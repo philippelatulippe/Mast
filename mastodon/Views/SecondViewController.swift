@@ -2118,7 +2118,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
-                    controller.spoilerText = sto[indexPath.row].status?.spoilerText ?? ""
+                    StoreStruct.spoilerText = sto[indexPath.row].status?.spoilerText ?? ""
                     controller.inReply = [sto[indexPath.row].status!]
                     controller.inReplyText = sto[indexPath.row].account.username
                     controller.prevTextReply = sto[indexPath.row].status!.content.stripHTML()

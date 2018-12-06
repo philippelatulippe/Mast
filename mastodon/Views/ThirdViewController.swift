@@ -492,6 +492,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            
+        } else {
         
         var settingsButton = MNGExpandedTouchAreaButton()
         settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 36, height: 36)))
@@ -505,6 +508,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.navigationItem.setLeftBarButton(done, animated: false)
         }
         
+        }
         
         
         
@@ -1874,7 +1878,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 } else {
                     
                     
-                    if self.chosenUser.fields.count > 0 {
+                    if self.chosenUser != nil || self.chosenUser.fields.count > 0 {
                     
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCellOwn", for: indexPath) as! ProfileHeaderCellOwn
@@ -2688,7 +2692,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
-                    controller.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
+                    StoreStruct.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
                     controller.inReply = [sto[indexPath.row].reblog ?? sto[indexPath.row]]
                     controller.inReplyText = sto[indexPath.row].reblog?.account.username ?? sto[indexPath.row].account.username
                     controller.prevTextReply = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
@@ -2804,7 +2808,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 print(action, ind)
                                 
                                 let controller = ComposeViewController()
-                                controller.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
+                                StoreStruct.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
                                 controller.idToDel = sto[indexPath.row].id
                                 controller.filledTextFieldText = sto[indexPath.row].content.stripHTML()
                                 self.present(controller, animated: true, completion: nil)

@@ -86,4 +86,6 @@ struct StoreStruct {
     static var allBoosts: [String] = []
     static var allPins: [String] = []
     static var photoNew = UIImage()
+    static var spoilerText = ""
+    static var typeOfSearch = 0
 }
