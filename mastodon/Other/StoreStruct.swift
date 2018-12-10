@@ -9,7 +9,14 @@
 import Foundation
 import UIKit
 
-struct StoreStruct {
+class StoreStruct {
+    
+    init(){
+        
+    }
+    
+    static let shared = StoreStruct()
+    
     static var colArray = [UIColor(red: 107/255.0, green: 122/255.0, blue: 214/255.0, alpha: 1.0),
                            UIColor(red: 79/255.0, green: 121/255.0, blue: 251/255.0, alpha: 1.0),
                            UIColor(red: 83/255.0, green: 153/255.0, blue: 244/255.0, alpha: 1.0),
@@ -32,13 +39,10 @@ struct StoreStruct {
                            UIColor(red: 58/255.0, green: 58/255.0, blue: 65/255.0, alpha: 1.0)]
     
     static var client = Client(baseURL: "")
-    static var redirect: String?
-    static var returnedText = ""
-    static var clientID = ""
-    static var clientSecret = ""
-    static var authCode = ""
-    static var accessToken = ""
-    
+    var currentInstance:InstanceData = InstanceData.getCurrentInstance() ?? InstanceData()
+    var allInstances:[InstanceData] = InstanceData.getAllInstances()
+    var newClient = Client(baseURL: "")
+    var newInstance:InstanceData?
     static var currentPage = 0
     static var playerID = ""
     
@@ -73,8 +77,8 @@ struct StoreStruct {
     
     static var tappedTag = ""
     static var currentUser: Account!
+    static var userAccounts: [Account]!
     static var newInstanceTags: [Status] = []
-    static var instanceText = ""
     
     static var allLists: [List] = []
     static var allListRelID: String = ""
@@ -86,4 +90,5 @@ struct StoreStruct {
     static var allBoosts: [String] = []
     static var allPins: [String] = []
     static var photoNew = UIImage()
+    
 }

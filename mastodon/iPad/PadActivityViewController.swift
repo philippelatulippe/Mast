@@ -179,7 +179,7 @@ class PadActivityViewController: UIViewController, UITableViewDelegate, UITableV
     @objc func goInstance() {
         let request = Timelines.public(local: true, range: .max(id: StoreStruct.newInstanceTags.last?.id ?? "", limit: 5000))
         let testClient = Client(
-            baseURL: "https://\(StoreStruct.instanceText)",
+            baseURL: "https://\(StoreStruct.shared.currentInstance.instanceText)",
             accessToken: StoreStruct.client.accessToken ?? ""
         )
         testClient.run(request) { (statuses) in
@@ -750,7 +750,7 @@ class PadActivityViewController: UIViewController, UITableViewDelegate, UITableV
             
             var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
             sss = sss.replacingOccurrences(of: "http", with: "wss")
-            nsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.accessToken)&stream=user")!)
+            nsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=user")!)
             nsocket.onConnect = {
                 print("websocket is connected")
             }

@@ -164,8 +164,8 @@ class PadTimelinesViewController: UIViewController, UITableViewDelegate, UITable
     @objc func goInstance() {
         let request = Timelines.public(local: true, range: .max(id: StoreStruct.newInstanceTags.last?.id ?? "", limit: nil))
         let testClient = Client(
-            baseURL: "https://\(StoreStruct.instanceText)",
-            accessToken: StoreStruct.client.accessToken ?? ""
+            baseURL: "https://\(StoreStruct.shared.currentInstance.instanceText)",
+            accessToken: StoreStruct.shared.currentInstance.accessToken ?? ""
         )
         testClient.run(request) { (statuses) in
             if let stat = (statuses.value) {
@@ -731,7 +731,7 @@ class PadTimelinesViewController: UIViewController, UITableViewDelegate, UITable
         
         
         
-        let applicationContext = [StoreStruct.client.accessToken ?? "": StoreStruct.returnedText]
+        let applicationContext = [StoreStruct.client.accessToken ?? "": StoreStruct.shared.currentInstance.returnedText]
         WatchSessionManager.sharedManager.transferUserInfo(userInfo: applicationContext as [String: AnyObject])
         
 //        let request = Notifications.all(range: .default)
@@ -855,7 +855,7 @@ class PadTimelinesViewController: UIViewController, UITableViewDelegate, UITable
             
             var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
             sss = sss.replacingOccurrences(of: "http", with: "wss")
-            socket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.accessToken)&stream=user")!)
+            socket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=user")!)
             socket.onConnect = {
                 print("websocket is connected")
             }
@@ -933,7 +933,7 @@ class PadTimelinesViewController: UIViewController, UITableViewDelegate, UITable
             
             var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
             sss = sss.replacingOccurrences(of: "http", with: "wss")
-            lsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.accessToken)&stream=public/local")!)
+            lsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=public/local")!)
             lsocket.onConnect = {
                 print("websocket is connected")
             }
@@ -1004,7 +1004,7 @@ class PadTimelinesViewController: UIViewController, UITableViewDelegate, UITable
             
             var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
             sss = sss.replacingOccurrences(of: "http", with: "wss")
-            fsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.accessToken)&stream=public")!)
+            fsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=public")!)
             fsocket.onConnect = {
                 print("websocket is connected")
             }
