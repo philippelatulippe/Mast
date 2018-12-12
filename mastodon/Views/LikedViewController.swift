@@ -240,7 +240,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
-        StoreStruct.currentPage = 0
+        StoreStruct.currentPage = 90
     }
     
     
@@ -523,7 +523,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
             var images = [SKPhoto]()
             for y in sto[indexPath.row].mediaAttachments {
-                let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
+                let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
                 photo.shouldCachePhotoURLImage = true
                 if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                     photo.caption = sto[indexPath.row].content.stripHTML()

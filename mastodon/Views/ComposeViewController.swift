@@ -1206,18 +1206,19 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.visibilityButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 60, y: 0, width: 80, height: 50)))
         
         if inReply.count > 0 {
+            self.textField.text = inReply[0].spoilerText
             if inReply[0].visibility == .direct {
                 self.visibility = .direct
                 self.visibilityButton.setImage(UIImage(named: "direct")?.maskWithColor(color: UIColor.white), for: .normal)
             } else {
                 
-                if (UserDefaults.standard.object(forKey: "privToot") == nil) || (UserDefaults.standard.object(forKey: "privToot") as! Int == 0) {
+                if (UserDefaults.standard.object(forKey: "privToot") == nil) || (UserDefaults.standard.object(forKey: "privToot") as! Int == 0) || inReply[0].visibility == .public {
                     self.visibility = .public
                     self.visibilityButton.setImage(UIImage(named: "eye")?.maskWithColor(color: UIColor.white), for: .normal)
-                } else if (UserDefaults.standard.object(forKey: "privToot") as! Int == 1) {
+                } else if (UserDefaults.standard.object(forKey: "privToot") as! Int == 1) || inReply[0].visibility == .unlisted {
                     self.visibility = .unlisted
                     self.visibilityButton.setImage(UIImage(named: "unlisted")?.maskWithColor(color: UIColor.white), for: .normal)
-                } else if (UserDefaults.standard.object(forKey: "privToot") as! Int == 2) {
+                } else if (UserDefaults.standard.object(forKey: "privToot") as! Int == 2) || inReply[0].visibility == .private {
                     self.visibility = .private
                     self.visibilityButton.setImage(UIImage(named: "private")?.maskWithColor(color: UIColor.white), for: .normal)
                 } else if (UserDefaults.standard.object(forKey: "privToot") as! Int == 3) {

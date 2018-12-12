@@ -2374,7 +2374,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCell
             var images = [SKPhoto]()
             
-            let photo = SKPhoto.photoWithImageURL(sto[0].reblog?.account.headerStatic ?? sto[0].account.headerStatic, holder: sender.currentImage)
+            let photo = SKPhoto.photoWithImageURL(sto[0].reblog?.account.headerStatic ?? sto[0].account.headerStatic, holder: nil)
             photo.shouldCachePhotoURLImage = true
             images.append(photo)
             
@@ -2393,7 +2393,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn
         var images = [SKPhoto]()
         
-        let photo = SKPhoto.photoWithImageURL(sto[0].reblog?.account.headerStatic ?? sto[0].account.headerStatic, holder: sender.currentImage)
+        let photo = SKPhoto.photoWithImageURL(sto[0].reblog?.account.headerStatic ?? sto[0].account.headerStatic, holder: nil)
         photo.shouldCachePhotoURLImage = true
         images.append(photo)
         
@@ -2423,7 +2423,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCell {
             var images = [SKPhoto]()
             
-            let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatarStatic, holder: sender.currentImage)
+            let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatarStatic, holder: nil)
             photo.shouldCachePhotoURLImage = true
             images.append(photo)
             
@@ -2441,7 +2441,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn
             var images = [SKPhoto]()
             
-            let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatarStatic, holder: sender.currentImage)
+            let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatarStatic, holder: nil)
             photo.shouldCachePhotoURLImage = true
             images.append(photo)
             
@@ -2487,7 +2487,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
             var images = [SKPhoto]()
             for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
-                let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
+                let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
                 photo.shouldCachePhotoURLImage = true
                 if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                     photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()

@@ -2188,7 +2188,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                     var images = [SKPhoto]()
                     for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
@@ -2213,7 +2213,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     let cell = tableViewL.cellForRow(at: indexPath) as! MainFeedCellImage
                     var images = [SKPhoto]()
                     for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
@@ -2238,7 +2238,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     let cell = tableViewF.cellForRow(at: indexPath) as! MainFeedCellImage
                     var images = [SKPhoto]()
                     for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
@@ -3151,7 +3151,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             
                             do {
-                                self.restoreScroll()
+//                                self.restoreScroll()
                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "home.json")
                                 try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "local.json")
                                 try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "fed.json")
@@ -3200,7 +3200,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             
                             do {
-                                self.restoreScroll()
+//                                self.restoreScroll()
                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "home.json")
                                 try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "local.json")
                                 try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "fed.json")
@@ -3250,7 +3250,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             
                             do {
-                                self.restoreScroll()
+//                                self.restoreScroll()
                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "home.json")
                                 try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "local.json")
                                 try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "fed.json")

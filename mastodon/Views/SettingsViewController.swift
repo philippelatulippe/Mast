@@ -237,7 +237,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tap.delegate = self
         self.view.window?.addGestureRecognizer(tap)
         
-        StoreStruct.currentPage = 0
+        StoreStruct.currentPage = 90
     }
     
     internal func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

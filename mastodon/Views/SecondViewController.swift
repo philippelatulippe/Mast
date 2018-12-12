@@ -1884,7 +1884,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             let cell = tableView.cellForRow(at: indexPath) as! NotificationCellImage
             var images = [SKPhoto]()
             for y in sto[indexPath.row].status!.mediaAttachments {
-                let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
+                let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
                 photo.shouldCachePhotoURLImage = true
                 if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                     photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
@@ -1907,7 +1907,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 let cell = tableView2.cellForRow(at: indexPath) as! NotificationCellImage
                 var images = [SKPhoto]()
                 for y in sto[indexPath.row].status!.mediaAttachments {
-                    let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
+                    let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
                     photo.shouldCachePhotoURLImage = true
                     if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                         photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
@@ -2671,7 +2671,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 1), at: .top, animated: false)
                             }
                         }
-                        self.restoreScroll()
+//                        self.restoreScroll()
                         UIView.setAnimationsEnabled(true)
                             
                         } else {
