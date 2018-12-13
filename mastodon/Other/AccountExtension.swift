@@ -9,16 +9,20 @@
 import Foundation
 
 
-extension Account {
+extension Account: Equatable {
     
     static func addAccountToList(account:Account) {
         
         guard let accountsData = UserDefaults.standard.object(forKey: "allAccounts") as? Data, var accounts = try? PropertyListDecoder().decode(Array<Account>.self, from: accountsData) else {
+            let accounts = [account]
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(accounts), forKey:"allAccounts")
             return
         }
         
-        accounts.append(account)
-        
+        if !accounts.contains(account) {
+            accounts.append(account)
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(accounts), forKey:"allAccounts")
+        }
         
     }
     
@@ -29,6 +33,14 @@ extension Account {
         }
         return accounts
         
+    }
+    
+    static func clearAccounts() {
+        UserDefaults.standard.setValue(nil, forKey: "allAccounts")
+    }
+    
+    static public func == (lhs: Account, rhs: Account) -> Bool {
+        return lhs.username == rhs.username && lhs.id == rhs.id
     }
     
 }

@@ -755,8 +755,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 return cell
             } else {
                 let instance = InstanceData.getAllInstances()[indexPath.row]
+                let account = Account.getAccounts()[indexPath.row]
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
-                cell.configure(status: self.appearanceArray[0], status2:instance.returnedText , image: "")
+                let instanceAndAccount = "@\(instance.returnedText) "
+                cell.configure(status: account.username, status2:instanceAndAccount, image: "", imageURL:account.avatarStatic )
                 cell.backgroundColor = Colours.white
                 cell.userName.textColor = Colours.black
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
@@ -1951,25 +1953,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             } else {
                 
                 InstanceData.setCurrentInstance(instance: instances[indexPath.row])
-//                let request = Timelines.home()
-//                StoreStruct.client.run(request) { (statuses) in
-//                    if let stat = (statuses.value) {
-//                        StoreStruct.statusesHome = stat
-//                        NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
-//                    }
-//                }
-//
-//
-//                let request2 = Accounts.currentUser()
-//                StoreStruct.client.run(request2) { (statuses) in
-//                    if let stat = (statuses.value) {
-//                        StoreStruct.currentUser = stat
-//                        Account.addAccountToList(account: stat)
-//                        DispatchQueue.main.async {
-//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
-//                        }
-//                    }
-//                }
                 
                 DispatchQueue.main.async {
                     

@@ -208,12 +208,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         do {
-            StoreStruct.statusesHome = try Disk.retrieve("home.json", from: .documents, as: [Status].self)
-            StoreStruct.statusesLocal = try Disk.retrieve("local.json", from: .documents, as: [Status].self)
-            StoreStruct.statusesFederated = try Disk.retrieve("fed.json", from: .documents, as: [Status].self)
-            StoreStruct.notifications = try Disk.retrieve("noti.json", from: .documents, as: [Notificationt].self)
-            StoreStruct.notificationsMentions = try Disk.retrieve("ment.json", from: .documents, as: [Notificationt].self)
-            StoreStruct.currentUser = try Disk.retrieve("use.json", from: .documents, as: Account.self)
+            StoreStruct.statusesHome = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
+            StoreStruct.statusesLocal = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
+            StoreStruct.statusesFederated = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
+            StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
+            StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+            StoreStruct.currentUser = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)use.json", from: .documents, as: Account.self)
         } catch {
             print("Couldn't load")
         }
@@ -237,14 +237,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UserDefaults.standard.set(StoreStruct.currentUser.username, forKey: "userN")
         do {
-            try Disk.save(StoreStruct.currentUser, to: .documents, as: "use.json")
+            try Disk.save(StoreStruct.currentUser, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)use.json")
             
-            try Disk.save(StoreStruct.statusesHome, to: .documents, as: "home.json")
-            try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "local.json")
-            try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "fed.json")
+            try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+            try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+            try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
             
-            try Disk.save(StoreStruct.notifications, to: .documents, as: "noti.json")
-            try Disk.save(StoreStruct.notificationsMentions, to: .documents, as: "ment.json")
+            try Disk.save(StoreStruct.notifications, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)noti.json")
+            try Disk.save(StoreStruct.notificationsMentions, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)ment.json")
         } catch {
             print("Couldn't save")
         }

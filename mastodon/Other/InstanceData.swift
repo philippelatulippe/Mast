@@ -41,6 +41,8 @@ class InstanceData:Codable {
         
     }
     
+    
+    
     static func getCurrentInstance() -> InstanceData? {
         
         guard let instanceData = UserDefaults.standard.data(forKey: "currentInstance"),  let instance = try? JSONDecoder().decode(InstanceData.self, from: instanceData) else {
@@ -63,7 +65,6 @@ class InstanceData:Codable {
     
         
        
-        
         StoreStruct.client.accessToken = instance.accessToken
         
         UserDefaults.standard.set(instance.clientID, forKey: "clientID")
@@ -72,11 +73,6 @@ class InstanceData:Codable {
         UserDefaults.standard.set(instance.accessToken, forKey: "accessToken")
         UserDefaults.standard.set(instance.returnedText, forKey: "returnedText")
         
-    
-        StoreStruct.client = Client(
-            baseURL: "https://\(StoreStruct.shared.currentInstance.returnedText)",
-            accessToken: StoreStruct.shared.currentInstance.accessToken
-        )
         StoreStruct.shared.newClient = Client(baseURL: "")
         StoreStruct.shared.newInstance = nil
         StoreStruct.statusesHome = []
@@ -90,7 +86,9 @@ class InstanceData:Codable {
         
     }
     
-    
+    static func clearInstances() {
+        UserDefaults.standard.setValue(nil, forKey: "instances")
+    }
 }
 
 extension InstanceData: Equatable {

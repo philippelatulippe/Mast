@@ -2721,9 +2721,9 @@ class PadTimelinesViewController: UIViewController, UITableViewDelegate, UITable
                             
                             
                             do {
-                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "home.json")
-                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "local.json")
-                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "fed.json")
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
                             } catch {
                                 print("Couldn't save")
                             }
@@ -2762,9 +2762,9 @@ class PadTimelinesViewController: UIViewController, UITableViewDelegate, UITable
                             
                             
                             do {
-                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "home.json")
-                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "local.json")
-                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "fed.json")
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
                             } catch {
                                 print("Couldn't save")
                             }
@@ -2809,9 +2809,9 @@ class PadTimelinesViewController: UIViewController, UITableViewDelegate, UITable
                             
                             
                             do {
-                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "home.json")
-                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "local.json")
-                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "fed.json")
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
                             } catch {
                                 print("Couldn't save")
                             }
