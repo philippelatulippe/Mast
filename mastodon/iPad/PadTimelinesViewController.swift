@@ -986,8 +986,8 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
         
         StoreStruct.currentPage = 0
         
-        let applicationContext = [StoreStruct.client.accessToken ?? "": StoreStruct.returnedText]
-        WatchSessionManager.sharedManager.transferUserInfo(userInfo: applicationContext as [String: AnyObject])
+//        let applicationContext = [StoreStruct.client.accessToken ?? "": StoreStruct.returnedText]
+//        WatchSessionManager.sharedManager.transferUserInfo(userInfo: applicationContext as [String: AnyObject])
         
         let request = Notifications.all(range: .default)
         StoreStruct.client.run(request) { (statuses) in

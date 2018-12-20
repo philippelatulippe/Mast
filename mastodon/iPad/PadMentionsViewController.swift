@@ -2671,7 +2671,7 @@ class PadMentionsViewController: UIViewController, SJFluidSegmentedControlDataSo
                                     self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 1), at: .top, animated: false)
                                 }
                             }
-                            self.restoreScroll()
+//                            self.restoreScroll()
                             UIView.setAnimationsEnabled(true)
                             
                         } else {

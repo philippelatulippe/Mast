@@ -302,10 +302,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             title.text = "Biometric Lock".localized
         } else if section == 4 {
             title.text = "About".localized
-        } else if section == 5 {
+        } else if section == 6 {
             title.text = "Tip Mast".localized
         } else {
-            title.text = "Instances"
+            title.text = "Accounts".localized
         }
         title.textColor = Colours.grayDark2
         title.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
@@ -342,7 +342,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return self.bioArray.count
         } else if section == 4 {
             return self.aboutArray.count
-        } else if section == 5 {
+        } else if section == 6 {
             return 4
         } else {
             return InstanceData.getAllInstances().count + 1
@@ -730,7 +730,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             
             return cell
             
-        } else if indexPath.section == 5 {
+        } else if indexPath.section == 6 {
             
             
             var tipArray = ["Calf Tip", "Elephant Tip", "Mammoth Tip", "Mastodon Tip"]
@@ -748,17 +748,24 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             bgColorView.backgroundColor = Colours.white
             cell.selectedBackgroundView = bgColorView
             return cell
-        } else if indexPath.section == 6 {
-            
+        } else if indexPath.section == 5 {
+            //bhere2
             if indexPath.row == InstanceData.getAllInstances().count  {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "addInstanceCell") as! AddInstanceCell
-                cell.configure()
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
+                cell.configure(status: "Add Account", status2: "Add a new account from any instance.", image: "newac1", imageURL: nil)
+                cell.backgroundColor = Colours.white
+                cell.userName.textColor = Colours.black
+                cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                let bgColorView = UIView()
+                bgColorView.backgroundColor = Colours.white
+                cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
                 let instance = InstanceData.getAllInstances()[indexPath.row]
                 let account = Account.getAccounts()[indexPath.row]
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
-                let instanceAndAccount = "@\(instance.returnedText) "
+                let instanceAndAccount = "\(instance.returnedText) "
                 cell.configure(status: account.username, status2:instanceAndAccount, image: "", imageURL:account.avatarStatic )
                 cell.backgroundColor = Colours.white
                 cell.userName.textColor = Colours.black
@@ -1927,7 +1934,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         //tjar
         
-        if indexPath.section == 5 {
+        if indexPath.section == 6 {
             if indexPath.row == 0 {
                 purchaseMyProduct(product: iapProducts[0])
             }
@@ -1942,25 +1949,84 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         
-        if indexPath.section == 6 {
+        if indexPath.section == 5 {
             let instances = InstanceData.getAllInstances()
             if indexPath.row == instances.count {
-                // launch the sign in
-                let loginController = ViewController()
-                vc = loginController
-                loginController.loadingAdditionalInstance = true
-                loginController.createLoginView(newInstance: true)
-                self.navigationController?.pushViewController(loginController, animated: true)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut2"), object: nil)
             } else {
                 
-                InstanceData.setCurrentInstance(instance: instances[indexPath.row])
+                //bhere3
                 
-                DispatchQueue.main.async {
+                
+                var curr = InstanceData.getCurrentInstance()
+                if curr?.clientID == instances[indexPath.row].clientID {
                     
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.reloadApplication()
+                    
+                    
+                    Alertift.actionSheet(title: "Already selected", message: "Pick another account, or add a new one.")
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
+                        .show(on: self)
+                    
+                    
+                } else {
+                
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Switch".localized), image: UIImage(named: "profile")) { (action, ind) in
+                        print(action, ind)
+                        
+                        
+                        InstanceData.setCurrentInstance(instance: instances[indexPath.row])
+                        
+                        DispatchQueue.main.async {
+                            
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            appDelegate.reloadApplication()
+                            
+                            
+                        }
+                        
+                    }
+                    .action(.default("Remove".localized), image: UIImage(named: "block")) { (action, ind) in
+                        print(action, ind)
+                        
+                        var instance = InstanceData.getAllInstances()
+                        var account = Account.getAccounts()
+                        account.remove(at: indexPath.row)
+                        UserDefaults.standard.set(try? PropertyListEncoder().encode(account), forKey:"allAccounts")
+                        instance.remove(at: indexPath.row)
+                        UserDefaults.standard.set(try? PropertyListEncoder().encode(instance), forKey:"instances")
+                        
+                        self.tableView.reloadSections([5], with: .none)
+                        
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .show(on: self)
+                    
                     
                 }
+                
+                
             }
         }
         

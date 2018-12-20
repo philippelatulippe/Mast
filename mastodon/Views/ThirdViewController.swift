@@ -1473,6 +1473,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     .show(on: self)
                 
                             }
+                .action(.default("Add Account".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                    print(action, ind)
+                    
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut2"), object: nil)
+                }
                 .action(.default("Log Out".localized), image: UIImage(named: "lout")) { (action, ind) in
                     print(action, ind)
                     
