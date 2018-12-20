@@ -91,4 +91,6 @@ class StoreStruct {
     static var allPins: [String] = []
     static var photoNew = UIImage()
     
+    static var spoilerText = ""
+    static var typeOfSearch = 0
 }

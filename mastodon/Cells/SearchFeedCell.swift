@@ -1,8 +1,8 @@
 //
-//  RepliesCellImage.swift
+//  MainFeedCell.swift
 //  mastodon
 //
-//  Created by Shihab Mehboob on 22/09/2018.
+//  Created by Shihab Mehboob on 18/09/2018.
 //  Copyright © 2018 Shihab Mehboob. All rights reserved.
 //
 
@@ -10,27 +10,28 @@ import Foundation
 import UIKit
 import PINRemoteImage
 
-class RepliesCellImage: SwipeTableViewCell {
+class SearchFeedCell: SwipeTableViewCell {
     
     var profileImageView = UIButton()
+    var profileImageView2 = UIButton()
+    var warningB = UIButton()
     var userName = UILabel()
     var userTag = UILabel()
     var date = UILabel()
     var toot = ActiveLabel()
-    var mainImageView = UIButton()
-    var mainImageViewBG = UIView()
     var moreImage = UIImageView()
-    var imageCountTag = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         profileImageView.backgroundColor = Colours.white
+        profileImageView2.backgroundColor = Colours.clear
+        warningB.backgroundColor = Colours.clear
         moreImage.backgroundColor = Colours.clear
         
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        mainImageView.translatesAutoresizingMaskIntoConstraints = false
-        mainImageViewBG.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView2.translatesAutoresizingMaskIntoConstraints = false
+        warningB.translatesAutoresizingMaskIntoConstraints = false
         userName.translatesAutoresizingMaskIntoConstraints = false
         userTag.translatesAutoresizingMaskIntoConstraints = false
         date.translatesAutoresizingMaskIntoConstraints = false
@@ -39,30 +40,26 @@ class RepliesCellImage: SwipeTableViewCell {
         
         if (UserDefaults.standard.object(forKey: "proCorner") == nil || UserDefaults.standard.object(forKey: "proCorner") as! Int == 0) {
             profileImageView.layer.cornerRadius = 20
+            profileImageView2.layer.cornerRadius = 13
         }
         if (UserDefaults.standard.object(forKey: "proCorner") != nil && UserDefaults.standard.object(forKey: "proCorner") as! Int == 1) {
             profileImageView.layer.cornerRadius = 8
+            profileImageView2.layer.cornerRadius = 4
         }
         if (UserDefaults.standard.object(forKey: "proCorner") != nil && UserDefaults.standard.object(forKey: "proCorner") as! Int == 2) {
             profileImageView.layer.cornerRadius = 0
+            profileImageView2.layer.cornerRadius = 0
         }
         profileImageView.layer.masksToBounds = true
+        profileImageView2.layer.masksToBounds = true
         
-        if (UserDefaults.standard.object(forKey: "imCorner") == nil || UserDefaults.standard.object(forKey: "imCorner") as! Int == 0) {
-            mainImageView.layer.cornerRadius = 10
-        }
-        if (UserDefaults.standard.object(forKey: "imCorner") != nil && UserDefaults.standard.object(forKey: "imCorner") as! Int == 1) {
-            mainImageView.layer.cornerRadius = 0
-        }
-        mainImageView.layer.masksToBounds = true
-        mainImageView.backgroundColor = Colours.white
-        mainImageViewBG.layer.cornerRadius = 10
-        mainImageViewBG.backgroundColor = Colours.white
-        mainImageViewBG.layer.shadowColor = UIColor.black.cgColor
-        mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 7)
-        mainImageViewBG.layer.shadowRadius = 10
-        mainImageViewBG.layer.shadowOpacity = 0.22
-        mainImageViewBG.layer.masksToBounds = false
+        warningB.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        warningB.titleLabel?.textAlignment = .center
+        warningB.setTitleColor(Colours.black.withAlphaComponent(0.4), for: .normal)
+        warningB.layer.cornerRadius = 7
+        warningB.titleLabel?.font = UIFont.systemFont(ofSize: Colours.fontSize3)
+        warningB.titleLabel?.numberOfLines = 0
+        warningB.layer.masksToBounds = true
         
         userName.numberOfLines = 0
         userTag.numberOfLines = 0
@@ -84,65 +81,38 @@ class RepliesCellImage: SwipeTableViewCell {
         toot.URLColor = Colours.tabSelected
         
         contentView.addSubview(profileImageView)
-        contentView.addSubview(mainImageViewBG)
-        contentView.addSubview(mainImageView)
+        contentView.addSubview(profileImageView2)
         contentView.addSubview(userName)
         contentView.addSubview(userTag)
         contentView.addSubview(date)
         contentView.addSubview(toot)
         contentView.addSubview(moreImage)
-        
-        imageCountTag.backgroundColor = Colours.clear
-        imageCountTag.translatesAutoresizingMaskIntoConstraints = false
-        imageCountTag.layer.cornerRadius = 7
-        imageCountTag.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
-        imageCountTag.layer.shadowColor = UIColor.black.cgColor
-        imageCountTag.layer.shadowOffset = CGSize(width: 0, height: 7)
-        imageCountTag.layer.shadowRadius = 10
-        imageCountTag.layer.shadowOpacity = 0.22
-        imageCountTag.layer.masksToBounds = false
-        mainImageView.addSubview(imageCountTag)
+        contentView.addSubview(warningB)
         
         let viewsDict = [
             "image" : profileImageView,
-            "mainImage" : mainImageView,
-            "mainImageBG" : mainImageViewBG,
+            "image2" : profileImageView2,
+            "warning" : warningB,
             "name" : userName,
             "artist" : userTag,
             "date" : date,
             "episodes" : toot,
             "more" : moreImage,
-            "countTag" : imageCountTag,
             ]
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-173-[image(40)]-13-[name]-(>=5)-[date]-120-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-173-[image(40)]-13-[artist]-(>=5)-[more(16)]-120-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-173-[image(40)]-13-[episodes]-120-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-226-[mainImage]-120-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-236-[mainImageBG]-130-|", options: [], metrics: nil, views: viewsDict))
+        
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[name]-(>=5)-[date]-20-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-40-[image2(26)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[artist]-(>=5)-[more(16)]-20-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
             contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[date]-2-[more(16)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
             contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[image(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImage(500)]-23-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImageBG(500)]-23-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-32-[image2(26)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-12-|", options: [], metrics: nil, views: viewsDict))
             
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[countTag(30)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-5-[countTag(22)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
-        } else {
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[image(40)]-13-[name]-(>=5)-[date]-20-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[image(40)]-13-[artist]-(>=5)-[more(16)]-20-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[image(40)]-13-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-126-[mainImage]-20-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-136-[mainImageBG]-30-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[date]-2-[more(16)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[image(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImage(180)]-23-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImageBG(180)]-23-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-71-[warning]-17-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-11-[warning]-9-|", options: [], metrics: nil, views: viewsDict))
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[countTag(30)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-5-[countTag(22)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -151,16 +121,30 @@ class RepliesCellImage: SwipeTableViewCell {
     
     func configure(_ status: Status) {
         
+        
+        if (UserDefaults.standard.object(forKey: "dmTog") == nil) || (UserDefaults.standard.object(forKey: "dmTog") as! Int == 0) {
+            
+        } else {
+            if status.visibility == .direct {
+                self.contentView.backgroundColor = Colours.cellQuote
+            } else {
+                self.contentView.backgroundColor = Colours.white
+            }
+        }
+        
+        
         toot.mentionColor = Colours.tabSelected
         toot.hashtagColor = Colours.tabSelected
         toot.URLColor = Colours.tabSelected
         
         userName.text = status.reblog?.account.displayName ?? status.account.displayName
+        
         if (UserDefaults.standard.object(forKey: "mentionToggle") == nil || UserDefaults.standard.object(forKey: "mentionToggle") as! Int == 0) {
             userTag.text = "@\(status.reblog?.account.acct ?? status.account.acct)"
         } else {
             userTag.text = "@\(status.reblog?.account.username ?? status.account.username)"
         }
+        
         
         if (UserDefaults.standard.object(forKey: "timerel") == nil) || (UserDefaults.standard.object(forKey: "timerel") as! Int == 0) {
             date.text = status.reblog?.createdAt.toStringWithRelativeTime() ?? status.createdAt.toStringWithRelativeTime()
@@ -169,8 +153,6 @@ class RepliesCellImage: SwipeTableViewCell {
         }
         
         if status.reblog?.content.stripHTML() != nil {
-//            toot.text = "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.username) boosted"
-            
             
             
             
@@ -195,9 +177,47 @@ class RepliesCellImage: SwipeTableViewCell {
             
             
             
-            
+            profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo"))
+            profileImageView2.pin_updateWithProgress = true
+            profileImageView2.pin_setImage(from: URL(string: "\(status.account.avatar)"))
+            profileImageView2.layer.masksToBounds = true
+            profileImageView2.layer.borderColor = UIColor.black.cgColor
+            profileImageView2.layer.borderWidth = 0.2
+            if (UserDefaults.standard.object(forKey: "proCorner") == nil || UserDefaults.standard.object(forKey: "proCorner") as! Int == 0) {
+                profileImageView2.layer.cornerRadius = 13
+            }
+            if (UserDefaults.standard.object(forKey: "proCorner") != nil && UserDefaults.standard.object(forKey: "proCorner") as! Int == 1) {
+                profileImageView2.layer.cornerRadius = 4
+            }
+            if (UserDefaults.standard.object(forKey: "proCorner") != nil && UserDefaults.standard.object(forKey: "proCorner") as! Int == 2) {
+                profileImageView2.layer.cornerRadius = 0
+            }
         } else {
-//            toot.text = status.content.stripHTML()
+            
+            
+            //            if status.emojis.isEmpty {
+            //                toot.text = status.content.stripHTML()
+            //            } else {
+            //                toot.text = "loading"
+            //                toot.textColor = Colours.white
+            //                let attributedString = NSMutableAttributedString(string: status.content.stripHTML())
+            //                for y in status.emojis {
+            //                    let textAttachment = NSTextAttachment()
+            //                    let data = try? Data(contentsOf: y.url)
+            //                    if let imageData = data {
+            //                        textAttachment.image = UIImage(data: imageData)
+            //                        textAttachment.bounds = CGRect(x:0, y: Int(-4), width: Int(self.toot.font.lineHeight), height: Int(self.toot.font.lineHeight))
+            //                        let attrStringWithImage = NSAttributedString(attachment: textAttachment)
+            //                        while attributedString.mutableString.contains(":\(y.shortcode):") {
+            //                            let range: NSRange = (attributedString.mutableString as NSString).range(of: ":\(y.shortcode):")
+            //                            attributedString.replaceCharacters(in: range, with: attrStringWithImage)
+            //                        }
+            //                    }
+            //                }
+            //                self.toot.attributedText = attributedString
+            //            }
+            
+            
             
             
             if status.emojis.isEmpty {
@@ -220,7 +240,24 @@ class RepliesCellImage: SwipeTableViewCell {
             
             
             
+            
+            
+            profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo2345"))
+            profileImageView2.layer.masksToBounds = true
+            profileImageView2.layer.borderColor = UIColor.black.cgColor
+            profileImageView2.layer.borderWidth = 0
+            profileImageView2.alpha = 0
+            if (UserDefaults.standard.object(forKey: "proCorner") == nil || UserDefaults.standard.object(forKey: "proCorner") as! Int == 0) {
+                profileImageView2.layer.cornerRadius = 13
+            }
+            if (UserDefaults.standard.object(forKey: "proCorner") != nil && UserDefaults.standard.object(forKey: "proCorner") as! Int == 1) {
+                profileImageView2.layer.cornerRadius = 4
+            }
+            if (UserDefaults.standard.object(forKey: "proCorner") != nil && UserDefaults.standard.object(forKey: "proCorner") as! Int == 2) {
+                profileImageView2.layer.cornerRadius = 0
+            }
         }
+        profileImageView2.isUserInteractionEnabled = false
         
         userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
         userTag.font = UIFont.systemFont(ofSize: Colours.fontSize3)
@@ -243,21 +280,6 @@ class RepliesCellImage: SwipeTableViewCell {
             profileImageView.layer.cornerRadius = 0
         }
         
-        mainImageView.contentMode = .scaleAspectFill
-        mainImageView.imageView?.contentMode = .scaleAspectFill
-        self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-        mainImageView.pin_updateWithProgress = true
-        mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].url ?? status.mediaAttachments[0].url)"))
-        mainImageView.layer.masksToBounds = true
-        mainImageView.layer.borderColor = UIColor.black.cgColor
-        if (UserDefaults.standard.object(forKey: "imCorner") == nil || UserDefaults.standard.object(forKey: "imCorner") as! Int == 0) {
-            mainImageView.layer.cornerRadius = 10
-        }
-        if (UserDefaults.standard.object(forKey: "imCorner") != nil && UserDefaults.standard.object(forKey: "imCorner") as! Int == 1) {
-            mainImageView.layer.cornerRadius = 0
-        }
-        //mainImageView.layer.borderWidth = 0.2
-        
         if (status.reblog?.favourited ?? status.favourited ?? false) && (status.reblog?.reblogged ?? status.reblogged ?? false) {
             self.moreImage.image = UIImage(named: "fifty")
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {
@@ -269,26 +291,38 @@ class RepliesCellImage: SwipeTableViewCell {
         }
         
         
-        
-        imageCountTag.isUserInteractionEnabled = false
-        if status.reblog?.mediaAttachments[0].type ?? status.mediaAttachments[0].type == .video {
-            imageCountTag.setTitle("\u{25b6}", for: .normal)
-            imageCountTag.backgroundColor = Colours.tabSelected
-            imageCountTag.alpha = 1
-        } else if status.reblog?.mediaAttachments[0].type ?? status.mediaAttachments[0].type == .gifv {
-            imageCountTag.setTitle("GIF", for: .normal)
-            imageCountTag.backgroundColor = Colours.tabSelected
-            imageCountTag.alpha = 1
-        } else if status.reblog?.mediaAttachments.count ?? status.mediaAttachments.count > 1 {
-            imageCountTag.setTitle("\(status.reblog?.mediaAttachments.count ?? status.mediaAttachments.count)", for: .normal)
-            imageCountTag.backgroundColor = Colours.tabSelected
-            imageCountTag.alpha = 1
+        if (UserDefaults.standard.object(forKey: "senseTog") == nil) || (UserDefaults.standard.object(forKey: "senseTog") as! Int == 0) {
+            
+            if status.reblog?.sensitive ?? false || status.sensitive ?? false {
+                warningB.backgroundColor = Colours.tabUnselected
+                let z = status.reblog?.spoilerText ?? status.spoilerText
+                var zz = "Content Warning"
+                if z == "" {} else {
+                    zz = z
+                }
+                warningB.setTitle("\(zz)\n\nTap to show toot", for: .normal)
+                warningB.setTitleColor(Colours.black.withAlphaComponent(0.4), for: .normal)
+                warningB.addTarget(self, action: #selector(self.didTouchWarning), for: .touchUpInside)
+                warningB.alpha = 1
+            } else {
+                warningB.backgroundColor = Colours.clear
+                warningB.alpha = 0
+            }
+            
         } else {
-            imageCountTag.backgroundColor = Colours.clear
-            imageCountTag.alpha = 0
+            warningB.backgroundColor = Colours.clear
+            warningB.alpha = 0
         }
         
     }
     
+    @objc func didTouchWarning() {
+        warningB.backgroundColor = Colours.clear
+        warningB.alpha = 0
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let selection = UISelectionFeedbackGenerator()
+            selection.selectionChanged()
+        }
+    }
+    
 }
-
