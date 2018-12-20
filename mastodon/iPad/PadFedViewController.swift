@@ -1,14 +1,14 @@
 //
-//  FirstViewController.swift
+//  TimelinesViewController.swift
 //  mastodon
 //
-//  Created by Shihab Mehboob on 18/09/2018.
+//  Created by Shihab Mehboob on 26/10/2018.
 //  Copyright © 2018 Shihab Mehboob. All rights reserved.
 //
 
+
 import Foundation
 import UIKit
-import SJFluidSegmentedControl
 import ReactiveSSE
 import ReactiveSwift
 import SafariServices
@@ -16,10 +16,8 @@ import StatusAlert
 import UserNotifications
 import SAConfettiView
 import Disk
-import AVKit
-import AVFoundation
 
-class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, URLSessionDataDelegate, UIViewControllerPreviewingDelegate {
+class PadFedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, URLSessionDataDelegate, UIViewControllerPreviewingDelegate {
     
     var socket: WebSocket!
     var lsocket: WebSocket!
@@ -29,20 +27,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     var lMod: [Status] = []
     var fMod: [Status] = []
     var newUpdatesB1 = UIButton()
-    var newUpdatesB2 = UIButton()
-    var newUpdatesB3 = UIButton()
     var countcount1 = 0
     var countcount2 = 0
     var countcount3 = 0
     
     var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .circleStrokeSpin, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
-    var segmentedControl: SJFluidSegmentedControl!
     var tableView = UITableView()
-    var tableViewL = UITableView()
-    var tableViewF = UITableView()
     var refreshControl = UIRefreshControl()
-    var currentIndex = 0
+    var currentIndex = 2
     var hStream = false
     var lStream = false
     var fStream = false
@@ -68,8 +61,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         } else if self.currentIndex == 1 {
             
             
-            guard let indexPath = self.tableViewL.indexPathForRow(at: location) else { return nil }
-            guard let cell = self.tableViewL.cellForRow(at: indexPath) else { return nil }
+            guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
+            guard let cell = self.tableView.cellForRow(at: indexPath) else { return nil }
             let detailVC = DetailViewController()
             if self.currentIndex == 0 {
                 detailVC.mainStatus.append(StoreStruct.statusesHome[indexPath.row])
@@ -86,8 +79,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         } else {
             
             
-            guard let indexPath = self.tableViewF.indexPathForRow(at: location) else { return nil }
-            guard let cell = self.tableViewF.cellForRow(at: indexPath) else { return nil }
+            guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
+            guard let cell = self.tableView.cellForRow(at: indexPath) else { return nil }
             let detailVC = DetailViewController()
             if self.currentIndex == 0 {
                 detailVC.mainStatus.append(StoreStruct.statusesHome[indexPath.row])
@@ -127,13 +120,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 }
             }
             
-            if self.tableViewL.alpha == 1 && StoreStruct.statusesLocal.count > 0 {
+            if self.tableView.alpha == 1 && StoreStruct.statusesLocal.count > 0 {
                 print("scrolllocal")
-                self.tableViewL.scrollToRow(at: indexPath, at: .top, animated: true)
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             } else {
                 if StoreStruct.statusesFederated.count > 0 {
                     print("scrollfed")
-                    self.tableViewF.scrollToRow(at: indexPath, at: .top, animated: true)
+                    self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
                 }
             }
             
@@ -147,6 +140,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     }
     
     @objc func search() {
+        //bh0
         let controller = DetailViewController()
         controller.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
         self.navigationController?.pushViewController(controller, animated: true)
@@ -180,7 +174,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
             }
-        } 
+        }
     }
     
     @objc func goMembers() {
@@ -319,44 +313,24 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             
             
             let indexPath1 = IndexPath(row: self.countcount2 - 1, section: 0)
-            if self.tableViewL.indexPathsForVisibleRows?.contains(indexPath1) ?? false {
+            if self.tableView.indexPathsForVisibleRows?.contains(indexPath1) ?? false {
                 if self.countcount2 == 0 {
                     springWithDelay(duration: 0.4, delay: 0, animations: {
-                        self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                        //                        self.newUpdatesB2.transform = CGAffineTransform(translationX: 0, y: 0)
-                        springWithDelay(duration: 0.5, delay: 0, animations: {
-                            self.newUpdatesB2.alpha = 0
-                            self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                            //                            self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
-                        })
+                        
                         self.countcount2 = 0
                     })
                 } else {
                     self.countcount2 = self.countcount2 - 1
                     if self.countcount2 == 0 {
                         springWithDelay(duration: 0.4, delay: 0, animations: {
-                            self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                            //                            self.newUpdatesB2.transform = CGAffineTransform(translationX: 0, y: 0)
-                            springWithDelay(duration: 0.5, delay: 0, animations: {
-                                self.newUpdatesB2.alpha = 0
-                                self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                //                                self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
-                            })
+                            
                             self.countcount2 = 0
                         })
                     }
                 }
-                self.newUpdatesB2.setTitle("\(self.countcount2)  ", for: .normal)
             }
             if (scrollView.contentOffset.y == 0) {
                 springWithDelay(duration: 0.4, delay: 0, animations: {
-                    self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                    //                    self.newUpdatesB2.transform = CGAffineTransform(translationX: 0, y: 0)
-                    springWithDelay(duration: 0.5, delay: 0, animations: {
-                        self.newUpdatesB2.alpha = 0
-                        self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                        //                        self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
-                    })
                     self.countcount2 = 0
                 })
             }
@@ -364,44 +338,22 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         } else {
             
             let indexPath1 = IndexPath(row: self.countcount3 - 1, section: 0)
-            if self.tableViewF.indexPathsForVisibleRows?.contains(indexPath1) ?? false {
+            if self.tableView.indexPathsForVisibleRows?.contains(indexPath1) ?? false {
                 if self.countcount3 == 0 {
                     springWithDelay(duration: 0.4, delay: 0, animations: {
-                        self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                        //                    self.newUpdatesB3.transform = CGAffineTransform(translationX: 0, y: 0)
-                        springWithDelay(duration: 0.5, delay: 0, animations: {
-                            self.newUpdatesB3.alpha = 0
-                            self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                            //                        self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
-                        })
                         self.countcount3 = 0
                     })
                 } else {
                     self.countcount3 = self.countcount3 - 1
                     if self.countcount3 == 0 {
                         springWithDelay(duration: 0.4, delay: 0, animations: {
-                            self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                            //                        self.newUpdatesB3.transform = CGAffineTransform(translationX: 0, y: 0)
-                            springWithDelay(duration: 0.5, delay: 0, animations: {
-                                self.newUpdatesB3.alpha = 0
-                                self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                //                            self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
-                            })
                             self.countcount3 = 0
                         })
                     }
                 }
-                self.newUpdatesB3.setTitle("\(self.countcount3)  ", for: .normal)
             }
             if (scrollView.contentOffset.y == 0) {
                 springWithDelay(duration: 0.4, delay: 0, animations: {
-                    self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                    //                self.newUpdatesB3.transform = CGAffineTransform(translationX: 0, y: 0)
-                    springWithDelay(duration: 0.5, delay: 0, animations: {
-                        self.newUpdatesB3.alpha = 0
-                        self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                        //                    self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
-                    })
                     self.countcount3 = 0
                 })
             }
@@ -420,7 +372,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     //            switch UIScreen.main.nativeBounds.height {
     //            case 2688:
     //                offset = 88
-    //            case 2436, 1792:
+    //            case 2436:
     //                offset = 88
     //            default:
     //                offset = 64
@@ -455,7 +407,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             case 2688:
                 offset = 88
                 newoff = 45
-            case 2436, 1792:
+            case 2436:
                 offset = 88
                 newoff = 45
             default:
@@ -464,125 +416,24 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 tabHeight = Int(UITabBarController().tabBar.frame.size.height)
             }
         }
-        segmentedControl.removeFromSuperview()
         tableView.removeFromSuperview()
-        tableViewL.removeFromSuperview()
-        tableViewF.removeFromSuperview()
-        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(offset + 5), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
-            segmentedControl.dataSource = self
-            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                segmentedControl.shapeStyle = .roundedRect
-            } else {
-                segmentedControl.shapeStyle = .liquid
-            }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-            segmentedControl.cornerRadius = 12
-            segmentedControl.shadowsEnabled = false
-            segmentedControl.transitionStyle = .slide
-            segmentedControl.delegate = self
-            view.addSubview(segmentedControl)
-            
-            self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
-            self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
-            self.tableView.alpha = 1
-            self.tableView.delegate = self
-            self.tableView.dataSource = self
-            self.tableView.separatorStyle = .singleLine
-            self.tableView.backgroundColor = Colours.white
-            self.tableView.separatorColor = Colours.cellQuote
-            self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
-            self.tableView.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableView)
-            
-            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
-            self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
-            self.tableViewL.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
-            self.tableViewL.alpha = 0
-            self.tableViewL.delegate = self
-            self.tableViewL.dataSource = self
-            self.tableViewL.separatorStyle = .singleLine
-            self.tableViewL.backgroundColor = Colours.white
-            self.tableViewL.separatorColor = Colours.cellQuote
-            self.tableViewL.layer.masksToBounds = true
-            self.tableViewL.estimatedRowHeight = 89
-            self.tableViewL.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewL)
-            
-            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
-            self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
-            self.tableViewF.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
-            self.tableViewF.alpha = 0
-            self.tableViewF.delegate = self
-            self.tableViewF.dataSource = self
-            self.tableViewF.separatorStyle = .singleLine
-            self.tableViewF.backgroundColor = Colours.white
-            self.tableViewF.separatorColor = Colours.cellQuote
-            self.tableViewF.layer.masksToBounds = true
-            self.tableViewF.estimatedRowHeight = 89
-            self.tableViewF.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewF)
-            self.loadLoadLoad()
-        } else {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(newoff), width: CGFloat(240), height: CGFloat(40)))
-            segmentedControl.dataSource = self
-            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                segmentedControl.shapeStyle = .roundedRect
-            } else {
-                segmentedControl.shapeStyle = .liquid
-            }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-            segmentedControl.cornerRadius = 12
-            segmentedControl.shadowsEnabled = false
-            segmentedControl.transitionStyle = .slide
-            segmentedControl.delegate = self
-            self.navigationController?.view.addSubview(segmentedControl)
-            
-            self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
-            self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
-            self.tableView.alpha = 1
-            self.tableView.delegate = self
-            self.tableView.dataSource = self
-            self.tableView.separatorStyle = .singleLine
-            self.tableView.backgroundColor = Colours.white
-            self.tableView.separatorColor = Colours.cellQuote
-            self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
-            self.tableView.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableView)
-            
-            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
-            self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
-            self.tableViewL.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
-            self.tableViewL.alpha = 0
-            self.tableViewL.delegate = self
-            self.tableViewL.dataSource = self
-            self.tableViewL.separatorStyle = .singleLine
-            self.tableViewL.backgroundColor = Colours.white
-            self.tableViewL.separatorColor = Colours.cellQuote
-            self.tableViewL.layer.masksToBounds = true
-            self.tableViewL.estimatedRowHeight = 89
-            self.tableViewL.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewL)
-            
-            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
-            self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
-            self.tableViewF.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
-            self.tableViewF.alpha = 0
-            self.tableViewF.delegate = self
-            self.tableViewF.dataSource = self
-            self.tableViewF.separatorStyle = .singleLine
-            self.tableViewF.backgroundColor = Colours.white
-            self.tableViewF.separatorColor = Colours.cellQuote
-            self.tableViewF.layer.masksToBounds = true
-            self.tableViewF.estimatedRowHeight = 89
-            self.tableViewF.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewF)
-            self.loadLoadLoad()
-        }
+        tableView.removeFromSuperview()
+        tableView.removeFromSuperview()
+        
+        
+        self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height))
+        self.tableView.alpha = 1
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.separatorStyle = .singleLine
+        self.tableView.backgroundColor = Colours.white
+        self.tableView.separatorColor = Colours.cellQuote
+        self.tableView.layer.masksToBounds = true
+        self.tableView.estimatedRowHeight = 89
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.view.addSubview(self.tableView)
+        
+        self.loadLoadLoad()
     }
     
     
@@ -590,9 +441,16 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         NotificationCenter.default.post(name: Notification.Name(rawValue: "touchList"), object: nil)
     }
     
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        print("newsize")
+        print(size)
+        
+        self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(size.width), height: Int(size.height))
+    }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    @objc func ref() {
+        self.refresh()
+        print("rrr123")
     }
     
     override func viewDidLoad() {
@@ -601,7 +459,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goInstance), name: NSNotification.Name(rawValue: "goInstance"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.searchUser), name: NSNotification.Name(rawValue: "searchUser"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
@@ -610,23 +468,18 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         NotificationCenter.default.addObserver(self, selector: #selector(self.createNoti), name: NSNotification.Name(rawValue: "createNoti"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.fetchAllNewest), name: NSNotification.Name(rawValue: "fetchAllNewest"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeSeg), name: NSNotification.Name(rawValue: "changeSeg"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.segTheme), name: NSNotification.Name(rawValue: "segTheme"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.ref), name: NSNotification.Name(rawValue: "ref"), object: nil)
         
         self.view.backgroundColor = Colours.white
+        self.title = "Federated"
+        splitViewController?.view.backgroundColor = Colours.white
         
-        
-        
-        var settingsButton = MNGExpandedTouchAreaButton()
-        settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 32, height: 32)))
-        settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-        settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        settingsButton.adjustsImageWhenHighlighted = false
-        settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
-        
-        let done = UIBarButtonItem.init(customView: settingsButton)
-        self.navigationItem.setLeftBarButton(done, animated: false)
-        
-        
+                UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+                UINavigationBar.appearance().backgroundColor = Colours.white
+        UINavigationBar.appearance().barTintColor = Colours.black
+        UINavigationBar.appearance().tintColor = Colours.black
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -636,7 +489,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             case 2688:
                 offset = 88
                 newoff = 45
-            case 2436, 1792:
+            case 2436:
                 offset = 88
                 newoff = 45
             default:
@@ -647,119 +500,23 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
         
         
-        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(offset + 5), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
-            segmentedControl.dataSource = self
-            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                segmentedControl.shapeStyle = .roundedRect
-            } else {
-                segmentedControl.shapeStyle = .liquid
-            }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-            segmentedControl.cornerRadius = 12
-            segmentedControl.shadowsEnabled = false
-            segmentedControl.transitionStyle = .slide
-            segmentedControl.delegate = self
-            view.addSubview(segmentedControl)
-            
-            self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
-            self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 65)
-            self.tableView.alpha = 1
-            self.tableView.delegate = self
-            self.tableView.dataSource = self
-            self.tableView.separatorStyle = .singleLine
-            self.tableView.backgroundColor = Colours.white
-            self.tableView.separatorColor = Colours.cellQuote
-            self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
-            self.tableView.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableView)
-            
-            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
-            self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
-            self.tableViewL.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 65)
-            self.tableViewL.alpha = 0
-            self.tableViewL.delegate = self
-            self.tableViewL.dataSource = self
-            self.tableViewL.separatorStyle = .singleLine
-            self.tableViewL.backgroundColor = Colours.white
-            self.tableViewL.separatorColor = Colours.cellQuote
-            self.tableViewL.layer.masksToBounds = true
-            self.tableViewL.estimatedRowHeight = 89
-            self.tableViewL.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewL)
-            
-            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
-            self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
-            self.tableViewF.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 65)
-            self.tableViewF.alpha = 0
-            self.tableViewF.delegate = self
-            self.tableViewF.dataSource = self
-            self.tableViewF.separatorStyle = .singleLine
-            self.tableViewF.backgroundColor = Colours.white
-            self.tableViewF.separatorColor = Colours.cellQuote
-            self.tableViewF.layer.masksToBounds = true
-            self.tableViewF.estimatedRowHeight = 89
-            self.tableViewF.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewF)
-        } else {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(newoff), width: CGFloat(240), height: CGFloat(40)))
-            segmentedControl.dataSource = self
-            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                segmentedControl.shapeStyle = .roundedRect
-            } else {
-                segmentedControl.shapeStyle = .liquid
-            }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-            segmentedControl.cornerRadius = 12
-            segmentedControl.shadowsEnabled = false
-            segmentedControl.transitionStyle = .slide
-            segmentedControl.delegate = self
-            self.navigationController?.view.addSubview(segmentedControl)
-            
-            self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
-            self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5)
-            self.tableView.alpha = 1
-            self.tableView.delegate = self
-            self.tableView.dataSource = self
-            self.tableView.separatorStyle = .singleLine
-            self.tableView.backgroundColor = Colours.white
-            self.tableView.separatorColor = Colours.cellQuote
-            self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
-            self.tableView.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableView)
-            
-            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
-            self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
-            self.tableViewL.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
-            self.tableViewL.alpha = 0
-            self.tableViewL.delegate = self
-            self.tableViewL.dataSource = self
-            self.tableViewL.separatorStyle = .singleLine
-            self.tableViewL.backgroundColor = Colours.white
-            self.tableViewL.separatorColor = Colours.cellQuote
-            self.tableViewL.layer.masksToBounds = true
-            self.tableViewL.estimatedRowHeight = 89
-            self.tableViewL.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewL)
-            
-            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
-            self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
-            self.tableViewF.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
-            self.tableViewF.alpha = 0
-            self.tableViewF.delegate = self
-            self.tableViewF.dataSource = self
-            self.tableViewF.separatorStyle = .singleLine
-            self.tableViewF.backgroundColor = Colours.white
-            self.tableViewF.separatorColor = Colours.cellQuote
-            self.tableViewF.layer.masksToBounds = true
-            self.tableViewF.estimatedRowHeight = 89
-            self.tableViewF.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewF)
-        }
+        
+        
+        
+        self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
+        self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
+        self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.frame.width), height: Int(self.view.frame.height))
+        self.tableView.alpha = 1
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.separatorStyle = .singleLine
+        self.tableView.backgroundColor = Colours.white
+        self.tableView.separatorColor = Colours.cellQuote
+        self.tableView.layer.masksToBounds = true
+        self.tableView.estimatedRowHeight = 89
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.view.addSubview(self.tableView)
+        
         
         refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //self.tableView.addSubview(refreshControl)
@@ -774,24 +531,24 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 self?.tableView.cr.endHeaderRefresh()
             })
         }
-        tableViewL.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+        tableView.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let selection = UISelectionFeedbackGenerator()
                 selection.selectionChanged()
             }
             self?.refreshCont()
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                self?.tableViewL.cr.endHeaderRefresh()
+                self?.tableView.cr.endHeaderRefresh()
             })
         }
-        tableViewF.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+        tableView.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let selection = UISelectionFeedbackGenerator()
                 selection.selectionChanged()
             }
             self?.refreshCont()
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                self?.tableViewF.cr.endHeaderRefresh()
+                self?.tableView.cr.endHeaderRefresh()
             })
         }
         //tableView.cr.beginHeaderRefresh()
@@ -816,8 +573,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         
         if (traitCollection.forceTouchCapability == .available) {
             registerForPreviewing(with: self, sourceView: self.tableView)
-            registerForPreviewing(with: self, sourceView: self.tableViewL)
-            registerForPreviewing(with: self, sourceView: self.tableViewF)
+            registerForPreviewing(with: self, sourceView: self.tableView)
+            registerForPreviewing(with: self, sourceView: self.tableView)
         }
         
         
@@ -826,83 +583,78 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         
         //
         //        if self.currentIndex == 0 {
-        //            if (UserDefaults.standard.object(forKey: "savedRowHome1") == nil) {} else {
-        //                self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowHome1") as! CGFloat), animated: false)
+        //            if (UserDefaults.standard.object(forKey: "savedRowHome10") == nil) {} else {
+        //                self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowHome10") as! CGFloat), animated: false)
         //            }
         //        } else if self.currentIndex == 1 {
-        //            if (UserDefaults.standard.object(forKey: "savedRowLocal1") == nil) {} else {
-        //                self.tableViewL.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowLocal1") as! CGFloat), animated: false)
+        //            if (UserDefaults.standard.object(forKey: "savedRowLocal10") == nil) {} else {
+        //                self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowLocal10") as! CGFloat), animated: false)
         //            }
         //        } else {
-        //            if (UserDefaults.standard.object(forKey: "savedRowFed1") == nil) {} else {
-        //                self.tableViewF.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowFed1") as! CGFloat), animated: false)
+        //            if (UserDefaults.standard.object(forKey: "savedRowFed10") == nil) {} else {
+        //                self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowFed10") as! CGFloat), animated: false)
         //            }
         //        }
         
-        self.restoreScroll()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            if (UserDefaults.standard.object(forKey: "savedRowHome10") == nil) {} else {
+                if StoreStruct.statusesHome.count > 5 {
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowHome10") as! CGFloat), animated: false)
+                }
+            }
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            if (UserDefaults.standard.object(forKey: "savedRowLocal10") == nil) {} else {
+                if StoreStruct.statusesLocal.count > 5 {
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowLocal10") as! CGFloat), animated: false)
+                }
+            }
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            if (UserDefaults.standard.object(forKey: "savedRowFed10") == nil) {} else {
+                if StoreStruct.statusesFederated.count > 5 {
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowFed10") as! CGFloat), animated: false)
+                }
+            }
+        }
+        
+        
+        
+        
+        
         
     }
     
-    
-    
-    func restoreScroll() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            if (UserDefaults.standard.object(forKey: "savedRowHome1") == nil) {} else {
-                if StoreStruct.statusesHome.count > 5 {
-                    self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowHome1") as! CGFloat), animated: false)
-                }
-            }
-        }
-        DispatchQueue.main.async {
-            self.tableViewL.reloadData()
-            if (UserDefaults.standard.object(forKey: "savedRowLocal1") == nil) {} else {
-                if StoreStruct.statusesLocal.count > 5 {
-                    self.tableViewL.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowLocal1") as! CGFloat), animated: false)
-                }
-            }
-        }
-        DispatchQueue.main.async {
-            self.tableViewF.reloadData()
-            if (UserDefaults.standard.object(forKey: "savedRowFed1") == nil) {} else {
-                if StoreStruct.statusesFederated.count > 5 {
-                    self.tableViewF.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowFed1") as! CGFloat), animated: false)
-                }
-            }
-        }
-    }
-    
-    
-    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if self.currentIndex == 0 {
-            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
+            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome10")
         } else if self.currentIndex == 1 {
-            UserDefaults.standard.set(self.tableViewL.contentOffset.y, forKey: "savedRowLocal1")
+            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowLocal10")
         } else {
-            UserDefaults.standard.set(self.tableViewF.contentOffset.y, forKey: "savedRowFed1")
+            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowFed10")
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
-        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {} else {
-            springWithDelay(duration: 0.4, delay: 0, animations: {
-                self.segmentedControl.alpha = 0
-                //            self.tableView.alpha = 0
-            })
-        }
+        UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome10")
+        UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowLocal10")
+        UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowFed10")
         
-        UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
-        UserDefaults.standard.set(self.tableViewL.contentOffset.y, forKey: "savedRowLocal1")
-        UserDefaults.standard.set(self.tableViewF.contentOffset.y, forKey: "savedRowFed1")
-        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "becomeFirst"), object: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "becomeFirst"), object: self)
+        self.navigationController?.view.backgroundColor = Colours.white
+        
+        self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.frame.width), height: Int(self.view.frame.height))
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
         var newoff = 45
@@ -911,7 +663,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             case 2688:
                 offset = 88
                 newoff = 45
-            case 2436, 1792:
+            case 2436:
                 offset = 88
                 newoff = 45
             default:
@@ -922,12 +674,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
         
         //bh4
-        var newSize = offset + 65
-        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-            newSize = offset + 65
-        } else {
-            newSize = offset + 15
-        }
+        var newSize = offset
         
         self.newUpdatesB1.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
         self.newUpdatesB1.backgroundColor = Colours.grayLight19
@@ -937,55 +684,75 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         self.newUpdatesB1.alpha = 0
         self.view.addSubview(self.newUpdatesB1)
         
-        self.newUpdatesB2.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
-        self.newUpdatesB2.backgroundColor = Colours.grayLight19
-        self.newUpdatesB2.layer.cornerRadius = 10
-        self.newUpdatesB2.setTitleColor(UIColor.white, for: .normal)
-        self.newUpdatesB2.setTitle("", for: .normal)
-        self.newUpdatesB2.alpha = 0
-        self.view.addSubview(self.newUpdatesB2)
-        
-        self.newUpdatesB3.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
-        self.newUpdatesB3.backgroundColor = Colours.grayLight19
-        self.newUpdatesB3.layer.cornerRadius = 10
-        self.newUpdatesB3.setTitleColor(UIColor.white, for: .normal)
-        self.newUpdatesB3.setTitle("", for: .normal)
-        self.newUpdatesB3.alpha = 0
-        self.view.addSubview(self.newUpdatesB3)
-        
-        
         
         springWithDelay(duration: 0.4, delay: 0, animations: {
-            self.segmentedControl.alpha = 1
             self.tableView.alpha = 1
         })
         
-//        self.navigationController?.navigationBar.tintColor = Colours.tabUnselected
-//        self.navigationController?.navigationBar.barTintColor = Colours.tabUnselected
+        //        self.navigationController?.navigationBar.tintColor = Colours.tabUnselected
+        //        self.navigationController?.navigationBar.barTintColor = Colours.tabUnselected
         self.navigationController?.navigationItem.backBarButtonItem?.tintColor = Colours.tabUnselected
         
         StoreStruct.currentPage = 0
         
-        let applicationContext = [StoreStruct.client.accessToken ?? "": StoreStruct.shared.currentInstance.returnedText]
-        WatchSessionManager.sharedManager.transferUserInfo(userInfo: applicationContext as [String: AnyObject])
         
-        let request = Notifications.all(range: .default)
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                StoreStruct.notifications = stat
-                
-                for x in StoreStruct.notifications {
-                    if x.type == .mention {
-                        StoreStruct.notificationsMentions.append(x)
-                        DispatchQueue.main.async {
-                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
-                        }
-                    }
-                }
-                
+        if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
+            if self.fStream == false {
+                self.streamDataFed()
             }
         }
+        
+        
+        if StoreStruct.currentUser == nil {
+            let request2 = Accounts.currentUser()
+            StoreStruct.client.run(request2) { (statuses) in
+                if let stat = (statuses.value) {
+                    StoreStruct.currentUser = stat
+                    
+                    
+                    let request8 = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, range: .min(id: "", limit: 5000))
+                    StoreStruct.client.run(request8) { (statuses) in
+                        if let stat = (statuses.value) {
+                            print("pinneddone")
+                            StoreStruct.tempPinned = stat
+                        }
+                    }
+                    let request9 = Favourites.all()
+                    StoreStruct.client.run(request9) { (statuses) in
+                        if let stat = (statuses.value) {
+                            print("likeddone")
+                            StoreStruct.tempLiked = stat
+                        }
+                    }
+                    
+                    
+                }
+            }
+        }
+        
+        
+        
+        
+        let applicationContext = [StoreStruct.shared.currentInstance.accessToken ?? "": StoreStruct.shared.currentInstance.returnedText]
+        WatchSessionManager.sharedManager.transferUserInfo(userInfo: applicationContext as [String: AnyObject])
+        
+        //        let request = Notifications.all(range: .default)
+        //        StoreStruct.client.run(request) { (statuses) in
+        //            if let stat = (statuses.value) {
+        //                StoreStruct.notifications = stat
+        //
+        //                for x in StoreStruct.notifications {
+        //                    if x.type == .mention {
+        //                        StoreStruct.notificationsMentions.append(x)
+        //                        DispatchQueue.main.async {
+        //                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+        //                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+        //                        }
+        //                    }
+        //                }
+        //
+        //            }
+        //        }
         
         
     }
@@ -1135,7 +902,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     UIView.setAnimationsEnabled(false)
                                     self.tableView.reloadData()
                                     self.refreshControl.endRefreshing()
-                                    self.tableView.scrollToRow(at: IndexPath(row: self.hMod.count - 1, section: 0), at: .top, animated: false)
+                                    self.tableView.scrollToRow(at: IndexPath(row: self.hMod.count, section: 0), at: .top, animated: false)
                                     UIView.setAnimationsEnabled(true)
                                 } else {
                                     
@@ -1195,30 +962,23 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             //self.tableView.reloadData()
                             
                             
-                            if self.tableViewL.contentOffset.y == 0 {
+                            if self.tableView.contentOffset.y == 0 {
                                 StoreStruct.statusesLocal = self.lMod.reversed() + StoreStruct.statusesLocal
                                 StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                                 
                                 
                                 if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                                    self.newUpdatesB2.setTitle("\(self.lMod.count)  ", for: .normal)
-                                    //                                self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
-                                    self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                    springWithDelay(duration: 0.5, delay: 0, animations: {
-                                        self.newUpdatesB2.alpha = 1
-                                        self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                        //                                    self.newUpdatesB2.transform = CGAffineTransform(translationX: 0, y: 0)
-                                    })
+                                    
                                     self.countcount2 = self.lMod.count
                                     
                                     UIView.setAnimationsEnabled(false)
-                                    self.tableViewL.reloadData()
+                                    self.tableView.reloadData()
                                     self.refreshControl.endRefreshing()
-                                    self.tableViewL.scrollToRow(at: IndexPath(row: self.lMod.count - 1, section: 0), at: .top, animated: false)
+                                    self.tableView.scrollToRow(at: IndexPath(row: self.lMod.count, section: 0), at: .top, animated: false)
                                     UIView.setAnimationsEnabled(true)
                                 } else {
                                     
-                                    self.tableViewL.reloadData()
+                                    self.tableView.reloadData()
                                     self.refreshControl.endRefreshing()
                                     
                                 }
@@ -1276,32 +1036,24 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         DispatchQueue.main.async {
                             
                             
-                            if self.tableViewF.contentOffset.y == 0 {
+                            if self.tableView.contentOffset.y == 0 {
                                 StoreStruct.statusesFederated = self.fMod.reversed() + StoreStruct.statusesFederated
                                 StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                                 
                                 
                                 if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                     
-                                    self.newUpdatesB3.setTitle("\(self.fMod.count)  ", for: .normal)
-                                    //                                            self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
-                                    self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                    springWithDelay(duration: 0.5, delay: 0, animations: {
-                                        self.newUpdatesB3.alpha = 1
-                                        self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                        //                                                self.newUpdatesB3.transform = CGAffineTransform(translationX: 0, y: 0)
-                                    })
                                     self.countcount3 = self.fMod.count
                                     
                                     UIView.setAnimationsEnabled(false)
-                                    self.tableViewF.reloadData()
+                                    self.tableView.reloadData()
                                     self.refreshControl.endRefreshing()
-                                    self.tableViewF.scrollToRow(at: IndexPath(row: self.fMod.count - 1, section: 0), at: .top, animated: false)
+                                    self.tableView.scrollToRow(at: IndexPath(row: self.fMod.count, section: 0), at: .top, animated: false)
                                     UIView.setAnimationsEnabled(true)
                                     
                                 } else {
                                     
-                                    self.tableViewF.reloadData()
+                                    self.tableView.reloadData()
                                     self.refreshControl.endRefreshing()
                                     
                                 }
@@ -1338,18 +1090,18 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     ////                }
     //            } else if self.currentIndex == 1 {
     //
-    //                if self.tableViewL.contentOffset.y == 0 {
+    //                if self.tableView.contentOffset.y == 0 {
     //                    StoreStruct.statusesLocal = self.lMod.reversed() + StoreStruct.statusesLocal
     //                    StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-    //                    self.tableViewL.reloadData()
+    //                    self.tableView.reloadData()
     //                    self.lMod = []
     //                }
     //            } else {
     //
-    //                if self.tableViewF.contentOffset.y == 0 {
+    //                if self.tableView.contentOffset.y == 0 {
     //                    StoreStruct.statusesFederated = self.fMod.reversed() + StoreStruct.statusesFederated
     //                    StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-    //                    self.tableViewF.reloadData()
+    //                    self.tableView.reloadData()
     //                    self.fMod = []
     //                }
     //            }
@@ -1361,153 +1113,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         return tableView(tableView, heightForRowAt: IndexPath(row: 0, section: 0))
     }
     
-    func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
-        return 3
-    }
-    
-    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
-        if index == 0 {
-            return "Home".localized
-        } else if index == 1 {
-            return "Local".localized
-        } else {
-            if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-                return "Federated".localized
-            } else {
-                return "Fed".localized
-            }
-        }
-    }
-    
-    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
-        return [Colours.tabSelected, Colours.tabSelected]
-    }
-    
-    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
-        return [Colours.tabSelected, Colours.tabSelected]
-    }
-    //backh2
-    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
-        
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
-        
-        
-        
-        if toIndex == 0 {
-            
-            if self.countcount1 == 0 {
-                self.newUpdatesB1.alpha = 0
-                self.newUpdatesB2.alpha = 0
-                self.newUpdatesB3.alpha = 0
-            } else {
-                self.newUpdatesB1.alpha = 1
-                self.newUpdatesB2.alpha = 0
-                self.newUpdatesB3.alpha = 0
-            }
-            
-            self.currentIndex = 0
-            self.tableView.reloadData()
-            self.tableView.alpha = 1
-            self.tableViewL.alpha = 0
-            self.tableViewF.alpha = 0
-            if (UserDefaults.standard.object(forKey: "savedRowHome1") == nil) {} else {
-                
-            }
-            
-            // stream
-            if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
-                if self.hStream == false {
-                    self.streamDataHome()
-                    
-                }
-            }
-        }
-        if toIndex == 1 {
-            
-            if self.countcount2 == 0 {
-                self.newUpdatesB1.alpha = 0
-                self.newUpdatesB2.alpha = 0
-                self.newUpdatesB3.alpha = 0
-            } else {
-                self.newUpdatesB1.alpha = 0
-                self.newUpdatesB2.alpha = 1
-                self.newUpdatesB3.alpha = 0
-            }
-            
-            self.currentIndex = 1
-            self.tableView.alpha = 0
-            self.tableViewL.alpha = 1
-            self.tableViewF.alpha = 0
-            
-            if StoreStruct.statusesLocal.isEmpty {
-                let request = Timelines.public(local: true, range: .default)
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
-                        DispatchQueue.main.async {
-                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-                            self.tableViewL.reloadData()
-                            
-                        }
-                    }
-                }
-            } else {
-                //bbbhere
-                self.tableViewL.reloadData()
-            }
-            
-            // stream
-            if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
-                if self.lStream == false {
-                    self.streamDataLocal()
-                }
-            }
-        }
-        if toIndex == 2 {
-            
-            if self.countcount3 == 0 {
-                self.newUpdatesB1.alpha = 0
-                self.newUpdatesB2.alpha = 0
-                self.newUpdatesB3.alpha = 0
-            } else {
-                self.newUpdatesB1.alpha = 0
-                self.newUpdatesB2.alpha = 0
-                self.newUpdatesB3.alpha = 1
-            }
-            
-            self.currentIndex = 2
-            self.tableView.alpha = 0
-            self.tableViewL.alpha = 0
-            self.tableViewF.alpha = 1
-            
-            if StoreStruct.statusesFederated.isEmpty {
-                let request = Timelines.public(local: false, range: .default)
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
-                        DispatchQueue.main.async {
-                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-                            self.tableViewF.reloadData()
-                            
-                        }
-                    }
-                }
-            } else {
-                ///bbhere
-                self.tableViewF.reloadData()
-            }
-            // stream
-            if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
-                if self.fStream == false {
-                    self.streamDataFed()
-                }
-            }
-            
-        }
-    }
     
     
     // Table stuff
@@ -1515,7 +1120,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
             return StoreStruct.statusesHome.count
-        } else if tableView == self.tableViewL {
+        } else if tableView == self.tableView {
             return StoreStruct.statusesLocal.count
         } else {
             return StoreStruct.statusesFederated.count
@@ -1528,417 +1133,27 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if tableView == self.tableView {
             
             
-            
-            
-            
-            if StoreStruct.statusesHome.count == 0 || indexPath.row >= StoreStruct.statusesHome.count {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
-                cell.backgroundColor = Colours.white
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
-                cell.selectedBackgroundView = bgColorView
-                return cell
-            } else {
-                
-                
-                if indexPath.row == StoreStruct.statusesHome.count - 14 {
-                    self.fetchMoreHome()
-                }
-                print(indexPath.row)
-                print(StoreStruct.statusesHome.count)
-                if StoreStruct.statusesHome[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.statusesHome[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
-                    cell.delegate = self
-                    cell.backgroundColor = Colours.white
-                    cell.configure(StoreStruct.statusesHome[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
-                    cell.date.textColor = Colours.black.withAlphaComponent(0.6)
-                    cell.toot.textColor = Colours.black
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        var newString = string
-                        for z2 in StoreStruct.statusesHome[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.acct
-                            }
-                        }
-                        
-                        print("tapmedemp")
-                        print(newString)
-                        
-                        
-                        let controller = ThirdViewController()
-                        if newString == StoreStruct.currentUser.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            self.safariVC = SFSafariViewController(url: z)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        } else {
-                            self.safariVC = SFSafariViewController(url: url)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! MainFeedCellImage
-                    cell.delegate = self
-                    cell.backgroundColor = Colours.white
-                    cell.configure(StoreStruct.statusesHome[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
-                    cell.mainImageView.tag = indexPath.row
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
-                    cell.date.textColor = Colours.black.withAlphaComponent(0.6)
-                    cell.toot.textColor = Colours.black
-                    cell.mainImageView.backgroundColor = Colours.white
-                    cell.mainImageViewBG.backgroundColor = Colours.white
-                    
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        var newString = string
-                        for z2 in StoreStruct.statusesHome[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.acct
-                            }
-                        }
-                        
-                        
-                        let controller = ThirdViewController()
-                        if newString == StoreStruct.currentUser.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            self.safariVC = SFSafariViewController(url: z)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        } else {
-                            self.safariVC = SFSafariViewController(url: url)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                }
-            }
-            
-            
-            
-        } else if tableView == self.tableViewL {
-            
-            
-            
-            if StoreStruct.statusesLocal.count == 0 || indexPath.row >= StoreStruct.statusesLocal.count  {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "celll", for: indexPath) as! MainFeedCell
-                cell.backgroundColor = Colours.white
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
-                cell.selectedBackgroundView = bgColorView
-                return cell
-            } else {
-                
-                
-                
-                
-                if indexPath.row == StoreStruct.statusesLocal.count - 14 {
-                    self.fetchMoreLocal()
-                }
-                if StoreStruct.statusesLocal[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.statusesLocal[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "celll", for: indexPath) as! MainFeedCell
-                    cell.delegate = self
-                    cell.backgroundColor = Colours.white
-                    cell.configure(StoreStruct.statusesLocal[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
-                    cell.date.textColor = Colours.black.withAlphaComponent(0.6)
-                    cell.toot.textColor = Colours.black
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        var newString = string
-                        for z2 in StoreStruct.statusesLocal[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.acct
-                            }
-                        }
-                        
-                        
-                        let controller = ThirdViewController()
-                        if newString == StoreStruct.currentUser.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            self.safariVC = SFSafariViewController(url: z)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        } else {
-                            self.safariVC = SFSafariViewController(url: url)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell2l", for: indexPath) as! MainFeedCellImage
-                    cell.delegate = self
-                    cell.backgroundColor = Colours.white
-                    cell.configure(StoreStruct.statusesLocal[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
-                    cell.mainImageView.tag = indexPath.row
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
-                    cell.date.textColor = Colours.black.withAlphaComponent(0.6)
-                    cell.toot.textColor = Colours.black
-                    cell.mainImageView.backgroundColor = Colours.white
-                    cell.mainImageViewBG.backgroundColor = Colours.white
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        var newString = string
-                        for z2 in StoreStruct.statusesLocal[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.acct
-                            }
-                        }
-                        
-                        
-                        let controller = ThirdViewController()
-                        if newString == StoreStruct.currentUser.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            self.safariVC = SFSafariViewController(url: z)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        } else {
-                            self.safariVC = SFSafariViewController(url: url)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                }
-                
-            }
-        } else {
-            
-            
-            if StoreStruct.statusesFederated.count == 0 || indexPath.row >= StoreStruct.statusesFederated.count  {
+            if StoreStruct.statusesFederated.count == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellf", for: indexPath) as! MainFeedCell
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.white
                 cell.selectedBackgroundView = bgColorView
                 return cell
-            } else {
+            } else if indexPath.row < StoreStruct.statusesFederated.count {
+                
+                
                 
                 if indexPath.row == StoreStruct.statusesFederated.count - 14 {
                     self.fetchMoreFederated()
                 }
+                
+                print("popopo")
+                print(StoreStruct.statusesFederated.count)
+                print(indexPath.row)
+                
                 if StoreStruct.statusesFederated[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.statusesFederated[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cellf", for: indexPath) as! MainFeedCell
                     cell.delegate = self
@@ -2112,9 +1327,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     cell.selectedBackgroundView = bgColorView
                     return cell
                 }
-            }
-            
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellf", for: indexPath) as! MainFeedCell
+                cell.backgroundColor = Colours.white
+                let bgColorView = UIView()
+                bgColorView.backgroundColor = Colours.white
+                cell.selectedBackgroundView = bgColorView
+                return cell
         }
+        
     }
     
     @objc func didTouchProfile(sender: UIButton) {
@@ -2168,16 +1389,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             if sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .gifv {
                 
                 let videoURL = URL(string: sto[sender.tag].reblog?.mediaAttachments[0].url ?? sto[sender.tag].mediaAttachments[0].url)!
-                if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {
-                    XPlayer.play(videoURL)
-                } else {
-                    let player = AVPlayer(url: videoURL)
-                    let playerViewController = AVPlayerViewController()
-                    playerViewController.player = player
-                    self.present(playerViewController, animated: true) {
-                        playerViewController.player!.play()
-                    }
-                }
+                XPlayer.play(videoURL)
                 
             } else {
                 
@@ -2188,7 +1400,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                     var images = [SKPhoto]()
                     for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
@@ -2210,10 +1422,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 } else if self.currentIndex == 1 {
                     
                     let indexPath = IndexPath(row: sender.tag, section: 0)
-                    let cell = tableViewL.cellForRow(at: indexPath) as! MainFeedCellImage
+                    let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                     var images = [SKPhoto]()
                     for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
@@ -2235,10 +1447,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 } else {
                     
                     let indexPath = IndexPath(row: sender.tag, section: 0)
-                    let cell = tableViewF.cellForRow(at: indexPath) as! MainFeedCellImage
+                    let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                     var images = [SKPhoto]()
                     for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
@@ -2273,10 +1485,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             theTable = self.tableView
         } else if self.currentIndex == 1 {
             sto = StoreStruct.statusesLocal
-            theTable = self.tableViewL
+            theTable = self.tableView
         } else if self.currentIndex == 2 {
             sto = StoreStruct.statusesFederated
-            theTable = self.tableViewF
+            theTable = self.tableView
         }
         
         
@@ -2446,19 +1658,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     cell.hideSwipe(animated: true)
                 }
             }
-            
-            
-            if (UserDefaults.standard.object(forKey: "dmTog") == nil) || (UserDefaults.standard.object(forKey: "dmTog") as! Int == 0) {
-                like.backgroundColor = Colours.white
-            } else {
-                if sto[indexPath.row].visibility == .direct {
-                    like.backgroundColor = Colours.cellQuote
-                } else {
-                    like.backgroundColor = Colours.white
-                }
-            }
-            
-            
+            like.backgroundColor = Colours.white
             like.image = UIImage(named: "like")
             like.transitionDelegate = ScaleTransition.default
             like.textColor = Colours.tabUnselected
@@ -2470,7 +1670,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 }
                 
                 let controller = ComposeViewController()
-                StoreStruct.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
+                controller.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
                 controller.inReply = [sto[indexPath.row].reblog ?? sto[indexPath.row]]
                 controller.prevTextReply = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                 controller.inReplyText = sto[indexPath.row].reblog?.account.username ?? sto[indexPath.row].account.username
@@ -2484,18 +1684,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     cell.hideSwipe(animated: true)
                 }
             }
-            
-            if (UserDefaults.standard.object(forKey: "dmTog") == nil) || (UserDefaults.standard.object(forKey: "dmTog") as! Int == 0) {
-                reply.backgroundColor = Colours.white
-            } else {
-                if sto[indexPath.row].visibility == .direct {
-                    reply.backgroundColor = Colours.cellQuote
-                } else {
-                    reply.backgroundColor = Colours.white
-                }
-            }
-            
-            
+            reply.backgroundColor = Colours.white
             reply.transitionDelegate = ScaleTransition.default
             reply.textColor = Colours.tabUnselected
             
@@ -2599,7 +1788,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             print(action, ind)
                             
                             let controller = ComposeViewController()
-                            StoreStruct.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
+                            controller.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
                             controller.idToDel = sto[indexPath.row].id
                             controller.filledTextFieldText = sto[indexPath.row].content.stripHTML()
                             self.present(controller, animated: true, completion: nil)
@@ -2646,9 +1835,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     
                                     if let myWebsite = sto[indexPath.row].url {
                                         let objectsToShare = [myWebsite]
-                                        let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                                        vc.previewNumberOfLines = 5
-                                        vc.previewFont = UIFont.systemFont(ofSize: 14)
+                                        let vc = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                        vc.popoverPresentationController?.sourceView = self.view
+                                        vc.popoverPresentationController?.sourceRect = CGRect(x: (self.view.bounds.midX), y: (self.view.bounds.midY), width: 0, height: 0)
+                                        vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 0)
+//                                        let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+//                                        vc.previewNumberOfLines = 5
+//                                        vc.previewFont = UIFont.systemFont(ofSize: 14)
                                         self.present(vc, animated: true, completion: nil)
                                     }
                                 }
@@ -2656,9 +1849,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     print(action, ind)
                                     
                                     let bodyText = sto[indexPath.row].content.stripHTML()
-                                    let vc = VisualActivityViewController(text: bodyText)
-                                    vc.previewNumberOfLines = 5
-                                    vc.previewFont = UIFont.systemFont(ofSize: 14)
+                                    let vc = UIActivityViewController(activityItems: [bodyText], applicationActivities: nil)
+                                    vc.popoverPresentationController?.sourceView = self.view
+                                    vc.popoverPresentationController?.sourceRect = CGRect(x: (self.view.bounds.midX), y: (self.view.bounds.midY), width: 0, height: 0)
+                                    vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 0)
+//                                    let vc = VisualActivityViewController(text: bodyText)
+//                                    vc.previewNumberOfLines = 5
+//                                    vc.previewFont = UIFont.systemFont(ofSize: 14)
                                     self.present(vc, animated: true, completion: nil)
                                     
                                 }
@@ -2668,6 +1865,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         return
                                     }
                                 }
+                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                                 .show(on: self)
                             
                             
@@ -2680,6 +1878,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 return
                             }
                         }
+                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                         .show(on: self)
                     
                     
@@ -2869,6 +2068,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         return
                                     }
                                 }
+                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                                 .show(on: self)
                             
                             
@@ -2879,15 +2079,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             let unreserved = "-._~/?"
                             let allowed = NSMutableCharacterSet.alphanumeric()
                             allowed.addCharacters(in: unreserved)
-                            let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            print("0001")
-                            print(bodyText)
-                            let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
-                            let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
-                            var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
-                            trans = trans!.replacingOccurrences(of: "\n\n", with: "%20")
-                            print("0002")
-                            print(trans)
+                            var bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            bodyText = bodyText.replacingOccurrences(of: ".", with: " ")
+                            bodyText = bodyText.replacingOccurrences(of: "!", with: " ")
+                            bodyText = bodyText.replacingOccurrences(of: "?", with: " ")
+                            bodyText = bodyText.replacingOccurrences(of: "~", with: " ")
+                            let trans = bodyText.addingPercentEncoding(withAllowedCharacters: allowed as CharacterSet)
                             let langStr = Locale.current.languageCode
                             let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
                             guard let requestUrl = URL(string:urlString) else {
@@ -2899,11 +2096,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 if error == nil, let usableData = data {
                                     do {
                                         let json = try JSONSerialization.jsonObject(with: usableData, options: .mutableContainers) as! [Any]
-                                        
-                                        var translatedText = ""
-                                        for i in (json[0] as! [Any]) {
-                                            translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
-                                        }
+                                        let translatedText = ((((json[0] as! [Any])[0]) as! [Any])[0])
                                         
                                         Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
                                             .backgroundColor(Colours.white)
@@ -2917,6 +2110,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                                     return
                                                 }
                                             }
+                                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                                             .show(on: self)
                                     } catch let error as NSError {
                                         print(error)
@@ -2942,9 +2136,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     
                                     if let myWebsite = sto[indexPath.row].reblog?.url ?? sto[indexPath.row].url {
                                         let objectsToShare = [myWebsite]
-                                        let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                                        vc.previewNumberOfLines = 5
-                                        vc.previewFont = UIFont.systemFont(ofSize: 14)
+                                        let vc = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                        vc.popoverPresentationController?.sourceView = self.view
+                                        vc.popoverPresentationController?.sourceRect = CGRect(x: (self.view.bounds.midX), y: (self.view.bounds.midY), width: 0, height: 0)
+                                        vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 0)
+//                                        let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+//                                        vc.previewNumberOfLines = 5
+//                                        vc.previewFont = UIFont.systemFont(ofSize: 14)
                                         self.present(vc, animated: true, completion: nil)
                                     }
                                 }
@@ -2952,9 +2150,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     print(action, ind)
                                     
                                     let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                                    let vc = VisualActivityViewController(text: bodyText)
-                                    vc.previewNumberOfLines = 5
-                                    vc.previewFont = UIFont.systemFont(ofSize: 14)
+                                    let vc = UIActivityViewController(activityItems: [bodyText], applicationActivities: nil)
+                                    vc.popoverPresentationController?.sourceView = self.view
+                                    vc.popoverPresentationController?.sourceRect = CGRect(x: (self.view.bounds.midX), y: (self.view.bounds.midY), width: 0, height: 0)
+                                    vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 0)
+//                                    let vc = VisualActivityViewController(text: bodyText)
+//                                    vc.previewNumberOfLines = 5
+//                                    vc.previewFont = UIFont.systemFont(ofSize: 14)
                                     self.present(vc, animated: true, completion: nil)
                                     
                                 }
@@ -2964,6 +2166,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         return
                                     }
                                 }
+                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                                 .show(on: self)
                             
                             
@@ -2976,6 +2179,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 return
                             }
                         }
+                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                         .show(on: self)
                     
                 }
@@ -2988,17 +2192,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     cell.hideSwipe(animated: true)
                 }
             }
-            
-            if (UserDefaults.standard.object(forKey: "dmTog") == nil) || (UserDefaults.standard.object(forKey: "dmTog") as! Int == 0) {
-                more.backgroundColor = Colours.white
-            } else {
-                if sto[indexPath.row].visibility == .direct {
-                    more.backgroundColor = Colours.cellQuote
-                } else {
-                    more.backgroundColor = Colours.white
-                }
-            }
-            
+            more.backgroundColor = Colours.white
             more.image = UIImage(named: "more2")
             more.transitionDelegate = ScaleTransition.default
             more.textColor = Colours.tabUnselected
@@ -3026,16 +2220,16 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
-        self.tableViewL.deselectRow(at: indexPath, animated: true)
-        self.tableViewF.deselectRow(at: indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: true)
         
         
         if self.currentIndex == 0 {
-            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
+            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome10")
         } else if self.currentIndex == 1 {
-            UserDefaults.standard.set(self.tableViewL.contentOffset.y, forKey: "savedRowLocal1")
+            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowLocal10")
         } else {
-            UserDefaults.standard.set(self.tableViewF.contentOffset.y, forKey: "savedRowFed1")
+            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowFed10")
         }
         
         let controller = DetailViewController()
@@ -3083,7 +2277,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         StoreStruct.statusesLocal = StoreStruct.statusesLocal + stat
                         DispatchQueue.main.async {
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-                            self.tableViewL.reloadData()
+                            self.tableView.reloadData()
                             
                         }
                     }
@@ -3104,7 +2298,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         StoreStruct.statusesFederated = StoreStruct.statusesFederated + stat
                         DispatchQueue.main.async {
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-                            self.tableViewF.reloadData()
+                            self.tableView.reloadData()
                         }
                     }
                 }
@@ -3151,7 +2345,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             
                             do {
-                                self.restoreScroll()
                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
                                 try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
                                 try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
@@ -3176,31 +2369,23 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             newestC = StoreStruct.statusesLocal.count - newestC
                             
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                                self.newUpdatesB2.setTitle("\(newestC)  ", for: .normal)
-                                //                            self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
-                                self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                springWithDelay(duration: 0.5, delay: 0, animations: {
-                                    self.newUpdatesB2.alpha = 1
-                                    self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                    //                                self.newUpdatesB2.transform = CGAffineTransform(translationX: 0, y: 0)
-                                })
+                                
                                 self.countcount2 = newestC
                                 
                                 UIView.setAnimationsEnabled(false)
-                                self.tableViewL.reloadData()
+                                self.tableView.reloadData()
                                 self.refreshControl.endRefreshing()
-                                self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
                                 UIView.setAnimationsEnabled(true)
                             } else {
                                 
-                                self.tableViewL.reloadData()
+                                self.tableView.reloadData()
                                 self.refreshControl.endRefreshing()
                                 
                             }
                             
                             
                             do {
-                                self.restoreScroll()
                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
                                 try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
                                 try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
@@ -3225,32 +2410,29 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             newestC = StoreStruct.statusesFederated.count - newestC
                             
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                                self.newUpdatesB3.setTitle("\(newestC)  ", for: .normal)
-                                //                            self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
-                                self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                springWithDelay(duration: 0.5, delay: 0, animations: {
-                                    self.newUpdatesB3.alpha = 1
-                                    self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                    //                                self.newUpdatesB3.transform = CGAffineTransform(translationX: 0, y: 0)
-                                })
+                                
                                 self.countcount3 = newestC
                                 
                                 UIView.setAnimationsEnabled(false)
-                                self.tableViewF.reloadData()
+                                self.tableView.reloadData()
                                 self.refreshControl.endRefreshing()
-                                self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                
+                                print("checkindexes")
+                                print(stat.count)
+                                print(newestC)
+                                
+                                self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
                                 UIView.setAnimationsEnabled(true)
                                 
                             } else {
                                 
-                                self.tableViewF.reloadData()
+                                self.tableView.reloadData()
                                 self.refreshControl.endRefreshing()
                                 
                             }
                             
                             
                             do {
-                                self.restoreScroll()
                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
                                 try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
                                 try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
@@ -3302,7 +2484,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             Colours.grayDark = UIColor(red: 250/250, green: 250/250, blue: 250/250, alpha: 1.0)
             Colours.grayDark2 = UIColor.white
             Colours.cellNorm = Colours.white
-            Colours.cellQuote = UIColor(red: 20/255.0, green: 20/255.0, blue: 29/255.0, alpha: 1.0)
+            Colours.cellQuote = UIColor(red: 33/255.0, green: 33/255.0, blue: 43/255.0, alpha: 1.0)
             Colours.cellSelected = UIColor(red: 34/255.0, green: 34/255.0, blue: 44/255.0, alpha: 1.0)
             Colours.tabUnselected = UIColor(red: 80/255.0, green: 80/255.0, blue: 90/255.0, alpha: 1.0)
             Colours.blackUsual = UIColor(red: 70/255.0, green: 70/255.0, blue: 80/255.0, alpha: 1.0)
@@ -3377,10 +2559,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
         
         
-        
         //        UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedOffsetHome")
         //        print("676767")
         //        print((UserDefaults.standard.object(forKey: "savedOffsetHome") as! CGFloat))
+        
+        UINavigationBar.appearance().barTintColor = Colours.black
+        UINavigationBar.appearance().tintColor = Colours.black
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
         
         self.ai.alpha = 0
         self.ai.removeFromSuperview()
@@ -3390,15 +2575,21 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         self.tableView.reloadData()
         self.tableView.reloadInputViews()
         
-        self.tableViewL.backgroundColor = Colours.white
-        self.tableViewL.separatorColor = Colours.cellQuote
-        self.tableViewL.reloadData()
-        self.tableViewL.reloadInputViews()
+        self.tableView.backgroundColor = Colours.white
+        self.tableView.separatorColor = Colours.cellQuote
+        self.tableView.reloadData()
+        self.tableView.reloadInputViews()
         
-        self.tableViewF.backgroundColor = Colours.white
-        self.tableViewF.separatorColor = Colours.cellQuote
-        self.tableViewF.reloadData()
-        self.tableViewF.reloadInputViews()
+        self.tableView.backgroundColor = Colours.white
+        self.tableView.separatorColor = Colours.cellQuote
+        self.tableView.reloadData()
+        self.tableView.reloadInputViews()
+        
+        self.navigationController?.navigationBar.backgroundColor = Colours.white
+        self.navigationController?.navigationBar.tintColor = Colours.black
+        self.navigationController?.navigationBar.barTintColor = Colours.black
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
+        self.splitViewController?.view.backgroundColor = Colours.cellQuote
         
         //        if (UserDefaults.standard.object(forKey: "savedOffsetHome") == nil) {} else {
         //            print("787878")
@@ -3421,56 +2612,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     }
     
     
-    @objc func segTheme() {
-        var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
-        var offset = 88
-        var newoff = 45
-        if UIDevice().userInterfaceIdiom == .phone {
-            switch UIScreen.main.nativeBounds.height {
-            case 2688:
-                offset = 88
-                newoff = 45
-            case 2436, 1792:
-                offset = 88
-                newoff = 45
-            default:
-                offset = 64
-                newoff = 24
-                tabHeight = Int(UITabBarController().tabBar.frame.size.height)
-            }
-        }
-        segmentedControl.removeFromSuperview()
-        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(offset + 5), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
-            segmentedControl.dataSource = self
-            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                segmentedControl.shapeStyle = .roundedRect
-            } else {
-                segmentedControl.shapeStyle = .liquid
-            }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-            segmentedControl.cornerRadius = 12
-            segmentedControl.shadowsEnabled = false
-            segmentedControl.transitionStyle = .slide
-            segmentedControl.delegate = self
-            view.addSubview(segmentedControl)
-        } else {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(newoff), width: CGFloat(240), height: CGFloat(40)))
-            segmentedControl.dataSource = self
-            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                segmentedControl.shapeStyle = .roundedRect
-            } else {
-                segmentedControl.shapeStyle = .liquid
-            }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-            segmentedControl.cornerRadius = 12
-            segmentedControl.shadowsEnabled = false
-            segmentedControl.transitionStyle = .slide
-            segmentedControl.delegate = self
-            self.navigationController?.view.addSubview(segmentedControl)
-        }
-        
-    }
     
     
 }
