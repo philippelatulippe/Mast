@@ -105,6 +105,15 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        
+        
+        let instances = InstanceData.getAllInstances()
+        var curr = InstanceData.getCurrentInstance()
+        if curr?.clientID == instances[indexPath.row].clientID {
+            
+        } else {
+        
+        
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
             let impact = UIImpactFeedbackGenerator(style: .medium)
             impact.impactOccurred()
@@ -123,6 +132,8 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
                 appDelegate.reloadApplication()
                 
             }
+        }
+            
         }
         
     }
