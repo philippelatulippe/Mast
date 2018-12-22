@@ -1626,6 +1626,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             if sender.state == .began {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
             }
+        } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 6) {
+            print("do nothing")
         } else {
             
             if sender.state == .began {
@@ -1945,6 +1947,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.textField.textColor = UIColor.white
         self.textField.spellCheckingType = .no
         self.textField.returnKeyType = .done
+        self.textField.autocorrectionType = .no
         self.textField.autocapitalizationType = .none
         self.textField.delegate = self
         self.textField.attributedPlaceholder = NSAttributedString(string: "mastodon.technology",

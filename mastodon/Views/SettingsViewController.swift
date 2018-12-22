@@ -197,6 +197,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse22")
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse23")
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse231")
+        self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse099")
         self.tableView.register(AddInstanceCell.self, forCellReuseIdentifier: "addInstanceCell")
         self.tableView.alpha = 1
         self.tableView.delegate = self
@@ -315,9 +316,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         return vw
     }
     
-    var generalArray = ["Realtime Updates", "Notifications", "Haptic Feedback", "Always Display Sensitive Content", "Default Toot Privacy", "Default Keyboard Style", "Long-Hold Anywhere Action", "Image Upload Quality", "Toot Load Order", "Toot Load Position", "Default Video Container"]
-    var generalArrayDesc = ["No need to refresh manually, you'll get the latest toots and notifications pushed to you.", "Realtime push notifications for mentions/follows/boosts/likes.", "Get a responsive little vibration when tapping buttons and other on-screen elements.", "Sensitive content will always be displayed without a content warning overlay.", "Select a default privacy state for you toots, from public (everyone can see), unlisted (local timelines can see), private (followers can see), and direct (only to the mentioned user).", "Choose from a convenient social keyboard that puts the @ and # keys front and centre, or the default keyboard with a return key.", "Select what happens when you long-hold anywhere in the app.", "Pick the quality of images uploaded when composing toots. A higher quality image may take longer to upload.", "Pick whether toots load the latest toot (plus roughly 20) when reloading, or whether the reloaded toots follow on immediately from the top toot in the timeline.", "Choose whether to retain the timeline scroll position when streaming and pulling to refresh, or to scroll to the top.", "Choose whether to show videos and GIFs in a custom Picture-in-Picture container which can be swiped down to keep the view around, or in the stock media player, where swiping down dismisses the content."]
-    var generalArrayIm = ["setreal", "notifs", "sethap", "setsensitivec", "priv", "keybse", "holdse", "comse", "orderse", "posse", "setvid"]
+    var generalArray = ["Realtime Updates", "Notifications", "Haptic Feedback", "Always Display Sensitive Content", "Default Toot Privacy", "Default Keyboard Style", "Long-Hold Anywhere Action", "Image Upload Quality", "Toot Load Order", "Toot Load Position", "Default Video Container", "Long Swipe Selection"]
+    var generalArrayDesc = ["No need to refresh manually, you'll get the latest toots and notifications pushed to you.", "Realtime push notifications for mentions/follows/boosts/likes.", "Get a responsive little vibration when tapping buttons and other on-screen elements.", "Sensitive content will always be displayed without a content warning overlay.", "Select a default privacy state for you toots, from public (everyone can see), unlisted (local timelines can see), private (followers can see), and direct (only to the mentioned user).", "Choose from a convenient social keyboard that puts the @ and # keys front and centre, or the default keyboard with a return key.", "Select what happens when you long-hold anywhere in the app.", "Pick the quality of images uploaded when composing toots. A higher quality image may take longer to upload.", "Pick whether toots load the latest toot (plus roughly 20) when reloading, or whether the reloaded toots follow on immediately from the top toot in the timeline.", "Choose whether to retain the timeline scroll position when streaming and pulling to refresh, or to scroll to the top.", "Choose whether to show videos and GIFs in a custom Picture-in-Picture container which can be swiped down to keep the view around, or in the stock media player, where swiping down dismisses the content.", "Swipe all the way left or right on a toot to select the action on the edge."]
+    var generalArrayIm = ["setreal", "notifs", "sethap", "setsensitivec", "priv", "keybse", "holdse", "comse", "orderse", "posse", "setvid", "swipeact"]
     
     var appearanceArray = ["", "Theme", "Text Size", "Profiles Corner Radius", "Images Corner Radius", "Hide Images in Timelines", "Full Usernames", "Confetti", "Gallery Grid Size", "Time Style", "Profile Header Background", "Segments Size", "Segments Transition Style", "Subtle Activity Notifications", "Profile Display Picture Border", "Pinch Background Theme", "Media Captions", "Toot Progress Indicator", "Highlight Direct Messages"]
     var appearanceArrayDesc = ["", "Select from a white day theme, a dark dusk theme, an even darker night theme, or a truly black OLED-friendly theme.", "Always be able to read posts with adjustable text sizing.", "Circle or square, your choice.", "Rounded or not, your choice.", "Timelines with some plain old text, for a distraction-free browsing experience.", "Display the user's full username, with the instance, in toots.", "Add some fun to posting toots, following users, boosting toots, and liking toots.", "Set the amount of columns in the toot composition section's photo picker gallery.", "Pick between absolute or relative time to display in timelines.", "Change the style of the profile header background.", "Choose from larger home and notification screen segments, or tinier ones.", "Pick between a static and linear transition, or a playful liquid one.", "Dims activity notifications, while keeping mentions untouched.", "Select a size for the border around profile view display pictures.", "Select a theme for the background when pinching to toot a screenshot.", "Pick whether to display the toot text or the image's alt text in media captions.", "Choose whether to show the toot progress indicator or not.", "Highlight direct messages in timelines with a subtle background."]
@@ -497,6 +498,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: self)
         }
     }
+    @objc func handleToggleSelectSwipe(sender: UISwitch) {
+        if sender.isOn {
+            UserDefaults.standard.set(0, forKey: "selectSwipe")
+            sender.setOn(true, animated: true)
+        } else {
+            UserDefaults.standard.set(1, forKey: "selectSwipe")
+            sender.setOn(false, animated: true)
+        }
+    }
     
     
     
@@ -582,6 +592,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         cell.switchView.setOn(true, animated: false)
                     }
                     cell.switchView.addTarget(self, action: #selector(self.handleToggleSensitiveMain), for: .touchUpInside)
+                }
+                if indexPath.row == 11 {
+                    // select swipe
+                    
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellse099", for: indexPath) as! SettingsCellToggle
+                    cell.configure(status: self.generalArray[indexPath.row], status2: self.generalArrayDesc[indexPath.row], image: self.generalArrayIm[indexPath.row])
+                    cell.backgroundColor = Colours.white
+                    cell.userName.textColor = Colours.black
+                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                    cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = Colours.white
+                    cell.selectedBackgroundView = bgColorView
+                    if (UserDefaults.standard.object(forKey: "selectSwipe") == nil) || (UserDefaults.standard.object(forKey: "selectSwipe") as! Int == 0) {
+                        cell.switchView.setOn(true, animated: false)
+                    } else {
+                        cell.switchView.setOn(false, animated: false)
+                    }
+                    cell.switchView.addTarget(self, action: #selector(self.handleToggleSelectSwipe), for: .touchUpInside)
+                    return cell
                 }
                 return cell
                 
@@ -766,11 +796,22 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 let account = Account.getAccounts()[indexPath.row]
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
                 let instanceAndAccount = "\(instance.returnedText) "
+                
+                let instances = InstanceData.getAllInstances()
+                let curr = InstanceData.getCurrentInstance()
+                if curr?.clientID == instances[indexPath.row].clientID {
+                    cell.configure(status: "• \(account.username)", status2: instanceAndAccount, image: "", imageURL:account.avatarStatic )
+                    cell.backgroundColor = Colours.white
+                    cell.userName.textColor = Colours.black
+                    cell.userTag.textColor = Colours.tabSelected
+                    cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                } else {
                 cell.configure(status: account.username, status2:instanceAndAccount, image: "", imageURL:account.avatarStatic )
                 cell.backgroundColor = Colours.white
                 cell.userName.textColor = Colours.black
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                }
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.white
                 cell.selectedBackgroundView = bgColorView
@@ -914,36 +955,49 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 var filledSet3 = UIImage(named: "unfilledset")
                 var filledSet4 = UIImage(named: "unfilledset")
                 var filledSet5 = UIImage(named: "unfilledset")
+                var filledSet6 = UIImage(named: "unfilledset")
                 if (UserDefaults.standard.object(forKey: "longToggle") == nil) || (UserDefaults.standard.object(forKey: "longToggle") as! Int == 0) {
                     filledSet1 = UIImage(named: "filledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "unfilledset")
                     filledSet4 = UIImage(named: "unfilledset")
                     filledSet5 = UIImage(named: "unfilledset")
+                    filledSet6 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 1) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "filledset")
                     filledSet3 = UIImage(named: "unfilledset")
                     filledSet4 = UIImage(named: "unfilledset")
                     filledSet5 = UIImage(named: "unfilledset")
+                    filledSet6 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 2) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "filledset")
                     filledSet4 = UIImage(named: "unfilledset")
                     filledSet5 = UIImage(named: "unfilledset")
+                    filledSet6 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 3) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "unfilledset")
                     filledSet4 = UIImage(named: "filledset")
                     filledSet5 = UIImage(named: "unfilledset")
+                    filledSet6 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 4) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "unfilledset")
                     filledSet4 = UIImage(named: "unfilledset")
                     filledSet5 = UIImage(named: "filledset")
+                    filledSet6 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 6) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                    filledSet4 = UIImage(named: "unfilledset")
+                    filledSet5 = UIImage(named: "unfilledset")
+                    filledSet6 = UIImage(named: "filledset")
                 }
                 
                 
@@ -972,6 +1026,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .action(.default("Rain Confetti".localized), image: filledSet4) { (action, ind) in
                         print(action, ind)
                         UserDefaults.standard.set(3, forKey: "longToggle")
+                    }
+                    .action(.default("Do Nothing".localized), image: filledSet6) { (action, ind) in
+                        print(action, ind)
+                        UserDefaults.standard.set(6, forKey: "longToggle")
                     }
                     .action(.cancel("Dismiss"))
                     .finally { action, index in
@@ -1958,7 +2016,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 //bhere3
                 
                 
-                var curr = InstanceData.getCurrentInstance()
+                let curr = InstanceData.getCurrentInstance()
                 if curr?.clientID == instances[indexPath.row].clientID {
                     
                     

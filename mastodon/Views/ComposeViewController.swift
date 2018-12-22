@@ -525,6 +525,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var theReg = ""
     let imag = UIImagePickerController()
     var gifVidData: Data?
+    var startRepText = ""
     
     
     @objc func actOnSpecialNotificationAuto() {
@@ -1357,12 +1358,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         textView.backgroundColor = Colours.clear
         textView.textColor = Colours.grayDark
         
-        
+        //bhere6
         if self.inReply.isEmpty {
             if self.inReplyText == "" {
                 textView.text = self.filledTextFieldText
             } else {
                 textView.text = "@\(self.inReplyText) "
+                self.startRepText = textView.text
             }
         } else {
             let statusAuthor = self.inReply[0].account.acct
@@ -1372,6 +1374,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             textView.text = goo.reduce("") { $0 + $1 + " " }
             textView.text = textView.text.replacingOccurrences(of: "@\(StoreStruct.currentUser.username)", with: "")
             textView.text = textView.text.replacingOccurrences(of: "  ", with: " ")
+            self.startRepText = textView.text
         }
         
         self.view.addSubview(textView)
@@ -2193,7 +2196,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         }
         
         
-        if self.textView.text! == "" {
+        if self.textView.text! == "" || self.textView.text! == self.startRepText {
             self.textView.resignFirstResponder()
             
             StoreStruct.caption1 = ""
@@ -2733,7 +2736,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             impact.impactOccurred()
         }
         if gesture.direction == UISwipeGestureRecognizer.Direction.down {
-            if self.textView.text! == "" {
+            if self.textView.text! == "" || self.textView.text! == self.startRepText {
                 self.textView.resignFirstResponder()
                 
                 StoreStruct.caption1 = ""

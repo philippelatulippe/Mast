@@ -111,11 +111,20 @@ class ProfileHeaderCellImage: UITableViewCell, UICollectionViewDelegate, UIColle
         
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionProfileCell
         var images = [SKPhoto]()
+            var coun = 0
         for y in sto[indexPath.row].mediaAttachments {
-            let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.image.image)
+            if coun == 0 {
+                let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.image.image)
+                photo.shouldCachePhotoURLImage = true
+                photo.caption = sto[indexPath.row].content.stripHTML()
+                images.append(photo)
+            } else {
+            let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
             photo.shouldCachePhotoURLImage = true
             photo.caption = sto[indexPath.row].content.stripHTML()
             images.append(photo)
+            }
+            coun += 1
         }
         let originImage = cell.image.image
         if originImage != nil {

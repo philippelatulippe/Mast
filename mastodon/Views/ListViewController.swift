@@ -470,7 +470,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let indexPath = IndexPath(row: sender.tag, section: 0)
         let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
         var images = [SKPhoto]()
+            var coun = 0
         for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
+            if coun == 0 {
+                let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
+                photo.shouldCachePhotoURLImage = true
+                if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                    photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                } else {
+                    photo.caption = y.description ?? ""
+                }
+                images.append(photo)
+            } else {
             let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
             photo.shouldCachePhotoURLImage = true
             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
@@ -479,6 +490,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 photo.caption = y.description ?? ""
             }
             images.append(photo)
+            }
+            coun += 1
         }
         let originImage = sender.currentImage
         if originImage != nil {
@@ -1262,7 +1275,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
-        options.expansionStyle = .selection
+        if (UserDefaults.standard.object(forKey: "selectSwipe") == nil) || (UserDefaults.standard.object(forKey: "selectSwipe") as! Int == 0) {
+            options.expansionStyle = .selection
+        } else {
+            options.expansionStyle = .none
+        }
         options.transitionStyle = .drag
         options.buttonSpacing = 0
         options.buttonPadding = 0

@@ -105,19 +105,26 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        
-        
-        let instances = InstanceData.getAllInstances()
-        var curr = InstanceData.getCurrentInstance()
-        if curr?.clientID == instances[indexPath.row].clientID {
-            
-        } else {
-        
-        
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
             let impact = UIImpactFeedbackGenerator(style: .medium)
             impact.impactOccurred()
         }
+        
+        if indexPath.item == InstanceData.getAllInstances().count {
+            
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut2"), object: nil)
+            
+        } else {
+        
+        
+        
+        let instances = InstanceData.getAllInstances()
+        var curr = InstanceData.getCurrentInstance()
+        if curr?.clientID == instances[indexPath.item].clientID {
+            
+        } else {
+        
+        
         
         let instances = InstanceData.getAllInstances()
         if indexPath.row >= InstanceData.getAllInstances().count {
@@ -132,6 +139,8 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
                 appDelegate.reloadApplication()
                 
             }
+        }
+            
         }
             
         }

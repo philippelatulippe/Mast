@@ -1228,7 +1228,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let indexPath = IndexPath(row: sender.tag, section: 1)
         let cell = tableView.cellForRow(at: indexPath) as! DetailCellImage
         var images = [SKPhoto]()
+            var coun = 0
         for y in sto[0].reblog?.mediaAttachments ?? sto[0].mediaAttachments {
+            if coun == 0 {
+                let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
+                photo.shouldCachePhotoURLImage = true
+                if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                    photo.caption = sto[0].reblog?.content.stripHTML() ?? sto[0].content.stripHTML()
+                } else {
+                    photo.caption = y.description ?? ""
+                }
+                images.append(photo)
+            } else {
             let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
             photo.shouldCachePhotoURLImage = true
             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
@@ -1237,6 +1248,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 photo.caption = y.description ?? ""
             }
             images.append(photo)
+            }
+            coun += 1
         }
         let originImage = sender.currentImage
         if originImage != nil {
@@ -1932,7 +1945,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                 var images = [SKPhoto]()
+                var coun = 0
                 for y in sto[indexPath.row].mediaAttachments {
+                    if coun == 0 {
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
+                        photo.shouldCachePhotoURLImage = true
+                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                            photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
+                        } else {
+                            photo.caption = y.description ?? ""
+                        }
+                        images.append(photo)
+                    } else {
                     let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
                     photo.shouldCachePhotoURLImage = true
                     if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
@@ -1941,6 +1965,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         photo.caption = y.description ?? ""
                     }
                     images.append(photo)
+                    }
+                    coun += 1
                 }
                 let originImage = sender.currentImage
                 if originImage != nil {
@@ -1956,7 +1982,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                 var images = [SKPhoto]()
+                var coun = 0
                 for y in sto[indexPath.row].mediaAttachments {
+                    if coun == 0 {
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
+                        photo.shouldCachePhotoURLImage = true
+                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                            photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
+                        } else {
+                            photo.caption = y.description ?? ""
+                        }
+                        images.append(photo)
+                    } else {
                     let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
                     photo.shouldCachePhotoURLImage = true
                     if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
@@ -1965,6 +2002,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         photo.caption = y.description ?? ""
                     }
                     images.append(photo)
+                    }
                 }
                 let originImage = sender.currentImage
                 if originImage != nil {
@@ -2003,7 +2041,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
             var images = [SKPhoto]()
+            var coun = 0
             for y in sto[indexPath.row].mediaAttachments {
+                if coun == 0 {
+                    let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
+                    photo.shouldCachePhotoURLImage = true
+                    if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                        photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
+                    } else {
+                        photo.caption = y.description ?? ""
+                    }
+                    images.append(photo)
+                } else {
                 let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
                 photo.shouldCachePhotoURLImage = true
                 if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
@@ -2012,6 +2061,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     photo.caption = y.description ?? ""
                 }
                 images.append(photo)
+                }
+                coun += 1
             }
             let originImage = sender.currentImage
             if originImage != nil {
@@ -2027,7 +2078,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let cell = tableView.cellForRow(at: indexPath) as! RepliesCellImage
         var images = [SKPhoto]()
+            var coun = 0
         for y in sto[indexPath.row].mediaAttachments {
+            if coun == 0 {
+                let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
+                photo.shouldCachePhotoURLImage = true
+                if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                    photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
+                } else {
+                    photo.caption = y.description ?? ""
+                }
+                images.append(photo)
+            } else {
             let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
             photo.shouldCachePhotoURLImage = true
             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
@@ -2036,6 +2098,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 photo.caption = y.description ?? ""
             }
             images.append(photo)
+            }
+            coun += 1
         }
         let originImage = sender.currentImage
         if originImage != nil {
@@ -2720,7 +2784,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
-        options.expansionStyle = .selection
+        if (UserDefaults.standard.object(forKey: "selectSwipe") == nil) || (UserDefaults.standard.object(forKey: "selectSwipe") as! Int == 0) {
+            options.expansionStyle = .selection
+        } else {
+            options.expansionStyle = .none
+        }
         options.transitionStyle = .drag
         options.buttonSpacing = 0
         options.buttonPadding = 0
