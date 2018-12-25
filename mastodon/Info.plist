@@ -587,6 +587,7 @@
 		<string>com.shi.Mast.oled</string>
 		<string>com.shi.Mast.light</string>
 		<string>com.shi.Mast.dark</string>
+        <string>com.shi.Mast.bluemid</string>
 		<string>com.shi.Mast.confetti</string>
 	</array>
 	<key>UIApplicationShortcutItems</key>

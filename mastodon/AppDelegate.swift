@@ -45,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if userActivity.activityType == "com.shi.Mast.dark2" {
             let viewController = window?.rootViewController as! ViewController
             viewController.siriDark2()
+        } else if userActivity.activityType == "com.shi.Mast.bluemid" {
+            let viewController = window?.rootViewController as! ViewController
+            viewController.siriBlue()
         } else {
             let viewController = window?.rootViewController as! ViewController
             viewController.siriOled()

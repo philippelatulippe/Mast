@@ -109,6 +109,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.genericStuff()
     }
     
+    func siriBlue() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        Colours.keyCol = UIKeyboardAppearance.dark
+        UserDefaults.standard.set(4, forKey: "theme")
+        self.genericStuff()
+    }
+    
     func siriConfetti() {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
     }
@@ -211,6 +218,21 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         }
         
         delay(4.5) {
+            let activity3 = NSUserActivity(activityType: "com.shi.Mast.bluemid")
+            activity3.title = "Switch to midnight blue mode".localized
+            activity3.userInfo = ["state" : "blue"]
+            activity3.isEligibleForSearch = true
+            if #available(iOS 12.0, *) {
+                activity3.isEligibleForPrediction = true
+                activity3.persistentIdentifier = "com.shi.Mast.bluemid"
+            } else {
+                // Fallback on earlier versions
+            }
+            self.view.userActivity = activity3
+            activity3.becomeCurrent()
+        }
+        
+        delay(6) {
             let activity3 = NSUserActivity(activityType: "com.shi.Mast.confetti")
             activity3.title = "Confetti time".localized
             activity3.userInfo = ["state" : "confetti"]
@@ -653,6 +675,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         NotificationCenter.default.addObserver(self, selector: #selector(self.themeNight), name: NSNotification.Name(rawValue: "night"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.themeNight2), name: NSNotification.Name(rawValue: "night2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.themeBlack), name: NSNotification.Name(rawValue: "black"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.midBlue), name: NSNotification.Name(rawValue: "midblue"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreate), name: NSNotification.Name(rawValue: "confettiCreate"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreateRe), name: NSNotification.Name(rawValue: "confettiCreateRe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreateLi), name: NSNotification.Name(rawValue: "confettiCreateLi"), object: nil)
@@ -860,6 +883,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         self.view0pinch.backgroundColor = UIColor(red: 36/250, green: 33/250, blue: 37/250, alpha: 1.0)
                     } else if (UserDefaults.standard.object(forKey: "screenshotcol") as! Int == 3) {
                         self.view0pinch.backgroundColor = UIColor(red: 0/250, green: 0/250, blue: 0/250, alpha: 1.0)
+                    } else if (UserDefaults.standard.object(forKey: "screenshotcol") as! Int == 4) {
+                        self.view0pinch.backgroundColor = UIColor(red: 18/250, green: 42/250, blue: 111/250, alpha: 1.0)
                     }
                     self.view1pinch.image = self.screenshot
                     self.view1pinch.layer.shadowColor = UIColor.black.cgColor
@@ -1560,8 +1585,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     Colours.keyCol = UIKeyboardAppearance.dark
                 }
                 if z == 3 {
-                    newNum = 0
+                    newNum = 4
                     UIApplication.shared.statusBarStyle = .default
+                    Colours.keyCol = UIKeyboardAppearance.light
+                }
+                if z == 4 {
+                    newNum = 0
+                    UIApplication.shared.statusBarStyle = .lightContent
                     Colours.keyCol = UIKeyboardAppearance.light
                 }
             }
@@ -1774,6 +1804,49 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 Colours.keyCol = UIKeyboardAppearance.dark
         
         UserDefaults.standard.set(3, forKey: "theme")
+        
+        DispatchQueue.main.async {
+            
+            self.firstView.loadLoadLoad()
+            self.secondView.loadLoadLoad()
+            self.thirdView.loadLoadLoad()
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
+            
+            self.view.backgroundColor = Colours.white
+            self.navigationController?.navigationBar.backgroundColor = Colours.white
+            self.navigationController?.navigationBar.tintColor = Colours.white
+            
+            self.tabBar.barTintColor = Colours.white
+            self.tabBar.backgroundColor = Colours.white
+            self.tabBar.unselectedItemTintColor = Colours.tabUnselected
+            self.tabBar.tintColor = Colours.tabSelected
+            
+            self.firstView.view.backgroundColor = Colours.white
+            self.secondView.view.backgroundColor = Colours.white
+            self.thirdView.view.backgroundColor = Colours.white
+            self.fourthView.view.backgroundColor = Colours.white
+            
+            self.tabOne.navigationBar.backgroundColor = Colours.white
+            self.tabOne.navigationBar.barTintColor = Colours.white
+            self.tabTwo.navigationBar.backgroundColor = Colours.white
+            self.tabTwo.navigationBar.barTintColor = Colours.white
+            self.tabThree.navigationBar.backgroundColor = Colours.white
+            self.tabThree.navigationBar.barTintColor = Colours.white
+            self.tabFour.navigationBar.backgroundColor = Colours.white
+            self.tabFour.navigationBar.barTintColor = Colours.white
+            
+            self.statusBarView.backgroundColor = Colours.white
+            
+        }
+    }
+    
+    
+    @objc func midBlue() {
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        Colours.keyCol = UIKeyboardAppearance.dark
+        
+        UserDefaults.standard.set(4, forKey: "theme")
         
         DispatchQueue.main.async {
             

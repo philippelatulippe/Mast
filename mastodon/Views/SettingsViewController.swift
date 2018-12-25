@@ -1299,26 +1299,37 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 var filledSet2 = UIImage(named: "unfilledset")
                 var filledSet3 = UIImage(named: "unfilledset")
                 var filledSet4 = UIImage(named: "unfilledset")
+                var filledSet5 = UIImage(named: "unfilledset")
                 if (UserDefaults.standard.object(forKey: "theme") == nil) || (UserDefaults.standard.object(forKey: "theme") as! Int == 0) {
                     filledSet1 = UIImage(named: "filledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "unfilledset")
                     filledSet4 = UIImage(named: "unfilledset")
+                    filledSet5 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "theme") as! Int == 1) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "filledset")
                     filledSet3 = UIImage(named: "unfilledset")
                     filledSet4 = UIImage(named: "unfilledset")
+                    filledSet5 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "theme") as! Int == 2) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "filledset")
                     filledSet4 = UIImage(named: "unfilledset")
+                    filledSet5 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "theme") as! Int == 3) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "unfilledset")
                     filledSet4 = UIImage(named: "filledset")
+                    filledSet5 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "theme") as! Int == 4) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                    filledSet4 = UIImage(named: "unfilledset")
+                    filledSet5 = UIImage(named: "filledset")
                 }
                 
                 
@@ -1343,6 +1354,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .action(.default("Midnight".localized), image: filledSet4) { (action, ind) in
                         print(action, ind)
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "black"), object: self)
+                    }
+                    .action(.default("Midnight Blue".localized), image: filledSet5) { (action, ind) in
+                        print(action, ind)
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "midblue"), object: self)
                     }
                     .action(.cancel("Dismiss"))
                     .finally { action, index in
@@ -1862,26 +1877,37 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 var filledSet2 = UIImage(named: "unfilledset")
                 var filledSet3 = UIImage(named: "unfilledset")
                 var filledSet4 = UIImage(named: "unfilledset")
+                var filledSet5 = UIImage(named: "unfilledset")
                 if (UserDefaults.standard.object(forKey: "screenshotcol") == nil) || (UserDefaults.standard.object(forKey: "screenshotcol") as! Int == 0) {
                     filledSet1 = UIImage(named: "filledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "unfilledset")
                     filledSet4 = UIImage(named: "unfilledset")
+                    filledSet5 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "screenshotcol") as! Int == 1) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "filledset")
                     filledSet3 = UIImage(named: "unfilledset")
                     filledSet4 = UIImage(named: "unfilledset")
+                    filledSet5 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "screenshotcol") as! Int == 2) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "filledset")
                     filledSet4 = UIImage(named: "unfilledset")
+                    filledSet5 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "screenshotcol") as! Int == 3) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "unfilledset")
                     filledSet4 = UIImage(named: "filledset")
+                    filledSet5 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "screenshotcol") as! Int == 4) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                    filledSet4 = UIImage(named: "unfilledset")
+                    filledSet5 = UIImage(named: "filledset")
                 }
                 
                 
@@ -1906,6 +1932,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .action(.default("Midnight".localized), image: filledSet4) { (action, ind) in
                         print(action, ind)
                         UserDefaults.standard.set(3, forKey: "screenshotcol")
+                    }
+                    .action(.default("Midnight Blue".localized), image: filledSet5) { (action, ind) in
+                        print(action, ind)
+                        UserDefaults.standard.set(4, forKey: "screenshotcol")
                     }
                     .action(.cancel("Dismiss"))
                     .finally { action, index in
@@ -2217,6 +2247,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             Colours.grayDark2 = UIColor.white
             Colours.cellNorm = Colours.white
             Colours.cellQuote = UIColor(red: 33/255.0, green: 33/255.0, blue: 43/255.0, alpha: 1.0)
+            Colours.cellSelected = UIColor(red: 34/255.0, green: 34/255.0, blue: 44/255.0, alpha: 1.0)
+            Colours.tabUnselected = UIColor(red: 80/255.0, green: 80/255.0, blue: 90/255.0, alpha: 1.0)
+            Colours.blackUsual = UIColor(red: 70/255.0, green: 70/255.0, blue: 80/255.0, alpha: 1.0)
+            Colours.cellOwn = UIColor(red: 55/255.0, green: 55/255.0, blue: 65/255.0, alpha: 1.0)
+            Colours.cellAlternative = UIColor(red: 20/255.0, green: 20/255.0, blue: 30/255.0, alpha: 1.0)
+            Colours.black = UIColor.white
+            UIApplication.shared.statusBarStyle = .lightContent
+        } else if (UserDefaults.standard.object(forKey: "theme") != nil && UserDefaults.standard.object(forKey: "theme") as! Int == 4) {
+            Colours.white = UIColor(red: 8/255.0, green: 28/255.0, blue: 88/255.0, alpha: 1.0)
+            Colours.grayDark = UIColor(red: 250/250, green: 250/250, blue: 250/250, alpha: 1.0)
+            Colours.grayDark2 = UIColor.white
+            Colours.cellNorm = Colours.white
+            Colours.cellQuote = UIColor(red: 20/255.0, green: 20/255.0, blue: 29/255.0, alpha: 1.0)
             Colours.cellSelected = UIColor(red: 34/255.0, green: 34/255.0, blue: 44/255.0, alpha: 1.0)
             Colours.tabUnselected = UIColor(red: 80/255.0, green: 80/255.0, blue: 90/255.0, alpha: 1.0)
             Colours.blackUsual = UIColor(red: 70/255.0, green: 70/255.0, blue: 80/255.0, alpha: 1.0)

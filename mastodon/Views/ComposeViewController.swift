@@ -602,6 +602,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     return
                 }
             }
+            .popover(anchorView: self.selectedImage1)
             .show(on: self)
         
         
@@ -647,6 +648,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     return
                 }
             }
+            .popover(anchorView: self.selectedImage2)
             .show(on: self)
         
     }
@@ -689,6 +691,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     return
                 }
             }
+            .popover(anchorView: self.selectedImage3)
             .show(on: self)
     }
     @objc func tappedImageView4(_ sender: AnyObject) {
@@ -729,6 +732,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     return
                 }
             }
+            .popover(anchorView: self.selectedImage4)
             .show(on: self)
     }
     
@@ -1279,7 +1283,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             sectionInset: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         )
         layout.scrollDirection = .horizontal
-        cameraCollectionView = UICollectionView(frame: CGRect(x: CGFloat(0), y: CGFloat(50), width: CGFloat(UIScreen.main.bounds.width), height: CGFloat(210)), collectionViewLayout: layout)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            cameraCollectionView = UICollectionView(frame: CGRect(x: CGFloat(0), y: CGFloat(50), width: CGFloat(UIScreen.main.bounds.width), height: CGFloat(310)), collectionViewLayout: layout)
+        } else {
+            cameraCollectionView = UICollectionView(frame: CGRect(x: CGFloat(0), y: CGFloat(50), width: CGFloat(UIScreen.main.bounds.width), height: CGFloat(210)), collectionViewLayout: layout)
+        }
+        
         cameraCollectionView.backgroundColor = Colours.clear
         cameraCollectionView.delegate = self
         cameraCollectionView.dataSource = self
@@ -1415,8 +1425,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         cell.image.layer.borderColor = UIColor.black.cgColor
         cell.image.image = self.images[indexPath.row]
         
-        cell.image.frame.size.width = 190
-        cell.image.frame.size.height = 150
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                cell.image.frame.size.width = 290
+                cell.image.frame.size.height = 250
+            } else {
+                cell.image.frame.size.width = 190
+                cell.image.frame.size.height = 150
+            }
         
         cell.bgImage.layer.masksToBounds = false
         cell.bgImage.layer.shadowColor = UIColor.black.cgColor
@@ -1863,6 +1878,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     return
                 }
             }
+            .popover(anchorView: self.visibilityButton)
             .show(on: self)
     }
     @objc func didTouchUpInsideWarningButton(_ sender: AnyObject) {
@@ -2031,6 +2047,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             return
                         }
                     }
+                    .popover(anchorView: self.emotiButton)
                     .show(on: self)
                 
                 
@@ -2125,6 +2142,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     return
                 }
             }
+            .popover(anchorView: self.emotiButton)
             .show(on: self)
         
         
@@ -2975,6 +2993,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     return
                 }
             }
+            .popover(anchorView: self.closeButton)
             .show(on: self)
     }
     
