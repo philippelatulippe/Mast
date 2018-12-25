@@ -71,6 +71,18 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
             
         } else {
             
+            
+            let instances = InstanceData.getAllInstances()
+            var curr = InstanceData.getCurrentInstance()
+            if curr?.clientID == instances[indexPath.row].clientID {
+                cell.image.layer.borderWidth = 3.6
+            } else {
+                cell.image.layer.borderWidth = 0
+            }
+            cell.image.layer.borderColor = Colours.tabSelected.cgColor
+            
+            
+            
             let instance = InstanceData.getAllInstances()[indexPath.row]
             let account = Account.getAccounts()[indexPath.row]
         
@@ -83,7 +95,6 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
         
         cell.image.layer.cornerRadius = 27.5
         cell.image.layer.masksToBounds = true
-        cell.image.layer.borderColor = UIColor.black.cgColor
         
         cell.image.frame = CGRect(x: 0, y: 0, width: 55, height: 55)
         cell.bgImage.frame = CGRect(x: 0, y: 0, width: 55, height: 55)
@@ -94,6 +105,8 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
         cell.bgImage.layer.shadowOffset = CGSize(width:0, height:6)
         cell.bgImage.layer.shadowRadius = 12
         cell.bgImage.layer.shadowOpacity = 0.12
+        
+        
         
         cell.frame.size.width = 55
         cell.frame.size.height = 55
@@ -126,7 +139,6 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
         
         
         
-        let instances = InstanceData.getAllInstances()
         if indexPath.row >= InstanceData.getAllInstances().count {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut2"), object: nil)
         } else {

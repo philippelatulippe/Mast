@@ -2293,7 +2293,19 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             reply.transitionDelegate = ScaleTransition.default
             reply.textColor = Colours.tabUnselected
             
-            return [reply, like, boost]
+            if (UserDefaults.standard.object(forKey: "sworder") == nil) || (UserDefaults.standard.object(forKey: "sworder") as! Int == 0) {
+                return [reply, like, boost]
+            } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 1) {
+                return [reply, boost, like]
+            } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 2) {
+                return [boost, reply, like]
+            } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 3) {
+                return [boost, like, reply]
+            } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 4) {
+                return [like, reply, boost]
+            } else {
+                return [like, boost, reply]
+            }
         } else {
             let impact = UIImpactFeedbackGenerator(style: .medium)
             

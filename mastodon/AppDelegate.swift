@@ -101,11 +101,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "newInstancelogged"), object: nil)
             return true
         } else {
-            print("Response ==> \(url.absoluteString)")
-            let x = url.absoluteString
-            let y = x.split(separator: "=")
-            StoreStruct.shared.currentInstance.authCode = y[1].description
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+//            print("Response ==> \(url.absoluteString)")
+//            let x = url.absoluteString
+//            let y = x.split(separator: "=")
+//            StoreStruct.shared.currentInstance.authCode = y[1].description
+//            NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
             return true
         }
     }
@@ -168,7 +168,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
         
-        // Replace 'YOUR_APP_ID' with your OneSignal App ID.
         OneSignal.initWithLaunchOptions(launchOptions,
                                         appId: "4f67f45a-7d0f-4e7d-8624-0ec148f064ed",
                                         handleNotificationAction: nil,
@@ -182,8 +181,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let BarButtonItemAppearance = UIBarButtonItem.appearance()
         BarButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: Colours.grayLight2], for: .normal)
-//        BarButtonItemAppearance.setBackgroundVerticalPositionAdjustment(-100, for: .default)
-//        BarButtonItemAppearance.setBackButtonTitlePositionAdjustment(UIOffset(horizontal: 36, vertical: -2), for:UIBarMetrics.default)
         BarButtonItemAppearance.tintColor = Colours.grayLight2
         
         

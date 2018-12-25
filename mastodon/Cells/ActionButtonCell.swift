@@ -71,9 +71,35 @@ class ActionButtonCell: UITableViewCell {
         contentView.addConstraint(horizontalCenter)
         
         
-        let horizontalFormat = "H:|-(==cornerMargin)-[reply(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
-        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
-        contentView.addConstraints(horizontalConstraints)
+        
+        if (UserDefaults.standard.object(forKey: "sworder") == nil) || (UserDefaults.standard.object(forKey: "sworder") as! Int == 0) {
+            let horizontalFormat = "H:|-(==cornerMargin)-[reply(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
+            contentView.addConstraints(horizontalConstraints)
+        } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 1) {
+            let horizontalFormat = "H:|-(==cornerMargin)-[reply(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
+            contentView.addConstraints(horizontalConstraints)
+        } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 2) {
+            let horizontalFormat = "H:|-(==cornerMargin)-[boost(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
+            contentView.addConstraints(horizontalConstraints)
+        } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 3) {
+            let horizontalFormat = "H:|-(==cornerMargin)-[boost(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
+            contentView.addConstraints(horizontalConstraints)
+        } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 4) {
+            let horizontalFormat = "H:|-(==cornerMargin)-[like(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
+            contentView.addConstraints(horizontalConstraints)
+        } else {
+            let horizontalFormat = "H:|-(==cornerMargin)-[like(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
+            contentView.addConstraints(horizontalConstraints)
+        }
+        
+        
+        
         
         let verticalFormat = "V:|-20-[reply(40)]-20-|"
         let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)

@@ -786,10 +786,34 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             if sto[indexPath.row].reblog?.visibility ?? sto[indexPath.row].visibility == .direct {
                 reply.image = UIImage(named: "direct2")
-                return [reply, like]
+                if (UserDefaults.standard.object(forKey: "sworder") == nil) || (UserDefaults.standard.object(forKey: "sworder") as! Int == 0) {
+                    return [reply, like]
+                } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 1) {
+                    return [reply, like]
+                } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 2) {
+                    return [reply, like]
+                } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 3) {
+                    return [like, reply]
+                } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 4) {
+                    return [like, reply]
+                } else {
+                    return [like, reply]
+                }
             } else {
                 reply.image = UIImage(named: "reply")
-                return [reply, like, boost]
+                if (UserDefaults.standard.object(forKey: "sworder") == nil) || (UserDefaults.standard.object(forKey: "sworder") as! Int == 0) {
+                    return [reply, like, boost]
+                } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 1) {
+                    return [reply, boost, like]
+                } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 2) {
+                    return [boost, reply, like]
+                } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 3) {
+                    return [boost, like, reply]
+                } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 4) {
+                    return [like, reply, boost]
+                } else {
+                    return [like, boost, reply]
+                }
             }
             
         } else {

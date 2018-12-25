@@ -931,7 +931,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         textView.becomeFirstResponder()
         
         
-        self.textField.text = StoreStruct.spoilerText
+//        self.textField.text = StoreStruct.spoilerText
         
         
         
@@ -1208,24 +1208,30 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         if inReply.count > 0 {
             self.textField.text = inReply[0].spoilerText
+            if self.textField.text != "" {
+                self.isSensitive = true
+            }
+            
             if inReply[0].visibility == .direct {
                 self.visibility = .direct
                 self.visibilityButton.setImage(UIImage(named: "direct")?.maskWithColor(color: UIColor.white), for: .normal)
             } else {
                 
-                if (UserDefaults.standard.object(forKey: "privToot") == nil) || (UserDefaults.standard.object(forKey: "privToot") as! Int == 0) || inReply[0].visibility == .public {
+                
+                if inReply[0].visibility == .public {
                     self.visibility = .public
                     self.visibilityButton.setImage(UIImage(named: "eye")?.maskWithColor(color: UIColor.white), for: .normal)
-                } else if (UserDefaults.standard.object(forKey: "privToot") as! Int == 1) || inReply[0].visibility == .unlisted {
+                } else if inReply[0].visibility == .unlisted {
                     self.visibility = .unlisted
                     self.visibilityButton.setImage(UIImage(named: "unlisted")?.maskWithColor(color: UIColor.white), for: .normal)
-                } else if (UserDefaults.standard.object(forKey: "privToot") as! Int == 2) || inReply[0].visibility == .private {
+                } else if inReply[0].visibility == .private {
                     self.visibility = .private
                     self.visibilityButton.setImage(UIImage(named: "private")?.maskWithColor(color: UIColor.white), for: .normal)
-                } else if (UserDefaults.standard.object(forKey: "privToot") as! Int == 3) {
+                } else {
                     self.visibility = .direct
                     self.visibilityButton.setImage(UIImage(named: "direct")?.maskWithColor(color: UIColor.white), for: .normal)
                 }
+                
                 
             }
         } else {

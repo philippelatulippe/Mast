@@ -295,6 +295,7 @@ class MainFeedCell: SwipeTableViewCell {
             profileImageView.layer.cornerRadius = 0
         }
         
+        self.moreImage.contentMode = .scaleAspectFit
         if (status.reblog?.favourited ?? status.favourited ?? false) && (status.reblog?.reblogged ?? status.reblogged ?? false) {
             self.moreImage.image = UIImage(named: "fifty")
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {
@@ -302,7 +303,16 @@ class MainFeedCell: SwipeTableViewCell {
         } else if (status.reblog?.favourited ?? status.favourited ?? false) || StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) {
             self.moreImage.image = UIImage(named: "like")
         } else {
-            self.moreImage.image = nil
+            
+            if status.reblog?.visibility ?? status.visibility == .direct {
+                self.moreImage.image = UIImage(named: "direct")
+            } else if status.reblog?.visibility ?? status.visibility == .unlisted {
+                self.moreImage.image = UIImage(named: "unlisted")
+            } else if status.reblog?.visibility ?? status.visibility == .private {
+                self.moreImage.image = UIImage(named: "private")
+            } else {
+                self.moreImage.image = nil
+            }
         }
         
         
