@@ -134,6 +134,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -761,7 +767,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell109", for: indexPath) as! ActionButtonCell2
-                cell.configure()
+                cell.configure(mainStatus: self.mainStatus[0])
                 cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
                 cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                 cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
@@ -778,7 +784,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell10", for: indexPath) as! ActionButtonCell
-            cell.configure()
+            cell.configure(mainStatus: self.mainStatus[0])
             cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
             cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
             cell.boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
@@ -1314,6 +1320,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         if self.mainStatus[0].reblog?.favourited ?? self.mainStatus[0].favourited ?? false || StoreStruct.allLikes.contains(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id) {
             
+            if self.mainStatus[0].visibility == .direct {
+                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell2
+                ce.likeButton.setImage(UIImage(named: "like0"), for: .normal)
+            } else {
+                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell
+                ce.likeButton.setImage(UIImage(named: "like0"), for: .normal)
+            }
+            
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let notification = UINotificationFeedbackGenerator()
                 notification.notificationOccurred(.success)
@@ -1331,6 +1345,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print(statuses.value)
             }
         } else {
+            if self.mainStatus[0].visibility == .direct {
+                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell2
+                ce.likeButton.setImage(UIImage(named: "like"), for: .normal)
+            } else {
+                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell
+                ce.likeButton.setImage(UIImage(named: "like"), for: .normal)
+            }
+            
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let notification = UINotificationFeedbackGenerator()
                 notification.notificationOccurred(.success)
@@ -1363,6 +1385,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         impact.impactOccurred()
         }
         if self.mainStatus[0].reblog?.reblogged ?? self.mainStatus[0].reblogged ?? false || StoreStruct.allBoosts.contains(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id) {
+            let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell
+            ce.boostButton.setImage(UIImage(named: "boost0"), for: .normal)
+            
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let notification = UINotificationFeedbackGenerator()
                 notification.notificationOccurred(.success)
@@ -1380,6 +1405,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print(statuses.value)
             }
         } else {
+            let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell
+            ce.boostButton.setImage(UIImage(named: "boost"), for: .normal)
+            
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let notification = UINotificationFeedbackGenerator()
                 notification.notificationOccurred(.success)

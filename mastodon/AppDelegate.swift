@@ -104,11 +104,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "newInstancelogged"), object: nil)
             return true
         } else {
-//            print("Response ==> \(url.absoluteString)")
-//            let x = url.absoluteString
-//            let y = x.split(separator: "=")
-//            StoreStruct.shared.currentInstance.authCode = y[1].description
-//            NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+            print("Response ==> \(url.absoluteString)")
+            let x = url.absoluteString
+            let y = x.split(separator: "=")
+            StoreStruct.shared.currentInstance.authCode = y[1].description
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
             return true
         }
     }
@@ -118,11 +118,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        if UIApplication.shared.isSplitOrSlideOver {
+            self.window?.rootViewController = ViewController()
+            self.window?.makeKeyAndVisible()
+        } else {
+        
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .phone:
-            self.window?.rootViewController = ViewController()
-            self.window?.makeKeyAndVisible()
+//            self.window?.rootViewController = ViewController()
+//            self.window?.makeKeyAndVisible()
+            print("nothing")
         case .pad:
             self.window = UIWindow(frame: UIScreen.main.bounds)
             self.window!.backgroundColor = Colours.white
@@ -158,11 +164,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().tintColor = Colours.black
             UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
         default:
-            self.window?.rootViewController = ViewController()
-            self.window?.makeKeyAndVisible()
+//            self.window?.rootViewController = ViewController()
+//            self.window?.makeKeyAndVisible()
+            print("nothing")
         }
         
-        
+        }
         
         SwiftyGiphyAPI.shared.apiKey = SwiftyGiphyAPI.publicBetaKey
         
@@ -237,6 +244,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -249,6 +257,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.biometricAuthenticationClicked(self)
                 self.oneTime = true
             }
+        }
+        
+        
+        if UIApplication.shared.isSplitOrSlideOver {
+            self.window?.rootViewController = ViewController()
+            self.window?.makeKeyAndVisible()
+        } else {
+            
+            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+            switch (deviceIdiom) {
+            case .phone:
+                //            self.window?.rootViewController = ViewController()
+                //            self.window?.makeKeyAndVisible()
+                print("nothing")
+            case .pad:
+                self.window = UIWindow(frame: UIScreen.main.bounds)
+                self.window!.backgroundColor = Colours.white
+                
+                let splitViewController =  UISplitViewController()
+                let rootViewController = PadViewController()
+                
+                let splitViewController2 =  UISplitViewController()
+                let rootViewController2 = PadTimelinesViewController()
+                let rootNavigationController2 = UINavigationController(rootViewController: rootViewController2)
+                
+                
+                splitViewController2.viewControllers = [rootNavigationController2]
+                splitViewController2.preferredPrimaryColumnWidthFraction = 0.5
+                splitViewController2.preferredDisplayMode = .allVisible
+                
+                splitViewController.viewControllers = [rootViewController, splitViewController2]
+                splitViewController.minimumPrimaryColumnWidth = 80
+                splitViewController.maximumPrimaryColumnWidth = 80
+                splitViewController.preferredDisplayMode = .allVisible
+                
+                splitViewController.view.backgroundColor = Colours.white
+                splitViewController2.view.backgroundColor = Colours.white
+                rootNavigationController2.view.backgroundColor = Colours.white
+                self.window!.rootViewController = splitViewController
+                self.window!.makeKeyAndVisible()
+                
+                
+                UINavigationBar.appearance().shadowImage = UIImage()
+                UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+                UINavigationBar.appearance().backgroundColor = Colours.white
+                UINavigationBar.appearance().barTintColor = Colours.black
+                UINavigationBar.appearance().tintColor = Colours.black
+                UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
+            default:
+                //            self.window?.rootViewController = ViewController()
+                //            self.window?.makeKeyAndVisible()
+                print("nothing")
+            }
+            
         }
     }
 
@@ -293,6 +355,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func reloadApplication() {
+        
+        if UIApplication.shared.isSplitOrSlideOver {
+            self.window?.rootViewController = ViewController()
+            self.window?.makeKeyAndVisible()
+        } else {
+            
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .phone:
@@ -335,6 +403,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = ViewController()
             self.window?.makeKeyAndVisible()
         }
+        }
     }
 }
 
+extension UIApplication {
+    public var isSplitOrSlideOver: Bool {
+        guard let w = self.delegate?.window, let window = w else { return false }
+        return !window.frame.equalTo(window.screen.bounds)
+    }
+    
+    public func isRunningInFullScreen() -> Bool {
+        if let w = self.keyWindow {
+            let maxScreenSize = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+            let minScreenSize = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+            let maxAppSize = max(w.bounds.size.width, w.bounds.size.height)
+            let minAppSize = min(w.bounds.size.width, w.bounds.size.height)
+            return maxScreenSize == maxAppSize && minScreenSize == minAppSize
+        }
+        return true
+    }
+}

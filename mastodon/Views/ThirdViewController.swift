@@ -464,6 +464,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         self.view.backgroundColor = Colours.white
+        self.title = ""
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers3"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists3"), object: nil)
@@ -492,23 +493,23 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if UIApplication.shared.isSplitOrSlideOver || UIDevice.current.userInterfaceIdiom == .phone {
+            var settingsButton = MNGExpandedTouchAreaButton()
+            settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 36, height: 36)))
+            settingsButton.setImage(UIImage(named: "sett")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+            settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            settingsButton.adjustsImageWhenHighlighted = false
+            settingsButton.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
             
+            if self.fromOtherUser {} else {
+                let done = UIBarButtonItem.init(customView: settingsButton)
+                self.navigationItem.setLeftBarButton(done, animated: false)
+            }
         } else {
-        
-        var settingsButton = MNGExpandedTouchAreaButton()
-        settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 36, height: 36)))
-        settingsButton.setImage(UIImage(named: "sett")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-        settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        settingsButton.adjustsImageWhenHighlighted = false
-        settingsButton.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
-        
-        if self.fromOtherUser {} else {
-            let done = UIBarButtonItem.init(customView: settingsButton)
-            self.navigationItem.setLeftBarButton(done, animated: false)
+            
         }
         
-        }
+        
         
         
         
@@ -535,10 +536,21 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         case .phone:
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
         case .pad:
-            self.title = "Profile"
             self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height))
         default:
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
+        }
+        if UIApplication.shared.isSplitOrSlideOver {
+            
+        } else {
+            switch (deviceIdiom) {
+            case .phone:
+            self.title = ""
+            case .pad:
+            self.title = "Profile"
+            default:
+            self.title = ""
+            }
         }
         self.tableView.register(ProfileHeaderCell.self, forCellReuseIdentifier: "ProfileHeaderCell")
         self.tableView.register(ProfileHeaderCellOwn.self, forCellReuseIdentifier: "ProfileHeaderCellOwn")

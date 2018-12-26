@@ -93,6 +93,24 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     let detailNavigationController6 = UINavigationController(rootViewController: LikedViewController())
     
     
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//
+//        if self.window?.bounds.width ?? CGFloat(0) > CGFloat(400) && previousTraitCollection == nil {
+//
+//        } else {
+//
+//            print("changed trait")
+//
+//
+//        if UIApplication.shared.isSplitOrSlideOver {
+//            self.window?.rootViewController = ViewController()
+//            self.window?.makeKeyAndVisible()
+//        } else {
+//            
+//        }
+//        }
+//    }
+    
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         print("newsize")
         print(size)
@@ -112,6 +130,8 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             self.splitViewController6.preferredDisplayMode = .allVisible
         }
 //        })
+        
+        
     }
     
     func load2() {
@@ -586,8 +606,13 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
                         Colours.keyCol = UIKeyboardAppearance.dark
                     }
                     if z == 3 {
-                        newNum = 0
+                        newNum = 4
                         UIApplication.shared.statusBarStyle = .default
+                        Colours.keyCol = UIKeyboardAppearance.light
+                    }
+                    if z == 4 {
+                        newNum = 0
+                        UIApplication.shared.statusBarStyle = .lightContent
                         Colours.keyCol = UIKeyboardAppearance.light
                     }
                 }

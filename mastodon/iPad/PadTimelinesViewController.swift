@@ -627,35 +627,10 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                     newoff = 24
                 }
             }
-            self.segmentedControl.removeFromSuperview()
             if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-                self.segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(30), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
-                self.segmentedControl.dataSource = self
-                if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                    self.segmentedControl.shapeStyle = .roundedRect
-                } else {
-                    self.segmentedControl.shapeStyle = .liquid
-                }
-                self.segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-                self.segmentedControl.cornerRadius = 12
-                self.segmentedControl.shadowsEnabled = false
-                self.segmentedControl.transitionStyle = .slide
-                self.segmentedControl.delegate = self
-                self.navigationController?.view.addSubview(self.segmentedControl)
+                self.segmentedControl.frame = CGRect(x: CGFloat(20), y: CGFloat(30), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40))
             } else {
-                self.segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
-                self.segmentedControl.dataSource = self
-                if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                    self.segmentedControl.shapeStyle = .roundedRect
-                } else {
-                    self.segmentedControl.shapeStyle = .liquid
-                }
-                self.segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-                self.segmentedControl.cornerRadius = 12
-                self.segmentedControl.shadowsEnabled = false
-                self.segmentedControl.transitionStyle = .slide
-                self.segmentedControl.delegate = self
-                self.navigationController?.view.addSubview(self.segmentedControl)
+                self.segmentedControl.frame = CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40))
             }
         })
     }

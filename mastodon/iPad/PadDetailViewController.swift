@@ -756,7 +756,7 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell109", for: indexPath) as! ActionButtonCell2
-                cell.configure()
+                cell.configure(mainStatus: self.mainStatus[0])
                 cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
                 cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                 cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
@@ -773,7 +773,7 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             } else {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell10", for: indexPath) as! ActionButtonCell
-                cell.configure()
+                cell.configure(mainStatus: self.mainStatus[0])
                 cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
                 cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                 cell.boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)

@@ -127,11 +127,21 @@ class ActionButtonCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
-        replyButton.setImage(UIImage(named: "reply"), for: .normal)
-        likeButton.setImage(UIImage(named: "like"), for: .normal)
-        boostButton.setImage(UIImage(named: "boost"), for: .normal)
+    func configure(mainStatus: Status) {
+        replyButton.setImage(UIImage(named: "reply0"), for: .normal)
         moreButton.setImage(UIImage(named: "more2"), for: .normal)
+        
+        if mainStatus.reblog?.favourited ?? mainStatus.favourited ?? false || StoreStruct.allLikes.contains(mainStatus.reblog?.id ?? mainStatus.id) {
+            likeButton.setImage(UIImage(named: "like"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(named: "like0"), for: .normal)
+        }
+        
+        if mainStatus.reblog?.reblogged ?? mainStatus.reblogged ?? false || StoreStruct.allBoosts.contains(mainStatus.reblog?.id ?? mainStatus.id) {
+            boostButton.setImage(UIImage(named: "boost"), for: .normal)
+        } else {
+            boostButton.setImage(UIImage(named: "boost0"), for: .normal)
+        }
     }
     
 }
@@ -217,10 +227,15 @@ class ActionButtonCell2: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    func configure(mainStatus: Status) {
         replyButton.setImage(UIImage(named: "direct2"), for: .normal)
-        likeButton.setImage(UIImage(named: "like"), for: .normal)
         moreButton.setImage(UIImage(named: "more2"), for: .normal)
+        
+        if mainStatus.reblog?.favourited ?? mainStatus.favourited ?? false || StoreStruct.allLikes.contains(mainStatus.reblog?.id ?? mainStatus.id) {
+            likeButton.setImage(UIImage(named: "like"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(named: "like0"), for: .normal)
+        }
     }
     
 }

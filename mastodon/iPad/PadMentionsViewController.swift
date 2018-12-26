@@ -422,36 +422,11 @@ class PadMentionsViewController: UIViewController, SJFluidSegmentedControlDataSo
                 newoff = 24
             }
         }
-        self.segmentedControl.removeFromSuperview()
-        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-            self.segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(30), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
-            self.segmentedControl.dataSource = self
-            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                self.segmentedControl.shapeStyle = .roundedRect
+            if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
+                self.segmentedControl.frame = CGRect(x: CGFloat(20), y: CGFloat(30), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40))
             } else {
-                self.segmentedControl.shapeStyle = .liquid
+                self.segmentedControl.frame = CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40))
             }
-            self.segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-            self.segmentedControl.cornerRadius = 12
-            self.segmentedControl.shadowsEnabled = false
-            self.segmentedControl.transitionStyle = .slide
-            self.segmentedControl.delegate = self
-            self.navigationController?.view.addSubview(self.segmentedControl)
-        } else {
-            self.segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
-            self.segmentedControl.dataSource = self
-            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                self.segmentedControl.shapeStyle = .roundedRect
-            } else {
-                self.segmentedControl.shapeStyle = .liquid
-            }
-            self.segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-            self.segmentedControl.cornerRadius = 12
-            self.segmentedControl.shadowsEnabled = false
-            self.segmentedControl.transitionStyle = .slide
-            self.segmentedControl.delegate = self
-            self.navigationController?.view.addSubview(self.segmentedControl)
-        }
         })
         
     }
@@ -579,7 +554,7 @@ class PadMentionsViewController: UIViewController, SJFluidSegmentedControlDataSo
             self.tableView.register(GraphCell.self, forCellReuseIdentifier: "cellG")
             self.tableView.register(NotificationCell.self, forCellReuseIdentifier: "cell3")
             self.tableView.register(NotificationCellImage.self, forCellReuseIdentifier: "cell4")
-            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - 80)
+            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 80), height: Int(self.view.bounds.height) - 80)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -594,7 +569,7 @@ class PadMentionsViewController: UIViewController, SJFluidSegmentedControlDataSo
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
             self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
-            self.tableView2.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - 80)
+            self.tableView2.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 80), height: Int(self.view.bounds.height) - 80)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
             self.tableView2.dataSource = self
@@ -623,7 +598,7 @@ class PadMentionsViewController: UIViewController, SJFluidSegmentedControlDataSo
             self.tableView.register(GraphCell.self, forCellReuseIdentifier: "cellG")
             self.tableView.register(NotificationCell.self, forCellReuseIdentifier: "cell3")
             self.tableView.register(NotificationCellImage.self, forCellReuseIdentifier: "cell4")
-            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - 80)
+            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 80), height: Int(self.view.bounds.height) - 80)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -638,7 +613,7 @@ class PadMentionsViewController: UIViewController, SJFluidSegmentedControlDataSo
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
             self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
-            self.tableView2.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - 80)
+            self.tableView2.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 80), height: Int(self.view.bounds.height) - 80)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
             self.tableView2.dataSource = self
