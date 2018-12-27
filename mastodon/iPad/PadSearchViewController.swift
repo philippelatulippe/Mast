@@ -124,7 +124,7 @@ class PadSearchViewController: UIViewController, SJFluidSegmentedControlDataSour
         self.searcherView.addSubview(self.tableView)
         
         //animate
-        self.searcherView.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
+        self.searcherView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
         springWithDelay(duration: 0.5, delay: 0, animations: {
             self.searcherView.alpha = 1
             self.searcherView.transform = CGAffineTransform(scaleX: 1, y: 1)

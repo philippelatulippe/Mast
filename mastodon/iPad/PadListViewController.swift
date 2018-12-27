@@ -18,7 +18,7 @@ class PadListViewController: UIViewController, UITextFieldDelegate, UITableViewD
         self.view.backgroundColor = Colours.grayDark3
         
         
-        self.tableViewLists.frame = CGRect(x: 0, y: 0, width: Int(self.view.bounds.width), height: Int(0))
+        self.tableViewLists.frame = CGRect(x: 0, y: 0, width: Int(440), height: Int(540))
         self.tableViewLists.alpha = 0
         self.tableViewLists.delegate = self
         self.tableViewLists.dataSource = self
@@ -39,10 +39,10 @@ class PadListViewController: UIViewController, UITextFieldDelegate, UITableViewD
             maxHe = Int(364)
         }
         maxHe += 90
-        self.tableViewLists.frame = CGRect(x: 0, y: 0, width: Int(self.view.bounds.width), height: Int(0))
+        self.tableViewLists.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
         springWithDelay(duration: 0.5, delay: 0, animations: {
             self.tableViewLists.alpha = 1
-            self.tableViewLists.frame = CGRect(x: 0, y: 0, width: Int(self.view.bounds.width), height: maxHe)
+            self.tableViewLists.transform = CGAffineTransform(scaleX: 1, y: 1)
         })
     }
     
@@ -119,7 +119,7 @@ class PadListViewController: UIViewController, UITextFieldDelegate, UITableViewD
                 return cell
             } else {
                 let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as! ListCell
-                cell.delegate = self
+//                cell.delegate = self
                 cell.configure(StoreStruct.allLists[indexPath.row - 2])
                 cell.backgroundColor = Colours.grayDark3
                 cell.userName.textColor = UIColor.white
@@ -131,7 +131,7 @@ class PadListViewController: UIViewController, UITextFieldDelegate, UITableViewD
         } else {
             
             let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l2", for: indexPath) as! ListCell2
-            cell.delegate = self
+//            cell.delegate = self
             cell.configure(StoreStruct.instanceLocalToAdd[indexPath.row])
             cell.backgroundColor = Colours.grayDark3
             cell.userName.textColor = UIColor.white
@@ -212,6 +212,7 @@ class PadListViewController: UIViewController, UITextFieldDelegate, UITableViewD
                             return
                         }
                     }
+                    .popover(anchorView: self.tableViewLists.cellForRow(at: IndexPath(row: indexPath.row, section: 0)) ?? self.tableViewLists)
                     .show(on: self)
                 
                 
@@ -267,6 +268,7 @@ class PadListViewController: UIViewController, UITextFieldDelegate, UITableViewD
                             return
                         }
                     }
+                    .popover(anchorView: self.tableViewLists.cellForRow(at: IndexPath(row: indexPath.row, section: 1)) ?? self.tableViewLists)
                     .show(on: self)
                 
                 

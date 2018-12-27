@@ -182,7 +182,15 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        self.ai.startAnimating()
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone:
+            self.ai.startAnimating()
+        case .pad:
+            print("nothing")
+        default:
+            self.ai.startAnimating()
+        }
     }
     
     @objc func tappedOnTag() {

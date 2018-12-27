@@ -11,6 +11,7 @@ import UIKit
 import SafariServices
 import OneSignal
 import StatusAlert
+import SAConfettiView
 
 class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionObserver, UIGestureRecognizerDelegate {
     
@@ -60,6 +61,50 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         }
     }
     
+    
+    @objc func confettiCreate() {
+        let confettiView = SAConfettiView(frame: self.view.bounds)
+        confettiView.isUserInteractionEnabled = false
+        self.view.addSubview(confettiView)
+        confettiView.intensity = 1
+        confettiView.startConfetti()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            confettiView.stopConfetti()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                confettiView.removeFromSuperview()
+            }
+        }
+    }
+    
+    @objc func confettiCreateRe() {
+        let confettiView = SAConfettiView(frame: self.view.bounds)
+        confettiView.isUserInteractionEnabled = false
+        self.view.addSubview(confettiView)
+        confettiView.intensity = 1
+        confettiView.colors = [UIColor(red: 89/250, green: 207/250, blue: 99/250, alpha: 1.0), UIColor(red: 84/250, green: 202/250, blue: 94/250, alpha: 1.0), UIColor(red: 79/250, green: 97/250, blue: 89/250, alpha: 1.0)]
+        confettiView.startConfetti()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            confettiView.stopConfetti()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                confettiView.removeFromSuperview()
+            }
+        }
+    }
+    
+    @objc func confettiCreateLi() {
+        let confettiView = SAConfettiView(frame: self.view.bounds)
+        confettiView.isUserInteractionEnabled = false
+        self.view.addSubview(confettiView)
+        confettiView.intensity = 1
+        confettiView.colors = [UIColor(red: 255/250, green: 177/250, blue: 61/250, alpha: 1.0), UIColor(red: 250/250, green: 172/250, blue: 56/250, alpha: 1.0), UIColor(red: 245/250, green: 168/250, blue: 51/250, alpha: 1.0)]
+        confettiView.startConfetti()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            confettiView.stopConfetti()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                confettiView.removeFromSuperview()
+            }
+        }
+    }
     
     var statusBarView = UIView()
     var searcherView = UIView()
@@ -506,11 +551,12 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         let op1 = UIKeyCommand(input: "1", modifierFlags: .control, action: #selector(b1Touched), discoverabilityTitle: "Home Timelines")
         let op2 = UIKeyCommand(input: "2", modifierFlags: .control, action: #selector(b2Touched), discoverabilityTitle: "Notification Timelines")
         let op3 = UIKeyCommand(input: "3", modifierFlags: .control, action: #selector(b3Touched), discoverabilityTitle: "Profile Timelines")
+        let listThing = UIKeyCommand(input: "l", modifierFlags: .control, action: #selector(b56Touched), discoverabilityTitle: "Lists")
         let searchThing = UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(b4Touched), discoverabilityTitle: "Search")
         let setThing = UIKeyCommand(input: ";", modifierFlags: .command, action: #selector(b6Touched), discoverabilityTitle: "Settings")
         let newToot = UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(b7Touched), discoverabilityTitle: "New Toot")
         return [
-            op1, op2, op3, searchThing, setThing, newToot
+            op1, op2, op3, listThing, searchThing, setThing, newToot
         ]
     }
     override var canBecomeFirstResponder: Bool {
@@ -537,6 +583,9 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         splitViewController?.view.backgroundColor = Colours.cellQuote
         
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreate), name: NSNotification.Name(rawValue: "confettiCreate"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreateRe), name: NSNotification.Name(rawValue: "confettiCreateRe"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreateLi), name: NSNotification.Name(rawValue: "confettiCreateLi"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.signOutNewInstance), name: NSNotification.Name(rawValue: "signOut2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissThings), name: NSNotification.Name(rawValue: "dismissThings"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.logBackOut), name: NSNotification.Name(rawValue: "logBackOut"), object: nil)
@@ -780,7 +829,7 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 1) {
             //cback2
             if sender.state == .began {
-//                self.tList()
+                self.b56Touched()
             }
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 2) {
 
@@ -803,7 +852,7 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         } else {
 
             if sender.state == .began {
-//                self.tSearch()
+                self.b4Touched()
             }
         }
     }
