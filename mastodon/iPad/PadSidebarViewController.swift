@@ -2,7 +2,7 @@
 //  SecondViewController.swift
 //  mastodon
 //
-//  Created by Shihab Mehboob on 18/09/2018.
+//  Created by Shihab Mehboob on 27/12/2018.
 //  Copyright © 2018 Shihab Mehboob. All rights reserved.
 //
 
@@ -17,7 +17,7 @@ import OneSignal
 import AVKit
 import AVFoundation
 
-class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, OSSubscriptionObserver {
+class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, OSSubscriptionObserver {
     
     func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges!) {
         print("state changed")
@@ -282,8 +282,8 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
         if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
             
             self.tableView.register(GraphCell.self, forCellReuseIdentifier: "cellG")
-            self.tableView.register(NotificationCell.self, forCellReuseIdentifier: "cell3")
-            self.tableView.register(NotificationCellImage.self, forCellReuseIdentifier: "cell4")
+            self.tableView.register(SidebarCell.self, forCellReuseIdentifier: "cell3")
+            self.tableView.register(SidebarCellImage.self, forCellReuseIdentifier: "cell4")
             self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - 80)
             self.tableView.alpha = 1
             self.tableView.delegate = self
@@ -297,8 +297,8 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
             self.view.addSubview(self.tableView)
             
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
-            self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
-            self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
+            self.tableView2.register(SidebarCell.self, forCellReuseIdentifier: "cell302")
+            self.tableView2.register(SidebarCellImage.self, forCellReuseIdentifier: "cell402")
             self.tableView2.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - 80)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
@@ -314,8 +314,8 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             
             self.tableView.register(GraphCell.self, forCellReuseIdentifier: "cellG")
-            self.tableView.register(NotificationCell.self, forCellReuseIdentifier: "cell3")
-            self.tableView.register(NotificationCellImage.self, forCellReuseIdentifier: "cell4")
+            self.tableView.register(SidebarCell.self, forCellReuseIdentifier: "cell3")
+            self.tableView.register(SidebarCellImage.self, forCellReuseIdentifier: "cell4")
             self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - 80)
             self.tableView.alpha = 1
             self.tableView.delegate = self
@@ -329,8 +329,8 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
             self.view.addSubview(self.tableView)
             
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
-            self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
-            self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
+            self.tableView2.register(SidebarCell.self, forCellReuseIdentifier: "cell302")
+            self.tableView2.register(SidebarCellImage.self, forCellReuseIdentifier: "cell402")
             self.tableView2.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - 80)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
@@ -365,35 +365,34 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         super.viewWillTransition(to: size, with: coordinator)
-//        coordinator.animate(alongsideTransition: nil, completion: {
-//            _ in
-//        })
+        //        coordinator.animate(alongsideTransition: nil, completion: {
+        //            _ in
+        //        })
         
         
         
         coordinator.animate(alongsideTransition: nil, completion: {
-                        _ in
-            
-            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width) - 0, height: Int(self.view.bounds.height))
-            self.tableView2.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width) - 0, height: Int(self.view.bounds.height))
+            _ in
+            self.tableView.frame = CGRect(x: 0, y: Int(20), width: Int(self.view.bounds.width) - 0, height: Int(self.view.bounds.height - 20))
+            self.tableView2.frame = CGRect(x: 0, y: Int(20), width: Int(self.view.bounds.width) - 0, height: Int(self.view.bounds.height - 20))
             self.tableView.reloadData()
             self.tableView2.reloadData()
-        
-        var offset = 88
-        var newoff = 45
-        if UIDevice().userInterfaceIdiom == .phone {
-            switch UIScreen.main.nativeBounds.height {
-            case 2688:
-                offset = 88
-                newoff = 45
-            case 2436, 1792:
-                offset = 88
-                newoff = 45
-            default:
-                offset = 64
-                newoff = 24
+            
+            var offset = 88
+            var newoff = 45
+            if UIDevice().userInterfaceIdiom == .phone {
+                switch UIScreen.main.nativeBounds.height {
+                case 2688:
+                    offset = 88
+                    newoff = 45
+                case 2436, 1792:
+                    offset = 88
+                    newoff = 45
+                default:
+                    offset = 64
+                    newoff = 24
+                }
             }
-        }
         })
         
     }
@@ -468,23 +467,23 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeSeg), name: NSNotification.Name(rawValue: "changeSeg"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.startStream), name: NSNotification.Name(rawValue: "startStream"), object: nil)
         
-        self.title = "Mentions"
+        self.title = "Activity"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
         self.view.backgroundColor = Colours.white
+        
         self.navigationController?.view.backgroundColor = Colours.white
         self.navigationController?.navigationBar.backgroundColor = Colours.white
         self.navigationController?.navigationBar.tintColor = Colours.black
         
-        
-//        var settingsButton = MNGExpandedTouchAreaButton()
-//        settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 32, height: 32)))
-//        settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-//        settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-//        settingsButton.adjustsImageWhenHighlighted = false
-//        settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
-//
-//        let done = UIBarButtonItem.init(customView: settingsButton)
-//        self.navigationItem.setLeftBarButton(done, animated: false)
+        //        var settingsButton = MNGExpandedTouchAreaButton()
+        //        settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 32, height: 32)))
+        //        settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+        //        settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        //        settingsButton.adjustsImageWhenHighlighted = false
+        //        settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
+        //
+        //        let done = UIBarButtonItem.init(customView: settingsButton)
+        //        self.navigationItem.setLeftBarButton(done, animated: false)
         
         
         
@@ -505,6 +504,8 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                 tabHeight = Int(UITabBarController().tabBar.frame.size.height)
             }
         }
+        
+        
         
         
         refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
@@ -627,6 +628,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
             registerForPreviewing(with: self, sourceView: self.tableView)
             registerForPreviewing(with: self, sourceView: self.tableView2)
         }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -658,13 +660,12 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
             newSize = offset + 15
         }
         
-        
         if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
             
             self.tableView.register(GraphCell.self, forCellReuseIdentifier: "cellG")
-            self.tableView.register(NotificationCell.self, forCellReuseIdentifier: "cell3")
-            self.tableView.register(NotificationCellImage.self, forCellReuseIdentifier: "cell4")
-            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 80)
+            self.tableView.register(SidebarCell.self, forCellReuseIdentifier: "cell3")
+            self.tableView.register(SidebarCellImage.self, forCellReuseIdentifier: "cell4")
+            self.tableView.frame = CGRect(x: 0, y: Int(20), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 20)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -677,9 +678,9 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
             self.view.addSubview(self.tableView)
             
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
-            self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
-            self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
-            self.tableView2.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 80)
+            self.tableView2.register(SidebarCell.self, forCellReuseIdentifier: "cell302")
+            self.tableView2.register(SidebarCellImage.self, forCellReuseIdentifier: "cell402")
+            self.tableView2.frame = CGRect(x: 0, y: Int(20), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 20)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
             self.tableView2.dataSource = self
@@ -693,9 +694,9 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             
             self.tableView.register(GraphCell.self, forCellReuseIdentifier: "cellG")
-            self.tableView.register(NotificationCell.self, forCellReuseIdentifier: "cell3")
-            self.tableView.register(NotificationCellImage.self, forCellReuseIdentifier: "cell4")
-            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 80)
+            self.tableView.register(SidebarCell.self, forCellReuseIdentifier: "cell3")
+            self.tableView.register(SidebarCellImage.self, forCellReuseIdentifier: "cell4")
+            self.tableView.frame = CGRect(x: 0, y: Int(20), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 20)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -708,9 +709,9 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
             self.view.addSubview(self.tableView)
             
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
-            self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
-            self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
-            self.tableView2.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 80)
+            self.tableView2.register(SidebarCell.self, forCellReuseIdentifier: "cell302")
+            self.tableView2.register(SidebarCellImage.self, forCellReuseIdentifier: "cell402")
+            self.tableView2.frame = CGRect(x: 0, y: Int(20), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 20)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
             self.tableView2.dataSource = self
@@ -723,13 +724,38 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
             self.view.addSubview(self.tableView2)
         }
         
-        
-        
-        
-        
         StoreStruct.currentPage = 1
         //        self.tableView.reloadData()
         //        self.tableView2.reloadData()
+        
+        
+        
+        if self.countcount2 == 0 {
+            self.newUpdatesB1.alpha = 0
+            self.newUpdatesB2.alpha = 0
+        } else {
+            self.newUpdatesB1.alpha = 0
+            self.newUpdatesB2.alpha = 1
+        }
+        
+        self.currentIndex = 0
+        //self.tableView2.reloadData()
+        self.tableView.alpha = 0
+        self.tableView2.alpha = 1
+        
+        
+        if StoreStruct.notifications.isEmpty {
+            let request = Notifications.all(range: .default)
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    StoreStruct.notifications = stat
+                    self.tableView2.reloadData()
+                    
+                }
+            }
+        } else {
+            self.tableView2.reloadData()
+        }
         
         
         self.newUpdatesB1.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
@@ -758,8 +784,6 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
         OneSignal.promptForPushNotifications(userResponse: { accepted in
             print("User accepted notifications: \(accepted)")
         })
-        
-        
     }
     
     
@@ -1019,15 +1043,17 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
             self.ai.alpha = 0
             self.ai.removeFromSuperview()
         }
-//        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {} else {
-        
-//        }
+        //        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {} else {
+        //        }
         if self.currentIndex == 0 {
             UserDefaults.standard.set(self.tableView2.contentOffset.y, forKey: "savedRowNotif")
         } else {
             UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowMent")
         }
     }
+    
+    
+    
     
     
     
@@ -1093,7 +1119,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                     self.ai.stopAnimating()
                     self.ai.removeFromSuperview()
                     
-                    let cell = tableView2.dequeueReusableCell(withIdentifier: "cell302", for: indexPath) as! NotificationCell
+                    let cell = tableView2.dequeueReusableCell(withIdentifier: "cell302", for: indexPath) as! SidebarCell
                     cell.backgroundColor = Colours.white
                     let bgColorView = UIView()
                     bgColorView.backgroundColor = Colours.white
@@ -1110,7 +1136,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                     if let hasStatus = StoreStruct.notifications[indexPath.row].status {
                         
                         if hasStatus.mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
-                            let cell = tableView2.dequeueReusableCell(withIdentifier: "cell302", for: indexPath) as! NotificationCell
+                            let cell = tableView2.dequeueReusableCell(withIdentifier: "cell302", for: indexPath) as! SidebarCell
                             cell.delegate = self
                             cell.configure(StoreStruct.notifications[indexPath.row])
                             cell.profileImageView.tag = indexPath.row
@@ -1193,7 +1219,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                             cell.selectedBackgroundView = bgColorView
                             return cell
                         } else {
-                            let cell = tableView2.dequeueReusableCell(withIdentifier: "cell402", for: indexPath) as! NotificationCellImage
+                            let cell = tableView2.dequeueReusableCell(withIdentifier: "cell402", for: indexPath) as! SidebarCellImage
                             cell.delegate = self
                             cell.configure(StoreStruct.notifications[indexPath.row])
                             cell.profileImageView.tag = indexPath.row
@@ -1285,7 +1311,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                         
                     } else {
                         
-                        let cell = tableView2.dequeueReusableCell(withIdentifier: "cell302", for: indexPath) as! NotificationCell
+                        let cell = tableView2.dequeueReusableCell(withIdentifier: "cell302", for: indexPath) as! SidebarCell
                         cell.delegate = self
                         cell.configure(StoreStruct.notifications[indexPath.row])
                         cell.backgroundColor = Colours.white
@@ -1380,7 +1406,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                 self.ai.stopAnimating()
                 self.ai.removeFromSuperview()
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! NotificationCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! SidebarCell
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.white
@@ -1400,7 +1426,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                 if let hasStatus = StoreStruct.notificationsMentions[indexPath.row].status {
                     
                     if hasStatus.mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
-                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! NotificationCell
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! SidebarCell
                         cell.delegate = self
                         cell.configure(StoreStruct.notificationsMentions[indexPath.row])
                         cell.profileImageView.tag = indexPath.row
@@ -1483,7 +1509,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     } else {
-                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell4", for: indexPath) as! NotificationCellImage
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell4", for: indexPath) as! SidebarCellImage
                         cell.delegate = self
                         cell.configure(StoreStruct.notificationsMentions[indexPath.row])
                         cell.profileImageView.tag = indexPath.row
@@ -1573,7 +1599,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                     
                 } else {
                     
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! NotificationCell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! SidebarCell
                     cell.delegate = self
                     cell.configure(StoreStruct.notificationsMentions[indexPath.row])
                     cell.backgroundColor = Colours.white
@@ -1728,7 +1754,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
             }
             
             if self.currentIndex == 1 {
-                let cell = tableView.cellForRow(at: indexPath) as! NotificationCellImage
+                let cell = tableView.cellForRow(at: indexPath) as! SidebarCellImage
                 var images = [SKPhoto]()
                 for y in sto[indexPath.row].status!.mediaAttachments {
                     let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
@@ -1751,7 +1777,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             } else {
                 
-                let cell = tableView2.cellForRow(at: indexPath) as! NotificationCellImage
+                let cell = tableView2.cellForRow(at: indexPath) as! SidebarCellImage
                 var images = [SKPhoto]()
                 for y in sto[indexPath.row].status!.mediaAttachments {
                     let photo = SKPhoto.photoWithImageURL(y.url, holder: sender.currentImage)
@@ -1805,7 +1831,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                         let request2 = Statuses.unreblog(id: sto[indexPath.row].status?.id ?? "" )
                         StoreStruct.client.run(request2) { (statuses) in
                             DispatchQueue.main.async {
-                                if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
+                                if let cell = theTable.cellForRow(at: indexPath) as? SidebarCell {
                                     if sto[indexPath.row].status!.favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "like")
@@ -1814,7 +1840,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                                     }
                                     cell.hideSwipe(animated: true)
                                 } else {
-                                    let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
+                                    let cell = theTable.cellForRow(at: indexPath) as! SidebarCellImage
                                     if sto[indexPath.row].status!.favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "like")
@@ -1834,7 +1860,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateRe"), object: nil)
                                 }
                                 
-                                if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
+                                if let cell = theTable.cellForRow(at: indexPath) as? SidebarCell {
                                     if sto[indexPath.row].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
@@ -1843,7 +1869,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                                     }
                                     cell.hideSwipe(animated: true)
                                 } else {
-                                    let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
+                                    let cell = theTable.cellForRow(at: indexPath) as! SidebarCellImage
                                     if sto[indexPath.row].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
@@ -1863,10 +1889,10 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     
                     
-                    if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
+                    if let cell = theTable.cellForRow(at: indexPath) as? SidebarCell {
                         cell.hideSwipe(animated: true)
                     } else {
-                        let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
+                        let cell = theTable.cellForRow(at: indexPath) as! SidebarCellImage
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -1892,7 +1918,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                         let request2 = Statuses.unfavourite(id: sto[indexPath.row].status?.id ?? "" )
                         StoreStruct.client.run(request2) { (statuses) in
                             DispatchQueue.main.async {
-                                if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
+                                if let cell = theTable.cellForRow(at: indexPath) as? SidebarCell {
                                     if sto[indexPath.row].status!.reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "boost")
@@ -1901,7 +1927,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                                     }
                                     cell.hideSwipe(animated: true)
                                 } else {
-                                    let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
+                                    let cell = theTable.cellForRow(at: indexPath) as! SidebarCellImage
                                     if sto[indexPath.row].status!.reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "boost")
@@ -1920,7 +1946,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                                 if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateLi"), object: nil)
                                 }
-                                if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
+                                if let cell = theTable.cellForRow(at: indexPath) as? SidebarCell {
                                     if sto[indexPath.row].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
@@ -1929,7 +1955,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                                     }
                                     cell.hideSwipe(animated: true)
                                 } else {
-                                    let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
+                                    let cell = theTable.cellForRow(at: indexPath) as! SidebarCellImage
                                     if sto[indexPath.row].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
@@ -1947,10 +1973,10 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     
                     
-                    if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
+                    if let cell = theTable.cellForRow(at: indexPath) as? SidebarCell {
                         cell.hideSwipe(animated: true)
                     } else {
-                        let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
+                        let cell = theTable.cellForRow(at: indexPath) as! SidebarCellImage
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -1973,10 +1999,10 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                     self.present(controller, animated: true, completion: nil)
                     
                     
-                    if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
+                    if let cell = theTable.cellForRow(at: indexPath) as? SidebarCell {
                         cell.hideSwipe(animated: true)
                     } else {
-                        let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
+                        let cell = theTable.cellForRow(at: indexPath) as! SidebarCellImage
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -2347,10 +2373,10 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     
                     
-                    if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
+                    if let cell = theTable.cellForRow(at: indexPath) as? SidebarCell {
                         cell.hideSwipe(animated: true)
                     } else {
-                        let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
+                        let cell = theTable.cellForRow(at: indexPath) as! SidebarCellImage
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -2547,7 +2573,7 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                                     self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 1), at: .top, animated: false)
                                 }
                             }
-//                            self.restoreScroll()
+                            //                            self.restoreScroll()
                             UIView.setAnimationsEnabled(true)
                             
                         } else {
@@ -2712,6 +2738,5 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
         //        self.collectionView.backgroundColor = Colours.white
         //        self.removeTabbarItemsText()
     }
-    
     
 }

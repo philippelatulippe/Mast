@@ -140,6 +140,9 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     let detailNavigationController6 = UINavigationController(rootViewController: LikedViewController())
     
     
+    let splitViewControllerA =  UISplitViewController()
+    let rootNavigationControllerA = UINavigationController(rootViewController: PadSidebarViewController())
+    
 //    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 //
 //        if self.window?.bounds.width ?? CGFloat(0) > CGFloat(400) && previousTraitCollection == nil {
@@ -165,19 +168,23 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         super.viewWillTransition(to: size, with: coordinator)
 //        coordinator.animate(alongsideTransition: nil, completion: {
 //            _ in
+        
         self.statusBarView.frame = UIApplication.shared.statusBarFrame
         
-        self.rootNavigationController2.preferredContentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
+        self.splitViewControllerA.preferredDisplayMode = .allVisible
         
-        if UIDevice.current.orientation.isPortrait {
-            self.splitViewController21.preferredDisplayMode = .primaryHidden
-            self.splitViewController6.preferredDisplayMode = .primaryHidden
-        } else {
-            self.splitViewController21.preferredDisplayMode = .allVisible
-            self.splitViewController6.preferredDisplayMode = .allVisible
-        }
+//        self.rootNavigationController2.preferredContentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
+        
+//        if UIDevice.current.orientation.isPortrait {
+//            self.splitViewController21.preferredDisplayMode = .primaryHidden
+//            self.splitViewController6.preferredDisplayMode = .primaryHidden
+//        } else {
+//            self.splitViewController21.preferredDisplayMode = .allVisible
+//            self.splitViewController6.preferredDisplayMode = .allVisible
+//        }
+        
 //        })
-        
+    
         
     }
     
@@ -245,7 +252,11 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         self.curr = 0
         self.tappedB = 0
         
-        self.splitViewController?.viewControllers[1] = rootNavigationController2
+        self.splitViewControllerA.viewControllers = [rootNavigationController2, rootNavigationControllerA]
+        self.splitViewControllerA.minimumPrimaryColumnWidth = CGFloat(size9)
+        self.splitViewControllerA.maximumPrimaryColumnWidth = CGFloat(size9)
+        
+        self.splitViewController?.viewControllers[1] = splitViewControllerA
         
         self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         self.button2.setImage(UIImage(named: "notifications")?.maskWithColor(color: self.unselectCol), for: .normal)
@@ -265,7 +276,11 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         self.curr = 1
         self.tappedB = 1
         
-        self.splitViewController?.viewControllers[1] = rootNavigationController21
+        self.splitViewControllerA.viewControllers = [rootNavigationController21, rootNavigationControllerA]
+        self.splitViewControllerA.minimumPrimaryColumnWidth = CGFloat(size9)
+        self.splitViewControllerA.maximumPrimaryColumnWidth = CGFloat(size9)
+        
+        self.splitViewController?.viewControllers[1] = splitViewControllerA
         
         self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: self.unselectCol), for: .normal)
         self.button2.setImage(UIImage(named: "notifications")?.maskWithColor(color: Colours.tabSelected), for: .normal)
@@ -285,8 +300,11 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         self.curr = 2
         self.tappedB = 2
         
+        self.splitViewControllerA.viewControllers = [rootNavigationController5, rootNavigationControllerA]
+        self.splitViewControllerA.minimumPrimaryColumnWidth = CGFloat(size9)
+        self.splitViewControllerA.maximumPrimaryColumnWidth = CGFloat(size9)
         
-        self.splitViewController?.viewControllers[1] = rootNavigationController5
+        self.splitViewController?.viewControllers[1] = splitViewControllerA
         
         self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: self.unselectCol), for: .normal)
         self.button2.setImage(UIImage(named: "notifications")?.maskWithColor(color: self.unselectCol), for: .normal)
@@ -576,12 +594,20 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         self.present(loginController, animated: true, completion: nil)
     }
     
+    var size9 = 961
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = Colours.white
         splitViewController?.view.backgroundColor = Colours.cellQuote
         
+        let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+        if SCREEN_MAX_LENGTH == 1366.0 {
+            
+        } else {
+            self.size9 = 761
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreate), name: NSNotification.Name(rawValue: "confettiCreate"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreateRe), name: NSNotification.Name(rawValue: "confettiCreateRe"), object: nil)
@@ -608,7 +634,11 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         self.load2()
         self.curr = 0
         
-        self.splitViewController?.viewControllers[1] = rootNavigationController2
+        self.splitViewControllerA.viewControllers = [rootNavigationController2, rootNavigationControllerA]
+        self.splitViewControllerA.minimumPrimaryColumnWidth = CGFloat(size9)
+        self.splitViewControllerA.maximumPrimaryColumnWidth = CGFloat(size9)
+        
+        self.splitViewController?.viewControllers[1] = splitViewControllerA
         
         self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         self.button2.setImage(UIImage(named: "notifications")?.maskWithColor(color: self.unselectCol), for: .normal)

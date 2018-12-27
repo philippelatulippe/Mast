@@ -602,16 +602,18 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
         super.viewWillTransition(to: size, with: coordinator)
 //        coordinator.animate(alongsideTransition: nil, completion: {
 //            _ in
-            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.height) - 80, height: Int(self.view.bounds.width))
-            self.tableViewL.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.height) - 80, height: Int(self.view.bounds.width))
-            self.tableViewF.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.height) - 80, height: Int(self.view.bounds.width))
-            self.tableView.reloadData()
-            self.tableViewL.reloadData()
-            self.tableViewF.reloadData()
 //        })
         
         coordinator.animate(alongsideTransition: nil, completion: {
             _ in
+            
+            
+            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width) - 0, height: Int(self.view.bounds.height))
+            self.tableViewL.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width) - 0, height: Int(self.view.bounds.height))
+            self.tableViewF.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width) - 0, height: Int(self.view.bounds.height))
+            self.tableView.reloadData()
+            self.tableViewL.reloadData()
+            self.tableViewF.reloadData()
             
             var offset = 88
             var newoff = 45
@@ -628,10 +630,12 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                     newoff = 24
                 }
             }
+            if self.segmentedControl.frame.height == CGFloat(40) {
             if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
                 self.segmentedControl.frame = CGRect(x: CGFloat(20), y: CGFloat(30), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40))
             } else {
                 self.segmentedControl.frame = CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40))
+            }
             }
         })
     }
@@ -662,6 +666,9 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
         
         self.view.backgroundColor = Colours.white
         
+        self.navigationController?.view.backgroundColor = Colours.white
+        self.navigationController?.navigationBar.backgroundColor = Colours.white
+        self.navigationController?.navigationBar.tintColor = Colours.black
         
         
 //        var settingsButton = MNGExpandedTouchAreaButton()
@@ -694,120 +701,6 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
             }
         }
         
-        
-        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(30), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
-            segmentedControl.dataSource = self
-            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                segmentedControl.shapeStyle = .roundedRect
-            } else {
-                segmentedControl.shapeStyle = .liquid
-            }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-            segmentedControl.cornerRadius = 12
-            segmentedControl.shadowsEnabled = false
-            segmentedControl.transitionStyle = .slide
-            segmentedControl.delegate = self
-            self.navigationController?.view.addSubview(segmentedControl)
-            
-            self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
-            self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
-            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 80), height: Int(self.view.bounds.height) - 80)
-            self.tableView.alpha = 1
-            self.tableView.delegate = self
-            self.tableView.dataSource = self
-            self.tableView.separatorStyle = .singleLine
-            self.tableView.backgroundColor = Colours.white
-            self.tableView.separatorColor = Colours.cellQuote
-            self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
-            self.tableView.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableView)
-            
-            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
-            self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
-            self.tableViewL.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 80), height: Int(self.view.bounds.height) - 80)
-            self.tableViewL.alpha = 0
-            self.tableViewL.delegate = self
-            self.tableViewL.dataSource = self
-            self.tableViewL.separatorStyle = .singleLine
-            self.tableViewL.backgroundColor = Colours.white
-            self.tableViewL.separatorColor = Colours.cellQuote
-            self.tableViewL.layer.masksToBounds = true
-            self.tableViewL.estimatedRowHeight = 89
-            self.tableViewL.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewL)
-            
-            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
-            self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
-            self.tableViewF.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 80), height: Int(self.view.bounds.height) - 80)
-            self.tableViewF.alpha = 0
-            self.tableViewF.delegate = self
-            self.tableViewF.dataSource = self
-            self.tableViewF.separatorStyle = .singleLine
-            self.tableViewF.backgroundColor = Colours.white
-            self.tableViewF.separatorColor = Colours.cellQuote
-            self.tableViewF.layer.masksToBounds = true
-            self.tableViewF.estimatedRowHeight = 89
-            self.tableViewF.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewF)
-        } else {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
-            segmentedControl.dataSource = self
-            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
-                segmentedControl.shapeStyle = .roundedRect
-            } else {
-                segmentedControl.shapeStyle = .liquid
-            }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
-            segmentedControl.cornerRadius = 12
-            segmentedControl.shadowsEnabled = false
-            segmentedControl.transitionStyle = .slide
-            segmentedControl.delegate = self
-            self.navigationController?.view.addSubview(segmentedControl)
-            
-            self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
-            self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
-            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 80), height: Int(self.view.bounds.height) - 80)
-            self.tableView.alpha = 1
-            self.tableView.delegate = self
-            self.tableView.dataSource = self
-            self.tableView.separatorStyle = .singleLine
-            self.tableView.backgroundColor = Colours.white
-            self.tableView.separatorColor = Colours.cellQuote
-            self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
-            self.tableView.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableView)
-            
-            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
-            self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
-            self.tableViewL.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 80), height: Int(self.view.bounds.height) - 80)
-            self.tableViewL.alpha = 0
-            self.tableViewL.delegate = self
-            self.tableViewL.dataSource = self
-            self.tableViewL.separatorStyle = .singleLine
-            self.tableViewL.backgroundColor = Colours.white
-            self.tableViewL.separatorColor = Colours.cellQuote
-            self.tableViewL.layer.masksToBounds = true
-            self.tableViewL.estimatedRowHeight = 89
-            self.tableViewL.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewL)
-            
-            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
-            self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
-            self.tableViewF.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 80), height: Int(self.view.bounds.height) - 80)
-            self.tableViewF.alpha = 0
-            self.tableViewF.delegate = self
-            self.tableViewF.dataSource = self
-            self.tableViewF.separatorStyle = .singleLine
-            self.tableViewF.backgroundColor = Colours.white
-            self.tableViewF.separatorColor = Colours.cellQuote
-            self.tableViewF.layer.masksToBounds = true
-            self.tableViewF.estimatedRowHeight = 89
-            self.tableViewF.rowHeight = UITableView.automaticDimension
-            self.view.addSubview(self.tableViewF)
-        }
         
         refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //self.tableView.addSubview(refreshControl)
@@ -951,6 +844,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
         var newoff = 45
@@ -977,6 +871,123 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
             newSize = offset + 15
         }
         
+        
+        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
+            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(30), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
+            segmentedControl.dataSource = self
+            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
+                segmentedControl.shapeStyle = .roundedRect
+            } else {
+                segmentedControl.shapeStyle = .liquid
+            }
+            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.cornerRadius = 12
+            segmentedControl.shadowsEnabled = false
+            segmentedControl.transitionStyle = .slide
+            segmentedControl.delegate = self
+            self.navigationController?.view.addSubview(segmentedControl)
+            
+            self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
+            self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
+            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 80)
+            self.tableView.alpha = 1
+            self.tableView.delegate = self
+            self.tableView.dataSource = self
+            self.tableView.separatorStyle = .singleLine
+            self.tableView.backgroundColor = Colours.white
+            self.tableView.separatorColor = Colours.cellQuote
+            self.tableView.layer.masksToBounds = true
+            self.tableView.estimatedRowHeight = 89
+            self.tableView.rowHeight = UITableView.automaticDimension
+            self.view.addSubview(self.tableView)
+            
+            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
+            self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
+            self.tableViewL.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 80)
+            self.tableViewL.alpha = 0
+            self.tableViewL.delegate = self
+            self.tableViewL.dataSource = self
+            self.tableViewL.separatorStyle = .singleLine
+            self.tableViewL.backgroundColor = Colours.white
+            self.tableViewL.separatorColor = Colours.cellQuote
+            self.tableViewL.layer.masksToBounds = true
+            self.tableViewL.estimatedRowHeight = 89
+            self.tableViewL.rowHeight = UITableView.automaticDimension
+            self.view.addSubview(self.tableViewL)
+            
+            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
+            self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
+            self.tableViewF.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 80)
+            self.tableViewF.alpha = 0
+            self.tableViewF.delegate = self
+            self.tableViewF.dataSource = self
+            self.tableViewF.separatorStyle = .singleLine
+            self.tableViewF.backgroundColor = Colours.white
+            self.tableViewF.separatorColor = Colours.cellQuote
+            self.tableViewF.layer.masksToBounds = true
+            self.tableViewF.estimatedRowHeight = 89
+            self.tableViewF.rowHeight = UITableView.automaticDimension
+            self.view.addSubview(self.tableViewF)
+        } else {
+            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
+            segmentedControl.dataSource = self
+            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
+                segmentedControl.shapeStyle = .roundedRect
+            } else {
+                segmentedControl.shapeStyle = .liquid
+            }
+            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.cornerRadius = 12
+            segmentedControl.shadowsEnabled = false
+            segmentedControl.transitionStyle = .slide
+            segmentedControl.delegate = self
+            self.navigationController?.view.addSubview(segmentedControl)
+            
+            self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
+            self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
+            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 80)
+            self.tableView.alpha = 1
+            self.tableView.delegate = self
+            self.tableView.dataSource = self
+            self.tableView.separatorStyle = .singleLine
+            self.tableView.backgroundColor = Colours.white
+            self.tableView.separatorColor = Colours.cellQuote
+            self.tableView.layer.masksToBounds = true
+            self.tableView.estimatedRowHeight = 89
+            self.tableView.rowHeight = UITableView.automaticDimension
+            self.view.addSubview(self.tableView)
+            
+            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
+            self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
+            self.tableViewL.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 80)
+            self.tableViewL.alpha = 0
+            self.tableViewL.delegate = self
+            self.tableViewL.dataSource = self
+            self.tableViewL.separatorStyle = .singleLine
+            self.tableViewL.backgroundColor = Colours.white
+            self.tableViewL.separatorColor = Colours.cellQuote
+            self.tableViewL.layer.masksToBounds = true
+            self.tableViewL.estimatedRowHeight = 89
+            self.tableViewL.rowHeight = UITableView.automaticDimension
+            self.view.addSubview(self.tableViewL)
+            
+            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
+            self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
+            self.tableViewF.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.width - 0), height: Int(self.view.bounds.height) - 80)
+            self.tableViewF.alpha = 0
+            self.tableViewF.delegate = self
+            self.tableViewF.dataSource = self
+            self.tableViewF.separatorStyle = .singleLine
+            self.tableViewF.backgroundColor = Colours.white
+            self.tableViewF.separatorColor = Colours.cellQuote
+            self.tableViewF.layer.masksToBounds = true
+            self.tableViewF.estimatedRowHeight = 89
+            self.tableViewF.rowHeight = UITableView.automaticDimension
+            self.view.addSubview(self.tableViewF)
+        }
+        
+        
+        
         self.newUpdatesB1.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
         self.newUpdatesB1.backgroundColor = Colours.grayLight19
         self.newUpdatesB1.layer.cornerRadius = 10
@@ -1000,7 +1011,6 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
         self.newUpdatesB3.setTitle("", for: .normal)
         self.newUpdatesB3.alpha = 0
         self.view.addSubview(self.newUpdatesB3)
-        
         
         
         springWithDelay(duration: 0.4, delay: 0, animations: {

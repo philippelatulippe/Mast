@@ -46,6 +46,9 @@
 		530976D42179DBD700640D84 /* AuthenticationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530976D12179DBD700640D84 /* AuthenticationErrors.swift */; };
 		531046C4215AC3AB00FCD068 /* ProfileHeaderCellOwn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531046C3215AC3AB00FCD068 /* ProfileHeaderCellOwn.swift */; };
 		531096B9216D05E100E767DF /* FedTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531096B8216D05E100E767DF /* FedTimelineController.swift */; };
+		5313A23D21D5303900F205E6 /* PadSidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313A23C21D5303900F205E6 /* PadSidebarViewController.swift */; };
+		5313A23F21D532E700F205E6 /* SidebarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313A23E21D532E700F205E6 /* SidebarCell.swift */; };
+		5313A24121D5330200F205E6 /* SidebarCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5313A24021D5330200F205E6 /* SidebarCellImage.swift */; };
 		5314E30C216D1502007F9651 /* EMTLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5314E2EB216D1502007F9651 /* EMTLoadingIndicator.swift */; };
 		5314E30D216D1502007F9651 /* EMTTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5314E2EC216D1502007F9651 /* EMTTimer.swift */; };
 		5314E30E216D1502007F9651 /* waitIndicatorGraphic-13@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5314E2EE216D1502007F9651 /* waitIndicatorGraphic-13@2x.png */; };
@@ -783,6 +786,9 @@
 		530976D12179DBD700640D84 /* AuthenticationErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationErrors.swift; sourceTree = "<group>"; };
 		531046C3215AC3AB00FCD068 /* ProfileHeaderCellOwn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCellOwn.swift; sourceTree = "<group>"; };
 		531096B8216D05E100E767DF /* FedTimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FedTimelineController.swift; sourceTree = "<group>"; };
+		5313A23C21D5303900F205E6 /* PadSidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadSidebarViewController.swift; sourceTree = "<group>"; };
+		5313A23E21D532E700F205E6 /* SidebarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarCell.swift; sourceTree = "<group>"; };
+		5313A24021D5330200F205E6 /* SidebarCellImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarCellImage.swift; sourceTree = "<group>"; };
 		5314E2EB216D1502007F9651 /* EMTLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMTLoadingIndicator.swift; sourceTree = "<group>"; };
 		5314E2EC216D1502007F9651 /* EMTTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMTTimer.swift; sourceTree = "<group>"; };
 		5314E2EE216D1502007F9651 /* waitIndicatorGraphic-13@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waitIndicatorGraphic-13@2x.png"; sourceTree = "<group>"; };
@@ -1604,6 +1610,7 @@
 				5318F56121877F8A00418159 /* PadLogInViewController.swift */,
 				53170E8321836761005F972B /* PadTimelinesViewController.swift */,
 				532533BC2185194100A8A65B /* PadMentionsViewController.swift */,
+				5313A23C21D5303900F205E6 /* PadSidebarViewController.swift */,
 				531BD18B2188672700E12278 /* TNFloatingPanel.swift */,
 				531BD18D218867EF00E12278 /* PadSearchViewController.swift */,
 				5318D60721D508710091262E /* PadListViewController.swift */,
@@ -2513,6 +2520,8 @@
 				5315308521B95223007E5C00 /* SearchFeedCell.swift */,
 				5373CB3B2154E93500676F3D /* NotificationCell.swift */,
 				5373CB3D2154E97500676F3D /* NotificationCellImage.swift */,
+				5313A23E21D532E700F205E6 /* SidebarCell.swift */,
+				5313A24021D5330200F205E6 /* SidebarCellImage.swift */,
 				5373CB3F2155049900676F3D /* ProfileHeaderCell.swift */,
 				531046C3215AC3AB00FCD068 /* ProfileHeaderCellOwn.swift */,
 				5373CB4121550E1900676F3D /* ProfileHeaderCellImage.swift */,
@@ -3487,6 +3496,7 @@
 				5373CAC32152C68000676F3D /* Payload.swift in Sources */,
 				531E0FA9216E2BA2003E8890 /* NVActivityIndicatorAnimationCubeTransition.swift in Sources */,
 				535B33B5215C0EC6001A2A7F /* XPlayerViewController+UI.swift in Sources */,
+				5313A23D21D5303900F205E6 /* PadSidebarViewController.swift in Sources */,
 				531E0F9F216E2BA2003E8890 /* NVActivityIndicatorAnimationBlank.swift in Sources */,
 				5373CAC72152C68000676F3D /* Blocks.swift in Sources */,
 				5373CB0A2152EDB800676F3D /* SwipeTransitionLayout.swift in Sources */,
@@ -3662,9 +3672,11 @@
 				5373CB042152EDB800676F3D /* SwipeFeedback.swift in Sources */,
 				5373CB3421541A0300676F3D /* SKDetectingImageView.swift in Sources */,
 				5373CAA02152C68000676F3D /* DateFormatter.swift in Sources */,
+				5313A24121D5330200F205E6 /* SidebarCellImage.swift in Sources */,
 				531E0F9D216E2BA2003E8890 /* NVActivityIndicatorAnimationBallRotateChase.swift in Sources */,
 				5373CB082152EDB800676F3D /* SwipeTableViewCell.swift in Sources */,
 				5373C9EA2151753800676F3D /* FirstViewController.swift in Sources */,
+				5313A23F21D532E700F205E6 /* SidebarCell.swift in Sources */,
 				5373CAA62152C68000676F3D /* Functions.swift in Sources */,
 				5352D090215E48DE00901B60 /* ListMembersViewController.swift in Sources */,
 				5373CABC2152C68000676F3D /* Results.swift in Sources */,
