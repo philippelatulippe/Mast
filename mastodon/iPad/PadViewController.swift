@@ -17,6 +17,7 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     var curr = 0
     var unselectCol = UIColor(red: 75/255.0, green: 75/255.0, blue: 85/255.0, alpha: 1.0)
     var isSearching = false
+    var isListing = false
     var tappedB = 0
     
     func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges!) {
@@ -72,6 +73,7 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     var button4 = MNGExpandedTouchAreaButton()
     var button5 = MNGExpandedTouchAreaButton()
     
+    var button56 = MNGExpandedTouchAreaButton()
     var button6 = MNGExpandedTouchAreaButton()
     var button7 = MNGExpandedTouchAreaButton()
     
@@ -191,6 +193,8 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         
         panelController.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
         self.isSearching = false
+        panelController2.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        self.isListing = false
         
         self.load2()
         self.curr = 0
@@ -209,6 +213,8 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         
         panelController.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
         self.isSearching = false
+        panelController2.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        self.isListing = false
         
         self.load2()
         self.curr = 1
@@ -227,6 +233,8 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         
         panelController.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
         self.isSearching = false
+        panelController2.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        self.isListing = false
         
         self.load2()
         self.curr = 2
@@ -261,12 +269,29 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     
     
     let panelController = FloatingPanelController()
+    let panelController2 = FloatingPanelController()
     
+    @objc func dismissThings() {
+        
+        panelController.removeFromParent()
+        panelController2.removeFromParent()
+        panelController.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        panelController2.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        self.bgbg.removeFromSuperview()
+        self.bgbg2.removeFromSuperview()
+        self.isListing = false
+        self.isSearching = false
+    }
     
     @objc func searchThing() {
         
         panelController.removeFromParent()
+        panelController2.removeFromParent()
         panelController.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        panelController2.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        self.bgbg.removeFromSuperview()
+        self.bgbg2.removeFromSuperview()
+        self.isListing = false
         self.isSearching = false
         
         if StoreStruct.typeOfSearch == 2 {
@@ -288,9 +313,41 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         }
     }
     
+    @objc func listThing() {
+        
+        panelController.removeFromParent()
+        panelController.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        panelController2.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        self.isListing = false
+        self.isSearching = false
+
+        print("gogo")
+        
+//        if StoreStruct.typeOfSearch == 2 {
+//            if StoreStruct.currentPage == 0 {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser"), object: self)
+//            } else if StoreStruct.currentPage == 1 {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser2"), object: self)
+//            } else {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser3"), object: self)
+//            }
+//        } else {
+//            if StoreStruct.currentPage == 0 {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: "search"), object: self)
+//            } else if StoreStruct.currentPage == 1 {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: "search2"), object: self)
+//            } else {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: "search3"), object: self)
+//            }
+//        }
+    }
+    
     
     let bgbg = UIButton()
     @objc func b4Touched() {
+        panelController2.removeFromParent()
+        panelController2.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        self.isListing = false
         
         if self.isSearching {
             
@@ -318,7 +375,7 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         panelController.resizeTo(CGSize(width:  440,
                                         height: 540))
         panelController.pinTo(position: .topLeading,
-                              margins: UIEdgeInsets(top:    6, left:  18,
+                              margins: UIEdgeInsets(top:    60, left:  0,
                                                     bottom: 42, right: 18))
         let yourContentVC = PadSearchViewController()
         panelController.set(viewController: yourContentVC)
@@ -331,6 +388,48 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     
     @objc func b5Touched() {
         
+    }
+    
+    let bgbg2 = UIButton()
+    @objc func b56Touched() {
+        panelController.removeFromParent()
+        panelController.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+        self.isSearching = false
+        
+        if self.isListing {
+            
+            self.bgbg2.removeFromSuperview()
+            panelController2.removeFromParent()
+            panelController2.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+            self.isListing = false
+            
+        } else {
+            
+            self.bgbg2.frame = UIScreen.main.bounds
+            self.bgbg2.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+            self.bgbg2.addTarget(self, action: #selector(self.b56Touched), for: .touchUpInside)
+            let wind = UIApplication.shared.keyWindow!
+            wind.addSubview(self.bgbg2)
+            
+            if self.tappedB == 0 {
+                panelController2.addTo(parent: self.rootNavigationController2)
+            } else if self.tappedB == 1 {
+                panelController2.addTo(parent: self.rootNavigationController21)
+            } else {
+                panelController2.addTo(parent: self.rootNavigationController5)
+            }
+            
+            panelController2.resizeTo(CGSize(width:  440,
+                                            height: 540))
+            panelController2.pinTo(position: .topLeading,
+                                  margins: UIEdgeInsets(top:    60, left:  18,
+                                                        bottom: 42, right: 18))
+            let yourContentVC = PadListViewController()
+            panelController2.set(viewController: yourContentVC)
+            panelController2.showPanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+            
+            self.isListing = true
+        }
     }
     
     @objc func b6Touched() {
@@ -423,6 +522,14 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     }
     
     
+    @objc func signOutNewInstance() {
+        let instances = InstanceData.getAllInstances()
+        let loginController = PadLogInViewController()
+        loginController.loadingAdditionalInstance = true
+        loginController.createLoginView(newInstance: true)
+        self.present(loginController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -430,6 +537,8 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         splitViewController?.view.backgroundColor = Colours.cellQuote
         
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.signOutNewInstance), name: NSNotification.Name(rawValue: "signOut2"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissThings), name: NSNotification.Name(rawValue: "dismissThings"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.logBackOut), name: NSNotification.Name(rawValue: "logBackOut"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.themeLight), name: NSNotification.Name(rawValue: "light"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.themeNight), name: NSNotification.Name(rawValue: "night"), object: nil)
@@ -500,27 +609,15 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         self.button4.addTarget(self, action: #selector(self.b4Touched), for: .touchUpInside)
         self.view.addSubview(self.button4)
         
-        
-        
-        
-        
-        
-//        self.button5.frame.size.height = 70
-//        self.button5.frame.size.width = 70
-////        self.button5.frame = CGRect(x: 5, y: self.view.bounds.height - 230, width: 70, height: 70)
-//        self.button5.setImage(UIImage(named: "search2")?.maskWithColor(color: self.unselectCol), for: .normal)
-//        self.button5.contentEdgeInsets = UIEdgeInsets(top: insetsConst2, left: insetsConst2, bottom: insetsConst2, right: insetsConst2)
-//        self.button5.backgroundColor = UIColor.clear
-//        self.button5.addTarget(self, action: #selector(self.b5Touched), for: .touchUpInside)
-//        //self.view.addSubview(self.button5)
-//        self.button5.translatesAutoresizingMaskIntoConstraints = false
-//
-//        self.button5.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -134).isActive = true
-//        self.button5.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: -12).isActive = true
+        self.button56.frame = CGRect(x: 5, y: 340, width: 70, height: 70)
+        self.button56.setImage(UIImage(named: "list")?.maskWithColor(color: self.unselectCol), for: .normal)
+        self.button56.contentEdgeInsets = UIEdgeInsets(top: insetsConst, left: insetsConst, bottom: insetsConst, right: insetsConst)
+        self.button56.backgroundColor = UIColor.clear
+        self.button56.addTarget(self, action: #selector(self.b56Touched), for: .touchUpInside)
+        self.view.addSubview(self.button56)
         
         self.button6.frame.size.height = 70
         self.button6.frame.size.width = 70
-//        self.button6.frame = CGRect(x: 5, y: self.view.bounds.height - 160, width: 70, height: 70)
         self.button6.setImage(UIImage(named: "settings2")?.maskWithColor(color: self.unselectCol), for: .normal)
         self.button6.contentEdgeInsets = UIEdgeInsets(top: insetsConst, left: insetsConst, bottom: insetsConst, right: insetsConst)
         self.button6.backgroundColor = UIColor.clear
@@ -561,6 +658,12 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         
         
         
+        let request = Lists.all()
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                StoreStruct.allLists = stat
+            }
+        }
     }
     
     

@@ -692,8 +692,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         
         if (UserDefaults.standard.object(forKey: "themeaccent") == nil) || (UserDefaults.standard.object(forKey: "themeaccent") as! Int == 0) {
             Colours.tabSelected = StoreStruct.colArray[0]
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.reloadTint()
         } else {
             Colours.tabSelected = StoreStruct.colArray[UserDefaults.standard.object(forKey: "themeaccent") as! Int]
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.reloadTint()
         }
         
         if (UserDefaults.standard.object(forKey: "instancesLocal") == nil) {

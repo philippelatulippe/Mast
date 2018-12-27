@@ -37,6 +37,11 @@ class PadSearchViewController: UIViewController, SJFluidSegmentedControlDataSour
         self.searchTextField.becomeFirstResponder()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.searchTextField.resignFirstResponder()
+    }
+    
     
     func tSearch() {
         
@@ -372,19 +377,10 @@ class PadSearchViewController: UIViewController, SJFluidSegmentedControlDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        print("search this")
         StoreStruct.searchIndex = indexPath.row
-//        if StoreStruct.typeOfSearch == 2 {
-//            NotificationCenter.default.post(name: Notification.Name(rawValue: "setVC2"), object: nil)
-//        } else {
-//            NotificationCenter.default.post(name: Notification.Name(rawValue: "setVC"), object: nil)
-//        }
-        
-        
+        self.searchTextField.resignFirstResponder()
         NotificationCenter.default.post(name: Notification.Name(rawValue: "hideP"), object: nil)
-        
-        
-        
     }
     
     

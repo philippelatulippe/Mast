@@ -160,6 +160,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
     }
     
     @objc func goLists() {
+        print("goinglists")
         DispatchQueue.main.async {
             let controller = ListViewController()
             self.navigationController?.pushViewController(controller, animated: true)

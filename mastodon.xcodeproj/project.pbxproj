@@ -97,6 +97,7 @@
 		5316C89D219D94A00003AB97 /* SwiftyGiphyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5316C88D219D94A00003AB97 /* SwiftyGiphyViewController.swift */; };
 		53170E80218361A4005F972B /* PadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53170E7F218361A4005F972B /* PadViewController.swift */; };
 		53170E8421836761005F972B /* PadTimelinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53170E8321836761005F972B /* PadTimelinesViewController.swift */; };
+		5318D60821D508710091262E /* PadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318D60721D508710091262E /* PadListViewController.swift */; };
 		5318F56221877F8A00418159 /* PadLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318F56121877F8A00418159 /* PadLogInViewController.swift */; };
 		531B04B9217111A100D31715 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 531B04B8217111A100D31715 /* Stickers.xcassets */; };
 		531B04BD217111A100D31715 /* MastStickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 531B04B62171119D00D31715 /* MastStickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -833,6 +834,7 @@
 		5316C88D219D94A00003AB97 /* SwiftyGiphyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyGiphyViewController.swift; sourceTree = "<group>"; };
 		53170E7F218361A4005F972B /* PadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadViewController.swift; sourceTree = "<group>"; };
 		53170E8321836761005F972B /* PadTimelinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadTimelinesViewController.swift; sourceTree = "<group>"; };
+		5318D60721D508710091262E /* PadListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadListViewController.swift; sourceTree = "<group>"; };
 		5318F56121877F8A00418159 /* PadLogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLogInViewController.swift; sourceTree = "<group>"; };
 		531B04B62171119D00D31715 /* MastStickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MastStickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		531B04B8217111A100D31715 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
@@ -1604,6 +1606,7 @@
 				532533BC2185194100A8A65B /* PadMentionsViewController.swift */,
 				531BD18B2188672700E12278 /* TNFloatingPanel.swift */,
 				531BD18D218867EF00E12278 /* PadSearchViewController.swift */,
+				5318D60721D508710091262E /* PadListViewController.swift */,
 				531BD18F2188762500E12278 /* PadDetailViewController.swift */,
 			);
 			path = iPad;
@@ -3533,6 +3536,7 @@
 				5352D0C4215E6A3500901B60 /* CollectionAppCell.swift in Sources */,
 				5316C897219D94A00003AB97 /* SwiftyGiphyAPI.swift in Sources */,
 				5316C892219D94A00003AB97 /* GiphySimpleSingleGIFResponse.swift in Sources */,
+				5318D60821D508710091262E /* PadListViewController.swift in Sources */,
 				5329F3932174DBDF00C4A23C /* Compression.swift in Sources */,
 				531E0FA7216E2BA2003E8890 /* NVActivityIndicatorAnimationPacman.swift in Sources */,
 				5320581E215D287700ED0C36 /* FontAwesome.swift in Sources */,

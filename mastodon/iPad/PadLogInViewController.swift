@@ -23,6 +23,15 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
     var searchTextField = UITextField()
     var backgroundView = UIButton()
     let volumeBar = VolumeBar.shared
+    var newInstance = false
+    var loadingAdditionalInstance = false
+    
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.down {
+            print("Swipe Down")
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     override func viewDidLoad() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.logged), name: NSNotification.Name(rawValue: "logged"), object: nil)
@@ -41,7 +50,13 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
         self.createLoginView()
     }
     
-    func createLoginView() {
+    func createLoginView(newInstance:Bool = false) {
+        self.newInstance = newInstance
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeDown.direction = .down
+        self.loginBG.addGestureRecognizer(swipeDown)
+        
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.loginBG.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         self.loginBG.backgroundColor = Colours.tabSelected
@@ -120,41 +135,137 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
     //        return true
     //    }
     
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//
+//        if textField == self.searchTextField {
+//
+//            return true
+//
+//            //            var fromTop = 45
+//            //            if UIDevice().userInterfaceIdiom == .phone {
+//            //                switch UIScreen.main.nativeBounds.height {
+//            //                case 2688:
+//            //                    print("iPhone Xs Max")
+//            //                    fromTop = 45
+//            //                case 2436:
+//            //                    print("iPhone X")
+//            //                    fromTop = 45
+//            //                default:
+//            //                    fromTop = 22
+//            //                }
+//            //            }
+//            //
+//            //            let wid = self.view.bounds.width - 20
+//            //            let he = Int(self.view.bounds.height) - fromTop - fromTop
+//            //
+//            //            textField.resignFirstResponder()
+//            //
+//            //            self.searcherView.frame = CGRect(x: 10, y: fromTop, width: Int(wid), height: 340)
+//            //            springWithDelay(duration: 0.5, delay: 0, animations: {
+//            //                self.searcherView.frame = CGRect(x: 10, y: fromTop, width: Int(wid), height: Int(he))
+//            //            })
+//            //            self.tableView.frame = CGRect(x: 0, y: 120, width: Int(wid), height: Int(220))
+//            //            springWithDelay(duration: 0.5, delay: 0, animations: {
+//            //                self.tableView.frame = CGRect(x: 0, y: 120, width: Int(wid), height: Int(he) - 60)
+//            //            })
+//            //
+//            //            return true
+//
+//
+//        } else {
+//
+//            let returnedText = textField.text ?? ""
+//            if returnedText == "" || returnedText == " " || returnedText == "  " {
+//
+//            } else {
+//
+//
+//                DispatchQueue.main.async {
+//                    self.textField.resignFirstResponder()
+//                }
+//
+//                // Send off returnedText to client
+//                StoreStruct.client = Client(baseURL: "https://\(returnedText)")
+//                let request = Clients.register(
+//                    clientName: "Mast",
+//                    redirectURI: "com.shi.mastodon://success",
+//                    scopes: [.read, .write, .follow],
+//                    website: "https://twitter.com/jpeguin"
+//                )
+//                StoreStruct.client.run(request) { (application) in
+//
+//                    if application.value == nil {
+//
+//                        DispatchQueue.main.async {
+//                            let statusAlert = StatusAlert()
+//                            statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+//                            statusAlert.title = "Not a valid Instance".localized
+//                            statusAlert.contentColor = Colours.grayDark
+//                            statusAlert.message = "Please enter an Instance name like mastodon.technology"
+//                            statusAlert.show()
+//                        }
+//
+//                    } else {
+//                        let application = application.value!
+//
+//                        StoreStruct.shared.currentInstance.clientID = application.clientID
+//                        StoreStruct.shared.currentInstance.clientSecret = application.clientSecret
+//                        StoreStruct.shared.currentInstance.returnedText = returnedText
+//
+//                        DispatchQueue.main.async {
+//                            StoreStruct.shared.currentInstance.redirect = "com.shi.mastodon://success".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+//                            let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.shared.currentInstance.redirect)&scope=read%20write%20follow&client_id=\(application.clientID)")!
+//                            self.safariVC = SFSafariViewController(url: queryURL)
+//                            self.present(self.safariVC!, animated: true, completion: nil)
+//                        }
+//                    }
+//                }
+//            }
+//            return true
+//
+//        }
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == self.searchTextField {
             
-            return true
+//            var fromTop = 45
+//            if UIDevice().userInterfaceIdiom == .phone {
+//                switch UIScreen.main.nativeBounds.height {
+//                case 2688:
+//                    print("iPhone Xs Max")
+//                    fromTop = 45
+//                case 2436, 1792:
+//                    print("iPhone X")
+//                    fromTop = 45
+//                default:
+//                    fromTop = 22
+//                }
+//            }
+//
+//            let wid = self.view.bounds.width - 20
+//            let he = Int(self.view.bounds.height) - fromTop - fromTop
+//
+//            textField.resignFirstResponder()
+//
+//            self.searcherView.frame = CGRect(x: 10, y: fromTop, width: Int(wid), height: 340)
+//            springWithDelay(duration: 0.5, delay: 0, animations: {
+//                self.searcherView.frame = CGRect(x: 10, y: fromTop, width: Int(wid), height: Int(he))
+//            })
+//            self.tableView.frame = CGRect(x: 0, y: 120, width: Int(wid), height: Int(220))
+//            springWithDelay(duration: 0.5, delay: 0, animations: {
+//                self.tableView.frame = CGRect(x: 0, y: 120, width: Int(wid), height: Int(he) - 60)
+//            })
             
-            //            var fromTop = 45
-            //            if UIDevice().userInterfaceIdiom == .phone {
-            //                switch UIScreen.main.nativeBounds.height {
-            //                case 2688:
-            //                    print("iPhone Xs Max")
-            //                    fromTop = 45
-            //                case 2436:
-            //                    print("iPhone X")
-            //                    fromTop = 45
-            //                default:
-            //                    fromTop = 22
-            //                }
-            //            }
-            //
-            //            let wid = self.view.bounds.width - 20
-            //            let he = Int(self.view.bounds.height) - fromTop - fromTop
-            //
-            //            textField.resignFirstResponder()
-            //
-            //            self.searcherView.frame = CGRect(x: 10, y: fromTop, width: Int(wid), height: 340)
-            //            springWithDelay(duration: 0.5, delay: 0, animations: {
-            //                self.searcherView.frame = CGRect(x: 10, y: fromTop, width: Int(wid), height: Int(he))
-            //            })
-            //            self.tableView.frame = CGRect(x: 0, y: 120, width: Int(wid), height: Int(220))
-            //            springWithDelay(duration: 0.5, delay: 0, animations: {
-            //                self.tableView.frame = CGRect(x: 0, y: 120, width: Int(wid), height: Int(he) - 60)
-            //            })
-            //
-            //            return true
+            return true
             
             
         } else {
@@ -169,47 +280,95 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
                     self.textField.resignFirstResponder()
                 }
                 
+                
                 // Send off returnedText to client
-                StoreStruct.client = Client(baseURL: "https://\(returnedText)")
-                let request = Clients.register(
-                    clientName: "Mast",
-                    redirectURI: "com.shi.mastodon://success",
-                    scopes: [.read, .write, .follow],
-                    website: "https://twitter.com/jpeguin"
-                )
-                StoreStruct.client.run(request) { (application) in
+                if newInstance {
                     
-                    if application.value == nil {
+                    StoreStruct.shared.newInstance = InstanceData()
+                    StoreStruct.shared.newClient = Client(baseURL: "https://\(returnedText)")
+                    let request = Clients.register(
+                        clientName: "Mast",
+                        redirectURI: "com.shi.mastodon://addNewInstance",
+                        scopes: [.read, .write, .follow],
+                        website: "https://twitter.com/jpeguin"
+                    )
+                    StoreStruct.shared.newClient.run(request) { (application) in
                         
-                        DispatchQueue.main.async {
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                            statusAlert.title = "Not a valid Instance".localized
-                            statusAlert.contentColor = Colours.grayDark
-                            statusAlert.message = "Please enter an Instance name like mastodon.technology"
-                            statusAlert.show()
+                        if application.value == nil {
+                            
+                            DispatchQueue.main.async {
+                                let statusAlert = StatusAlert()
+                                statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                                statusAlert.title = "Not a valid Instance".localized
+                                statusAlert.contentColor = Colours.grayDark
+                                statusAlert.message = "  an Instance name like mastodon.technology"
+                                statusAlert.show()
+                            }
+                            
+                        } else {
+                            let application = application.value!
+                            
+                            StoreStruct.shared.newInstance?.clientID = application.clientID
+                            StoreStruct.shared.newInstance?.clientSecret = application.clientSecret
+                            StoreStruct.shared.newInstance?.returnedText = returnedText
+                            
+                            DispatchQueue.main.async {
+                                StoreStruct.shared.newInstance?.redirect = "com.shi.mastodon://addNewInstance".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+                                let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.shared.newInstance!.redirect)&scope=read%20write%20follow&client_id=\(application.clientID)")!
+                                self.safariVC = SFSafariViewController(url: queryURL)
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
                         }
+                    }
+                } else {
+                    StoreStruct.client = Client(baseURL: "https://\(returnedText)")
+                    let request = Clients.register(
+                        clientName: "Mast",
+                        redirectURI: "com.shi.mastodon://success",
+                        scopes: [.read, .write, .follow],
+                        website: "https://twitter.com/jpeguin"
+                    )
+                    StoreStruct.client.run(request) { (application) in
                         
-                    } else {
-                        let application = application.value!
-                        
-                        StoreStruct.shared.currentInstance.clientID = application.clientID
-                        StoreStruct.shared.currentInstance.clientSecret = application.clientSecret
-                        StoreStruct.shared.currentInstance.returnedText = returnedText
-                        
-                        DispatchQueue.main.async {
-                            StoreStruct.shared.currentInstance.redirect = "com.shi.mastodon://success".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-                            let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.shared.currentInstance.redirect)&scope=read%20write%20follow&client_id=\(application.clientID)")!
-                            self.safariVC = SFSafariViewController(url: queryURL)
-                            self.present(self.safariVC!, animated: true, completion: nil)
+                        if application.value == nil {
+                            
+                            DispatchQueue.main.async {
+                                let statusAlert = StatusAlert()
+                                statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                                statusAlert.title = "Not a valid Instance".localized
+                                statusAlert.contentColor = Colours.grayDark
+                                statusAlert.message = "  an Instance name like mastodon.technology"
+                                statusAlert.show()
+                            }
+                            
+                        } else {
+                            let application = application.value!
+                            
+                            StoreStruct.shared.currentInstance.clientID = application.clientID
+                            StoreStruct.shared.currentInstance.clientSecret = application.clientSecret
+                            StoreStruct.shared.currentInstance.returnedText = returnedText
+                            
+                            DispatchQueue.main.async {
+                                StoreStruct.shared.currentInstance.redirect = "com.shi.mastodon://success".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+                                let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.shared.currentInstance.redirect)&scope=read%20write%20follow&client_id=\(application.clientID)")!
+                                self.safariVC = SFSafariViewController(url: queryURL)
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
                         }
                     }
                 }
+                
+                
+                
             }
             return true
             
         }
     }
+    
+    
+    
+    
     
     
     

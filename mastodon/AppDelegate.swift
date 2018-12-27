@@ -354,6 +354,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func reloadTint() {
+        window?.tintColor = Colours.tabSelected
+    }
+    
     func reloadApplication() {
         
         if UIApplication.shared.isSplitOrSlideOver {
