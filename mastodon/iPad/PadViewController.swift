@@ -602,6 +602,8 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         self.view.backgroundColor = Colours.white
         splitViewController?.view.backgroundColor = Colours.cellQuote
         
+        self.splitViewControllerA.preferredDisplayMode = .allVisible
+        
         let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
         if SCREEN_MAX_LENGTH == 1366.0 {
             

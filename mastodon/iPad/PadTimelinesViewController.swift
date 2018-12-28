@@ -630,7 +630,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                     newoff = 24
                 }
             }
-            if self.segmentedControl.frame.height == CGFloat(40) {
+            if self.view.subviews.contains(self.segmentedControl) {
             if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
                 self.segmentedControl.frame = CGRect(x: CGFloat(20), y: CGFloat(30), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40))
             } else {
@@ -681,7 +681,35 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
 //        let done = UIBarButtonItem.init(customView: settingsButton)
 //        self.navigationItem.setLeftBarButton(done, animated: false)
         
-        
+        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
+            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(30), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
+            segmentedControl.dataSource = self
+            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
+                segmentedControl.shapeStyle = .roundedRect
+            } else {
+                segmentedControl.shapeStyle = .liquid
+            }
+            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.cornerRadius = 12
+            segmentedControl.shadowsEnabled = false
+            segmentedControl.transitionStyle = .slide
+            segmentedControl.delegate = self
+            self.navigationController?.view.addSubview(segmentedControl)
+        } else {
+            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
+            segmentedControl.dataSource = self
+            if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
+                segmentedControl.shapeStyle = .roundedRect
+            } else {
+                segmentedControl.shapeStyle = .liquid
+            }
+            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.cornerRadius = 12
+            segmentedControl.shadowsEnabled = false
+            segmentedControl.transitionStyle = .slide
+            segmentedControl.delegate = self
+            self.navigationController?.view.addSubview(segmentedControl)
+        }
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -871,7 +899,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
             newSize = offset + 15
         }
         
-        
+        segmentedControl.removeFromSuperview()
         if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
             segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(30), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
             segmentedControl.dataSource = self

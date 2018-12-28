@@ -158,45 +158,6 @@ class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    @objc func search() {
-        let controller = DetailViewController()
-        controller.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
-        self.navigationController?.pushViewController(controller, animated: true)
-    }
-    
-    @objc func searchUser() {
-        let controller = ThirdViewController()
-        controller.fromOtherUser = true
-        controller.userIDtoUse = StoreStruct.statusSearchUser[StoreStruct.searchIndex].id
-        self.navigationController?.pushViewController(controller, animated: true)
-    }
-    
-    
-    @objc func goLists() {
-        DispatchQueue.main.async {
-            let controller = ListViewController()
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
-    }
-    
-    
-    @objc func goInstance() {
-        let request = Timelines.public(local: true, range: .max(id: StoreStruct.newInstanceTags.last?.id ?? "", limit: 5000))
-        let testClient = Client(
-            baseURL: "https://\(StoreStruct.shared.currentInstance.instanceText)",
-            accessToken: StoreStruct.shared.currentInstance.accessToken ?? ""
-        )
-        testClient.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                StoreStruct.newInstanceTags = stat
-                DispatchQueue.main.async {
-                    let controller = InstanceViewController()
-                    self.navigationController?.pushViewController(controller, animated: true)
-                }
-            }
-        }
-    }
-    
     
     @objc func goMembers() {
         let request = Lists.accounts(id: StoreStruct.allListRelID)
@@ -457,10 +418,6 @@ class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers2"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists2"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.goInstance), name: NSNotification.Name(rawValue: "goInstance2"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search2"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.searchUser), name: NSNotification.Name(rawValue: "searchUser2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTop2), name: NSNotification.Name(rawValue: "scrollTop2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadNewest), name: NSNotification.Name(rawValue: "loadNewest"), object: nil)
@@ -749,7 +706,9 @@ class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableVi
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     StoreStruct.notifications = stat
-                    self.tableView2.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView2.reloadData()
+                    }
                     
                 }
             }

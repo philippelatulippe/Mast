@@ -156,6 +156,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
         self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
         
+//        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
+//        self.tableView.addSubview(refreshControl)
+        
+        
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .phone:
@@ -176,9 +180,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
         
-//        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
-//        self.tableView.addSubview(refreshControl)
-        
         self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40)
         self.view.addSubview(self.ai)
         self.loadLoadLoad()
@@ -197,6 +198,41 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.navigationItem.backBarButtonItem?.tintColor = Colours.tabUnselected
         
         StoreStruct.currentPage = 90
+        
+        
+        var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
+        var offset = 88
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 2688:
+                offset = 88
+            case 2436, 1792:
+                offset = 88
+            default:
+                offset = 64
+                tabHeight = Int(UITabBarController().tabBar.frame.size.height)
+            }
+        }
+        
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone:
+            print("n")
+        case .pad:
+            self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height))
+        default:
+            print("n")
+        }
+        self.tableView.alpha = 1
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.separatorStyle = .singleLine
+        self.tableView.backgroundColor = Colours.white
+        self.tableView.separatorColor = Colours.cellQuote
+        self.tableView.layer.masksToBounds = true
+        self.tableView.estimatedRowHeight = 89
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.view.addSubview(self.tableView)
     }
     
     
