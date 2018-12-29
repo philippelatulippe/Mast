@@ -328,9 +328,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     var bioArrayDesc = ["Add a biometric lock to the app.", "Add a biometric lock to the notifications section."]
     var bioArrayIm = ["biolock1", "biolock2"]
     
-    var aboutArray = ["Mast", "Follow Mast"]
-    var aboutArrayDesc = ["Let us tell you a little bit about ourselves.", "Keep in touch, and get progress updates about what we're up to."]
-    var aboutArrayIm = ["setmas", "setfo"]
+    var aboutArray = ["Mast", "Follow Mast", "URL Schemes"]
+    var aboutArrayDesc = ["Let us tell you a little bit about ourselves.", "Keep in touch, and get progress updates about what we're up to.", "Use these to do specific actions within the app from outside the app."]
+    var aboutArrayIm = ["setmas", "setfo", "schemes"]
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
@@ -2024,7 +2024,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if indexPath.section == 4 {
             if indexPath.row == 0 {
                 // about
-                Alertift.actionSheet(title: "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", message: "A beautiful Mastodon client\nMade with the intention to be reliant\nIt's fast, it's fluid, it's fun\nBut most of all, it's built with love for everyone\n\nMade independantly by @JPEG@mastodon.technology\nA Swift backend software developer by day, and an iOS frontend developer by night".localized)
+                Alertift.actionSheet(title: "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", message: "A beautiful Mastodon client\nMade with the intention to be reliant\nIt's fast, it's fluid, it's fun\nBut most of all, it's built with love for everyone\n\nMade independantly by @JPEG@mastodon.technology".localized)
                     .backgroundColor(Colours.white)
                     .titleTextColor(Colours.grayDark)
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -2099,6 +2099,23 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                             self.present(self.safariVC!, animated: true, completion: nil)
                         }
                     }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+            if indexPath.row == 2 {
+                // schemes
+                Alertift.actionSheet(title: "URL Schemes".localized, message: "com.shi.mastodon://light : Switch to the light white theme\ncom.shi.mastodon://dark : Switch to the dark theme\ncom.shi.mastodon://darker : Switch to the darker theme\ncom.shi.mastodon://black : Switch to the black OLED theme\ncom.shi.mastodon://blue : Switch to the midnight blue theme\ncom.shi.mastodon://confetti : Make it rain confetti\ncom.shi.mastodon://onboard : Present the onboarding pop-up again\ncom.shi.mastodon://home : Switch to the home tab\ncom.shi.mastodon://mentions : Switch to the mentions tab\ncom.shi.mastodon://profile : Switch to the profile tab\ncom.shi.mastodon://toot : Present the toot composer screen\ncom.shi.mastodon://id=123 : Go to a toot with the ID 123")
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
                     .action(.cancel("Dismiss"))
                     .finally { action, index in
                         if action.style == .cancel {

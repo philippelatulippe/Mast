@@ -739,10 +739,10 @@ class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableVi
             self.streamDataNoti()
         }
         
-        OneSignal.add(self as OSSubscriptionObserver)
-        OneSignal.promptForPushNotifications(userResponse: { accepted in
-            print("User accepted notifications: \(accepted)")
-        })
+//        OneSignal.add(self as OSSubscriptionObserver)
+//        OneSignal.promptForPushNotifications(userResponse: { accepted in
+//            print("User accepted notifications: \(accepted)")
+//        })
     }
     
     

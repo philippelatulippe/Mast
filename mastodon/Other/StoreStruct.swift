@@ -94,4 +94,6 @@ class StoreStruct {
     
     static var spoilerText = ""
     static var typeOfSearch = 0
+    
+    static var curID = ""
 }

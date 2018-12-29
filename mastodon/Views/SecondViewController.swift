@@ -453,9 +453,23 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         super.didReceiveMemoryWarning()
     }
     
+    
+    @objc func goToID() {
+        sleep(2)
+        let request = Statuses.status(id: StoreStruct.curID)
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                let controller = DetailViewController()
+                controller.mainStatus.append(stat)
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goInstance), name: NSNotification.Name(rawValue: "goInstance2"), object: nil)

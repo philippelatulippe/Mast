@@ -535,11 +535,6 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         } else {
             
             
-            OneSignal.add(self as OSSubscriptionObserver)
-            OneSignal.promptForPushNotifications(userResponse: { accepted in
-                print("User accepted notifications: \(accepted)")
-            })
-            
             
             
             StoreStruct.shared.currentInstance.accessToken = UserDefaults.standard.object(forKey: "accessToken2") as! String
@@ -595,6 +590,106 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     }
     
     var size9 = 961
+    
+    func siriLight() {
+        UIApplication.shared.statusBarStyle = .default
+        Colours.keyCol = UIKeyboardAppearance.dark
+        UserDefaults.standard.set(0, forKey: "theme")
+        self.genericStuff()
+    }
+    
+    func siriDark() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        Colours.keyCol = UIKeyboardAppearance.dark
+        UserDefaults.standard.set(1, forKey: "theme")
+        self.genericStuff()
+    }
+    
+    func siriDark2() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        Colours.keyCol = UIKeyboardAppearance.dark
+        UserDefaults.standard.set(2, forKey: "theme")
+        self.genericStuff()
+    }
+    
+    func siriOled() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        Colours.keyCol = UIKeyboardAppearance.dark
+        UserDefaults.standard.set(3, forKey: "theme")
+        self.genericStuff()
+    }
+    
+    func siriBlue() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        Colours.keyCol = UIKeyboardAppearance.dark
+        UserDefaults.standard.set(4, forKey: "theme")
+        self.genericStuff()
+    }
+    
+    func gotoID() {
+        
+        if StoreStruct.currentPage == 0 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid"), object: self)
+        } else if StoreStruct.currentPage == 1 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid2"), object: self)
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid3"), object: self)
+        }
+        
+    }
+    
+    func genericStuff() {
+        (self.rootNavigationController2.viewControllers[0] as! PadTimelinesViewController).loadLoadLoad()
+        (self.rootNavigationController21.viewControllers[0] as! PadMentionsViewController).loadLoadLoad()
+        (self.rootNavigationController5.viewControllers[0] as! ThirdViewController).loadLoadLoad()
+        (self.rootNavigationController6.viewControllers[0] as! PinnedViewController).loadLoadLoad()
+        (self.detailNavigationController6.viewControllers[0] as! LikedViewController).loadLoadLoad()
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
+        
+        self.splitViewController2.view.backgroundColor = Colours.white
+        self.splitViewController31.view.backgroundColor = Colours.white
+        self.rootNavigationController22.view.backgroundColor = Colours.white
+        self.splitViewController21.view.backgroundColor = Colours.white
+        self.splitViewController5.view.backgroundColor = Colours.white
+        self.splitViewController6.view.backgroundColor = Colours.white
+        self.rootNavigationController2.view.backgroundColor = Colours.white
+        self.rootNavigationController21.view.backgroundColor = Colours.white
+        self.rootNavigationController5.view.backgroundColor = Colours.white
+        self.rootNavigationController6.view.backgroundColor = Colours.white
+        self.detailNavigationController6.view.backgroundColor = Colours.white
+        
+        self.navigationController?.view.backgroundColor = Colours.white
+        
+        self.view.backgroundColor = Colours.white
+        self.navigationController?.navigationBar.backgroundColor = Colours.white
+        self.navigationController?.navigationBar.tintColor = Colours.black
+        
+        
+        self.statusBarView.backgroundColor = Colours.white
+        self.splitViewController?.view.backgroundColor = Colours.cellQuote
+        
+        self.load2()
+        if self.curr == 0 {
+            self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+            self.button2.setImage(UIImage(named: "notifications")?.maskWithColor(color: self.unselectCol), for: .normal)
+            self.button3.setImage(UIImage(named: "profile")?.maskWithColor(color: self.unselectCol), for: .normal)
+            self.button4.setImage(UIImage(named: "search2")?.maskWithColor(color: self.unselectCol), for: .normal)
+        } else if self.curr == 1 {
+            self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: self.unselectCol), for: .normal)
+            self.button2.setImage(UIImage(named: "notifications")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+            self.button3.setImage(UIImage(named: "profile")?.maskWithColor(color: self.unselectCol), for: .normal)
+            self.button4.setImage(UIImage(named: "search2")?.maskWithColor(color: self.unselectCol), for: .normal)
+        } else {
+            self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: self.unselectCol), for: .normal)
+            self.button2.setImage(UIImage(named: "notifications")?.maskWithColor(color: self.unselectCol), for: .normal)
+            self.button3.setImage(UIImage(named: "profile")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+            self.button4.setImage(UIImage(named: "search2")?.maskWithColor(color: self.unselectCol), for: .normal)
+        }
+    }
+    
+    func siriConfetti() {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

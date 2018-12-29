@@ -468,12 +468,26 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.didReceiveMemoryWarning()
     }
     
+    
+    @objc func goToID() {
+        sleep(2)
+        let request = Statuses.status(id: StoreStruct.curID)
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                let controller = DetailViewController()
+                controller.mainStatus.append(stat)
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = Colours.white
         self.title = ""
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid3"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers3"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists3"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goInstance), name: NSNotification.Name(rawValue: "goInstance3"), object: nil)

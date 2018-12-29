@@ -34,7 +34,8 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidLoad() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.logged), name: NSNotification.Name(rawValue: "logged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.logged), name: NSNotification.Name(rawValue: "logged2"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newInstanceLogged), name: NSNotification.Name(rawValue: "newInstancelogged2"), object: nil)
         self.view.backgroundColor = Colours.white
         print("didload123")
         
@@ -301,7 +302,7 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
                                 statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
                                 statusAlert.title = "Not a valid Instance".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = "  an Instance name like mastodon.technology"
+                                statusAlert.message = "Please enter an Instance name like mastodon.technology"
                                 statusAlert.show()
                             }
                             
@@ -337,7 +338,7 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
                                 statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
                                 statusAlert.title = "Not a valid Instance".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = "  an Instance name like mastodon.technology"
+                                statusAlert.message = "Please enter an Instance name like mastodon.technology"
                                 statusAlert.show()
                             }
                             
@@ -372,13 +373,135 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
     
     
     
+//    @objc func logged() {
+//
+//        self.loginBG.removeFromSuperview()
+//        self.loginLogo.removeFromSuperview()
+//        self.loginLabel.removeFromSuperview()
+//        self.textField.removeFromSuperview()
+////        self.safariVC!.dismiss(animated: true, completion: nil)
+//
+//        var request = URLRequest(url: URL(string: "https://\(StoreStruct.shared.currentInstance.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.shared.currentInstance.authCode)&redirect_uri=\(StoreStruct.shared.currentInstance.redirect)&client_id=\(StoreStruct.shared.currentInstance.clientID)&client_secret=\(StoreStruct.shared.currentInstance.clientSecret)")!)
+//        request.httpMethod = "POST"
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue("application/json", forHTTPHeaderField: "Accept")
+//
+//        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+//            guard error == nil else { return }
+//            guard let data = data else { return }
+//            do {
+//                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+//                    print(json)
+//
+//                    DispatchQueue.main.async {
+//                        var customStyle = VolumeBarStyle.likeInstagram
+//                        customStyle.trackTintColor = Colours.cellQuote
+//                        customStyle.progressTintColor = Colours.grayDark
+//                        customStyle.backgroundColor = Colours.white
+//                        self.volumeBar.style = customStyle
+//                        //self.volumeBar.start()
+//                        //self.volumeBar.showInitial()
+//
+//                        StoreStruct.shared.currentInstance.accessToken = (json["access_token"] as! String)
+//                        StoreStruct.client.accessToken = StoreStruct.shared.currentInstance.accessToken
+//
+//                        UserDefaults.standard.set(StoreStruct.shared.currentInstance.clientID, forKey: "clientID")
+//                        UserDefaults.standard.set(StoreStruct.shared.currentInstance.clientSecret, forKey: "clientSecret")
+//                        UserDefaults.standard.set(StoreStruct.shared.currentInstance.authCode, forKey: "authCode")
+//                        UserDefaults.standard.set(StoreStruct.shared.currentInstance.accessToken, forKey: "accessToken2")
+//                        UserDefaults.standard.set(StoreStruct.shared.currentInstance.returnedText, forKey: "returnedText")
+//                    }
+//
+//
+//
+//                    let request = Timelines.home()
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            StoreStruct.statusesHome = stat
+//                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
+//                        }
+//                    }
+//
+//
+//
+//                    print("fetchingall09")
+//
+//                        if StoreStruct.statusesLocal.isEmpty {
+//                            let request = Timelines.public(local: true, range: .default)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    StoreStruct.statusesLocal = stat
+//                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
+//                                }
+//                            }
+//                        }
+//
+//
+//                        if StoreStruct.statusesFederated.isEmpty {
+//                            let request = Timelines.public(local: false, range: .default)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    StoreStruct.statusesFederated = stat
+//                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
+//                                }
+//                            }
+//                        }
+//
+//
+//
+//
+//                    let request2 = Accounts.currentUser()
+//                    StoreStruct.client.run(request2) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            StoreStruct.currentUser = stat
+//
+//                            DispatchQueue.main.async {
+//                                NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+//                            }
+//                        }
+//                    }
+//
+//
+//                    self.dismiss(animated: true, completion: nil)
+//                    self.dismiss(animated: true, completion: nil)
+//
+//                    // onboarding
+//                    //                    if (UserDefaults.standard.object(forKey: "onb") == nil) || (UserDefaults.standard.object(forKey: "onb") as! Int == 0) {
+//                    //                        DispatchQueue.main.async {
+//                    //                            self.bulletinManager.prepare()
+//                    //                            self.bulletinManager.presentBulletin(above: self, animated: true, completion: nil)
+//                    //                        }
+//                    //                    }
+//
+//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "becomeFirst"), object: self)
+//
+//                }
+//            } catch let error {
+//                print(error.localizedDescription)
+//            }
+//        })
+//        task.resume()
+//
+//    }
+    
+    
+    
+    
     @objc func logged() {
         
         self.loginBG.removeFromSuperview()
         self.loginLogo.removeFromSuperview()
         self.loginLabel.removeFromSuperview()
         self.textField.removeFromSuperview()
-        self.safariVC!.dismiss(animated: true, completion: nil)
+//        self.safariVC?.dismiss(animated: true, completion: nil)
+        
+        print("11111")
+        print(StoreStruct.shared.currentInstance.returnedText)
+        print(StoreStruct.shared.currentInstance.authCode)
+        print(StoreStruct.shared.currentInstance.redirect)
+        print(StoreStruct.shared.currentInstance.clientID)
+        print(StoreStruct.shared.currentInstance.clientSecret)
         
         var request = URLRequest(url: URL(string: "https://\(StoreStruct.shared.currentInstance.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.shared.currentInstance.authCode)&redirect_uri=\(StoreStruct.shared.currentInstance.redirect)&client_id=\(StoreStruct.shared.currentInstance.clientID)&client_secret=\(StoreStruct.shared.currentInstance.clientSecret)")!)
         request.httpMethod = "POST"
@@ -386,10 +509,11 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            guard error == nil else { return }
+            guard error == nil else { print(error);return }
             guard let data = data else { return }
             do {
                 if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    print("00000")
                     print(json)
                     
                     DispatchQueue.main.async {
@@ -401,10 +525,13 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
                         //self.volumeBar.start()
                         //self.volumeBar.showInitial()
                     }
-                    
-                    
-                    StoreStruct.shared.currentInstance.accessToken = (json["access_token"] as! String)
+                    print("000")
+                    print(json["access_token"])
+                    StoreStruct.shared.currentInstance.accessToken = (json["access_token"] as? String ?? "")
                     StoreStruct.client.accessToken = StoreStruct.shared.currentInstance.accessToken
+                    
+                    
+                    let currentInstance = InstanceData(clientID: StoreStruct.shared.currentInstance.clientID, clientSecret: StoreStruct.shared.currentInstance.clientSecret, authCode: StoreStruct.shared.currentInstance.authCode, accessToken: StoreStruct.shared.currentInstance.accessToken, returnedText: StoreStruct.shared.currentInstance.returnedText, redirect:StoreStruct.shared.currentInstance.redirect)
                     
                     UserDefaults.standard.set(StoreStruct.shared.currentInstance.clientID, forKey: "clientID")
                     UserDefaults.standard.set(StoreStruct.shared.currentInstance.clientSecret, forKey: "clientSecret")
@@ -412,6 +539,10 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
                     UserDefaults.standard.set(StoreStruct.shared.currentInstance.accessToken, forKey: "accessToken2")
                     UserDefaults.standard.set(StoreStruct.shared.currentInstance.returnedText, forKey: "returnedText")
                     
+                    var instances = InstanceData.getAllInstances()
+                    instances.append(currentInstance)
+                    UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
+                    InstanceData.setCurrentInstance(instance: currentInstance)
                     let request = Timelines.home()
                     StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
@@ -422,56 +553,30 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
                     }
                     
                     
-                    
-                    print("fetchingall09")
-                    
-                        if StoreStruct.statusesLocal.isEmpty {
-                            let request = Timelines.public(local: true, range: .default)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    StoreStruct.statusesLocal = stat
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
-                                }
-                            }
-                        }
-                    
-                    
-                        if StoreStruct.statusesFederated.isEmpty {
-                            let request = Timelines.public(local: false, range: .default)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    StoreStruct.statusesFederated = stat
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
-                                }
-                            }
-                        }
-                    
-                    
-                    
-                    
                     let request2 = Accounts.currentUser()
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
                             StoreStruct.currentUser = stat
-                            
+                            Account.addAccountToList(account: stat)
                             DispatchQueue.main.async {
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                             }
                         }
                     }
                     
-                    
+                    self.dismiss(animated: true, completion: nil)
                     self.dismiss(animated: true, completion: nil)
                     
-                    // onboarding
-                    //                    if (UserDefaults.standard.object(forKey: "onb") == nil) || (UserDefaults.standard.object(forKey: "onb") as! Int == 0) {
-                    //                        DispatchQueue.main.async {
-                    //                            self.bulletinManager.prepare()
-                    //                            self.bulletinManager.presentBulletin(above: self, animated: true, completion: nil)
-                    //                        }
-                    //                    }
                     
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "becomeFirst"), object: self)
+                    // onboarding
+//                    if (UserDefaults.standard.object(forKey: "onb") == nil) || (UserDefaults.standard.object(forKey: "onb") as! Int == 0) {
+//                        DispatchQueue.main.async {
+//                            self.bulletinManager.prepare()
+//                            self.bulletinManager.presentBulletin(above: self, animated: true, completion: nil)
+//                        }
+//                    }
+                    
+                    
                     
                 }
             } catch let error {
@@ -483,8 +588,89 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
-    
+    @objc func newInstanceLogged(){
+        
+        self.loginBG.removeFromSuperview()
+        self.loginLogo.removeFromSuperview()
+        self.loginLabel.removeFromSuperview()
+        self.textField.removeFromSuperview()
+        //        self.safariVC?.dismiss(animated: true, completion: nil)
+        
+        var request = URLRequest(url: URL(string: "https://\(StoreStruct.shared.newInstance!.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.shared.newInstance!.authCode)&redirect_uri=\(StoreStruct.shared.newInstance!.redirect)&client_id=\(StoreStruct.shared.newInstance!.clientID)&client_secret=\(StoreStruct.shared.newInstance!.clientSecret)")!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            guard error == nil else { print(error);return }
+            guard let data = data else { return }
+            guard let newInsatnce = StoreStruct.shared.newInstance else {
+                return
+            }
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    print(json)
+                    
+                    
+                    newInsatnce.accessToken = (json["access_token"] as! String)
+                    
+                    InstanceData.setCurrentInstance(instance: newInsatnce)
+                    var instances = InstanceData.getAllInstances()
+                    instances.append(newInsatnce)
+                    UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
+                    
+                    
+                    let request = Timelines.home()
+                    StoreStruct.shared.newClient.run(request) { (statuses) in
+                        if let stat = (statuses.value) {
+                            StoreStruct.statusesHome = stat
+                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
+                        }
+                    }
+                    
+                    
+                    let request2 = Accounts.currentUser()
+                    StoreStruct.shared.newClient.run(request2) { (statuses) in
+                        print("THIS IS THE STATUS \(statuses)")
+                        if let stat = (statuses.value) {
+                            StoreStruct.currentUser = stat
+                            Account.addAccountToList(account: stat)
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+                            }
+                        }
+                    }
+                    
+                    self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
+                    
+                    
+                    // onboarding
+//                    if (UserDefaults.standard.object(forKey: "onb") == nil) || (UserDefaults.standard.object(forKey: "onb") as! Int == 0) {
+//                        DispatchQueue.main.async {
+//                            self.bulletinManager.prepare()
+//                            self.bulletinManager.presentBulletin(above: self, animated: true, completion: nil)
+//                        }
+//                    }
+                    
+                    
+                    DispatchQueue.main.async {
+                        
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        appDelegate.reloadApplication()
+                        
+                    }
+                    
+                    
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        })
+        task.resume()
+        
+    }
     
     
     
