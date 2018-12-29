@@ -799,6 +799,33 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         OneSignal.promptForPushNotifications(userResponse: { accepted in
             print("User accepted notifications: \(accepted)")
         })
+        
+        if (UserDefaults.standard.object(forKey: "mentdef2") == nil) || (UserDefaults.standard.object(forKey: "mentdef2") as! Int == 0) {
+            
+        } else {
+            
+            self.segmentedControl.currentSegment = 1
+            
+            self.currentIndex = 0
+            //self.tableView2.reloadData()
+            self.tableView.alpha = 0
+            self.tableView2.alpha = 1
+            
+            if StoreStruct.notifications.isEmpty {
+                let request = Notifications.all(range: .default)
+                StoreStruct.client.run(request) { (statuses) in
+                    if let stat = (statuses.value) {
+                        StoreStruct.notifications = stat
+                        DispatchQueue.main.async {
+                            self.tableView2.reloadData()
+                        }
+                        
+                    }
+                }
+            } else {
+                self.tableView2.reloadData()
+            }
+        }
     }
     
     

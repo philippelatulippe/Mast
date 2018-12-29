@@ -494,7 +494,7 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
         self.loginLogo.removeFromSuperview()
         self.loginLabel.removeFromSuperview()
         self.textField.removeFromSuperview()
-//        self.safariVC?.dismiss(animated: true, completion: nil)
+        self.safariVC?.dismiss(animated: true, completion: nil)
         
         print("11111")
         print(StoreStruct.shared.currentInstance.returnedText)
@@ -516,6 +516,7 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
                     print("00000")
                     print(json)
                     
+                    if StoreStruct.doOnce {
                     DispatchQueue.main.async {
                         var customStyle = VolumeBarStyle.likeInstagram
                         customStyle.trackTintColor = Colours.cellQuote
@@ -524,48 +525,50 @@ class PadLogInViewController: UIViewController, UITextFieldDelegate {
                         self.volumeBar.style = customStyle
                         //self.volumeBar.start()
                         //self.volumeBar.showInitial()
-                    }
-                    print("000")
-                    print(json["access_token"])
-                    StoreStruct.shared.currentInstance.accessToken = (json["access_token"] as? String ?? "")
-                    StoreStruct.client.accessToken = StoreStruct.shared.currentInstance.accessToken
-                    
-                    
-                    let currentInstance = InstanceData(clientID: StoreStruct.shared.currentInstance.clientID, clientSecret: StoreStruct.shared.currentInstance.clientSecret, authCode: StoreStruct.shared.currentInstance.authCode, accessToken: StoreStruct.shared.currentInstance.accessToken, returnedText: StoreStruct.shared.currentInstance.returnedText, redirect:StoreStruct.shared.currentInstance.redirect)
-                    
-                    UserDefaults.standard.set(StoreStruct.shared.currentInstance.clientID, forKey: "clientID")
-                    UserDefaults.standard.set(StoreStruct.shared.currentInstance.clientSecret, forKey: "clientSecret")
-                    UserDefaults.standard.set(StoreStruct.shared.currentInstance.authCode, forKey: "authCode")
-                    UserDefaults.standard.set(StoreStruct.shared.currentInstance.accessToken, forKey: "accessToken2")
-                    UserDefaults.standard.set(StoreStruct.shared.currentInstance.returnedText, forKey: "returnedText")
-                    
-                    var instances = InstanceData.getAllInstances()
-                    instances.append(currentInstance)
-                    UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
-                    InstanceData.setCurrentInstance(instance: currentInstance)
-                    let request = Timelines.home()
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            StoreStruct.statusesHome = stat
-                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
-                        }
-                    }
-                    
-                    
-                    let request2 = Accounts.currentUser()
-                    StoreStruct.client.run(request2) { (statuses) in
-                        if let stat = (statuses.value) {
-                            StoreStruct.currentUser = stat
-                            Account.addAccountToList(account: stat)
-                            DispatchQueue.main.async {
-                                NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+                        print("000")
+                        print(json["access_token"])
+                        StoreStruct.shared.currentInstance.accessToken = (json["access_token"]! as! String)
+                        StoreStruct.client.accessToken = StoreStruct.shared.currentInstance.accessToken
+                        print(StoreStruct.shared.currentInstance.accessToken)
+                        
+                        let currentInstance = InstanceData(clientID: StoreStruct.shared.currentInstance.clientID, clientSecret: StoreStruct.shared.currentInstance.clientSecret, authCode: StoreStruct.shared.currentInstance.authCode, accessToken: StoreStruct.shared.currentInstance.accessToken, returnedText: StoreStruct.shared.currentInstance.returnedText, redirect:StoreStruct.shared.currentInstance.redirect)
+                        
+                        UserDefaults.standard.set(StoreStruct.shared.currentInstance.clientID, forKey: "clientID")
+                        UserDefaults.standard.set(StoreStruct.shared.currentInstance.clientSecret, forKey: "clientSecret")
+                        UserDefaults.standard.set(StoreStruct.shared.currentInstance.authCode, forKey: "authCode")
+                        UserDefaults.standard.set(StoreStruct.shared.currentInstance.accessToken, forKey: "accessToken2")
+                        UserDefaults.standard.set(StoreStruct.shared.currentInstance.returnedText, forKey: "returnedText")
+                        
+                        var instances = InstanceData.getAllInstances()
+                        instances.append(currentInstance)
+                        UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
+                        InstanceData.setCurrentInstance(instance: currentInstance)
+                        let request = Timelines.home()
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                StoreStruct.statusesHome = stat
+                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                                NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
                             }
                         }
+                        
+                        
+                        let request2 = Accounts.currentUser()
+                        StoreStruct.client.run(request2) { (statuses) in
+                            if let stat = (statuses.value) {
+                                StoreStruct.currentUser = stat
+                                Account.addAccountToList(account: stat)
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+                                }
+                            }
+                        }
+                        
+                        self.dismiss(animated: true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                     }
-                    
-                    self.dismiss(animated: true, completion: nil)
-                    self.dismiss(animated: true, completion: nil)
+                        StoreStruct.doOnce = false
+                    }
                     
                     
                     // onboarding

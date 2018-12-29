@@ -175,16 +175,41 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         
 //        self.rootNavigationController2.preferredContentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
         
-//        if UIDevice.current.orientation.isPortrait {
-//            self.splitViewController21.preferredDisplayMode = .primaryHidden
-//            self.splitViewController6.preferredDisplayMode = .primaryHidden
-//        } else {
-//            self.splitViewController21.preferredDisplayMode = .allVisible
-//            self.splitViewController6.preferredDisplayMode = .allVisible
-//        }
+        if UIDevice.current.orientation.isPortrait {
+            let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+            if SCREEN_MAX_LENGTH == 1366.0 {
+                
+            } else if SCREEN_MAX_LENGTH == 1024.0 {
+                self.size9 = 691
+                self.splitViewControllerA.minimumPrimaryColumnWidth = CGFloat(size9)
+                self.splitViewControllerA.maximumPrimaryColumnWidth = CGFloat(size9)
+            } else if SCREEN_MAX_LENGTH == 1112.0 {
+                self.size9 = 761
+                self.splitViewControllerA.minimumPrimaryColumnWidth = CGFloat(size9)
+                self.splitViewControllerA.maximumPrimaryColumnWidth = CGFloat(size9)
+            } else {
+                self.size9 = 761
+            }
+        } else {
+            let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+            if SCREEN_MAX_LENGTH == 1366.0 {
+                
+            } else if SCREEN_MAX_LENGTH == 1024.0 {
+                self.size9 = 621
+                self.splitViewControllerA.minimumPrimaryColumnWidth = CGFloat(size9)
+                self.splitViewControllerA.maximumPrimaryColumnWidth = CGFloat(size9)
+            } else if SCREEN_MAX_LENGTH == 1112.0 {
+                self.size9 = 661
+                self.splitViewControllerA.minimumPrimaryColumnWidth = CGFloat(size9)
+                self.splitViewControllerA.maximumPrimaryColumnWidth = CGFloat(size9)
+            } else {
+                self.size9 = 761
+            }
+        }
         
 //        })
     
+        
         
     }
     
@@ -699,9 +724,16 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         
         self.splitViewControllerA.preferredDisplayMode = .allVisible
         
+        print("testtesttest")
+        print(max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height))
+        
         let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
         if SCREEN_MAX_LENGTH == 1366.0 {
             
+        } else if SCREEN_MAX_LENGTH == 1024.0 {
+            self.size9 = 621
+        } else if SCREEN_MAX_LENGTH == 1112.0 {
+            self.size9 = 661
         } else {
             self.size9 = 761
         }
