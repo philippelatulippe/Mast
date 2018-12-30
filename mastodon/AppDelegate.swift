@@ -422,13 +422,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UIApplication.shared.isSplitOrSlideOver {
             self.window?.rootViewController = ViewController()
             self.window?.makeKeyAndVisible()
+            StoreStruct.isSplit = true
         } else {
-            
+            if StoreStruct.isSplit {
             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
             switch (deviceIdiom) {
             case .phone:
-                //            self.window?.rootViewController = ViewController()
-                //            self.window?.makeKeyAndVisible()
                 print("nothing")
             case .pad:
                 self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -465,11 +464,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UINavigationBar.appearance().tintColor = Colours.black
                 UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
             default:
-                //            self.window?.rootViewController = ViewController()
-                //            self.window?.makeKeyAndVisible()
                 print("nothing")
             }
-            
+                StoreStruct.isSplit = false
+            }
         }
     }
     

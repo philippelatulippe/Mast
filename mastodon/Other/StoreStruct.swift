@@ -97,4 +97,5 @@ class StoreStruct {
     
     static var curID = ""
     static var doOnce = true
+    static var isSplit = false
 }

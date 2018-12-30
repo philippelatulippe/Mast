@@ -143,37 +143,37 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     let splitViewControllerA =  UISplitViewController()
     let rootNavigationControllerA = UINavigationController(rootViewController: PadSidebarViewController())
     
-//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//
-//        if self.window?.bounds.width ?? CGFloat(0) > CGFloat(400) && previousTraitCollection == nil {
-//
-//        } else {
-//
-//            print("changed trait")
-//
-//
-//        if UIApplication.shared.isSplitOrSlideOver {
-//            self.window?.rootViewController = ViewController()
-//            self.window?.makeKeyAndVisible()
-//        } else {
-//            
-//        }
-//        }
-//    }
+    //    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    //
+    //        if self.window?.bounds.width ?? CGFloat(0) > CGFloat(400) && previousTraitCollection == nil {
+    //
+    //        } else {
+    //
+    //            print("changed trait")
+    //
+    //
+    //        if UIApplication.shared.isSplitOrSlideOver {
+    //            self.window?.rootViewController = ViewController()
+    //            self.window?.makeKeyAndVisible()
+    //        } else {
+    //
+    //        }
+    //        }
+    //    }
     
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         print("newsize")
         print(size)
         
         super.viewWillTransition(to: size, with: coordinator)
-//        coordinator.animate(alongsideTransition: nil, completion: {
-//            _ in
+        //        coordinator.animate(alongsideTransition: nil, completion: {
+        //            _ in
         
         self.statusBarView.frame = UIApplication.shared.statusBarFrame
         
         self.splitViewControllerA.preferredDisplayMode = .allVisible
         
-//        self.rootNavigationController2.preferredContentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
+        //        self.rootNavigationController2.preferredContentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
         
         if UIDevice.current.orientation.isPortrait {
             let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
@@ -207,8 +207,8 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             }
         }
         
-//        })
-    
+        //        })
+        
         
         
     }
@@ -343,15 +343,15 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     
     
     @objc func setVC() {
-            let con = PadDetailViewController()
-            con.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
+        let con = PadDetailViewController()
+        con.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
         panelController.set(viewController: con)
         
     }
     @objc func setVC2() {
-            let con = ThirdViewController()
-            con.fromOtherUser = true
-            con.userIDtoUse = StoreStruct.statusSearchUser[StoreStruct.searchIndex].id
+        let con = ThirdViewController()
+        con.fromOtherUser = true
+        con.userIDtoUse = StoreStruct.statusSearchUser[StoreStruct.searchIndex].id
         panelController.set(viewController: con)
     }
     
@@ -408,26 +408,26 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         panelController2.hidePanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
         self.isListing = false
         self.isSearching = false
-
+        
         print("gogo")
         
-//        if StoreStruct.typeOfSearch == 2 {
-//            if StoreStruct.currentPage == 0 {
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser"), object: self)
-//            } else if StoreStruct.currentPage == 1 {
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser2"), object: self)
-//            } else {
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser3"), object: self)
-//            }
-//        } else {
-//            if StoreStruct.currentPage == 0 {
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: "search"), object: self)
-//            } else if StoreStruct.currentPage == 1 {
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: "search2"), object: self)
-//            } else {
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: "search3"), object: self)
-//            }
-//        }
+        //        if StoreStruct.typeOfSearch == 2 {
+        //            if StoreStruct.currentPage == 0 {
+        //                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser"), object: self)
+        //            } else if StoreStruct.currentPage == 1 {
+        //                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser2"), object: self)
+        //            } else {
+        //                NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser3"), object: self)
+        //            }
+        //        } else {
+        //            if StoreStruct.currentPage == 0 {
+        //                NotificationCenter.default.post(name: Notification.Name(rawValue: "search"), object: self)
+        //            } else if StoreStruct.currentPage == 1 {
+        //                NotificationCenter.default.post(name: Notification.Name(rawValue: "search2"), object: self)
+        //            } else {
+        //                NotificationCenter.default.post(name: Notification.Name(rawValue: "search3"), object: self)
+        //            }
+        //        }
     }
     
     
@@ -451,7 +451,7 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             self.bgbg.addTarget(self, action: #selector(self.b4Touched), for: .touchUpInside)
             let wind = UIApplication.shared.keyWindow!
             wind.addSubview(self.bgbg)
-        
+            
             if self.tappedB == 0 {
                 panelController.addTo(parent: self.rootNavigationController2)
             } else if self.tappedB == 1 {
@@ -460,14 +460,14 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
                 panelController.addTo(parent: self.rootNavigationController5)
             }
             
-        panelController.resizeTo(CGSize(width:  440,
-                                        height: 540))
-        panelController.pinTo(position: .topLeading,
-                              margins: UIEdgeInsets(top:    60, left:  0,
-                                                    bottom: 42, right: 18))
-        let yourContentVC = PadSearchViewController()
-        panelController.set(viewController: yourContentVC)
-        panelController.showPanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
+            panelController.resizeTo(CGSize(width:  440,
+                                            height: 540))
+            panelController.pinTo(position: .topLeading,
+                                  margins: UIEdgeInsets(top:    60, left:  0,
+                                                        bottom: 42, right: 18))
+            let yourContentVC = PadSearchViewController()
+            panelController.set(viewController: yourContentVC)
+            panelController.showPanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
             
             self.isSearching = true
         }
@@ -508,10 +508,10 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             }
             
             panelController2.resizeTo(CGSize(width:  440,
-                                            height: 540))
+                                             height: 540))
             panelController2.pinTo(position: .topLeading,
-                                  margins: UIEdgeInsets(top:    60, left:  18,
-                                                        bottom: 42, right: 18))
+                                   margins: UIEdgeInsets(top:    60, left:  18,
+                                                         bottom: 42, right: 18))
             let yourContentVC = PadListViewController()
             panelController2.set(viewController: yourContentVC)
             panelController2.showPanel(animated: false, inCornerAlongXAxis: true, inCornerAlongYAxis: false)
@@ -727,15 +727,31 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
         print("testtesttest")
         print(max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height))
         
-        let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
-        if SCREEN_MAX_LENGTH == 1366.0 {
-            
-        } else if SCREEN_MAX_LENGTH == 1024.0 {
-            self.size9 = 621
-        } else if SCREEN_MAX_LENGTH == 1112.0 {
-            self.size9 = 661
+        
+        if UIDevice.current.orientation.isPortrait {
+            let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+            if SCREEN_MAX_LENGTH == 1366.0 {
+                
+            } else if SCREEN_MAX_LENGTH == 1024.0 {
+                self.size9 = 691
+            } else if SCREEN_MAX_LENGTH == 1112.0 {
+                self.size9 = 761
+            } else {
+                self.size9 = 761
+            }
         } else {
-            self.size9 = 761
+            
+            let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+            if SCREEN_MAX_LENGTH == 1366.0 {
+                
+            } else if SCREEN_MAX_LENGTH == 1024.0 {
+                self.size9 = 621
+            } else if SCREEN_MAX_LENGTH == 1112.0 {
+                self.size9 = 661
+            } else {
+                self.size9 = 761
+            }
+            
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreate), name: NSNotification.Name(rawValue: "confettiCreate"), object: nil)
@@ -882,18 +898,18 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
     
     
     @objc func longAction(sender: UILongPressGestureRecognizer) {
-
+        
         if (UserDefaults.standard.object(forKey: "longToggle") == nil) || (UserDefaults.standard.object(forKey: "longToggle") as! Int == 0) {
-
-
+            
+            
             if sender.state == .began {
                 print("long pressed")
-
+                
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     let selection = UIImpactFeedbackGenerator()
                     selection.impactOccurred()
                 }
-
+                
                 var newNum = 0
                 if UserDefaults.standard.object(forKey: "theme") == nil {
                     newNum = 1
@@ -927,11 +943,11 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
                         Colours.keyCol = UIKeyboardAppearance.light
                     }
                 }
-
+                
                 UserDefaults.standard.set(newNum, forKey: "theme")
-
+                
                 DispatchQueue.main.async {
-
+                    
                     (self.rootNavigationController2.viewControllers[0] as! PadTimelinesViewController).loadLoadLoad()
                     (self.rootNavigationController21.viewControllers[0] as! PadMentionsViewController).loadLoadLoad()
                     (self.rootNavigationController5.viewControllers[0] as! ThirdViewController).loadLoadLoad()
@@ -959,7 +975,7 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
                     
                     self.statusBarView.backgroundColor = Colours.white
                     self.splitViewController?.view.backgroundColor = Colours.cellQuote
-
+                    
                     
                     self.load2()
                     if self.curr == 0 {
@@ -984,14 +1000,14 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
                     
                 }
             }
-
+            
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 1) {
             //cback2
             if sender.state == .began {
                 self.b56Touched()
             }
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 2) {
-
+            
             if sender.state == .began {
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     let imp = UIImpactFeedbackGenerator()
@@ -1002,42 +1018,42 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
                 controller.inReplyText = ""
                 self.present(controller, animated: true, completion: nil)
             }
-
+            
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 3) {
-
+            
             if sender.state == .began {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
             }
         } else {
-
+            
             if sender.state == .began {
                 self.b4Touched()
             }
         }
     }
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+    
     @objc func themeLight() {
-
+        
         UIApplication.shared.statusBarStyle = .default
         Colours.keyCol = UIKeyboardAppearance.light
         UserDefaults.standard.set(0, forKey: "theme")
-
+        
         DispatchQueue.main.async {
-
+            
             (self.rootNavigationController2.viewControllers[0] as! PadTimelinesViewController).loadLoadLoad()
             (self.rootNavigationController21.viewControllers[0] as! PadMentionsViewController).loadLoadLoad()
             (self.rootNavigationController5.viewControllers[0] as! ThirdViewController).loadLoadLoad()
             (self.rootNavigationController6.viewControllers[0] as! PinnedViewController).loadLoadLoad()
             (self.detailNavigationController6.viewControllers[0] as! LikedViewController).loadLoadLoad()
             NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
-
+            
             self.splitViewController2.view.backgroundColor = Colours.white
             self.splitViewController31.view.backgroundColor = Colours.white
             self.rootNavigationController22.view.backgroundColor = Colours.white
@@ -1055,10 +1071,10 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             self.view.backgroundColor = Colours.white
             self.navigationController?.navigationBar.backgroundColor = Colours.white
             self.navigationController?.navigationBar.tintColor = Colours.black
-
+            
             self.statusBarView.backgroundColor = Colours.white
             self.splitViewController?.view.backgroundColor = Colours.cellQuote
-
+            
             self.load2()
             if self.curr == 0 {
                 self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: Colours.tabSelected), for: .normal)
@@ -1079,23 +1095,23 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             
         }
     }
-
+    
     @objc func themeNight() {
-
+        
         UIApplication.shared.statusBarStyle = .lightContent
         Colours.keyCol = UIKeyboardAppearance.dark
-
+        
         UserDefaults.standard.set(1, forKey: "theme")
-
+        
         DispatchQueue.main.async {
-
+            
             (self.rootNavigationController2.viewControllers[0] as! PadTimelinesViewController).loadLoadLoad()
             (self.rootNavigationController21.viewControllers[0] as! PadMentionsViewController).loadLoadLoad()
             (self.rootNavigationController5.viewControllers[0] as! ThirdViewController).loadLoadLoad()
             (self.rootNavigationController6.viewControllers[0] as! PinnedViewController).loadLoadLoad()
             (self.detailNavigationController6.viewControllers[0] as! LikedViewController).loadLoadLoad()
             NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
-
+            
             self.splitViewController2.view.backgroundColor = Colours.white
             self.splitViewController31.view.backgroundColor = Colours.white
             self.rootNavigationController22.view.backgroundColor = Colours.white
@@ -1113,11 +1129,11 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             self.view.backgroundColor = Colours.white
             self.navigationController?.navigationBar.backgroundColor = Colours.white
             self.navigationController?.navigationBar.tintColor = Colours.black
-
+            
             
             self.statusBarView.backgroundColor = Colours.white
             self.splitViewController?.view.backgroundColor = Colours.cellQuote
-
+            
             self.load2()
             if self.curr == 0 {
                 self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: Colours.tabSelected), for: .normal)
@@ -1138,23 +1154,23 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             
         }
     }
-
+    
     @objc func themeNight2() {
-
+        
         UIApplication.shared.statusBarStyle = .lightContent
         Colours.keyCol = UIKeyboardAppearance.dark
-
+        
         UserDefaults.standard.set(2, forKey: "theme")
-
+        
         DispatchQueue.main.async {
-
+            
             (self.rootNavigationController2.viewControllers[0] as! PadTimelinesViewController).loadLoadLoad()
             (self.rootNavigationController21.viewControllers[0] as! PadMentionsViewController).loadLoadLoad()
             (self.rootNavigationController5.viewControllers[0] as! ThirdViewController).loadLoadLoad()
             (self.rootNavigationController6.viewControllers[0] as! PinnedViewController).loadLoadLoad()
             (self.detailNavigationController6.viewControllers[0] as! LikedViewController).loadLoadLoad()
             NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
-
+            
             self.splitViewController2.view.backgroundColor = Colours.white
             self.splitViewController31.view.backgroundColor = Colours.white
             self.rootNavigationController22.view.backgroundColor = Colours.white
@@ -1172,11 +1188,11 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             self.view.backgroundColor = Colours.white
             self.navigationController?.navigationBar.backgroundColor = Colours.white
             self.navigationController?.navigationBar.tintColor = Colours.black
-
-
+            
+            
             self.statusBarView.backgroundColor = Colours.white
             self.splitViewController?.view.backgroundColor = Colours.cellQuote
-
+            
             self.load2()
             if self.curr == 0 {
                 self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: Colours.tabSelected), for: .normal)
@@ -1197,23 +1213,23 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             
         }
     }
-
+    
     @objc func themeBlack() {
-
+        
         UIApplication.shared.statusBarStyle = .lightContent
         Colours.keyCol = UIKeyboardAppearance.dark
-
+        
         UserDefaults.standard.set(3, forKey: "theme")
-
+        
         DispatchQueue.main.async {
-
+            
             (self.rootNavigationController2.viewControllers[0] as! PadTimelinesViewController).loadLoadLoad()
             (self.rootNavigationController21.viewControllers[0] as! PadMentionsViewController).loadLoadLoad()
             (self.rootNavigationController5.viewControllers[0] as! ThirdViewController).loadLoadLoad()
             (self.rootNavigationController6.viewControllers[0] as! PinnedViewController).loadLoadLoad()
             (self.detailNavigationController6.viewControllers[0] as! LikedViewController).loadLoadLoad()
             NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
-
+            
             self.splitViewController2.view.backgroundColor = Colours.white
             self.splitViewController31.view.backgroundColor = Colours.white
             self.rootNavigationController22.view.backgroundColor = Colours.white
@@ -1231,10 +1247,10 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             self.view.backgroundColor = Colours.white
             self.navigationController?.navigationBar.backgroundColor = Colours.white
             self.navigationController?.navigationBar.tintColor = Colours.black
-
+            
             self.statusBarView.backgroundColor = Colours.white
             self.splitViewController?.view.backgroundColor = Colours.cellQuote
-
+            
             self.load2()
             if self.curr == 0 {
                 self.button1.setImage(UIImage(named: "feed")?.maskWithColor(color: Colours.tabSelected), for: .normal)
