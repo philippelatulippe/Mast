@@ -801,6 +801,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let selection = UISelectionFeedbackGenerator()
                 selection.selectionChanged()
+                
             }
             self?.refreshCont()
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {

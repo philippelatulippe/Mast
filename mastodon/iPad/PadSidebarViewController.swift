@@ -48,7 +48,7 @@ class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableVi
             
             guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
             guard let cell = self.tableView.cellForRow(at: indexPath) else { return nil }
-            let detailVC = DetailViewController()
+            let detailVC = PadDetailViewController2()
             if self.currentIndex == 0 {
                 if indexPath.section == 0 {
                     return nil
@@ -78,7 +78,7 @@ class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableVi
             
             guard let indexPath = self.tableView2.indexPathForRow(at: location) else { return nil }
             guard let cell = self.tableView2.cellForRow(at: indexPath) else { return nil }
-            let detailVC = DetailViewController()
+            let detailVC = PadDetailViewController2()
             if self.currentIndex == 0 {
                 if indexPath.section == 0 {
                     return nil
@@ -414,9 +414,17 @@ class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableVi
         super.didReceiveMemoryWarning()
     }
     
+    @objc func refreshgraph() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.tableView2.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshgraph), name: NSNotification.Name(rawValue: "refrefref"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTop2), name: NSNotification.Name(rawValue: "scrollTop2"), object: nil)
@@ -1038,10 +1046,44 @@ class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (UserDefaults.standard.object(forKey: "setGraph") == nil) || (UserDefaults.standard.object(forKey: "setGraph") as! Int == 0) {
+        if self.currentIndex == 0 {
+            return 40
+        } else {
+            return 0
+        }
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let vw = UIView()
+        vw.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40)
+        let title = UILabel()
+        title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
+        if section == 0 {
+            title.text = "Recent"
+        } else {
+            title.text = "Activity"
+        }
+        title.textColor = Colours.grayDark2
+        title.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        vw.addSubview(title)
+        vw.backgroundColor = Colours.white
+        
+        return vw
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if self.currentIndex == 0 && indexPath.section == 0 {
-            //return 220
-            return 0
+            // toggle this to enable/disable the activity graph
+            if (UserDefaults.standard.object(forKey: "setGraph") == nil) || (UserDefaults.standard.object(forKey: "setGraph") as! Int == 0) {
+                return 220
+            } else {
+                return 0
+            }
         } else {
             return UITableView.automaticDimension
         }
@@ -1056,12 +1098,14 @@ class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableVi
                 // make graph in cell
                 
                 let cell = tableView2.dequeueReusableCell(withIdentifier: "cellG02", for: indexPath) as! GraphCell
-                //                let data: [Double] = [Double(20), Double(50), Double(12), Double(25), Double(15), Double(5), Double(21)]
-                //                let labels = ["S", "M", "T", "W", "T", "F", "S"]
-                //                cell.configure(data: data, labels: labels)
-                //                cell.backgroundColor = Colours.white
-                //                cell.graphView.fillGradientEndColor = Colours.white
-                //                cell.graphView.dataPointLabelColor = Colours.black.withAlphaComponent(0.6)
+                if (UserDefaults.standard.object(forKey: "setGraph") == nil) || (UserDefaults.standard.object(forKey: "setGraph") as! Int == 0) {
+                cell.configure()
+                cell.backgroundColor = Colours.white
+                cell.graphView.dataPointSpacing = (self.view.bounds.width / 5.2)
+                cell.graphView.alpha = 1
+                } else {
+                    cell.graphView.alpha = 0
+                }
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.white
                 cell.selectedBackgroundView = bgColorView
@@ -2410,14 +2454,14 @@ class PadSidebarViewController: UIViewController, UITableViewDelegate, UITableVi
                     controller.userIDtoUse = StoreStruct.notifications[indexPath.row].account.id
                     self.navigationController?.pushViewController(controller, animated: true)
                 } else {
-                    let controller = DetailViewController()
+                    let controller = PadDetailViewController2()
                     controller.mainStatus.append(StoreStruct.notifications[indexPath.row].status!)
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
             }
         } else {
             
-            let controller = DetailViewController()
+            let controller = PadDetailViewController2()
             controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
             self.navigationController?.pushViewController(controller, animated: true)
         }

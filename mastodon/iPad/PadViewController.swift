@@ -179,7 +179,7 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
             if SCREEN_MAX_LENGTH == 1366.0 {
                 
-            } else if SCREEN_MAX_LENGTH == 1024.0 {
+            } else if SCREEN_MAX_LENGTH <= 1024.0 {
                 self.size9 = 691
                 self.splitViewControllerA.minimumPrimaryColumnWidth = CGFloat(size9)
                 self.splitViewControllerA.maximumPrimaryColumnWidth = CGFloat(size9)
@@ -194,8 +194,8 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
             if SCREEN_MAX_LENGTH == 1366.0 {
                 
-            } else if SCREEN_MAX_LENGTH == 1024.0 {
-                self.size9 = 621
+            } else if SCREEN_MAX_LENGTH <= 1024.0 {
+                self.size9 = 611
                 self.splitViewControllerA.minimumPrimaryColumnWidth = CGFloat(size9)
                 self.splitViewControllerA.maximumPrimaryColumnWidth = CGFloat(size9)
             } else if SCREEN_MAX_LENGTH == 1112.0 {
@@ -732,7 +732,7 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
             if SCREEN_MAX_LENGTH == 1366.0 {
                 
-            } else if SCREEN_MAX_LENGTH == 1024.0 {
+            } else if SCREEN_MAX_LENGTH <= 1024.0 {
                 self.size9 = 691
             } else if SCREEN_MAX_LENGTH == 1112.0 {
                 self.size9 = 761
@@ -744,8 +744,8 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
             let SCREEN_MAX_LENGTH = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
             if SCREEN_MAX_LENGTH == 1366.0 {
                 
-            } else if SCREEN_MAX_LENGTH == 1024.0 {
-                self.size9 = 621
+            } else if SCREEN_MAX_LENGTH <= 1024.0 {
+                self.size9 = 611
             } else if SCREEN_MAX_LENGTH == 1112.0 {
                 self.size9 = 661
             } else {
