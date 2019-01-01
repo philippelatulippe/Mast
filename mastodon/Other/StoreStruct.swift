@@ -98,4 +98,12 @@ class StoreStruct {
     static var curID = ""
     static var doOnce = true
     static var isSplit = false
+    
+    static var gapLastHomeID = ""
+    static var gapLastLocalID = ""
+    static var gapLastFedID = ""
+    
+    static var gapLastHomeStat: Status? = nil
+    static var gapLastLocalStat: Status? = nil
+    static var gapLastFedStat: Status? = nil
 }
