@@ -460,9 +460,11 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
         let request = Statuses.status(id: StoreStruct.curID)
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
+                DispatchQueue.main.async {
                 let controller = DetailViewController()
                 controller.mainStatus.append(stat)
                 self.navigationController?.pushViewController(controller, animated: true)
+                }
             }
         }
     }

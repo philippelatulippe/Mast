@@ -843,7 +843,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return cell
         } else if indexPath.section == 5 {
             //bhere2
-            if indexPath.row == InstanceData.getAllInstances().count  {
+            let z1 = Account.getAccounts()
+            let z2 = InstanceData.getAllInstances()
+            
+            if indexPath.row == z1.count {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
                 cell.configure(status: "Add Account", status2: "Add a new account from any instance.", image: "newac1", imageURL: nil)
                 cell.backgroundColor = Colours.white
@@ -855,8 +858,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
-                let instance = InstanceData.getAllInstances()[indexPath.row]
-                let account = Account.getAccounts()[indexPath.row]
+                print("count--")
+                print(Account.getAccounts().count)
+                let instance = z2[indexPath.row]
+                let account = z1[indexPath.row]
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
                 let instanceAndAccount = "\(instance.returnedText) "
                 
