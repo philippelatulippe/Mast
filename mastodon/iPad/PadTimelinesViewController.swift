@@ -3731,7 +3731,24 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                         
                         var newestC = StoreStruct.statusesHome.count
                         
-                        StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                        
+                        if let st = stat.last {
+                            if StoreStruct.statusesHome.contains(st) || stat.count == 1 {
+                                print("no need for load more button here")
+                                StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                            } else {
+                                print("need load more button here")
+                                StoreStruct.gapLastHomeID = stat.last?.id ?? ""
+                                let z = stat.last!
+                                z.id = "loadmorehere"
+                                StoreStruct.gapLastHomeStat = z
+                                StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                            }
+                        } else {
+                            StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                        }
+                        
+                        
                         DispatchQueue.main.async {
                             StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             
@@ -3777,7 +3794,23 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         var newestC = StoreStruct.statusesLocal.count
-                        StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
+                        
+                        if let st = stat.last {
+                            if StoreStruct.statusesLocal.contains(st) || stat.count == 1 {
+                                print("no need for load more button here")
+                                StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
+                            } else {
+                                print("need load more button here")
+                                StoreStruct.gapLastLocalID = stat.last?.id ?? ""
+                                let z = stat.last!
+                                z.id = "loadmorehere"
+                                StoreStruct.gapLastLocalStat = z
+                                StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
+                            }
+                        } else {
+                            StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
+                        }
+                        
                         DispatchQueue.main.async {
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             
@@ -3825,7 +3858,24 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         var newestC = StoreStruct.statusesFederated.count
-                        StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
+                        
+                        if let st = stat.last {
+                            if StoreStruct.statusesFederated.contains(st) || stat.count == 1 {
+                                print("no need for load more button here")
+                                StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
+                            } else {
+                                print("need load more button here")
+                                StoreStruct.gapLastFedID = stat.last?.id ?? ""
+                                let z = stat.last!
+                                z.id = "loadmorehere"
+                                StoreStruct.gapLastFedStat = z
+                                print(StoreStruct.gapLastFedID)
+                                StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
+                            }
+                        } else {
+                            StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
+                        }
+                        
                         DispatchQueue.main.async {
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             
@@ -3951,7 +4001,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
             Colours.cellOwn = UIColor(red: 10/255.0, green: 10/255.0, blue: 20/255.0, alpha: 1.0)
             Colours.cellAlternative = UIColor(red: 20/255.0, green: 20/255.0, blue: 30/255.0, alpha: 1.0)
             Colours.black = UIColor.white
-            Colours.white3 = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
+            Colours.white3 = UIColor(red: 30/255.0, green: 34/255.0, blue: 38/255.0, alpha: 1.0)
             UIApplication.shared.statusBarStyle = .lightContent
         }
         

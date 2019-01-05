@@ -1337,7 +1337,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
-                    .action(.default("Mentions".localized), image: filledSet1) { (action, ind) in
+                    .action(.default("@You".localized), image: filledSet1) { (action, ind) in
                         print(action, ind)
                         UserDefaults.standard.set(0, forKey: "mentdef2")
                     }

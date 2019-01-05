@@ -2555,9 +2555,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             theTable = self.tableViewF
         }
         
-        print("testtag--")
-        print(sender.tag)
-        
         if sto[sender.tag].reblog?.favourited! ?? sto[sender.tag].favourited! || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
             StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[sender.tag].reblog?.id ?? sto[sender.tag].id }
             let request2 = Statuses.unfavourite(id: sto[sender.tag].reblog?.id ?? sto[sender.tag].id)
@@ -3733,7 +3730,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         
                         
                         if let st = stat.last {
-                        if StoreStruct.statusesHome.contains(st) {
+                            if StoreStruct.statusesHome.contains(st) || stat.count == 1 {
                             print("no need for load more button here")
                             StoreStruct.statusesHome = stat + StoreStruct.statusesHome
                         } else {
@@ -3799,7 +3796,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         
                         
                         if let st = stat.last {
-                            if StoreStruct.statusesLocal.contains(st) {
+                            if StoreStruct.statusesLocal.contains(st) || stat.count == 1 {
                                 print("no need for load more button here")
                                 StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
                             } else {
@@ -3865,7 +3862,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         var newestC = StoreStruct.statusesFederated.count
                         
                         if let st = stat.last {
-                            if StoreStruct.statusesFederated.contains(st) {
+                            if StoreStruct.statusesFederated.contains(st) || stat.count == 1 {
                                 print("no need for load more button here")
                                 StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
                             } else {
@@ -4002,7 +3999,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             Colours.cellOwn = UIColor(red: 10/255.0, green: 10/255.0, blue: 20/255.0, alpha: 1.0)
             Colours.cellAlternative = UIColor(red: 20/255.0, green: 20/255.0, blue: 30/255.0, alpha: 1.0)
             Colours.black = UIColor.white
-            Colours.white3 = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
+            Colours.white3 = UIColor(red: 30/255.0, green: 34/255.0, blue: 38/255.0, alpha: 1.0)
             UIApplication.shared.statusBarStyle = .lightContent
         }
         
