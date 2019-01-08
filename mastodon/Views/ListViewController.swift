@@ -504,10 +504,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         var sto = StoreStruct.currentList
         if self.currentIndex == 0 {
             sto = StoreStruct.currentList
+            StoreStruct.newIDtoGoTo = sto[sender.tag].id
         } else if self.currentIndex == 1 {
             sto = StoreStruct.statusesLocal
+            StoreStruct.newIDtoGoTo = sto[sender.tag].id
         } else if self.currentIndex == 2 {
             sto = StoreStruct.statusesFederated
+            StoreStruct.newIDtoGoTo = sto[sender.tag].id
         }
         
         

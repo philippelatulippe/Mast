@@ -946,12 +946,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             
         } else {
             
-            self.segmentedControl.currentSegment = 1
+            self.segmentedControl.currentSegment = 2
             
             self.currentIndex = 0
             //self.tableView2.reloadData()
             self.tableView.alpha = 0
             self.tableView2.alpha = 1
+            self.tableView3.alpha = 0
             
             if StoreStruct.notifications.isEmpty {
                 let request = Notifications.all(range: .default)
@@ -1316,11 +1317,19 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
-        return [Colours.tabSelected, Colours.tabSelected]
+        if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
+            return [Colours.tabSelected, Colours.tabSelected]
+        } else {
+            return [Colours.grayLight2, Colours.grayLight2]
+        }
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
-        return [Colours.tabSelected, Colours.tabSelected]
+        if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
+            return [Colours.tabSelected, Colours.tabSelected]
+        } else {
+            return [Colours.grayLight2, Colours.grayLight2]
+        }
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
@@ -1903,7 +1912,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 } else {
                     
                     
-                    if indexPath.row == StoreStruct.notifications.count - 14 {
+                    if indexPath.row == StoreStruct.notifications.count - 14 || indexPath.row == StoreStruct.notifications.count {
                         self.fetchMoreNotifications()
                     }
                     
@@ -2551,10 +2560,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         var sto = StoreStruct.notifications
         if self.currentIndex == 0 {
             sto = StoreStruct.notifications
+            StoreStruct.newIDtoGoTo = sto[sender.tag].status?.id ?? ""
         } else if self.currentIndex == 5 {
             sto = StoreStruct.notificationsDirect
+            StoreStruct.newIDtoGoTo = sto[sender.tag].status?.id ?? ""
         } else if self.currentIndex == 1 {
             sto = StoreStruct.notificationsMentions
+            StoreStruct.newIDtoGoTo = sto[sender.tag].status?.id ?? ""
         }
         
         

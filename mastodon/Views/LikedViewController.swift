@@ -558,6 +558,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         var sto = self.currentTags
+        StoreStruct.newIDtoGoTo = sto[sender.tag].id
         
         
         if sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].mediaAttachments[0].type == .gifv {

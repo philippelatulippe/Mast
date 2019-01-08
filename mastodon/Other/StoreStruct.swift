@@ -107,4 +107,6 @@ class StoreStruct {
     static var gapLastHomeStat: Status? = nil
     static var gapLastLocalStat: Status? = nil
     static var gapLastFedStat: Status? = nil
+    
+    static var newIDtoGoTo = ""
 }

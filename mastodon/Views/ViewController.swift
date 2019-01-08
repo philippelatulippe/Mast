@@ -1620,12 +1620,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 }
                 if z == 3 {
                     newNum = 4
-                    UIApplication.shared.statusBarStyle = .default
-                    Colours.keyCol = UIKeyboardAppearance.light
+                    UIApplication.shared.statusBarStyle = .lightContent
+                    Colours.keyCol = UIKeyboardAppearance.dark
                 }
                 if z == 4 {
                     newNum = 0
-                    UIApplication.shared.statusBarStyle = .lightContent
+                    UIApplication.shared.statusBarStyle = .default
                     Colours.keyCol = UIKeyboardAppearance.light
                 }
             }
@@ -2496,11 +2496,19 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
-        return [Colours.tabSelected, Colours.tabSelected]
+        if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
+            return [Colours.tabSelected, Colours.tabSelected]
+        } else {
+            return [Colours.grayLight2, Colours.grayLight2]
+        }
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
-        return [Colours.tabSelected, Colours.tabSelected]
+        if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
+            return [Colours.tabSelected, Colours.tabSelected]
+        } else {
+            return [Colours.grayLight2, Colours.grayLight2]
+        }
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
@@ -2967,5 +2975,11 @@ class MNGExpandedTouchAreaButton: UIButton {
 extension String {
     var localized: String {
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
+    }
+}
+
+extension Date {
+    var ticks: UInt64 {
+        return UInt64((self.timeIntervalSince1970 + 62_135_596_800) * 10_000_000)
     }
 }

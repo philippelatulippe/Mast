@@ -934,12 +934,12 @@ class PadViewController: UIViewController, UITextFieldDelegate, OSSubscriptionOb
                     }
                     if z == 3 {
                         newNum = 4
-                        UIApplication.shared.statusBarStyle = .default
-                        Colours.keyCol = UIKeyboardAppearance.light
+                        UIApplication.shared.statusBarStyle = .lightContent
+                        Colours.keyCol = UIKeyboardAppearance.dark
                     }
                     if z == 4 {
                         newNum = 0
-                        UIApplication.shared.statusBarStyle = .lightContent
+                        UIApplication.shared.statusBarStyle = .default
                         Colours.keyCol = UIKeyboardAppearance.light
                     }
                 }

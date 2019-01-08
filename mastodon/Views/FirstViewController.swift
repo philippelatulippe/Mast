@@ -755,7 +755,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
             self.tableView.register(SettingsCell.self, forCellReuseIdentifier: "cellmore")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5 - tabHeight)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -1024,6 +1024,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 
             }
         }
+        
+        print("current id is")
+        print(StoreStruct.currentUser.id)
         
         
     }
@@ -1418,11 +1421,19 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
-        return [Colours.tabSelected, Colours.tabSelected]
+        if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
+            return [Colours.tabSelected, Colours.tabSelected]
+        } else {
+            return [Colours.grayLight2, Colours.grayLight2]
+        }
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
-        return [Colours.tabSelected, Colours.tabSelected]
+        if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
+            return [Colours.tabSelected, Colours.tabSelected]
+        } else {
+            return [Colours.grayLight2, Colours.grayLight2]
+        }
     }
     //backh2
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
@@ -2304,10 +2315,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         var sto = StoreStruct.statusesHome
         if self.currentIndex == 0 {
             sto = StoreStruct.statusesHome
+            StoreStruct.newIDtoGoTo = sto[sender.tag].id
         } else if self.currentIndex == 1 {
             sto = StoreStruct.statusesLocal
+            StoreStruct.newIDtoGoTo = sto[sender.tag].id
         } else if self.currentIndex == 2 {
             sto = StoreStruct.statusesFederated
+            StoreStruct.newIDtoGoTo = sto[sender.tag].id
         }
         
         if sto.count < 1 {} else {
@@ -3733,6 +3747,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             if StoreStruct.statusesHome.contains(st) || stat.count == 1 {
                             print("no need for load more button here")
                             StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         } else {
                             print("need load more button here")
                             StoreStruct.gapLastHomeID = stat.last?.id ?? ""
@@ -3740,9 +3755,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             z.id = "loadmorehere"
                             StoreStruct.gapLastHomeStat = z
                             StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         }
                         } else {
                             StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         }
                         
                         
@@ -3799,6 +3816,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             if StoreStruct.statusesLocal.contains(st) || stat.count == 1 {
                                 print("no need for load more button here")
                                 StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
+                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             } else {
                                 print("need load more button here")
                                 StoreStruct.gapLastLocalID = stat.last?.id ?? ""
@@ -3806,9 +3824,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 z.id = "loadmorehere"
                                 StoreStruct.gapLastLocalStat = z
                                 StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
+                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             }
                         } else {
                             StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
+                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                         }
                         
                         
@@ -3865,6 +3885,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             if StoreStruct.statusesFederated.contains(st) || stat.count == 1 {
                                 print("no need for load more button here")
                                 StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
+                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             } else {
                                 print("need load more button here")
                                 StoreStruct.gapLastFedID = stat.last?.id ?? ""
@@ -3873,9 +3894,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 StoreStruct.gapLastFedStat = z
                                 print(StoreStruct.gapLastFedID)
                                 StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
+                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             }
                         } else {
                             StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
+                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                         }
                         
                         
