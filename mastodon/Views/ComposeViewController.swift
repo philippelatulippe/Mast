@@ -2168,7 +2168,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.picker.alpha = 1
                 })
                 self.picker.completionHandler = { date in
-                    let timestamp = String(date.iso8601())
+                    print(date.toString())
+                    let dateFormatterGet = DateFormatter()
+                    dateFormatterGet.dateFormat = "M/d/yy, h:mm a"
+                    let dateFormatterPrint = DateFormatter()
+                    dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm"
+                    var timestamp = ""
+                    if let date1 = dateFormatterGet.date(from: date.toString()) {
+                        timestamp = (dateFormatterPrint.string(from: date1))
+                    }
                     print(timestamp)
                     self.scheduleTime = timestamp
                     self.isScheduled = true
@@ -2205,7 +2213,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
     }
     
-    let picker = DateTimePicker.create(minimumDate: Date().addingTimeInterval(5 * 60), maximumDate: Date().addingTimeInterval(900000 * 60 * 24 * 4))
+    let picker = DateTimePicker.create(minimumDate: Date().addingTimeInterval(10 * 60), maximumDate: Date().addingTimeInterval(900000 * 60 * 24 * 4))
     
     
     

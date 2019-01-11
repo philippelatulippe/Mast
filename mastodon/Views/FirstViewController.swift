@@ -1025,9 +1025,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
         }
         
-        print("current id is")
-        print(StoreStruct.currentUser.id)
-        
         
     }
     

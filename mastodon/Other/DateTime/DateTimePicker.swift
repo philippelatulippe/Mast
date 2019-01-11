@@ -93,7 +93,10 @@ public protocol DateTimePickerDelegate {
     public var selectedDateString: String {
         get {
             let formatter = DateFormatter()
-            formatter.dateFormat = self.dateFormat
+            formatter.locale = Locale.current
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .short
+//            formatter.dateFormat = self.dateFormat
             return formatter.string(from: self.selectedDate)
         }
     }
