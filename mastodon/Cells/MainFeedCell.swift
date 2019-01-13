@@ -310,8 +310,6 @@ class MainFeedCell: SwipeTableViewCell {
 //            }
             
             
-            
-            
             if status.emojis.isEmpty {
                 toot.text = status.content.stripHTML()
             } else {
@@ -324,7 +322,6 @@ class MainFeedCell: SwipeTableViewCell {
                     while attributedString.mutableString.contains(":\(y.shortcode):") {
                         let range: NSRange = (attributedString.mutableString as NSString).range(of: ":\(y.shortcode):")
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
-                        
                     }
                 }
                 self.toot.attributedText = attributedString

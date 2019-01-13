@@ -662,6 +662,24 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
     }
     
     
+    override var canBecomeFirstResponder: Bool {
+        get {
+            return true
+        }
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            if self.currentIndex == 0 {
+                self.tableView.reloadData()
+            } else if self.currentIndex == 1 {
+                self.tableViewL.reloadData()
+            } else {
+                self.tableViewF.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -1678,7 +1696,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
             
             
             
-            if StoreStruct.statusesHome.count == 0 || indexPath.row >= StoreStruct.statusesHome.count {
+            if StoreStruct.statusesHome.count <= 0 || indexPath.row >= StoreStruct.statusesHome.count {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
@@ -1915,7 +1933,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
             
             
             
-            if StoreStruct.statusesLocal.count == 0 || indexPath.row >= StoreStruct.statusesLocal.count  {
+            if StoreStruct.statusesLocal.count <= 0 || indexPath.row >= StoreStruct.statusesLocal.count  {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "celll", for: indexPath) as! MainFeedCell
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
@@ -2137,7 +2155,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
         } else {
             
             
-            if StoreStruct.statusesFederated.count == 0 || indexPath.row >= StoreStruct.statusesFederated.count  {
+            if StoreStruct.statusesFederated.count <= 0 || indexPath.row >= StoreStruct.statusesFederated.count  {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellf", for: indexPath) as! MainFeedCell
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
@@ -3759,7 +3777,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                             if StoreStruct.statusesHome.contains(st) || stat.count == 1 {
                                 print("no need for load more button here")
                                 StoreStruct.statusesHome = stat + StoreStruct.statusesHome
-                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+//                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             } else {
                                 print("need load more button here")
                                 StoreStruct.gapLastHomeID = stat.last?.id ?? ""
@@ -3767,15 +3785,16 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                                 z.id = "loadmorehere"
                                 StoreStruct.gapLastHomeStat = z
                                 StoreStruct.statusesHome = stat + StoreStruct.statusesHome
-                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+//                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             }
                         } else {
                             StoreStruct.statusesHome = stat + StoreStruct.statusesHome
-                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+//                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         }
                         
                         
                         DispatchQueue.main.async {
+                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             
                             newestC = StoreStruct.statusesHome.count - newestC
                             
@@ -3824,7 +3843,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                             if StoreStruct.statusesLocal.contains(st) || stat.count == 1 {
                                 print("no need for load more button here")
                                 StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
-                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+//                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             } else {
                                 print("need load more button here")
                                 StoreStruct.gapLastLocalID = stat.last?.id ?? ""
@@ -3832,14 +3851,15 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                                 z.id = "loadmorehere"
                                 StoreStruct.gapLastLocalStat = z
                                 StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
-                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+//                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             }
                         } else {
                             StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
-                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+//                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                         }
                         
                         DispatchQueue.main.async {
+                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             
                             newestC = StoreStruct.statusesLocal.count - newestC
                             
@@ -3890,7 +3910,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                             if StoreStruct.statusesFederated.contains(st) || stat.count == 1 {
                                 print("no need for load more button here")
                                 StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
-                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+//                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             } else {
                                 print("need load more button here")
                                 StoreStruct.gapLastFedID = stat.last?.id ?? ""
@@ -3899,14 +3919,15 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                                 StoreStruct.gapLastFedStat = z
                                 print(StoreStruct.gapLastFedID)
                                 StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
-                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+//                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             }
                         } else {
                             StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
-                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+//                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                         }
                         
                         DispatchQueue.main.async {
+                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             
                             newestC = StoreStruct.statusesFederated.count - newestC
                             

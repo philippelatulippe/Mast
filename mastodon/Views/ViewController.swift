@@ -2818,9 +2818,18 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         //topIcon.addGestureRecognizer(longPressRecognizer1)
 //                        self.navigationController?.view.addSubview(topIcon)
                         
-                        self.settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 32, height: 32)))
-                        self.settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-                        self.settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                        if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
+                            self.settingsButton.frame = CGRect(x: 18, y: 47, width: 32, height: 32)
+                            self.settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+                            self.settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                        } else {
+                            self.settingsButton.frame = CGRect(x: 18, y: 47, width: 20, height: 20)
+                            self.settingsButton.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatarStatic)"))
+                            self.settingsButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+                            self.settingsButton.imageView?.layer.cornerRadius = 10
+                            self.settingsButton.imageView?.contentMode = .scaleAspectFill
+                            self.settingsButton.layer.masksToBounds = true
+                        }
                         self.settingsButton.adjustsImageWhenHighlighted = false
                         self.settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
                         
@@ -2832,6 +2841,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         
 //                        x.view.addSubview(topIcon)
                         x.view.addSubview(self.searchButton)
+                        x.view.addSubview(self.settingsButton)
                         let done = UIBarButtonItem.init(customView: self.settingsButton)
 //                        self.firstView.navigationItem.setLeftBarButton(done, animated: true)
 //                        self.secondView.navigationItem.setLeftBarButton(done, animated: true)
@@ -2857,9 +2867,18 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         //topIcon.addGestureRecognizer(longPressRecognizer1)
 //                        self.navigationController?.view.addSubview(topIcon)
                         
-                        self.settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 32, height: 32)))
-                        self.settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-                        self.settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                        if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
+                            self.settingsButton.frame = CGRect(x: 18, y: 50, width: 32, height: 32)
+                            self.settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+                            self.settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                        } else {
+                            self.settingsButton.frame = CGRect(x: 18, y: 50, width: 20, height: 20)
+                            self.settingsButton.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatarStatic)"))
+                            self.settingsButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+                            self.settingsButton.imageView?.layer.cornerRadius = 10
+                            self.settingsButton.imageView?.contentMode = .scaleAspectFill
+                            self.settingsButton.layer.masksToBounds = true
+                        }
                         self.settingsButton.adjustsImageWhenHighlighted = false
                         self.settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
                         
@@ -2872,6 +2891,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         
 //                        x.view.addSubview(topIcon)
                         x.view.addSubview(self.searchButton)
+                        x.view.addSubview(self.settingsButton)
                         let done = UIBarButtonItem.init(customView: self.settingsButton)
 //                        self.firstView.navigationItem.setLeftBarButton(done, animated: true)
 //                        self.secondView.navigationItem.setLeftBarButton(done, animated: true)
@@ -2894,9 +2914,18 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         //topIcon.addGestureRecognizer(longPressRecognizer1)
 //                        self.navigationController?.view.addSubview(topIcon)
                         
-                        self.settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 24, width: 32, height: 35)))
-                        self.settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-                        self.settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                        if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
+                            self.settingsButton.frame = CGRect(x: 18, y: 27, width: 32, height: 32)
+                            self.settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+                            self.settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                        } else {
+                            self.settingsButton.frame = CGRect(x: 18, y: 27, width: 20, height: 20)
+                            self.settingsButton.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatarStatic)"))
+                            self.settingsButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+                            self.settingsButton.imageView?.layer.cornerRadius = 10
+                            self.settingsButton.imageView?.contentMode = .scaleAspectFill
+                            self.settingsButton.layer.masksToBounds = true
+                        }
                         self.settingsButton.adjustsImageWhenHighlighted = false
                         self.settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
                         
@@ -2908,6 +2937,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         
 //                        x.view.addSubview(topIcon)
                         x.view.addSubview(self.searchButton)
+                        x.view.addSubview(self.settingsButton)
                         let done = UIBarButtonItem.init(customView: self.settingsButton)
 //                        self.firstView.navigationItem.setLeftBarButton(done, animated: true)
 //                        self.secondView.navigationItem.setLeftBarButton(done, animated: true)
@@ -2923,7 +2953,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
         }
     }
-    
 }
 
 extension UIImage {

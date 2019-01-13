@@ -469,6 +469,22 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    override var canBecomeFirstResponder: Bool {
+        get {
+            return true
+        }
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            if self.currentIndex == 0 {
+                self.tableView2.reloadData()
+            } else {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

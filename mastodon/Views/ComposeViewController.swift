@@ -1363,7 +1363,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.closeButton.addTarget(self, action: #selector(didTouchUpInsideCloseButton), for: .touchUpInside)
         self.view.addSubview(self.closeButton)
         
-        countLabel.text = "500"
+        countLabel.text = "\(StoreStruct.maxChars)"
         countLabel.textColor = Colours.gray.withAlphaComponent(0.65)
         countLabel.textAlignment = .center
         self.view.addSubview(countLabel)
@@ -3055,7 +3055,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
 //        self.textView.normalizeText()
         
-        let newCount = 500 - (textView.text?.count)!
+        let newCount = StoreStruct.maxChars - (textView.text?.count)!
         countLabel.text = "\(newCount)"
         
         if Int(countLabel.text!)! < 1 {
