@@ -116,6 +116,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.ai.alpha = 0
             self.ai.removeFromSuperview()
             self.tableView.reloadData()
+            if StoreStruct.statusesHome.isEmpty {
+                self.refreshCont()
+            }
         }
     }
     
@@ -2740,7 +2743,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
         
         
-        if StoreStruct.statusesHome[indexPath.row].id == "loadmorehere" {
+        if sto[indexPath.row].id == "loadmorehere" {
             return nil
         }
         

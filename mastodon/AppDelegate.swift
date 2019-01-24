@@ -32,6 +32,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //        }
     //    }
     
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if let tabBarController = window?.rootViewController as? UITabBarController {
+            if let tabBarViewControllers = tabBarController.viewControllers {
+                if let projectsNavigationController = tabBarViewControllers[1] as? UINavigationController {
+                    if projectsNavigationController.visibleViewController is SKPhotoBrowser {
+                        return .all
+                    }
+                }
+            }
+        }
+        return .portrait
+    }
+    
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == "com.shi.Mast.confetti" {
             let viewController = window?.rootViewController as! ViewController
@@ -540,6 +553,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func reloadApplication() {
+        
+        
+        do {
+            StoreStruct.currentUser = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)use.json", from: .documents, as: Account.self)
+            StoreStruct.statusesHome = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
+            StoreStruct.statusesLocal = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
+            StoreStruct.statusesFederated = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
+            StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
+            StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+            
+            StoreStruct.gapLastHomeStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)homestat.json", from: .documents, as: Status.self)
+            StoreStruct.gapLastLocalStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)localstat.json", from: .documents, as: Status.self)
+            StoreStruct.gapLastFedStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fedstat.json", from: .documents, as: Status.self)
+        } catch {
+            print("Couldn't load")
+        }
         
         if UIApplication.shared.isSplitOrSlideOver {
             self.window?.rootViewController = ViewController()

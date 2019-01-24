@@ -2763,7 +2763,8 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
             return nil
         }
         
-        if StoreStruct.statusesHome[indexPath.row].id == "loadmorehere" {
+        
+        if sto[indexPath.row].id == "loadmorehere" {
             return nil
         }
         
@@ -3631,9 +3632,31 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                                 StoreStruct.statusesHome = y.first! + stat + y.last!
                             }
                             
+                            let newestC = y.first!.count + stat.count
+                            
                             DispatchQueue.main.async {
-                                //                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-                                self.tableView.reloadData()
+                                if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
+                                    self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
+                                    self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                                    springWithDelay(duration: 0.5, delay: 0, animations: {
+                                        self.newUpdatesB1.alpha = 1
+                                        self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                    })
+                                    self.countcount1 = newestC
+                                    
+                                    DispatchQueue.main.async {
+                                        UIView.setAnimationsEnabled(false)
+                                        self.tableView.reloadData()
+                                        self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                        UIView.setAnimationsEnabled(true)
+                                    }
+                                } else {
+                                    
+                                    DispatchQueue.main.async {
+                                        self.tableView.reloadData()
+                                    }
+                                    
+                                }
                             }
                             
                         }
@@ -3661,10 +3684,31 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                                 StoreStruct.statusesLocal = y.first! + stat + y.last!
                             }
                             
+                            let newestC = y.first!.count + stat.count
+                            
                             DispatchQueue.main.async {
-                                //                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-                                self.tableViewL.reloadData()
-                                
+                                if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
+                                    self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
+                                    self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                                    springWithDelay(duration: 0.5, delay: 0, animations: {
+                                        self.newUpdatesB1.alpha = 1
+                                        self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                    })
+                                    self.countcount1 = newestC
+                                    
+                                    DispatchQueue.main.async {
+                                        UIView.setAnimationsEnabled(false)
+                                        self.tableViewL.reloadData()
+                                        self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                        UIView.setAnimationsEnabled(true)
+                                    }
+                                } else {
+                                    
+                                    DispatchQueue.main.async {
+                                        self.tableViewL.reloadData()
+                                    }
+                                    
+                                }
                             }
                         }
                     }
@@ -3694,9 +3738,31 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                                 StoreStruct.statusesFederated = y.first! + stat + y.last!
                             }
                             
+                            let newestC = y.first!.count + stat.count
+                            
                             DispatchQueue.main.async {
-                                //                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-                                self.tableViewF.reloadData()
+                                if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
+                                    self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
+                                    self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                                    springWithDelay(duration: 0.5, delay: 0, animations: {
+                                        self.newUpdatesB1.alpha = 1
+                                        self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                    })
+                                    self.countcount1 = newestC
+                                    
+                                    DispatchQueue.main.async {
+                                        UIView.setAnimationsEnabled(false)
+                                        self.tableViewF.reloadData()
+                                        self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                        UIView.setAnimationsEnabled(true)
+                                    }
+                                } else {
+                                    
+                                    DispatchQueue.main.async {
+                                        self.tableViewF.reloadData()
+                                    }
+                                    
+                                }
                             }
                             
                         }

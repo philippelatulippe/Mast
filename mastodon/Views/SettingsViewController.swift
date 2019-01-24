@@ -333,7 +333,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     var bioArrayIm = ["biolock1", "biolock2"]
     
     var aboutArray = ["Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", "Review Mast", "Get in Touch", "URL Schemes"]
-    var aboutArrayDesc = ["Let us tell you a little bit about ourselves.", "If you're enjoying using Mast, please consider leaving a review on the App Store.", "Keep in touch, and get progress updates about what we're up to.", "Use these to do specific actions within the app from outside the app."]
+    var aboutArrayDesc = ["Let us tell you a little bit about ourselves.", "If you enjoy using Mast, please consider leaving a review on the App Store.", "Keep in touch, and get progress updates about what we're up to.", "Use these to do specific actions within the app from outside the app."]
     var aboutArrayIm = ["setmas", "like", "intouch", "schemes"]
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -2444,7 +2444,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
             if indexPath.row == 3 {
                 // schemes
-                Alertift.actionSheet(title: "URL Schemes".localized, message: "com.shi.mastodon://light : Switch to the light white theme\n\ncom.shi.mastodon://dark : Switch to the dark theme\n\ncom.shi.mastodon://darker : Switch to the darker theme\n\ncom.shi.mastodon://black : Switch to the black OLED theme\n\ncom.shi.mastodon://blue : Switch to the midnight blue theme\n\ncom.shi.mastodon://confetti : Make it rain confetti\n\ncom.shi.mastodon://onboard : Present the onboarding pop-up again\n\ncom.shi.mastodon://home : Switch to the home tab\n\ncom.shi.mastodon://mentions : Switch to the mentions tab\n\ncom.shi.mastodon://profile : Switch to the profile tab\n\ncom.shi.mastodon://toot : Present the toot composer screen\n\ncom.shi.mastodon://id=123 : Go to a toot with the ID 123")
+                Alertift.actionSheet(title: nil, message: "com.shi.mastodon://light : Switch to the light white theme\n\ncom.shi.mastodon://dark : Switch to the dark theme\n\ncom.shi.mastodon://darker : Switch to the darker theme\n\ncom.shi.mastodon://black : Switch to the black OLED theme\n\ncom.shi.mastodon://blue : Switch to the midnight blue theme\n\ncom.shi.mastodon://confetti : Make it rain confetti\n\ncom.shi.mastodon://onboard : Present the onboarding pop-up again\n\ncom.shi.mastodon://home : Switch to the home tab\n\ncom.shi.mastodon://mentions : Switch to the mentions tab\n\ncom.shi.mastodon://profile : Switch to the profile tab\n\ncom.shi.mastodon://toot : Present the toot composer screen\n\ncom.shi.mastodon://id=123 : Go to a toot with the ID 123")
                     .backgroundColor(Colours.white)
                     .titleTextColor(Colours.grayDark)
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
