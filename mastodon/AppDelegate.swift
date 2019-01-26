@@ -447,6 +447,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         NotificationCenter.default.post(name: Notification.Name(rawValue: "startStream"), object: self)
         
+        SettingsBundleHelper.checkAndExecuteSettings()
+        SettingsBundleHelper.setVersionAndBuildNumber()
         
         if self.oneTime == false {
             if (UserDefaults.standard.object(forKey: "biometrics") == nil) || (UserDefaults.standard.object(forKey: "biometrics") as! Int == 0) {} else {
