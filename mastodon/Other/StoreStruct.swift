@@ -121,4 +121,7 @@ class StoreStruct {
     static var newIDtoGoTo = ""
     static var maxChars = 500
     static var initTimeline = false
+    
+    static var savedComposeText = ""
+    static var savedInReplyText = ""
 }
