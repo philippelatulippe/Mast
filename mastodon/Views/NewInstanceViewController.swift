@@ -199,7 +199,7 @@ class NewInstanceViewController: UIViewController, UITextViewDelegate {
         let request = Clients.register(
             clientName: "Mast",
             redirectURI: "com.shi.mastodon://success",
-            scopes: [.read, .write, .follow],
+            scopes: [.read, .write, .follow, .push],
             website: "https://twitter.com/jpeguin"
         )
         StoreStruct.client.run(request) { (application) in

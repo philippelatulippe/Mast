@@ -127,4 +127,5 @@ class StoreStruct {
     static var savedInReplyText = ""
     
     static var hexCol = UIColor.white
+    static var historyBool = false
 }

@@ -89,6 +89,77 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+        
+        guard  StoreStruct.shared.currentInstance.returnedText != "" else {
+            return
+        }
+        var state: PushNotificationState!
+        let receiver = try! PushNotificationReceiver()
+        let subScription = PushNotificationSubscription(endpoint: URL(string:"https://pushrelay1.your.org/relay-to/production/\(token)")!, alerts: PushNotificationAlerts.all)
+        let deviceToken = PushNotificationDeviceToken(deviceToken: deviceToken)
+        state = PushNotificationState(receiver: receiver, subscription: subScription, deviceToken: deviceToken)
+        PushNotificationReceiver.setState(state: state)
+        
+        // change following when pushing to App Store or for local dev
+        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.all)
+//        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.all)
+        
+        //create the url with URL
+        let url = URL(string: "https://\(StoreStruct.shared.currentInstance.returnedText)/api/v1/push/subscription")! //change the url
+        
+        //create the session object
+        let session = URLSession.shared
+        
+        //now create the URLRequest object using the url object
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"// "POST" //set http method as POST
+        
+        
+        
+        let jsonEncoder = JSONEncoder()
+        do {
+            let jsonData = try jsonEncoder.encode(requestParams)
+            let jsonString = String(data: jsonData, encoding: .utf8)
+            
+            request.httpBody = jsonData
+            print("JSON String : " + jsonString!)
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        request.setValue("Bearer \(StoreStruct.shared.currentInstance.accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        //create dataTask using the session object to send data to the server
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            guard error == nil else {
+                return
+            }
+            guard let data = data else {
+                return
+            }
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    print(json)
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        })
+        task.resume()
+        
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register: \(error)")
+    }
+    
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         if shortcutItem.type == "com.shi.Mast.feed" {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "switch11"), object: self)
@@ -250,7 +321,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Response ==> \(url.absoluteString)")
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
-                StoreStruct.shared.newInstance!.authCode = y[1].description
+                StoreStruct.shared.newInstance!.authCode = y.last?.description ?? ""
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .phone:
@@ -345,14 +416,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
-        
-        OneSignal.initWithLaunchOptions(launchOptions,
-                                        appId: "4f67f45a-7d0f-4e7d-8624-0ec148f064ed",
-                                        handleNotificationAction: nil,
-                                        settings: onesignalInitSettings)
-        
-        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+//        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+//
+//        OneSignal.initWithLaunchOptions(launchOptions,
+//                                        appId: "4f67f45a-7d0f-4e7d-8624-0ec148f064ed",
+//                                        handleNotificationAction: nil,
+//                                        settings: onesignalInitSettings)
+//
+//        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
         
         
         WatchSessionManager.sharedManager.startSession()

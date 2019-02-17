@@ -1317,7 +1317,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             statusAlert.title = "Unliked".localized
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
-            statusAlert.show()
+            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
             
             StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id }
             let request2 = Statuses.unfavourite(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
@@ -1336,7 +1338,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             statusAlert.title = "Liked".localized
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
-            statusAlert.show()
+            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
             
             StoreStruct.allLikes.append(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             let request2 = Statuses.favourite(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
@@ -1369,7 +1373,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             statusAlert.title = "Unboosted".localized
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
-            statusAlert.show()
+            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
             
             StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id }
             let request2 = Statuses.unreblog(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
@@ -1386,7 +1392,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             statusAlert.title = "Boosted".localized
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
-            statusAlert.show()
+            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
             
             StoreStruct.allBoosts.append(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             let request2 = Statuses.reblog(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
@@ -1464,7 +1472,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                 statusAlert.title = "Unpinned".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "This Toot"
-                                statusAlert.show()
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                             }
                         }
                     } else {
@@ -1481,7 +1491,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                 statusAlert.title = "Pinned".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "This Toot"
-                                statusAlert.show()
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                             }
                         }
                     }
@@ -1513,7 +1525,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                             statusAlert.title = "Deleted".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Your Toot"
-                            statusAlert.show()
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                             //sto.remove(at: indexPath.row)
                             //self.tableView.reloadData()
                         }
@@ -1612,7 +1626,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                         statusAlert.title = "Muted".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                         statusAlert.show()
+                    }
                         
                         let request = Accounts.mute(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
                         StoreStruct.client.run(request) { (statuses) in
@@ -1631,7 +1647,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                         statusAlert.title = "Unmuted".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                         statusAlert.show()
+                    }
                         
                         let request = Accounts.unmute(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
                         StoreStruct.client.run(request) { (statuses) in
@@ -1656,7 +1674,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                         statusAlert.title = "Blocked".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                         statusAlert.show()
+                    }
                         
                         let request = Accounts.block(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
                         StoreStruct.client.run(request) { (statuses) in
@@ -1675,7 +1695,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                         statusAlert.title = "Unblocked".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                         statusAlert.show()
+                    }
                         
                         let request = Accounts.unblock(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
                         StoreStruct.client.run(request) { (statuses) in
@@ -1710,7 +1732,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                             statusAlert.title = "Reported".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Harassment"
-                            statusAlert.show()
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                             
                             let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "Harassment")
                             StoreStruct.client.run(request) { (statuses) in
@@ -1734,7 +1758,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                             statusAlert.title = "Reported".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "No Content Warning"
-                            statusAlert.show()
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                             
                             let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "No Content Warning")
                             StoreStruct.client.run(request) { (statuses) in
@@ -1758,7 +1784,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                             statusAlert.title = "Reported".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Spam"
-                            statusAlert.show()
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                             
                             let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "Spam")
                             StoreStruct.client.run(request) { (statuses) in
@@ -2338,7 +2366,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                         statusAlert.title = "Unpinned".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
-                                        statusAlert.show()
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                                     }
                                 }
                             } else {
@@ -2355,7 +2385,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                         statusAlert.title = "Pinned".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
-                                        statusAlert.show()
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                                     }
                                 }
                             }
@@ -2387,7 +2419,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                     statusAlert.title = "Deleted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Your Toot"
-                                    statusAlert.show()
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                                     //sto.remove(at: indexPath.row)
                                     //self.tableView.reloadData()
                                 }
@@ -2487,7 +2521,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                 statusAlert.title = "Muted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                statusAlert.show()
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                                 
                                 let request = Accounts.mute(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
@@ -2506,7 +2542,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                 statusAlert.title = "Unmuted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                statusAlert.show()
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                                 
                                 let request = Accounts.unmute(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
@@ -2531,7 +2569,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                 statusAlert.title = "Blocked".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                statusAlert.show()
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                                 
                                 let request = Accounts.block(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
@@ -2550,7 +2590,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                 statusAlert.title = "Unblocked".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                statusAlert.show()
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                                 
                                 let request = Accounts.unblock(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
@@ -2584,7 +2626,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Harassment"
-                                    statusAlert.show()
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                                     
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Harassment")
                                     StoreStruct.client.run(request) { (statuses) in
@@ -2608,7 +2652,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "No Content Warning"
-                                    statusAlert.show()
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                                     
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "No Content Warning")
                                     StoreStruct.client.run(request) { (statuses) in
@@ -2632,7 +2678,9 @@ class PadDetailViewController: UIViewController, UITableViewDelegate, UITableVie
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Spam"
-                                    statusAlert.show()
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        statusAlert.show()
+                    }
                                     
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Spam")
                                     StoreStruct.client.run(request) { (statuses) in
