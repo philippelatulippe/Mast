@@ -21,6 +21,7 @@ pod 'Disk'
 pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'SwiftyGiphy'
+pod 'QuickLayout'
 
 end
 

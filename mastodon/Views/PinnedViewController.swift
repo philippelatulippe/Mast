@@ -1326,6 +1326,10 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         .action(.default("Delete".localized), image: UIImage(named: "block")) { (action, ind) in
                             print(action, ind)
                             
+                            self.currentTags = self.currentTags.filter { $0 != self.currentTags[indexPath.row] }
+                            self.tableView.deleteRows(at: [indexPath], with: .none)
+                            
+                            
                             let request = Statuses.delete(id: sto[indexPath.row].id)
                             StoreStruct.client.run(request) { (statuses) in
                                 print("deleted")

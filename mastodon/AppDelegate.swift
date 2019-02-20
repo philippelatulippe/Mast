@@ -69,6 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
+        
         let request = Notifications.all(range: .default)
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
@@ -105,8 +108,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PushNotificationReceiver.setState(state: state)
         
         // change following when pushing to App Store or for local dev
-        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.all)
-//        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.all)
+//        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.all)
+        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.all)
         
         //create the url with URL
         let url = URL(string: "https://\(StoreStruct.shared.currentInstance.returnedText)/api/v1/push/subscription")! //change the url
@@ -521,6 +524,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         NotificationCenter.default.post(name: Notification.Name(rawValue: "startStream"), object: self)
         
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         if (UserDefaults.standard.object(forKey: "composeSaved") == nil) || (UserDefaults.standard.object(forKey: "composeSaved") as? String == "") {
             

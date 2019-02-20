@@ -128,4 +128,6 @@ class StoreStruct {
     
     static var hexCol = UIColor.white
     static var historyBool = false
+    
+    static var currentInstanceDetails: [Instance] = []
 }

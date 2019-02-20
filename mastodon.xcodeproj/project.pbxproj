@@ -720,6 +720,39 @@
 		53BC45BC215AC8EE0092223F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45BB215AC8EE0092223F /* SettingsCell.swift */; };
 		53BC45C2215AE4F10092223F /* SettingsCellToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */; };
 		53C037B0220A2A6F0047EBC4 /* NewQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */; };
+		53E1ADFD221AB82200A6E1E6 /* CrownAttributes+Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE2221AB82100A6E1E6 /* CrownAttributes+Sizes.swift */; };
+		53E1ADFE221AB82200A6E1E6 /* CrownAttributes+ScrollAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE3221AB82100A6E1E6 /* CrownAttributes+ScrollAxis.swift */; };
+		53E1ADFF221AB82200A6E1E6 /* CrownAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE4221AB82100A6E1E6 /* CrownAttributes.swift */; };
+		53E1AE00221AB82200A6E1E6 /* CrownAttributes+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE5221AB82100A6E1E6 /* CrownAttributes+Style.swift */; };
+		53E1AE01221AB82200A6E1E6 /* CrownAttributes+AnchorPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE6221AB82100A6E1E6 /* CrownAttributes+AnchorPosition.swift */; };
+		53E1AE02221AB82200A6E1E6 /* CrownAttributes+AxisConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE7221AB82100A6E1E6 /* CrownAttributes+AxisConstraint.swift */; };
+		53E1AE03221AB82200A6E1E6 /* CrownAttributes+UserInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE8221AB82100A6E1E6 /* CrownAttributes+UserInteraction.swift */; };
+		53E1AE04221AB82200A6E1E6 /* CrownAttributes+Accessors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE9221AB82100A6E1E6 /* CrownAttributes+Accessors.swift */; };
+		53E1AE05221AB82200A6E1E6 /* CrownAttributes+SpinDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADEA221AB82100A6E1E6 /* CrownAttributes+SpinDirection.swift */; };
+		53E1AE06221AB82200A6E1E6 /* CrownAttributes+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADEB221AB82100A6E1E6 /* CrownAttributes+Feedback.swift */; };
+		53E1AE07221AB82200A6E1E6 /* StyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADED221AB82100A6E1E6 /* StyleView.swift */; };
+		53E1AE08221AB82200A6E1E6 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADEE221AB82100A6E1E6 /* BackgroundView.swift */; };
+		53E1AE09221AB82200A6E1E6 /* CGPoint+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADF0221AB82100A6E1E6 /* CGPoint+Utils.swift */; };
+		53E1AE0A221AB82200A6E1E6 /* UIScrollView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADF1221AB82100A6E1E6 /* UIScrollView+Utils.swift */; };
+		53E1AE0B221AB82200A6E1E6 /* UIView+PositionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADF2221AB82100A6E1E6 /* UIView+PositionUtils.swift */; };
+		53E1AE0C221AB82200A6E1E6 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADF3221AB82100A6E1E6 /* ShadowView.swift */; };
+		53E1AE0D221AB82200A6E1E6 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADF4221AB82100A6E1E6 /* GradientView.swift */; };
+		53E1AE0E221AB82200A6E1E6 /* HapticFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADF5221AB82100A6E1E6 /* HapticFeedbackGenerator.swift */; };
+		53E1AE0F221AB82200A6E1E6 /* PinIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADF7221AB82100A6E1E6 /* PinIndicatorView.swift */; };
+		53E1AE10221AB82200A6E1E6 /* CrownControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADF8221AB82100A6E1E6 /* CrownControl.swift */; };
+		53E1AE11221AB82200A6E1E6 /* CrownIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADF9221AB82100A6E1E6 /* CrownIndicatorView.swift */; };
+		53E1AE12221AB82200A6E1E6 /* CrownSurfaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADFA221AB82100A6E1E6 /* CrownSurfaceView.swift */; };
+		53E1AE13221AB82200A6E1E6 /* CrownControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADFB221AB82100A6E1E6 /* CrownControlDelegate.swift */; };
+		53E1AE14221AB82200A6E1E6 /* CrownSurfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADFC221AB82100A6E1E6 /* CrownSurfaceController.swift */; };
+		53E1AE16221AD44D00A6E1E6 /* DetailCellLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE15221AD44D00A6E1E6 /* DetailCellLink.swift */; };
+		53E1AE20221ADFEA00A6E1E6 /* SwiftLinkPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE18221ADFE900A6E1E6 /* SwiftLinkPreview.swift */; };
+		53E1AE21221ADFEA00A6E1E6 /* NSURLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE19221ADFE900A6E1E6 /* NSURLSessionExtension.swift */; };
+		53E1AE22221ADFEA00A6E1E6 /* ResponseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE1A221ADFE900A6E1E6 /* ResponseExtension.swift */; };
+		53E1AE23221ADFEA00A6E1E6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE1B221ADFE900A6E1E6 /* Response.swift */; };
+		53E1AE24221ADFEA00A6E1E6 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE1C221ADFE900A6E1E6 /* Regex.swift */; };
+		53E1AE25221ADFEA00A6E1E6 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE1D221ADFE900A6E1E6 /* Cache.swift */; };
+		53E1AE26221ADFEA00A6E1E6 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE1E221ADFE900A6E1E6 /* StringExtension.swift */; };
+		53E1AE27221ADFEA00A6E1E6 /* PreviewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE1F221ADFE900A6E1E6 /* PreviewError.swift */; };
 		53E5039B2207153100FD5CF2 /* NewHexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E5039A2207153100FD5CF2 /* NewHexViewController.swift */; };
 		53E6F2B1216CCA9400912B83 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */; };
 		53E6F2B2216CCA9400912B83 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */; };
@@ -1582,6 +1615,39 @@
 		53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellToggle.swift; sourceTree = "<group>"; };
 		53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQRViewController.swift; sourceTree = "<group>"; };
 		53D14D9322183D330037C865 /* mastodon-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mastodon-Bridging-Header.h"; sourceTree = "<group>"; };
+		53E1ADE2221AB82100A6E1E6 /* CrownAttributes+Sizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+Sizes.swift"; sourceTree = "<group>"; };
+		53E1ADE3221AB82100A6E1E6 /* CrownAttributes+ScrollAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+ScrollAxis.swift"; sourceTree = "<group>"; };
+		53E1ADE4221AB82100A6E1E6 /* CrownAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownAttributes.swift; sourceTree = "<group>"; };
+		53E1ADE5221AB82100A6E1E6 /* CrownAttributes+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+Style.swift"; sourceTree = "<group>"; };
+		53E1ADE6221AB82100A6E1E6 /* CrownAttributes+AnchorPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+AnchorPosition.swift"; sourceTree = "<group>"; };
+		53E1ADE7221AB82100A6E1E6 /* CrownAttributes+AxisConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+AxisConstraint.swift"; sourceTree = "<group>"; };
+		53E1ADE8221AB82100A6E1E6 /* CrownAttributes+UserInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+UserInteraction.swift"; sourceTree = "<group>"; };
+		53E1ADE9221AB82100A6E1E6 /* CrownAttributes+Accessors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+Accessors.swift"; sourceTree = "<group>"; };
+		53E1ADEA221AB82100A6E1E6 /* CrownAttributes+SpinDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+SpinDirection.swift"; sourceTree = "<group>"; };
+		53E1ADEB221AB82100A6E1E6 /* CrownAttributes+Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+Feedback.swift"; sourceTree = "<group>"; };
+		53E1ADED221AB82100A6E1E6 /* StyleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleView.swift; sourceTree = "<group>"; };
+		53E1ADEE221AB82100A6E1E6 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		53E1ADF0221AB82100A6E1E6 /* CGPoint+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Utils.swift"; sourceTree = "<group>"; };
+		53E1ADF1221AB82100A6E1E6 /* UIScrollView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Utils.swift"; sourceTree = "<group>"; };
+		53E1ADF2221AB82100A6E1E6 /* UIView+PositionUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+PositionUtils.swift"; sourceTree = "<group>"; };
+		53E1ADF3221AB82100A6E1E6 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		53E1ADF4221AB82100A6E1E6 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		53E1ADF5221AB82100A6E1E6 /* HapticFeedbackGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticFeedbackGenerator.swift; sourceTree = "<group>"; };
+		53E1ADF7221AB82100A6E1E6 /* PinIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinIndicatorView.swift; sourceTree = "<group>"; };
+		53E1ADF8221AB82100A6E1E6 /* CrownControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownControl.swift; sourceTree = "<group>"; };
+		53E1ADF9221AB82100A6E1E6 /* CrownIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownIndicatorView.swift; sourceTree = "<group>"; };
+		53E1ADFA221AB82100A6E1E6 /* CrownSurfaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownSurfaceView.swift; sourceTree = "<group>"; };
+		53E1ADFB221AB82100A6E1E6 /* CrownControlDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownControlDelegate.swift; sourceTree = "<group>"; };
+		53E1ADFC221AB82100A6E1E6 /* CrownSurfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownSurfaceController.swift; sourceTree = "<group>"; };
+		53E1AE15221AD44D00A6E1E6 /* DetailCellLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellLink.swift; sourceTree = "<group>"; };
+		53E1AE18221ADFE900A6E1E6 /* SwiftLinkPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLinkPreview.swift; sourceTree = "<group>"; };
+		53E1AE19221ADFE900A6E1E6 /* NSURLSessionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLSessionExtension.swift; sourceTree = "<group>"; };
+		53E1AE1A221ADFE900A6E1E6 /* ResponseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseExtension.swift; sourceTree = "<group>"; };
+		53E1AE1B221ADFE900A6E1E6 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		53E1AE1C221ADFE900A6E1E6 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		53E1AE1D221ADFE900A6E1E6 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		53E1AE1E221ADFE900A6E1E6 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		53E1AE1F221ADFE900A6E1E6 /* PreviewError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewError.swift; sourceTree = "<group>"; };
 		53E5039A2207153100FD5CF2 /* NewHexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHexViewController.swift; sourceTree = "<group>"; };
 		53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		53E6F2B3216CDDF800912B83 /* StoreStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreStruct.swift; sourceTree = "<group>"; };
@@ -2760,6 +2826,8 @@
 			isa = PBXGroup;
 			children = (
 				531B61C0221960B200DD3845 /* push */,
+				53E1AE17221ADFE900A6E1E6 /* SLP */,
+				53E1ADE0221AB82100A6E1E6 /* Crown */,
 				53631C3B22136A1D000D5B40 /* MisterFusion */,
 				53631C2A221364D0000D5B40 /* SAHistoryNavigationViewController */,
 				531CCD5522073CC900A56145 /* ChromaColorPicker */,
@@ -2852,6 +2920,7 @@
 				5373CB4521550EC800676F3D /* CollectionProfileCell.swift */,
 				5373CB4D21566E6500676F3D /* DetailCell.swift */,
 				5373CB4F2156826000676F3D /* DetailCellImage.swift */,
+				53E1AE15221AD44D00A6E1E6 /* DetailCellLink.swift */,
 				5317C79221DA2E6200746197 /* SideDetailCell.swift */,
 				5317C79421DA2E9200746197 /* SideDetailCellImage.swift */,
 				5373CB512156884B00676F3D /* RepliesCell.swift */,
@@ -3053,6 +3122,84 @@
 				5393859B217393A3002444FC /* DLTagInfo.swift */,
 			);
 			path = DLTagView;
+			sourceTree = "<group>";
+		};
+		53E1ADE0221AB82100A6E1E6 /* Crown */ = {
+			isa = PBXGroup;
+			children = (
+				53E1ADE1221AB82100A6E1E6 /* CrownAttributes */,
+				53E1ADEC221AB82100A6E1E6 /* Utils */,
+				53E1ADF6221AB82100A6E1E6 /* CrownInterfaces */,
+			);
+			path = Crown;
+			sourceTree = "<group>";
+		};
+		53E1ADE1221AB82100A6E1E6 /* CrownAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				53E1ADE2221AB82100A6E1E6 /* CrownAttributes+Sizes.swift */,
+				53E1ADE3221AB82100A6E1E6 /* CrownAttributes+ScrollAxis.swift */,
+				53E1ADE4221AB82100A6E1E6 /* CrownAttributes.swift */,
+				53E1ADE5221AB82100A6E1E6 /* CrownAttributes+Style.swift */,
+				53E1ADE6221AB82100A6E1E6 /* CrownAttributes+AnchorPosition.swift */,
+				53E1ADE7221AB82100A6E1E6 /* CrownAttributes+AxisConstraint.swift */,
+				53E1ADE8221AB82100A6E1E6 /* CrownAttributes+UserInteraction.swift */,
+				53E1ADE9221AB82100A6E1E6 /* CrownAttributes+Accessors.swift */,
+				53E1ADEA221AB82100A6E1E6 /* CrownAttributes+SpinDirection.swift */,
+				53E1ADEB221AB82100A6E1E6 /* CrownAttributes+Feedback.swift */,
+			);
+			path = CrownAttributes;
+			sourceTree = "<group>";
+		};
+		53E1ADEC221AB82100A6E1E6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				53E1ADED221AB82100A6E1E6 /* StyleView.swift */,
+				53E1ADEE221AB82100A6E1E6 /* BackgroundView.swift */,
+				53E1ADEF221AB82100A6E1E6 /* Extensions */,
+				53E1ADF3221AB82100A6E1E6 /* ShadowView.swift */,
+				53E1ADF4221AB82100A6E1E6 /* GradientView.swift */,
+				53E1ADF5221AB82100A6E1E6 /* HapticFeedbackGenerator.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		53E1ADEF221AB82100A6E1E6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				53E1ADF0221AB82100A6E1E6 /* CGPoint+Utils.swift */,
+				53E1ADF1221AB82100A6E1E6 /* UIScrollView+Utils.swift */,
+				53E1ADF2221AB82100A6E1E6 /* UIView+PositionUtils.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		53E1ADF6221AB82100A6E1E6 /* CrownInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				53E1ADF7221AB82100A6E1E6 /* PinIndicatorView.swift */,
+				53E1ADF8221AB82100A6E1E6 /* CrownControl.swift */,
+				53E1ADF9221AB82100A6E1E6 /* CrownIndicatorView.swift */,
+				53E1ADFA221AB82100A6E1E6 /* CrownSurfaceView.swift */,
+				53E1ADFB221AB82100A6E1E6 /* CrownControlDelegate.swift */,
+				53E1ADFC221AB82100A6E1E6 /* CrownSurfaceController.swift */,
+			);
+			path = CrownInterfaces;
+			sourceTree = "<group>";
+		};
+		53E1AE17221ADFE900A6E1E6 /* SLP */ = {
+			isa = PBXGroup;
+			children = (
+				53E1AE18221ADFE900A6E1E6 /* SwiftLinkPreview.swift */,
+				53E1AE19221ADFE900A6E1E6 /* NSURLSessionExtension.swift */,
+				53E1AE1A221ADFE900A6E1E6 /* ResponseExtension.swift */,
+				53E1AE1B221ADFE900A6E1E6 /* Response.swift */,
+				53E1AE1C221ADFE900A6E1E6 /* Regex.swift */,
+				53E1AE1D221ADFE900A6E1E6 /* Cache.swift */,
+				53E1AE1E221ADFE900A6E1E6 /* StringExtension.swift */,
+				53E1AE1F221ADFE900A6E1E6 /* PreviewError.swift */,
+			);
+			path = SLP;
 			sourceTree = "<group>";
 		};
 		7138629AB3761F8644F6E477 /* Frameworks */ = {
@@ -3526,6 +3673,7 @@
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
+				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSSE/ReactiveSSE.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Regift/Regift.framework",
@@ -3549,6 +3697,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSSE.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regift.framework",
@@ -3857,6 +4006,7 @@
 				53631C4522136A1D000D5B40 /* MisterFusion.SafeArea.swift in Sources */,
 				5373CA9D2152C68000676F3D /* ClientType.swift in Sources */,
 				5317C7B821DA334500746197 /* ScrollableGraphViewDrawingDelegate.swift in Sources */,
+				53E1AE0B221AB82200A6E1E6 /* UIView+PositionUtils.swift in Sources */,
 				53205823215D287700ED0C36 /* DKImagePickerController.swift in Sources */,
 				5373CB4C2156686300676F3D /* ActionButtonCell.swift in Sources */,
 				5317C7BB21DA334500746197 /* LabelPool.swift in Sources */,
@@ -3865,6 +4015,7 @@
 				5354BADA216577FD0094C545 /* CRRefreshComponent.swift in Sources */,
 				5373CB1A2152FCF300676F3D /* Debug.swift in Sources */,
 				5373CB1B2152FCF300676F3D /* InnerAlertController.swift in Sources */,
+				53E1AE12221AB82200A6E1E6 /* CrownSurfaceView.swift in Sources */,
 				53ADB308217E4F6C00A7C431 /* NewCaptionViewController.swift in Sources */,
 				5373CB4421550EAC00676F3D /* ColumnFlowLayout.swift in Sources */,
 				531E0F90216E2BA2003E8890 /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */,
@@ -3874,6 +4025,7 @@
 				531E0FAB216E2BA2003E8890 /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */,
 				5373CAC32152C68000676F3D /* Payload.swift in Sources */,
 				531E0FA9216E2BA2003E8890 /* NVActivityIndicatorAnimationCubeTransition.swift in Sources */,
+				53E1ADFF221AB82200A6E1E6 /* CrownAttributes.swift in Sources */,
 				535B33B5215C0EC6001A2A7F /* XPlayerViewController+UI.swift in Sources */,
 				5313A23D21D5303900F205E6 /* PadSidebarViewController.swift in Sources */,
 				531E0F9F216E2BA2003E8890 /* NVActivityIndicatorAnimationBlank.swift in Sources */,
@@ -3899,10 +4051,12 @@
 				535B33CB215C31E3001A2A7F /* ActiveType.swift in Sources */,
 				5373CAAF2152C68000676F3D /* ClientApplication.swift in Sources */,
 				5317C79321DA2E6200746197 /* SideDetailCell.swift in Sources */,
+				53E1AE10221AB82200A6E1E6 /* CrownControl.swift in Sources */,
 				5373CAFC2152EDB800676F3D /* SwipeAnimator.swift in Sources */,
 				5329F3942174DBDF00C4A23C /* SSLSecurity.swift in Sources */,
 				531E0FA5216E2BA2003E8890 /* NVActivityIndicatorAnimationLineScale.swift in Sources */,
 				5320582C215D287700ED0C36 /* DKAssetGroupCellItemProtocol.swift in Sources */,
+				53E1AE13221AB82200A6E1E6 /* CrownControlDelegate.swift in Sources */,
 				5373CAB82152C68000676F3D /* NotificationType.swift in Sources */,
 				5316C893219D94A00003AB97 /* SwiftyGiphyGridLayout.swift in Sources */,
 				5373CB032152EDB800676F3D /* SwipeExpansionStyle.swift in Sources */,
@@ -3918,6 +4072,7 @@
 				531B61C7221960B300DD3845 /* SwiftGCM.swift in Sources */,
 				53631C39221364D0000D5B40 /* SAHistoryNavigationViewController.swift in Sources */,
 				53631C3A221364D0000D5B40 /* SAHistoryNavigationTransitionController.swift in Sources */,
+				53E1AE24221ADFEA00A6E1E6 /* Regex.swift in Sources */,
 				5351D75C21617FC40012960F /* VolumeBar.swift in Sources */,
 				5316C88F219D94A00003AB97 /* GiphyUser.swift in Sources */,
 				531E0F95216E2BA2003E8890 /* NVActivityIndicatorAnimationBallZigZagDeflect.swift in Sources */,
@@ -3927,6 +4082,7 @@
 				5373CB5C2157FEDA00676F3D /* ListViewController.swift in Sources */,
 				531BD60421795D1F00C1509D /* SentimentAnalysisRequest.swift in Sources */,
 				53205820215D287700ED0C36 /* Enum.swift in Sources */,
+				53E1AE20221ADFEA00A6E1E6 /* SwiftLinkPreview.swift in Sources */,
 				5373CABA2152C68000676F3D /* Report.swift in Sources */,
 				5318F56221877F8A00418159 /* PadLogInViewController.swift in Sources */,
 				A9D80EED21B8F27A00020ECE /* InstanceData.swift in Sources */,
@@ -3960,9 +4116,11 @@
 				53631C35221364D0000D5B40 /* UIView+Screenshot.swift in Sources */,
 				5320582D215D287700ED0C36 /* DKAssetGroupDetailBaseCell.swift in Sources */,
 				5354BACC216577FD0094C545 /* WCLLoadingView.swift in Sources */,
+				53E1AE0A221AB82200A6E1E6 /* UIScrollView+Utils.swift in Sources */,
 				535B33C9215C31E3001A2A7F /* StringTrimExtension.swift in Sources */,
 				5315728F21FCC2E300328053 /* SettingsBundleHelper.swift in Sources */,
 				53205812215D287700ED0C36 /* DKAssetGroup.swift in Sources */,
+				53E1AE05221AB82200A6E1E6 /* CrownAttributes+SpinDirection.swift in Sources */,
 				5354BAD9216577FD0094C545 /* CRRefreshProtocol.swift in Sources */,
 				5373CAAE2152C68000676F3D /* Card.swift in Sources */,
 				531E0FA6216E2BA2003E8890 /* NVActivityIndicatorAnimationBallScaleRippleMultiple.swift in Sources */,
@@ -3975,7 +4133,9 @@
 				530976D42179DBD700640D84 /* AuthenticationErrors.swift in Sources */,
 				530976D22179DBD700640D84 /* BiometricAuthenticationConstants.swift in Sources */,
 				5373CB3521541A0300676F3D /* SKDetectingView.swift in Sources */,
+				53E1AE01221AB82200A6E1E6 /* CrownAttributes+AnchorPosition.swift in Sources */,
 				5329F3882174D0B900C4A23C /* ColourCells.swift in Sources */,
+				53E1AE06221AB82200A6E1E6 /* CrownAttributes+Feedback.swift in Sources */,
 				7806850921CC222F00072C41 /* ProCells.swift in Sources */,
 				536A4FBB216B73D600A3D483 /* BulletinDismissAnimationController.swift in Sources */,
 				5354BAC7216577FD0094C545 /* RamotionBounceLayer.swift in Sources */,
@@ -3991,6 +4151,7 @@
 				531046C4215AC3AB00FCD068 /* ProfileHeaderCellOwn.swift in Sources */,
 				531CCD6022073CCA00A56145 /* ColorModeToggleButton.swift in Sources */,
 				531E0F92216E2BA2003E8890 /* NVActivityIndicatorAnimationBallTrianglePath.swift in Sources */,
+				53E1AE0E221AB82200A6E1E6 /* HapticFeedbackGenerator.swift in Sources */,
 				5373CAD12152C68000676F3D /* Notifications.swift in Sources */,
 				532533BD2185194100A8A65B /* PadMentionsViewController.swift in Sources */,
 				535B33B6215C0EC6001A2A7F /* WOMaintainer.swift in Sources */,
@@ -4002,8 +4163,10 @@
 				5354BAC9216577FD0094C545 /* RamotionWaveLayer.swift in Sources */,
 				5373CACB2152C68000676F3D /* FollowRequests.swift in Sources */,
 				5316C894219D94A00003AB97 /* GiphySimpleItem.swift in Sources */,
+				53E1AE21221ADFEA00A6E1E6 /* NSURLSessionExtension.swift in Sources */,
 				5373CADC2152E29700676F3D /* PlainText.swift in Sources */,
 				5373CAC12152C68000676F3D /* PaginationItem.swift in Sources */,
+				53E1AE22221ADFEA00A6E1E6 /* ResponseExtension.swift in Sources */,
 				5320580E215D287700ED0C36 /* DKCamera.swift in Sources */,
 				535B33D0215CE9A9001A2A7F /* LikedViewController.swift in Sources */,
 				5373CAF82152EDB700676F3D /* SwipeAction.swift in Sources */,
@@ -4013,11 +4176,14 @@
 				531E0FAA216E2BA2003E8890 /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift in Sources */,
 				531E0F94216E2BA2003E8890 /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift in Sources */,
 				53631C4822136A1D000D5B40 /* MisterFusion.swift in Sources */,
+				53E1AE14221AB82200A6E1E6 /* CrownSurfaceController.swift in Sources */,
 				53BC45C2215AE4F10092223F /* SettingsCellToggle.swift in Sources */,
 				5317C79721DA2EE100746197 /* PadDetailViewController2.swift in Sources */,
 				5316C88E219D94A00003AB97 /* GiphyImageSet.swift in Sources */,
 				5320581D215D287700ED0C36 /* FontAwesomeTextRepresentable.swift in Sources */,
+				53E1AE03221AB82200A6E1E6 /* CrownAttributes+UserInteraction.swift in Sources */,
 				5354BAC6216577FD0094C545 /* UIColorExtension.swift in Sources */,
+				53E1AE0D221AB82200A6E1E6 /* GradientView.swift in Sources */,
 				5373CAA52152C68000676F3D /* URLRequest.swift in Sources */,
 				5354BAC8216577FD0094C545 /* RamotionAnimator.swift in Sources */,
 				5317C7BE21DA334500746197 /* GraphPoint.swift in Sources */,
@@ -4031,6 +4197,7 @@
 				5316C890219D94A00003AB97 /* GiphyMeta.swift in Sources */,
 				5320582E215D287700ED0C36 /* DKAssetGroupDetailImageCell.swift in Sources */,
 				5351D75821617FC40012960F /* VolumeBarStackView.swift in Sources */,
+				53E1AE08221AB82200A6E1E6 /* BackgroundView.swift in Sources */,
 				53C037B0220A2A6F0047EBC4 /* NewQRViewController.swift in Sources */,
 				5373CAFA2152EDB700676F3D /* SwipeActionsView.swift in Sources */,
 				5373CB2F21541A0300676F3D /* UIImage+Rotation.swift in Sources */,
@@ -4040,6 +4207,7 @@
 				5354BACA216577FD0094C545 /* RamotionBallLayer.swift in Sources */,
 				5373CABF2152C68000676F3D /* Visibility.swift in Sources */,
 				5373CB3E2154E97500676F3D /* NotificationCellImage.swift in Sources */,
+				53E1AE25221ADFEA00A6E1E6 /* Cache.swift in Sources */,
 				531E0FA1216E2BA2003E8890 /* NVActivityIndicatorAnimationAudioEqualizer.swift in Sources */,
 				5373CAC92152C68000676F3D /* DomainBlocks.swift in Sources */,
 				5373CAF72152EDB700676F3D /* SwipeAccessibilityCustomAction.swift in Sources */,
@@ -4069,6 +4237,7 @@
 				5373CB402155049900676F3D /* ProfileHeaderCell.swift in Sources */,
 				5354BAC5216577FD0094C545 /* CRRefreshAnimator.swift in Sources */,
 				531CCD5D22073CCA00A56145 /* ChromaShadeSlider.swift in Sources */,
+				53E1AE11221AB82200A6E1E6 /* CrownIndicatorView.swift in Sources */,
 				5373CB3621541A0300676F3D /* SKIndicatorView.swift in Sources */,
 				7806850B21CC227100072C41 /* CollectionProCells.swift in Sources */,
 				5373CB162152FCF300676F3D /* ActionSheet.swift in Sources */,
@@ -4090,11 +4259,13 @@
 				5373CAA12152C68000676F3D /* Decodable.swift in Sources */,
 				5373CB582156AA7200676F3D /* GraphCell.swift in Sources */,
 				5317C7B021DA334500746197 /* ReferenceLineDrawingView.swift in Sources */,
+				53E1AE26221ADFEA00A6E1E6 /* StringExtension.swift in Sources */,
 				5317C7B721DA334500746197 /* ScrollableGraphView.swift in Sources */,
 				531E0F8E216E2BA2003E8890 /* NVActivityIndicatorAnimationBallRotate.swift in Sources */,
 				5373CAD52152C68000676F3D /* Timelines.swift in Sources */,
 				5316C89C219D94A00003AB97 /* ParsingTransforms.swift in Sources */,
 				53170E80218361A4005F972B /* PadViewController.swift in Sources */,
+				53E1AE16221AD44D00A6E1E6 /* DetailCellLink.swift in Sources */,
 				5373CAB32152C68000676F3D /* Instance.swift in Sources */,
 				5351B98E2167ADF400002069 /* NewListViewController.swift in Sources */,
 				531CCD5F22073CCA00A56145 /* ChromaColorPicker.swift in Sources */,
@@ -4108,8 +4279,10 @@
 				535B33C7215C31E3001A2A7F /* ActiveLabel.swift in Sources */,
 				5373CB54215688D700676F3D /* RepliesCellImage.swift in Sources */,
 				53BC45BC215AC8EE0092223F /* SettingsCell.swift in Sources */,
+				53E1AE27221ADFEA00A6E1E6 /* PreviewError.swift in Sources */,
 				5329F38A2174D0CB00C4A23C /* CollectionColourCell.swift in Sources */,
 				5320580C215D287700ED0C36 /* DKCameraResource.swift in Sources */,
+				53E1ADFE221AB82200A6E1E6 /* CrownAttributes+ScrollAxis.swift in Sources */,
 				A9D80EE721B84B3900020ECE /* AddInstanceCell.swift in Sources */,
 				5317C7BF21DA334500746197 /* Plot.swift in Sources */,
 				5320581B215D287700ED0C36 /* FontAwesomeImageRepresentable.swift in Sources */,
@@ -4118,6 +4291,8 @@
 				53205813215D287700ED0C36 /* DKAsset.swift in Sources */,
 				5316C891219D94A00003AB97 /* GiphyItem.swift in Sources */,
 				5373CAA22152C68000676F3D /* HTTPURLResponse.swift in Sources */,
+				53E1AE00221AB82200A6E1E6 /* CrownAttributes+Style.swift in Sources */,
+				53E1AE0F221AB82200A6E1E6 /* PinIndicatorView.swift in Sources */,
 				5320582B215D287700ED0C36 /* DKAssetGroupDetailVideoCell.swift in Sources */,
 				5373CAD62152C68000676F3D /* Result.swift in Sources */,
 				5373CAD02152C68000676F3D /* Mutes.swift in Sources */,
@@ -4139,6 +4314,7 @@
 				5373CB002152EDB800676F3D /* SwipeCollectionViewCellDelegate.swift in Sources */,
 				53631C36221364D0000D5B40 /* UIViewController+Screenshot.swift in Sources */,
 				535B339B215C0198001A2A7F /* BoostersViewController.swift in Sources */,
+				53E1AE07221AB82200A6E1E6 /* StyleView.swift in Sources */,
 				531E0F96216E2BA2003E8890 /* NVActivityIndicatorAnimationBallScale.swift in Sources */,
 				5373C9F22151956300676F3D /* ThirdViewController.swift in Sources */,
 				531E0F8F216E2BA2003E8890 /* NVActivityIndicatorAnimationBallGridPulse.swift in Sources */,
@@ -4152,8 +4328,10 @@
 				53205822215D287700ED0C36 /* DKImageResource.swift in Sources */,
 				5373CACD2152C68000676F3D /* Lists.swift in Sources */,
 				53205810215D287700ED0C36 /* DKImageManager.swift in Sources */,
+				53E1AE09221AB82200A6E1E6 /* CGPoint+Utils.swift in Sources */,
 				53205829215D287700ED0C36 /* DKAssetGroupDetailVC.swift in Sources */,
 				5373CAD22152C68000676F3D /* Reports.swift in Sources */,
+				53E1ADFD221AB82200A6E1E6 /* CrownAttributes+Sizes.swift in Sources */,
 				5373CB172152FCF300676F3D /* Alert.swift in Sources */,
 				53205826215D287700ED0C36 /* DKPopoverViewController.swift in Sources */,
 				5373CB5A2157F7C500676F3D /* ListCell.swift in Sources */,
@@ -4171,6 +4349,7 @@
 				5373CB1D21540F5E00676F3D /* MainFeedCellImage.swift in Sources */,
 				53205819215D287700ED0C36 /* FontAwesomeView.swift in Sources */,
 				531CCD5E22073CCA00A56145 /* UIColor+Utilities.swift in Sources */,
+				53E1AE02221AB82200A6E1E6 /* CrownAttributes+AxisConstraint.swift in Sources */,
 				5351D75E21617FC40012960F /* VolumeBarStyle+Presets.swift in Sources */,
 				5317C7B321DA334500746197 /* DotDrawingLayer.swift in Sources */,
 				5373CAAA2152C68000676F3D /* Account.swift in Sources */,
@@ -4208,6 +4387,7 @@
 				5393858E21738054002444FC /* HashType.swift in Sources */,
 				5373C9EC2151757300676F3D /* Colours.swift in Sources */,
 				5316C896219D94A00003AB97 /* CornerRoundingMaskView.swift in Sources */,
+				53E1AE0C221AB82200A6E1E6 /* ShadowView.swift in Sources */,
 				5373CAC52152C68000676F3D /* RequestRange.swift in Sources */,
 				536A4FBA216B73D600A3D483 /* ActivityIndicator.swift in Sources */,
 				5317C7B921DA334500746197 /* ScrollableGraphViewDataSource.swift in Sources */,
@@ -4218,6 +4398,7 @@
 				5373CAB92152C68000676F3D /* Relationship.swift in Sources */,
 				53205828215D287700ED0C36 /* DKAssetGroupGridLayout.swift in Sources */,
 				5393859C217393A4002444FC /* DLTagView.swift in Sources */,
+				53E1AE23221ADFEA00A6E1E6 /* Response.swift in Sources */,
 				5373CAF52152EDB700676F3D /* Extensions.swift in Sources */,
 				530F5B3821E267CA00A910B3 /* DateTimePicker.swift in Sources */,
 				531CCD642207406C00A56145 /* FiltersViewController.swift in Sources */,
@@ -4238,6 +4419,7 @@
 				5373CAB62152C68000676F3D /* Mention.swift in Sources */,
 				535B33AF215C0EC6001A2A7F /* XPlayerViewController.swift in Sources */,
 				5320581F215D287700ED0C36 /* FontAwesomeStateRequirement.swift in Sources */,
+				53E1AE04221AB82200A6E1E6 /* CrownAttributes+Accessors.swift in Sources */,
 				53E5039B2207153100FD5CF2 /* NewHexViewController.swift in Sources */,
 				5351D75D21617FC40012960F /* VolumeBarStyle.swift in Sources */,
 				5373CAB42152C68000676F3D /* List.swift in Sources */,

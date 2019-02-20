@@ -233,6 +233,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse099367")
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse0993678")
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse099309")
+        self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse0993091")
+        self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse0993092")
+        self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse0993093")
         self.tableView.register(AddInstanceCell.self, forCellReuseIdentifier: "addInstanceCell")
         self.tableView.alpha = 1
         self.tableView.delegate = self
@@ -351,9 +354,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         return vw
     }
     
-    var generalArray = ["Realtime Updates", "Notifications", "Haptic Feedback", "Always Display Sensitive Content", "Default Toot Privacy", "Default Keyboard Style", "Long-Hold Anywhere Action", "Image Upload Quality", "Toot Load Position", "Default Video Container", "Long Swipe Selection", "Swipe Action Order", "Default Mentions Tab", "Activity Graph", "Activity Graph Animation", "Toot Actions Placement", "Display Boosts in Profiles", "Shake Gesture", "Initial Timeline", "User Search Scope", "Keyboard Haptics", "Jump to Top With New Toot"]
-    var generalArrayDesc = ["No need to refresh manually, you'll get the latest toots and notifications pushed to you.", "Realtime push notifications for mentions/follows/boosts/likes.", "Get a responsive little vibration when tapping buttons and other on-screen elements.", "Sensitive content will always be displayed without a content warning overlay.", "Select a default privacy state for you toots, from public (everyone can see), unlisted (local timelines can see), private (followers can see), and direct (only to the mentioned user).", "Choose from a convenient social keyboard that puts the @ and # keys front and centre, or the default keyboard with a return key.", "Select what happens when you long-hold anywhere in the app.", "Pick the quality of images uploaded when composing toots. A higher quality image may take longer to upload.", "Choose whether to retain the timeline scroll position when streaming and pulling to refresh, or to scroll to the top.", "Choose whether to show videos and GIFs in a custom Picture-in-Picture container which can be swiped down to keep the view around, or in the stock media player, where swiping down dismisses the content.", "Swipe all the way left or right on a toot to select the action on the edge.", "Select the order of swipe action elements.", "Switch to either show mentions or activity by default.", "Display an activity graph showing recent activity in the mentions tab.", "Animate the activity graph when showing it.", "Choose whether to display toot actions on the toot cell or behind a swipe. This will require restarting the app to take effect.", "Display boosted toots in the Toots & Replies section of user profiles.", "Select whether to hide sensitive content, rain confetti, or do nothing when shaking your device.", "Pick the initial timeline to be displayed, whether it's home, local, or federated.", "Pick whether searching for users is across all of Mastodon or just local.", "Set haptic feedback for key presses on the keyboard.", "Pick whether posting a new toot jumps the timeline to the top."]
-    var generalArrayIm = ["setreal", "notifs", "sethap", "setsensitivec", "priv", "keybse", "holdse", "comse", "posse", "setvid", "swipeact", "swipeact3", "actdef", "setgraph", "setgraph2", "like", "boost", "setshake", "segse", "searchscope", "keyhap", "jumptop"]
+    var generalArray = ["Realtime Updates", "Notifications", "Haptic Feedback", "Always Display Sensitive Content", "Default Toot Privacy", "Default Keyboard Style", "Long-Hold Anywhere Action", "Image Upload Quality", "Toot Load Position", "Default Video Container", "Long Swipe Selection", "Swipe Action Order", "Default Mentions Tab", "Activity Graph", "Activity Graph Animation", "Toot Actions Placement", "Display Boosts in Profiles", "Shake Gesture", "Initial Timeline", "User Search Scope", "Keyboard Haptics", "Jump to Top With New Toot", "Thumb Scroller", "Link Previews", "Load More Order", "Automatically Load Gaps", "Default Profile Secondary Button"]
+    var generalArrayDesc = ["No need to refresh manually, you'll get the latest toots and notifications pushed to you.", "Realtime push notifications for mentions/follows/boosts/likes.", "Get a responsive little vibration when tapping buttons and other on-screen elements.", "Sensitive content will always be displayed without a content warning overlay.", "Select a default privacy state for you toots, from public (everyone can see), unlisted (local timelines can see), private (followers can see), and direct (only to the mentioned user).", "Choose from a convenient social keyboard that puts the @ and # keys front and centre, or the default keyboard with a return key.", "Select what happens when you long-hold anywhere in the app.", "Pick the quality of images uploaded when composing toots. A higher quality image may take longer to upload.", "Choose whether to retain the timeline scroll position when streaming and pulling to refresh, or to scroll to the top.", "Choose whether to show videos and GIFs in a custom Picture-in-Picture container which can be swiped down to keep the view around, or in the stock media player, where swiping down dismisses the content.", "Swipe all the way left or right on a toot to select the action on the edge.", "Select the order of swipe action elements.", "Switch to either show mentions or activity by default.", "Display an activity graph showing recent activity in the mentions tab.", "Animate the activity graph when showing it.", "Choose whether to display toot actions on the toot cell or behind a swipe. This will require restarting the app to take effect.", "Display boosted toots in the Toots & Replies section of user profiles.", "Select whether to hide sensitive content, rain confetti, or do nothing when shaking your device.", "Pick the initial timeline to be displayed, whether it's home, local, or federated.", "Pick whether searching for users is across all of Mastodon or just local.", "Set haptic feedback for key presses on the keyboard.", "Pick whether posting a new toot jumps the timeline to the top.", "Display a circular thumb scroller on timelines, which allows you to rotate the scroller with your thumb to navigate through timelines without lifting a finger. This will require restarting the app to take effect.", "Choose whether to display link preview cards in toot details for all links within the toot.", "Select whether tapping the 'load more' button in timelines retains the current scroll position (allowing the new toots to be read downwards), or whether it shifts you to just below the newly loaded toots (allowing the new toots to be read upwards).", "Automatically fetch gaps in between timelines, removing the need to tap the 'load more' buttons.", "Select what action the secondary profile button (on the left of the profile image) should do: View liked toots or view pinned toots."]
+    var generalArrayIm = ["setreal", "notifs", "sethap", "setsensitivec", "priv", "keybse", "holdse", "comse", "posse", "setvid", "swipeact", "swipeact3", "actdef", "setgraph", "setgraph2", "like", "boost", "setshake", "segse", "searchscope", "keyhap", "jumptop", "circscroll", "linkcard", "lmore", "autol", "likepin"]
     
     var appearanceArray = ["", "Theme", "Text Size", "Profiles Corner Radius", "Images Corner Radius", "Hide Images in Timelines", "Full Usernames", "Confetti", "Gallery Grid Size", "Time Style", "Profile Header Background", "Segments Size", "Segments Transition Style", "Subtle Activity Notifications", "Profile Display Picture Border", "Pinch and History View Background Theme", "Media Captions", "Toot Progress Indicator", "Highlight Direct Messages", "Toot Bar Hue", "Activity Graph Hue", "Segments Hue", "Instances and Lists Icon", "Profile Display Picture in Toot Composition", "Popup Alerts"]
     var appearanceArrayDesc = ["", "Select from a white day theme, a dark dusk theme, an even darker night theme, or a truly black OLED-friendly theme.", "Always be able to read posts with adjustable text sizing.", "Circle or square, your choice.", "Rounded or not, your choice.", "Timelines with some plain old text, for a distraction-free browsing experience.", "Display the user's full username, with the instance, in toots.", "Add some fun to posting toots, following users, boosting toots, and liking toots.", "Set the amount of columns in the toot composition section's photo picker gallery.", "Pick between absolute or relative time to display in timelines.", "Change the style of the profile header background.", "Choose from larger home and notification screen segments, or tinier ones.", "Pick between a static and linear transition, or a playful liquid one.", "Dims activity notifications, while keeping mentions untouched.", "Select a size for the border around profile view display pictures.", "Select a theme for the background when pinching to toot a screenshot, or when long-holding a back button to enter the history view.", "Pick whether to display the toot text or the image's alt text in media captions.", "Choose whether to show the toot progress indicator or not.", "Highlight direct messages in timelines with a subtle, distinct, or theme background.", "Select the hue for the keyboard bar when composing toots.", "Select the hue for the activity graph columns.", "Select the hue for segments. This may require restarting the app to take effect.", "Select an icon to use for the top-left instances and list section icon.", "Choose whether to display the current account's display picture in the top-left when composing toots.", "Pick whether to display popup alerts for a variety of actions including tooting, liking, and boosting."]
@@ -505,10 +508,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @objc func handleTogglePopupset(sender: UISwitch) {
         
         if sender.isOn {
-            UserDefaults.standard.set(1, forKey: "popupset")
+            UserDefaults.standard.set(0, forKey: "popupset")
             sender.setOn(true, animated: true)
         } else {
-            UserDefaults.standard.set(0, forKey: "popupset")
+            UserDefaults.standard.set(1, forKey: "popupset")
             sender.setOn(false, animated: true)
         }
     }
@@ -610,6 +613,33 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             sender.setOn(false, animated: true)
         }
     }
+    @objc func handleToggleThumbsc(sender: UISwitch) {
+        if sender.isOn {
+            UserDefaults.standard.set(1, forKey: "thumbsc")
+            sender.setOn(true, animated: true)
+        } else {
+            UserDefaults.standard.set(0, forKey: "thumbsc")
+            sender.setOn(false, animated: true)
+        }
+    }
+    @objc func handleToggleLinkcards(sender: UISwitch) {
+        if sender.isOn {
+            UserDefaults.standard.set(0, forKey: "linkcards")
+            sender.setOn(true, animated: true)
+        } else {
+            UserDefaults.standard.set(1, forKey: "linkcards")
+            sender.setOn(false, animated: true)
+        }
+    }
+    @objc func handleToggleAutol(sender: UISwitch) {
+        if sender.isOn {
+            UserDefaults.standard.set(1, forKey: "autol1")
+            sender.setOn(true, animated: true)
+        } else {
+            UserDefaults.standard.set(0, forKey: "autol1")
+            sender.setOn(false, animated: true)
+        }
+    }
     
     
     
@@ -637,7 +667,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return cell
         } else if indexPath.section == 1 {
             
-            if indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6 || indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9 || indexPath.row == 11 || indexPath.row == 12 || indexPath.row == 15 || indexPath.row == 17 || indexPath.row == 18 || indexPath.row == 19 || indexPath.row == 20 {
+            if indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6 || indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9 || indexPath.row == 11 || indexPath.row == 12 || indexPath.row == 15 || indexPath.row == 17 || indexPath.row == 18 || indexPath.row == 19 || indexPath.row == 20 || indexPath.row == 24 || indexPath.row == 26 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
                 cell.configure(status: self.generalArray[indexPath.row], status2: self.generalArrayDesc[indexPath.row], image: self.generalArrayIm[indexPath.row])
                 cell.backgroundColor = Colours.white
@@ -799,6 +829,66 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         cell.switchView.setOn(true, animated: false)
                     }
                     cell.switchView.addTarget(self, action: #selector(self.handleToggleSelectJump), for: .touchUpInside)
+                    return cell
+                }
+                if indexPath.row == 22 {
+                    // thumb scroller
+                    
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellse0993091", for: indexPath) as! SettingsCellToggle
+                    cell.configure(status: self.generalArray[indexPath.row], status2: self.generalArrayDesc[indexPath.row], image: self.generalArrayIm[indexPath.row])
+                    cell.backgroundColor = Colours.white
+                    cell.userName.textColor = Colours.black
+                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                    cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = Colours.white
+                    cell.selectedBackgroundView = bgColorView
+                    if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {
+                        cell.switchView.setOn(false, animated: false)
+                    } else {
+                        cell.switchView.setOn(true, animated: false)
+                    }
+                    cell.switchView.addTarget(self, action: #selector(self.handleToggleThumbsc), for: .touchUpInside)
+                    return cell
+                }
+                if indexPath.row == 23 {
+                    // link cards
+                    
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellse0993092", for: indexPath) as! SettingsCellToggle
+                    cell.configure(status: self.generalArray[indexPath.row], status2: self.generalArrayDesc[indexPath.row], image: self.generalArrayIm[indexPath.row])
+                    cell.backgroundColor = Colours.white
+                    cell.userName.textColor = Colours.black
+                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                    cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = Colours.white
+                    cell.selectedBackgroundView = bgColorView
+                    if (UserDefaults.standard.object(forKey: "linkcards") == nil) || (UserDefaults.standard.object(forKey: "linkcards") as! Int == 0) {
+                        cell.switchView.setOn(true, animated: false)
+                    } else {
+                        cell.switchView.setOn(false, animated: false)
+                    }
+                    cell.switchView.addTarget(self, action: #selector(self.handleToggleLinkcards), for: .touchUpInside)
+                    return cell
+                }
+                if indexPath.row == 25 {
+                    // auto load
+                    
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellse0993093", for: indexPath) as! SettingsCellToggle
+                    cell.configure(status: self.generalArray[indexPath.row], status2: self.generalArrayDesc[indexPath.row], image: self.generalArrayIm[indexPath.row])
+                    cell.backgroundColor = Colours.white
+                    cell.userName.textColor = Colours.black
+                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                    cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = Colours.white
+                    cell.selectedBackgroundView = bgColorView
+                    if (UserDefaults.standard.object(forKey: "autol1") == nil) || (UserDefaults.standard.object(forKey: "autol1") as! Int == 0) {
+                        cell.switchView.setOn(false, animated: false)
+                    } else {
+                        cell.switchView.setOn(true, animated: false)
+                    }
+                    cell.switchView.addTarget(self, action: #selector(self.handleToggleAutol), for: .touchUpInside)
                     return cell
                 }
                 return cell
@@ -1378,7 +1468,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
-                    .action(.default("Stock".localized), image: filledSet2) { (action, ind) in
+                    .action(.default("Stock Video Player".localized), image: filledSet2) { (action, ind) in
                         print(action, ind)
                         UserDefaults.standard.set(1, forKey: "vidgif")
                     }
@@ -1731,6 +1821,80 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .action(.default("Wild".localized), image: filledSet3) { (action, ind) in
                         print(action, ind)
                         UserDefaults.standard.set(2, forKey: "keyhap")
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+            if indexPath.row == 24 {
+                // load more
+                
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "lmore1") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: title, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Retain Scroll".localized), image: filledSet1) { (action, ind) in
+                        print(action, ind)
+                        UserDefaults.standard.set(0, forKey: "lmore1")
+                    }
+                    .action(.default("Jump Below New Toots".localized), image: filledSet2) { (action, ind) in
+                        print(action, ind)
+                        UserDefaults.standard.set(1, forKey: "lmore1")
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+            if indexPath.row == 26 {
+                // profile secondary button
+                
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "likepin") == nil) || (UserDefaults.standard.object(forKey: "likepin") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "likepin") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: title, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Liked".localized), image: filledSet1) { (action, ind) in
+                        print(action, ind)
+                        UserDefaults.standard.set(0, forKey: "likepin")
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+                    }
+                    .action(.default("Pinned".localized), image: filledSet2) { (action, ind) in
+                        print(action, ind)
+                        UserDefaults.standard.set(1, forKey: "likepin")
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                     }
                     .action(.cancel("Dismiss"))
                     .finally { action, index in
@@ -2682,7 +2846,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if indexPath.section == 4 {
             if indexPath.row == 0 {
                 // about
-                Alertift.actionSheet(title: "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", message: "A beautiful Mastodon client\nMade with the intention to be reliant\nIt's fast, it's fluid, it's fun\nBut most of all, it's built with love for everyone\n\nMade independantly by @JPEG@mastodon.technology".localized)
+                Alertift.actionSheet(title: "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", message: "A beautiful Mastodon client\nMade with the intention to be reliant\nIt's fast, it's fluid, it's fun\nBut most of all, it's built with love for everyone\n\nDesigned and created by @JPEG@mastodon.technology".localized)
                     .backgroundColor(Colours.white)
                     .titleTextColor(Colours.grayDark)
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))

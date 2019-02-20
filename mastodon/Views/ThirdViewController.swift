@@ -15,8 +15,9 @@ import SAConfettiView
 import AVKit
 import AVFoundation
 import SJFluidSegmentedControl
+import MessageUI
 
-class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate {
+class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, CrownControlDelegate, MFMailComposeViewControllerDelegate {
     
     var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .circleStrokeSpin, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
@@ -38,6 +39,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var segmentedControl: SJFluidSegmentedControl!
     var currentIndex = 0
     var isEndorsed = false
+    private var crownControl: CrownControl!
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
@@ -511,6 +517,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
+            crownControl?.spinToMatchScrollViewOffset()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -556,7 +569,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             settingsButton.setImage(UIImage(named: "sett")?.maskWithColor(color: Colours.grayLight2), for: .normal)
             settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
             settingsButton.adjustsImageWhenHighlighted = false
-            settingsButton.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
+            settingsButton.addTarget(self, action: #selector(self.setTop1), for: .touchUpInside)
             
             if self.fromOtherUser {} else {
                 let done = UIBarButtonItem.init(customView: settingsButton)
@@ -669,6 +682,25 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if (traitCollection.forceTouchCapability == .available) {
             registerForPreviewing(with: self, sourceView: self.tableView)
         }
+        
+        
+        if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
+            self.crownScroll()
+        }
+    }
+    
+    func crownScroll() {
+        var attributes = CrownAttributes(scrollView: self.tableView, scrollAxis: .vertical)
+        attributes.backgroundStyle.content = .gradient(gradient: .init(colors: [UIColor(red: 55/255.0, green: 55/255.0, blue: 65/255.0, alpha: 1.0), UIColor(red: 20/255.0, green: 20/255.0, blue: 29/255.0, alpha: 1.0)], startPoint: .zero, endPoint: CGPoint(x: 1, y: 1)))
+        attributes.backgroundStyle.border = .value(color: UIColor(red: 34/255.0, green: 34/255.0, blue: 35/255.0, alpha: 1.0), width: 1)
+        attributes.foregroundStyle.content = .gradient(gradient: .init(colors: [Colours.tabSelected, Colours.tabSelected], startPoint: .zero, endPoint: CGPoint(x: 1, y: 1)))
+        attributes.foregroundStyle.border = .value(color: UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1.0), width: 0)
+        attributes.feedback.leading.backgroundFlash = .active(color: .clear, fadeDuration: 0)
+        attributes.feedback.trailing.backgroundFlash = .active(color: .clear, fadeDuration: 0)
+        let verticalConstraint = CrownAttributes.AxisConstraint(crownEdge: .bottom, anchorView: self.tableView, anchorViewEdge: .bottom, offset: -50)
+        let horizontalConstraint = CrownAttributes.AxisConstraint(crownEdge: .trailing, anchorView: self.tableView, anchorViewEdge: .trailing, offset: -50)
+        crownControl = CrownControl(attributes: attributes, delegate: self)
+        crownControl.layout(in: view, horizontalConstaint: horizontalConstraint, verticalConstraint: verticalConstraint)
     }
     
     func setupProfile() {
@@ -1226,7 +1258,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     
-    @objc func setTop() {
+    @objc func setTop1() {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
             let impact = UIImpactFeedbackGenerator()
             impact.impactOccurred()
@@ -1234,6 +1266,40 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let controller = SettingsViewController()
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    @objc func setTop() {
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let impact = UIImpactFeedbackGenerator()
+            impact.impactOccurred()
+        }
+        
+        if (UserDefaults.standard.object(forKey: "likepin") == nil) || (UserDefaults.standard.object(forKey: "likepin") as! Int == 0) {
+        let controller = LikedViewController()
+        controller.currentTagTitle = "Liked"
+        let request = Favourites.all()
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                controller.currentTags = stat
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }
+            }
+        }
+        } else {
+            
+            let controller = PinnedViewController()
+            controller.currentTagTitle = "Pinned"
+            controller.curID = self.chosenUser.id
+            let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .min(id: "", limit: 5000))
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    controller.currentTags = stat
+                    DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
+            }
+        }
     }
     
     
@@ -1460,7 +1526,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 
                 // change below endorse
-                .action(.default(endoTitle), image: UIImage(named: "profile")) { (action, ind) in
+                .action(.default(endoTitle), image: UIImage(named: "endo")) { (action, ind) in
                     print(action, ind)
                     
                     if self.isEndorsed {
@@ -1823,7 +1889,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                     }
                 }
-                .action(.default("Scheduled Toots"), image: UIImage(named: "schedule")) { (action, ind) in
+                .action(.default("Scheduled Toots"), image: UIImage(named: "scheduled")) { (action, ind) in
                     print(action, ind)
                     
                     let request = Statuses.allScheduled()
@@ -1839,7 +1905,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                     }
                 }
-                .action(.default("Follow Suggestions".localized), image: UIImage(named: "profile")) { (action, ind) in
+                .action(.default("Follow Suggestions".localized), image: UIImage(named: "folsug")) { (action, ind) in
                     print(action, ind)
                     
                     let request = Accounts.followSuggestions()
@@ -1853,7 +1919,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                     }
                 }
-                .action(.default("Endorsed Accounts".localized), image: UIImage(named: "profile")) { (action, ind) in
+                .action(.default("Endorsed Accounts".localized), image: UIImage(named: "endo")) { (action, ind) in
                     print(action, ind)
                     
                     let request = Accounts.allEndorsements()
@@ -1866,6 +1932,34 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             }
                         }
                     }
+                }
+                .action(.default("Instance Details".localized), image: UIImage(named: "instats")) { (action, ind) in
+                    print(action, ind)
+                    Alertift.actionSheet(title: "\(StoreStruct.currentInstanceDetails.first?.title.stripHTML() ?? "Instance") (\(StoreStruct.currentInstanceDetails.first?.version ?? "1.0.0"))", message: "\(StoreStruct.currentInstanceDetails.first?.stats.userCount ?? 0) users\n\(StoreStruct.currentInstanceDetails.first?.stats.statusCount ?? 0) statuses\n\(StoreStruct.currentInstanceDetails.first?.stats.domainCount ?? 0) domains\n\n\(StoreStruct.currentInstanceDetails.first?.description.stripHTML() ?? "")")
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.default("Instance Admin Contact".localized), image: nil) { (action, ind) in
+                            if MFMailComposeViewController.canSendMail() {
+                                let mail = MFMailComposeViewController()
+                                mail.mailComposeDelegate = self
+                                mail.setToRecipients([StoreStruct.currentInstanceDetails.first?.email ?? "shihab.mehboob@hotmail.com"])
+                                
+                                self.present(mail, animated: true)
+                            } else {
+                                // show failure alert
+                            }
+                        }
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
+                        .popover(anchorView: self.view)
+                        .show(on: self)
                 }
                             .action(.default("Edit Profile".localized), image: UIImage(named: "profile")) { (action, ind) in
                                 print(action, ind)
@@ -3099,7 +3193,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCell {
             var images = [SKPhoto]()
             
-            let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatarStatic, holder: cell.profileImageView.currentImage ?? nil)
+            let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatar, holder: cell.profileImageView.currentImage ?? nil)
             photo.shouldCachePhotoURLImage = true
             images.append(photo)
             
@@ -3118,7 +3212,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn
             var images = [SKPhoto]()
             
-            let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatarStatic, holder: nil)
+            let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatar, holder: nil)
             photo.shouldCachePhotoURLImage = true
             images.append(photo)
             
@@ -3138,7 +3232,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn2
                 var images = [SKPhoto]()
                 
-                let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatarStatic, holder: nil)
+                let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatar, holder: nil)
                 photo.shouldCachePhotoURLImage = true
                 images.append(photo)
                 
@@ -3959,6 +4053,15 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             }
                             .action(.default("Delete".localized), image: UIImage(named: "block")) { (action, ind) in
                                 print(action, ind)
+                                
+                                if self.currentIndex == 0 {
+                                    self.profileStatuses = self.profileStatuses.filter { $0 != self.profileStatuses[indexPath.row] }
+                                    self.tableView.deleteRows(at: [indexPath], with: .none)
+                                } else if self.currentIndex == 1 {
+                                    self.profileStatuses2 = self.profileStatuses2.filter { $0 != self.profileStatuses2[indexPath.row] }
+                                    self.tableView.deleteRows(at: [indexPath], with: .none)
+                                }
+                                
                                 
                                 let request = Statuses.delete(id: sto[indexPath.row].id)
                                 StoreStruct.client.run(request) { (statuses) in

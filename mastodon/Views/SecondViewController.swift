@@ -18,7 +18,7 @@ import OneSignal
 import AVKit
 import AVFoundation
 
-class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, OSSubscriptionObserver {
+class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, OSSubscriptionObserver, CrownControlDelegate {
     
     func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges!) {
         print("state changed")
@@ -48,6 +48,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     var currentIndex = 1
     var doOnce = false
     var doOnce2 = false
+    private var crownControl: CrownControl!
+    private var crownControl2: CrownControl!
+    private var crownControl3: CrownControl!
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
@@ -909,6 +912,56 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             registerForPreviewing(with: self, sourceView: self.tableView2)
             registerForPreviewing(with: self, sourceView: self.tableView3)
         }
+        
+        if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
+            self.crownScroll()
+            self.crownScroll2()
+            self.crownScroll3()
+        }
+    }
+    
+    func crownScroll() {
+        var attributes = CrownAttributes(scrollView: self.tableView, scrollAxis: .vertical)
+        attributes.backgroundStyle.content = .gradient(gradient: .init(colors: [UIColor(red: 55/255.0, green: 55/255.0, blue: 65/255.0, alpha: 1.0), UIColor(red: 20/255.0, green: 20/255.0, blue: 29/255.0, alpha: 1.0)], startPoint: .zero, endPoint: CGPoint(x: 1, y: 1)))
+        attributes.backgroundStyle.border = .value(color: UIColor(red: 34/255.0, green: 34/255.0, blue: 35/255.0, alpha: 1.0), width: 1)
+        attributes.foregroundStyle.content = .gradient(gradient: .init(colors: [Colours.tabSelected, Colours.tabSelected], startPoint: .zero, endPoint: CGPoint(x: 1, y: 1)))
+        attributes.foregroundStyle.border = .value(color: UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1.0), width: 0)
+        attributes.feedback.leading.backgroundFlash = .active(color: .clear, fadeDuration: 0)
+        attributes.feedback.trailing.backgroundFlash = .active(color: .clear, fadeDuration: 0)
+        let verticalConstraint = CrownAttributes.AxisConstraint(crownEdge: .bottom, anchorView: self.tableView, anchorViewEdge: .bottom, offset: -50)
+        let horizontalConstraint = CrownAttributes.AxisConstraint(crownEdge: .trailing, anchorView: self.tableView, anchorViewEdge: .trailing, offset: -50)
+        crownControl = CrownControl(attributes: attributes, delegate: self)
+        crownControl.layout(in: view, horizontalConstaint: horizontalConstraint, verticalConstraint: verticalConstraint)
+    }
+    
+    func crownScroll2() {
+        var attributes = CrownAttributes(scrollView: self.tableView3, scrollAxis: .vertical)
+        attributes.backgroundStyle.content = .gradient(gradient: .init(colors: [UIColor(red: 55/255.0, green: 55/255.0, blue: 65/255.0, alpha: 1.0), UIColor(red: 20/255.0, green: 20/255.0, blue: 29/255.0, alpha: 1.0)], startPoint: .zero, endPoint: CGPoint(x: 1, y: 1)))
+        attributes.backgroundStyle.border = .value(color: UIColor(red: 34/255.0, green: 34/255.0, blue: 35/255.0, alpha: 1.0), width: 1)
+        attributes.foregroundStyle.content = .gradient(gradient: .init(colors: [Colours.tabSelected, Colours.tabSelected], startPoint: .zero, endPoint: CGPoint(x: 1, y: 1)))
+        attributes.foregroundStyle.border = .value(color: UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1.0), width: 0)
+        attributes.feedback.leading.backgroundFlash = .active(color: .clear, fadeDuration: 0)
+        attributes.feedback.trailing.backgroundFlash = .active(color: .clear, fadeDuration: 0)
+        let verticalConstraint = CrownAttributes.AxisConstraint(crownEdge: .bottom, anchorView: self.tableView3, anchorViewEdge: .bottom, offset: -50)
+        let horizontalConstraint = CrownAttributes.AxisConstraint(crownEdge: .trailing, anchorView: self.tableView3, anchorViewEdge: .trailing, offset: -50)
+        crownControl2 = CrownControl(attributes: attributes, delegate: self)
+        crownControl2.layout(in: view, horizontalConstaint: horizontalConstraint, verticalConstraint: verticalConstraint)
+        crownControl2.hideCrown()
+    }
+    
+    func crownScroll3() {
+        var attributes = CrownAttributes(scrollView: self.tableView2, scrollAxis: .vertical)
+        attributes.backgroundStyle.content = .gradient(gradient: .init(colors: [UIColor(red: 55/255.0, green: 55/255.0, blue: 65/255.0, alpha: 1.0), UIColor(red: 20/255.0, green: 20/255.0, blue: 29/255.0, alpha: 1.0)], startPoint: .zero, endPoint: CGPoint(x: 1, y: 1)))
+        attributes.backgroundStyle.border = .value(color: UIColor(red: 34/255.0, green: 34/255.0, blue: 35/255.0, alpha: 1.0), width: 1)
+        attributes.foregroundStyle.content = .gradient(gradient: .init(colors: [Colours.tabSelected, Colours.tabSelected], startPoint: .zero, endPoint: CGPoint(x: 1, y: 1)))
+        attributes.foregroundStyle.border = .value(color: UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1.0), width: 0)
+        attributes.feedback.leading.backgroundFlash = .active(color: .clear, fadeDuration: 0)
+        attributes.feedback.trailing.backgroundFlash = .active(color: .clear, fadeDuration: 0)
+        let verticalConstraint = CrownAttributes.AxisConstraint(crownEdge: .bottom, anchorView: self.tableView2, anchorViewEdge: .bottom, offset: -50)
+        let horizontalConstraint = CrownAttributes.AxisConstraint(crownEdge: .trailing, anchorView: self.tableView2, anchorViewEdge: .trailing, offset: -50)
+        crownControl3 = CrownControl(attributes: attributes, delegate: self)
+        crownControl3.layout(in: view, horizontalConstaint: horizontalConstraint, verticalConstraint: verticalConstraint)
+        crownControl3.hideCrown()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -1066,6 +1119,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         if self.currentIndex == 1 {
             
             
+            if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
+                crownControl?.spinToMatchScrollViewOffset()
+            }
+            
+            
             
             let indexPath1 = IndexPath(row: self.countcount1 - 1, section: 0)
             if self.tableView.indexPathsForVisibleRows?.contains(indexPath1) ?? false {
@@ -1114,6 +1172,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             
             
             
+            if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
+                crownControl2?.spinToMatchScrollViewOffset()
+            }
+            
+            
             let indexPath1 = IndexPath(row: self.countcount5 - 1, section: 1)
             if self.tableView3.indexPathsForVisibleRows?.contains(indexPath1) ?? false {
                 if self.countcount5 == 0 {
@@ -1158,6 +1221,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             }
             
         } else {
+            
+            
+            if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
+                crownControl3?.spinToMatchScrollViewOffset()
+            }
             
             
             
@@ -1420,6 +1488,12 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         }
         if toIndex == 0 {
             
+            if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
+                crownControl.showCrown()
+                crownControl2.hideCrown()
+                crownControl3.hideCrown()
+            }
+            
             if self.countcount1 == 0 {
                 self.newUpdatesB1.alpha = 0
                 self.newUpdatesB2.alpha = 0
@@ -1493,6 +1567,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         if toIndex == 1 {
             
+            if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
+                crownControl.hideCrown()
+                crownControl2.showCrown()
+                crownControl3.hideCrown()
+            }
+            
+            
             if self.countcount2 == 0 {
                 self.newUpdatesB1.alpha = 0
                 self.newUpdatesB2.alpha = 0
@@ -1527,6 +1608,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         
         if toIndex == 2 {
+            
+            if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
+                crownControl.hideCrown()
+                crownControl2.hideCrown()
+                crownControl3.showCrown()
+            }
+            
             
             if self.countcount2 == 0 {
                 self.newUpdatesB1.alpha = 0
@@ -1638,6 +1726,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         if tableView == self.tableView3 {
             if StoreStruct.notificationsDirect.count == 0 || indexPath.row >= StoreStruct.notificationsDirect.count {
+                
+                self.fetchMoreNotifications()
                 
                 self.ai.stopAnimating()
                 self.ai.removeFromSuperview()
@@ -2847,7 +2937,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 
 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = theTable.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 for y in sto[indexPath.row].status!.mediaAttachments {
@@ -2920,7 +3010,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 
 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = theTable.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 for y in sto[indexPath.row].status!.mediaAttachments {
@@ -2994,7 +3084,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 
 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = theTable.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 for y in sto[indexPath.row].status!.mediaAttachments {
@@ -3069,7 +3159,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 
 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = theTable.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 for y in sto[indexPath.row].status!.mediaAttachments {
