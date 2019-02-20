@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import OneSignal
 import Disk
 
 @UIApplicationMain
@@ -70,6 +69,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
+        // uncomment once you get the notification's status' id and place it in the push model and service ext
+//        if application.applicationState == .inactive {
+//
+//            if let userDefaults = UserDefaults(suiteName: "group.com.shi.Mast.wormhole") {
+//                if userDefaults.value(forKey: "notidpush") != nil {
+//                    print("NOTIDPUSH- \(userDefaults.value(forKey: "notidpush") as? Int ?? 0)")
+//                    let id = userDefaults.value(forKey: "notidpush") as? Int ?? 0
+//
+//                    StoreStruct.curID = "\(id)"
+//                    if UIDevice.current.userInterfaceIdiom == .pad {
+//                        let viewController0 = window?.rootViewController as! UISplitViewController
+//                        let viewController = viewController0.viewControllers[0] as! PadViewController
+//                        viewController.gotoID()
+//                    } else {
+//                        let viewController = window?.rootViewController as! ViewController
+//                        viewController.gotoID()
+//                    }
+//
+//                    userDefaults.set(nil, forKey: "notidpush")
+//                }
+//            }
+//
+//        }
+        
         UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
         
         let request = Notifications.all(range: .default)
@@ -102,14 +125,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         var state: PushNotificationState!
         let receiver = try! PushNotificationReceiver()
-        let subScription = PushNotificationSubscription(endpoint: URL(string:"https://pushrelay1.your.org/relay-to/production/\(token)")!, alerts: PushNotificationAlerts.all)
+        let subScription = PushNotificationSubscription(endpoint: URL(string:"https://pushrelay1.your.org/relay-to/production/\(token)")!, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
         let deviceToken = PushNotificationDeviceToken(deviceToken: deviceToken)
         state = PushNotificationState(receiver: receiver, subscription: subScription, deviceToken: deviceToken)
         PushNotificationReceiver.setState(state: state)
         
         // change following when pushing to App Store or for local dev
 //        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.all)
-        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.all)
+        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
         
         //create the url with URL
         let url = URL(string: "https://\(StoreStruct.shared.currentInstance.returnedText)/api/v1/push/subscription")! //change the url
@@ -415,18 +438,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         SwiftyGiphyAPI.shared.apiKey = SwiftyGiphyAPI.publicBetaKey
-        
-        
-        
-        
-//        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
-//
-//        OneSignal.initWithLaunchOptions(launchOptions,
-//                                        appId: "4f67f45a-7d0f-4e7d-8624-0ec148f064ed",
-//                                        handleNotificationAction: nil,
-//                                        settings: onesignalInitSettings)
-//
-//        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
         
         
         WatchSessionManager.sharedManager.startSession()

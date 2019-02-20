@@ -18,7 +18,6 @@ import SAConfettiView
 import Disk
 import AVKit
 import AVFoundation
-import OneSignal
 
 class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, URLSessionDataDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate {
     
@@ -1018,7 +1017,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         DispatchQueue.main.async {
 //            self.tableView.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowHome1") == nil) {} else {
-                if StoreStruct.statusesHome.count > 5 {
+                if StoreStruct.statusesHome.count > 0 {
                     self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowHome1") as! CGFloat), animated: false)
                 }
             }
@@ -1026,7 +1025,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         DispatchQueue.main.async {
 //            self.tableViewL.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowLocal1") == nil) {} else {
-                if StoreStruct.statusesLocal.count > 5 {
+                if StoreStruct.statusesLocal.count > 0 {
                     self.tableViewL.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowLocal1") as! CGFloat), animated: false)
                 }
             }
@@ -1034,16 +1033,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         DispatchQueue.main.async {
 //            self.tableViewF.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowFed1") == nil) {} else {
-                if StoreStruct.statusesFederated.count > 5 {
+                if StoreStruct.statusesFederated.count > 0 {
                     self.tableViewF.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowFed1") as! CGFloat), animated: false)
                 }
             }
         }
     }
     
-    
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.currentIndex == 0 {
             UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
         } else if self.currentIndex == 1 {
@@ -1091,13 +1088,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
         }
         
-        
-        self.restoreScroll()
-        
-//        if (OneSignal.getPermissionSubscriptionState()?.subscriptionStatus.subscribed ?? false) {
-//            OneSignal.setSubscription(false)
-//            OneSignal.setSubscription(true)
-//        }
         
         //bh4
         var newSize = offset + 65
@@ -1315,6 +1305,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 }
             }
         }
+        
     }
     
     
@@ -2665,6 +2656,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             StoreStruct.newIDtoGoTo = sto[sender.tag].id
         }
         
+        StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
+        
         if sto.count < 1 {} else {
             
             if sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .gifv {
@@ -2696,8 +2689,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            } else {
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = y.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
                             images.append(photo)
                         } else {
@@ -2705,9 +2700,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
-                        }
+                        } else {
+                            photo.caption = ""
+                            }
                         images.append(photo)
                         }
                         coun += 1
@@ -2734,8 +2731,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            } else {
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = y.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
                             images.append(photo)
                         } else {
@@ -2743,9 +2742,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
-                        }
+                        } else {
+                            photo.caption = ""
+                            }
                         images.append(photo)
                         }
                         coun += 1
@@ -2772,8 +2773,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            } else {
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = y.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
                             images.append(photo)
                         } else {
@@ -2781,9 +2784,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
-                        }
+                        } else {
+                            photo.caption = ""
+                            }
                         images.append(photo)
                         }
                         coun += 1
@@ -2830,6 +2835,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             tab = self.tableViewF
         }
         
+        StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
+        
         if sto.count < 1 {} else {
             
             if sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .gifv {
@@ -2846,8 +2853,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            } else {
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = y.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
                             images.append(photo)
                         } else {
@@ -2855,8 +2864,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            } else {
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = y.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
                             images.append(photo)
                         }
@@ -2899,6 +2910,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             tab = self.tableViewF
         }
         
+        StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
+        
         if sto.count < 1 {} else {
             
             if sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .gifv {
@@ -2915,8 +2928,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     } else {
@@ -2924,8 +2939,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     }
@@ -2969,6 +2986,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             tab = self.tableViewF
         }
         
+        StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
+        
         if sto.count < 1 {} else {
             
             if sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .gifv {
@@ -2985,8 +3004,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     } else {
@@ -2994,8 +3015,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     }
@@ -3040,6 +3063,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             tab = self.tableViewF
         }
         
+        StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
+        
         if sto.count < 1 {} else {
             
             if sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .gifv {
@@ -3056,8 +3081,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     } else {
@@ -3065,8 +3092,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     }
@@ -4243,6 +4272,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                             self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            
+                                            do {
+                                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                            } catch {
+                                                print("Couldn't save")
+                                            }
                                         }
                                     }
                                     UIView.setAnimationsEnabled(true)
@@ -4308,6 +4345,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                             self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            
+                                            do {
+                                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                            } catch {
+                                                print("Couldn't save")
+                                            }
                                         }
                                     }
                                     UIView.setAnimationsEnabled(true)
@@ -4373,6 +4418,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                             self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            
+                                            do {
+                                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                            } catch {
+                                                print("Couldn't save")
+                                            }
                                         }
                                     }
                                     UIView.setAnimationsEnabled(true)
@@ -4407,6 +4460,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         DispatchQueue.main.async {
                             StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             self.tableView.reloadData()
+                            
+                            do {
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                            } catch {
+                                print("Couldn't save")
+                            }
                         }
                         
                     }
@@ -4429,6 +4490,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             self.tableViewL.reloadData()
                             
+                            do {
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                            } catch {
+                                print("Couldn't save")
+                            }
                         }
                     }
                 }
@@ -4449,6 +4517,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         DispatchQueue.main.async {
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             self.tableViewF.reloadData()
+                            
+                            do {
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                            } catch {
+                                print("Couldn't save")
+                            }
                         }
                     }
                 }

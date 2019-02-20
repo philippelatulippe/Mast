@@ -13,15 +13,10 @@ import StatusAlert
 import SAConfettiView
 import ReactiveSSE
 import ReactiveSwift
-import OneSignal
 import AVKit
 import AVFoundation
 
-class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, OSSubscriptionObserver {
-    
-    func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges!) {
-        print("state changed")
-    }
+class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate {
     
     var newUpdatesB1 = UIButton()
     var newUpdatesB2 = UIButton()
@@ -799,11 +794,6 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
         if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
             self.streamDataNoti()
         }
-        
-        OneSignal.add(self as OSSubscriptionObserver)
-        OneSignal.promptForPushNotifications(userResponse: { accepted in
-            print("User accepted notifications: \(accepted)")
-        })
         
         
     }
@@ -1832,8 +1822,10 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                     photo.shouldCachePhotoURLImage = true
                     if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                         photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                    } else {
+                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                         photo.caption = y.description ?? ""
+                    } else {
+                        photo.caption = ""
                     }
                     images.append(photo)
                 }
@@ -1855,8 +1847,10 @@ class PadMentionsViewController: UIViewController, UITableViewDelegate, UITableV
                     photo.shouldCachePhotoURLImage = true
                     if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                         photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                    } else {
+                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                         photo.caption = y.description ?? ""
+                    } else {
+                        photo.caption = ""
                     }
                     images.append(photo)
                 }

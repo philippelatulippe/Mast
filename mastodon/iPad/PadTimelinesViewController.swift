@@ -972,7 +972,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
         DispatchQueue.main.async {
 //            self.tableView.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowHome1") == nil) {} else {
-                if StoreStruct.statusesHome.count > 5 {
+                if StoreStruct.statusesHome.count > 0 {
                     self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowHome1") as! CGFloat), animated: false)
                 }
             }
@@ -980,7 +980,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
         DispatchQueue.main.async {
 //            self.tableViewL.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowLocal1") == nil) {} else {
-                if StoreStruct.statusesLocal.count > 5 {
+                if StoreStruct.statusesLocal.count > 0 {
                     self.tableViewL.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowLocal1") as! CGFloat), animated: false)
                 }
             }
@@ -988,7 +988,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
         DispatchQueue.main.async {
 //            self.tableViewF.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowFed1") == nil) {} else {
-                if StoreStruct.statusesFederated.count > 5 {
+                if StoreStruct.statusesFederated.count > 0 {
                     self.tableViewF.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowFed1") as! CGFloat), animated: false)
                 }
             }
@@ -996,8 +996,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
     }
     
     
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.currentIndex == 0 {
             UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
         } else if self.currentIndex == 1 {
@@ -1044,7 +1043,6 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                 tabHeight = Int(UITabBarController().tabBar.frame.size.height)
             }
         }
-        self.restoreScroll()
         
         //bh4
         var newSize = offset + 65
@@ -2718,8 +2716,10 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     }
@@ -2743,8 +2743,10 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     }
@@ -2768,8 +2770,10 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     }
@@ -3943,6 +3947,14 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                                         } else {
                                             if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                                 self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                                
+                                                do {
+                                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                                } catch {
+                                                    print("Couldn't save")
+                                                }
                                             }
                                         }
                                         UIView.setAnimationsEnabled(true)
@@ -4005,6 +4017,14 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                                         } else {
                                             if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                                 self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                                
+                                                do {
+                                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                                } catch {
+                                                    print("Couldn't save")
+                                                }
                                             }
                                         }
                                         UIView.setAnimationsEnabled(true)
@@ -4069,6 +4089,14 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                                         } else {
                                             if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                                 self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                                
+                                                do {
+                                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                                } catch {
+                                                    print("Couldn't save")
+                                                }
                                             }
                                         }
                                         UIView.setAnimationsEnabled(true)
@@ -4103,6 +4131,13 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                         DispatchQueue.main.async {
                             StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             self.tableView.reloadData()
+                            do {
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                            } catch {
+                                print("Couldn't save")
+                            }
                         }
                         
                     }
@@ -4124,6 +4159,13 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                         DispatchQueue.main.async {
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             self.tableViewL.reloadData()
+                            do {
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                            } catch {
+                                print("Couldn't save")
+                            }
                             
                         }
                     }
@@ -4145,6 +4187,13 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
                         DispatchQueue.main.async {
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             self.tableViewF.reloadData()
+                            do {
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                            } catch {
+                                print("Couldn't save")
+                            }
                         }
                     }
                 }

@@ -14,15 +14,10 @@ import StatusAlert
 import SAConfettiView
 import ReactiveSSE
 import ReactiveSwift
-import OneSignal
 import AVKit
 import AVFoundation
 
-class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, OSSubscriptionObserver, CrownControlDelegate {
-    
-    func onOSSubscriptionChanged(_ stateChanges: OSSubscriptionStateChanges!) {
-        print("state changed")
-    }
+class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate {
     
     var newUpdatesB1 = UIButton()
     var newUpdatesB2 = UIButton()
@@ -525,7 +520,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         NotificationCenter.default.post(name: Notification.Name(rawValue: "touchList"), object: nil)
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.currentIndex == 0 {
             UserDefaults.standard.set(self.tableView2.contentOffset.y, forKey: "savedRowNotif")
         } else if self.currentIndex == 5 {
@@ -1064,11 +1059,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
         self.streamDataNoti()
         }
-        
-        OneSignal.add(self as OSSubscriptionObserver)
-        OneSignal.promptForPushNotifications(userResponse: { accepted in
-            print("User accepted notifications: \(accepted)")
-        })
         
         if (UserDefaults.standard.object(forKey: "mentdef2") == nil) || (UserDefaults.standard.object(forKey: "mentdef2") as! Int == 0) {
             
@@ -2765,6 +2755,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         }
         
         
+        StoreStruct.currentImageURL = sto[sender.tag].status!.reblog?.url ?? sto[sender.tag].status!.url
+        
         if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
             
             let videoURL = URL(string: sto[sender.tag].status!.mediaAttachments[0].url)!
@@ -2797,8 +2789,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     photo.shouldCachePhotoURLImage = true
                     if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                         photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                    } else {
+                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                         photo.caption = y.description ?? ""
+                    } else {
+                        photo.caption = ""
                     }
                     images.append(photo)
                 } else {
@@ -2806,9 +2800,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 photo.shouldCachePhotoURLImage = true
                 if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                     photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                } else {
+                } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                     photo.caption = y.description ?? ""
-                }
+                } else {
+                    photo.caption = ""
+                    }
                 images.append(photo)
                 }
                 coun += 1
@@ -2834,8 +2830,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                            } else {
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = y.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
                             images.append(photo)
                         } else {
@@ -2843,8 +2841,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                            } else {
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = y.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
                             images.append(photo)
                         }
@@ -2869,8 +2869,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                            } else {
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = y.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
                             images.append(photo)
                         } else {
@@ -2878,8 +2880,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                            } else {
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = y.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
                             images.append(photo)
                         }
@@ -2930,6 +2934,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             indexPath = IndexPath(row: sender.tag, section: 1)
         }
         
+        StoreStruct.currentImageURL = sto[sender.tag].status!.reblog?.url ?? sto[sender.tag].status!.url
+        
         if sto.count < 1 {} else {
             
             if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
@@ -2946,8 +2952,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     } else {
@@ -2955,8 +2963,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     }
@@ -3003,6 +3013,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             indexPath = IndexPath(row: sender.tag, section: 1)
         }
         
+        StoreStruct.currentImageURL = sto[sender.tag].status!.reblog?.url ?? sto[sender.tag].status!.url
+        
         if sto.count < 1 {} else {
             
             if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
@@ -3019,8 +3031,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     } else {
@@ -3028,8 +3042,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     }
@@ -3077,6 +3093,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             indexPath = IndexPath(row: sender.tag, section: 1)
         }
         
+        StoreStruct.currentImageURL = sto[sender.tag].status!.reblog?.url ?? sto[sender.tag].status!.url
+        
         if sto.count < 1 {} else {
             
             if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
@@ -3093,8 +3111,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     } else {
@@ -3102,8 +3122,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     }
@@ -3152,6 +3174,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             indexPath = IndexPath(row: sender.tag, section: 1)
         }
         
+        StoreStruct.currentImageURL = sto[sender.tag].status!.reblog?.url ?? sto[sender.tag].status!.url
+        
         if sto.count < 1 {} else {
             
             if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
@@ -3168,8 +3192,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     } else {
@@ -3177,8 +3203,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
-                        } else {
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
                         images.append(photo)
                     }
@@ -4548,7 +4576,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         DispatchQueue.main.async {
 //            self.tableView3.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowDirect") == nil) {} else {
-                if StoreStruct.notificationsDirect.count > 5 {
+                if StoreStruct.notificationsDirect.count > 0 {
                     self.tableView3.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowDirect") as! CGFloat), animated: false)
                 }
             }
@@ -4556,7 +4584,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         DispatchQueue.main.async {
 //            self.tableView2.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowNotif") == nil) {} else {
-                if StoreStruct.notifications.count > 5 {
+                if StoreStruct.notifications.count > 0 {
                     self.tableView2.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowNotif") as! CGFloat), animated: false)
                 }
             }
@@ -4564,7 +4592,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         DispatchQueue.main.async {
 //            self.tableView.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowMent") == nil) {} else {
-                if StoreStruct.notificationsMentions.count > 5 {
+                if StoreStruct.notificationsMentions.count > 0 {
                     self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowMent") as! CGFloat), animated: false)
                 }
             }
@@ -4616,6 +4644,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     }
     
     var lastThing = ""
+    var tempFetchedDirect = false
     func fetchMoreNotifications() {
         let request = Notifications.all(range: .max(id: StoreStruct.notifications.last?.id ?? "", limit: 5000))
         StoreStruct.client.run(request) { (statuses) in
@@ -4632,6 +4661,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     if x.type == .mention {
                         StoreStruct.notificationsMentions.append(x)
                         if x.status?.visibility == .direct {
+                            self.tempFetchedDirect = true
                             StoreStruct.notificationsDirect.append(x)
                         }
                     }
@@ -4654,6 +4684,12 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     } else {
                         self.tableView2.reloadData()
                     }
+                    
+                    if StoreStruct.notificationsDirect.isEmpty || self.tempFetchedDirect == false {
+                        self.fetchMoreNotifications()
+                    }
+                    
+                    self.tempFetchedDirect = false
                     
                 }
                     

@@ -11,11 +11,11 @@ import UIKit
 import SJFluidSegmentedControl
 import SafariServices
 import StatusAlert
-import OneSignal
 import SAConfettiView
 import StoreKit
+import UserNotifications
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate, UIGestureRecognizerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate, UIGestureRecognizerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver, UNUserNotificationCenterDelegate {
     
     var tap: UITapGestureRecognizer!
     var safariVC: SFSafariViewController?
@@ -354,9 +354,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         return vw
     }
     
-    var generalArray = ["Realtime Updates", "Notifications", "Haptic Feedback", "Always Display Sensitive Content", "Default Toot Privacy", "Default Keyboard Style", "Long-Hold Anywhere Action", "Image Upload Quality", "Toot Load Position", "Default Video Container", "Long Swipe Selection", "Swipe Action Order", "Default Mentions Tab", "Activity Graph", "Activity Graph Animation", "Toot Actions Placement", "Display Boosts in Profiles", "Shake Gesture", "Initial Timeline", "User Search Scope", "Keyboard Haptics", "Jump to Top With New Toot", "Thumb Scroller", "Link Previews", "Load More Order", "Automatically Load Gaps", "Default Profile Secondary Button"]
-    var generalArrayDesc = ["No need to refresh manually, you'll get the latest toots and notifications pushed to you.", "Realtime push notifications for mentions/follows/boosts/likes.", "Get a responsive little vibration when tapping buttons and other on-screen elements.", "Sensitive content will always be displayed without a content warning overlay.", "Select a default privacy state for you toots, from public (everyone can see), unlisted (local timelines can see), private (followers can see), and direct (only to the mentioned user).", "Choose from a convenient social keyboard that puts the @ and # keys front and centre, or the default keyboard with a return key.", "Select what happens when you long-hold anywhere in the app.", "Pick the quality of images uploaded when composing toots. A higher quality image may take longer to upload.", "Choose whether to retain the timeline scroll position when streaming and pulling to refresh, or to scroll to the top.", "Choose whether to show videos and GIFs in a custom Picture-in-Picture container which can be swiped down to keep the view around, or in the stock media player, where swiping down dismisses the content.", "Swipe all the way left or right on a toot to select the action on the edge.", "Select the order of swipe action elements.", "Switch to either show mentions or activity by default.", "Display an activity graph showing recent activity in the mentions tab.", "Animate the activity graph when showing it.", "Choose whether to display toot actions on the toot cell or behind a swipe. This will require restarting the app to take effect.", "Display boosted toots in the Toots & Replies section of user profiles.", "Select whether to hide sensitive content, rain confetti, or do nothing when shaking your device.", "Pick the initial timeline to be displayed, whether it's home, local, or federated.", "Pick whether searching for users is across all of Mastodon or just local.", "Set haptic feedback for key presses on the keyboard.", "Pick whether posting a new toot jumps the timeline to the top.", "Display a circular thumb scroller on timelines, which allows you to rotate the scroller with your thumb to navigate through timelines without lifting a finger. This will require restarting the app to take effect.", "Choose whether to display link preview cards in toot details for all links within the toot.", "Select whether tapping the 'load more' button in timelines retains the current scroll position (allowing the new toots to be read downwards), or whether it shifts you to just below the newly loaded toots (allowing the new toots to be read upwards).", "Automatically fetch gaps in between timelines, removing the need to tap the 'load more' buttons.", "Select what action the secondary profile button (on the left of the profile image) should do: View liked toots or view pinned toots."]
-    var generalArrayIm = ["setreal", "notifs", "sethap", "setsensitivec", "priv", "keybse", "holdse", "comse", "posse", "setvid", "swipeact", "swipeact3", "actdef", "setgraph", "setgraph2", "like", "boost", "setshake", "segse", "searchscope", "keyhap", "jumptop", "circscroll", "linkcard", "lmore", "autol", "likepin"]
+    var generalArray = ["Realtime Updates", "Notifications", "Haptic Feedback", "Always Display Sensitive Content", "Default Toot Privacy", "Default Keyboard Style", "Long-Hold Anywhere Action", "Image Upload Quality", "Toot Load Position", "Default Video Container", "Long Swipe Selection", "Swipe Action Order", "Default Mentions Tab", "Activity Graph", "Activity Graph Animation", "Toot Actions Placement", "Display Boosts in Profiles", "Shake Gesture", "Initial Timeline", "User Search Scope", "Keyboard Haptics", "Jump to Top With New Toot", "Thumb Scroller", "Link Previews", "Load More Order", "Automatically Load Gaps", "Default Profile Secondary Button", "Recent Media Swipe Type"]
+    var generalArrayDesc = ["No need to refresh manually, you'll get the latest toots and notifications pushed to you.", "Realtime push notifications for mentions/follows/boosts/likes. Select which type of activities you'd like to receive notifications for.", "Get a responsive little vibration when tapping buttons and other on-screen elements.", "Sensitive content will always be displayed without a content warning overlay.", "Select a default privacy state for you toots, from public (everyone can see), unlisted (local timelines can see), private (followers can see), and direct (only to the mentioned user).", "Choose from a convenient social keyboard that puts the @ and # keys front and centre, or the default keyboard with a return key.", "Select what happens when you long-hold anywhere in the app.", "Pick the quality of images uploaded when composing toots. A higher quality image may take longer to upload.", "Choose whether to retain the timeline scroll position when streaming and pulling to refresh, or to scroll to the top.", "Choose whether to show videos and GIFs in a custom Picture-in-Picture container which can be swiped down to keep the view around, or in the stock media player, where swiping down dismisses the content.", "Swipe all the way left or right on a toot to select the action on the edge.", "Select the order of swipe action elements.", "Switch to either show mentions or activity by default.", "Display an activity graph showing recent activity in the mentions tab.", "Animate the activity graph when showing it.", "Choose whether to display toot actions on the toot cell or behind a swipe. This will require restarting the app to take effect.", "Display boosted toots in the Toots & Replies section of user profiles.", "Select whether to hide sensitive content, rain confetti, or do nothing when shaking your device.", "Pick the initial timeline to be displayed, whether it's home, local, or federated.", "Pick whether searching for users is across all of Mastodon or just local.", "Set haptic feedback for key presses on the keyboard.", "Pick whether posting a new toot jumps the timeline to the top.", "Display a circular thumb scroller on timelines, which allows you to rotate the scroller with your thumb to navigate through timelines without lifting a finger. This will require restarting the app to take effect.", "Choose whether to display link preview cards in toot details for all links within the toot.", "Select whether tapping the 'load more' button in timelines retains the current scroll position (allowing the new toots to be read downwards), or whether it shifts you to just below the newly loaded toots (allowing the new toots to be read upwards).", "Automatically fetch gaps in between timelines, removing the need to tap the 'load more' buttons.", "Select what action the secondary profile button (on the left of the profile image) should do: View liked toots or view pinned toots.", "Pick whether swiping enlarged recent media images scrolls through all attached media in the specified toot and does nothing if there's a single image, or whether it scrolls through all recent media."]
+    var generalArrayIm = ["setreal", "notifs", "sethap", "setsensitivec", "priv", "keybse", "holdse", "comse", "posse", "setvid", "swipeact", "swipeact3", "actdef", "setgraph", "setgraph2", "like", "boost", "setshake", "segse", "searchscope", "keyhap", "jumptop", "circscroll", "linkcard", "lmore", "autol", "likepin", "comse"]
     
     var appearanceArray = ["", "Theme", "Text Size", "Profiles Corner Radius", "Images Corner Radius", "Hide Images in Timelines", "Full Usernames", "Confetti", "Gallery Grid Size", "Time Style", "Profile Header Background", "Segments Size", "Segments Transition Style", "Subtle Activity Notifications", "Profile Display Picture Border", "Pinch and History View Background Theme", "Media Captions", "Toot Progress Indicator", "Highlight Direct Messages", "Toot Bar Hue", "Activity Graph Hue", "Segments Hue", "Instances and Lists Icon", "Profile Display Picture in Toot Composition", "Popup Alerts"]
     var appearanceArrayDesc = ["", "Select from a white day theme, a dark dusk theme, an even darker night theme, or a truly black OLED-friendly theme.", "Always be able to read posts with adjustable text sizing.", "Circle or square, your choice.", "Rounded or not, your choice.", "Timelines with some plain old text, for a distraction-free browsing experience.", "Display the user's full username, with the instance, in toots.", "Add some fun to posting toots, following users, boosting toots, and liking toots.", "Set the amount of columns in the toot composition section's photo picker gallery.", "Pick between absolute or relative time to display in timelines.", "Change the style of the profile header background.", "Choose from larger home and notification screen segments, or tinier ones.", "Pick between a static and linear transition, or a playful liquid one.", "Dims activity notifications, while keeping mentions untouched.", "Select a size for the border around profile view display pictures.", "Select a theme for the background when pinching to toot a screenshot, or when long-holding a back button to enter the history view.", "Pick whether to display the toot text or the image's alt text in media captions.", "Choose whether to show the toot progress indicator or not.", "Highlight direct messages in timelines with a subtle, distinct, or theme background.", "Select the hue for the keyboard bar when composing toots.", "Select the hue for the activity graph columns.", "Select the hue for segments. This may require restarting the app to take effect.", "Select an icon to use for the top-left instances and list section icon.", "Choose whether to display the current account's display picture in the top-left when composing toots.", "Pick whether to display popup alerts for a variety of actions including tooting, liking, and boosting."]
@@ -430,10 +430,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             UIApplication.shared.registerForRemoteNotifications()
         } else {
             sender.setOn(false, animated: true)
-            let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-                // Enable or disable features based on authorization.
-            }
             UIApplication.shared.unregisterForRemoteNotifications()
         }
     }
@@ -667,7 +663,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             return cell
         } else if indexPath.section == 1 {
             
-            if indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6 || indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9 || indexPath.row == 11 || indexPath.row == 12 || indexPath.row == 15 || indexPath.row == 17 || indexPath.row == 18 || indexPath.row == 19 || indexPath.row == 20 || indexPath.row == 24 || indexPath.row == 26 {
+            if indexPath.row == 1 || indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6 || indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9 || indexPath.row == 11 || indexPath.row == 12 || indexPath.row == 15 || indexPath.row == 17 || indexPath.row == 18 || indexPath.row == 19 || indexPath.row == 20 || indexPath.row == 24 || indexPath.row == 26 || indexPath.row == 27 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
                 cell.configure(status: self.generalArray[indexPath.row], status2: self.generalArrayDesc[indexPath.row], image: self.generalArrayIm[indexPath.row])
                 cell.backgroundColor = Colours.white
@@ -699,20 +695,16 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     }
                     cell.switchView.addTarget(self, action: #selector(self.handleToggleStream), for: .touchUpInside)
                 }
-                if indexPath.row == 1 {
-                    // notifs
-                    
-                    let center = UNUserNotificationCenter.current()
-                    center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-                        // Enable or disable features based on authorization.
-                    }
-                    if UIApplication.shared.isRegisteredForRemoteNotifications {
-                        cell.switchView.setOn(true, animated: false)
-                    } else {
-                        cell.switchView.setOn(false, animated: false)
-                    }
-                    cell.switchView.addTarget(self, action: #selector(self.handleNotifsStream), for: .touchUpInside)
-                }
+//                if indexPath.row == 1 {
+//                    // notifs
+//
+//                    if UIApplication.shared.isRegisteredForRemoteNotifications {
+//                        cell.switchView.setOn(true, animated: false)
+//                    } else {
+//                        cell.switchView.setOn(false, animated: false)
+//                    }
+//                    cell.switchView.addTarget(self, action: #selector(self.handleNotifsStream), for: .touchUpInside)
+//                }
                 if indexPath.row == 2 {
                     // haptics
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -1163,12 +1155,93 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         print(indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
         
-        
-        
-        
-        
-        
         if indexPath.section == 1 {
+            
+            if indexPath.row == 1 {
+                
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                var filledSet3 = UIImage(named: "unfilledset")
+                var filledSet4 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "pnmentions") == nil) || (UserDefaults.standard.object(forKey: "pnmentions") as! Bool == true) {
+                    filledSet1 = UIImage(named: "filledset")
+                } else {
+                    filledSet1 = UIImage(named: "unfilledset")
+                }
+                if (UserDefaults.standard.object(forKey: "pnlikes") == nil) || (UserDefaults.standard.object(forKey: "pnlikes") as! Bool == true) {
+                    filledSet2 = UIImage(named: "filledset")
+                } else {
+                    filledSet2 = UIImage(named: "unfilledset")
+                }
+                if (UserDefaults.standard.object(forKey: "pnboosts") == nil) || (UserDefaults.standard.object(forKey: "pnboosts") as! Bool == true) {
+                    filledSet3 = UIImage(named: "filledset")
+                } else {
+                    filledSet3 = UIImage(named: "unfilledset")
+                }
+                if (UserDefaults.standard.object(forKey: "pnfollows") == nil) || (UserDefaults.standard.object(forKey: "pnfollows") as! Bool == true) {
+                    filledSet4 = UIImage(named: "filledset")
+                } else {
+                    filledSet4 = UIImage(named: "unfilledset")
+                }
+                
+                
+                // push not
+                Alertift.actionSheet(title: title, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Mentions".localized), image: filledSet1) { (action, ind) in
+                        print(action, ind)
+                        if (UserDefaults.standard.object(forKey: "pnmentions") == nil) || (UserDefaults.standard.object(forKey: "pnmentions") as! Bool == true) {
+                            UserDefaults.standard.set(false, forKey: "pnmentions")
+                            UIApplication.shared.registerForRemoteNotifications()
+                        } else {
+                            UserDefaults.standard.set(true, forKey: "pnmentions")
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                    }
+                    .action(.default("Likes".localized), image: filledSet2) { (action, ind) in
+                        print(action, ind)
+                        if (UserDefaults.standard.object(forKey: "pnlikes") == nil) || (UserDefaults.standard.object(forKey: "pnlikes") as! Bool == true) {
+                            UserDefaults.standard.set(false, forKey: "pnlikes")
+                            UIApplication.shared.registerForRemoteNotifications()
+                        } else {
+                            UserDefaults.standard.set(true, forKey: "pnlikes")
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                    }
+                    .action(.default("Boosts".localized), image: filledSet3) { (action, ind) in
+                        print(action, ind)
+                        if (UserDefaults.standard.object(forKey: "pnboosts") == nil) || (UserDefaults.standard.object(forKey: "pnboosts") as! Bool == true) {
+                            UserDefaults.standard.set(false, forKey: "pnboosts")
+                            UIApplication.shared.registerForRemoteNotifications()
+                        } else {
+                            UserDefaults.standard.set(true, forKey: "pnboosts")
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                    }
+                    .action(.default("Follows".localized), image: filledSet4) { (action, ind) in
+                        print(action, ind)
+                        if (UserDefaults.standard.object(forKey: "pnfollows") == nil) || (UserDefaults.standard.object(forKey: "pnfollows") as! Bool == true) {
+                            UserDefaults.standard.set(false, forKey: "pnfollows")
+                            UIApplication.shared.registerForRemoteNotifications()
+                        } else {
+                            UserDefaults.standard.set(true, forKey: "pnfollows")
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+            
             if indexPath.row == 4 {
                 
                 var filledSet1 = UIImage(named: "unfilledset")
@@ -1905,6 +1978,42 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
                     .show(on: self)
             }
+            if indexPath.row == 27 {
+                // swipe recent media
+                
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "swrece") == nil) || (UserDefaults.standard.object(forKey: "swrece") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "swrece") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: title, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Swipe Attached Images".localized), image: filledSet1) { (action, ind) in
+                        print(action, ind)
+                        UserDefaults.standard.set(0, forKey: "swrece")
+                    }
+                    .action(.default("Swipe Recent Media".localized), image: filledSet2) { (action, ind) in
+                        print(action, ind)
+                        UserDefaults.standard.set(1, forKey: "swrece")
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .show(on: self)
+            }
             
             
         }
@@ -2569,12 +2678,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 var filledSet1 = UIImage(named: "unfilledset")
                 var filledSet2 = UIImage(named: "unfilledset")
+                var filledSet3 = UIImage(named: "unfilledset")
                 if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                     filledSet1 = UIImage(named: "filledset")
                     filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "captionset") as! Int == 1) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "filledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "captionset") as! Int == 2) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "filledset")
                 }
                 
                 
@@ -2591,6 +2707,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .action(.default("Image Alt Text".localized), image: filledSet2) { (action, ind) in
                         print(action, ind)
                         UserDefaults.standard.set(1, forKey: "captionset")
+                    }
+                    .action(.default("No Caption".localized), image: filledSet3) { (action, ind) in
+                        print(action, ind)
+                        UserDefaults.standard.set(2, forKey: "captionset")
                     }
                     .action(.cancel("Dismiss"))
                     .finally { action, index in

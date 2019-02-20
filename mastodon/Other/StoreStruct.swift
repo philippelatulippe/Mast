@@ -130,4 +130,5 @@ class StoreStruct {
     static var historyBool = false
     
     static var currentInstanceDetails: [Instance] = []
+    static var currentImageURL = URL(string: "www.google.com")
 }

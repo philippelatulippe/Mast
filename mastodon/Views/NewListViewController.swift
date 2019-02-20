@@ -162,13 +162,6 @@ class NewListViewController: UIViewController, UITextViewDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        
-    }
-    
-    
     func textViewDidChange(_ textView: UITextView) {
         
         if (UserDefaults.standard.object(forKey: "keyhap") == nil) || (UserDefaults.standard.object(forKey: "keyhap") as! Int == 0) {
