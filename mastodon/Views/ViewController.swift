@@ -442,16 +442,18 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         page.actionHandler = { item in
             print("Action button tapped")
             
-            let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-                // Enable or disable features based on authorization.
-            }
-            UIApplication.shared.registerForRemoteNotifications()
-            
             UserDefaults.standard.set(true, forKey: "pnmentions")
             UserDefaults.standard.set(true, forKey: "pnlikes")
             UserDefaults.standard.set(true, forKey: "pnboosts")
             UserDefaults.standard.set(true, forKey: "pnfollows")
+            
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+                // Enable or disable features based on authorization.
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
             
             item.manager?.push(item: self.makeSiriPage())
         }
@@ -1101,7 +1103,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     bgColorView.backgroundColor = Colours.grayDark3
                     cell.selectedBackgroundView = bgColorView
                     return cell
-                    } else {
+            } else {
                         //bhere7
                         let cell = tableView.dequeueReusableCell(withIdentifier: "cell002", for: indexPath) as! MainFeedCellImage
                         cell.configure(StoreStruct.statusSearch[indexPath.row])
