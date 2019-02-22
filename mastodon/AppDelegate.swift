@@ -69,25 +69,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        // uncomment once you get the notification's status' id and place it in the push model and service ext
-//        if application.applicationState == .inactive {
-//            if let userDefaults = UserDefaults(suiteName: "group.com.shi.Mast.wormhole") {
-//                if userDefaults.value(forKey: "notidpush") != nil {
-//                    let id = userDefaults.value(forKey: "notidpush") as? Int64 ?? 0
-//                    StoreStruct.curID = "\(id)"
-//                    if UIDevice.current.userInterfaceIdiom == .pad {
-//                        let viewController0 = window?.rootViewController as! UISplitViewController
-//                        let viewController = viewController0.viewControllers[0] as! PadViewController
-//                        viewController.gotoID()
-//                    } else {
-//                        let viewController = window?.rootViewController as! ViewController
-//                        viewController.gotoID()
-//                    }
-//
-//                    userDefaults.set(nil, forKey: "notidpush")
-//                }
-//            }
-//        }
+        if application.applicationState == .inactive {
+            if let userDefaults = UserDefaults(suiteName: "group.com.shi.Mast.wormhole") {
+                if userDefaults.value(forKey: "notidpush") != nil {
+                    let id = userDefaults.value(forKey: "notidpush") as? Int64 ?? 0
+                    StoreStruct.curIDNoti = "\(id)"
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        let viewController0 = window?.rootViewController as! UISplitViewController
+                        let viewController = viewController0.viewControllers[0] as! PadViewController
+                        viewController.gotoIDNoti()
+                    } else {
+                        let viewController = window?.rootViewController as! ViewController
+                        viewController.gotoIDNoti()
+                    }
+
+                    userDefaults.set(nil, forKey: "notidpush")
+                }
+            }
+        }
         
         UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
         
@@ -127,8 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PushNotificationReceiver.setState(state: state)
         
         // change following when pushing to App Store or for local dev
-//                let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
-        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
+        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
+//        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
         
         //create the url with URL
         let url = URL(string: "https://\(StoreStruct.shared.currentInstance.returnedText)/api/v1/push/subscription")! //change the url

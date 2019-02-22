@@ -662,6 +662,19 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
         })
     }
     
+    @objc func goToIDNoti() {
+        let request = Notifications.notification(id: StoreStruct.curIDNoti)
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                DispatchQueue.main.async {
+                    let controller = DetailViewController()
+                    controller.mainStatus.append(stat.status!)
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }
+            }
+        }
+    }
+    
     
     @objc func goToID() {
         sleep(2)
@@ -744,6 +757,7 @@ class PadTimelinesViewController: UIViewController, SJFluidSegmentedControlDataS
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.savedComposePresent), name: NSNotification.Name(rawValue: "savedComposePresent"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists"), object: nil)

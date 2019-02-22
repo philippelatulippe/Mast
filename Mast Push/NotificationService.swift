@@ -27,15 +27,15 @@ class NotificationService: UNNotificationServiceExtension {
             }
             
             if let content = try? bestAttemptContent.decrypt(state: storedState) {
-                
-                // uncomment once you get the notification's status' id and place it in the push model and service ext
-//                if let userDefaults = UserDefaults(suiteName: "group.com.shi.Mast.wormhole") {
-//                    userDefaults.set(content.notificationId, forKey: "notidpush")
-//                }
+                if content.notificationType == .follow {} else {
+                    if let userDefaults = UserDefaults(suiteName: "group.com.shi.Mast.wormhole") {
+                        userDefaults.set(content.notificationId, forKey: "notidpush")
+                    }
+                }
                 
                 // Mark the message as still encrypted.
                 bestAttemptContent.title = content.title
-                bestAttemptContent.body = content.body.replacingOccurrences(of: "&#39;", with: "'").replacingOccurrences(of: "&lt;", with: "<").replacingOccurrences(of: "&gt;", with: ">").replacingOccurrences(of: "&amp;", with: "&")
+                bestAttemptContent.body = content.body.replacingOccurrences(of: "&#39;", with: "'").replacingOccurrences(of: "&lt;", with: "<").replacingOccurrences(of: "&gt;", with: ">").replacingOccurrences(of: "&amp;", with: "&").replacingOccurrences(of: "&quot;", with: "\"")
                 
             }
             contentHandler(bestAttemptContent)

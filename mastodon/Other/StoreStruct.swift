@@ -108,6 +108,7 @@ class StoreStruct {
     static var typeOfSearch = 0
     
     static var curID = ""
+    static var curIDNoti = ""
     static var doOnce = true
     static var isSplit = false
     

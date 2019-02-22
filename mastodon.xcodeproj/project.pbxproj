@@ -756,6 +756,7 @@
 		53E6F2B2216CCA9400912B83 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */; };
 		53E6F2B5216CDDF800912B83 /* StoreStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B3216CDDF800912B83 /* StoreStruct.swift */; };
 		53E6F2B7216CDE7D00912B83 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B6216CDE7D00912B83 /* DetailController.swift */; };
+		53EBE6B52220030A000D007E /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBE6B42220030A000D007E /* UIImageColors.swift */; };
 		7806850921CC222F00072C41 /* ProCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7806850821CC222F00072C41 /* ProCells.swift */; };
 		7806850B21CC227100072C41 /* CollectionProCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7806850A21CC227100072C41 /* CollectionProCells.swift */; };
 		A9D80EE721B84B3900020ECE /* AddInstanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D80EE621B84B3900020ECE /* AddInstanceCell.swift */; };
@@ -1638,6 +1639,7 @@
 		53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		53E6F2B3216CDDF800912B83 /* StoreStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreStruct.swift; sourceTree = "<group>"; };
 		53E6F2B6216CDE7D00912B83 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		53EBE6B42220030A000D007E /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		7806850821CC222F00072C41 /* ProCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProCells.swift; sourceTree = "<group>"; };
 		7806850A21CC227100072C41 /* CollectionProCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionProCells.swift; sourceTree = "<group>"; };
 		78F6FFEAB47575DB49E46173 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2823,6 +2825,7 @@
 				5373CA572152B59A00676F3D /* PaddedTextField.swift */,
 				5373CB4321550EAC00676F3D /* ColumnFlowLayout.swift */,
 				535B33BD215C1A08001A2A7F /* VisualActivityViewController.swift */,
+				53EBE6B42220030A000D007E /* UIImageColors.swift */,
 				53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */,
 				A9D80EEC21B8F27A00020ECE /* InstanceData.swift */,
 				A9D80EEE21BB154200020ECE /* AccountExtension.swift */,
@@ -3913,6 +3916,7 @@
 				531CCD6122073CCA00A56145 /* ChromaHandle.swift in Sources */,
 				5316C89D219D94A00003AB97 /* SwiftyGiphyViewController.swift in Sources */,
 				5373CB2E21541A0300676F3D /* Dev+GIF.swift in Sources */,
+				53EBE6B52220030A000D007E /* UIImageColors.swift in Sources */,
 				5373CAA42152C68000676F3D /* URLComponents.swift in Sources */,
 				53631C4522136A1D000D5B40 /* MisterFusion.SafeArea.swift in Sources */,
 				5373CA9D2152C68000676F3D /* ClientType.swift in Sources */,
