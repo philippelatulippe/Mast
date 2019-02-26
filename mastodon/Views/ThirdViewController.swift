@@ -3604,7 +3604,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             impact.impactOccurred()
         }
         
-        var theTable = self.tableView
+        let theTable = self.tableView
         var sto = self.profileStatuses
         
         if sto[sender.tag].reblog?.reblogged! ?? sto[sender.tag].reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
@@ -3612,6 +3612,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let request2 = Statuses.unreblog(id: sto[sender.tag].reblog?.id ?? sto[sender.tag].id)
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
+                    if sto[sender.tag].account.username == self.chosenUser.username {} else {
+                        self.profileStatuses = self.profileStatuses.filter { $0 != self.profileStatuses[sender.tag] }
+                        theTable.deleteRows(at: [IndexPath(row: sender.tag, section: 2)], with: .none)
+                    }
+                    
                     if let cell = theTable.cellForRow(at:IndexPath(row: sender.tag, section: 2)) as? MainFeedCell {
                         if sto[sender.tag].reblog?.favourited! ?? sto[sender.tag].favourited! || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil

@@ -137,18 +137,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //now create the URLRequest object using the url object
         var request = URLRequest(url: url)
-        
         request.httpMethod = "POST"// "POST" //set http method as POST
-        
-        
         
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(requestParams)
-            let jsonString = String(data: jsonData, encoding: .utf8)
-            
             request.httpBody = jsonData
-            print("JSON String : " + jsonString!)
         }
         catch {
             print(error.localizedDescription)

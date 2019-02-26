@@ -110,7 +110,7 @@ public class DLTagView: UIScrollView {
     
     private func rearrangeButtons() {
         var currentX = padding.left
-        var currentY = padding.top
+        let currentY = padding.top
         
         var previousView: UIView? = nil
         

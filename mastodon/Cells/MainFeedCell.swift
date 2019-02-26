@@ -218,6 +218,12 @@ class MainFeedCell: SwipeTableViewCell {
         like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
         boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
         more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.gray), for: .normal)
+        if status.reblog?.reblogged ?? status.reblogged ?? false {
+            boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
+        }
+        if status.reblog?.favourited ?? status.favourited ?? false {
+            like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
+        }
         
         if (UserDefaults.standard.object(forKey: "dmTog") == nil) || (UserDefaults.standard.object(forKey: "dmTog") as! Int == 0) {
             

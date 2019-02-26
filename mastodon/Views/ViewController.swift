@@ -715,6 +715,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             appDelegate.reloadTint()
         }
         
+        if (UserDefaults.standard.object(forKey: "autol1") == nil) {
+            UserDefaults.standard.set(1, forKey: "autol1")
+        }
+        
         if (UserDefaults.standard.object(forKey: "instancesLocal") == nil) {
             
         } else {
