@@ -207,6 +207,11 @@ class MainFeedCell: SwipeTableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        self.profileImageView.imageView?.image = nil
+        self.profileImageView2.imageView?.image = nil
+    }
+    
     func configure(_ status: Status) {
         
         rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.gray), for: .normal)

@@ -2058,9 +2058,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 
                 let cell = tableView2.dequeueReusableCell(withIdentifier: "cellG02", for: indexPath) as! GraphCell
                 if (UserDefaults.standard.object(forKey: "setGraph") == nil) || (UserDefaults.standard.object(forKey: "setGraph") as! Int == 0) {
-                                cell.configure()
-                                cell.backgroundColor = Colours.white
-                                cell.graphView.dataPointSpacing = (self.view.bounds.width / 5)
+                    cell.configure()
+                    cell.backgroundColor = Colours.white
+                    cell.graphView.dataPointSpacing = (self.view.bounds.width / 5)
                     cell.graphView.alpha = 1
                 } else {
                     cell.graphView.alpha = 0
@@ -4722,6 +4722,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     var newestC3 = StoreStruct.notificationsDirect.count
                     
                     StoreStruct.notifications = stat + StoreStruct.notifications
+                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     var co = 0
                     for x in stat {
                         if x.type == .mention {

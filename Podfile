@@ -15,7 +15,6 @@ pod 'ReactiveSwift'
 pod 'TinyConstraints'
 pod 'StatusAlert'
 pod 'NextLevel'
-pod 'OneSignal'
 pod 'SAConfettiView'
 pod 'Disk'
 pod 'Alamofire'
@@ -23,9 +22,4 @@ pod 'SwiftyJSON'
 pod 'SwiftyGiphy'
 pod 'QuickLayout'
 
-end
-
-target 'OneSignalNotificationServiceExtension' do
-  use_frameworks!
-  pod 'OneSignal'
 end
