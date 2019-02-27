@@ -277,21 +277,21 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink33")
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink34")
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink35")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink36")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink37")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink38")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink39")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink40")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink41")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink42")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink43")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink44")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink45")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink46")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink47")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink48")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink49")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink50")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink36")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink37")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink38")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink39")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink40")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink41")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink42")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink43")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink44")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink45")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink46")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink47")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink48")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink49")
+//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink50")
         self.tableView.alpha = 1
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -403,7 +403,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if (UserDefaults.standard.object(forKey: "linkcards") == nil) || (UserDefaults.standard.object(forKey: "linkcards") as! Int == 0) {
                 let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
                 let matches = detector.matches(in: self.mainStatus[0].content, options: [], range: NSRange(location: 0, length: self.mainStatus[0].content.utf16.count))
-                if matches.count > 0 {
+                if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
                     return matches.count
                 }
             } else {
@@ -875,7 +875,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCellLink\(indexPath.row)", for: indexPath) as! DetailCellLink
                 let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
                 let matches = detector.matches(in: self.mainStatus[0].content, options: [], range: NSRange(location: 0, length: self.mainStatus[0].content.utf16.count))
-                if matches.count > 0 {
+                if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
                     if let range = Range(matches[indexPath.row - 1].range, in: self.mainStatus[0].content) {
                         let url = self.mainStatus[0].content[range]
                         cell.configure(String(url))
@@ -1682,7 +1682,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             
             
-            Alertift.actionSheet(title: nil, message: nil)
+            let wordsInThis = self.mainStatus[0].content.stripHTML().components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+            let newSeconds = Double(wordsInThis) * 0.38
+            var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
+            if newSeconds >= 60 {
+                if Int(newSeconds) % 60 == 0 {
+                    newSecondsText = "\(Int(newSeconds/60)) minutes average reading time"
+                } else {
+                    newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
+                }
+            }
+            
+            Alertift.actionSheet(title: nil, message: newSecondsText)
                 .backgroundColor(Colours.white)
                 .titleTextColor(Colours.grayDark)
                 .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -1765,6 +1776,68 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                     }
                 }
+                .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
+                    print(action, ind)
+                    
+                    let unreserved = "-._~/?"
+                    let allowed = NSMutableCharacterSet.alphanumeric()
+                    allowed.addCharacters(in: unreserved)
+                    let bodyText = self.mainStatus[0].content.stripHTML()
+                    print("0001")
+                    print(bodyText)
+                    let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
+                    let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
+                    var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
+                    trans = trans!.replacingOccurrences(of: "\n\n", with: "%20")
+                    print("0002")
+                    print(trans)
+                    let langStr = Locale.current.languageCode
+                    let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
+                    guard let requestUrl = URL(string:urlString) else {
+                        return
+                    }
+                    let request = URLRequest(url:requestUrl)
+                    let task = URLSession.shared.dataTask(with: request) {
+                        (data, response, error) in
+                        if error == nil, let usableData = data {
+                            do {
+                                let json = try JSONSerialization.jsonObject(with: usableData, options: .mutableContainers) as! [Any]
+                                
+                                var translatedText = ""
+                                for i in (json[0] as! [Any]) {
+                                    translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
+                                }
+                                
+                                Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
+                                    .backgroundColor(Colours.white)
+                                    .titleTextColor(Colours.grayDark)
+                                    .messageTextColor(Colours.grayDark)
+                                    .messageTextAlignment(.left)
+                                    .titleTextAlignment(.left)
+                                    .action(.cancel("Dismiss"))
+                                    .finally { action, index in
+                                        if action.style == .cancel {
+                                            return
+                                        }
+                                    }
+                                    .show(on: self)
+                            } catch let error as NSError {
+                                print(error)
+                            }
+                            
+                        }
+                    }
+                    task.resume()
+                }
+                .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                    print(action, ind)
+                    
+                    let controller = ComposeViewController()
+                    controller.inReply = []
+                    controller.inReplyText = ""
+                    controller.filledTextFieldText = self.mainStatus[0].content.stripHTML()
+                    self.present(controller, animated: true, completion: nil)
+                }
                 .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
                     print(action, ind)
                     
@@ -1831,7 +1904,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
         } else {
         
-        Alertift.actionSheet(title: nil, message: nil)
+            let wordsInThis = self.mainStatus[0].content.stripHTML().components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+            let newSeconds = Double(wordsInThis) * 0.38
+            var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
+            if newSeconds >= 60 {
+                if Int(newSeconds) % 60 == 0 {
+                    newSecondsText = "\(Int(newSeconds/60)) minutes average reading time"
+                } else {
+                    newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
+                }
+            }
+            
+            Alertift.actionSheet(title: nil, message: newSecondsText)
             .backgroundColor(Colours.white)
             .titleTextColor(Colours.grayDark)
             .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -2081,6 +2165,15 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                 }
                 task.resume()
+            }
+            .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                print(action, ind)
+                
+                let controller = ComposeViewController()
+                controller.inReply = []
+                controller.inReplyText = ""
+                controller.filledTextFieldText = self.mainStatus[0].content.stripHTML()
+                self.present(controller, animated: true, completion: nil)
             }
             .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
                 print(action, ind)
@@ -3427,7 +3520,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     
                     
-                    Alertift.actionSheet(title: nil, message: nil)
+                    let wordsInThis = sto[indexPath.row].content.stripHTML().components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+                    let newSeconds = Double(wordsInThis) * 0.38
+                    var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
+                    if newSeconds >= 60 {
+                        if Int(newSeconds) % 60 == 0 {
+                            newSecondsText = "\(Int(newSeconds/60)) minutes average reading time"
+                        } else {
+                            newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
+                        }
+                    }
+                    
+                    Alertift.actionSheet(title: nil, message: newSecondsText)
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
                         .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -3510,6 +3614,15 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 }
                             }
                         }
+                        .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                            print(action, ind)
+                            
+                            let controller = ComposeViewController()
+                            controller.inReply = []
+                            controller.inReplyText = ""
+                            controller.filledTextFieldText = sto[indexPath.row].content.stripHTML()
+                            self.present(controller, animated: true, completion: nil)
+                        }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
                             print(action, ind)
                             
@@ -3577,7 +3690,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 
                 
-                Alertift.actionSheet(title: nil, message: nil)
+                    let wordsInThis = sto[indexPath.row].content.stripHTML().components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+                    let newSeconds = Double(wordsInThis) * 0.38
+                    var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
+                    if newSeconds >= 60 {
+                        if Int(newSeconds) % 60 == 0 {
+                            newSecondsText = "\(Int(newSeconds/60)) minutes average reading time"
+                        } else {
+                            newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
+                        }
+                    }
+                    
+                    Alertift.actionSheet(title: nil, message: newSecondsText)
                     .backgroundColor(Colours.white)
                     .titleTextColor(Colours.grayDark)
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -3824,6 +3948,15 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         task.resume()
+                    }
+                    .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                        print(action, ind)
+                        
+                        let controller = ComposeViewController()
+                        controller.inReply = []
+                        controller.inReplyText = ""
+                        controller.filledTextFieldText = sto[indexPath.row].content.stripHTML()
+                        self.present(controller, animated: true, completion: nil)
                     }
                     .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
                         print(action, ind)

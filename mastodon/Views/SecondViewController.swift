@@ -3646,7 +3646,18 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                     }
                     
-                    Alertift.actionSheet(title: nil, message: nil)
+                    let wordsInThis = (sto[indexPath.row].status?.content.stripHTML() ?? "").components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+                    let newSeconds = Double(wordsInThis) * 0.38
+                    var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
+                    if newSeconds >= 60 {
+                        if Int(newSeconds) % 60 == 0 {
+                            newSecondsText = "\(Int(newSeconds/60)) minutes average reading time"
+                        } else {
+                            newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
+                        }
+                    }
+                    
+                    Alertift.actionSheet(title: nil, message: newSecondsText)
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
                         .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -3895,6 +3906,15 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             }
                             task.resume()
                         }
+                        .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                            print(action, ind)
+                            
+                            let controller = ComposeViewController()
+                            controller.inReply = []
+                            controller.inReplyText = ""
+                            controller.filledTextFieldText = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            self.present(controller, animated: true, completion: nil)
+                        }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
                             print(action, ind)
                             
@@ -4025,7 +4045,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     }
                                     cell.hideSwipe(animated: true)
                                 } else {
-                                    let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
+                                    if let cell = theTable.cellForRow(at: indexPath) as? NotificationCellImage {
                                     if sto[indexPath.row].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
@@ -4033,6 +4053,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         cell.moreImage.image = UIImage(named: "boost")
                                     }
                                     cell.hideSwipe(animated: true)
+                                    }
                                 }
                             }
                         }
@@ -4238,7 +4259,18 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                     }
                     
-                    Alertift.actionSheet(title: nil, message: nil)
+                    let wordsInThis = (sto[indexPath.row].status?.content.stripHTML() ?? "").components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+                    let newSeconds = Double(wordsInThis) * 0.38
+                    var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
+                    if newSeconds >= 60 {
+                        if Int(newSeconds) % 60 == 0 {
+                            newSecondsText = "\(Int(newSeconds/60)) minutes average reading time"
+                        } else {
+                            newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
+                        }
+                    }
+                    
+                    Alertift.actionSheet(title: nil, message: newSecondsText)
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
                         .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -4486,6 +4518,15 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 }
                             }
                             task.resume()
+                        }
+                        .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                            print(action, ind)
+                            
+                            let controller = ComposeViewController()
+                            controller.inReply = []
+                            controller.inReplyText = ""
+                            controller.filledTextFieldText = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            self.present(controller, animated: true, completion: nil)
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
                             print(action, ind)

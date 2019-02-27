@@ -212,38 +212,38 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print(StoreStruct.tappedTag)
         
         if StoreStruct.tappedTag.contains("https") || StoreStruct.tappedTag.contains("http") {
-        
-        if let ur = URL(string: String(StoreStruct.tappedTag)) {
             
-            
-            
-            Alertift.actionSheet(title: nil, message: StoreStruct.tappedTag)
-                .backgroundColor(Colours.white)
-                .titleTextColor(Colours.grayDark)
-                .messageTextColor(Colours.grayDark)
-                .messageTextAlignment(.left)
-                .titleTextAlignment(.left)
+            if let ur = URL(string: String(StoreStruct.tappedTag)) {
                 
-                .action(.default("Visit Link"), image: UIImage(named: "share")) { (action, ind) in
-                    print(action, ind)
+                
+                
+                Alertift.actionSheet(title: nil, message: StoreStruct.tappedTag)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark)
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
                     
-                    self.safariVC = SFSafariViewController(url: ur)
-                    self.safariVC?.preferredBarTintColor = Colours.white
-                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                    self.present(self.safariVC!, animated: true, completion: nil)
-                }
-                
-                .action(.cancel("Dismiss"))
-                .finally { action, index in
-                    if action.style == .cancel {
-                        return
+                    .action(.default("Visit Link"), image: UIImage(named: "share")) { (action, ind) in
+                        print(action, ind)
+                        
+                        self.safariVC = SFSafariViewController(url: ur)
+                        self.safariVC?.preferredBarTintColor = Colours.white
+                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                        self.present(self.safariVC!, animated: true, completion: nil)
                     }
-                }
-                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.contentView ?? self.view)
-                .show(on: self)
-            
-            
-        }
+                    
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.contentView ?? self.view)
+                    .show(on: self)
+                
+                
+            }
             
         } else {
             
@@ -270,15 +270,15 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func setLeft() {
-//        var settingsButton = MNGExpandedTouchAreaButton()
-//        settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 32, height: 32)))
-//        settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-//        settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-//        settingsButton.adjustsImageWhenHighlighted = false
-//        settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
-//
-//        let done = UIBarButtonItem.init(customView: settingsButton)
-//        self.navigationItem.setLeftBarButton(done, animated: false)
+        //        var settingsButton = MNGExpandedTouchAreaButton()
+        //        settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 32, height: 32)))
+        //        settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+        //        settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        //        settingsButton.adjustsImageWhenHighlighted = false
+        //        settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
+        //
+        //        let done = UIBarButtonItem.init(customView: settingsButton)
+        //        self.navigationItem.setLeftBarButton(done, animated: false)
         
     }
     
@@ -337,9 +337,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         
-//        self.ai = NVActivityIndicatorView(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 20), y: CGFloat(offset + 65), width: 40, height: 40), type: .circleStrokeSpin, color: Colours.tabSelected)
-//        self.view.addSubview(self.ai)
-//        self.loadLoadLoad()
+        //        self.ai = NVActivityIndicatorView(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 20), y: CGFloat(offset + 65), width: 40, height: 40), type: .circleStrokeSpin, color: Colours.tabSelected)
+        //        self.view.addSubview(self.ai)
+        //        self.loadLoadLoad()
         
         
         if self.fromOtherUser == true {
@@ -503,9 +503,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 DispatchQueue.main.async {
-                let controller = DetailViewController()
-                controller.mainStatus.append(stat)
-                self.navigationController?.pushViewController(controller, animated: true)
+                    let controller = DetailViewController()
+                    controller.mainStatus.append(stat)
+                    self.navigationController?.pushViewController(controller, animated: true)
                 }
             }
         }
@@ -629,11 +629,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             switch (deviceIdiom) {
             case .phone:
-            self.title = ""
+                self.title = ""
             case .pad:
-            self.title = "Profile"
+                self.title = "Profile"
             default:
-            self.title = ""
+                self.title = ""
             }
         }
         self.tableView.register(ProfileHeaderCell.self, forCellReuseIdentifier: "ProfileHeaderCell")
@@ -720,13 +720,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func setupProfile() {
-
+        
         if self.fromOtherUser == true {
             let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     if stat.isEmpty {
-
+                        
                         let request09 = Accounts.account(id: self.userIDtoUse)
                         StoreStruct.client.run(request09) { (statuses) in
                             if let stat = (statuses.value) {
@@ -736,108 +736,108 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 }
                             }
                         }
-
+                        
                     } else {
                         self.profileStatuses = stat
                         self.chosenUser = self.profileStatuses[0].account
                         DispatchQueue.main.async {
-
+                            
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
                             self.tableView.reloadData()
                         }
-
+                        
                     }
                 }
             }
         } else {
-
+            
             if StoreStruct.currentUser == nil {
                 let request2 = Accounts.currentUser()
                 StoreStruct.client.run(request2) { (statuses) in
                     if let stat = (statuses.value) {
                         StoreStruct.currentUser = stat
-
-
+                        
+                        
                         self.userIDtoUse = StoreStruct.currentUser.id
                         let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-
+                                
                                 if stat.isEmpty {
-
+                                    
                                     DispatchQueue.main.async {
                                         self.chosenUser = StoreStruct.currentUser
                                         self.tableView.reloadData()
                                     }
-
+                                    
                                 } else {
-
+                                    
                                     self.profileStatuses = stat
                                     self.chosenUser = self.profileStatuses[0].account
                                     DispatchQueue.main.async {
-
+                                        
                                         self.ai.alpha = 0
                                         self.ai.removeFromSuperview()
                                         self.tableView.reloadData()
                                     }
-
+                                    
                                 }
-
+                                
                             }
                         }
-
+                        
                     }
                 }
             } else {
-
-
+                
+                
                 self.userIDtoUse = StoreStruct.currentUser.id
                 let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
-
+                        
                         if stat.isEmpty {
-
+                            
                             DispatchQueue.main.async {
                                 self.chosenUser = StoreStruct.currentUser
                                 self.tableView.reloadData()
                             }
-
+                            
                         } else {
-
+                            
                             self.profileStatuses = stat
                             self.chosenUser = self.profileStatuses[0].account
                             DispatchQueue.main.async {
-
+                                
                                 self.ai.alpha = 0
                                 self.ai.removeFromSuperview()
                                 self.tableView.reloadData()
                             }
-
+                            
                         }
-
+                        
                     }
                 }
-
-
+                
+                
             }
         }
-
-
+        
+        
         var zzz = false
         if (UserDefaults.standard.object(forKey: "boostpro3") == nil) || (UserDefaults.standard.object(forKey: "boostpro3") as! Int == 0) {
             zzz = false
         } else {
             zzz = true
         }
-
+        
         if self.fromOtherUser == true {
             let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     if stat.isEmpty {
-
+                        
                         let request09 = Accounts.account(id: self.userIDtoUse)
                         StoreStruct.client.run(request09) { (statuses) in
                             if let stat = (statuses.value) {
@@ -847,95 +847,95 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 }
                             }
                         }
-
+                        
                     } else {
                         self.profileStatuses2 = stat
                         self.chosenUser = self.profileStatuses2[0].account
                         DispatchQueue.main.async {
-
+                            
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
                             self.tableView.reloadData()
                         }
-
+                        
                     }
                 }
             }
         } else {
-
+            
             if StoreStruct.currentUser == nil {
                 let request2 = Accounts.currentUser()
                 StoreStruct.client.run(request2) { (statuses) in
                     if let stat = (statuses.value) {
                         StoreStruct.currentUser = stat
-
-
+                        
+                        
                         self.userIDtoUse = StoreStruct.currentUser.id
                         let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-
+                                
                                 if stat.isEmpty {
-
+                                    
                                     DispatchQueue.main.async {
                                         self.chosenUser = StoreStruct.currentUser
                                         self.tableView.reloadData()
                                     }
-
+                                    
                                 } else {
-
+                                    
                                     self.profileStatuses2 = stat
                                     self.chosenUser = self.profileStatuses2[0].account
                                     DispatchQueue.main.async {
-
+                                        
                                         self.ai.alpha = 0
                                         self.ai.removeFromSuperview()
                                         self.tableView.reloadData()
                                     }
-
+                                    
                                 }
-
+                                
                             }
                         }
-
+                        
                     }
                 }
             } else {
-
-
+                
+                
                 self.userIDtoUse = StoreStruct.currentUser.id
                 let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
-
+                        
                         if stat.isEmpty {
-
+                            
                             DispatchQueue.main.async {
                                 self.chosenUser = StoreStruct.currentUser
                                 self.tableView.reloadData()
                             }
-
+                            
                         } else {
-
+                            
                             self.profileStatuses2 = stat
                             self.chosenUser = self.profileStatuses2[0].account
                             DispatchQueue.main.async {
-
+                                
                                 self.ai.alpha = 0
                                 self.ai.removeFromSuperview()
                                 self.tableView.reloadData()
                             }
-
+                            
                         }
-
+                        
                     }
                 }
-
-
+                
+                
             }
         }
-
-
+        
+        
         let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .min(id: "", limit: 5000))
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
@@ -958,18 +958,18 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
             }
         }
-
+        
     }
     
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             super.viewWillTransition(to: size, with: coordinator)
-//            coordinator.animate(alongsideTransition: nil, completion: {
-//                _ in
-                self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.height) - 80, height: Int(self.view.bounds.width))
-                self.tableView.reloadData()
-//            })
+            //            coordinator.animate(alongsideTransition: nil, completion: {
+            //                _ in
+            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.height) - 80, height: Int(self.view.bounds.width))
+            self.tableView.reloadData()
+            //            })
         }
         
     }
@@ -979,8 +979,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-//        self.navigationController?.navigationBar.tintColor = Colours.tabUnselected
-//        self.navigationController?.navigationBar.barTintColor = Colours.tabUnselected
+        //        self.navigationController?.navigationBar.tintColor = Colours.tabUnselected
+        //        self.navigationController?.navigationBar.barTintColor = Colours.tabUnselected
         self.navigationController?.navigationItem.backBarButtonItem?.tintColor = Colours.tabUnselected
         
         StoreStruct.currentPage = 2
@@ -997,17 +997,17 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         DispatchQueue.global(qos: .userInitiated).async {
-        let request = Lists.all()
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                StoreStruct.allLists = stat
-                DispatchQueue.main.async {
-                    for x in StoreStruct.allLists {
-                        self.zzz[x.title] = x.id
+            let request = Lists.all()
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    StoreStruct.allLists = stat
+                    DispatchQueue.main.async {
+                        for x in StoreStruct.allLists {
+                            self.zzz[x.title] = x.id
+                        }
                     }
                 }
             }
-        }
         }
         
         
@@ -1176,7 +1176,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as? Int == 0) {
             let selection = UISelectionFeedbackGenerator()
             selection.selectionChanged()
         }
@@ -1289,17 +1289,17 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         if (UserDefaults.standard.object(forKey: "likepin") == nil) || (UserDefaults.standard.object(forKey: "likepin") as! Int == 0) {
-        let controller = LikedViewController()
-        controller.currentTagTitle = "Liked"
-        let request = Favourites.all()
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                controller.currentTags = stat
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(controller, animated: true)
+            let controller = LikedViewController()
+            controller.currentTagTitle = "Liked"
+            let request = Favourites.all()
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    controller.currentTags = stat
+                    DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
                 }
             }
-        }
         } else {
             
             let controller = PinnedViewController()
@@ -1332,8 +1332,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 statusAlert.contentColor = Colours.grayDark
                 statusAlert.message = self.chosenUser.displayName
                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                    statusAlert.show()
+                }
             } else {
                 let statusAlert = StatusAlert()
                 statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
@@ -1341,8 +1341,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 statusAlert.contentColor = Colours.grayDark
                 statusAlert.message = self.chosenUser.displayName
                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                    statusAlert.show()
+                }
             }
             
             if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
@@ -1371,8 +1371,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = self.chosenUser.displayName
             if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                statusAlert.show()
+            }
             
             self.isFollowing = false
             let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell
@@ -1486,17 +1486,17 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = self.chosenUser.displayName
                             if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                statusAlert.show()
+                            }
                         } else {
-                        let statusAlert = StatusAlert()
-                        statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
-                        statusAlert.title = "Followed".localized
-                        statusAlert.contentColor = Colours.grayDark
-                        statusAlert.message = self.chosenUser.displayName
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                            let statusAlert = StatusAlert()
+                            statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
+                            statusAlert.title = "Followed".localized
+                            statusAlert.contentColor = Colours.grayDark
+                            statusAlert.message = self.chosenUser.displayName
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                statusAlert.show()
+                            }
                         }
                         
                         
@@ -1525,8 +1525,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.chosenUser.displayName
                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                            statusAlert.show()
+                        }
                         
                         self.isFollowing = false
                         let request = Accounts.unfollow(id: self.chosenUser.id)
@@ -1559,8 +1559,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = self.chosenUser.displayName
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                        statusAlert.show()
+                                    }
                                     
                                     self.isEndorsed = false
                                 }
@@ -1581,8 +1581,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = self.chosenUser.displayName
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                        statusAlert.show()
+                                    }
                                     
                                     self.isEndorsed = true
                                 }
@@ -1592,7 +1592,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                 }
                 
-            
+                
                 
                 
                 
@@ -1611,7 +1611,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             if action.style == .cancel {
                                 return
                             }
-                        }
+                    }
                     for xx in self.zzz {
                         z1.action(.default(xx.key), image: nil) { (action, ind) in
                             print("test")
@@ -1628,8 +1628,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = self.chosenUser.displayName
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                        statusAlert.show()
+                                    }
                                     
                                 }
                             }
@@ -1665,8 +1665,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.chosenUser.displayName
                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                            statusAlert.show()
+                        }
                         
                         let request = Accounts.mute(id: self.chosenUser.id)
                         StoreStruct.client.run(request) { (statuses) in
@@ -1686,8 +1686,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.chosenUser.displayName
                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                            statusAlert.show()
+                        }
                         
                         let request = Accounts.unmute(id: self.chosenUser.id)
                         StoreStruct.client.run(request) { (statuses) in
@@ -1712,8 +1712,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.chosenUser.displayName
                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                            statusAlert.show()
+                        }
                         
                         let request = Accounts.block(id: self.chosenUser.id)
                         StoreStruct.client.run(request) { (statuses) in
@@ -1733,8 +1733,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.chosenUser.displayName
                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                            statusAlert.show()
+                        }
                         
                         let request = Accounts.unblock(id: self.chosenUser.id)
                         StoreStruct.client.run(request) { (statuses) in
@@ -1810,16 +1810,16 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 isItGoingToLockText = "Locked Account"
             }
             
-//            var imim = UIImage()
-//            let url = URL(string: self.chosenUser.header ?? "")
-//            if url != nil {
-//                do {
-//                    let data = try? Data(contentsOf: url!)
-//                    imim = UIImage(data: data!)!
-//                } catch {
-//                    print("err")
-//                }
-//            }
+            //            var imim = UIImage()
+            //            let url = URL(string: self.chosenUser.header ?? "")
+            //            if url != nil {
+            //                do {
+            //                    let data = try? Data(contentsOf: url!)
+            //                    imim = UIImage(data: data!)!
+            //                } catch {
+            //                    print("err")
+            //                }
+            //            }
             
             let z1 = Alertift.actionSheet(title: nil, message: nil)
                 .backgroundColor(Colours.white)
@@ -1976,139 +1976,36 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         .popover(anchorView: self.view)
                         .show(on: self)
                 }
-                            .action(.default("Edit Profile".localized), image: UIImage(named: "profile")) { (action, ind) in
-                                print(action, ind)
-                
-                                Alertift.actionSheet()
-                                    .backgroundColor(Colours.white)
-                                    .titleTextColor(Colours.grayDark)
-                                    .messageTextColor(Colours.grayDark)
-                                    .messageTextAlignment(.left)
-                                    .titleTextAlignment(.left)
-                                    
-                                    
-                                    
-                                    // uncomment below for profile avatar and header
-                                    .action(.default("Edit Display Picture"), image: nil) { (action, ind) in
-                                        print(action, ind)
-
-                                        let pickerController = DKImagePickerController()
-                                        pickerController.didSelectAssets = { (assets: [DKAsset]) in
-                                            if assets.count == 0 {
-                                                return
-                                            }
-                                            if assets.count > 0 {
-                                                assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-                                                    let imageData = (image ?? UIImage()).jpegData(compressionQuality: 0.82)
-                                                    let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: .jpeg(imageData), header: nil)
-                                                    StoreStruct.client.run(request) { (statuses) in
-                                                        print(statuses)
-                                                        if let stat = (statuses.value) {
-                                                            print(stat)
-                                                            print("updated")
-                                                            DispatchQueue.main.async {
-                                                                NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
-                                                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                                                    let notification = UINotificationFeedbackGenerator()
-                                                                    notification.notificationOccurred(.success)
-                                                                }
-                                                                let statusAlert = StatusAlert()
-                                                                statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
-                                                                statusAlert.title = "Updated Display Picture".localized
-                                                                statusAlert.contentColor = Colours.grayDark
-                                                                statusAlert.message = StoreStruct.currentUser.displayName
-                                                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                                                            }
-                                                        }
-                                                    }
-
-                                                })
-                                            }
-                                        }
-                                        pickerController.showsCancelButton = true
-                                        pickerController.maxSelectableCount = 1
-                                        pickerController.allowMultipleTypes = false
-                                        pickerController.assetType = .allPhotos
-                                        self.present(pickerController, animated: true) {}
-                                    }
-
-
-                                    .action(.default("Edit Header"), image: nil) { (action, ind) in
-                                        print(action, ind)
-
-                                        let pickerController = DKImagePickerController()
-                                        pickerController.didSelectAssets = { (assets: [DKAsset]) in
-                                            if assets.count == 0 {
-                                                return
-                                            }
-                                            if assets.count > 0 {
-                                                assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-                                                    print("fetched header")
-                                                    let imageData = (image ?? UIImage()).jpegData(compressionQuality: 0.5)
-                                                    let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: .jpeg(imageData))
-                                                    StoreStruct.client.run(request) { (statuses) in
-                                                        print("fetched header 2")
-                                                        print(statuses)
-                                                        if let stat = (statuses.value) {
-                                                            print(stat)
-                                                            print("updated")
-                                                            print(stat.headerStatic)
-                                                            DispatchQueue.main.async {
-                                                                NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
-                                                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                                                    let notification = UINotificationFeedbackGenerator()
-                                                                    notification.notificationOccurred(.success)
-                                                                }
-                                                                let statusAlert = StatusAlert()
-                                                                statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
-                                                                statusAlert.title = "Updated Header".localized
-                                                                statusAlert.contentColor = Colours.grayDark
-                                                                statusAlert.message = StoreStruct.currentUser.displayName
-                                                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                                                            }
-                                                        }
-                                                    }
-
-                                                })
-                                            }
-                                        }
-                                        pickerController.showsCancelButton = true
-                                        pickerController.maxSelectableCount = 1
-                                        pickerController.allowMultipleTypes = false
-                                        pickerController.assetType = .allPhotos
-                                        self.present(pickerController, animated: true) {}
-                                    }
-                                    
-                                    
-                                    .action(.default("Edit Display Name"), image: nil) { (action, ind) in
-                                        print(action, ind)
-                                        
-                                        let controller = NewProfileViewController()
-                                        controller.editListName = self.chosenUser.displayName
-                                        self.present(controller, animated: true, completion: nil)
-                                        
-                                    }
-                                    .action(.default("Edit Note"), image: nil) { (action, ind) in
-                                        print(action, ind)
-                                        
-                                        let controller = NewProfileNoteViewController()
-                                        controller.editListName = self.chosenUser.note.stripHTML()
-                                        self.present(controller, animated: true, completion: nil)
-                                        
-                                    }
-                                    .action(.default(lockText), image: nil) { (action, ind) in
-                                        
-                                        //bh2
-                                        
-                                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: nil, locked: isItGoingToLock)
+                .action(.default("Edit Profile".localized), image: UIImage(named: "profile")) { (action, ind) in
+                    print(action, ind)
+                    
+                    Alertift.actionSheet()
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark)
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        
+                        
+                        
+                        // uncomment below for profile avatar and header
+                        .action(.default("Edit Display Picture"), image: nil) { (action, ind) in
+                            print(action, ind)
+                            
+                            let pickerController = DKImagePickerController()
+                            pickerController.didSelectAssets = { (assets: [DKAsset]) in
+                                if assets.count == 0 {
+                                    return
+                                }
+                                if assets.count > 0 {
+                                    assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+                                        let imageData = (image ?? UIImage()).jpegData(compressionQuality: 0.82)
+                                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: .jpeg(imageData), header: nil)
                                         StoreStruct.client.run(request) { (statuses) in
+                                            print(statuses)
                                             if let stat = (statuses.value) {
-                                                print(stat.locked)
-                                                print("togglelock")
+                                                print(stat)
+                                                print("updated")
                                                 DispatchQueue.main.async {
                                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
                                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2116,33 +2013,136 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                                         notification.notificationOccurred(.success)
                                                     }
                                                     let statusAlert = StatusAlert()
-                                                    if stat.locked {
-                                                        statusAlert.image = UIImage(named: "largelock")?.maskWithColor(color: Colours.grayDark)
-                                                    } else {
-                                                        statusAlert.image = UIImage(named: "largeunlock")?.maskWithColor(color: Colours.grayDark)
-                                                    }
-                                                    statusAlert.title = isItGoingToLockText.localized
+                                                    statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
+                                                    statusAlert.title = "Updated Display Picture".localized
                                                     statusAlert.contentColor = Colours.grayDark
                                                     statusAlert.message = StoreStruct.currentUser.displayName
                                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                                        statusAlert.show()
+                                                    }
                                                 }
                                             }
                                         }
                                         
+                                    })
+                                }
+                            }
+                            pickerController.showsCancelButton = true
+                            pickerController.maxSelectableCount = 1
+                            pickerController.allowMultipleTypes = false
+                            pickerController.assetType = .allPhotos
+                            self.present(pickerController, animated: true) {}
+                        }
+                        
+                        
+                        .action(.default("Edit Header"), image: nil) { (action, ind) in
+                            print(action, ind)
+                            
+                            let pickerController = DKImagePickerController()
+                            pickerController.didSelectAssets = { (assets: [DKAsset]) in
+                                if assets.count == 0 {
+                                    return
+                                }
+                                if assets.count > 0 {
+                                    assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+                                        print("fetched header")
+                                        let imageData = (image ?? UIImage()).jpegData(compressionQuality: 0.5)
+                                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: .jpeg(imageData))
+                                        StoreStruct.client.run(request) { (statuses) in
+                                            print("fetched header 2")
+                                            print(statuses)
+                                            if let stat = (statuses.value) {
+                                                print(stat)
+                                                print("updated")
+                                                print(stat.headerStatic)
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                                        let notification = UINotificationFeedbackGenerator()
+                                                        notification.notificationOccurred(.success)
+                                                    }
+                                                    let statusAlert = StatusAlert()
+                                                    statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
+                                                    statusAlert.title = "Updated Header".localized
+                                                    statusAlert.contentColor = Colours.grayDark
+                                                    statusAlert.message = StoreStruct.currentUser.displayName
+                                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                        statusAlert.show()
+                                                    }
+                                                }
+                                            }
+                                        }
                                         
-                                    }
-                                    .action(.cancel("Dismiss"))
-                                    .finally { action, index in
-                                        if action.style == .cancel {
-                                            return
+                                    })
+                                }
+                            }
+                            pickerController.showsCancelButton = true
+                            pickerController.maxSelectableCount = 1
+                            pickerController.allowMultipleTypes = false
+                            pickerController.assetType = .allPhotos
+                            self.present(pickerController, animated: true) {}
+                        }
+                        
+                        
+                        .action(.default("Edit Display Name"), image: nil) { (action, ind) in
+                            print(action, ind)
+                            
+                            let controller = NewProfileViewController()
+                            controller.editListName = self.chosenUser.displayName
+                            self.present(controller, animated: true, completion: nil)
+                            
+                        }
+                        .action(.default("Edit Note"), image: nil) { (action, ind) in
+                            print(action, ind)
+                            
+                            let controller = NewProfileNoteViewController()
+                            controller.editListName = self.chosenUser.note.stripHTML()
+                            self.present(controller, animated: true, completion: nil)
+                            
+                        }
+                        .action(.default(lockText), image: nil) { (action, ind) in
+                            
+                            //bh2
+                            
+                            let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: nil, locked: isItGoingToLock)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    print(stat.locked)
+                                    print("togglelock")
+                                    DispatchQueue.main.async {
+                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                            let notification = UINotificationFeedbackGenerator()
+                                            notification.notificationOccurred(.success)
+                                        }
+                                        let statusAlert = StatusAlert()
+                                        if stat.locked {
+                                            statusAlert.image = UIImage(named: "largelock")?.maskWithColor(color: Colours.grayDark)
+                                        } else {
+                                            statusAlert.image = UIImage(named: "largeunlock")?.maskWithColor(color: Colours.grayDark)
+                                        }
+                                        statusAlert.title = isItGoingToLockText.localized
+                                        statusAlert.contentColor = Colours.grayDark
+                                        statusAlert.message = StoreStruct.currentUser.displayName
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                            statusAlert.show()
                                         }
                                     }
-                                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.contentView ?? self.view)
-                                    .show(on: self)
-                
+                                }
                             }
+                            
+                            
+                        }
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
+                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.contentView ?? self.view)
+                        .show(on: self)
+                    
+                }
                 .action(.default("Add Account".localized), image: UIImage(named: "addac1")) { (action, ind) in
                     print(action, ind)
                     
@@ -2205,29 +2205,29 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     if action.style == .cancel {
                         return
                     }
-                }
+            }
             
             if self.chosenUser.locked {
-            z1.action(.default("Follow Requests"), image: UIImage(named: "profile")) { (action, ind) in
-//                print("test")
-                
-                
-                let request = FollowRequests.all()
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        DispatchQueue.main.async {
-                        
-                            let controller = FollowRequestsViewController()
-                            controller.currentTags = stat
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        
+                z1.action(.default("Follow Requests"), image: UIImage(named: "profile")) { (action, ind) in
+                    //                print("test")
+                    
+                    
+                    let request = FollowRequests.all()
+                    StoreStruct.client.run(request) { (statuses) in
+                        if let stat = (statuses.value) {
+                            DispatchQueue.main.async {
+                                
+                                let controller = FollowRequestsViewController()
+                                controller.currentTags = stat
+                                self.navigationController?.pushViewController(controller, animated: true)
+                                
+                            }
                         }
                     }
-                }
-                
-                
-                
-                
+                    
+                    
+                    
+                    
                 }
             }
             
@@ -2236,7 +2236,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             
             z1.popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.contentView ?? self.view)
-                z1.show(on: self)
+            z1.show(on: self)
             
         }
         
@@ -2259,179 +2259,15 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     self.ai.stopAnimating()
                     self.ai.removeFromSuperview()
-                
-                if self.fromOtherUser == true {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCell", for: indexPath) as! ProfileHeaderCell
-                    cell.configure(self.chosenUser)
-                    cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
-                    cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
-                    cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
-                    cell.follows.tag = indexPath.row
-                    cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
-                    cell.backgroundColor = Colours.tabSelected
                     
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = ThirdViewController()
-                        if string == StoreStruct.currentUser.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        let request = Accounts.search(query: string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            self.safariVC = SFSafariViewController(url: z)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        } else {
-                            self.safariVC = SFSafariViewController(url: url)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    
-                    
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.tabSelected
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                } else {
-                    
-                    
-                    if self.chosenUser.fields.count > 0 {
-                    
-                    
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCellOwn", for: indexPath) as! ProfileHeaderCellOwn
-                    cell.configure(self.chosenUser)
-                    cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
-                    cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
-                    cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
-                    cell.follows.tag = indexPath.row
-                    cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
-                    cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
-                    cell.backgroundColor = Colours.tabSelected
-                    
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = ThirdViewController()
-                        if string == StoreStruct.currentUser.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        let request = Accounts.search(query: string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            self.safariVC = SFSafariViewController(url: z)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        } else {
-                            self.safariVC = SFSafariViewController(url: url)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.tabSelected
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                        
-                        
-                    } else {
-                        
-                        
-                        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCellOwn2", for: indexPath) as! ProfileHeaderCellOwn2
+                    if self.fromOtherUser == true {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCell", for: indexPath) as! ProfileHeaderCell
                         cell.configure(self.chosenUser)
                         cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
                         cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
-                        cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
                         cell.backgroundColor = Colours.tabSelected
                         
                         cell.toot.handleMentionTap { (string) in
@@ -2496,17 +2332,181 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             }
                         }
                         
+                        
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.tabSelected
                         cell.selectedBackgroundView = bgColorView
                         return cell
+                    } else {
+                        
+                        
+//                        if self.chosenUser.fields.count > 0 {
+                        
+                            
+                            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCellOwn", for: indexPath) as! ProfileHeaderCellOwn
+                            cell.configure(self.chosenUser)
+                            cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
+                            cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
+                            cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
+                            cell.follows.tag = indexPath.row
+                            cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
+                            cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
+                            cell.backgroundColor = Colours.tabSelected
+                            
+                            cell.toot.handleMentionTap { (string) in
+                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                    let selection = UISelectionFeedbackGenerator()
+                                    selection.selectionChanged()
+                                }
+                                
+                                let controller = ThirdViewController()
+                                if string == StoreStruct.currentUser.username {} else {
+                                    controller.fromOtherUser = true
+                                }
+                                let request = Accounts.search(query: string)
+                                StoreStruct.client.run(request) { (statuses) in
+                                    if let stat = (statuses.value) {
+                                        if stat.count > 0 {
+                                            controller.userIDtoUse = stat[0].id
+                                            DispatchQueue.main.async {
+                                                self.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            cell.toot.handleURLTap { (url) in
+                                // safari
+                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                    let selection = UISelectionFeedbackGenerator()
+                                    selection.selectionChanged()
+                                }
+                                
+                                if url.absoluteString.hasPrefix(".") {
+                                    let z = URL(string: String(url.absoluteString.dropFirst()))!
+                                    self.safariVC = SFSafariViewController(url: z)
+                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                    self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    self.safariVC = SFSafariViewController(url: url)
+                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                    self.present(self.safariVC!, animated: true, completion: nil)
+                                }
+                            }
+                            cell.toot.handleHashtagTap { (string) in
+                                // hash
+                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                    let selection = UISelectionFeedbackGenerator()
+                                    selection.selectionChanged()
+                                }
+                                
+                                let controller = HashtagViewController()
+                                controller.currentTagTitle = string
+                                let request = Timelines.tag(string)
+                                StoreStruct.client.run(request) { (statuses) in
+                                    if let stat = (statuses.value) {
+                                        controller.currentTags = stat
+                                        DispatchQueue.main.async {
+                                            self.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            let bgColorView = UIView()
+                            bgColorView.backgroundColor = Colours.tabSelected
+                            cell.selectedBackgroundView = bgColorView
+                            return cell
+                            
+                            
+//                        } else {
+//
+//
+//                            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCellOwn2", for: indexPath) as! ProfileHeaderCellOwn2
+//                            cell.configure(self.chosenUser)
+//                            cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
+//                            cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
+//                            cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
+//                            cell.follows.tag = indexPath.row
+//                            cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
+//                            cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
+//                            cell.backgroundColor = Colours.tabSelected
+//
+//                            cell.toot.handleMentionTap { (string) in
+//                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//                                    let selection = UISelectionFeedbackGenerator()
+//                                    selection.selectionChanged()
+//                                }
+//
+//                                let controller = ThirdViewController()
+//                                if string == StoreStruct.currentUser.username {} else {
+//                                    controller.fromOtherUser = true
+//                                }
+//                                let request = Accounts.search(query: string)
+//                                StoreStruct.client.run(request) { (statuses) in
+//                                    if let stat = (statuses.value) {
+//                                        if stat.count > 0 {
+//                                            controller.userIDtoUse = stat[0].id
+//                                            DispatchQueue.main.async {
+//                                                self.navigationController?.pushViewController(controller, animated: true)
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                            cell.toot.handleURLTap { (url) in
+//                                // safari
+//                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//                                    let selection = UISelectionFeedbackGenerator()
+//                                    selection.selectionChanged()
+//                                }
+//
+//                                if url.absoluteString.hasPrefix(".") {
+//                                    let z = URL(string: String(url.absoluteString.dropFirst()))!
+//                                    self.safariVC = SFSafariViewController(url: z)
+//                                    self.safariVC?.preferredBarTintColor = Colours.white
+//                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+//                                    self.present(self.safariVC!, animated: true, completion: nil)
+//                                } else {
+//                                    self.safariVC = SFSafariViewController(url: url)
+//                                    self.safariVC?.preferredBarTintColor = Colours.white
+//                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+//                                    self.present(self.safariVC!, animated: true, completion: nil)
+//                                }
+//                            }
+//                            cell.toot.handleHashtagTap { (string) in
+//                                // hash
+//                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//                                    let selection = UISelectionFeedbackGenerator()
+//                                    selection.selectionChanged()
+//                                }
+//
+//                                let controller = HashtagViewController()
+//                                controller.currentTagTitle = string
+//                                let request = Timelines.tag(string)
+//                                StoreStruct.client.run(request) { (statuses) in
+//                                    if let stat = (statuses.value) {
+//                                        controller.currentTags = stat
+//                                        DispatchQueue.main.async {
+//                                            self.navigationController?.pushViewController(controller, animated: true)
+//                                        }
+//                                    }
+//                                }
+//                            }
+//
+//                            let bgColorView = UIView()
+//                            bgColorView.backgroundColor = Colours.tabSelected
+//                            cell.selectedBackgroundView = bgColorView
+//                            return cell
+//
+//
+//                        }
+//
                         
                         
                     }
-                        
-                        
-                        
-                }
                     
                 }
             } else {
@@ -2593,84 +2593,84 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     
                     if self.chosenUser != nil || self.chosenUser.fields.count > 0 {
-                    
-                    
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCellOwn", for: indexPath) as! ProfileHeaderCellOwn
-                    cell.configure(self.chosenUser)
-                    cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
-                    cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
-                    cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
-                    cell.follows.tag = indexPath.row
-                    cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
-                    cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
-                    cell.backgroundColor = Colours.tabSelected
-                    
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
                         
-                        let controller = ThirdViewController()
-                        if string == StoreStruct.currentUser.username {} else {
-                            controller.fromOtherUser = true
+                        
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCellOwn", for: indexPath) as! ProfileHeaderCellOwn
+                        cell.configure(self.chosenUser)
+                        cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
+                        cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
+                        cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
+                        cell.follows.tag = indexPath.row
+                        cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
+                        cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
+                        cell.backgroundColor = Colours.tabSelected
+                        
+                        cell.toot.handleMentionTap { (string) in
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            let controller = ThirdViewController()
+                            if string == StoreStruct.currentUser.username {} else {
+                                controller.fromOtherUser = true
+                            }
+                            let request = Accounts.search(query: string)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    if stat.count > 0 {
+                                        controller.userIDtoUse = stat[0].id
+                                        DispatchQueue.main.async {
+                                            self.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                    }
+                                }
+                            }
                         }
-                        let request = Accounts.search(query: string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
+                        cell.toot.handleURLTap { (url) in
+                            // safari
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            if url.absoluteString.hasPrefix(".") {
+                                let z = URL(string: String(url.absoluteString.dropFirst()))!
+                                self.safariVC = SFSafariViewController(url: z)
+                                self.safariVC?.preferredBarTintColor = Colours.white
+                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            } else {
+                                self.safariVC = SFSafariViewController(url: url)
+                                self.safariVC?.preferredBarTintColor = Colours.white
+                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
+                        }
+                        cell.toot.handleHashtagTap { (string) in
+                            // hash
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            let controller = HashtagViewController()
+                            controller.currentTagTitle = string
+                            let request = Timelines.tag(string)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    controller.currentTags = stat
                                     DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     }
                                 }
                             }
                         }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
                         
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            self.safariVC = SFSafariViewController(url: z)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        } else {
-                            self.safariVC = SFSafariViewController(url: url)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.tabSelected
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.tabSelected
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
                         
                     } else {
                         
@@ -2779,7 +2779,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             var zzz = self.profileStatuses
             if self.currentIndex == 0 {
-               zzz = self.profileStatuses
+                zzz = self.profileStatuses
             } else {
                 zzz = self.profileStatuses2
             }
@@ -2806,8 +2806,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 cell.toot.textColor = Colours.black
                 cell.toot.handleMentionTap { (string) in
                     // mention
-//                    let selection = UISelectionFeedbackGenerator()
-//                    selection.selectionChanged()
+                    //                    let selection = UISelectionFeedbackGenerator()
+                    //                    selection.selectionChanged()
                     
                     let controller = ThirdViewController()
                     if string == StoreStruct.currentUser.username {} else {
@@ -3083,12 +3083,12 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 selection.selectionChanged()
             }
             
-        let controller = ThirdViewController()
-        if sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username == StoreStruct.currentUser.username {} else {
-            controller.fromOtherUser = true
-        }
-        controller.userIDtoUse = sto[sender.tag].reblog?.account.id ?? sto[sender.tag].account.id
-        self.navigationController?.pushViewController(controller, animated: true)
+            let controller = ThirdViewController()
+            if sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username == StoreStruct.currentUser.username {} else {
+                controller.fromOtherUser = true
+            }
+            controller.userIDtoUse = sto[sender.tag].reblog?.account.id ?? sto[sender.tag].account.id
+            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
     
@@ -3152,23 +3152,23 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             
             if self.chosenUser.fields.count > 0 {
-        
-        let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn
-        var images = [SKPhoto]()
-        
-        let photo = SKPhoto.photoWithImageURL(sto[0].reblog?.account.headerStatic ?? sto[0].account.headerStatic, holder: cell.headerImageView.currentImage ?? nil)
-        photo.shouldCachePhotoURLImage = true
-        images.append(photo)
-        
-        let originImage = sender.currentImage
-        if originImage != nil {
-            let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.headerImageView)
-            browser.displayToolbar = true
-            browser.displayAction = true
-            browser.delegate = self
-            browser.initializePageIndex(0)
-            present(browser, animated: true, completion: nil)
-        }
+                
+                let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn
+                var images = [SKPhoto]()
+                
+                let photo = SKPhoto.photoWithImageURL(sto[0].reblog?.account.headerStatic ?? sto[0].account.headerStatic, holder: cell.headerImageView.currentImage ?? nil)
+                photo.shouldCachePhotoURLImage = true
+                images.append(photo)
+                
+                let originImage = sender.currentImage
+                if originImage != nil {
+                    let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.headerImageView)
+                    browser.displayToolbar = true
+                    browser.displayAction = true
+                    browser.delegate = self
+                    browser.initializePageIndex(0)
+                    present(browser, animated: true, completion: nil)
+                }
                 
                 
             } else {
@@ -3228,22 +3228,22 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         } else {
             if self.chosenUser.fields.count > 0 {
-            let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn
-            var images = [SKPhoto]()
-            
-            let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatar, holder: nil)
-            photo.shouldCachePhotoURLImage = true
-            images.append(photo)
-            
-            let originImage = sender.currentImage
-            if originImage != nil {
-                let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.profileImageView)
-                browser.displayToolbar = true
-                browser.displayAction = true
-                browser.delegate = self
-                browser.initializePageIndex(0)
-                present(browser, animated: true, completion: nil)
-            }
+                let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn
+                var images = [SKPhoto]()
+                
+                let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatar, holder: nil)
+                photo.shouldCachePhotoURLImage = true
+                images.append(photo)
+                
+                let originImage = sender.currentImage
+                if originImage != nil {
+                    let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.profileImageView)
+                    browser.displayToolbar = true
+                    browser.displayAction = true
+                    browser.delegate = self
+                    browser.initializePageIndex(0)
+                    present(browser, animated: true, completion: nil)
+                }
                 
             } else {
                 
@@ -3316,16 +3316,16 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     images.append(photo)
                 } else {
-                let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
-                photo.shouldCachePhotoURLImage = true
-                if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                    photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                    photo.caption = y.description ?? ""
-                } else {
-                    photo.caption = ""
+                    let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                    photo.shouldCachePhotoURLImage = true
+                    if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                        photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                        photo.caption = y.description ?? ""
+                    } else {
+                        photo.caption = ""
                     }
-                images.append(photo)
+                    images.append(photo)
                 }
                 coun += 1
             }
@@ -3762,7 +3762,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-       
+        
         var sto = self.profileStatuses
         if self.currentIndex == 0 {
             sto = self.profileStatuses
@@ -4046,7 +4046,18 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                         
                         
-                        Alertift.actionSheet(title: nil, message: nil)
+                        let wordsInThis = sto[indexPath.row].content.stripHTML().components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+                        let newSeconds = Double(wordsInThis) * 0.38
+                        var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
+                        if newSeconds >= 60 {
+                            if Int(newSeconds) % 60 == 0 {
+                                newSecondsText = "\(Int(newSeconds/60)) minutes average reading time"
+                            } else {
+                                newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
+                            }
+                        }
+                        
+                        Alertift.actionSheet(title: nil, message: newSecondsText)
                             .backgroundColor(Colours.white)
                             .titleTextColor(Colours.grayDark)
                             .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -4069,8 +4080,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                             statusAlert.contentColor = Colours.grayDark
                                             statusAlert.message = "This Toot"
                                             if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                                statusAlert.show()
+                                            }
                                         }
                                     }
                                 } else {
@@ -4088,8 +4099,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                             statusAlert.contentColor = Colours.grayDark
                                             statusAlert.message = "This Toot"
                                             if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                                statusAlert.show()
+                                            }
                                         }
                                     }
                                 }
@@ -4131,12 +4142,74 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "Your Toot"
                                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                            statusAlert.show()
+                                        }
                                         //sto.remove(at: indexPath.row)
                                         //self.tableView.reloadData()
                                     }
                                 }
+                            }
+                            .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
+                                print(action, ind)
+                                
+                                let unreserved = "-._~/?"
+                                let allowed = NSMutableCharacterSet.alphanumeric()
+                                allowed.addCharacters(in: unreserved)
+                                let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                                print("0001")
+                                print(bodyText)
+                                let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
+                                let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
+                                var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
+                                trans = trans!.replacingOccurrences(of: "\n\n", with: "%20")
+                                print("0002")
+                                print(trans)
+                                let langStr = Locale.current.languageCode
+                                let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
+                                guard let requestUrl = URL(string:urlString) else {
+                                    return
+                                }
+                                let request = URLRequest(url:requestUrl)
+                                let task = URLSession.shared.dataTask(with: request) {
+                                    (data, response, error) in
+                                    if error == nil, let usableData = data {
+                                        do {
+                                            let json = try JSONSerialization.jsonObject(with: usableData, options: .mutableContainers) as! [Any]
+                                            
+                                            var translatedText = ""
+                                            for i in (json[0] as! [Any]) {
+                                                translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
+                                            }
+                                            
+                                            Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
+                                                .backgroundColor(Colours.white)
+                                                .titleTextColor(Colours.grayDark)
+                                                .messageTextColor(Colours.grayDark)
+                                                .messageTextAlignment(.left)
+                                                .titleTextAlignment(.left)
+                                                .action(.cancel("Dismiss"))
+                                                .finally { action, index in
+                                                    if action.style == .cancel {
+                                                        return
+                                                    }
+                                                }
+                                                .show(on: self)
+                                        } catch let error as NSError {
+                                            print(error)
+                                        }
+                                        
+                                    }
+                                }
+                                task.resume()
+                            }
+                            .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                                print(action, ind)
+                                
+                                let controller = ComposeViewController()
+                                controller.inReply = []
+                                controller.inReplyText = ""
+                                controller.filledTextFieldText = sto[indexPath.row].content.stripHTML()
+                                self.present(controller, animated: true, completion: nil)
                             }
                             .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
                                 print(action, ind)
@@ -4183,10 +4256,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                             vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 0)
                                             self.present(vc, animated: true, completion: nil)
                                         } else {
-                                        let vc = VisualActivityViewController(text: bodyText)
-                                        vc.previewNumberOfLines = 5
-                                        vc.previewFont = UIFont.systemFont(ofSize: 14)
-                                        self.present(vc, animated: true, completion: nil)
+                                            let vc = VisualActivityViewController(text: bodyText)
+                                            vc.previewNumberOfLines = 5
+                                            vc.previewFont = UIFont.systemFont(ofSize: 14)
+                                            self.present(vc, animated: true, completion: nil)
                                         }
                                         
                                     }
@@ -4223,339 +4296,359 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                         
                     } else {
-                    
-                    
-                    
-                    
-                    Alertift.actionSheet(title: nil, message: nil)
-                        .backgroundColor(Colours.white)
-                        .titleTextColor(Colours.grayDark)
-                        .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
-                        .messageTextAlignment(.left)
-                        .titleTextAlignment(.left)
-                        .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
-                            print(action, ind)
-                            
-                            if isMuted == false {
-                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                    let notification = UINotificationFeedbackGenerator()
-                                    notification.notificationOccurred(.success)
-                                }
-                                let statusAlert = StatusAlert()
-                                statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
-                                statusAlert.title = "Muted".localized
-                                statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                                
-                                let request = Accounts.mute(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
-                                StoreStruct.client.run(request) { (statuses) in
-                                    if let stat = (statuses.value) {
-                                        print("muted")
-                                        print(stat)
-                                    }
-                                }
+                        
+                        
+                        
+                        
+                        let wordsInThis = sto[indexPath.row].content.stripHTML().components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+                        let newSeconds = Double(wordsInThis) * 0.38
+                        var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
+                        if newSeconds >= 60 {
+                            if Int(newSeconds) % 60 == 0 {
+                                newSecondsText = "\(Int(newSeconds/60)) minutes average reading time"
                             } else {
-                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                    let notification = UINotificationFeedbackGenerator()
-                                    notification.notificationOccurred(.success)
-                                }
-                                let statusAlert = StatusAlert()
-                                statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
-                                statusAlert.title = "Unmuted".localized
-                                statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                                
-                                let request = Accounts.unmute(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
-                                StoreStruct.client.run(request) { (statuses) in
-                                    if let stat = (statuses.value) {
-                                        print("unmuted")
-                                        print(stat)
-                                    }
-                                }
+                                newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
                             }
-                            
                         }
-                        .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
-                            print(action, ind)
-                            
-                            if isBlocked == false {
-                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                    let notification = UINotificationFeedbackGenerator()
-                                    notification.notificationOccurred(.success)
-                                }
-                                let statusAlert = StatusAlert()
-                                statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
-                                statusAlert.title = "Blocked".localized
-                                statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                        
+                        Alertift.actionSheet(title: nil, message: newSecondsText)
+                            .backgroundColor(Colours.white)
+                            .titleTextColor(Colours.grayDark)
+                            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                            .messageTextAlignment(.left)
+                            .titleTextAlignment(.left)
+                            .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
+                                print(action, ind)
                                 
-                                let request = Accounts.block(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
-                                StoreStruct.client.run(request) { (statuses) in
-                                    if let stat = (statuses.value) {
-                                        print("blocked")
-                                        print(stat)
-                                    }
-                                }
-                            } else {
-                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                    let notification = UINotificationFeedbackGenerator()
-                                    notification.notificationOccurred(.success)
-                                }
-                                let statusAlert = StatusAlert()
-                                statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
-                                statusAlert.title = "Unblocked".localized
-                                statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                                
-                                let request = Accounts.unblock(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
-                                StoreStruct.client.run(request) { (statuses) in
-                                    if let stat = (statuses.value) {
-                                        print("unblocked")
-                                        print(stat)
-                                    }
-                                }
-                            }
-                            
-                        }
-                        .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
-                            print(action, ind)
-                            
-                            Alertift.actionSheet()
-                                .backgroundColor(Colours.white)
-                                .titleTextColor(Colours.grayDark)
-                                .messageTextColor(Colours.grayDark)
-                                .messageTextAlignment(.left)
-                                .titleTextAlignment(.left)
-                                .action(.default("Harassment"), image: nil) { (action, ind) in
-                                    print(action, ind)
-                                    
+                                if isMuted == false {
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
                                     }
-                                    
                                     let statusAlert = StatusAlert()
-                                    statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                                    statusAlert.title = "Reported".localized
+                                    statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
+                                    statusAlert.title = "Muted".localized
                                     statusAlert.contentColor = Colours.grayDark
-                                    statusAlert.message = "Harassment"
+                                    statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                        statusAlert.show()
+                                    }
                                     
-                                    let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Harassment")
+                                    let request = Accounts.mute(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            print("muted")
                                             print(stat)
                                         }
                                     }
-                                    
-                                }
-                                .action(.default("No Content Warning"), image: nil) { (action, ind) in
-                                    print(action, ind)
-                                    
+                                } else {
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
                                     }
-                                    
                                     let statusAlert = StatusAlert()
-                                    statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                                    statusAlert.title = "Reported".localized
+                                    statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
+                                    statusAlert.title = "Unmuted".localized
                                     statusAlert.contentColor = Colours.grayDark
-                                    statusAlert.message = "No Content Warning"
+                                    statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                        statusAlert.show()
+                                    }
                                     
-                                    let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "No Content Warning")
+                                    let request = Accounts.unmute(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            print("unmuted")
                                             print(stat)
                                         }
                                     }
-                                    
                                 }
-                                .action(.default("Spam"), image: nil) { (action, ind) in
-                                    print(action, ind)
-                                    
-                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                        let notification = UINotificationFeedbackGenerator()
-                                        notification.notificationOccurred(.success)
-                                    }
-                                    
-                                    let statusAlert = StatusAlert()
-                                    statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                                    statusAlert.title = "Reported".localized
-                                    statusAlert.contentColor = Colours.grayDark
-                                    statusAlert.message = "Spam"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                                    
-                                    let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Spam")
-                                    StoreStruct.client.run(request) { (statuses) in
-                                        if let stat = (statuses.value) {
-                                            print("reported")
-                                            print(stat)
-                                        }
-                                    }
-                                    
-                                }
-                                .action(.cancel("Dismiss"))
-                                .finally { action, index in
-                                    if action.style == .cancel {
-                                        return
-                                    }
-                                }
-                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
-                                .show(on: self)
-                            
-                            
-                        }
-                        .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                            print(action, ind)
-                            
-                            let unreserved = "-._~/?"
-                            let allowed = NSMutableCharacterSet.alphanumeric()
-                            allowed.addCharacters(in: unreserved)
-                            let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
-                            let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
-                            var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
-                            trans = trans!.replacingOccurrences(of: "\n", with: "%20")
-                            let langStr = Locale.current.languageCode
-                            let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
-                            guard let requestUrl = URL(string:urlString) else {
-                                return
+                                
                             }
-                            let request = URLRequest(url:requestUrl)
-                            let task = URLSession.shared.dataTask(with: request) {
-                                (data, response, error) in
-                                if error == nil, let usableData = data {
-                                    do {
-                                        let json = try JSONSerialization.jsonObject(with: usableData, options: .mutableContainers) as! [Any]
+                            .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
+                                print(action, ind)
+                                
+                                if isBlocked == false {
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
+                                    }
+                                    let statusAlert = StatusAlert()
+                                    statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
+                                    statusAlert.title = "Blocked".localized
+                                    statusAlert.contentColor = Colours.grayDark
+                                    statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        statusAlert.show()
+                                    }
+                                    
+                                    let request = Accounts.block(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
+                                    StoreStruct.client.run(request) { (statuses) in
+                                        if let stat = (statuses.value) {
+                                            print("blocked")
+                                            print(stat)
+                                        }
+                                    }
+                                } else {
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
+                                    }
+                                    let statusAlert = StatusAlert()
+                                    statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
+                                    statusAlert.title = "Unblocked".localized
+                                    statusAlert.contentColor = Colours.grayDark
+                                    statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        statusAlert.show()
+                                    }
+                                    
+                                    let request = Accounts.unblock(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
+                                    StoreStruct.client.run(request) { (statuses) in
+                                        if let stat = (statuses.value) {
+                                            print("unblocked")
+                                            print(stat)
+                                        }
+                                    }
+                                }
+                                
+                            }
+                            .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
+                                print(action, ind)
+                                
+                                Alertift.actionSheet()
+                                    .backgroundColor(Colours.white)
+                                    .titleTextColor(Colours.grayDark)
+                                    .messageTextColor(Colours.grayDark)
+                                    .messageTextAlignment(.left)
+                                    .titleTextAlignment(.left)
+                                    .action(.default("Harassment"), image: nil) { (action, ind) in
+                                        print(action, ind)
                                         
-                                        var translatedText = ""
-                                        for i in (json[0] as! [Any]) {
-                                            translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
+                                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                            let notification = UINotificationFeedbackGenerator()
+                                            notification.notificationOccurred(.success)
                                         }
                                         
-                                        Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
-                                            .backgroundColor(Colours.white)
-                                            .titleTextColor(Colours.grayDark)
-                                            .messageTextColor(Colours.grayDark)
-                                            .messageTextAlignment(.left)
-                                            .titleTextAlignment(.left)
-                                            .action(.cancel("Dismiss"))
-                                            .finally { action, index in
-                                                if action.style == .cancel {
-                                                    return
-                                                }
+                                        let statusAlert = StatusAlert()
+                                        statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                                        statusAlert.title = "Reported".localized
+                                        statusAlert.contentColor = Colours.grayDark
+                                        statusAlert.message = "Harassment"
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                            statusAlert.show()
+                                        }
+                                        
+                                        let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Harassment")
+                                        StoreStruct.client.run(request) { (statuses) in
+                                            if let stat = (statuses.value) {
+                                                print("reported")
+                                                print(stat)
                                             }
-                                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
-                                            .show(on: self)
-                                    } catch let error as NSError {
-                                        print(error)
+                                        }
+                                        
                                     }
-                                    
-                                }
+                                    .action(.default("No Content Warning"), image: nil) { (action, ind) in
+                                        print(action, ind)
+                                        
+                                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                            let notification = UINotificationFeedbackGenerator()
+                                            notification.notificationOccurred(.success)
+                                        }
+                                        
+                                        let statusAlert = StatusAlert()
+                                        statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                                        statusAlert.title = "Reported".localized
+                                        statusAlert.contentColor = Colours.grayDark
+                                        statusAlert.message = "No Content Warning"
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                            statusAlert.show()
+                                        }
+                                        
+                                        let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "No Content Warning")
+                                        StoreStruct.client.run(request) { (statuses) in
+                                            if let stat = (statuses.value) {
+                                                print("reported")
+                                                print(stat)
+                                            }
+                                        }
+                                        
+                                    }
+                                    .action(.default("Spam"), image: nil) { (action, ind) in
+                                        print(action, ind)
+                                        
+                                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                            let notification = UINotificationFeedbackGenerator()
+                                            notification.notificationOccurred(.success)
+                                        }
+                                        
+                                        let statusAlert = StatusAlert()
+                                        statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                                        statusAlert.title = "Reported".localized
+                                        statusAlert.contentColor = Colours.grayDark
+                                        statusAlert.message = "Spam"
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                            statusAlert.show()
+                                        }
+                                        
+                                        let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Spam")
+                                        StoreStruct.client.run(request) { (statuses) in
+                                            if let stat = (statuses.value) {
+                                                print("reported")
+                                                print(stat)
+                                            }
+                                        }
+                                        
+                                    }
+                                    .action(.cancel("Dismiss"))
+                                    .finally { action, index in
+                                        if action.style == .cancel {
+                                            return
+                                        }
+                                    }
+                                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                                    .show(on: self)
+                                
+                                
                             }
-                            task.resume()
-                        }
-                        .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
-                            
-                            
-                            
-                            
-                            Alertift.actionSheet()
-                                .backgroundColor(Colours.white)
-                                .titleTextColor(Colours.grayDark)
-                                .messageTextColor(Colours.grayDark)
-                                .messageTextAlignment(.left)
-                                .titleTextAlignment(.left)
-                                .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
-                                    
-                                    if let myWebsite = sto[indexPath.row].reblog?.url ?? sto[indexPath.row].url {
-                                        let objectsToShare = [myWebsite]
+                            .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
+                                print(action, ind)
+                                
+                                let unreserved = "-._~/?"
+                                let allowed = NSMutableCharacterSet.alphanumeric()
+                                allowed.addCharacters(in: unreserved)
+                                let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                                let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
+                                let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
+                                var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
+                                trans = trans!.replacingOccurrences(of: "\n", with: "%20")
+                                let langStr = Locale.current.languageCode
+                                let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
+                                guard let requestUrl = URL(string:urlString) else {
+                                    return
+                                }
+                                let request = URLRequest(url:requestUrl)
+                                let task = URLSession.shared.dataTask(with: request) {
+                                    (data, response, error) in
+                                    if error == nil, let usableData = data {
+                                        do {
+                                            let json = try JSONSerialization.jsonObject(with: usableData, options: .mutableContainers) as! [Any]
+                                            
+                                            var translatedText = ""
+                                            for i in (json[0] as! [Any]) {
+                                                translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
+                                            }
+                                            
+                                            Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
+                                                .backgroundColor(Colours.white)
+                                                .titleTextColor(Colours.grayDark)
+                                                .messageTextColor(Colours.grayDark)
+                                                .messageTextAlignment(.left)
+                                                .titleTextAlignment(.left)
+                                                .action(.cancel("Dismiss"))
+                                                .finally { action, index in
+                                                    if action.style == .cancel {
+                                                        return
+                                                    }
+                                                }
+                                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                                                .show(on: self)
+                                        } catch let error as NSError {
+                                            print(error)
+                                        }
+                                        
+                                    }
+                                }
+                                task.resume()
+                            }
+                            .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                                print(action, ind)
+                                
+                                let controller = ComposeViewController()
+                                controller.inReply = []
+                                controller.inReplyText = ""
+                                controller.filledTextFieldText = sto[indexPath.row].content.stripHTML()
+                                self.present(controller, animated: true, completion: nil)
+                            }
+                            .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
+                                print(action, ind)
+                                
+                                
+                                
+                                
+                                Alertift.actionSheet()
+                                    .backgroundColor(Colours.white)
+                                    .titleTextColor(Colours.grayDark)
+                                    .messageTextColor(Colours.grayDark)
+                                    .messageTextAlignment(.left)
+                                    .titleTextAlignment(.left)
+                                    .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
+                                        print(action, ind)
+                                        
+                                        if let myWebsite = sto[indexPath.row].reblog?.url ?? sto[indexPath.row].url {
+                                            let objectsToShare = [myWebsite]
+                                            if UIDevice.current.userInterfaceIdiom == .pad {
+                                                let vc = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                                vc.popoverPresentationController?.sourceView = self.view
+                                                vc.popoverPresentationController?.sourceRect = CGRect(x: (self.view.bounds.midX), y: (self.view.bounds.midY), width: 0, height: 0)
+                                                vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 0)
+                                                self.present(vc, animated: true, completion: nil)
+                                            } else {
+                                                let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                                vc.previewNumberOfLines = 5
+                                                vc.previewFont = UIFont.systemFont(ofSize: 14)
+                                                self.present(vc, animated: true, completion: nil)
+                                            }
+                                        }
+                                    }
+                                    .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
+                                        print(action, ind)
+                                        
+                                        let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                                         if UIDevice.current.userInterfaceIdiom == .pad {
-                                            let vc = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                            let vc = UIActivityViewController(activityItems: [bodyText], applicationActivities: nil)
                                             vc.popoverPresentationController?.sourceView = self.view
                                             vc.popoverPresentationController?.sourceRect = CGRect(x: (self.view.bounds.midX), y: (self.view.bounds.midY), width: 0, height: 0)
                                             vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 0)
                                             self.present(vc, animated: true, completion: nil)
                                         } else {
-                                        let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                                        vc.previewNumberOfLines = 5
-                                        vc.previewFont = UIFont.systemFont(ofSize: 14)
-                                        self.present(vc, animated: true, completion: nil)
+                                            let vc = VisualActivityViewController(text: bodyText)
+                                            vc.previewNumberOfLines = 5
+                                            vc.previewFont = UIFont.systemFont(ofSize: 14)
+                                            self.present(vc, animated: true, completion: nil)
+                                        }
+                                        
+                                    }
+                                    .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
+                                        print(action, ind)
+                                        
+                                        let controller = NewQRViewController()
+                                        controller.ur = sto[indexPath.row].reblog?.url?.absoluteString ?? sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
+                                        self.present(controller, animated: true, completion: nil)
+                                        
+                                    }
+                                    .action(.cancel("Dismiss"))
+                                    .finally { action, index in
+                                        if action.style == .cancel {
+                                            return
                                         }
                                     }
-                                }
-                                .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
-                                    
-                                    let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                                    if UIDevice.current.userInterfaceIdiom == .pad {
-                                        let vc = UIActivityViewController(activityItems: [bodyText], applicationActivities: nil)
-                                        vc.popoverPresentationController?.sourceView = self.view
-                                        vc.popoverPresentationController?.sourceRect = CGRect(x: (self.view.bounds.midX), y: (self.view.bounds.midY), width: 0, height: 0)
-                                        vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 0)
-                                        self.present(vc, animated: true, completion: nil)
-                                    } else {
-                                    let vc = VisualActivityViewController(text: bodyText)
-                                    vc.previewNumberOfLines = 5
-                                    vc.previewFont = UIFont.systemFont(ofSize: 14)
-                                    self.present(vc, animated: true, completion: nil)
-                                    }
-                                    
-                                }
-                                .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
-                                    
-                                    let controller = NewQRViewController()
-                                    controller.ur = sto[indexPath.row].reblog?.url?.absoluteString ?? sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
-                                    self.present(controller, animated: true, completion: nil)
-                                    
-                                }
-                                .action(.cancel("Dismiss"))
-                                .finally { action, index in
-                                    if action.style == .cancel {
-                                        return
-                                    }
-                                }
-                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
-                                .show(on: self)
-                            
-                            
-                            
-                            
-                        }
-                        .action(.cancel("Dismiss"))
-                        .finally { action, index in
-                            if action.style == .cancel {
-                                return
+                                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                                    .show(on: self)
+                                
+                                
+                                
+                                
                             }
-                        }
-                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
-                        .show(on: self)
-                    
+                            .action(.cancel("Dismiss"))
+                            .finally { action, index in
+                                if action.style == .cancel {
+                                    return
+                                }
+                            }
+                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                            .show(on: self)
+                        
                     }
                     
                     if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
@@ -4608,9 +4701,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         if indexPath.section == 2 {
-        let controller = DetailViewController()
-        controller.mainStatus.append(zzz[indexPath.row])
-        self.navigationController?.pushViewController(controller, animated: true)
+            let controller = DetailViewController()
+            controller.mainStatus.append(zzz[indexPath.row])
+            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
     
@@ -4626,24 +4719,24 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func fetchMoreProfile() {
         
         if self.currentIndex == 0 {
-        
-        let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .max(id: self.profileStatuses.last?.id ?? "", limit: 5000))
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                print("first \(self.lastThing)")
-                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {
-                    print("do nothing")
-                } else {
-                    self.lastThing = stat.first?.id ?? ""
-                    print("second \(self.lastThing)")
-                self.profileStatuses = self.profileStatuses + stat
-                DispatchQueue.main.async {
-                    self.profileStatuses = self.profileStatuses.removeDuplicates()
-                    self.tableView.reloadData()
-                }
+            
+            let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .max(id: self.profileStatuses.last?.id ?? "", limit: 5000))
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    print("first \(self.lastThing)")
+                    if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {
+                        print("do nothing")
+                    } else {
+                        self.lastThing = stat.first?.id ?? ""
+                        print("second \(self.lastThing)")
+                        self.profileStatuses = self.profileStatuses + stat
+                        DispatchQueue.main.async {
+                            self.profileStatuses = self.profileStatuses.removeDuplicates()
+                            self.tableView.reloadData()
+                        }
+                    }
                 }
             }
-        }
             
         } else {
             
@@ -4679,9 +4772,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func refreshCont() {
         
         if self.currentIndex == 0 {
-        
-        let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: self.profileStatuses.first?.id ?? "", limit: 5000))
-//        DispatchQueue.global(qos: .userInitiated).async {
+            
+            let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: self.profileStatuses.first?.id ?? "", limit: 5000))
+            //        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     self.profileStatuses = stat + self.profileStatuses
@@ -4693,7 +4786,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                 }
             }
-//        }
+            //        }
             
         } else {
             
@@ -4705,19 +4798,19 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
             let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: self.profileStatuses2.first?.id ?? "", limit: 5000))
-//            DispatchQueue.global(qos: .userInitiated).async {
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        self.profileStatuses2 = stat + self.profileStatuses2
-                        DispatchQueue.main.async {
-                            
-                            self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
-                            self.tableView.reloadData()
-                            self.refreshControl.endRefreshing()
-                        }
+            //            DispatchQueue.global(qos: .userInitiated).async {
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    self.profileStatuses2 = stat + self.profileStatuses2
+                    DispatchQueue.main.async {
+                        
+                        self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
+                        self.tableView.reloadData()
+                        self.refreshControl.endRefreshing()
                     }
                 }
-//            }
+            }
+            //            }
             
         }
     }
