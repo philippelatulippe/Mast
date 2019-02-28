@@ -1203,11 +1203,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let vw = UIView()
         vw.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40)
-        let title = UILabel()
-        title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
         if section == 0 {
             return nil
         } else if section == 1 {
+            let title = UILabel()
+            title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
             title.textColor = Colours.grayDark2
             title.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
             vw.addSubview(title)
@@ -1946,6 +1946,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 self.navigationController?.pushViewController(controller, animated: true)
                             }
                         }
+                    }
+                }
+                .action(.default("Search".localized), image: UIImage(named: "search2")) { (action, ind) in
+                    print(action, ind)
+                    DispatchQueue.main.async {
+                        let controller = SearchViewController()
+                        self.navigationController?.pushViewController(controller, animated: true)
                     }
                 }
                 .action(.default("Instance Details".localized), image: UIImage(named: "instats")) { (action, ind) in
@@ -3300,7 +3307,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else {
             
             let indexPath = IndexPath(row: sender.tag, section: 2)
-            let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+            if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCellImage {
             var images = [SKPhoto]()
             var coun = 0
             for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
@@ -3338,7 +3345,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 browser.initializePageIndex(0)
                 present(browser, animated: true, completion: nil)
             }
-            
+        }
         }
     }
     

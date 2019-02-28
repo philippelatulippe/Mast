@@ -133,7 +133,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         if self.currentIndex == 1 {
             
             DispatchQueue.main.async {
-                if StoreStruct.notifications.count > 0 {
+                if StoreStruct.notificationsMentions.count > 0 {
                     let indexPath = IndexPath(row: 0, section: 0)
                     self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
                 }

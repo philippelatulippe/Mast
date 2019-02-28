@@ -2887,7 +2887,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 case 2688:
                     backBit = self.view.bounds.width - 66
                     tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
-                case 2436, 1792:
+                case 2436:
+                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
+                case 1792:
+                    backBit = self.view.bounds.width - 64
                     tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
                 case 1136:
                     backBit = self.view.bounds.width - 54
