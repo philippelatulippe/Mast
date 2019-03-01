@@ -3040,10 +3040,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         if UIApplication.shared.canOpenURL(twUrl) {
                             UIApplication.shared.open(twUrl, options: [:], completionHandler: nil)
                         } else {
-                            self.safariVC = SFSafariViewController(url: twUrlWeb)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
+                            UIApplication.shared.open(twUrlWeb, options: [.universalLinksOnly: true]) { (success) in
+                                if !success {
+                                    self.safariVC = SFSafariViewController(url: twUrlWeb)
+                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                    self.present(self.safariVC!, animated: true, completion: nil)
+                                }
+                            }
                         }
                     }
                     .action(.default("Mast Twitter".localized)) { (action, ind) in
@@ -3053,10 +3057,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         if UIApplication.shared.canOpenURL(twUrl) {
                             UIApplication.shared.open(twUrl, options: [:], completionHandler: nil)
                         } else {
-                            self.safariVC = SFSafariViewController(url: twUrlWeb)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
+                            UIApplication.shared.open(twUrlWeb, options: [.universalLinksOnly: true]) { (success) in
+                                if !success {
+                                    self.safariVC = SFSafariViewController(url: twUrlWeb)
+                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                    self.present(self.safariVC!, animated: true, completion: nil)
+                                }
+                            }
                         }
                     }
                     .action(.cancel("Dismiss"))

@@ -1079,6 +1079,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cellfs", for: indexPath) as! FollowersCell
                     cell.configure(StoreStruct.statusSearchUser[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
+                    cell.profileImageView.isUserInteractionEnabled = false
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = UIColor.white
                     cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
@@ -1090,6 +1091,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as! MainFeedCell
                     cell.profileImageView.tag = indexPath.row
+                    cell.profileImageView.isUserInteractionEnabled = false
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = UIColor.white
                     cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
@@ -1107,6 +1109,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as! MainFeedCell
                     cell.configure(StoreStruct.statusSearch[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
+                        cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = UIColor.white
                     cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
@@ -1121,6 +1124,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         let cell = tableView.dequeueReusableCell(withIdentifier: "cell002", for: indexPath) as! MainFeedCellImage
                         cell.configure(StoreStruct.statusSearch[indexPath.row])
                         cell.profileImageView.tag = indexPath.row
+                        cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.backgroundColor = Colours.grayDark3
                         cell.userName.textColor = UIColor.white
                         cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
@@ -1315,6 +1319,24 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
           */
     }
     
+    
+    @objc func didTouchProfile(sender: UIButton) {
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let selection = UISelectionFeedbackGenerator()
+            selection.selectionChanged()
+        }
+        
+        self.dismissOverlayProperSearch()
+        
+        StoreStruct.searchIndex = sender.tag
+        if StoreStruct.currentPage == 0 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "searchPro"), object: self)
+        } else if StoreStruct.currentPage == 1 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "searchPro2"), object: self)
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "searchPro3"), object: self)
+        }
+    }
     
     func members(ind: Int) {
         self.dismissOverlayProper()
@@ -2248,8 +2270,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         DispatchQueue.main.async {
                             StoreStruct.shared.newInstance?.redirect = "com.shi.mastodon://addNewInstance".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
                             let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.shared.newInstance!.redirect)&scope=read%20write%20follow%20push&client_id=\(application.clientID)")!
-                            self.safariVC = SFSafariViewController(url: queryURL)
-                            self.present(self.safariVC!, animated: true, completion: nil)
+                            UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
+                                if !success {
+                                    self.safariVC = SFSafariViewController(url: queryURL)
+                                    self.present(self.safariVC!, animated: true, completion: nil)
+                                }
+                            }
                         }
                     }
                 }
@@ -2286,8 +2312,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         DispatchQueue.main.async {
                             StoreStruct.shared.currentInstance.redirect = "com.shi.mastodon://success".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
                             let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.shared.currentInstance.redirect)&scope=read%20write%20follow%20push&client_id=\(application.clientID)")!
-                            self.safariVC = SFSafariViewController(url: queryURL)
-                            self.present(self.safariVC!, animated: true, completion: nil)
+                            UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
+                                if !success {
+                                    self.safariVC = SFSafariViewController(url: queryURL)
+                                    self.present(self.safariVC!, animated: true, completion: nil)
+                                }
+                            }
                         }
                     }
                 }

@@ -400,9 +400,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return self.allPrevious.count
         } else if section == 1 {
             
+            let newCont = "\(self.mainStatus[0].content) "
+            
             if (UserDefaults.standard.object(forKey: "linkcards") == nil) || (UserDefaults.standard.object(forKey: "linkcards") as! Int == 0) {
                 let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-                let matches = detector.matches(in: self.mainStatus[0].content, options: [], range: NSRange(location: 0, length: self.mainStatus[0].content.utf16.count))
+                let matches = detector.matches(in: newCont, options: [], range: NSRange(location: 0, length: newCont.utf16.count))
                 if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
                     return matches.count
                 }
@@ -448,15 +450,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     if url.absoluteString.hasPrefix(".") {
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
-                        self.safariVC = SFSafariViewController(url: z)
-                        self.safariVC?.preferredBarTintColor = Colours.white
-                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                        self.present(self.safariVC!, animated: true, completion: nil)
+                        UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                            if !success {
+                                self.safariVC = SFSafariViewController(url: z)
+                                self.safariVC?.preferredBarTintColor = Colours.white
+                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
+                        }
                     } else {
-                        self.safariVC = SFSafariViewController(url: url)
-                        self.safariVC?.preferredBarTintColor = Colours.white
-                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                        self.present(self.safariVC!, animated: true, completion: nil)
+                        UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                            if !success {
+                                self.safariVC = SFSafariViewController(url: url)
+                                self.safariVC?.preferredBarTintColor = Colours.white
+                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
+                        }
                     }
                 }
                 cell.toot.handleHashtagTap { (string) in
@@ -534,15 +544,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             if url.absoluteString.hasPrefix(".") {
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
-                                self.safariVC = SFSafariViewController(url: z)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: z)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             } else {
-                                self.safariVC = SFSafariViewController(url: url)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: url)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             }
                         }
                         cell.toot.handleHashtagTap { (string) in
@@ -628,15 +646,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             if url.absoluteString.hasPrefix(".") {
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
-                                self.safariVC = SFSafariViewController(url: z)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: z)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             } else {
-                                self.safariVC = SFSafariViewController(url: url)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: url)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             }
                         }
                         cell.toot.handleHashtagTap { (string) in
@@ -735,15 +761,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     if url.absoluteString.hasPrefix(".") {
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
-                        self.safariVC = SFSafariViewController(url: z)
-                        self.safariVC?.preferredBarTintColor = Colours.white
-                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                        self.present(self.safariVC!, animated: true, completion: nil)
+                        UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                            if !success {
+                                self.safariVC = SFSafariViewController(url: z)
+                                self.safariVC?.preferredBarTintColor = Colours.white
+                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
+                        }
                     } else {
-                        self.safariVC = SFSafariViewController(url: url)
-                        self.safariVC?.preferredBarTintColor = Colours.white
-                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                        self.present(self.safariVC!, animated: true, completion: nil)
+                        UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                            if !success {
+                                self.safariVC = SFSafariViewController(url: url)
+                                self.safariVC?.preferredBarTintColor = Colours.white
+                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
+                        }
                     }
                 }
                 cell.toot.handleHashtagTap { (string) in
@@ -833,15 +867,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     if url.absoluteString.hasPrefix(".") {
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
-                        self.safariVC = SFSafariViewController(url: z)
-                        self.safariVC?.preferredBarTintColor = Colours.white
-                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                        self.present(self.safariVC!, animated: true, completion: nil)
+                        UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                            if !success {
+                                self.safariVC = SFSafariViewController(url: z)
+                                self.safariVC?.preferredBarTintColor = Colours.white
+                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
+                        }
                     } else {
-                        self.safariVC = SFSafariViewController(url: url)
-                        self.safariVC?.preferredBarTintColor = Colours.white
-                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                        self.present(self.safariVC!, animated: true, completion: nil)
+                        UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                            if !success {
+                                self.safariVC = SFSafariViewController(url: url)
+                                self.safariVC?.preferredBarTintColor = Colours.white
+                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
+                        }
                     }
                 }
                 cell.toot.handleHashtagTap { (string) in
@@ -956,15 +998,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     if url.absoluteString.hasPrefix(".") {
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
-                        self.safariVC = SFSafariViewController(url: z)
-                        self.safariVC?.preferredBarTintColor = Colours.white
-                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                        self.present(self.safariVC!, animated: true, completion: nil)
+                        UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                            if !success {
+                                self.safariVC = SFSafariViewController(url: z)
+                                self.safariVC?.preferredBarTintColor = Colours.white
+                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
+                        }
                     } else {
-                        self.safariVC = SFSafariViewController(url: url)
-                        self.safariVC?.preferredBarTintColor = Colours.white
-                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                        self.present(self.safariVC!, animated: true, completion: nil)
+                        UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                            if !success {
+                                self.safariVC = SFSafariViewController(url: url)
+                                self.safariVC?.preferredBarTintColor = Colours.white
+                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                self.present(self.safariVC!, animated: true, completion: nil)
+                            }
+                        }
                     }
                 }
                 cell.toot.handleHashtagTap { (string) in
@@ -1043,15 +1093,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             if url.absoluteString.hasPrefix(".") {
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
-                                self.safariVC = SFSafariViewController(url: z)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: z)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             } else {
-                                self.safariVC = SFSafariViewController(url: url)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: url)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             }
                         }
                         cell.toot.handleHashtagTap { (string) in
@@ -1125,15 +1183,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             if url.absoluteString.hasPrefix(".") {
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
-                                self.safariVC = SFSafariViewController(url: z)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: z)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             } else {
-                                self.safariVC = SFSafariViewController(url: url)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: url)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             }
                         }
                         cell.toot.handleHashtagTap { (string) in
@@ -1222,15 +1288,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             if url.absoluteString.hasPrefix(".") {
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
-                                self.safariVC = SFSafariViewController(url: z)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: z)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             } else {
-                                self.safariVC = SFSafariViewController(url: url)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: url)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             }
                         }
                         cell.toot.handleHashtagTap { (string) in
@@ -1315,15 +1389,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             if url.absoluteString.hasPrefix(".") {
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
-                                self.safariVC = SFSafariViewController(url: z)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: z)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             } else {
-                                self.safariVC = SFSafariViewController(url: url)
-                                self.safariVC?.preferredBarTintColor = Colours.white
-                                self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                self.present(self.safariVC!, animated: true, completion: nil)
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        self.safariVC = SFSafariViewController(url: url)
+                                        self.safariVC?.preferredBarTintColor = Colours.white
+                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                        self.present(self.safariVC!, animated: true, completion: nil)
+                                    }
+                                }
                             }
                         }
                         cell.toot.handleHashtagTap { (string) in

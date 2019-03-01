@@ -106,10 +106,15 @@ class DetailCellLink: UITableViewCell {
                 selection.selectionChanged()
             }
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            self.safariVC = SFSafariViewController(url: URL(string: self.currentURL) ?? URL(string: "google.com")!)
-            self.safariVC?.preferredBarTintColor = Colours.white
-            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-            appDelegate.window?.rootViewController?.present(self.safariVC!, animated: true, completion: nil)
+            let url = URL(string: self.currentURL) ?? URL(string: "google.com")!
+            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                if !success {
+                    self.safariVC = SFSafariViewController(url: url)
+                    self.safariVC?.preferredBarTintColor = Colours.white
+                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                    appDelegate.window?.rootViewController?.present(self.safariVC!, animated: true, completion: nil)
+                }
+            }
         }
     }
 }
