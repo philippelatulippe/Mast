@@ -4756,8 +4756,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.refreshControl.endRefreshing()
                                 if newestC == 0 {
                                     
-                                } else {
-                                    self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                } else if StoreStruct.statusesHome.count >= newestC + 1 {
+                                    self.tableView.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
                                 }
                                 UIView.setAnimationsEnabled(true)
                             } else {
@@ -4829,8 +4829,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.refreshControl.endRefreshing()
                                 if newestC == 0 {
                                     
-                                } else {
-                                    self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                } else if StoreStruct.statusesLocal.count >= newestC + 1 {
+                                    self.tableViewL.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
                                 }
                                 UIView.setAnimationsEnabled(true)
                             } else {
@@ -4906,8 +4906,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.refreshControl.endRefreshing()
                                 if newestC == 0 {
                                     
-                                } else {
-                                    self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                } else if StoreStruct.statusesFederated.count >= newestC + 1 {
+                                    self.tableViewF.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
                                 }
                                 UIView.setAnimationsEnabled(true)
                                 
