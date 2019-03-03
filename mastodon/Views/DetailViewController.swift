@@ -23,6 +23,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var allPrevious: [Status] = []
     var allReplies: [Status] = []
     var isPeeking = false
+    var replyButton = UIButton()
+    var likeButton = UIButton()
+    var boostButton = UIButton()
+    var moreButton = UIButton()
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
@@ -122,19 +126,96 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
+        var offset = 88
+        var newoff = 45
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 2688:
+                offset = 88
+                newoff = 45
+            case 2436, 1792:
+                offset = 88
+                newoff = 45
+            default:
+                offset = 64
+                newoff = 24
+                tabHeight = Int(UITabBarController().tabBar.frame.size.height)
+            }
+        }
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
-        case .phone:
-            print("nothing")
         case .pad:
-            self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.frame.width), height: Int(self.view.frame.height))
+            self.tableView.translatesAutoresizingMaskIntoConstraints = false
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+            
+            if self.mainStatus.isEmpty {} else {
+            
+            replyButton.backgroundColor = Colours.white
+            likeButton.backgroundColor = Colours.white
+            boostButton.backgroundColor = Colours.white
+            moreButton.backgroundColor = Colours.white
+            
+            replyButton.layer.cornerRadius = 20
+            replyButton.layer.masksToBounds = true
+            likeButton.layer.cornerRadius = 20
+            likeButton.layer.masksToBounds = true
+            boostButton.layer.cornerRadius = 20
+            boostButton.layer.masksToBounds = true
+            moreButton.layer.cornerRadius = 20
+            moreButton.layer.masksToBounds = true
+            
+            replyButton.setImage(UIImage(named: "reply0"), for: .normal)
+            moreButton.setImage(UIImage(named: "more2"), for: .normal)
+            likeButton.setImage(UIImage(named: "like0"), for: .normal)
+            boostButton.setImage(UIImage(named: "boost0"), for: .normal)
+                
+            replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+            likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+            boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+            moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
+            
+            self.view.addSubview(self.moreButton)
+            self.view.addSubview(self.boostButton)
+            self.view.addSubview(self.likeButton)
+            self.view.addSubview(self.replyButton)
+            
+            self.moreButton.translatesAutoresizingMaskIntoConstraints = false
+            self.moreButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+            self.moreButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            self.moreButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+            self.moreButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+            
+            self.boostButton.translatesAutoresizingMaskIntoConstraints = false
+            self.boostButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+            self.boostButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            self.boostButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -85).isActive = true
+            self.boostButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+            
+            self.likeButton.translatesAutoresizingMaskIntoConstraints = false
+            self.likeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+            self.likeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            self.likeButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -150).isActive = true
+            self.likeButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+            
+            self.replyButton.translatesAutoresizingMaskIntoConstraints = false
+            self.replyButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+            self.replyButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            self.replyButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -215).isActive = true
+            self.replyButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+                
+            }
         default:
             print("nothing")
         }
         
-        
-        self.refDetailCount()
+        if self.mainStatus.isEmpty {} else {
+            self.refDetailCount()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -174,6 +255,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshCont), name: NSNotification.Name(rawValue: "refreshCont"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "splitload"), object: nil)
         
         self.view.backgroundColor = Colours.white
         splitViewController?.view.backgroundColor = Colours.cellQuote
@@ -211,14 +293,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            print("nothing")
-        case .pad:
-            self.title = "Detail"
-        default:
-            print("nothing")
-        }
+//        switch (deviceIdiom) {
+//        case .phone:
+//            print("nothing")
+//        case .pad:
+//            self.title = "Detail"
+//        default:
+//            print("nothing")
+//        }
         
         switch (deviceIdiom) {
         case .phone:
@@ -321,7 +403,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         //tableView.cr.beginHeaderRefresh()
         
-        
+        if self.mainStatus.isEmpty {} else {
         let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
@@ -336,7 +418,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         }
-        
+        }
         
         
         if (traitCollection.forceTouchCapability == .available) {
@@ -400,6 +482,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return self.allPrevious.count
         } else if section == 1 {
             
+            if self.mainStatus.isEmpty {
+                return 0
+            }
+            
             let newCont = "\(self.mainStatus[0].content) "
             
             if (UserDefaults.standard.object(forKey: "linkcards") == nil) || (UserDefaults.standard.object(forKey: "linkcards") as! Int == 0) {
@@ -421,6 +507,15 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            if indexPath.section == 2 {
+                return 0
+            }
+        default:
+            print("nothing")
+        }
         return UITableView.automaticDimension
     }
     
@@ -937,6 +1032,50 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             // Action buttons
             
+            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+            switch (deviceIdiom) {
+            case .pad:
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell10", for: indexPath) as! ActionButtonCell
+                cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                cell.boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
+                cell.replyButton.tag = indexPath.row
+                cell.likeButton.tag = indexPath.row
+                cell.boostButton.tag = indexPath.row
+                cell.moreButton.tag = indexPath.row
+                cell.replyButton.alpha = 0
+                cell.likeButton.alpha = 0
+                cell.boostButton.alpha = 0
+                cell.backgroundColor = Colours.white
+                let bgColorView = UIView()
+                bgColorView.backgroundColor = Colours.white
+                cell.selectedBackgroundView = bgColorView
+                return cell
+                
+            default:
+                
+                
+            
+            if self.mainStatus.isEmpty {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell10", for: indexPath) as! ActionButtonCell
+                cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                cell.boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
+                cell.replyButton.tag = indexPath.row
+                cell.likeButton.tag = indexPath.row
+                cell.boostButton.tag = indexPath.row
+                cell.moreButton.tag = indexPath.row
+                cell.backgroundColor = Colours.white
+                let bgColorView = UIView()
+                bgColorView.backgroundColor = Colours.white
+                cell.selectedBackgroundView = bgColorView
+                return cell
+                
+            } else {
+            
             if self.mainStatus[0].visibility == .direct {
                 
                 
@@ -973,8 +1112,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.selectedBackgroundView = bgColorView
             return cell
             
+                }
             }
             
+            }
         } else {
             
             // All replies
@@ -1902,6 +2043,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             return
                                         }
                                     }
+                                    .popover(anchorView: self.moreButton ?? self.view)
                                     .show(on: self)
                             } catch let error as NSError {
                                 print(error)
@@ -1966,7 +2108,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 return
                             }
                         }
-                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))?.contentView ?? self.view)
+                        .popover(anchorView: self.moreButton ?? self.view)
                         .show(on: self)
                     
                     
@@ -1979,7 +2121,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         return
                     }
                 }
-                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))?.contentView ?? self.view)
+                .popover(anchorView: self.moreButton ?? self.view)
                 .show(on: self)
             
             
@@ -2193,7 +2335,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.moreButton ?? self.view)
                     .show(on: self)
                 
                 
@@ -2238,7 +2380,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         return
                                     }
                                 }
-                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))?.contentView ?? self.view)
+                                .popover(anchorView: self.moreButton ?? self.view)
                                 .show(on: self)
                         } catch let error as NSError {
                             print(error)
@@ -2303,7 +2445,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.moreButton ?? self.view)
                     .show(on: self)
                 
                 
@@ -2315,7 +2457,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     return
                 }
             }
-            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 2))?.contentView ?? self.view)
+                .popover(anchorView: self.moreButton ?? self.view)
             .show(on: self)
         
         }
@@ -3751,6 +3893,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         return
                                     }
                                 }
+                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                 .show(on: self)
                             
                             
@@ -3763,6 +3906,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 return
                             }
                         }
+                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                         .show(on: self)
                     
                     
@@ -3978,6 +4122,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     return
                                 }
                             }
+                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                             .show(on: self)
                         
                         
@@ -4022,6 +4167,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                 return
                                             }
                                         }
+                                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                         .show(on: self)
                                 } catch let error as NSError {
                                     print(error)
@@ -4087,6 +4233,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     return
                                 }
                             }
+                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                             .show(on: self)
                         
                         
@@ -4098,6 +4245,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             return
                         }
                     }
+                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                     .show(on: self)
                 
                     

@@ -192,8 +192,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         case .phone:
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
         case .pad:
-            self.title = "Liked"
-            self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height))
+            print("nothing")
         default:
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
         }
@@ -208,6 +207,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.estimatedRowHeight = 89
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
+        
         
         //        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //        self.tableView.addSubview(refreshControl)
@@ -263,15 +263,6 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            print("n")
-        case .pad:
-            self.title = "Liked"
-            self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height))
-        default:
-            print("n")
-        }
         
         self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
         self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
@@ -286,6 +277,17 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
         self.loadLoadLoad()
+        
+        switch (deviceIdiom) {
+        case .pad:
+            self.tableView.translatesAutoresizingMaskIntoConstraints = false
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        default:
+            print("nothing")
+        }
     }
     
     
@@ -1528,6 +1530,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                                     return
                                                 }
                                             }
+                                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                             .show(on: self)
                                     } catch let error as NSError {
                                         print(error)
@@ -1608,6 +1611,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                         return
                                     }
                                 }
+                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                 .show(on: self)
                             
                             
@@ -1620,6 +1624,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 return
                             }
                         }
+                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                         .show(on: self)
                     
                     
@@ -1834,6 +1839,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                     return
                                 }
                             }
+                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                             .show(on: self)
                         
                         
@@ -1878,6 +1884,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                                 return
                                             }
                                         }
+                                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                         .show(on: self)
                                 } catch let error as NSError {
                                     print(error)
@@ -1958,6 +1965,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                     return
                                 }
                             }
+                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                             .show(on: self)
                         
                         
@@ -1970,6 +1978,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             return
                         }
                     }
+                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                     .show(on: self)
                     
                 }
@@ -2033,9 +2042,20 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         print(indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
         
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone :
         let controller = DetailViewController()
         controller.mainStatus.append(self.currentTags[indexPath.row])
         self.navigationController?.pushViewController(controller, animated: true)
+        case .pad:
+            let controller = DetailViewController()
+            controller.mainStatus.append(self.currentTags[indexPath.row])
+            self.splitViewController?.showDetailViewController(controller, sender: self)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+        default:
+            print("nothing")
+        }
     }
     
     var lastThing = ""

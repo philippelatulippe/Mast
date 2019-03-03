@@ -667,6 +667,42 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         }
     }
     
+    override var keyCommands: [UIKeyCommand]? {
+        //shortkeys
+        let op1 = UIKeyCommand(input: "1", modifierFlags: .control, action: #selector(b1Touched), discoverabilityTitle: "Home Timelines")
+        let op2 = UIKeyCommand(input: "2", modifierFlags: .control, action: #selector(b2Touched), discoverabilityTitle: "Notification Timelines")
+        let op3 = UIKeyCommand(input: "3", modifierFlags: .control, action: #selector(b3Touched), discoverabilityTitle: "Profile Timelines")
+        let listThing = UIKeyCommand(input: "l", modifierFlags: .control, action: #selector(b56Touched), discoverabilityTitle: "Lists")
+        let searchThing = UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(b4Touched), discoverabilityTitle: "Search")
+        let newToot = UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(switch44), discoverabilityTitle: "New Toot")
+        return [
+            op1, op2, op3, listThing, searchThing, newToot
+        ]
+    }
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    @objc func b1Touched() {
+        self.selectedIndex = 0
+    }
+    
+    @objc func b2Touched() {
+        self.selectedIndex = 1
+    }
+    
+    @objc func b3Touched() {
+        self.selectedIndex = 2
+    }
+    
+    @objc func b56Touched() {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "touchList"), object: nil)
+    }
+    
+    @objc func b4Touched() {
+        self.tSearch()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colours.white
@@ -693,6 +729,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         NotificationCenter.default.addObserver(self, selector: #selector(self.touchList), name: NSNotification.Name(rawValue: "touchList"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.signOut), name: NSNotification.Name(rawValue: "signOut"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.signOutNewInstance), name: NSNotification.Name(rawValue: "signOut2"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didTouchSearch), name: NSNotification.Name(rawValue: "searchthething"), object: nil)
         
         
         

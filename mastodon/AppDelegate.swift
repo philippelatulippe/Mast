@@ -126,8 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PushNotificationReceiver.setState(state: state)
         
         // change following when pushing to App Store or for local dev
-        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
-//        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
+//        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
+        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
         
         //create the url with URL
         let url = URL(string: "https://\(StoreStruct.shared.currentInstance.returnedText)/api/v1/push/subscription")! //change the url
@@ -273,15 +273,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.shared.currentInstance.authCode = y[1].description
-                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-                switch (deviceIdiom) {
-                case .phone:
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
-                case .pad:
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged2"), object: nil)
-                default:
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+//                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+//                switch (deviceIdiom) {
+//                case .phone:
+//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+//                case .pad:
+//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged2"), object: nil)
+//                default:
+//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+//                }
                 return true
             } else {
                 return true
@@ -362,15 +363,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.shared.currentInstance.authCode = y[1].description
-                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-                switch (deviceIdiom) {
-                case .phone:
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
-                case .pad:
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged2"), object: nil)
-                default:
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+//                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+//                switch (deviceIdiom) {
+//                case .phone:
+//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+//                case .pad:
+//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged2"), object: nil)
+//                default:
+//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+//                }
                 return true
             } else {
                 return true
@@ -420,53 +422,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = ViewController()
             self.window?.makeKeyAndVisible()
         } else {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            self.window!.backgroundColor = Colours.white
             
-            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-            switch (deviceIdiom) {
-            case .phone:
-                //            self.window?.rootViewController = ViewController()
-                //            self.window?.makeKeyAndVisible()
-                print("nothing")
-            case .pad:
-                self.window = UIWindow(frame: UIScreen.main.bounds)
-                self.window!.backgroundColor = Colours.white
-                
-                let splitViewController =  UISplitViewController()
-                let rootViewController = PadViewController()
-                
-                let splitViewController2 =  UISplitViewController()
-                let rootViewController2 = PadTimelinesViewController()
-                let rootNavigationController2 = UINavigationController(rootViewController: rootViewController2)
-                
-                
-                splitViewController2.viewControllers = [rootNavigationController2]
-                splitViewController2.preferredPrimaryColumnWidthFraction = 0.5
-                splitViewController2.preferredDisplayMode = .allVisible
-                
-                splitViewController.viewControllers = [rootViewController, splitViewController2]
-                splitViewController.minimumPrimaryColumnWidth = 80
-                splitViewController.maximumPrimaryColumnWidth = 80
-                splitViewController.preferredDisplayMode = .allVisible
-                
-                splitViewController.view.backgroundColor = Colours.white
-                splitViewController2.view.backgroundColor = Colours.white
-                rootNavigationController2.view.backgroundColor = Colours.white
-                self.window!.rootViewController = splitViewController
-                self.window!.makeKeyAndVisible()
-                
-                
-                UINavigationBar.appearance().shadowImage = UIImage()
-                UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-                UINavigationBar.appearance().backgroundColor = Colours.white
-                UINavigationBar.appearance().barTintColor = Colours.black
-                UINavigationBar.appearance().tintColor = Colours.black
-                UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
-            default:
-                //            self.window?.rootViewController = ViewController()
-                //            self.window?.makeKeyAndVisible()
-                print("nothing")
-            }
+            let splitViewController =  UISplitViewController()
+            let rootViewController = ViewController()
+            let detailViewController = DetailViewController()
+            splitViewController.viewControllers = [rootViewController, detailViewController]
+            splitViewController.preferredDisplayMode = .allVisible
+            self.window!.rootViewController = splitViewController
+            self.window!.makeKeyAndVisible()
             
+//            let splitViewController =  UISplitViewController()
+//            let rootViewController = PadViewController()
+//
+//            let splitViewController2 =  UISplitViewController()
+//            let rootViewController2 = PadTimelinesViewController()
+//            let rootNavigationController2 = UINavigationController(rootViewController: rootViewController2)
+//
+//
+//            splitViewController2.viewControllers = [rootNavigationController2]
+//            splitViewController2.preferredPrimaryColumnWidthFraction = 0.5
+//            splitViewController2.preferredDisplayMode = .allVisible
+//
+//            splitViewController.viewControllers = [rootViewController, splitViewController2]
+//            splitViewController.minimumPrimaryColumnWidth = 80
+//            splitViewController.maximumPrimaryColumnWidth = 80
+//            splitViewController.preferredDisplayMode = .allVisible
+//
+//            splitViewController.view.backgroundColor = Colours.white
+//            splitViewController2.view.backgroundColor = Colours.white
+//            rootNavigationController2.view.backgroundColor = Colours.white
+//            self.window!.rootViewController = splitViewController
+//            self.window!.makeKeyAndVisible()
+            
+            UINavigationBar.appearance().shadowImage = UIImage()
+            UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+            UINavigationBar.appearance().backgroundColor = Colours.white
+            UINavigationBar.appearance().barTintColor = Colours.black
+            UINavigationBar.appearance().tintColor = Colours.black
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
         }
         
         SwiftyGiphyAPI.shared.apiKey = SwiftyGiphyAPI.publicBetaKey
@@ -607,29 +602,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case .pad:
                 self.window = UIWindow(frame: UIScreen.main.bounds)
                 self.window!.backgroundColor = Colours.white
-                
+
                 let splitViewController =  UISplitViewController()
-                let rootViewController = PadViewController()
-                
-                let splitViewController2 =  UISplitViewController()
-                let rootViewController2 = PadTimelinesViewController()
-                let rootNavigationController2 = UINavigationController(rootViewController: rootViewController2)
-                
-                
-                splitViewController2.viewControllers = [rootNavigationController2]
-                splitViewController2.preferredPrimaryColumnWidthFraction = 0.5
-                splitViewController2.preferredDisplayMode = .allVisible
-                
-                splitViewController.viewControllers = [rootViewController, splitViewController2]
-                splitViewController.minimumPrimaryColumnWidth = 80
-                splitViewController.maximumPrimaryColumnWidth = 80
+                let rootViewController = ViewController()
+                let detailViewController = DetailViewController()
+                splitViewController.viewControllers = [rootViewController, detailViewController]
                 splitViewController.preferredDisplayMode = .allVisible
-                
-                splitViewController.view.backgroundColor = Colours.white
-                splitViewController2.view.backgroundColor = Colours.white
-                rootNavigationController2.view.backgroundColor = Colours.white
                 self.window!.rootViewController = splitViewController
                 self.window!.makeKeyAndVisible()
+                
+//                let splitViewController =  UISplitViewController()
+//                let rootViewController = PadViewController()
+//
+//                let splitViewController2 =  UISplitViewController()
+//                let rootViewController2 = PadTimelinesViewController()
+//                let rootNavigationController2 = UINavigationController(rootViewController: rootViewController2)
+//
+//
+//                splitViewController2.viewControllers = [rootNavigationController2]
+//                splitViewController2.preferredPrimaryColumnWidthFraction = 0.5
+//                splitViewController2.preferredDisplayMode = .allVisible
+//
+//                splitViewController.viewControllers = [rootViewController, splitViewController2]
+//                splitViewController.minimumPrimaryColumnWidth = 80
+//                splitViewController.maximumPrimaryColumnWidth = 80
+//                splitViewController.preferredDisplayMode = .allVisible
+//
+//                splitViewController.view.backgroundColor = Colours.white
+//                splitViewController2.view.backgroundColor = Colours.white
+//                rootNavigationController2.view.backgroundColor = Colours.white
+//                self.window!.rootViewController = splitViewController
+//                self.window!.makeKeyAndVisible()
                 
                 
                 UINavigationBar.appearance().shadowImage = UIImage()
@@ -721,28 +724,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case .pad:
                 self.window = UIWindow(frame: UIScreen.main.bounds)
                 self.window!.backgroundColor = Colours.white
-                
+
                 let splitViewController =  UISplitViewController()
-                let rootViewController = PadViewController()
-                
-                let splitViewController2 =  UISplitViewController()
-                let rootViewController2 = PadTimelinesViewController()
-                let rootNavigationController2 = UINavigationController(rootViewController: rootViewController2)
-                
-                splitViewController2.viewControllers = [rootNavigationController2]
-                splitViewController2.preferredPrimaryColumnWidthFraction = 0.5
-                splitViewController2.preferredDisplayMode = .allVisible
-                
-                splitViewController.viewControllers = [rootViewController, splitViewController2]
-                splitViewController.minimumPrimaryColumnWidth = 80
-                splitViewController.maximumPrimaryColumnWidth = 80
+                let rootViewController = ViewController()
+                let detailViewController = DetailViewController()
+                splitViewController.viewControllers = [rootViewController, detailViewController]
                 splitViewController.preferredDisplayMode = .allVisible
-                
-                splitViewController.view.backgroundColor = Colours.white
-                splitViewController2.view.backgroundColor = Colours.white
-                rootNavigationController2.view.backgroundColor = Colours.white
                 self.window!.rootViewController = splitViewController
                 self.window!.makeKeyAndVisible()
+                
+//                let splitViewController =  UISplitViewController()
+//                let rootViewController = PadViewController()
+//
+//                let splitViewController2 =  UISplitViewController()
+//                let rootViewController2 = PadTimelinesViewController()
+//                let rootNavigationController2 = UINavigationController(rootViewController: rootViewController2)
+//
+//                splitViewController2.viewControllers = [rootNavigationController2]
+//                splitViewController2.preferredPrimaryColumnWidthFraction = 0.5
+//                splitViewController2.preferredDisplayMode = .allVisible
+//
+//                splitViewController.viewControllers = [rootViewController, splitViewController2]
+//                splitViewController.minimumPrimaryColumnWidth = 80
+//                splitViewController.maximumPrimaryColumnWidth = 80
+//                splitViewController.preferredDisplayMode = .allVisible
+//
+//                splitViewController.view.backgroundColor = Colours.white
+//                splitViewController2.view.backgroundColor = Colours.white
+//                rootNavigationController2.view.backgroundColor = Colours.white
+//                self.window!.rootViewController = splitViewController
+//                self.window!.makeKeyAndVisible()
                 
                 
                 UINavigationBar.appearance().shadowImage = UIImage()

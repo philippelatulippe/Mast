@@ -26,6 +26,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     var countcount2 = 0
     var countcount5 = 0
     
+    var maybeDoOnce = false
+    var searchButton = MNGExpandedTouchAreaButton()
     var settingsButton = UIButton(type: .custom)
     var blurEffectViewMain = UIView()
     var blurEffect0 = UIBlurEffect()
@@ -191,9 +193,20 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     }
     
     @objc func search() {
+            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+            switch (deviceIdiom) {
+            case .phone :
         let controller = DetailViewController()
         controller.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
         self.navigationController?.pushViewController(controller, animated: true)
+            case .pad:
+                let controller = DetailViewController()
+                controller.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
+                self.splitViewController?.showDetailViewController(controller, sender: self)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+            default:
+                print("nothing")
+            }
     }
     
     @objc func searchUser() {
@@ -983,6 +996,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         crownControl3.hideCrown()
     }
     
+    @objc func search9() {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "searchthething"), object: self)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
@@ -1029,6 +1046,25 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             newSize = offset + 15
         }
         
+        
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone:
+            print("nothing")
+        case .pad:
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "segTheme"), object: self)
+            if self.maybeDoOnce == false {
+            self.searchButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: self.view.bounds.width - 50, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)))
+            self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+            self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            self.searchButton.adjustsImageWhenHighlighted = false
+            self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
+            self.navigationController?.view.addSubview(self.searchButton)
+                self.maybeDoOnce = true
+            }
+        default:
+            print("nothing")
+        }
         
         
         if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
@@ -3935,6 +3971,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         return
                                     }
                                 }
+                                .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                 .show(on: self)
                             
                             
@@ -3979,6 +4016,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                                     return
                                                 }
                                             }
+                                            .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                             .show(on: self)
                                     } catch let error as NSError {
                                         print(error)
@@ -4044,6 +4082,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         return
                                     }
                                 }
+                                .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                 .show(on: self)
                             
                             
@@ -4056,6 +4095,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 return
                             }
                         }
+                        .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                         .show(on: self)
                     
                     
@@ -4548,6 +4588,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         return
                                     }
                                 }
+                                .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                 .show(on: self)
                             
                             
@@ -4592,6 +4633,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                                     return
                                                 }
                                             }
+                                            .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                             .show(on: self)
                                     } catch let error as NSError {
                                         print(error)
@@ -4657,6 +4699,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         return
                                     }
                                 }
+                                .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                 .show(on: self)
                             
                             
@@ -4669,6 +4712,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 return
                             }
                         }
+                        .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                         .show(on: self)
                     
                     
@@ -4752,6 +4796,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowMent")
         }
         
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone :
         if self.currentIndex == 0 {
             if indexPath.section == 1 {
                 if StoreStruct.notifications[indexPath.row].type == .follow {
@@ -4768,15 +4815,44 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 }
             }
         } else if self.currentIndex == 5 {
-            
             let controller = DetailViewController()
             controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
             self.navigationController?.pushViewController(controller, animated: true)
         } else {
-            
             let controller = DetailViewController()
             controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
             self.navigationController?.pushViewController(controller, animated: true)
+        }
+        case .pad:
+            if self.currentIndex == 0 {
+                if indexPath.section == 1 {
+                    if StoreStruct.notifications[indexPath.row].type == .follow {
+                        let controller = ThirdViewController()
+                        if StoreStruct.notifications[indexPath.row].account.username == StoreStruct.currentUser.username {} else {
+                            controller.fromOtherUser = true
+                        }
+                        controller.userIDtoUse = StoreStruct.notifications[indexPath.row].account.id
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    } else {
+                        let controller = DetailViewController()
+                        controller.mainStatus.append(StoreStruct.notifications[indexPath.row].status!)
+                        self.splitViewController?.showDetailViewController(controller, sender: self)
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                    }
+                }
+            } else if self.currentIndex == 5 {
+                let controller = DetailViewController()
+                controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
+                self.splitViewController?.showDetailViewController(controller, sender: self)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+            } else {
+                let controller = DetailViewController()
+                controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
+                self.splitViewController?.showDetailViewController(controller, sender: self)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+            }
+        default:
+            print("nothing")
         }
     }
     
@@ -5130,12 +5206,32 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             segmentedControl.transitionStyle = .slide
             segmentedControl.delegate = self
             view.addSubview(segmentedControl)
-        } else {
-            if UIApplication.shared.isSplitOrSlideOver {
-                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
-            } else {
-                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(newoff), width: CGFloat(240), height: CGFloat(40)))
+            
+            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+            switch (deviceIdiom) {
+            case .pad:
+                self.tableView.translatesAutoresizingMaskIntoConstraints = false
+                self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
+                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
+                
+                self.tableView3.translatesAutoresizingMaskIntoConstraints = false
+                self.tableView3.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableView3.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableView3.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
+                self.tableView3.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
+                
+                self.tableView2.translatesAutoresizingMaskIntoConstraints = false
+                self.tableView2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableView2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
+                self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
+            default:
+                print("nothing")
             }
+        } else {
+            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
             segmentedControl.dataSource = self
             if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
                 segmentedControl.shapeStyle = .roundedRect
@@ -5148,6 +5244,30 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             segmentedControl.transitionStyle = .slide
             segmentedControl.delegate = self
             self.navigationController?.view.addSubview(segmentedControl)
+            
+            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+            switch (deviceIdiom) {
+            case .pad:
+                self.tableView.translatesAutoresizingMaskIntoConstraints = false
+                self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+                
+                self.tableView3.translatesAutoresizingMaskIntoConstraints = false
+                self.tableView3.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableView3.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableView3.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView3.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+                
+                self.tableView2.translatesAutoresizingMaskIntoConstraints = false
+                self.tableView2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableView2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+            default:
+                print("nothing")
+            }
         }
         
     }

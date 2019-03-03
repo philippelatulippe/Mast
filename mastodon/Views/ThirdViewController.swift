@@ -24,6 +24,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var profileImageView = UIImageView()
     var tableView = UITableView()
     var refreshControl = UIRefreshControl()
+    var maybeDoOnce = false
+    var searchButton = MNGExpandedTouchAreaButton()
     var chosenUser: Account!
     var profileStatuses: [Status] = []
     var profileStatuses2: [Status] = []
@@ -80,9 +82,20 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func search() {
+            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+            switch (deviceIdiom) {
+            case .phone :
         let controller = DetailViewController()
         controller.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
         self.navigationController?.pushViewController(controller, animated: true)
+            case .pad:
+                let controller = DetailViewController()
+                controller.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
+                self.splitViewController?.showDetailViewController(controller, sender: self)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+            default:
+                print("nothing")
+            }
     }
     
     @objc func searchUser() {
@@ -197,15 +210,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            self.ai.startAnimating()
-        case .pad:
-            print("nothing")
-        default:
-            self.ai.startAnimating()
-        }
+        self.ai.startAnimating()
     }
     
     @objc func tappedOnTag() {
@@ -587,7 +592,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
-        if UIApplication.shared.isSplitOrSlideOver || UIDevice.current.userInterfaceIdiom == .phone {
+//        if UIApplication.shared.isSplitOrSlideOver || UIDevice.current.userInterfaceIdiom == .phone {
             var settingsButton = MNGExpandedTouchAreaButton()
             settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 36, height: 36)))
             settingsButton.setImage(UIImage(named: "sett")?.maskWithColor(color: Colours.grayLight2), for: .normal)
@@ -599,9 +604,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let done = UIBarButtonItem.init(customView: settingsButton)
                 self.navigationItem.setLeftBarButton(done, animated: false)
             }
-        } else {
-            
-        }
+//        } else {
+//
+//        }
         
         
         
@@ -637,14 +642,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if UIApplication.shared.isSplitOrSlideOver {
             
         } else {
-            switch (deviceIdiom) {
-            case .phone:
-                self.title = ""
-            case .pad:
-                self.title = "Profile"
-            default:
-                self.title = ""
-            }
+            self.title = ""
         }
         self.tableView.register(ProfileHeaderCell.self, forCellReuseIdentifier: "ProfileHeaderCell")
         self.tableView.register(ProfileHeaderCellOwn.self, forCellReuseIdentifier: "ProfileHeaderCellOwn")
@@ -842,6 +840,108 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             zzz = true
         }
         
+        if self.fromOtherUser == true {
+            let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    if stat.isEmpty {
+                        
+                        let request09 = Accounts.account(id: self.userIDtoUse)
+                        StoreStruct.client.run(request09) { (statuses) in
+                            if let stat = (statuses.value) {
+                                DispatchQueue.main.async {
+                                    self.chosenUser = stat
+                                    self.tableView.reloadData()
+                                }
+                            }
+                        }
+                        
+                    } else {
+                        self.profileStatuses2 = stat
+                        self.chosenUser = self.profileStatuses2[0].account
+                        DispatchQueue.main.async {
+                            
+                            self.ai.alpha = 0
+                            self.ai.removeFromSuperview()
+                            self.tableView.reloadData()
+                        }
+                        
+                    }
+                }
+            }
+        } else {
+            
+            if StoreStruct.currentUser == nil {
+                let request2 = Accounts.currentUser()
+                StoreStruct.client.run(request2) { (statuses) in
+                    if let stat = (statuses.value) {
+                        StoreStruct.currentUser = stat
+                        
+                        
+                        self.userIDtoUse = StoreStruct.currentUser.id
+                        let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                
+                                if stat.isEmpty {
+                                    
+                                    DispatchQueue.main.async {
+                                        self.chosenUser = StoreStruct.currentUser
+                                        self.tableView.reloadData()
+                                    }
+                                    
+                                } else {
+                                    
+                                    self.profileStatuses2 = stat
+                                    self.chosenUser = self.profileStatuses2[0].account
+                                    DispatchQueue.main.async {
+                                        
+                                        self.ai.alpha = 0
+                                        self.ai.removeFromSuperview()
+                                        self.tableView.reloadData()
+                                    }
+                                    
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                }
+            } else {
+                
+                
+                self.userIDtoUse = StoreStruct.currentUser.id
+                let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
+                StoreStruct.client.run(request) { (statuses) in
+                    if let stat = (statuses.value) {
+                        
+                        if stat.isEmpty {
+                            
+                            DispatchQueue.main.async {
+                                self.chosenUser = StoreStruct.currentUser
+                                self.tableView.reloadData()
+                            }
+                            
+                        } else {
+                            
+                            self.profileStatuses2 = stat
+                            self.chosenUser = self.profileStatuses2[0].account
+                            DispatchQueue.main.async {
+                                
+                                self.ai.alpha = 0
+                                self.ai.removeFromSuperview()
+                                self.tableView.reloadData()
+                            }
+                            
+                        }
+                        
+                    }
+                }
+                
+                
+            }
+        }
         
         let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .min(id: "", limit: 5000))
         StoreStruct.client.run(request) { (statuses) in
@@ -882,6 +982,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     var zzz: [String:String] = [:]
+    
+    @objc func search9() {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "searchthething"), object: self)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -938,6 +1042,28 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print("nothing")
         }
         
+        switch (deviceIdiom) {
+        case .pad:
+            self.ai.startAnimating()
+            
+            self.tableView.translatesAutoresizingMaskIntoConstraints = false
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+            
+            if self.maybeDoOnce == false {
+            self.searchButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: self.view.bounds.width - 50, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)))
+            self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+            self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            self.searchButton.adjustsImageWhenHighlighted = false
+            self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
+            self.navigationController?.view.addSubview(self.searchButton)
+                self.maybeDoOnce = true
+            }
+        default:
+            print("nothing")
+        }
         
         
         /////////
@@ -4663,9 +4789,20 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         if indexPath.section == 2 {
+            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+            switch (deviceIdiom) {
+            case .phone :
             let controller = DetailViewController()
             controller.mainStatus.append(zzz[indexPath.row])
             self.navigationController?.pushViewController(controller, animated: true)
+            case .pad:
+                let controller = DetailViewController()
+                controller.mainStatus.append(zzz[indexPath.row])
+                self.splitViewController?.showDetailViewController(controller, sender: self)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+            default:
+                print("nothing")
+            }
         }
     }
     

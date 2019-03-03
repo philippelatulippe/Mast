@@ -74,17 +74,6 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
             self?.player.play()
         }
         
-        
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            print("nothing")
-        case .pad:
-            self.title = "Follows"
-        default:
-            print("nothing")
-        }
-        
         self.tableView.register(ScheduledCell.self, forCellReuseIdentifier: "ScheduledCell")
         self.tableView.register(ScheduledCellImage.self, forCellReuseIdentifier: "ScheduledCellImage")
         self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
@@ -119,10 +108,12 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
-        case .phone:
-            print("nothing")
         case .pad:
-            self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.frame.width), height: Int(self.view.frame.height))
+            self.tableView.translatesAutoresizingMaskIntoConstraints = false
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         default:
             print("nothing")
         }
@@ -347,6 +338,7 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
                     return
                 }
             }
+            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
             .show(on: self)
         
         

@@ -136,6 +136,7 @@
 		5318D3E8220CCC1D00E5C41A /* Pulsator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318D3E7220CCC1D00E5C41A /* Pulsator.swift */; };
 		5318D60821D508710091262E /* PadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318D60721D508710091262E /* PadListViewController.swift */; };
 		5318F56221877F8A00418159 /* PadLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318F56121877F8A00418159 /* PadLogInViewController.swift */; };
+		531937A4222AC7CE007B75BD /* PadTempSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531937A3222AC7CE007B75BD /* PadTempSecondViewController.swift */; };
 		531B04B9217111A100D31715 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 531B04B8217111A100D31715 /* Stickers.xcassets */; };
 		531B04BD217111A100D31715 /* MastStickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 531B04B62171119D00D31715 /* MastStickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		531B61C7221960B300DD3845 /* SwiftGCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531B61C1221960B200DD3845 /* SwiftGCM.swift */; };
@@ -707,6 +708,10 @@
 		53865FCB216CE5540041E686 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCA216CE5540041E686 /* Date.swift */; };
 		53865FCD216CF3540041E686 /* TootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCC216CF3540041E686 /* TootController.swift */; };
 		53865FCF216CFFA40041E686 /* LocalTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCE216CFFA40041E686 /* LocalTimelineController.swift */; };
+		538B214B222BDF9C0034977E /* FlickTypeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 538B214A222BDF9B0034977E /* FlickTypeKit.framework */; };
+		538B214C222BDF9C0034977E /* FlickTypeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 538B214A222BDF9B0034977E /* FlickTypeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		538B2150222BE00A0034977E /* FlickType.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 538B214F222BE0090034977E /* FlickType.storyboard */; };
+		538B2152222BE01A0034977E /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 538B2151222BE0190034977E /* keyboard.png */; };
 		539385862172A782002444FC /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539385852172A782002444FC /* NewProfileViewController.swift */; };
 		539385882172A9E4002444FC /* NewProfileNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539385872172A9E4002444FC /* NewProfileNoteViewController.swift */; };
 		5393858E21738054002444FC /* HashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393858D21738054002444FC /* HashType.swift */; };
@@ -847,6 +852,17 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		538B214D222BDF9C0034977E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				538B214C222BDF9C0034977E /* FlickTypeKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -981,6 +997,7 @@
 		5318D3E7220CCC1D00E5C41A /* Pulsator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pulsator.swift; sourceTree = "<group>"; };
 		5318D60721D508710091262E /* PadListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadListViewController.swift; sourceTree = "<group>"; };
 		5318F56121877F8A00418159 /* PadLogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLogInViewController.swift; sourceTree = "<group>"; };
+		531937A3222AC7CE007B75BD /* PadTempSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadTempSecondViewController.swift; sourceTree = "<group>"; };
 		531B04B62171119D00D31715 /* MastStickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MastStickers.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		531B04B8217111A100D31715 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
 		531B04BA217111A100D31715 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1590,6 +1607,9 @@
 		53865FCA216CE5540041E686 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		53865FCC216CF3540041E686 /* TootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootController.swift; sourceTree = "<group>"; };
 		53865FCE216CFFA40041E686 /* LocalTimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTimelineController.swift; sourceTree = "<group>"; };
+		538B214A222BDF9B0034977E /* FlickTypeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlickTypeKit.framework; path = FlickTypeKit/FlickTypeKit.framework; sourceTree = "<group>"; };
+		538B214F222BE0090034977E /* FlickType.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = FlickType.storyboard; path = "FlickTypeKit/App Resources/FlickType.storyboard"; sourceTree = "<group>"; };
+		538B2151222BE0190034977E /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keyboard.png; path = "FlickTypeKit/App Resources/keyboard.png"; sourceTree = "<group>"; };
 		539385852172A782002444FC /* NewProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
 		539385872172A9E4002444FC /* NewProfileNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileNoteViewController.swift; sourceTree = "<group>"; };
 		5393858D21738054002444FC /* HashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashType.swift; sourceTree = "<group>"; };
@@ -1679,6 +1699,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				538B214B222BDF9C0034977E /* FlickTypeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1837,6 +1858,7 @@
 				5318D60721D508710091262E /* PadListViewController.swift */,
 				531BD18F2188762500E12278 /* PadDetailViewController.swift */,
 				5317C79621DA2EE100746197 /* PadDetailViewController2.swift */,
+				531937A3222AC7CE007B75BD /* PadTempSecondViewController.swift */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
@@ -2684,6 +2706,9 @@
 		5373C9CB215173EE00676F3D = {
 			isa = PBXGroup;
 			children = (
+				538B2151222BE0190034977E /* keyboard.png */,
+				538B214F222BE0090034977E /* FlickType.storyboard */,
+				538B214A222BDF9B0034977E /* FlickTypeKit.framework */,
 				5373CA112151AC8D00676F3D /* Localizable.strings */,
 				5373C9D6215173EE00676F3D /* mastodon */,
 				5354BA1A2163F89E0094C545 /* MastShare */,
@@ -3290,9 +3315,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 536A4FE3216B843A00A3D483 /* Build configuration list for PBXNativeTarget "MastWatch Extension" */;
 			buildPhases = (
+				538B214E222BDFBB0034977E /* Run Script */,
 				536A4FC9216B843A00A3D483 /* Sources */,
 				536A4FCA216B843A00A3D483 /* Frameworks */,
 				536A4FCB216B843A00A3D483 /* Resources */,
+				538B214D222BDF9C0034977E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3469,6 +3496,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				538B2152222BE01A0034977E /* keyboard.png in Resources */,
+				538B2150222BE00A0034977E /* FlickType.storyboard in Resources */,
 				536A4FC7216B843A00A3D483 /* Assets.xcassets in Resources */,
 				536A4FC5216B843700A3D483 /* Interface.storyboard in Resources */,
 			);
@@ -3657,6 +3686,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mastodon/Pods-mastodon-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		538B214E222BDFBB0034977E /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -eu\n\"${PROJECT_DIR}/FlickTypeKit/_internal/select-framework.sh\" \"${PLATFORM_NAME}\"\n";
 		};
 		9AAFC006A0AA4FB1DA232B52 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4098,6 +4145,7 @@
 				53BC45C2215AE4F10092223F /* SettingsCellToggle.swift in Sources */,
 				5317C79721DA2EE100746197 /* PadDetailViewController2.swift in Sources */,
 				5316C88E219D94A00003AB97 /* GiphyImageSet.swift in Sources */,
+				531937A4222AC7CE007B75BD /* PadTempSecondViewController.swift in Sources */,
 				5320581D215D287700ED0C36 /* FontAwesomeTextRepresentable.swift in Sources */,
 				53EBE6BB22283FF9000D007E /* SearchViewController.swift in Sources */,
 				53E1AE03221AB82200A6E1E6 /* CrownAttributes+UserInteraction.swift in Sources */,
@@ -4663,6 +4711,10 @@
 				CODE_SIGN_ENTITLEMENTS = "MastWatch Extension/MastWatch Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R5WHJ77XXD;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FlickTypeKit",
+				);
 				INFOPLIST_FILE = "MastWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4686,6 +4738,10 @@
 				CODE_SIGN_ENTITLEMENTS = "MastWatch Extension/MastWatch Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R5WHJ77XXD;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FlickTypeKit",
+				);
 				INFOPLIST_FILE = "MastWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
