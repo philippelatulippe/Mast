@@ -62,10 +62,7 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionColourCell", for: indexPath) as! CollectionProCells
         
-        
         cell.configure()
-        print("count: \(Account.getAccounts().count)")
-        print(indexPath.row)
         
         if indexPath.item >= InstanceData.getAllInstances().count {
             
@@ -77,6 +74,7 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
             
             
             let instances = InstanceData.getAllInstances()
+            if instances.isEmpty {} else {
             let curr = InstanceData.getCurrentInstance()
             if curr?.clientID == instances[indexPath.item].clientID {
                 cell.image.layer.borderWidth = 3.6
@@ -85,13 +83,12 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
             }
             cell.image.layer.borderColor = Colours.tabSelected.cgColor
             
-//            let instance = InstanceData.getAllInstances()[indexPath.item]
             let account = Account.getAccounts()[indexPath.item]
         
             cell.image.pin_setImage(from: URL(string: account.avatar))
             
             cell.image.backgroundColor = Colours.clear
-            
+            }
         }
         
         cell.image.layer.cornerRadius = 27.5

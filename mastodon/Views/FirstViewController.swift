@@ -1512,10 +1512,28 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         DispatchQueue.main.async {
                             //self.tableView.reloadData()
                             
+                            if self.hMod.count == 1 {
+                                return
+                            }
                             
                             if self.tableView.contentOffset.y == 0 {
-                                StoreStruct.statusesHome = self.hMod.reversed() + StoreStruct.statusesHome
-                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                                self.hMod = self.hMod.reversed()
+                                if let st = self.hMod.last {
+                                    if StoreStruct.statusesHome.contains(st) {
+                                        StoreStruct.statusesHome = self.hMod + StoreStruct.statusesHome
+                                        StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                                    } else {
+                                        StoreStruct.gapLastHomeID = self.hMod.last?.id ?? ""
+                                        let z = st
+                                        z.id = "loadmorehere"
+                                        StoreStruct.gapLastHomeStat = z
+                                        StoreStruct.statusesHome = self.hMod + StoreStruct.statusesHome
+                                        StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                                    }
+                                } else {
+                                    StoreStruct.statusesHome = self.hMod + StoreStruct.statusesHome
+                                    StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                                }
                                 
                                 if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                     self.newUpdatesB1.setTitle("\(self.hMod.count)  ", for: .normal)
@@ -1538,6 +1556,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     self.tableView.reloadData()
                                     self.refreshControl.endRefreshing()
                                     
+                                }
+                                
+                                do {
+                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                } catch {
+                                    print("Couldn't save")
                                 }
                                 
                                 self.hMod = []
@@ -1590,11 +1616,28 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         DispatchQueue.main.async {
                             //self.tableView.reloadData()
                             
+                            if self.lMod.count == 1 {
+                                return
+                            }
                             
                             if self.tableViewL.contentOffset.y == 0 {
-                                StoreStruct.statusesLocal = self.lMod.reversed() + StoreStruct.statusesLocal
-                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-                                
+                                self.lMod = self.lMod.reversed()
+                                if let st = self.lMod.last {
+                                    if StoreStruct.statusesLocal.contains(st) {
+                                        StoreStruct.statusesLocal = self.lMod + StoreStruct.statusesLocal
+                                        StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                                    } else {
+                                        StoreStruct.gapLastLocalID = self.lMod.last?.id ?? ""
+                                        let z = st
+                                        z.id = "loadmorehere"
+                                        StoreStruct.gapLastLocalStat = z
+                                        StoreStruct.statusesLocal = self.lMod + StoreStruct.statusesLocal
+                                        StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                                    }
+                                } else {
+                                    StoreStruct.statusesLocal = self.lMod + StoreStruct.statusesLocal
+                                    StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                                }
                                 
                                 if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                     self.newUpdatesB2.setTitle("\(self.lMod.count)  ", for: .normal)
@@ -1618,6 +1661,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     self.refreshControl.endRefreshing()
                                     
                                 }
+                                
+                                do {
+                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                } catch {
+                                    print("Couldn't save")
+                                }
+                                
                                 self.lMod = []
                             }
                             
@@ -1671,10 +1723,28 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         
                         DispatchQueue.main.async {
                             
+                            if self.fMod.count == 1 {
+                                return
+                            }
                             
                             if self.tableViewF.contentOffset.y == 0 {
-                                StoreStruct.statusesFederated = self.fMod.reversed() + StoreStruct.statusesFederated
-                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                                self.fMod = self.fMod.reversed()
+                                if let st = self.fMod.last {
+                                    if StoreStruct.statusesFederated.contains(st) {
+                                        StoreStruct.statusesFederated = self.fMod + StoreStruct.statusesFederated
+                                        StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                                    } else {
+                                        StoreStruct.gapLastFedID = self.fMod.last?.id ?? ""
+                                        let z = st
+                                        z.id = "loadmorehere"
+                                        StoreStruct.gapLastFedStat = z
+                                        StoreStruct.statusesFederated = self.fMod + StoreStruct.statusesFederated
+                                        StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                                    }
+                                } else {
+                                    StoreStruct.statusesFederated = self.fMod + StoreStruct.statusesFederated
+                                    StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                                }
                                 
                                 
                                 if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
@@ -1700,6 +1770,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     self.tableViewF.reloadData()
                                     self.refreshControl.endRefreshing()
                                     
+                                }
+                                
+                                
+                                do {
+                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                } catch {
+                                    print("Couldn't save")
                                 }
                                 
                                 self.fMod = []
@@ -4846,7 +4925,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.refreshControl.endRefreshing()
                                 if newestC == 0 {
                                     
-                                } else if StoreStruct.statusesHome.count >= newestC + 1 {
+                                } else if StoreStruct.statusesHome.count > newestC + 1 {
                                     self.tableView.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
                                 }
                                 UIView.setAnimationsEnabled(true)
@@ -4919,7 +4998,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.refreshControl.endRefreshing()
                                 if newestC == 0 {
                                     
-                                } else if StoreStruct.statusesLocal.count >= newestC + 1 {
+                                } else if StoreStruct.statusesLocal.count > newestC + 1 {
                                     self.tableViewL.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
                                 }
                                 UIView.setAnimationsEnabled(true)
@@ -4932,7 +5011,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             
                             do {
-//                                self.restoreScroll()
                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
                                 try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
                                 try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
@@ -4996,7 +5074,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.refreshControl.endRefreshing()
                                 if newestC == 0 {
                                     
-                                } else if StoreStruct.statusesFederated.count >= newestC + 1 {
+                                } else if StoreStruct.statusesFederated.count > newestC + 1 {
                                     self.tableViewF.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
                                 }
                                 UIView.setAnimationsEnabled(true)

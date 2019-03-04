@@ -1120,21 +1120,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             } else {
                 print("count--")
                 print(Account.getAccounts().count)
-                let instance = z2[indexPath.row]
-                let account = z1[indexPath.row]
+                var instance: InstanceData? = nil
+                if z2.count == 0 {} else {
+                    instance = z2[indexPath.row]
+                }
+                var account: Account? = nil
+                if z1.count == 0 {} else {
+                    account = z1[indexPath.row]
+                }
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
-                let instanceAndAccount = "\(instance.returnedText) "
+                let instanceAndAccount = "\(instance?.returnedText ?? "") "
                 
-                let instances = InstanceData.getAllInstances()
                 let curr = InstanceData.getCurrentInstance()
-                if curr?.clientID == instances[indexPath.row].clientID {
-                    cell.configure(status: "• \(account.username)", status2: instanceAndAccount, image: "", imageURL:account.avatarStatic )
+                if curr?.clientID == z2[indexPath.row].clientID {
+                    cell.configure(status: "• \(account?.username ?? "")", status2: instanceAndAccount, image: "", imageURL: account?.avatarStatic ?? "")
                     cell.backgroundColor = Colours.white
                     cell.userName.textColor = Colours.black
                     cell.userTag.textColor = Colours.tabSelected
                     cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 } else {
-                    cell.configure(status: account.username, status2:instanceAndAccount, image: "", imageURL:account.avatarStatic )
+                    cell.configure(status: account?.username ?? "", status2: instanceAndAccount, image: "", imageURL: account?.avatarStatic ?? "")
                     cell.backgroundColor = Colours.white
                     cell.userName.textColor = Colours.black
                     cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)

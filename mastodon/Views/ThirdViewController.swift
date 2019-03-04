@@ -3213,14 +3213,34 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var sto = self.profileStatuses
         
-        let indexPath = IndexPath(row: sender.tag, section: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
         
         
         StoreStruct.currentImageURL = sto[sender.tag].url ?? URL(string: "www.google.com")
         
         if self.fromOtherUser {
-            
-            let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCell
+            if self.chosenUser.fields.count > 0 {
+                
+                if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCellOwn {
+                    var images = [SKPhoto]()
+                    
+                    let photo = SKPhoto.photoWithImageURL(sto[0].reblog?.account.headerStatic ?? sto[0].account.headerStatic, holder: cell.headerImageView.currentImage ?? nil)
+                    photo.shouldCachePhotoURLImage = true
+                    images.append(photo)
+                    
+                    let originImage = sender.currentImage
+                    if originImage != nil {
+                        let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.headerImageView)
+                        browser.displayToolbar = true
+                        browser.displayAction = true
+                        browser.delegate = self
+                        browser.initializePageIndex(0)
+                        present(browser, animated: true, completion: nil)
+                    }
+                }
+                
+            } else {
+            if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCell {
             var images = [SKPhoto]()
             
             let photo = SKPhoto.photoWithImageURL(sto[0].reblog?.account.headerStatic ?? sto[0].account.headerStatic, holder: cell.headerImageView.currentImage ?? nil)
@@ -3236,12 +3256,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 browser.initializePageIndex(0)
                 present(browser, animated: true, completion: nil)
             }
-            
+            }
+            }
         } else {
             
             if self.chosenUser.fields.count > 0 {
                 
-                let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn
+                if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCellOwn {
                 var images = [SKPhoto]()
                 
                 let photo = SKPhoto.photoWithImageURL(sto[0].reblog?.account.headerStatic ?? sto[0].account.headerStatic, holder: cell.headerImageView.currentImage ?? nil)
@@ -3257,13 +3278,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     browser.initializePageIndex(0)
                     present(browser, animated: true, completion: nil)
                 }
-                
+                }
                 
             } else {
                 
                 
                 
-                let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn2
+                if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCellOwn2 {
                 var images = [SKPhoto]()
                 
                 let photo = SKPhoto.photoWithImageURL(sto[0].reblog?.account.headerStatic ?? sto[0].account.headerStatic, holder: cell.headerImageView.currentImage ?? nil)
@@ -3279,7 +3300,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     browser.initializePageIndex(0)
                     present(browser, animated: true, completion: nil)
                 }
-                
+                }
             }
             
         }
@@ -3316,7 +3337,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         } else {
             if self.chosenUser.fields.count > 0 {
-                let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn
+                if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCellOwn {
                 var images = [SKPhoto]()
                 
                 let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatar, holder: nil)
@@ -3332,11 +3353,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     browser.initializePageIndex(0)
                     present(browser, animated: true, completion: nil)
                 }
-                
+                }
             } else {
                 
                 
-                let cell = tableView.cellForRow(at: indexPath) as! ProfileHeaderCellOwn2
+                if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCellOwn2 {
                 var images = [SKPhoto]()
                 
                 let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatar, holder: nil)
@@ -3352,7 +3373,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     browser.initializePageIndex(0)
                     present(browser, animated: true, completion: nil)
                 }
-                
+                }
                 
             }
         }

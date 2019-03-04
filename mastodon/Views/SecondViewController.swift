@@ -4944,12 +4944,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         newestC = StoreStruct.notifications.count - newestC
                         newestC2 = StoreStruct.notificationsMentions.count - newestC2
                         newestC3 = StoreStruct.notificationsDirect.count - newestC3
-//                        self.tableView.reloadData()
-//                        self.tableView2.reloadData()
-//
-//                        self.refreshControl.endRefreshing()
-                        
-                        
                         
                         if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                         

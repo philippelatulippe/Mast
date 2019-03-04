@@ -658,16 +658,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         }
     }
     
-    func gotoIDNoti() {
-        if StoreStruct.currentPage == 0 {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoidnoti"), object: self)
-        } else if StoreStruct.currentPage == 1 {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoidnoti2"), object: self)
-        } else {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoidnoti3"), object: self)
-        }
-    }
-    
     override var keyCommands: [UIKeyCommand]? {
         //shortkeys
         let op1 = UIKeyCommand(input: "1", modifierFlags: .control, action: #selector(b1Touched), discoverabilityTitle: "Home Timelines")
