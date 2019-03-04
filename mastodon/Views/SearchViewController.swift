@@ -22,6 +22,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
     var typeOfSearch = 0
     var newestText = ""
     var safariVC: SFSafariViewController?
+    var searchIcon = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,13 +68,18 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
         searchTextField.layer.cornerRadius = 10
         searchTextField.alpha = 1
         searchTextField.attributedPlaceholder = NSAttributedString(string: "Search...".localized,
-                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:110/250, green: 113/250, blue: 121/250, alpha: 1.0)])
+                                                                   attributes: [NSAttributedString.Key.foregroundColor: Colours.tabUnselected])
         searchTextField.returnKeyType = .search
         searchTextField.delegate = self
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         searchTextField.textColor = Colours.grayDark
         searchTextField.keyboardAppearance = Colours.keyCol
         self.view.addSubview(searchTextField)
+        
+        self.searchIcon.frame = CGRect(x: 15, y: 10, width: 20, height: 20)
+        self.searchIcon.backgroundColor = UIColor.clear
+        self.searchIcon.image = UIImage(named: "search")?.maskWithColor(color: Colours.tabUnselected)
+        self.searchTextField.addSubview(self.searchIcon)
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
@@ -2147,7 +2153,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
 
 
 class SearchField: UITextField {
-    let padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+    let padding = UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 15)
     
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)

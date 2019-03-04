@@ -142,6 +142,16 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
             self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+            
+            let request = FilterToots.all()
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    DispatchQueue.main.async {
+                        self.currentTags = stat
+                        self.loadLoadLoad()
+                    }
+                }
+            }
         default:
             print("nothing")
         }

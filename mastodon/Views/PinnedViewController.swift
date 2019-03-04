@@ -190,12 +190,22 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
         case .phone:
             print("nothing")
         case .pad:
-            self.currentTags = StoreStruct.tempPinned
             self.tableView.translatesAutoresizingMaskIntoConstraints = false
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
             self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+            
+            let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .min(id: "", limit: 5000))
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    self.currentTags = stat
+                    DispatchQueue.main.async {
+                        self.loadLoadLoad()
+                    }
+                }
+            }
+            
         default:
             print("nothing")
         }

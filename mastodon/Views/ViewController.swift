@@ -52,6 +52,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     var segmentedControl: SJFluidSegmentedControl!
     var typeOfSearch = 0
     var newestText = ""
+    var searchIcon = UIImageView()
     
     var tabOne = SAHistoryNavigationViewController()
     var tabTwo = SAHistoryNavigationViewController()
@@ -75,7 +76,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     var safariVC: SFSafariViewController?
     
     var searcherView = UIView()
-    var searchTextField = UITextField()
+    var searchTextField = SearchField()
     var backgroundView = UIButton()
     var tableView = UITableView()
     var tableViewLists = UITableView()
@@ -754,6 +755,14 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         
         if (UserDefaults.standard.object(forKey: "autol1") == nil) {
             UserDefaults.standard.set(1, forKey: "autol1")
+        }
+        
+        if (UserDefaults.standard.object(forKey: "bord") == nil) {
+            UserDefaults.standard.set(1, forKey: "bord")
+        }
+        
+        if (UserDefaults.standard.object(forKey: "segsize") == nil) {
+            UserDefaults.standard.set(1, forKey: "segsize")
         }
         
         if (UserDefaults.standard.object(forKey: "instancesLocal") == nil) {
@@ -2569,7 +2578,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         searchTextField.layer.cornerRadius = 10
         searchTextField.alpha = 1
         searchTextField.attributedPlaceholder = NSAttributedString(string: "Search...".localized,
-                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor(red:110/250, green: 113/250, blue: 121/250, alpha: 1.0)])
+                                                                   attributes: [NSAttributedString.Key.foregroundColor: Colours.tabUnselected])
         searchTextField.becomeFirstResponder()
         searchTextField.returnKeyType = .search
         searchTextField.delegate = self
@@ -2579,6 +2588,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         searchTextField.keyboardAppearance = UIKeyboardAppearance.dark
         self.searcherView.addSubview(searchTextField)
         
+        self.searchIcon.frame = CGRect(x: 15, y: 10, width: 20, height: 20)
+        self.searchIcon.backgroundColor = UIColor.clear
+        self.searchIcon.image = UIImage(named: "search")?.maskWithColor(color: Colours.tabUnselected)
+        self.searchTextField.addSubview(self.searchIcon)
         
         segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: 20, y: 60, width: Int(wid - 40), height: Int(40)))
         segmentedControl.dataSource = self
