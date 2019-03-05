@@ -127,8 +127,8 @@ class RepliesCellImage: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-136-[mainImageBG]-30-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[date]-2-[more(16)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[image(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImage(180)]-23-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImageBG(180)]-23-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImage(210)]-23-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImageBG(210)]-23-|", options: [], metrics: nil, views: viewsDict))
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[countTag(30)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-5-[countTag(22)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
@@ -158,10 +158,6 @@ class RepliesCellImage: SwipeTableViewCell {
         }
         
         if status.reblog?.content.stripHTML() != nil {
-//            toot.text = "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.username) boosted"
-            
-            
-            
             
             
             if status.reblog!.emojis.isEmpty {
@@ -207,8 +203,6 @@ class RepliesCellImage: SwipeTableViewCell {
             
             
         } else {
-//            toot.text = status.content.stripHTML()
-            
             
             if status.emojis.isEmpty {
                 toot.text = status.content.stripHTML()
@@ -280,7 +274,7 @@ class RepliesCellImage: SwipeTableViewCell {
 //        DispatchQueue.global(qos: .userInitiated).async {
         self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
         self.mainImageView.pin_updateWithProgress = true
-        self.mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].url ?? status.mediaAttachments[0].url)"))
+        self.mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].remoteURL ?? status.mediaAttachments[0].remoteURL!)"))
 //        }
         mainImageView.layer.masksToBounds = true
         mainImageView.layer.borderColor = UIColor.black.cgColor

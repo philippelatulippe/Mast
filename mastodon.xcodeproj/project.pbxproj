@@ -429,6 +429,7 @@
 		5354BB7C21668D8B0094C545 /* MediaAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5354BB4021668D8B0094C545 /* MediaAttachment.swift */; };
 		5354BB7F21668E6A0094C545 /* MainFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5354BB7E21668E6A0094C545 /* MainFeedCell.swift */; };
 		5354BB81216690990094C545 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5354BB80216690990094C545 /* Date.swift */; };
+		535932BB222DB47600086545 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535932BA222DB47600086545 /* Poll.swift */; };
 		535B339B215C0198001A2A7F /* BoostersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535B339A215C0198001A2A7F /* BoostersViewController.swift */; };
 		535B33AE215C0EC6001A2A7F /* WOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535B339E215C0EC6001A2A7F /* WOViewController.swift */; };
 		535B33AF215C0EC6001A2A7F /* XPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535B339F215C0EC6001A2A7F /* XPlayerViewController.swift */; };
@@ -1281,6 +1282,7 @@
 		5354BB7D21668D9B0094C545 /* MastExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MastExtension.entitlements; sourceTree = "<group>"; };
 		5354BB7E21668E6A0094C545 /* MainFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedCell.swift; sourceTree = "<group>"; };
 		5354BB80216690990094C545 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		535932BA222DB47600086545 /* Poll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
 		535B339A215C0198001A2A7F /* BoostersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoostersViewController.swift; sourceTree = "<group>"; };
 		535B339E215C0EC6001A2A7F /* WOViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOViewController.swift; sourceTree = "<group>"; };
 		535B339F215C0EC6001A2A7F /* XPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPlayerViewController.swift; sourceTree = "<group>"; };
@@ -2947,6 +2949,7 @@
 				5373CA792152C67F00676F3D /* Mention.swift */,
 				5373CA7A2152C67F00676F3D /* Notification.swift */,
 				5373CA7B2152C67F00676F3D /* NotificationType.swift */,
+				535932BA222DB47600086545 /* Poll.swift */,
 				5373CA7C2152C67F00676F3D /* Relationship.swift */,
 				5373CA7D2152C67F00676F3D /* Report.swift */,
 				5373CA7E2152C67F00676F3D /* RequestError.swift */,
@@ -4022,6 +4025,7 @@
 				531B61C8221960B300DD3845 /* DecryptNotification.swift in Sources */,
 				53631C35221364D0000D5B40 /* UIView+Screenshot.swift in Sources */,
 				5320582D215D287700ED0C36 /* DKAssetGroupDetailBaseCell.swift in Sources */,
+				535932BB222DB47600086545 /* Poll.swift in Sources */,
 				5354BACC216577FD0094C545 /* WCLLoadingView.swift in Sources */,
 				53E1AE0A221AB82200A6E1E6 /* UIScrollView+Utils.swift in Sources */,
 				535B33C9215C31E3001A2A7F /* StringTrimExtension.swift in Sources */,

@@ -4571,9 +4571,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         
                         if stat.isEmpty {} else {
                             
-                            let y = StoreStruct.statusesHome.split(separator: StoreStruct.gapLastHomeStat!)
+                            let y = StoreStruct.statusesHome.split(separator: StoreStruct.gapLastHomeStat ?? StoreStruct.statusesHome.last!)
                             print(y)
-                            if StoreStruct.statusesHome.count >= y.first!.count + 1 {
+                            if StoreStruct.statusesHome.count > y.first!.count + 1 {
                             StoreStruct.statusesHome.remove(at: y.first!.count + 1)
                             }
                             
@@ -4643,10 +4643,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     if let stat = (statuses.value) {
                         
                         if stat.isEmpty {} else {
-                            let y = StoreStruct.statusesLocal.split(separator: StoreStruct.gapLastLocalStat!)
+                            let y = StoreStruct.statusesLocal.split(separator: StoreStruct.gapLastLocalStat ?? StoreStruct.statusesLocal.last!)
                             print(y)
                             
-                            if StoreStruct.statusesLocal.count >= y.first!.count + 1 {
+                            if StoreStruct.statusesLocal.count > y.first!.count + 1 {
                             StoreStruct.statusesLocal.remove(at: y.first!.count + 1)
                             }
                             
@@ -4715,11 +4715,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     if let stat = (statuses.value) {
                         
                         if stat.isEmpty {} else {
-                            let y = StoreStruct.statusesFederated.split(separator: StoreStruct.gapLastFedStat!)
+                            let y = StoreStruct.statusesFederated.split(separator: StoreStruct.gapLastFedStat ?? StoreStruct.statusesFederated.last!)
                             print("testing")
                             print(y.first?.count ?? 0)
                             print(y.last?.count ?? 0)
-                            if StoreStruct.statusesFederated.count >= y.first!.count + 1 {
+                            if StoreStruct.statusesFederated.count > y.first!.count + 1 {
                             StoreStruct.statusesFederated.remove(at: y.first!.count + 1)
                             }
                             
