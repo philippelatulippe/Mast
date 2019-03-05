@@ -220,8 +220,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        
     }
     
     override func didReceiveMemoryWarning() {

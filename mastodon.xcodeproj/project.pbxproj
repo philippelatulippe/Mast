@@ -749,6 +749,7 @@
 		53E6F2B7216CDE7D00912B83 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B6216CDE7D00912B83 /* DetailController.swift */; };
 		53EBE6B52220030A000D007E /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBE6B42220030A000D007E /* UIImageColors.swift */; };
 		53EBE6BB22283FF9000D007E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBE6BA22283FF9000D007E /* SearchViewController.swift */; };
+		53EBE6BD222E7C4D000D007E /* Polls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBE6BC222E7C4D000D007E /* Polls.swift */; };
 		7806850921CC222F00072C41 /* ProCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7806850821CC222F00072C41 /* ProCells.swift */; };
 		7806850B21CC227100072C41 /* CollectionProCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7806850A21CC227100072C41 /* CollectionProCells.swift */; };
 		A9D80EE721B84B3900020ECE /* AddInstanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D80EE621B84B3900020ECE /* AddInstanceCell.swift */; };
@@ -1634,6 +1635,7 @@
 		53E6F2B6216CDE7D00912B83 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		53EBE6B42220030A000D007E /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		53EBE6BA22283FF9000D007E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		53EBE6BC222E7C4D000D007E /* Polls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polls.swift; sourceTree = "<group>"; };
 		7806850821CC222F00072C41 /* ProCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProCells.swift; sourceTree = "<group>"; };
 		7806850A21CC227100072C41 /* CollectionProCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionProCells.swift; sourceTree = "<group>"; };
 		78F6FFEAB47575DB49E46173 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2979,6 +2981,7 @@
 				5373CA932152C67F00676F3D /* Media.swift */,
 				5373CA942152C67F00676F3D /* Mutes.swift */,
 				5373CA952152C67F00676F3D /* Notifications.swift */,
+				53EBE6BC222E7C4D000D007E /* Polls.swift */,
 				5373CA962152C67F00676F3D /* Reports.swift */,
 				5373CA972152C67F00676F3D /* Search.swift */,
 				5373CA982152C67F00676F3D /* Statuses.swift */,
@@ -4265,6 +4268,7 @@
 				5354BACE216577FD0094C545 /* FastLayer.swift in Sources */,
 				5329F3922174DBDF00C4A23C /* SSLClientCertificate.swift in Sources */,
 				5373CB622159553600676F3D /* FollowersViewController.swift in Sources */,
+				53EBE6BD222E7C4D000D007E /* Polls.swift in Sources */,
 				5373CAD42152C68000676F3D /* Statuses.swift in Sources */,
 				535B33CA215C31E3001A2A7F /* ActiveBuilder.swift in Sources */,
 				5373C9D8215173EE00676F3D /* AppDelegate.swift in Sources */,

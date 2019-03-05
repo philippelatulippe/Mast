@@ -22,7 +22,7 @@ public class Poll: Codable {
     /// Voted?
     public let voted: Bool?
     /// Options.
-    public let options: PollOptions
+    public let options: [PollOptions]
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -39,11 +39,25 @@ public class PollOptions: Codable {
     /// The poll title.
     public let title: String
     /// Poll votes count.
-    public let votesCount: Int
+    public let votesCount: Int?
     
     private enum CodingKeys: String, CodingKey {
         case title
         case votesCount = "votes_count"
+    }
+}
+
+public class PollPost: Codable {
+    public let options: [String]
+    public let expiresIn: Int
+    public let multiple: Bool?
+    public let hideTotals: Bool?
+    
+    private enum CodingKeys: String, CodingKey {
+        case options
+        case expiresIn = "expires_in"
+        case multiple
+        case hideTotals = "hide_totals"
     }
 }
 
