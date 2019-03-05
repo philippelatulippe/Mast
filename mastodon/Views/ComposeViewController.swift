@@ -1309,6 +1309,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         super.viewDidLoad()
         
         StoreStruct.spoilerText = ""
+        StoreStruct.currentOptions = []
+        StoreStruct.expiresIn = 86400
+        StoreStruct.allowsMultiple = false
+        StoreStruct.totalsHidden = false
+        StoreStruct.newPollPost = []
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.doneDate), name: NSNotification.Name(rawValue: "doneDate"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.actOnSpecialNotificationAuto), name: NSNotification.Name(rawValue: "cpick"), object: nil)
@@ -3174,7 +3179,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 }
             }
         } else if self.selectedImage1.image == nil {
-            let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, visibility: self.visibility)
+            let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, poll: StoreStruct.newPollPost, visibility: self.visibility)
             DispatchQueue.global(qos: .userInitiated).async {
                 StoreStruct.client.run(request0) { (statuses) in
                     print(statuses)

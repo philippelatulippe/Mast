@@ -17,10 +17,11 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
     var keyHeight = 0
     var bgView = UIView()
     var tableView = UITableView()
-    var currentOptions: [String] = []
     let timePicker = UIDatePicker()
     let toolBar = UIToolbar()
     var hiddenTextField = UITextField()
+    var titlesOp = ["Allow Multiple Selections", "Hide Totals"]
+    var descriptionsOp = ["Allow users to select multiple options when voting.", "Hide the running vote count from users."]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +94,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
         
         self.tableView.register(PollOptionCell.self, forCellReuseIdentifier: "PollOptionCell")
         self.tableView.register(PollOptionCell.self, forCellReuseIdentifier: "PollOptionCell2")
+        self.tableView.register(PollOptionCellToggle.self, forCellReuseIdentifier: "PollOptionCellToggle")
         self.tableView.frame = CGRect(x: 0, y: Int(offset + 40), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 45)
         self.tableView.alpha = 1
         self.tableView.delegate = self
@@ -153,6 +155,10 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? PollOptionCell {
             cell.configure(formatter.string(from: self.timePicker.date), count: "This poll will expire on:")
         }
+        
+        StoreStruct.pollPickerDate = self.timePicker.date
+        StoreStruct.expiresIn = Calendar.current.dateComponents([.second], from: Date(), to: self.timePicker.date).second ?? 0
+        
         timePicker.removeFromSuperview()
         toolBar.removeFromSuperview()
         self.hiddenTextField.resignFirstResponder()
@@ -207,7 +213,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
         if textField.text == "" || textField.text == " " {
             self.textField.resignFirstResponder()
         } else {
-            self.currentOptions.append(textField.text ?? "")
+            StoreStruct.currentOptions.append(textField.text ?? "")
             self.textField.text = ""
             self.tableView.reloadData()
         }
@@ -233,20 +239,25 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
     }
     
     @objc func didTouchUpInsideTootButton(_ sender: AnyObject) {
-        if self.textField.text == "" { return }
+        if StoreStruct.currentOptions.isEmpty && self.textField.text == "" { return }
+        
+        StoreStruct.newPollPost = [StoreStruct.currentOptions, StoreStruct.expiresIn, StoreStruct.allowsMultiple, StoreStruct.totalsHidden]
+        
         self.textField.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return currentOptions.count
-        } else {
+            return StoreStruct.currentOptions.count
+        } else if section == 1 {
             return 1
+        } else {
+            return 2
         }
     }
     
@@ -257,29 +268,75 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PollOptionCell", for: indexPath) as! PollOptionCell
-            cell.configure(self.currentOptions[indexPath.row], count: "Option \(indexPath.row + 1)")
+            cell.configure(StoreStruct.currentOptions[indexPath.row], count: "Option \(indexPath.row + 1)")
+            cell.backgroundColor = Colours.white
+            let bgColorView = UIView()
+            bgColorView.backgroundColor = Colours.white
+            cell.selectedBackgroundView = bgColorView
+            return cell
+        } else if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PollOptionCell2", for: indexPath) as! PollOptionCell
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+            var dText = formatter.string(from: StoreStruct.pollPickerDate)
+            if StoreStruct.pollPickerDate == Date() {
+                dText = "Tomorrow"
+            }
+            cell.configure(dText, count: "This poll will expire on:")
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
             bgColorView.backgroundColor = Colours.white
             cell.selectedBackgroundView = bgColorView
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PollOptionCell2", for: indexPath) as! PollOptionCell
-            cell.configure("Tomorrow", count: "This poll will expire on:")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PollOptionCellToggle", for: indexPath) as! PollOptionCellToggle
+            cell.configure(status: self.titlesOp[indexPath.row], status2: self.descriptionsOp[indexPath.row])
             cell.backgroundColor = Colours.white
+            cell.userName.textColor = Colours.black
+            cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+            cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
             let bgColorView = UIView()
             bgColorView.backgroundColor = Colours.white
             cell.selectedBackgroundView = bgColorView
+            cell.switchView.setOn(false, animated: false)
+            if indexPath.row == 0 {
+                cell.switchView.addTarget(self, action: #selector(self.handleToggle1), for: .touchUpInside)
+            } else {
+                cell.switchView.addTarget(self, action: #selector(self.handleToggle2), for: .touchUpInside)
+            }
             return cell
+        }
+    }
+    
+    @objc func handleToggle1(sender: UISwitch) {
+        if sender.isOn {
+            StoreStruct.allowsMultiple = true
+            sender.setOn(true, animated: true)
+        } else {
+            StoreStruct.allowsMultiple = false
+            sender.setOn(false, animated: true)
+        }
+    }
+    
+    @objc func handleToggle2(sender: UISwitch) {
+        if sender.isOn {
+            StoreStruct.totalsHidden = true
+            sender.setOn(true, animated: true)
+        } else {
+            StoreStruct.totalsHidden = false
+            sender.setOn(false, animated: true)
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             
-        } else {
+        } else if indexPath.section == 1 {
             self.textField.resignFirstResponder()
             self.hiddenTextField.becomeFirstResponder()
+        } else {
+            
         }
     }
 }

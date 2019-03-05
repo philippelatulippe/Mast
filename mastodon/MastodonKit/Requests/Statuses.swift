@@ -85,7 +85,7 @@ public struct Statuses {
                               sensitive: Bool? = nil,
                               spoilerText: String? = nil,
                               scheduledAt: String? = nil,
-                              poll: PollPost? = nil,
+                              poll: [Any]? = nil,
                               visibility: Visibility = .public) -> Request<Status> {
         var parameters = [
             Parameter(name: "status", value: status),
@@ -98,10 +98,10 @@ public struct Statuses {
         
         if poll != nil, let poll = poll {
             let newParams = [
-                Parameter(name: "poll[expires_in]", value: String(poll.expiresIn)),
-                Parameter(name: "poll[multiple]", value: (poll.multiple).flatMap(trueOrNil)),
-                Parameter(name: "poll[hide_totals]", value: (poll.hideTotals).flatMap(trueOrNil))
-            ] + poll.options.map(toArrayOfParameters(withName: "poll[options]"))
+                Parameter(name: "poll[expires_in]", value: String(poll[1] as! Int)),
+                Parameter(name: "poll[multiple]", value: (poll[2] as? Bool).flatMap(trueOrNil)),
+                Parameter(name: "poll[hide_totals]", value: (poll[3] as? Bool).flatMap(trueOrNil))
+            ] + (poll[0] as! [String]).map(toArrayOfParameters(withName: "poll[options]"))
             parameters = parameters + newParams
         }
 
