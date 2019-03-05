@@ -132,4 +132,9 @@ class StoreStruct {
     
     static var currentInstanceDetails: [Instance] = []
     static var currentImageURL = URL(string: "www.google.com")
+    
+    static var containsPoll = false
+    static var pollHeight = 0
+    static var currentPollSelection: [Int] = []
+    static var currentPollSelectionTitle = ""
 }

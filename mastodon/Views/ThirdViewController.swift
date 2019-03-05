@@ -968,19 +968,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            super.viewWillTransition(to: size, with: coordinator)
-            //            coordinator.animate(alongsideTransition: nil, completion: {
-            //                _ in
-            self.tableView.frame = CGRect(x: 0, y: Int(80), width: Int(self.view.bounds.height) - 80, height: Int(self.view.bounds.width))
-            self.tableView.reloadData()
-            //            })
-        }
-        
-    }
-    
     var zzz: [String:String] = [:]
     
     @objc func search9() {

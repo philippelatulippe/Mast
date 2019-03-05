@@ -467,6 +467,17 @@
 		53631C4622136A1D000D5B40 /* MisterFusionConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C4022136A1D000D5B40 /* MisterFusionConvertible.swift */; };
 		53631C4722136A1D000D5B40 /* Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C4122136A1D000D5B40 /* Deprecated.swift */; };
 		53631C4822136A1D000D5B40 /* MisterFusion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C4222136A1D000D5B40 /* MisterFusion.swift */; };
+		536592F0222E997800BFF3CD /* PollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536592EF222E997800BFF3CD /* PollCell.swift */; };
+		5365941B222EB73400BFF3CD /* CoreBarChartsDisplayConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659413222EB73300BFF3CD /* CoreBarChartsDisplayConfig.swift */; };
+		5365941C222EB73400BFF3CD /* VCoreBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659414222EB73300BFF3CD /* VCoreBarChart.swift */; };
+		5365941D222EB73400BFF3CD /* HCoreBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659415222EB73300BFF3CD /* HCoreBarChart.swift */; };
+		5365941E222EB73400BFF3CD /* CoreChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659416222EB73300BFF3CD /* CoreChartEntry.swift */; };
+		5365941F222EB73400BFF3CD /* CoreChartOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659417222EB73300BFF3CD /* CoreChartOrientation.swift */; };
+		53659420222EB73400BFF3CD /* BarChartCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659418222EB73300BFF3CD /* BarChartCore.swift */; };
+		53659421222EB73400BFF3CD /* Extensions2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659419222EB73300BFF3CD /* Extensions2.swift */; };
+		53659422222EB73400BFF3CD /* CoreChartViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5365941A222EB73300BFF3CD /* CoreChartViewDataSource.swift */; };
+		53659424222ED4CA00BFF3CD /* NewPollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659423222ED4CA00BFF3CD /* NewPollViewController.swift */; };
+		53659426222EDA6000BFF3CD /* PollOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53659425222EDA6000BFF3CD /* PollOptionCell.swift */; };
 		536A4F9C216B60AD00A3D483 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536A4F9B216B60AD00A3D483 /* Intents.framework */; };
 		536A4FB1216B73D600A3D483 /* BulletinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A4FA2216B73D600A3D483 /* BulletinManager.swift */; };
 		536A4FB2216B73D600A3D483 /* BulletinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A4FA3216B73D600A3D483 /* BulletinViewController.swift */; };
@@ -1323,6 +1334,17 @@
 		53631C4022136A1D000D5B40 /* MisterFusionConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MisterFusionConvertible.swift; sourceTree = "<group>"; };
 		53631C4122136A1D000D5B40 /* Deprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deprecated.swift; sourceTree = "<group>"; };
 		53631C4222136A1D000D5B40 /* MisterFusion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MisterFusion.swift; sourceTree = "<group>"; };
+		536592EF222E997800BFF3CD /* PollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollCell.swift; sourceTree = "<group>"; };
+		53659413222EB73300BFF3CD /* CoreBarChartsDisplayConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreBarChartsDisplayConfig.swift; sourceTree = "<group>"; };
+		53659414222EB73300BFF3CD /* VCoreBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCoreBarChart.swift; sourceTree = "<group>"; };
+		53659415222EB73300BFF3CD /* HCoreBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCoreBarChart.swift; sourceTree = "<group>"; };
+		53659416222EB73300BFF3CD /* CoreChartEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreChartEntry.swift; sourceTree = "<group>"; };
+		53659417222EB73300BFF3CD /* CoreChartOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreChartOrientation.swift; sourceTree = "<group>"; };
+		53659418222EB73300BFF3CD /* BarChartCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartCore.swift; sourceTree = "<group>"; };
+		53659419222EB73300BFF3CD /* Extensions2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions2.swift; sourceTree = "<group>"; };
+		5365941A222EB73300BFF3CD /* CoreChartViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreChartViewDataSource.swift; sourceTree = "<group>"; };
+		53659423222ED4CA00BFF3CD /* NewPollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPollViewController.swift; sourceTree = "<group>"; };
+		53659425222EDA6000BFF3CD /* PollOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollOptionCell.swift; sourceTree = "<group>"; };
 		536A4F9B216B60AD00A3D483 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		536A4FA2216B73D600A3D483 /* BulletinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinManager.swift; sourceTree = "<group>"; };
 		536A4FA3216B73D600A3D483 /* BulletinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletinViewController.swift; sourceTree = "<group>"; };
@@ -2503,6 +2525,29 @@
 			path = MisterFusion;
 			sourceTree = "<group>";
 		};
+		53659411222EB73300BFF3CD /* CoreCharts */ = {
+			isa = PBXGroup;
+			children = (
+				53659412222EB73300BFF3CD /* ChartApperance */,
+				53659414222EB73300BFF3CD /* VCoreBarChart.swift */,
+				53659415222EB73300BFF3CD /* HCoreBarChart.swift */,
+				53659416222EB73300BFF3CD /* CoreChartEntry.swift */,
+				53659417222EB73300BFF3CD /* CoreChartOrientation.swift */,
+				53659418222EB73300BFF3CD /* BarChartCore.swift */,
+				53659419222EB73300BFF3CD /* Extensions2.swift */,
+				5365941A222EB73300BFF3CD /* CoreChartViewDataSource.swift */,
+			);
+			path = CoreCharts;
+			sourceTree = "<group>";
+		};
+		53659412222EB73300BFF3CD /* ChartApperance */ = {
+			isa = PBXGroup;
+			children = (
+				53659413222EB73300BFF3CD /* CoreBarChartsDisplayConfig.swift */,
+			);
+			path = ChartApperance;
+			sourceTree = "<group>";
+		};
 		536A4FA1216B73D600A3D483 /* BulletinBoard */ = {
 			isa = PBXGroup;
 			children = (
@@ -2777,6 +2822,7 @@
 			isa = PBXGroup;
 			children = (
 				531B61C0221960B200DD3845 /* push */,
+				53659411222EB73300BFF3CD /* CoreCharts */,
 				53E1AE17221ADFE900A6E1E6 /* SLP */,
 				53E1ADE0221AB82100A6E1E6 /* Crown */,
 				53631C3B22136A1D000D5B40 /* MisterFusion */,
@@ -2835,6 +2881,7 @@
 				53E5039A2207153100FD5CF2 /* NewHexViewController.swift */,
 				531CCD5322073C3C00A56145 /* NewHuePickerViewController.swift */,
 				531CCD672207457400A56145 /* NewFilterViewController.swift */,
+				53659423222ED4CA00BFF3CD /* NewPollViewController.swift */,
 				53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */,
 				5329F3852174B31400C4A23C /* InstanceViewController.swift */,
 				53205830215D317800ED0C36 /* CameraViewController.swift */,
@@ -2876,8 +2923,10 @@
 				5373CB53215688D700676F3D /* RepliesCellImage.swift */,
 				5373CB4B2156686300676F3D /* ActionButtonCell.swift */,
 				5373CB572156AA7200676F3D /* GraphCell.swift */,
+				536592EF222E997800BFF3CD /* PollCell.swift */,
 				5373CB592157F7C400676F3D /* ListCell.swift */,
 				531CCD652207413C00A56145 /* FiltersCell.swift */,
+				53659425222EDA6000BFF3CD /* PollOptionCell.swift */,
 				5373CB632159564400676F3D /* FollowersCell.swift */,
 				53BC45BB215AC8EE0092223F /* SettingsCell.swift */,
 				53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */,
@@ -3920,6 +3969,7 @@
 				5316C89D219D94A00003AB97 /* SwiftyGiphyViewController.swift in Sources */,
 				5373CB2E21541A0300676F3D /* Dev+GIF.swift in Sources */,
 				53EBE6B52220030A000D007E /* UIImageColors.swift in Sources */,
+				5365941F222EB73400BFF3CD /* CoreChartOrientation.swift in Sources */,
 				5373CAA42152C68000676F3D /* URLComponents.swift in Sources */,
 				53631C4522136A1D000D5B40 /* MisterFusion.SafeArea.swift in Sources */,
 				5373CA9D2152C68000676F3D /* ClientType.swift in Sources */,
@@ -3930,6 +3980,7 @@
 				5317C7BB21DA334500746197 /* LabelPool.swift in Sources */,
 				5373CAC62152C68000676F3D /* Accounts.swift in Sources */,
 				5373CADA2152E04C00676F3D /* Date.swift in Sources */,
+				5365941C222EB73400BFF3CD /* VCoreBarChart.swift in Sources */,
 				5354BADA216577FD0094C545 /* CRRefreshComponent.swift in Sources */,
 				5373CB1A2152FCF300676F3D /* Debug.swift in Sources */,
 				5373CB1B2152FCF300676F3D /* InnerAlertController.swift in Sources */,
@@ -3943,10 +3994,12 @@
 				531E0FAB216E2BA2003E8890 /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */,
 				5373CAC32152C68000676F3D /* Payload.swift in Sources */,
 				531E0FA9216E2BA2003E8890 /* NVActivityIndicatorAnimationCubeTransition.swift in Sources */,
+				53659426222EDA6000BFF3CD /* PollOptionCell.swift in Sources */,
 				53E1ADFF221AB82200A6E1E6 /* CrownAttributes.swift in Sources */,
 				535B33B5215C0EC6001A2A7F /* XPlayerViewController+UI.swift in Sources */,
 				531E0F9F216E2BA2003E8890 /* NVActivityIndicatorAnimationBlank.swift in Sources */,
 				5373CAC72152C68000676F3D /* Blocks.swift in Sources */,
+				53659420222EB73400BFF3CD /* BarChartCore.swift in Sources */,
 				5373CB0A2152EDB800676F3D /* SwipeTransitionLayout.swift in Sources */,
 				5373CB142152FCF300676F3D /* Action.swift in Sources */,
 				5354BADB216577FD0094C545 /* CRRefreshFooterView.swift in Sources */,
@@ -4082,6 +4135,7 @@
 				5320580E215D287700ED0C36 /* DKCamera.swift in Sources */,
 				535B33D0215CE9A9001A2A7F /* LikedViewController.swift in Sources */,
 				5373CAF82152EDB700676F3D /* SwipeAction.swift in Sources */,
+				53659422222EB73400BFF3CD /* CoreChartViewDataSource.swift in Sources */,
 				5373CB062152EDB800676F3D /* SwipeTableViewCell+Accessibility.swift in Sources */,
 				5373CABE2152C68000676F3D /* Tag.swift in Sources */,
 				5373CAC02152C68000676F3D /* Pagination.swift in Sources */,
@@ -4108,6 +4162,7 @@
 				536A4FB2216B73D600A3D483 /* BulletinViewController.swift in Sources */,
 				5316C890219D94A00003AB97 /* GiphyMeta.swift in Sources */,
 				5320582E215D287700ED0C36 /* DKAssetGroupDetailImageCell.swift in Sources */,
+				536592F0222E997800BFF3CD /* PollCell.swift in Sources */,
 				5351D75821617FC40012960F /* VolumeBarStackView.swift in Sources */,
 				53E1AE08221AB82200A6E1E6 /* BackgroundView.swift in Sources */,
 				53C037B0220A2A6F0047EBC4 /* NewQRViewController.swift in Sources */,
@@ -4195,6 +4250,7 @@
 				5317C7BF21DA334500746197 /* Plot.swift in Sources */,
 				5320581B215D287700ED0C36 /* FontAwesomeImageRepresentable.swift in Sources */,
 				531B61CA221960B300DD3845 /* PushNotificationReceiver.swift in Sources */,
+				5365941D222EB73400BFF3CD /* HCoreBarChart.swift in Sources */,
 				5354BAD3216577FD0094C545 /* NormalHeaderAnimator.swift in Sources */,
 				53205813215D287700ED0C36 /* DKAsset.swift in Sources */,
 				5316C891219D94A00003AB97 /* GiphyItem.swift in Sources */,
@@ -4236,11 +4292,13 @@
 				53205822215D287700ED0C36 /* DKImageResource.swift in Sources */,
 				5373CACD2152C68000676F3D /* Lists.swift in Sources */,
 				53205810215D287700ED0C36 /* DKImageManager.swift in Sources */,
+				53659421222EB73400BFF3CD /* Extensions2.swift in Sources */,
 				53E1AE09221AB82200A6E1E6 /* CGPoint+Utils.swift in Sources */,
 				53205829215D287700ED0C36 /* DKAssetGroupDetailVC.swift in Sources */,
 				5373CAD22152C68000676F3D /* Reports.swift in Sources */,
 				53E1ADFD221AB82200A6E1E6 /* CrownAttributes+Sizes.swift in Sources */,
 				5373CB172152FCF300676F3D /* Alert.swift in Sources */,
+				53659424222ED4CA00BFF3CD /* NewPollViewController.swift in Sources */,
 				53205826215D287700ED0C36 /* DKPopoverViewController.swift in Sources */,
 				5373CB5A2157F7C500676F3D /* ListCell.swift in Sources */,
 				53205824215D287700ED0C36 /* DKImagePickerControllerDefaultUIDelegate.swift in Sources */,
@@ -4284,6 +4342,7 @@
 				5315ECE021FDE0AE00A3F1A9 /* FollowSuggestionsViewController.swift in Sources */,
 				5373CAFB2152EDB800676F3D /* SwipeActionTransitioning.swift in Sources */,
 				5317C7B221DA334500746197 /* GradientDrawingLayer.swift in Sources */,
+				5365941B222EB73400BFF3CD /* CoreBarChartsDisplayConfig.swift in Sources */,
 				536A4FB8216B73D600A3D483 /* BulletinBackgroundView.swift in Sources */,
 				531E0FA0216E2BA2003E8890 /* NVActivityIndicatorAnimationCircleStrokeSpin.swift in Sources */,
 				5315ECE821FE1A0B00A3F1A9 /* ScheduledStatusesViewController.swift in Sources */,
@@ -4316,6 +4375,7 @@
 				530F5B3721E267CA00A910B3 /* FullDateCollectionViewCell.swift in Sources */,
 				535B33B4215C0EC6001A2A7F /* XPlayer.swift in Sources */,
 				5354BACD216577FD0094C545 /* FastAnimator.swift in Sources */,
+				5365941E222EB73400BFF3CD /* CoreChartEntry.swift in Sources */,
 				5320581C215D287700ED0C36 /* FontAwesomeImageView.swift in Sources */,
 				5373CA9F2152C68000676F3D /* Data.swift in Sources */,
 				531E0FAE216E2BA2003E8890 /* NVActivityIndicatorAnimationOrbit.swift in Sources */,

@@ -256,17 +256,6 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
         
     }
     
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        print("newsize")
-        print(size)
-        
-        super.viewWillTransition(to: size, with: coordinator)
-//        coordinator.animate(alongsideTransition: nil, completion: {
-//            _ in
-            self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(size.width), height: Int(size.height))
-//        })
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         

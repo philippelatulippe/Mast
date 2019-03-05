@@ -15,7 +15,7 @@ public class Poll: Codable {
     public let expired: Bool
     /// The time the poll expires.
     public let expiresAt: Date?
-    /// Poll count.
+    /// Whether the poll allows multiple choices.
     public let multiple: Bool
     /// The poll vote count.
     public let votesCount: Int

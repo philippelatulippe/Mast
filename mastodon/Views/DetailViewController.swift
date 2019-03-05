@@ -50,7 +50,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func load() {
         DispatchQueue.main.async {
-        self.loadLoadLoad()
+            self.loadLoadLoad()
         }
     }
     
@@ -111,18 +111,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    
-    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        print("newsize")
-        print(size)
-        
-        super.viewWillTransition(to: size, with: coordinator)
-//        coordinator.animate(alongsideTransition: nil, completion: {
-//            _ in
-            self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(size.width), height: Int(size.height))
-//        })
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
@@ -154,59 +142,59 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
             
             if self.mainStatus.isEmpty {} else {
-            
-            replyButton.backgroundColor = Colours.white
-            likeButton.backgroundColor = Colours.white
-            boostButton.backgroundColor = Colours.white
-            moreButton.backgroundColor = Colours.white
-            
-            replyButton.layer.cornerRadius = 20
-            replyButton.layer.masksToBounds = true
-            likeButton.layer.cornerRadius = 20
-            likeButton.layer.masksToBounds = true
-            boostButton.layer.cornerRadius = 20
-            boostButton.layer.masksToBounds = true
-            moreButton.layer.cornerRadius = 20
-            moreButton.layer.masksToBounds = true
-            
-            replyButton.setImage(UIImage(named: "reply0"), for: .normal)
-            moreButton.setImage(UIImage(named: "more2"), for: .normal)
-            likeButton.setImage(UIImage(named: "like0"), for: .normal)
-            boostButton.setImage(UIImage(named: "boost0"), for: .normal)
                 
-            replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-            likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-            boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
-            moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
-            
-            self.view.addSubview(self.moreButton)
-            self.view.addSubview(self.boostButton)
-            self.view.addSubview(self.likeButton)
-            self.view.addSubview(self.replyButton)
-            
-            self.moreButton.translatesAutoresizingMaskIntoConstraints = false
-            self.moreButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-            self.moreButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-            self.moreButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
-            self.moreButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
-            
-            self.boostButton.translatesAutoresizingMaskIntoConstraints = false
-            self.boostButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-            self.boostButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-            self.boostButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -85).isActive = true
-            self.boostButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
-            
-            self.likeButton.translatesAutoresizingMaskIntoConstraints = false
-            self.likeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-            self.likeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-            self.likeButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -150).isActive = true
-            self.likeButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
-            
-            self.replyButton.translatesAutoresizingMaskIntoConstraints = false
-            self.replyButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-            self.replyButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-            self.replyButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -215).isActive = true
-            self.replyButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+                replyButton.backgroundColor = Colours.white
+                likeButton.backgroundColor = Colours.white
+                boostButton.backgroundColor = Colours.white
+                moreButton.backgroundColor = Colours.white
+                
+                replyButton.layer.cornerRadius = 20
+                replyButton.layer.masksToBounds = true
+                likeButton.layer.cornerRadius = 20
+                likeButton.layer.masksToBounds = true
+                boostButton.layer.cornerRadius = 20
+                boostButton.layer.masksToBounds = true
+                moreButton.layer.cornerRadius = 20
+                moreButton.layer.masksToBounds = true
+                
+                replyButton.setImage(UIImage(named: "reply0"), for: .normal)
+                moreButton.setImage(UIImage(named: "more2"), for: .normal)
+                likeButton.setImage(UIImage(named: "like0"), for: .normal)
+                boostButton.setImage(UIImage(named: "boost0"), for: .normal)
+                
+                replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
+                
+                self.view.addSubview(self.moreButton)
+                self.view.addSubview(self.boostButton)
+                self.view.addSubview(self.likeButton)
+                self.view.addSubview(self.replyButton)
+                
+                self.moreButton.translatesAutoresizingMaskIntoConstraints = false
+                self.moreButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+                self.moreButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+                self.moreButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+                self.moreButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+                
+                self.boostButton.translatesAutoresizingMaskIntoConstraints = false
+                self.boostButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+                self.boostButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+                self.boostButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -85).isActive = true
+                self.boostButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+                
+                self.likeButton.translatesAutoresizingMaskIntoConstraints = false
+                self.likeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+                self.likeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+                self.likeButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -150).isActive = true
+                self.likeButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+                
+                self.replyButton.translatesAutoresizingMaskIntoConstraints = false
+                self.replyButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+                self.replyButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+                self.replyButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -215).isActive = true
+                self.replyButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
                 
             }
         default:
@@ -246,6 +234,75 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    @objc func tappedPoll() {
+        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? PollCell {
+            
+            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                let selection = UISelectionFeedbackGenerator()
+                selection.selectionChanged()
+            }
+            
+            if let poll = self.mainStatus[0].poll {
+                if poll.expired {
+                    Alertift.actionSheet(title: "This poll is now closed", message: nil)
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark)
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
+                        .popover(anchorView: cell)
+                        .show(on: self)
+                } else {
+                    Alertift.actionSheet()
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark)
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.default("Vote for \(StoreStruct.currentPollSelectionTitle)"), image: nil) { (action, ind) in
+                            print(action, ind)
+                            
+                            if let poll = self.mainStatus[0].poll {
+                                let request = Polls.vote(id: poll.id, choices: StoreStruct.currentPollSelection)
+                                StoreStruct.client.run(request) { (statuses) in
+                                    if let stat = (statuses.value) {
+                                        print(stat.votesCount)
+                                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                            let notification = UINotificationFeedbackGenerator()
+                                            notification.notificationOccurred(.success)
+                                        }
+                                        let statusAlert = StatusAlert()
+                                        statusAlert.image = UIImage(named: "likelarge")?.maskWithColor(color: Colours.grayDark)
+                                        statusAlert.title = "Voted"
+                                        statusAlert.contentColor = Colours.grayDark
+                                        statusAlert.message = StoreStruct.currentPollSelectionTitle
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                            statusAlert.show()
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
+                        .popover(anchorView: cell)
+                        .show(on: self)
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -254,6 +311,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshCont), name: NSNotification.Name(rawValue: "refreshCont"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "splitload"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.tappedPoll), name: NSNotification.Name(rawValue: "tappedPoll"), object: nil)
         
         self.view.backgroundColor = Colours.white
         splitViewController?.view.backgroundColor = Colours.cellQuote
@@ -291,14 +349,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-//        switch (deviceIdiom) {
-//        case .phone:
-//            print("nothing")
-//        case .pad:
-//            self.title = "Detail"
-//        default:
-//            print("nothing")
-//        }
+        //        switch (deviceIdiom) {
+        //        case .phone:
+        //            print("nothing")
+        //        case .pad:
+        //            self.title = "Detail"
+        //        default:
+        //            print("nothing")
+        //        }
         
         switch (deviceIdiom) {
         case .phone:
@@ -320,6 +378,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell9")
         self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell900")
         self.tableView.register(RepliesCellImage.self, forCellReuseIdentifier: "cell90")
+        self.tableView.register(PollCell.self, forCellReuseIdentifier: "PollCell")
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink")
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink0")
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink1")
@@ -357,21 +416,21 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink33")
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink34")
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink35")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink36")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink37")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink38")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink39")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink40")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink41")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink42")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink43")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink44")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink45")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink46")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink47")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink48")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink49")
-//        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink50")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink36")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink37")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink38")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink39")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink40")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink41")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink42")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink43")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink44")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink45")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink46")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink47")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink48")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink49")
+        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink50")
         self.tableView.alpha = 1
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -402,20 +461,20 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //tableView.cr.beginHeaderRefresh()
         
         if self.mainStatus.isEmpty {} else {
-        let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                self.allPrevious = (stat.ancestors)
-                self.allReplies = (stat.descendants)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    if self.allPrevious.count == 0 {} else {
-                        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: false)
-                        self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentOffset.y + 1), animated: false)
+            let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    self.allPrevious = (stat.ancestors)
+                    self.allReplies = (stat.descendants)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        if self.allPrevious.count == 0 {} else {
+                            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: false)
+                            self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentOffset.y + 1), animated: false)
+                        }
                     }
                 }
             }
-        }
         }
         
         
@@ -434,6 +493,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else if section == 1 {
             return 0
         } else if section == 2 {
+            return 0
+        } else if section == 3 {
+            return 0
+        } else if section == 4 {
             return 0
         } else {
             if self.allReplies.isEmpty {
@@ -456,6 +519,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else if section == 2 {
             return nil
         } else if section == 3 {
+            return nil
+        } else if section == 4 {
+            return nil
+        } else if section == 5 {
             if self.allReplies.isEmpty {
                 return nil
             } else {
@@ -472,47 +539,82 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 6
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return self.allPrevious.count
         } else if section == 1 {
-            
             if self.mainStatus.isEmpty {
                 return 0
-            }
-            
-            let newCont = "\(self.mainStatus[0].content) "
-            
-            if (UserDefaults.standard.object(forKey: "linkcards") == nil) || (UserDefaults.standard.object(forKey: "linkcards") as! Int == 0) {
-                let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-                let matches = detector.matches(in: newCont, options: [], range: NSRange(location: 0, length: newCont.utf16.count))
-                if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
-                    return matches.count
-                }
             } else {
                 return 1
             }
-            
-            return 1
         } else if section == 2 {
+            if self.mainStatus.isEmpty {
+                return 0
+            } else {
+                if self.mainStatus[0].poll != nil {
+                    return 1
+                } else {
+                    return 0
+                }
+            }
+        } else if section == 3 {
+            if self.mainStatus.isEmpty {
+                return 0
+            } else {
+                let newCont = "\(self.mainStatus[0].content) "
+                if (UserDefaults.standard.object(forKey: "linkcards") == nil) || (UserDefaults.standard.object(forKey: "linkcards") as! Int == 0) {
+                    let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+                    let matches = detector.matches(in: newCont, options: [], range: NSRange(location: 0, length: newCont.utf16.count))
+                    if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
+                        return matches.count - 1
+                    }
+                } else {
+                    return 0
+                }
+            }
+        } else if section == 4 {
             return 1
         } else {
             return self.allReplies.count
         }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
-            if indexPath.section == 2 {
+            if indexPath.section == 4 {
                 return 0
             }
         default:
             print("nothing")
+        }
+        if indexPath.section == 2 {
+            if self.mainStatus.isEmpty {
+                return 0
+            } else {
+                if self.mainStatus[0].poll != nil {
+                    return CGFloat(StoreStruct.pollHeight)
+                } else {
+                    return 0
+                }
+            }
+        }
+        if indexPath.section == 3 {
+            if self.mainStatus.isEmpty {
+                return 0
+            } else {
+                if (UserDefaults.standard.object(forKey: "linkcards") == nil) || (UserDefaults.standard.object(forKey: "linkcards") as! Int == 0) {
+                    return UITableView.automaticDimension
+                } else {
+                    return 0
+                }
+            }
         }
         return UITableView.automaticDimension
     }
@@ -589,16 +691,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 if self.allPrevious[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
                     
-                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell8", for: indexPath) as! MainFeedCell
-                        cell.delegate = self
-                        cell.configure(self.allPrevious[indexPath.row])
-                        cell.profileImageView.tag = indexPath.row
-                        cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfileP), for: .touchUpInside)
-                        cell.backgroundColor = Colours.white
-                        cell.userName.textColor = Colours.black
-                        cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
-                        cell.date.textColor = Colours.black.withAlphaComponent(0.6)
-                        cell.toot.textColor = Colours.black
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell8", for: indexPath) as! MainFeedCell
+                    cell.delegate = self
+                    cell.configure(self.allPrevious[indexPath.row])
+                    cell.profileImageView.tag = indexPath.row
+                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfileP), for: .touchUpInside)
+                    cell.backgroundColor = Colours.white
+                    cell.userName.textColor = Colours.black
+                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.toot.textColor = Colours.black
                     
                     
                     cell.rep1.tag = indexPath.row
@@ -638,64 +740,64 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                     }
-                        cell.toot.handleURLTap { (url) in
-                            // safari
-                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                let selection = UISelectionFeedbackGenerator()
-                                selection.selectionChanged()
-                            }
-                            if url.absoluteString.hasPrefix(".") {
-                                let z = URL(string: String(url.absoluteString.dropFirst()))!
-                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
-                                    if !success {
-                                        self.safariVC = SFSafariViewController(url: z)
-                                        self.safariVC?.preferredBarTintColor = Colours.white
-                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                        self.present(self.safariVC!, animated: true, completion: nil)
-                                    }
+                    cell.toot.handleURLTap { (url) in
+                        // safari
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let selection = UISelectionFeedbackGenerator()
+                            selection.selectionChanged()
+                        }
+                        if url.absoluteString.hasPrefix(".") {
+                            let z = URL(string: String(url.absoluteString.dropFirst()))!
+                            UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                if !success {
+                                    self.safariVC = SFSafariViewController(url: z)
+                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                    self.present(self.safariVC!, animated: true, completion: nil)
                                 }
-                            } else {
-                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
-                                    if !success {
-                                        self.safariVC = SFSafariViewController(url: url)
-                                        self.safariVC?.preferredBarTintColor = Colours.white
-                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                        self.present(self.safariVC!, animated: true, completion: nil)
-                                    }
+                            }
+                        } else {
+                            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                if !success {
+                                    self.safariVC = SFSafariViewController(url: url)
+                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                    self.present(self.safariVC!, animated: true, completion: nil)
                                 }
                             }
                         }
-                        cell.toot.handleHashtagTap { (string) in
-                            // hash
-                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                let selection = UISelectionFeedbackGenerator()
-                                selection.selectionChanged()
-                            }
-                            let controller = HashtagViewController()
-                            controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    controller.currentTags = stat
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
+                    }
+                    cell.toot.handleHashtagTap { (string) in
+                        // hash
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let selection = UISelectionFeedbackGenerator()
+                            selection.selectionChanged()
+                        }
+                        let controller = HashtagViewController()
+                        controller.currentTagTitle = string
+                        let request = Timelines.tag(string)
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                controller.currentTags = stat
+                                DispatchQueue.main.async {
+                                    self.navigationController?.pushViewController(controller, animated: true)
                                 }
                             }
                         }
-                        let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
-                        cell.selectedBackgroundView = bgColorView
-                        return cell
+                    }
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = Colours.white
+                    cell.selectedBackgroundView = bgColorView
+                    return cell
                 } else {
                     
-                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell9", for: indexPath) as! MainFeedCellImage
-                        cell.delegate = self
-                        cell.configure(self.allPrevious[indexPath.row])
-                        cell.profileImageView.tag = indexPath.row
-                        cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfileP), for: .touchUpInside)
-                        cell.mainImageView.addTarget(self, action: #selector(self.tappedImagePrev(_:)), for: .touchUpInside)
-                        cell.mainImageView.tag = indexPath.row
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell9", for: indexPath) as! MainFeedCellImage
+                    cell.delegate = self
+                    cell.configure(self.allPrevious[indexPath.row])
+                    cell.profileImageView.tag = indexPath.row
+                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfileP), for: .touchUpInside)
+                    cell.mainImageView.addTarget(self, action: #selector(self.tappedImagePrev(_:)), for: .touchUpInside)
+                    cell.mainImageView.tag = indexPath.row
                     cell.smallImage1.addTarget(self, action: #selector(self.tappedImagePrevS1(_:)), for: .touchUpInside)
                     cell.smallImage2.addTarget(self, action: #selector(self.tappedImagePrevS2(_:)), for: .touchUpInside)
                     cell.smallImage3.addTarget(self, action: #selector(self.tappedImagePrevS3(_:)), for: .touchUpInside)
@@ -712,12 +814,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     cell.like1.addTarget(self, action: #selector(self.didTouchPreLike), for: .touchUpInside)
                     cell.boost1.addTarget(self, action: #selector(self.didTouchPreBoost), for: .touchUpInside)
                     
-                        cell.backgroundColor = Colours.white
-                        cell.userName.textColor = Colours.black
-                        cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
-                        cell.date.textColor = Colours.black.withAlphaComponent(0.6)
-                        cell.toot.textColor = Colours.black
-                        cell.mainImageView.backgroundColor = Colours.white
+                    cell.backgroundColor = Colours.white
+                    cell.userName.textColor = Colours.black
+                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.toot.textColor = Colours.black
+                    cell.mainImageView.backgroundColor = Colours.white
                     cell.toot.handleMentionTap { (string) in
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                             let selection = UISelectionFeedbackGenerator()
@@ -748,55 +850,55 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                     }
-                        cell.toot.handleURLTap { (url) in
-                            // safari
-                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                let selection = UISelectionFeedbackGenerator()
-                                selection.selectionChanged()
-                            }
-                            if url.absoluteString.hasPrefix(".") {
-                                let z = URL(string: String(url.absoluteString.dropFirst()))!
-                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
-                                    if !success {
-                                        self.safariVC = SFSafariViewController(url: z)
-                                        self.safariVC?.preferredBarTintColor = Colours.white
-                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                        self.present(self.safariVC!, animated: true, completion: nil)
-                                    }
+                    cell.toot.handleURLTap { (url) in
+                        // safari
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let selection = UISelectionFeedbackGenerator()
+                            selection.selectionChanged()
+                        }
+                        if url.absoluteString.hasPrefix(".") {
+                            let z = URL(string: String(url.absoluteString.dropFirst()))!
+                            UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                if !success {
+                                    self.safariVC = SFSafariViewController(url: z)
+                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                    self.present(self.safariVC!, animated: true, completion: nil)
                                 }
-                            } else {
-                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
-                                    if !success {
-                                        self.safariVC = SFSafariViewController(url: url)
-                                        self.safariVC?.preferredBarTintColor = Colours.white
-                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                        self.present(self.safariVC!, animated: true, completion: nil)
-                                    }
+                            }
+                        } else {
+                            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                if !success {
+                                    self.safariVC = SFSafariViewController(url: url)
+                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                    self.present(self.safariVC!, animated: true, completion: nil)
                                 }
                             }
                         }
-                        cell.toot.handleHashtagTap { (string) in
-                            // hash
-                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                let selection = UISelectionFeedbackGenerator()
-                                selection.selectionChanged()
-                            }
-                            let controller = HashtagViewController()
-                            controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    controller.currentTags = stat
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
+                    }
+                    cell.toot.handleHashtagTap { (string) in
+                        // hash
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let selection = UISelectionFeedbackGenerator()
+                            selection.selectionChanged()
+                        }
+                        let controller = HashtagViewController()
+                        controller.currentTagTitle = string
+                        let request = Timelines.tag(string)
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                controller.currentTags = stat
+                                DispatchQueue.main.async {
+                                    self.navigationController?.pushViewController(controller, animated: true)
                                 }
                             }
                         }
-                        let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
-                        cell.selectedBackgroundView = bgColorView
-                        return cell
+                    }
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = Colours.white
+                    cell.selectedBackgroundView = bgColorView
+                    return cell
                 }
                 
             }
@@ -812,9 +914,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print(self.mainStatus[0].content)
             
             // Main status
-            
-            
-            if indexPath.row == 0 {
             
             
             if self.mainStatus[indexPath.row].reblog?.mediaAttachments.isEmpty ?? self.mainStatus[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
@@ -865,8 +964,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.toot.handleURLTap { (url) in
                     // safari
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                    let selection = UISelectionFeedbackGenerator()
-                    selection.selectionChanged()
+                        let selection = UISelectionFeedbackGenerator()
+                        selection.selectionChanged()
                     }
                     
                     if url.absoluteString.hasPrefix(".") {
@@ -893,8 +992,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.toot.handleHashtagTap { (string) in
                     // hash
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                    let selection = UISelectionFeedbackGenerator()
-                    selection.selectionChanged()
+                        let selection = UISelectionFeedbackGenerator()
+                        selection.selectionChanged()
                     }
                     
                     let controller = HashtagViewController()
@@ -924,10 +1023,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.smallImage3.addTarget(self, action: #selector(self.tappedImageDetailS3(_:)), for: .touchUpInside)
                 cell.smallImage4.addTarget(self, action: #selector(self.tappedImageDetailS4(_:)), for: .touchUpInside)
                 cell.mainImageView.tag = indexPath.row
-                    cell.smallImage1.tag = indexPath.row
-                    cell.smallImage2.tag = indexPath.row
-                    cell.smallImage3.tag = indexPath.row
-                    cell.smallImage4.tag = indexPath.row
+                cell.smallImage1.tag = indexPath.row
+                cell.smallImage2.tag = indexPath.row
+                cell.smallImage3.tag = indexPath.row
+                cell.smallImage4.tag = indexPath.row
                 cell.backgroundColor = Colours.white
                 cell.userName.textColor = Colours.black
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
@@ -972,8 +1071,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.toot.handleURLTap { (url) in
                     // safari
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                    let selection = UISelectionFeedbackGenerator()
-                    selection.selectionChanged()
+                        let selection = UISelectionFeedbackGenerator()
+                        selection.selectionChanged()
                     }
                     if url.absoluteString.hasPrefix(".") {
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
@@ -999,8 +1098,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.toot.handleHashtagTap { (string) in
                     // hash
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                    let selection = UISelectionFeedbackGenerator()
-                    selection.selectionChanged()
+                        let selection = UISelectionFeedbackGenerator()
+                        selection.selectionChanged()
                     }
                     let controller = HashtagViewController()
                     controller.currentTagTitle = string
@@ -1019,31 +1118,44 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }
-                
-            } else {
-                
-                
-                
-                let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCellLink\(indexPath.row)", for: indexPath) as! DetailCellLink
-                let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-                let matches = detector.matches(in: self.mainStatus[0].content, options: [], range: NSRange(location: 0, length: self.mainStatus[0].content.utf16.count))
-                if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
-                    if let range = Range(matches[indexPath.row - 1].range, in: self.mainStatus[0].content) {
-                        let url = self.mainStatus[0].content[range]
-                        cell.configure(String(url))
-                    }
-                }
-                cell.backgroundColor = Colours.white
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
-                cell.selectedBackgroundView = bgColorView
-                return cell
-                
-                
-            }
+            
+            
+            
+            
+            
             
             
         } else if indexPath.section == 2 {
+            
+            // insert poll
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PollCell", for: indexPath) as! PollCell
+            if let poll = self.mainStatus[0].poll {
+                cell.configure(thePoll: poll, theOptions: poll.options)
+            }
+            cell.backgroundColor = Colours.white
+            let bgColorView = UIView()
+            bgColorView.backgroundColor = Colours.white
+            cell.selectedBackgroundView = bgColorView
+            return cell
+            
+        } else if indexPath.section == 3 {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCellLink\(indexPath.row)", for: indexPath) as! DetailCellLink
+            let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+            let matches = detector.matches(in: self.mainStatus[0].content, options: [], range: NSRange(location: 0, length: self.mainStatus[0].content.utf16.count))
+            if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
+                if let range = Range(matches[indexPath.row - 1].range, in: self.mainStatus[0].content) {
+                    let url = self.mainStatus[0].content[range]
+                    cell.configure(String(url))
+                }
+            }
+            cell.backgroundColor = Colours.white
+            let bgColorView = UIView()
+            bgColorView.backgroundColor = Colours.white
+            cell.selectedBackgroundView = bgColorView
+            return cell
+            
+        } else if indexPath.section == 4 {
             
             // Action buttons
             
@@ -1072,64 +1184,64 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             default:
                 
                 
-            
-            if self.mainStatus.isEmpty {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell10", for: indexPath) as! ActionButtonCell
-                cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-                cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-                cell.boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
-                cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
-                cell.replyButton.tag = indexPath.row
-                cell.likeButton.tag = indexPath.row
-                cell.boostButton.tag = indexPath.row
-                cell.moreButton.tag = indexPath.row
-                cell.backgroundColor = Colours.white
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
-                cell.selectedBackgroundView = bgColorView
-                return cell
                 
-            } else {
-            
-            if self.mainStatus[0].visibility == .direct {
-                
-                
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell109", for: indexPath) as! ActionButtonCell2
-                cell.configure(mainStatus: self.mainStatus[0])
-                cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-                cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-                cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
-                cell.replyButton.tag = indexPath.row
-                cell.likeButton.tag = indexPath.row
-                cell.moreButton.tag = indexPath.row
-                cell.backgroundColor = Colours.white
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
-                cell.selectedBackgroundView = bgColorView
-                return cell
-                
-                
-            } else {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell10", for: indexPath) as! ActionButtonCell
-            cell.configure(mainStatus: self.mainStatus[0])
-            cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-            cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-            cell.boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
-            cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
-            cell.replyButton.tag = indexPath.row
-            cell.likeButton.tag = indexPath.row
-            cell.boostButton.tag = indexPath.row
-            cell.moreButton.tag = indexPath.row
-            cell.backgroundColor = Colours.white
-            let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
-            cell.selectedBackgroundView = bgColorView
-            return cell
-            
+                if self.mainStatus.isEmpty {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell10", for: indexPath) as! ActionButtonCell
+                    cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                    cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                    cell.boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                    cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
+                    cell.replyButton.tag = indexPath.row
+                    cell.likeButton.tag = indexPath.row
+                    cell.boostButton.tag = indexPath.row
+                    cell.moreButton.tag = indexPath.row
+                    cell.backgroundColor = Colours.white
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = Colours.white
+                    cell.selectedBackgroundView = bgColorView
+                    return cell
+                    
+                } else {
+                    
+                    if self.mainStatus[0].visibility == .direct {
+                        
+                        
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell109", for: indexPath) as! ActionButtonCell2
+                        cell.configure(mainStatus: self.mainStatus[0])
+                        cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                        cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                        cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
+                        cell.replyButton.tag = indexPath.row
+                        cell.likeButton.tag = indexPath.row
+                        cell.moreButton.tag = indexPath.row
+                        cell.backgroundColor = Colours.white
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                        
+                        
+                    } else {
+                        
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell10", for: indexPath) as! ActionButtonCell
+                        cell.configure(mainStatus: self.mainStatus[0])
+                        cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                        cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                        cell.boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                        cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
+                        cell.replyButton.tag = indexPath.row
+                        cell.likeButton.tag = indexPath.row
+                        cell.boostButton.tag = indexPath.row
+                        cell.moreButton.tag = indexPath.row
+                        cell.backgroundColor = Colours.white
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                        
+                    }
                 }
-            }
-            
+                
             }
         } else {
             
@@ -1149,8 +1261,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.toot.handleURLTap { (url) in
                     // safari
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                    let selection = UISelectionFeedbackGenerator()
-                    selection.selectionChanged()
+                        let selection = UISelectionFeedbackGenerator()
+                        selection.selectionChanged()
                     }
                     if url.absoluteString.hasPrefix(".") {
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
@@ -1176,8 +1288,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.toot.handleHashtagTap { (string) in
                     // hash
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                    let selection = UISelectionFeedbackGenerator()
-                    selection.selectionChanged()
+                        let selection = UISelectionFeedbackGenerator()
+                        selection.selectionChanged()
                     }
                     let controller = HashtagViewController()
                     controller.currentTagTitle = string
@@ -1250,8 +1362,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.toot.handleURLTap { (url) in
                             // safari
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
                             }
                             if url.absoluteString.hasPrefix(".") {
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
@@ -1277,8 +1389,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.toot.handleHashtagTap { (string) in
                             // hash
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
                             }
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
@@ -1340,8 +1452,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.toot.handleURLTap { (url) in
                             // safari
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
                             }
                             if url.absoluteString.hasPrefix(".") {
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
@@ -1367,8 +1479,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.toot.handleHashtagTap { (string) in
                             // hash
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
                             }
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
@@ -1397,15 +1509,15 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.profileImageView.tag = indexPath.row
                         cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
-                    cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
-                    cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
-                    cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
-                    cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
+                        cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
+                        cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
+                        cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
+                        cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
                         cell.mainImageView.tag = indexPath.row
-                    cell.smallImage1.tag = indexPath.row
-                    cell.smallImage2.tag = indexPath.row
-                    cell.smallImage3.tag = indexPath.row
-                    cell.smallImage4.tag = indexPath.row
+                        cell.smallImage1.tag = indexPath.row
+                        cell.smallImage2.tag = indexPath.row
+                        cell.smallImage3.tag = indexPath.row
+                        cell.smallImage4.tag = indexPath.row
                         cell.rep1.tag = indexPath.row
                         cell.like1.tag = indexPath.row
                         cell.boost1.tag = indexPath.row
@@ -1451,8 +1563,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.toot.handleURLTap { (url) in
                             // safari
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
                             }
                             if url.absoluteString.hasPrefix(".") {
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
@@ -1478,8 +1590,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.toot.handleHashtagTap { (string) in
                             // hash
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
                             }
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
@@ -1504,15 +1616,15 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.profileImageView.tag = indexPath.row
                         cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
-                    cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
-                    cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
-                    cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
-                    cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
+                        cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
+                        cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
+                        cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
+                        cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
                         cell.mainImageView.tag = indexPath.row
-                    cell.smallImage1.tag = indexPath.row
-                    cell.smallImage2.tag = indexPath.row
-                    cell.smallImage3.tag = indexPath.row
-                    cell.smallImage4.tag = indexPath.row
+                        cell.smallImage1.tag = indexPath.row
+                        cell.smallImage2.tag = indexPath.row
+                        cell.smallImage3.tag = indexPath.row
+                        cell.smallImage4.tag = indexPath.row
                         cell.backgroundColor = Colours.white
                         cell.userName.textColor = Colours.black
                         cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
@@ -1552,8 +1664,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.toot.handleURLTap { (url) in
                             // safari
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
                             }
                             if url.absoluteString.hasPrefix(".") {
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
@@ -1579,8 +1691,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.toot.handleHashtagTap { (string) in
                             // hash
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
                             }
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
@@ -1913,8 +2025,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var player = AVPlayer()
     @objc func tappedImageDetail(_ sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let selection = UISelectionFeedbackGenerator()
-        selection.selectionChanged()
+            let selection = UISelectionFeedbackGenerator()
+            selection.selectionChanged()
         }
         
         var sto = self.mainStatus
@@ -1937,46 +2049,46 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             
         } else {
-        
-        let indexPath = IndexPath(row: sender.tag, section: 1)
-        let cell = tableView.cellForRow(at: indexPath) as! DetailCellImage
-        var images = [SKPhoto]()
+            
+            let indexPath = IndexPath(row: sender.tag, section: 1)
+            let cell = tableView.cellForRow(at: indexPath) as! DetailCellImage
+            var images = [SKPhoto]()
             var coun = 0
-        for y in sto[0].reblog?.mediaAttachments ?? sto[0].mediaAttachments {
-            if coun == 0 {
-                let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
-                photo.shouldCachePhotoURLImage = true
-                if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                    photo.caption = sto[0].reblog?.content.stripHTML() ?? sto[0].content.stripHTML()
-                } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                    photo.caption = y.description ?? ""
+            for y in sto[0].reblog?.mediaAttachments ?? sto[0].mediaAttachments {
+                if coun == 0 {
+                    let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
+                    photo.shouldCachePhotoURLImage = true
+                    if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                        photo.caption = sto[0].reblog?.content.stripHTML() ?? sto[0].content.stripHTML()
+                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                        photo.caption = y.description ?? ""
+                    } else {
+                        photo.caption = ""
+                    }
+                    images.append(photo)
                 } else {
-                    photo.caption = ""
+                    let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                    photo.shouldCachePhotoURLImage = true
+                    if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                        photo.caption = sto[0].reblog?.content.stripHTML() ?? sto[0].content.stripHTML()
+                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                        photo.caption = y.description ?? ""
+                    } else {
+                        photo.caption = ""
+                    }
+                    images.append(photo)
                 }
-                images.append(photo)
-            } else {
-            let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
-            photo.shouldCachePhotoURLImage = true
-            if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                photo.caption = sto[0].reblog?.content.stripHTML() ?? sto[0].content.stripHTML()
-            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                photo.caption = y.description ?? ""
-            } else {
-                photo.caption = ""
-                }
-            images.append(photo)
+                coun += 1
             }
-            coun += 1
-        }
-        let originImage = sender.currentImage
-        if originImage != nil {
-            let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.mainImageView)
-            browser.displayToolbar = true
-            browser.displayAction = true
-            browser.delegate = self
-            browser.initializePageIndex(0)
-            present(browser, animated: true, completion: nil)
-        }
+            let originImage = sender.currentImage
+            if originImage != nil {
+                let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.mainImageView)
+                browser.displayToolbar = true
+                browser.displayAction = true
+                browser.delegate = self
+                browser.initializePageIndex(0)
+                present(browser, animated: true, completion: nil)
+            }
             
         }
         
@@ -1984,39 +2096,39 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func didTouchFaves(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let selection = UIImpactFeedbackGenerator()
-        selection.impactOccurred()
+            let selection = UIImpactFeedbackGenerator()
+            selection.impactOccurred()
         }
         if self.mainStatus[0].reblog?.favouritesCount ?? self.mainStatus[0].favouritesCount > 0 || self.mainStatus[0].reblog?.reblogsCount ?? self.mainStatus[0].reblogsCount > 0 {
             
-        let request = Statuses.favouritedBy(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                DispatchQueue.main.async {
-                    
-                    
-                    let request0 = Statuses.rebloggedBy(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
-                    StoreStruct.client.run(request0) { (statuses) in
-                        if let stat0 = (statuses.value) {
-                            
-                            
-                            DispatchQueue.main.async {
-                            
-                                let controller = BoostersViewController()
-                                controller.statusLiked = stat
-                                controller.statusBoosted = stat0
-                                controller.profileStatus = self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id ?? ""
-                                self.navigationController?.pushViewController(controller, animated: true)
+            let request = Statuses.favouritedBy(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    DispatchQueue.main.async {
+                        
+                        
+                        let request0 = Statuses.rebloggedBy(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
+                        StoreStruct.client.run(request0) { (statuses) in
+                            if let stat0 = (statuses.value) {
+                                
+                                
+                                DispatchQueue.main.async {
+                                    
+                                    let controller = BoostersViewController()
+                                    controller.statusLiked = stat
+                                    controller.statusBoosted = stat0
+                                    controller.profileStatus = self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id ?? ""
+                                    self.navigationController?.pushViewController(controller, animated: true)
+                                    
+                                }
                                 
                             }
-                            
                         }
+                        
+                        
                     }
-                
-                            
                 }
             }
-        }
             
         }
         
@@ -2024,8 +2136,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func didTouchReply(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
-        impact.impactOccurred()
+            let impact = UIImpactFeedbackGenerator()
+            impact.impactOccurred()
         }
         let controller = ComposeViewController()
         StoreStruct.spoilerText = self.mainStatus[sender.tag].reblog?.spoilerText ?? self.mainStatus[sender.tag].spoilerText
@@ -2060,16 +2172,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func didTouchLike(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
-        impact.impactOccurred()
+            let impact = UIImpactFeedbackGenerator()
+            impact.impactOccurred()
         }
         if self.mainStatus[0].reblog?.favourited ?? self.mainStatus[0].favourited ?? false || StoreStruct.allLikes.contains(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id) {
             
             if self.mainStatus[0].visibility == .direct {
-                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell2
+                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! ActionButtonCell2
                 ce.likeButton.setImage(UIImage(named: "like0"), for: .normal)
             } else {
-                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell
+                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! ActionButtonCell
                 ce.likeButton.setImage(UIImage(named: "like0"), for: .normal)
             }
             
@@ -2083,8 +2195,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
             if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                statusAlert.show()
+            }
             
             StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id }
             let request2 = Statuses.unfavourite(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
@@ -2095,10 +2207,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.refDetailCount()
         } else {
             if self.mainStatus[0].visibility == .direct {
-                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell2
+                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! ActionButtonCell2
                 ce.likeButton.setImage(UIImage(named: "like"), for: .normal)
             } else {
-                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell
+                let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! ActionButtonCell
                 ce.likeButton.setImage(UIImage(named: "like"), for: .normal)
             }
             
@@ -2112,17 +2224,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
             if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                statusAlert.show()
+            }
             
             StoreStruct.allLikes.append(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             let request2 = Statuses.favourite(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
-                if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateLi"), object: nil)
-                }
+                    if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateLi"), object: nil)
+                    }
                 }
                 print(statuses.value)
             }
@@ -2134,11 +2246,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func didTouchBoost(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
-        impact.impactOccurred()
+            let impact = UIImpactFeedbackGenerator()
+            impact.impactOccurred()
         }
         if self.mainStatus[0].reblog?.reblogged ?? self.mainStatus[0].reblogged ?? false || StoreStruct.allBoosts.contains(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id) {
-            let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell
+            let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! ActionButtonCell
             ce.boostButton.setImage(UIImage(named: "boost0"), for: .normal)
             
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2151,8 +2263,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
             if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                statusAlert.show()
+            }
             
             StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id }
             let request2 = Statuses.unreblog(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
@@ -2162,7 +2274,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             self.refDetailCount()
         } else {
-            let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ActionButtonCell
+            let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! ActionButtonCell
             ce.boostButton.setImage(UIImage(named: "boost"), for: .normal)
             
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2175,17 +2287,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
             if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                statusAlert.show()
+            }
             
             StoreStruct.allBoosts.append(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             let request2 = Statuses.reblog(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request2) { (statuses) in
                 
                 DispatchQueue.main.async {
-                if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateRe"), object: nil)
-                }
+                    if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateRe"), object: nil)
+                    }
                 }
                 print(statuses.value)
             }
@@ -2197,8 +2309,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func didTouchMore(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
-        impact.impactOccurred()
+            let impact = UIImpactFeedbackGenerator()
+            impact.impactOccurred()
         }
         
         var isMuted = false
@@ -2268,8 +2380,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "This Toot"
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                    statusAlert.show()
+                                }
                             }
                         }
                     } else {
@@ -2287,8 +2399,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "This Toot"
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                    statusAlert.show()
+                                }
                             }
                         }
                     }
@@ -2321,8 +2433,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Your Toot"
                             if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                statusAlert.show()
+                            }
                             //sto.remove(at: indexPath.row)
                             //self.tableView.reloadData()
                         }
@@ -2456,7 +2568,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             
         } else {
-        
+            
             let wordsInThis = self.mainStatus[0].content.stripHTML().components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
             let newSeconds = Double(wordsInThis) * 0.38
             var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
@@ -2469,326 +2581,326 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             
             Alertift.actionSheet(title: nil, message: newSecondsText)
-            .backgroundColor(Colours.white)
-            .titleTextColor(Colours.grayDark)
-            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
-            .messageTextAlignment(.left)
-            .titleTextAlignment(.left)
-            .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
-                print(action, ind)
-                
-                if isMuted == false {
-                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                        let notification = UINotificationFeedbackGenerator()
-                        notification.notificationOccurred(.success)
-                    }
-                    let statusAlert = StatusAlert()
-                    statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
-                    statusAlert.title = "Muted".localized
-                    statusAlert.contentColor = Colours.grayDark
-                    statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
-                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                .backgroundColor(Colours.white)
+                .titleTextColor(Colours.grayDark)
+                .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                .messageTextAlignment(.left)
+                .titleTextAlignment(.left)
+                .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
+                    print(action, ind)
                     
-                    let request = Accounts.mute(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            print("muted")
-                            print(stat)
-                        }
-                    }
-                } else {
-                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                        let notification = UINotificationFeedbackGenerator()
-                        notification.notificationOccurred(.success)
-                    }
-                    let statusAlert = StatusAlert()
-                    statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
-                    statusAlert.title = "Unmuted".localized
-                    statusAlert.contentColor = Colours.grayDark
-                    statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
-                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                    
-                    let request = Accounts.unmute(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            print("unmuted")
-                            print(stat)
-                        }
-                    }
-                }
-                
-            }
-            .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
-                print(action, ind)
-                
-                if isBlocked == false {
-                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                        let notification = UINotificationFeedbackGenerator()
-                        notification.notificationOccurred(.success)
-                    }
-                    let statusAlert = StatusAlert()
-                    statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
-                    statusAlert.title = "Blocked".localized
-                    statusAlert.contentColor = Colours.grayDark
-                    statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
-                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                    
-                    let request = Accounts.block(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            print("blocked")
-                            print(stat)
-                        }
-                    }
-                } else {
-                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                        let notification = UINotificationFeedbackGenerator()
-                        notification.notificationOccurred(.success)
-                    }
-                    let statusAlert = StatusAlert()
-                    statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
-                    statusAlert.title = "Unblocked".localized
-                    statusAlert.contentColor = Colours.grayDark
-                    statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
-                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                    
-                    let request = Accounts.unblock(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            print("unblocked")
-                            print(stat)
-                        }
-                    }
-                }
-                
-            }
-            .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
-                print(action, ind)
-                
-                
-                Alertift.actionSheet()
-                    .backgroundColor(Colours.white)
-                    .titleTextColor(Colours.grayDark)
-                    .messageTextColor(Colours.grayDark)
-                    .messageTextAlignment(.left)
-                    .titleTextAlignment(.left)
-                    .action(.default("Harassment"), image: nil) { (action, ind) in
-                        print(action, ind)
-                        
+                    if isMuted == false {
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                             let notification = UINotificationFeedbackGenerator()
                             notification.notificationOccurred(.success)
                         }
-                        
                         let statusAlert = StatusAlert()
-                        statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                        statusAlert.title = "Reported".localized
+                        statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
+                        statusAlert.title = "Muted".localized
                         statusAlert.contentColor = Colours.grayDark
-                        statusAlert.message = "Harassment"
+                        statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                            statusAlert.show()
+                        }
                         
-                        let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "Harassment")
+                        let request = Accounts.mute(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("reported")
+                                print("muted")
                                 print(stat)
                             }
                         }
-                        
-                    }
-                    .action(.default("No Content Warning"), image: nil) { (action, ind) in
-                        print(action, ind)
-                        
+                    } else {
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                             let notification = UINotificationFeedbackGenerator()
                             notification.notificationOccurred(.success)
                         }
-                        
                         let statusAlert = StatusAlert()
-                        statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                        statusAlert.title = "Reported".localized
+                        statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
+                        statusAlert.title = "Unmuted".localized
                         statusAlert.contentColor = Colours.grayDark
-                        statusAlert.message = "No Content Warning"
+                        statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                            statusAlert.show()
+                        }
                         
-                        let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "No Content Warning")
+                        let request = Accounts.unmute(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("reported")
+                                print("unmuted")
                                 print(stat)
                             }
                         }
-                        
                     }
-                    .action(.default("Spam"), image: nil) { (action, ind) in
-                        print(action, ind)
-                        
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let notification = UINotificationFeedbackGenerator()
-                            notification.notificationOccurred(.success)
-                        }
-                        
-                        let statusAlert = StatusAlert()
-                        statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                        statusAlert.title = "Reported".localized
-                        statusAlert.contentColor = Colours.grayDark
-                        statusAlert.message = "Spam"
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                        
-                        let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "Spam")
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                print("reported")
-                                print(stat)
-                            }
-                        }
-                        
-                    }
-                    .action(.cancel("Dismiss"))
-                    .finally { action, index in
-                        if action.style == .cancel {
-                            return
-                        }
-                    }
-                    .popover(anchorView: self.moreButton ?? self.view)
-                    .show(on: self)
-                
-                
-            }
-            .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                print(action, ind)
-                
-                let unreserved = "-._~/?"
-                let allowed = NSMutableCharacterSet.alphanumeric()
-                allowed.addCharacters(in: unreserved)
-                let bodyText = self.mainStatus[0].reblog?.content.stripHTML() ?? self.mainStatus[0].content.stripHTML()
-                let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
-                let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
-                var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
-                trans = trans!.replacingOccurrences(of: "\n", with: "%20")
-                let langStr = Locale.current.languageCode
-                let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
-                guard let requestUrl = URL(string:urlString) else {
-                    return
+                    
                 }
-                let request = URLRequest(url:requestUrl)
-                let task = URLSession.shared.dataTask(with: request) {
-                    (data, response, error) in
-                    if error == nil, let usableData = data {
-                        do {
-                            let json = try JSONSerialization.jsonObject(with: usableData, options: .mutableContainers) as! [Any]
+                .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
+                    print(action, ind)
+                    
+                    if isBlocked == false {
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let notification = UINotificationFeedbackGenerator()
+                            notification.notificationOccurred(.success)
+                        }
+                        let statusAlert = StatusAlert()
+                        statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
+                        statusAlert.title = "Blocked".localized
+                        statusAlert.contentColor = Colours.grayDark
+                        statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            statusAlert.show()
+                        }
+                        
+                        let request = Accounts.block(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                print("blocked")
+                                print(stat)
+                            }
+                        }
+                    } else {
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let notification = UINotificationFeedbackGenerator()
+                            notification.notificationOccurred(.success)
+                        }
+                        let statusAlert = StatusAlert()
+                        statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
+                        statusAlert.title = "Unblocked".localized
+                        statusAlert.contentColor = Colours.grayDark
+                        statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            statusAlert.show()
+                        }
+                        
+                        let request = Accounts.unblock(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                print("unblocked")
+                                print(stat)
+                            }
+                        }
+                    }
+                    
+                }
+                .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
+                    print(action, ind)
+                    
+                    
+                    Alertift.actionSheet()
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark)
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.default("Harassment"), image: nil) { (action, ind) in
+                            print(action, ind)
                             
-                            var translatedText = ""
-                            for i in (json[0] as! [Any]) {
-                                translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let notification = UINotificationFeedbackGenerator()
+                                notification.notificationOccurred(.success)
                             }
                             
-                            Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
-                                .backgroundColor(Colours.white)
-                                .titleTextColor(Colours.grayDark)
-                                .messageTextColor(Colours.grayDark)
-                                .messageTextAlignment(.left)
-                                .titleTextAlignment(.left)
-                                .action(.cancel("Dismiss"))
-                                .finally { action, index in
-                                    if action.style == .cancel {
-                                        return
-                                    }
+                            let statusAlert = StatusAlert()
+                            statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                            statusAlert.title = "Reported".localized
+                            statusAlert.contentColor = Colours.grayDark
+                            statusAlert.message = "Harassment"
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                statusAlert.show()
+                            }
+                            
+                            let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "Harassment")
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    print("reported")
+                                    print(stat)
                                 }
-                                .popover(anchorView: self.moreButton ?? self.view)
-                                .show(on: self)
-                        } catch let error as NSError {
-                            print(error)
+                            }
+                            
                         }
-                        
-                    }
+                        .action(.default("No Content Warning"), image: nil) { (action, ind) in
+                            print(action, ind)
+                            
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let notification = UINotificationFeedbackGenerator()
+                                notification.notificationOccurred(.success)
+                            }
+                            
+                            let statusAlert = StatusAlert()
+                            statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                            statusAlert.title = "Reported".localized
+                            statusAlert.contentColor = Colours.grayDark
+                            statusAlert.message = "No Content Warning"
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                statusAlert.show()
+                            }
+                            
+                            let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "No Content Warning")
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    print("reported")
+                                    print(stat)
+                                }
+                            }
+                            
+                        }
+                        .action(.default("Spam"), image: nil) { (action, ind) in
+                            print(action, ind)
+                            
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let notification = UINotificationFeedbackGenerator()
+                                notification.notificationOccurred(.success)
+                            }
+                            
+                            let statusAlert = StatusAlert()
+                            statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                            statusAlert.title = "Reported".localized
+                            statusAlert.contentColor = Colours.grayDark
+                            statusAlert.message = "Spam"
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                statusAlert.show()
+                            }
+                            
+                            let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "Spam")
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    print("reported")
+                                    print(stat)
+                                }
+                            }
+                            
+                        }
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
+                        .popover(anchorView: self.moreButton ?? self.view)
+                        .show(on: self)
+                    
+                    
                 }
-                task.resume()
-            }
-            .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                print(action, ind)
-                
-                let controller = ComposeViewController()
-                controller.inReply = []
-                controller.inReplyText = ""
-                controller.filledTextFieldText = self.mainStatus[0].content.stripHTML()
-                self.present(controller, animated: true, completion: nil)
-            }
-            .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                print(action, ind)
-                
-                
-                
-                Alertift.actionSheet()
-                    .backgroundColor(Colours.white)
-                    .titleTextColor(Colours.grayDark)
-                    .messageTextColor(Colours.grayDark)
-                    .messageTextAlignment(.left)
-                    .titleTextAlignment(.left)
-                    .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                        print(action, ind)
-                        
-                        if let myWebsite = self.mainStatus[0].reblog?.url ?? self.mainStatus[0].url {
-                            let objectsToShare = [myWebsite]
-                            let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
+                    print(action, ind)
+                    
+                    let unreserved = "-._~/?"
+                    let allowed = NSMutableCharacterSet.alphanumeric()
+                    allowed.addCharacters(in: unreserved)
+                    let bodyText = self.mainStatus[0].reblog?.content.stripHTML() ?? self.mainStatus[0].content.stripHTML()
+                    let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
+                    let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
+                    var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
+                    trans = trans!.replacingOccurrences(of: "\n", with: "%20")
+                    let langStr = Locale.current.languageCode
+                    let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
+                    guard let requestUrl = URL(string:urlString) else {
+                        return
+                    }
+                    let request = URLRequest(url:requestUrl)
+                    let task = URLSession.shared.dataTask(with: request) {
+                        (data, response, error) in
+                        if error == nil, let usableData = data {
+                            do {
+                                let json = try JSONSerialization.jsonObject(with: usableData, options: .mutableContainers) as! [Any]
+                                
+                                var translatedText = ""
+                                for i in (json[0] as! [Any]) {
+                                    translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
+                                }
+                                
+                                Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
+                                    .backgroundColor(Colours.white)
+                                    .titleTextColor(Colours.grayDark)
+                                    .messageTextColor(Colours.grayDark)
+                                    .messageTextAlignment(.left)
+                                    .titleTextAlignment(.left)
+                                    .action(.cancel("Dismiss"))
+                                    .finally { action, index in
+                                        if action.style == .cancel {
+                                            return
+                                        }
+                                    }
+                                    .popover(anchorView: self.moreButton ?? self.view)
+                                    .show(on: self)
+                            } catch let error as NSError {
+                                print(error)
+                            }
+                            
+                        }
+                    }
+                    task.resume()
+                }
+                .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                    print(action, ind)
+                    
+                    let controller = ComposeViewController()
+                    controller.inReply = []
+                    controller.inReplyText = ""
+                    controller.filledTextFieldText = self.mainStatus[0].content.stripHTML()
+                    self.present(controller, animated: true, completion: nil)
+                }
+                .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
+                    print(action, ind)
+                    
+                    
+                    
+                    Alertift.actionSheet()
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark)
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
+                            print(action, ind)
+                            
+                            if let myWebsite = self.mainStatus[0].reblog?.url ?? self.mainStatus[0].url {
+                                let objectsToShare = [myWebsite]
+                                let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                vc.previewNumberOfLines = 5
+                                vc.previewFont = UIFont.systemFont(ofSize: 14)
+                                self.present(vc, animated: true, completion: nil)
+                            }
+                        }
+                        .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
+                            print(action, ind)
+                            
+                            let bodyText = self.mainStatus[0].reblog?.content.stripHTML() ?? self.mainStatus[0].content.stripHTML()
+                            let vc = VisualActivityViewController(text: bodyText)
                             vc.previewNumberOfLines = 5
                             vc.previewFont = UIFont.systemFont(ofSize: 14)
                             self.present(vc, animated: true, completion: nil)
+                            
                         }
-                    }
-                    .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                        print(action, ind)
-                        
-                        let bodyText = self.mainStatus[0].reblog?.content.stripHTML() ?? self.mainStatus[0].content.stripHTML()
-                        let vc = VisualActivityViewController(text: bodyText)
-                        vc.previewNumberOfLines = 5
-                        vc.previewFont = UIFont.systemFont(ofSize: 14)
-                        self.present(vc, animated: true, completion: nil)
-                        
-                    }
-                    .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                        print(action, ind)
-                        
-                        let controller = NewQRViewController()
-                        controller.ur = self.mainStatus[0].url?.absoluteString ?? "https://www.thebluebird.app"
-                        self.present(controller, animated: true, completion: nil)
-                        
-                    }
-                    .action(.cancel("Dismiss"))
-                    .finally { action, index in
-                        if action.style == .cancel {
-                            return
+                        .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
+                            print(action, ind)
+                            
+                            let controller = NewQRViewController()
+                            controller.ur = self.mainStatus[0].url?.absoluteString ?? "https://www.thebluebird.app"
+                            self.present(controller, animated: true, completion: nil)
+                            
                         }
-                    }
-                    .popover(anchorView: self.moreButton ?? self.view)
-                    .show(on: self)
-                
-                
-                
-            }
-            .action(.cancel("Dismiss"))
-            .finally { action, index in
-                if action.style == .cancel {
-                    return
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
+                        .popover(anchorView: self.moreButton ?? self.view)
+                        .show(on: self)
+                    
+                    
+                    
                 }
-            }
+                .action(.cancel("Dismiss"))
+                .finally { action, index in
+                    if action.style == .cancel {
+                        return
+                    }
+                }
                 .popover(anchorView: self.moreButton ?? self.view)
-            .show(on: self)
-        
+                .show(on: self)
+            
         }
         
     }
@@ -2796,8 +2908,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func didTouchProfileM(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let selection = UISelectionFeedbackGenerator()
-        selection.selectionChanged()
+            let selection = UISelectionFeedbackGenerator()
+            selection.selectionChanged()
         }
         
         let controller = ThirdViewController()
@@ -2830,8 +2942,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func didTouchProfile(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let selection = UISelectionFeedbackGenerator()
-        selection.selectionChanged()
+            let selection = UISelectionFeedbackGenerator()
+            selection.selectionChanged()
         }
         
         print("pp0")
@@ -2884,16 +2996,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         images.append(photo)
                     } else {
-                    let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
-                    photo.shouldCachePhotoURLImage = true
-                    if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                        photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
-                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                        photo.caption = y.description ?? ""
-                    } else {
-                        photo.caption = ""
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        photo.shouldCachePhotoURLImage = true
+                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                            photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                            photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
-                    images.append(photo)
+                        images.append(photo)
                     }
                     coun += 1
                 }
@@ -2925,16 +3037,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         images.append(photo)
                     } else {
-                    let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
-                    photo.shouldCachePhotoURLImage = true
-                    if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                        photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
-                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                        photo.caption = y.description ?? ""
-                    } else {
-                        photo.caption = ""
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        photo.shouldCachePhotoURLImage = true
+                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                            photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                            photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
                         }
-                    images.append(photo)
+                        images.append(photo)
                     }
                 }
                 let originImage = sender.currentImage
@@ -2954,14 +3066,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func tappedImage(_ sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let selection = UISelectionFeedbackGenerator()
-        selection.selectionChanged()
+            let selection = UISelectionFeedbackGenerator()
+            selection.selectionChanged()
         }
         
         
         var sto = self.allReplies
         StoreStruct.newIDtoGoTo = sto[sender.tag].id
-        let indexPath = IndexPath(row: sender.tag, section: 3)
+        let indexPath = IndexPath(row: sender.tag, section: 5)
         
         
         StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
@@ -2972,91 +3084,91 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             XPlayer.play(videoURL)
             
         } else {
-        
-        if self.allReplies[indexPath.row].inReplyToID == self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id {
             
-            let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
-            var images = [SKPhoto]()
-            var coun = 0
-            for y in sto[indexPath.row].mediaAttachments {
-                if coun == 0 {
-                    let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
-                    photo.shouldCachePhotoURLImage = true
-                    if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                        photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
-                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                        photo.caption = y.description ?? ""
+            if self.allReplies[indexPath.row].inReplyToID == self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id {
+                
+                let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                var images = [SKPhoto]()
+                var coun = 0
+                for y in sto[indexPath.row].mediaAttachments {
+                    if coun == 0 {
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
+                        photo.shouldCachePhotoURLImage = true
+                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                            photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                            photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
+                        }
+                        images.append(photo)
                     } else {
-                        photo.caption = ""
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        photo.shouldCachePhotoURLImage = true
+                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                            photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                            photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
+                        }
+                        images.append(photo)
                     }
-                    images.append(photo)
-                } else {
-                let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
-                photo.shouldCachePhotoURLImage = true
-                if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                    photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
-                } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                    photo.caption = y.description ?? ""
-                } else {
-                    photo.caption = ""
-                    }
-                images.append(photo)
+                    coun += 1
                 }
-                coun += 1
-            }
-            let originImage = sender.currentImage
-            if originImage != nil {
-                let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.mainImageView)
-                browser.displayToolbar = true
-                browser.displayAction = true
-                browser.delegate = self
-                browser.initializePageIndex(0)
-                present(browser, animated: true, completion: nil)
+                let originImage = sender.currentImage
+                if originImage != nil {
+                    let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.mainImageView)
+                    browser.displayToolbar = true
+                    browser.displayAction = true
+                    browser.delegate = self
+                    browser.initializePageIndex(0)
+                    present(browser, animated: true, completion: nil)
+                }
+                
+            } else {
+                
+                let cell = tableView.cellForRow(at: indexPath) as! RepliesCellImage
+                var images = [SKPhoto]()
+                var coun = 0
+                for y in sto[indexPath.row].mediaAttachments {
+                    if coun == 0 {
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
+                        photo.shouldCachePhotoURLImage = true
+                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                            photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                            photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
+                        }
+                        images.append(photo)
+                    } else {
+                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        photo.shouldCachePhotoURLImage = true
+                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                            photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                            photo.caption = y.description ?? ""
+                        } else {
+                            photo.caption = ""
+                        }
+                        images.append(photo)
+                    }
+                    coun += 1
+                }
+                let originImage = sender.currentImage
+                if originImage != nil {
+                    let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.mainImageView)
+                    browser.displayToolbar = true
+                    browser.displayAction = true
+                    browser.delegate = self
+                    browser.initializePageIndex(0)
+                    present(browser, animated: true, completion: nil)
+                }
+                
             }
             
-        } else {
-        
-        let cell = tableView.cellForRow(at: indexPath) as! RepliesCellImage
-        var images = [SKPhoto]()
-            var coun = 0
-        for y in sto[indexPath.row].mediaAttachments {
-            if coun == 0 {
-                let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
-                photo.shouldCachePhotoURLImage = true
-                if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                    photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
-                } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                    photo.caption = y.description ?? ""
-                } else {
-                    photo.caption = ""
-                }
-                images.append(photo)
-            } else {
-            let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
-            photo.shouldCachePhotoURLImage = true
-            if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                photo.caption = sto[indexPath.row].content.stripHTML() ?? ""
-            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                photo.caption = y.description ?? ""
-            } else {
-                photo.caption = ""
-                }
-            images.append(photo)
-            }
-            coun += 1
-        }
-        let originImage = sender.currentImage
-        if originImage != nil {
-            let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.mainImageView)
-            browser.displayToolbar = true
-            browser.displayAction = true
-            browser.delegate = self
-            browser.initializePageIndex(0)
-            present(browser, animated: true, completion: nil)
-        }
-            
-        }
-        
         }
     }
     
@@ -3071,7 +3183,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         var sto = self.allReplies
         StoreStruct.newIDtoGoTo = sto[sender.tag].id
-        let indexPath = IndexPath(row: sender.tag, section: 3)
+        let indexPath = IndexPath(row: sender.tag, section: 5)
         
         StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
         
@@ -3081,7 +3193,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             } else {
                 
-//                let indexPath = IndexPath(row: sender.tag, section: 0)
+                //                let indexPath = IndexPath(row: sender.tag, section: 0)
                 let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                 var images = [SKPhoto]()
                 var coun = 0
@@ -3134,7 +3246,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         var sto = self.allReplies
         StoreStruct.newIDtoGoTo = sto[sender.tag].id
-        let indexPath = IndexPath(row: sender.tag, section: 3)
+        let indexPath = IndexPath(row: sender.tag, section: 5)
         
         StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
         
@@ -3144,7 +3256,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             } else {
                 
-//                let indexPath = IndexPath(row: sender.tag, section: 0)
+                //                let indexPath = IndexPath(row: sender.tag, section: 0)
                 let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                 var images = [SKPhoto]()
                 var coun = 0
@@ -3198,7 +3310,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         var sto = self.allReplies
         StoreStruct.newIDtoGoTo = sto[sender.tag].id
-        let indexPath = IndexPath(row: sender.tag, section: 3)
+        let indexPath = IndexPath(row: sender.tag, section: 5)
         
         StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
         
@@ -3208,7 +3320,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             } else {
                 
-//                let indexPath = IndexPath(row: sender.tag, section: 0)
+                //                let indexPath = IndexPath(row: sender.tag, section: 0)
                 let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                 var images = [SKPhoto]()
                 var coun = 0
@@ -3263,7 +3375,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         var sto = self.allReplies
         StoreStruct.newIDtoGoTo = sto[sender.tag].id
-        let indexPath = IndexPath(row: sender.tag, section: 3)
+        let indexPath = IndexPath(row: sender.tag, section: 5)
         
         StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
         
@@ -3273,7 +3385,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             } else {
                 
-//                let indexPath = IndexPath(row: sender.tag, section: 0)
+                //                let indexPath = IndexPath(row: sender.tag, section: 0)
                 let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                 var images = [SKPhoto]()
                 var coun = 0
@@ -3843,6 +3955,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             sto = self.allPrevious
         }
         
+        if indexPath.section == 2 || indexPath.section == 3 {
+            return nil
+        }
         
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {} else {
             return nil
@@ -3854,7 +3969,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let boost = SwipeAction(style: .default, title: nil) { action, indexPath in
                 print("boost")
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                impact.impactOccurred()
+                    impact.impactOccurred()
                 }
                 if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
                     cell.hideSwipe(animated: true)
@@ -3875,7 +3990,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let like = SwipeAction(style: .default, title: nil) { action, indexPath in
                 print("like")
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                impact.impactOccurred()
+                    impact.impactOccurred()
                 }
                 
                 
@@ -3902,22 +4017,22 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 }
                                 cell.hideSwipe(animated: true)
                             } else if let cell = tableView.cellForRow(at: indexPath) as? RepliesCell {
-                        if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
-                            cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "boost")
-                        } else {
-                            cell.moreImage.image = nil
-                        }
-                        cell.hideSwipe(animated: true)
+                                if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                                    cell.moreImage.image = nil
+                                    cell.moreImage.image = UIImage(named: "boost")
+                                } else {
+                                    cell.moreImage.image = nil
+                                }
+                                cell.hideSwipe(animated: true)
                             } else if let cell = tableView.cellForRow(at: indexPath) as? RepliesCellImage {
-                    if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
-                        cell.moreImage.image = nil
-                        cell.moreImage.image = UIImage(named: "boost")
-                    } else {
-                        cell.moreImage.image = nil
-                    }
-                    cell.hideSwipe(animated: true)
-                }
+                                if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                                    cell.moreImage.image = nil
+                                    cell.moreImage.image = UIImage(named: "boost")
+                                } else {
+                                    cell.moreImage.image = nil
+                                }
+                                cell.hideSwipe(animated: true)
+                            }
                         }
                     }
                 } else {
@@ -3945,22 +4060,22 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 }
                                 cell.hideSwipe(animated: true)
                             } else if let cell = tableView.cellForRow(at: indexPath) as? RepliesCell {
-                        if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
-                            cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
-                        } else {
-                            cell.moreImage.image = UIImage(named: "like")
-                        }
-                        cell.hideSwipe(animated: true)
+                                if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                                    cell.moreImage.image = nil
+                                    cell.moreImage.image = UIImage(named: "fifty")
+                                } else {
+                                    cell.moreImage.image = UIImage(named: "like")
+                                }
+                                cell.hideSwipe(animated: true)
                             } else if let cell = tableView.cellForRow(at: indexPath) as? RepliesCellImage {
-                    if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
-                        cell.moreImage.image = nil
-                        cell.moreImage.image = UIImage(named: "fifty")
-                    } else {
-                        cell.moreImage.image = UIImage(named: "like")
-                    }
-                    cell.hideSwipe(animated: true)
-                }
+                                if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                                    cell.moreImage.image = nil
+                                    cell.moreImage.image = UIImage(named: "fifty")
+                                } else {
+                                    cell.moreImage.image = UIImage(named: "like")
+                                }
+                                cell.hideSwipe(animated: true)
+                            }
                         }
                     }
                 }
@@ -3990,7 +4105,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let reply = SwipeAction(style: .default, title: nil) { action, indexPath in
                 print("reply")
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                impact.impactOccurred()
+                    impact.impactOccurred()
                 }
                 
                 let controller = ComposeViewController()
@@ -4037,7 +4152,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let more = SwipeAction(style: .default, title: nil) { action, indexPath in
                 print("boost")
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                impact.impactOccurred()
+                    impact.impactOccurred()
                 }
                 
                 
@@ -4107,8 +4222,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
                                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                            statusAlert.show()
+                                        }
                                     }
                                 }
                             } else {
@@ -4126,8 +4241,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
                                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                            statusAlert.show()
+                                        }
                                     }
                                 }
                             }
@@ -4160,8 +4275,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Your Toot"
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                        statusAlert.show()
+                                    }
                                     //sto.remove(at: indexPath.row)
                                     //self.tableView.reloadData()
                                 }
@@ -4241,10 +4356,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     
                 } else {
-                
-                
-                
-                
+                    
+                    
+                    
+                    
                     let wordsInThis = sto[indexPath.row].content.stripHTML().components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
                     let newSeconds = Double(wordsInThis) * 0.38
                     var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
@@ -4257,326 +4372,326 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     
                     Alertift.actionSheet(title: nil, message: newSecondsText)
-                    .backgroundColor(Colours.white)
-                    .titleTextColor(Colours.grayDark)
-                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
-                    .messageTextAlignment(.left)
-                    .titleTextAlignment(.left)
-                    .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
-                        print(action, ind)
-                        
-                        if isMuted == false {
-                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                let notification = UINotificationFeedbackGenerator()
-                                notification.notificationOccurred(.success)
-                            }
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
-                            statusAlert.title = "Muted".localized
-                            statusAlert.contentColor = Colours.grayDark
-                            statusAlert.message = sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
+                            print(action, ind)
                             
-                            let request = Accounts.mute(id: sto[indexPath.row].account.id)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    print("muted")
-                                    print(stat)
-                                }
-                            }
-                        } else {
-                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                let notification = UINotificationFeedbackGenerator()
-                                notification.notificationOccurred(.success)
-                            }
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
-                            statusAlert.title = "Unmuted".localized
-                            statusAlert.contentColor = Colours.grayDark
-                            statusAlert.message = sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                            
-                            let request = Accounts.unmute(id: sto[indexPath.row].account.id)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    print("unmuted")
-                                    print(stat)
-                                }
-                            }
-                        }
-                        
-                    }
-                    .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
-                        print(action, ind)
-                        
-                        if isBlocked == false {
-                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                let notification = UINotificationFeedbackGenerator()
-                                notification.notificationOccurred(.success)
-                            }
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
-                            statusAlert.title = "Blocked".localized
-                            statusAlert.contentColor = Colours.grayDark
-                            statusAlert.message = sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                            
-                            let request = Accounts.block(id: sto[indexPath.row].account.id)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    print("blocked")
-                                    print(stat)
-                                }
-                            }
-                        } else {
-                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                let notification = UINotificationFeedbackGenerator()
-                                notification.notificationOccurred(.success)
-                            }
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
-                            statusAlert.title = "Unblocked".localized
-                            statusAlert.contentColor = Colours.grayDark
-                            statusAlert.message = sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                            
-                            let request = Accounts.unblock(id: sto[indexPath.row].account.id)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    print("unblocked")
-                                    print(stat)
-                                }
-                            }
-                        }
-                        
-                    }
-                    .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
-                        print(action, ind)
-                        
-                        Alertift.actionSheet()
-                            .backgroundColor(Colours.white)
-                            .titleTextColor(Colours.grayDark)
-                            .messageTextColor(Colours.grayDark)
-                            .messageTextAlignment(.left)
-                            .titleTextAlignment(.left)
-                            .action(.default("Harassment"), image: nil) { (action, ind) in
-                                print(action, ind)
-                                
+                            if isMuted == false {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                     let notification = UINotificationFeedbackGenerator()
                                     notification.notificationOccurred(.success)
                                 }
-                                
                                 let statusAlert = StatusAlert()
-                                statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                                statusAlert.title = "Reported".localized
+                                statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
+                                statusAlert.title = "Muted".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = "Harassment"
+                                statusAlert.message = sto[indexPath.row].account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                    statusAlert.show()
+                                }
                                 
-                                let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Harassment")
+                                let request = Accounts.mute(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("reported")
+                                        print("muted")
                                         print(stat)
                                     }
                                 }
-                                
-                            }
-                            .action(.default("No Content Warning"), image: nil) { (action, ind) in
-                                print(action, ind)
-                                
+                            } else {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                     let notification = UINotificationFeedbackGenerator()
                                     notification.notificationOccurred(.success)
                                 }
-                                
                                 let statusAlert = StatusAlert()
-                                statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                                statusAlert.title = "Reported".localized
+                                statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
+                                statusAlert.title = "Unmuted".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = "No Content Warning"
+                                statusAlert.message = sto[indexPath.row].account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                    statusAlert.show()
+                                }
                                 
-                                let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "No Content Warning")
+                                let request = Accounts.unmute(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("reported")
+                                        print("unmuted")
                                         print(stat)
                                     }
                                 }
-                                
                             }
-                            .action(.default("Spam"), image: nil) { (action, ind) in
-                                print(action, ind)
-                                
-                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                    let notification = UINotificationFeedbackGenerator()
-                                    notification.notificationOccurred(.success)
-                                }
-                                
-                                let statusAlert = StatusAlert()
-                                statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                                statusAlert.title = "Reported".localized
-                                statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = "Spam"
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
-                                
-                                let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Spam")
-                                StoreStruct.client.run(request) { (statuses) in
-                                    if let stat = (statuses.value) {
-                                        print("reported")
-                                        print(stat)
-                                    }
-                                }
-                                
-                            }
-                            .action(.cancel("Dismiss"))
-                            .finally { action, index in
-                                if action.style == .cancel {
-                                    return
-                                }
-                            }
-                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
-                            .show(on: self)
-                        
-                        
-                    }
-                    .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                        print(action, ind)
-                        
-                        let unreserved = "-._~/?"
-                        let allowed = NSMutableCharacterSet.alphanumeric()
-                        allowed.addCharacters(in: unreserved)
-                        let bodyText = sto[indexPath.row].content.stripHTML()
-                        let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
-                        let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
-                        var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
-                        trans = trans!.replacingOccurrences(of: "\n", with: "%20")
-                        let langStr = Locale.current.languageCode
-                        let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
-                        guard let requestUrl = URL(string:urlString) else {
-                            return
+                            
                         }
-                        let request = URLRequest(url:requestUrl)
-                        let task = URLSession.shared.dataTask(with: request) {
-                            (data, response, error) in
-                            if error == nil, let usableData = data {
-                                do {
-                                    let json = try JSONSerialization.jsonObject(with: usableData, options: .mutableContainers) as! [Any]
+                        .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
+                            print(action, ind)
+                            
+                            if isBlocked == false {
+                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                    let notification = UINotificationFeedbackGenerator()
+                                    notification.notificationOccurred(.success)
+                                }
+                                let statusAlert = StatusAlert()
+                                statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
+                                statusAlert.title = "Blocked".localized
+                                statusAlert.contentColor = Colours.grayDark
+                                statusAlert.message = sto[indexPath.row].account.displayName
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    statusAlert.show()
+                                }
+                                
+                                let request = Accounts.block(id: sto[indexPath.row].account.id)
+                                StoreStruct.client.run(request) { (statuses) in
+                                    if let stat = (statuses.value) {
+                                        print("blocked")
+                                        print(stat)
+                                    }
+                                }
+                            } else {
+                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                    let notification = UINotificationFeedbackGenerator()
+                                    notification.notificationOccurred(.success)
+                                }
+                                let statusAlert = StatusAlert()
+                                statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
+                                statusAlert.title = "Unblocked".localized
+                                statusAlert.contentColor = Colours.grayDark
+                                statusAlert.message = sto[indexPath.row].account.displayName
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    statusAlert.show()
+                                }
+                                
+                                let request = Accounts.unblock(id: sto[indexPath.row].account.id)
+                                StoreStruct.client.run(request) { (statuses) in
+                                    if let stat = (statuses.value) {
+                                        print("unblocked")
+                                        print(stat)
+                                    }
+                                }
+                            }
+                            
+                        }
+                        .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
+                            print(action, ind)
+                            
+                            Alertift.actionSheet()
+                                .backgroundColor(Colours.white)
+                                .titleTextColor(Colours.grayDark)
+                                .messageTextColor(Colours.grayDark)
+                                .messageTextAlignment(.left)
+                                .titleTextAlignment(.left)
+                                .action(.default("Harassment"), image: nil) { (action, ind) in
+                                    print(action, ind)
                                     
-                                    var translatedText = ""
-                                    for i in (json[0] as! [Any]) {
-                                        translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
                                     }
                                     
-                                    Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
-                                        .backgroundColor(Colours.white)
-                                        .titleTextColor(Colours.grayDark)
-                                        .messageTextColor(Colours.grayDark)
-                                        .messageTextAlignment(.left)
-                                        .titleTextAlignment(.left)
-                                        .action(.cancel("Dismiss"))
-                                        .finally { action, index in
-                                            if action.style == .cancel {
-                                                return
-                                            }
+                                    let statusAlert = StatusAlert()
+                                    statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                                    statusAlert.title = "Reported".localized
+                                    statusAlert.contentColor = Colours.grayDark
+                                    statusAlert.message = "Harassment"
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        statusAlert.show()
+                                    }
+                                    
+                                    let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Harassment")
+                                    StoreStruct.client.run(request) { (statuses) in
+                                        if let stat = (statuses.value) {
+                                            print("reported")
+                                            print(stat)
                                         }
-                                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
-                                        .show(on: self)
-                                } catch let error as NSError {
-                                    print(error)
+                                    }
+                                    
                                 }
-                                
-                            }
+                                .action(.default("No Content Warning"), image: nil) { (action, ind) in
+                                    print(action, ind)
+                                    
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
+                                    }
+                                    
+                                    let statusAlert = StatusAlert()
+                                    statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                                    statusAlert.title = "Reported".localized
+                                    statusAlert.contentColor = Colours.grayDark
+                                    statusAlert.message = "No Content Warning"
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        statusAlert.show()
+                                    }
+                                    
+                                    let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "No Content Warning")
+                                    StoreStruct.client.run(request) { (statuses) in
+                                        if let stat = (statuses.value) {
+                                            print("reported")
+                                            print(stat)
+                                        }
+                                    }
+                                    
+                                }
+                                .action(.default("Spam"), image: nil) { (action, ind) in
+                                    print(action, ind)
+                                    
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
+                                    }
+                                    
+                                    let statusAlert = StatusAlert()
+                                    statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                                    statusAlert.title = "Reported".localized
+                                    statusAlert.contentColor = Colours.grayDark
+                                    statusAlert.message = "Spam"
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        statusAlert.show()
+                                    }
+                                    
+                                    let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Spam")
+                                    StoreStruct.client.run(request) { (statuses) in
+                                        if let stat = (statuses.value) {
+                                            print("reported")
+                                            print(stat)
+                                        }
+                                    }
+                                    
+                                }
+                                .action(.cancel("Dismiss"))
+                                .finally { action, index in
+                                    if action.style == .cancel {
+                                        return
+                                    }
+                                }
+                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
+                                .show(on: self)
+                            
+                            
                         }
-                        task.resume()
-                    }
-                    .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                        print(action, ind)
-                        
-                        let controller = ComposeViewController()
-                        controller.inReply = []
-                        controller.inReplyText = ""
-                        controller.filledTextFieldText = sto[indexPath.row].content.stripHTML()
-                        self.present(controller, animated: true, completion: nil)
-                    }
-                    .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                        print(action, ind)
-                        
-                        
-                        
-                        
-                        Alertift.actionSheet()
-                            .backgroundColor(Colours.white)
-                            .titleTextColor(Colours.grayDark)
-                            .messageTextColor(Colours.grayDark)
-                            .messageTextAlignment(.left)
-                            .titleTextAlignment(.left)
-                            .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                                print(action, ind)
-                                
-                                if let myWebsite = sto[indexPath.row].url {
-                                    let objectsToShare = [myWebsite]
-                                    let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                        .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
+                            print(action, ind)
+                            
+                            let unreserved = "-._~/?"
+                            let allowed = NSMutableCharacterSet.alphanumeric()
+                            allowed.addCharacters(in: unreserved)
+                            let bodyText = sto[indexPath.row].content.stripHTML()
+                            let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
+                            let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
+                            var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
+                            trans = trans!.replacingOccurrences(of: "\n", with: "%20")
+                            let langStr = Locale.current.languageCode
+                            let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
+                            guard let requestUrl = URL(string:urlString) else {
+                                return
+                            }
+                            let request = URLRequest(url:requestUrl)
+                            let task = URLSession.shared.dataTask(with: request) {
+                                (data, response, error) in
+                                if error == nil, let usableData = data {
+                                    do {
+                                        let json = try JSONSerialization.jsonObject(with: usableData, options: .mutableContainers) as! [Any]
+                                        
+                                        var translatedText = ""
+                                        for i in (json[0] as! [Any]) {
+                                            translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
+                                        }
+                                        
+                                        Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
+                                            .backgroundColor(Colours.white)
+                                            .titleTextColor(Colours.grayDark)
+                                            .messageTextColor(Colours.grayDark)
+                                            .messageTextAlignment(.left)
+                                            .titleTextAlignment(.left)
+                                            .action(.cancel("Dismiss"))
+                                            .finally { action, index in
+                                                if action.style == .cancel {
+                                                    return
+                                                }
+                                            }
+                                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
+                                            .show(on: self)
+                                    } catch let error as NSError {
+                                        print(error)
+                                    }
+                                    
+                                }
+                            }
+                            task.resume()
+                        }
+                        .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
+                            print(action, ind)
+                            
+                            let controller = ComposeViewController()
+                            controller.inReply = []
+                            controller.inReplyText = ""
+                            controller.filledTextFieldText = sto[indexPath.row].content.stripHTML()
+                            self.present(controller, animated: true, completion: nil)
+                        }
+                        .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
+                            print(action, ind)
+                            
+                            
+                            
+                            
+                            Alertift.actionSheet()
+                                .backgroundColor(Colours.white)
+                                .titleTextColor(Colours.grayDark)
+                                .messageTextColor(Colours.grayDark)
+                                .messageTextAlignment(.left)
+                                .titleTextAlignment(.left)
+                                .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
+                                    print(action, ind)
+                                    
+                                    if let myWebsite = sto[indexPath.row].url {
+                                        let objectsToShare = [myWebsite]
+                                        let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                        vc.previewNumberOfLines = 5
+                                        vc.previewFont = UIFont.systemFont(ofSize: 14)
+                                        self.present(vc, animated: true, completion: nil)
+                                    }
+                                }
+                                .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
+                                    print(action, ind)
+                                    
+                                    let bodyText = sto[indexPath.row].content.stripHTML()
+                                    let vc = VisualActivityViewController(text: bodyText)
                                     vc.previewNumberOfLines = 5
                                     vc.previewFont = UIFont.systemFont(ofSize: 14)
                                     self.present(vc, animated: true, completion: nil)
+                                    
                                 }
-                            }
-                            .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                                print(action, ind)
-                                
-                                let bodyText = sto[indexPath.row].content.stripHTML()
-                                let vc = VisualActivityViewController(text: bodyText)
-                                vc.previewNumberOfLines = 5
-                                vc.previewFont = UIFont.systemFont(ofSize: 14)
-                                self.present(vc, animated: true, completion: nil)
-                                
-                            }
-                            .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                                print(action, ind)
-                                
-                                let controller = NewQRViewController()
-                                controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
-                                self.present(controller, animated: true, completion: nil)
-                                
-                            }
-                            .action(.cancel("Dismiss"))
-                            .finally { action, index in
-                                if action.style == .cancel {
-                                    return
+                                .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
+                                    print(action, ind)
+                                    
+                                    let controller = NewQRViewController()
+                                    controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
+                                    self.present(controller, animated: true, completion: nil)
+                                    
                                 }
-                            }
-                            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
-                            .show(on: self)
-                        
-                        
-                        
-                    }
-                    .action(.cancel("Dismiss"))
-                    .finally { action, index in
-                        if action.style == .cancel {
-                            return
+                                .action(.cancel("Dismiss"))
+                                .finally { action, index in
+                                    if action.style == .cancel {
+                                        return
+                                    }
+                                }
+                                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
+                                .show(on: self)
+                            
+                            
+                            
                         }
-                    }
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
                         .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
-                    .show(on: self)
-                
+                        .show(on: self)
+                    
                     
                 }
                 
@@ -4626,7 +4741,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             controller.mainStatus.append(self.allPrevious[indexPath.row])
             self.navigationController?.pushViewController(controller, animated: true)
         }
-        if indexPath.section == 3 {
+        if indexPath.section == 5 {
             let controller = DetailViewController()
             controller.mainStatus.append(self.allReplies[indexPath.row])
             self.navigationController?.pushViewController(controller, animated: true)

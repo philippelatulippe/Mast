@@ -2323,6 +2323,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 
                 
             }
+            .action(.default(" Add Poll"), image: UIImage(named: "list")) { (action, ind) in
+                print(action, ind)
+                
+                let controller = NewPollViewController()
+                self.present(controller, animated: true, completion: nil)
+            }
             .action(.default("  Add Now Playing"), image: UIImage(named: "music")) { (action, ind) in
                 print(action, ind)
                 
