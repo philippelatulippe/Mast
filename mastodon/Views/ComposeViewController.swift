@@ -2741,7 +2741,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     
                                 } else {
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "fetchAllNewest"), object: nil)
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
+//                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
                                 }
                                 if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
@@ -2881,7 +2881,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                             
                                                         } else {
                                                             NotificationCenter.default.post(name: Notification.Name(rawValue: "fetchAllNewest"), object: nil)
-                                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
+//                                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
                                                         }
                                                         if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                                                             NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
@@ -3009,7 +3009,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                     
                                                 } else {
                                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "fetchAllNewest"), object: nil)
-                                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
+//                                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
                                                 }
                                                 if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
@@ -3124,7 +3124,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                             
                                         } else {
                                             NotificationCenter.default.post(name: Notification.Name(rawValue: "fetchAllNewest"), object: nil)
-                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
+//                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
                                         }
                                         if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                                             NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
@@ -3223,7 +3223,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     
                                 } else {
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "fetchAllNewest"), object: nil)
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
+//                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
                                 }
                                 if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
@@ -3309,7 +3309,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             
                         } else {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "fetchAllNewest"), object: nil)
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshCont"), object: nil)
                         }
                         if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)

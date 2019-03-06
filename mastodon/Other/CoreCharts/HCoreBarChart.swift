@@ -67,7 +67,7 @@ public class HCoreBarChart: BarChartCore {
         
         let barLayer0 = CALayer()
         barLayer0.cornerRadius = 10
-        barLayer0.backgroundColor = Colours.tabUnselected.cgColor
+        barLayer0.backgroundColor = Colours.tabUnselected.withAlphaComponent(0.75).cgColor
         
         barLayer0.frame = CGRect(
             x: xPos,
@@ -156,7 +156,7 @@ public class HCoreBarChart: BarChartCore {
         textLayer.frame = CGRect(
             x: xPos + 10,
             y: yPos + (((displayConfig.barWidth)! / 2) - (textSize.height / 2)),
-            width: textSize.width,
+            width: (mainLayer.frame.width - (displayConfig.bottomSpace)! - (displayConfig.topSpace)!),
             height: textSize.height
         )
         

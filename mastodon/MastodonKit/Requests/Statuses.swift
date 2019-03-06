@@ -96,13 +96,17 @@ public struct Statuses {
             Parameter(name: "visibility", value: visibility.rawValue)
             ] + mediaIDs.map(toArrayOfParameters(withName: "media_ids"))
         
-        if poll != nil, let poll = poll {
-            let newParams = [
-                Parameter(name: "poll[expires_in]", value: String(poll[1] as! Int)),
-                Parameter(name: "poll[multiple]", value: (poll[2] as? Bool).flatMap(trueOrNil)),
-                Parameter(name: "poll[hide_totals]", value: (poll[3] as? Bool).flatMap(trueOrNil))
-            ] + (poll[0] as! [String]).map(toArrayOfParameters(withName: "poll[options]"))
-            parameters = parameters + newParams
+        if poll?.isEmpty ?? false {
+            
+        } else {
+            if let poll = poll {
+                let newParams = [
+                    Parameter(name: "poll[expires_in]", value: String(poll[1] as! Int)),
+                    Parameter(name: "poll[multiple]", value: (poll[2] as? Bool).flatMap(trueOrNil)),
+                    Parameter(name: "poll[hide_totals]", value: (poll[3] as? Bool).flatMap(trueOrNil))
+                    ] + (poll[0] as! [String]).map(toArrayOfParameters(withName: "poll[options]"))
+                parameters = parameters + newParams
+            }
         }
 
         let method = HTTPMethod.post(.parameters(parameters))

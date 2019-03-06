@@ -169,7 +169,7 @@ class MainFeedCell: SwipeTableViewCell {
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[like1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[boost1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[more1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
-                contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[rep1(20)]-24-[like1(20)]-24-[boost1(14)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
+                contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[rep1(20)]-24-[like1(40)]-15-[boost1(40)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
             }
             
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-71-[warning]-17-|", options: [], metrics: nil, views: viewsDict))
@@ -189,15 +189,28 @@ class MainFeedCell: SwipeTableViewCell {
         
         rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.gray), for: .normal)
         more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.gray), for: .normal)
-        if status.reblog?.reblogged ?? status.reblogged ?? false {
+        if StoreStruct.allBoosts.contains(status.reblog?.id ?? status.id) || status.reblog?.reblogged ?? status.reblogged ?? false {
             boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
         } else {
             boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
         }
-        if status.reblog?.favourited ?? status.favourited ?? false {
+        if StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) || status.reblog?.favourited ?? status.favourited ?? false {
             like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
         } else {
             like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
+        }
+        
+        if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {} else {
+            like1.setTitle("\(status.reblog?.favouritesCount ?? status.favouritesCount)", for: .normal)
+            like1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
+            like1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            like1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+            like1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+            boost1.setTitle("\(status.reblog?.reblogsCount ?? status.reblogsCount)", for: .normal)
+            boost1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
+            boost1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            boost1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+            boost1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         }
         
         if (UserDefaults.standard.object(forKey: "dmTog") == nil) || (UserDefaults.standard.object(forKey: "dmTog") as! Int == 0) {

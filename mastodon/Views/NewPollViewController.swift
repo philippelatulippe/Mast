@@ -75,7 +75,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
         textField.tintColor = Colours.tabSelected
         textField.delegate = self
         textField.keyboardType = .default
-        textField.attributedPlaceholder = NSAttributedString(string: "Add at least two poll options...".localized,
+        textField.attributedPlaceholder = NSAttributedString(string: "Start typing to add at least two poll options...".localized,
                                                                    attributes: [NSAttributedString.Key.foregroundColor: Colours.tabUnselected])
         textField.keyboardAppearance = Colours.keyCol
         textField.backgroundColor = Colours.white
@@ -110,7 +110,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
     }
     
     func openTimePicker()  {
-        self.timePicker.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 200)
+        self.timePicker.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 250)
         self.timePicker.tintColor = Colours.grayDark
         self.timePicker.datePickerMode = .dateAndTime
         self.timePicker.minimumDate = Date()
@@ -142,8 +142,12 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
     }
     
     @objc func cancelDatePicker() {
-        timePicker.removeFromSuperview()
-        toolBar.removeFromSuperview()
+        self.hiddenTextField.resignFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.textField.resignFirstResponder()
         self.hiddenTextField.resignFirstResponder()
     }
     
@@ -158,8 +162,6 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
         StoreStruct.pollPickerDate = self.timePicker.date
         StoreStruct.expiresIn = Calendar.current.dateComponents([.second], from: Date(), to: self.timePicker.date).second ?? 0
         
-        timePicker.removeFromSuperview()
-        toolBar.removeFromSuperview()
         self.hiddenTextField.resignFirstResponder()
     }
     
@@ -332,6 +334,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             Alertift.actionSheet(title: nil, message: nil)
                 .backgroundColor(Colours.white)

@@ -867,23 +867,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         
                     }
                     
-//                    for x in stat {
-//                        if x.type == .mention {
-//                            StoreStruct.notificationsMentions.append(x)
-//                            DispatchQueue.main.async {
-//                                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-//                                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
-//
-//                                self.ai.alpha = 0
-//                                self.ai.removeFromSuperview()
-//
-//                                self.tableView.reloadData()
-//                                self.tableView2.reloadData()
-//
-//                            }
-//                        }
-//                    }
-                    
                 }
             }
         } else {
@@ -918,24 +901,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 self.tableView3.reloadData()
                 
             }
-            
-            
-//            for x in StoreStruct.notifications {
-//                if x.type == .mention {
-//                    StoreStruct.notificationsMentions.append(x)
-//                    DispatchQueue.main.async {
-//                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-//                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
-//
-//                        self.ai.alpha = 0
-//                        self.ai.removeFromSuperview()
-//
-//                        self.tableView.reloadData()
-//                        self.tableView2.reloadData()
-//
-//                    }
-//                }
-//            }
         }
         
         
@@ -1480,10 +1445,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.ai.removeFromSuperview()
         }
         if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {} else {
-//            springWithDelay(duration: 0.4, delay: 0, animations: {
+            springWithDelay(duration: 0.4, delay: 0, animations: {
                 self.segmentedControl.alpha = 0
-                //            self.tableView.alpha = 0
-//            })
+            })
         }
         if self.currentIndex == 0 {
             UserDefaults.standard.set(self.tableView2.contentOffset.y, forKey: "savedRowNotif")
@@ -3404,6 +3368,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         } else {
                             cell.moreImage.image = nil
                         }
+                        cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                        cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as! NotificationCellImage
@@ -3413,6 +3379,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         } else {
                             cell.moreImage.image = nil
                         }
+                        cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                        cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -3428,18 +3396,26 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? NotificationCell {
                         if sto[sender.tag].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].status?.id ?? "" ) {
+                            cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
+                            cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
+                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
                             cell.moreImage.image = UIImage(named: "boost")
                         }
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as! NotificationCellImage
                         if sto[sender.tag].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].status?.id ?? "" ) {
+                            cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
+                            cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
+                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
                             cell.moreImage.image = UIImage(named: "boost")
                         }
                         cell.hideSwipe(animated: true)
@@ -3487,6 +3463,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         } else {
                             cell.moreImage.image = nil
                         }
+                        cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                        cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as! NotificationCellImage
@@ -3496,6 +3474,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         } else {
                             cell.moreImage.image = nil
                         }
+                        cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                        cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -3510,18 +3490,26 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     }
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? NotificationCell {
                         if sto[sender.tag].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].status?.id ?? "" ) {
+                            cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
+                            cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
+                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
                             cell.moreImage.image = UIImage(named: "like")
                         }
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as! NotificationCellImage
                         if sto[sender.tag].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].status?.id ?? "" ) {
+                            cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
+                            cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
+                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
                             cell.moreImage.image = UIImage(named: "like")
                         }
                         cell.hideSwipe(animated: true)
@@ -4863,9 +4851,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 
-                
-                
-                
                 if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
                     self.lastThing = stat.first?.id ?? ""
                 StoreStruct.notifications = StoreStruct.notifications + stat
@@ -4889,7 +4874,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     
-                    
                     if self.currentIndex == 1 {
                         self.tableView.reloadData()
                     } else if self.currentIndex == 5 {
@@ -4899,16 +4883,54 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     }
                     
                     if StoreStruct.notificationsDirect.isEmpty || self.tempFetchedDirect == false {
-                        self.fetchMoreNotifications()
+                        self.fetchMoreNotificationsD()
                     }
                     
                     self.tempFetchedDirect = false
-                    
                 }
                     
                 }
             }
         }
+    }
+    
+    func fetchMoreNotificationsD() {
+        let request = Notifications.all(range: .max(id: StoreStruct.notifications.last?.id ?? "", limit: 5000))
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                
+                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                    self.lastThing = stat.first?.id ?? ""
+                    StoreStruct.notifications = StoreStruct.notifications + stat
+                    
+                    for x in stat {
+                        if x.type == .mention {
+                            if x.status?.visibility == .direct {
+                                self.tempFetchedDirect = true
+                                StoreStruct.notificationsDirect.append(x)
+                            }
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
+                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
+                        
+                        if self.currentIndex == 5 {
+                            self.tableView3.reloadData()
+                        }
+                        
+                        if StoreStruct.notificationsDirect.isEmpty || self.tempFetchedDirect == false {
+                            self.fetchMoreNotificationsD()
+                        }
+                        
+                        self.tempFetchedDirect = false
+                    }
+                    
+    
+            }
+        }
+    }
     }
     
     @objc func refreshCont() {

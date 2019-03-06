@@ -1112,7 +1112,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         super.viewWillDisappear(true)
         
         if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {} else {
+            springWithDelay(duration: 0.4, delay: 0, animations: {
                 self.segmentedControl.alpha = 0
+            })
         }
         
         UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
@@ -3356,6 +3358,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         } else {
                             cell.moreImage.image = nil
                         }
+                        cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                        cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
@@ -3365,6 +3369,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         } else {
                             cell.moreImage.image = nil
                         }
+                        cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                        cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -3381,18 +3387,26 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
                         if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                            cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
+                            cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
+                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
                             cell.moreImage.image = UIImage(named: "boost")
                         }
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
                         if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                            cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
+                            cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
+                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
                             cell.moreImage.image = UIImage(named: "boost")
                         }
                         cell.hideSwipe(animated: true)
@@ -3435,6 +3449,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         } else {
                             cell.moreImage.image = nil
                         }
+                        cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                        cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
@@ -3444,6 +3460,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         } else {
                             cell.moreImage.image = nil
                         }
+                        cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                        cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -3459,18 +3477,26 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
                         if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                            cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
+                            cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
+                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
                             cell.moreImage.image = UIImage(named: "like")
                         }
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
                         if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                            cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
+                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
+                            cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
+                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
                             cell.moreImage.image = UIImage(named: "like")
                         }
                         cell.hideSwipe(animated: true)
@@ -4609,7 +4635,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
-                                            self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            if newestC >= 0 {
+                                                self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            }
                                             
                                             do {
                                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
@@ -4682,7 +4710,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
-                                            self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            if newestC >= 0 {
+                                                self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            }
                                             
                                             do {
                                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
@@ -4755,7 +4785,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
-                                            self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            if newestC >= 0 {
+                                                self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            }
                                             
                                             do {
                                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
@@ -4925,8 +4957,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.refreshControl.endRefreshing()
                                 if newestC == 0 {
                                     
-                                } else if StoreStruct.statusesHome.count > newestC + 1 {
-                                    self.tableView.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+                                } else if StoreStruct.statusesHome.count > newestC + 1 && (newestC + 1 >= 0) {
+                                    if StoreStruct.statusesHome.count == 0 {
+                                        
+                                    } else {
+                                        self.tableView.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+                                    }
                                 }
                                 UIView.setAnimationsEnabled(true)
                             } else {
@@ -4998,8 +5034,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.refreshControl.endRefreshing()
                                 if newestC == 0 {
                                     
-                                } else if StoreStruct.statusesLocal.count > newestC + 1 {
-                                    self.tableViewL.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+                                } else if StoreStruct.statusesLocal.count > newestC + 1 && (newestC + 1 >= 0) {
+                                    if StoreStruct.statusesLocal.count == 0 {
+                                        
+                                    } else {
+                                        self.tableViewL.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+                                    }
                                 }
                                 UIView.setAnimationsEnabled(true)
                             } else {
@@ -5074,8 +5114,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.refreshControl.endRefreshing()
                                 if newestC == 0 {
                                     
-                                } else if StoreStruct.statusesFederated.count > newestC + 1 {
-                                    self.tableViewF.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+                                } else if StoreStruct.statusesFederated.count > newestC + 1 && (newestC + 1 >= 0) {
+                                    if StoreStruct.statusesFederated.count == 0 {
+                                        
+                                    } else {
+                                        self.tableViewF.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+                                    }
                                 }
                                 UIView.setAnimationsEnabled(true)
                                 

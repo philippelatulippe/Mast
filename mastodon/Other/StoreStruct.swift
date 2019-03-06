@@ -137,7 +137,8 @@ class StoreStruct {
     static var pollHeight = 0
     static var currentPollSelection: [Int] = []
     static var currentPollSelectionTitle = ""
-    static var newPollPost: [Any]? = nil
+    
+    static var newPollPost: [Any]? = []
     
     static var currentOptions: [String] = []
     static var expiresIn = 86400

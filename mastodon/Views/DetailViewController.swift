@@ -287,14 +287,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if let poll = self.mainStatus[0].reblog?.poll ?? self.mainStatus[0].poll {
                                 let request = Polls.vote(id: poll.id, choices: StoreStruct.currentPollSelection)
                                 StoreStruct.client.run(request) { (statuses) in
-                                    if let stat = (statuses.value) {
-                                        print(stat.votesCount)
+                                    DispatchQueue.main.async {
                                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                             let notification = UINotificationFeedbackGenerator()
                                             notification.notificationOccurred(.success)
                                         }
                                         let statusAlert = StatusAlert()
-                                        statusAlert.image = UIImage(named: "likelarge")?.maskWithColor(color: Colours.grayDark)
+                                        statusAlert.image = UIImage(named: "listbig")?.maskWithColor(color: Colours.grayDark)
                                         statusAlert.title = "Voted"
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = StoreStruct.currentPollSelectionTitle
@@ -366,15 +365,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        //        switch (deviceIdiom) {
-        //        case .phone:
-        //            print("nothing")
-        //        case .pad:
-        //            self.title = "Detail"
-        //        default:
-        //            print("nothing")
-        //        }
-        
         switch (deviceIdiom) {
         case .phone:
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
@@ -433,21 +423,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink33")
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink34")
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink35")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink36")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink37")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink38")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink39")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink40")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink41")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink42")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink43")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink44")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink45")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink46")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink47")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink48")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink49")
-        //        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink50")
         self.tableView.alpha = 1
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -461,7 +436,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
         refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
-        //self.tableView.addSubview(refreshControl)
         
         self.loadLoadLoad()
         
@@ -2167,17 +2141,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func refDetailCount() {
-        let request = Statuses.status(id: self.mainStatus[0].id)
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                DispatchQueue.main.async {
-                    if stat.reblog?.mediaAttachments.isEmpty ?? stat.mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
+        if self.mainStatus.isEmpty {} else {
+            let request = Statuses.status(id: self.mainStatus[0].id)
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    self.mainStatus = [stat]
+                    DispatchQueue.main.async {
                         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DetailCell {
                             cell.configure(stat)
                             self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
-                        }
-                    } else {
-                        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DetailCellImage {
+                        } else if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DetailCellImage {
                             cell.configure(stat)
                             self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
                         }

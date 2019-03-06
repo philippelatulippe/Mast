@@ -278,7 +278,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         //self.volumeBar.start()
                         //self.volumeBar.showInitial()
                     }
-                    StoreStruct.shared.currentInstance.accessToken = (json["access_token"] as! String)
+                    StoreStruct.shared.currentInstance.accessToken = (json["access_token"] as? String ?? "")
                     StoreStruct.client.accessToken = StoreStruct.shared.currentInstance.accessToken
                     
                    
