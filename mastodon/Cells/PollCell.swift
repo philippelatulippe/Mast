@@ -63,7 +63,7 @@ class PollCell: UITableViewCell, CoreChartViewDataSource {
                                                             valueFontSize: 16,
                                                             titleFont: nil,
                                                             valueFont: nil,
-                                                            titleLength: 100)
+                                                            titleLength: 400)
         contentView.addSubview(self.barChart)
         
         var voteText = "\(thePoll.votesCount) votes"

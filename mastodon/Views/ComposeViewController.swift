@@ -602,6 +602,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var isScheduled = false
     var scheduleTime: String?
     var boosterText = ""
+    var isPollAdded = false
     
     @objc func actOnSpecialNotificationAuto() {
         //dothestuff
@@ -642,6 +643,44 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             selection.selectionChanged()
         }
         
+        if self.isPollAdded {
+            
+            Alertift.actionSheet(title: nil, message: nil)
+                .backgroundColor(Colours.white)
+                .titleTextColor(Colours.grayDark)
+                .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                .messageTextAlignment(.left)
+                .titleTextAlignment(.left)
+                .action(.default("Edit Poll"), image: UIImage(named: "list")) { (action, ind) in
+                    print(action, ind)
+                    let controller = NewPollViewController()
+                    self.present(controller, animated: true, completion: nil)
+                }
+                .action(.default("Remove Poll".localized), image: UIImage(named: "block")) { (action, ind) in
+                    print(action, ind)
+                    
+                    self.selectedImage1.image = nil
+                    self.selectedImage2.image = nil
+                    self.selectedImage3.image = nil
+                    self.selectedImage4.image = nil
+                    StoreStruct.currentOptions = []
+                    StoreStruct.expiresIn = 86400
+                    StoreStruct.allowsMultiple = false
+                    StoreStruct.totalsHidden = false
+                    StoreStruct.newPollPost = []
+                }
+                .action(.cancel("Dismiss"))
+                .finally { action, index in
+                    if action.style == .cancel {
+                        self.bringBackDrawer()
+                        return
+                    }
+                }
+                .popover(anchorView: self.selectedImage1)
+                .show(on: self)
+            
+        } else {
+        
         Alertift.actionSheet(title: nil, message: nil)
             .backgroundColor(Colours.white)
             .titleTextColor(Colours.grayDark)
@@ -680,7 +719,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             .popover(anchorView: self.selectedImage1)
             .show(on: self)
         
-        
+        }
     }
     @objc func tappedImageView2(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -816,6 +855,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     
     @objc func panButton1(pan: UIPanGestureRecognizer) {
+        if self.isPollAdded {} else {
         if pan.state == .began {
             buttonCenter = self.selectedImage1.center
             self.view.bringSubviewToFront(self.selectedImage1)
@@ -859,6 +899,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             springWithDelay(duration: 0.6, delay: 0, animations: {
                 self.selectedImage1.center = location
             })
+        }
         }
     }
     
@@ -1060,6 +1101,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         // images
         
+        if self.isPollAdded {} else {
         self.selectedImage1.frame = CGRect(x:15, y:Int(self.view.bounds.height) - 50 - Int(self.keyHeight) - 55, width: 40, height: 40)
         self.selectedImage1.backgroundColor = Colours.clear
         self.selectedImage1.layer.cornerRadius = 8
@@ -1071,6 +1113,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 let pan1 = UIPanGestureRecognizer(target: self, action: #selector(self.panButton1(pan:)))
                 self.selectedImage1.addGestureRecognizer(pan1)
         self.view.addSubview(self.selectedImage1)
+        }
         
         self.selectedImage2.frame = CGRect(x:70, y:Int(self.view.bounds.height) - 50 - Int(self.keyHeight) - 55, width: 40, height: 40)
         self.selectedImage2.backgroundColor = Colours.clear
@@ -1305,10 +1348,22 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.textView.becomeFirstResponder()
     }
     
+    @objc func addedPoll() {
+        self.isPollAdded = true
+        self.selectedImage1.isUserInteractionEnabled = true
+        self.selectedImage1.contentMode = .scaleAspectFit
+        self.selectedImage1.layer.masksToBounds = true
+        self.selectedImage1.image = UIImage(named: "list")
+        self.selectedImage2.image = nil
+        self.selectedImage3.image = nil
+        self.selectedImage4.image = nil
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         StoreStruct.spoilerText = ""
+        
         StoreStruct.currentOptions = []
         StoreStruct.expiresIn = 86400
         StoreStruct.allowsMultiple = false
@@ -1317,6 +1372,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.doneDate), name: NSNotification.Name(rawValue: "doneDate"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.actOnSpecialNotificationAuto), name: NSNotification.Name(rawValue: "cpick"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.addedPoll), name: NSNotification.Name(rawValue: "addedPoll"), object: nil)
         
         self.view.backgroundColor = Colours.white
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

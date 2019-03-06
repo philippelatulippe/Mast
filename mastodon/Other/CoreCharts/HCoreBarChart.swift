@@ -65,6 +65,20 @@ public class HCoreBarChart: BarChartCore {
         
         let width = CGFloat(entry.barHeight) * (mainLayer.frame.width - (displayConfig.bottomSpace)! - (displayConfig.topSpace)!)
         
+        let barLayer0 = CALayer()
+        barLayer0.cornerRadius = 10
+        barLayer0.backgroundColor = Colours.tabUnselected.cgColor
+        
+        barLayer0.frame = CGRect(
+            x: xPos,
+            y: yPos,
+            width: (mainLayer.frame.width - (displayConfig.bottomSpace)! - (displayConfig.topSpace)!),
+            height: (displayConfig.barWidth)!
+        )
+        
+        mainLayer.addSublayer(barLayer0)
+        layers.append((barLayer0, entry))
+        
         let barLayer = CALayer()
         barLayer.cornerRadius = 10
         barLayer.backgroundColor = entry.barColor.cgColor
@@ -77,7 +91,6 @@ public class HCoreBarChart: BarChartCore {
         )
 
         mainLayer.addSublayer(barLayer)
-        
         layers.append((barLayer, entry))
         
         return width
@@ -170,7 +183,7 @@ public class HCoreBarChart: BarChartCore {
         let textLayer = CATextLayer()
         
         textLayer.frame = CGRect(
-            x: barWidth + (textSize.width / CGFloat(textValue.count)) + (displayConfig.bottomSpace)!,
+            x: (mainLayer.frame.width - (displayConfig.bottomSpace)! - (displayConfig.topSpace)!) + (textSize.width / CGFloat(textValue.count)) + (displayConfig.bottomSpace)!,
             y: yPos + (((displayConfig.barWidth)! / 2) - (textSize.height / 2)),
             width: textSize.width,
             height: textSize.height

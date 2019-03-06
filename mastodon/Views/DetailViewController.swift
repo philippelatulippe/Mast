@@ -242,7 +242,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 selection.selectionChanged()
             }
             
-            if let poll = self.mainStatus[0].poll {
+            if let poll = self.mainStatus[0].reblog?.poll ?? self.mainStatus[0].poll {
+                if self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id == StoreStruct.currentUser.id {
+                    Alertift.actionSheet(title: "You can't vote on your own poll", message: nil)
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark)
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
+                        .popover(anchorView: cell)
+                        .show(on: self)
+                } else {
                 if poll.expired {
                     Alertift.actionSheet(title: "This poll is now closed", message: nil)
                         .backgroundColor(Colours.white)
@@ -268,7 +284,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         .action(.default("Vote for \(StoreStruct.currentPollSelectionTitle)"), image: nil) { (action, ind) in
                             print(action, ind)
                             
-                            if let poll = self.mainStatus[0].poll {
+                            if let poll = self.mainStatus[0].reblog?.poll ?? self.mainStatus[0].poll {
                                 let request = Polls.vote(id: poll.id, choices: StoreStruct.currentPollSelection)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
@@ -298,6 +314,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         .popover(anchorView: cell)
                         .show(on: self)
+                }
                 }
             }
         }
@@ -555,7 +572,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if self.mainStatus.isEmpty {
                 return 0
             } else {
-                if self.mainStatus[0].poll != nil {
+                if self.mainStatus[0].reblog?.poll ?? self.mainStatus[0].poll != nil {
                     return 1
                 } else {
                     return 0
@@ -570,7 +587,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
                     let matches = detector.matches(in: newCont, options: [], range: NSRange(location: 0, length: newCont.utf16.count))
                     if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
-                        return matches.count - 1
+                        return matches.count
                     }
                 } else {
                     return 0
@@ -598,7 +615,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if self.mainStatus.isEmpty {
                 return 0
             } else {
-                if self.mainStatus[0].poll != nil {
+                if self.mainStatus[0].reblog?.poll ?? self.mainStatus[0].poll != nil {
                     return CGFloat(StoreStruct.pollHeight)
                 } else {
                     return 0
@@ -1129,7 +1146,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             // insert poll
             let cell = tableView.dequeueReusableCell(withIdentifier: "PollCell", for: indexPath) as! PollCell
-            if let poll = self.mainStatus[0].poll {
+            if let poll = self.mainStatus[0].reblog?.poll ?? self.mainStatus[0].poll {
                 cell.configure(thePoll: poll, theOptions: poll.options)
             }
             cell.backgroundColor = Colours.white
@@ -1144,7 +1161,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
             let matches = detector.matches(in: self.mainStatus[0].content, options: [], range: NSRange(location: 0, length: self.mainStatus[0].content.utf16.count))
             if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
-                if let range = Range(matches[indexPath.row - 1].range, in: self.mainStatus[0].content) {
+                if let range = Range(matches[indexPath.row].range, in: self.mainStatus[0].content) {
                     let url = self.mainStatus[0].content[range]
                     cell.configure(String(url))
                 }

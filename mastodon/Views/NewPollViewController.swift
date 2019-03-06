@@ -74,9 +74,8 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
         textField.font = UIFont.systemFont(ofSize: Colours.fontSize1 + 2)
         textField.tintColor = Colours.tabSelected
         textField.delegate = self
-        textField.becomeFirstResponder()
         textField.keyboardType = .default
-        textField.attributedPlaceholder = NSAttributedString(string: "Start typing to add poll options...".localized,
+        textField.attributedPlaceholder = NSAttributedString(string: "Add at least two poll options...".localized,
                                                                    attributes: [NSAttributedString.Key.foregroundColor: Colours.tabUnselected])
         textField.keyboardAppearance = Colours.keyCol
         textField.backgroundColor = Colours.white
@@ -231,7 +230,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
             impact.impactOccurred()
         }
         
-        if (textField.text?.count)! > 0 {
+        if (textField.text?.count)! > 0 && StoreStruct.currentOptions.count < 2 {
             tootLabel.setTitleColor(Colours.tabSelected, for: .normal)
         } else {
             tootLabel.setTitleColor(Colours.gray.withAlphaComponent(0.65), for: .normal)
@@ -239,9 +238,12 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
     }
     
     @objc func didTouchUpInsideTootButton(_ sender: AnyObject) {
+        if StoreStruct.currentOptions.count < 2 { return }
         if StoreStruct.currentOptions.isEmpty && self.textField.text == "" { return }
         
         StoreStruct.newPollPost = [StoreStruct.currentOptions, StoreStruct.expiresIn, StoreStruct.allowsMultiple, StoreStruct.totalsHidden]
+        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "addedPoll"), object: self)
         
         self.textField.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
@@ -331,7 +333,30 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            
+            Alertift.actionSheet(title: nil, message: nil)
+                .backgroundColor(Colours.white)
+                .titleTextColor(Colours.grayDark)
+                .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                .messageTextAlignment(.left)
+                .titleTextAlignment(.left)
+                .action(.default("Remove Option".localized), image: UIImage(named: "block")) { (action, ind) in
+                    print(action, ind)
+                    StoreStruct.currentOptions = StoreStruct.currentOptions.filter { $0 != StoreStruct.currentOptions[indexPath.row] }
+                    self.tableView.reloadData()
+                    if StoreStruct.currentOptions.count < 2 {
+                        self.tootLabel.setTitleColor(Colours.tabSelected, for: .normal)
+                    } else {
+                        self.tootLabel.setTitleColor(Colours.gray.withAlphaComponent(0.65), for: .normal)
+                    }
+                }
+                .action(.cancel("Dismiss"))
+                .finally { action, index in
+                    if action.style == .cancel {
+                        return
+                    }
+                }
+                .popover(anchorView: self.tableView.cellForRow(at: indexPath) ?? self.view)
+                .show(on: self)
         } else if indexPath.section == 1 {
             self.textField.resignFirstResponder()
             self.hiddenTextField.becomeFirstResponder()

@@ -461,6 +461,10 @@ class MainFeedCellImage: SwipeTableViewCell {
         } else if (status.reblog?.favourited ?? status.favourited ?? false) || StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) {
             self.moreImage.image = UIImage(named: "like")
         } else {
+            if status.reblog?.poll ?? status.poll != nil {
+                self.moreImage.image = UIImage(named: "list")
+            } else {
+                
             if status.reblog?.visibility ?? status.visibility == .direct {
                 self.moreImage.image = UIImage(named: "direct")
             } else if status.reblog?.visibility ?? status.visibility == .unlisted {
@@ -469,6 +473,8 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.moreImage.image = UIImage(named: "private")
             } else {
                 self.moreImage.image = nil
+            }
+                
             }
         }
             
