@@ -1040,13 +1040,19 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
             
             if self.maybeDoOnce == false {
-            self.searchButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: self.view.bounds.width - 50, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)))
-            self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-            self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-            self.searchButton.adjustsImageWhenHighlighted = false
-            self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
-            self.navigationController?.view.addSubview(self.searchButton)
+                self.searchButton = MNGExpandedTouchAreaButton()
+                self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+                self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                self.searchButton.adjustsImageWhenHighlighted = false
+                self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
+                self.navigationController?.view.addSubview(self.searchButton)
                 self.maybeDoOnce = true
+                
+                self.searchButton.translatesAutoresizingMaskIntoConstraints = false
+                self.searchButton.widthAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
+                self.searchButton.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
+                self.searchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+                self.searchButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
             }
         default:
             print("nothing")

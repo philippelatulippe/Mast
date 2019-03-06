@@ -135,13 +135,26 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
+            
             self.tableView.translatesAutoresizingMaskIntoConstraints = false
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
             self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
             
-            if self.mainStatus.isEmpty {} else {
+            if self.mainStatus.isEmpty {
+                
+                let introLogo = UIImageView()
+                introLogo.contentMode = .scaleAspectFit
+                self.view.addSubview(introLogo)
+                introLogo.translatesAutoresizingMaskIntoConstraints = false
+                introLogo.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+                introLogo.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+                introLogo.widthAnchor.constraint(equalToConstant: CGFloat(120)).isActive = true
+                introLogo.heightAnchor.constraint(equalToConstant: CGFloat(120)).isActive = true
+                introLogo.image = UIImage(named: "launcgLogo")?.maskWithColor(color: Colours.tabUnselected.withAlphaComponent(0.2))
+                
+            } else {
                 
                 replyButton.backgroundColor = Colours.white
                 likeButton.backgroundColor = Colours.white

@@ -387,9 +387,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.loadLoadLoad()
         } else {
             if UIApplication.shared.isSplitOrSlideOver {
-                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 110), y: CGFloat(30), width: CGFloat(220), height: CGFloat(40)))
             } else {
-                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(newoff), width: CGFloat(240), height: CGFloat(40)))
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 110), y: CGFloat(newoff), width: CGFloat(220), height: CGFloat(40)))
             }
             segmentedControl.dataSource = self
             if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
@@ -726,9 +726,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.view.addSubview(self.tableView2)
         } else {
             if UIApplication.shared.isSplitOrSlideOver {
-                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 110), y: CGFloat(30), width: CGFloat(220), height: CGFloat(40)))
             } else {
-                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(newoff), width: CGFloat(240), height: CGFloat(40)))
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 110), y: CGFloat(newoff), width: CGFloat(220), height: CGFloat(40)))
             }
             segmentedControl.dataSource = self
             if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
@@ -1019,13 +1019,19 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         case .pad:
             NotificationCenter.default.post(name: Notification.Name(rawValue: "segTheme"), object: self)
             if self.maybeDoOnce == false {
-            self.searchButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: self.view.bounds.width - 50, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)))
-            self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-            self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-            self.searchButton.adjustsImageWhenHighlighted = false
-            self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
-            self.navigationController?.view.addSubview(self.searchButton)
+                self.searchButton = MNGExpandedTouchAreaButton()
+                self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+                self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                self.searchButton.adjustsImageWhenHighlighted = false
+                self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
+                self.navigationController?.view.addSubview(self.searchButton)
                 self.maybeDoOnce = true
+                
+                self.searchButton.translatesAutoresizingMaskIntoConstraints = false
+                self.searchButton.widthAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
+                self.searchButton.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
+                self.searchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+                self.searchButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
             }
         default:
             print("nothing")
