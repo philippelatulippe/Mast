@@ -75,8 +75,8 @@ class PollCell: UITableViewCell, CoreChartViewDataSource {
         }
         countLabel.frame = CGRect(x: 30, y: Int(StoreStruct.pollHeight - 47), width: Int(CGFloat(UIScreen.main.bounds.width - 60)), height: 30)
         countLabel.text = voteText
-        countLabel.font = UIFont.systemFont(ofSize: 13)
-        countLabel.textColor = Colours.grayDark.withAlphaComponent(0.6)
+        countLabel.font = UIFont.boldSystemFont(ofSize: 13)
+        countLabel.textColor = Colours.grayDark
         countLabel.textAlignment = .left
         contentView.addSubview(self.countLabel)
         
@@ -84,7 +84,7 @@ class PollCell: UITableViewCell, CoreChartViewDataSource {
         if thePoll.expired {
             timeText = "CLOSED"
         }
-        expiryLabel.frame = CGRect(x: 30, y: Int(StoreStruct.pollHeight - 21), width: Int(CGFloat(UIScreen.main.bounds.width - 60)), height: 30)
+        expiryLabel.frame = CGRect(x: 30, y: Int(StoreStruct.pollHeight - 25), width: Int(CGFloat(UIScreen.main.bounds.width - 60)), height: 30)
         expiryLabel.text = timeText
         expiryLabel.font = UIFont.systemFont(ofSize: 13)
         expiryLabel.textColor = Colours.grayDark.withAlphaComponent(0.6)

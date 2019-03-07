@@ -4859,12 +4859,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .max(id: self.profileStatuses.last?.id ?? "", limit: 5000))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    print("first \(self.lastThing)")
-                    if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {
-                        print("do nothing")
-                    } else {
+                    if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
                         self.lastThing = stat.first?.id ?? ""
-                        print("second \(self.lastThing)")
                         self.profileStatuses = self.profileStatuses + stat
                         DispatchQueue.main.async {
                             self.profileStatuses = self.profileStatuses.removeDuplicates()
@@ -4886,12 +4882,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .max(id: self.profileStatuses2.last?.id ?? "", limit: 5000))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    print("first \(self.lastThing)")
-                    if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {
-                        print("do nothing")
-                    } else {
+                    if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
                         self.lastThing = stat.first?.id ?? ""
-                        print("second \(self.lastThing)")
                         self.profileStatuses2 = self.profileStatuses2 + stat
                         DispatchQueue.main.async {
                             self.profileStatuses2 = self.profileStatuses2.removeDuplicates()

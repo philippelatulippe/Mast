@@ -205,6 +205,17 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //        self.tableView.addSubview(refreshControl)
         
         self.currentTags = StoreStruct.tempLiked
+        
+        let request = Favourites.all()
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                self.currentTags = stat
+                DispatchQueue.main.async {
+                    self.loadLoadLoad()
+                }
+            }
+        }
+        
         self.loadLoadLoad()
         
         
@@ -256,7 +267,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             self.loadLoadLoad()
                         }
                     }
-            }
+                }
             
 //            self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.frame.width), height: Int(self.view.frame.height))
 //            tableView.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in

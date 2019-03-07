@@ -1523,7 +1523,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             }
             
             self.currentIndex = 1
-            //self.tableView.reloadData()
             self.tableView.alpha = 1
             self.tableView2.alpha = 0
             self.tableView3.alpha = 0
@@ -1556,23 +1555,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                         }
                         
-                        
-                        
-//                        for x in stat {
-//                            if x.type == .mention {
-//                                StoreStruct.notificationsMentions.append(x)
-//                                DispatchQueue.main.async {
-//                                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-//                                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
-//
-//                                    self.ai.alpha = 0
-//                                    self.ai.removeFromSuperview()
-//
-//                                    self.tableView.reloadData()
-//                                }
-//                            }
-//                        }
-                        
                     }
                 }
             } else {
@@ -1603,7 +1585,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             }
             
             self.currentIndex = 5
-            //self.tableView2.reloadData()
             self.tableView.alpha = 0
             self.tableView2.alpha = 0
             self.tableView3.alpha = 1
@@ -1645,7 +1626,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             }
             
             self.currentIndex = 0
-            //self.tableView2.reloadData()
             self.tableView.alpha = 0
             self.tableView2.alpha = 1
             self.tableView3.alpha = 0
@@ -4944,6 +4924,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
+                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     var newestC = StoreStruct.notifications.count
                     var newestC2 = StoreStruct.notificationsMentions.count
                     var newestC3 = StoreStruct.notificationsDirect.count
@@ -5011,7 +4994,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                         }
                         
-                        UIView.setAnimationsEnabled(false)
+//                        UIView.setAnimationsEnabled(false)
                         self.tableView.reloadData()
                         self.tableView2.reloadData()
                             self.tableView3.reloadData()
@@ -5030,7 +5013,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             }
                         }
 //                        self.restoreScroll()
-                        UIView.setAnimationsEnabled(true)
+//                        UIView.setAnimationsEnabled(true)
                             
                         } else {
                             self.tableView.reloadData()

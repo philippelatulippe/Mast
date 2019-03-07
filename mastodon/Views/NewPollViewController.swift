@@ -75,7 +75,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
         textField.tintColor = Colours.tabSelected
         textField.delegate = self
         textField.keyboardType = .default
-        textField.attributedPlaceholder = NSAttributedString(string: "Start typing to add at least two poll options...".localized,
+        textField.attributedPlaceholder = NSAttributedString(string: "Add at least two poll options...".localized,
                                                                    attributes: [NSAttributedString.Key.foregroundColor: Colours.tabUnselected])
         textField.keyboardAppearance = Colours.keyCol
         textField.backgroundColor = Colours.white
@@ -156,7 +156,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
         formatter.dateStyle = .short
         formatter.timeStyle = .short
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? PollOptionCell {
-            cell.configure(formatter.string(from: self.timePicker.date), count: "This poll will expire on:")
+            cell.configure(formatter.string(from: self.timePicker.date), count: "This poll will run until:")
         }
         
         StoreStruct.pollPickerDate = self.timePicker.date
@@ -336,6 +336,10 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
+            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                let selection = UISelectionFeedbackGenerator()
+                selection.selectionChanged()
+            }
             Alertift.actionSheet(title: nil, message: nil)
                 .backgroundColor(Colours.white)
                 .titleTextColor(Colours.grayDark)
@@ -361,6 +365,10 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
                 .popover(anchorView: self.tableView.cellForRow(at: indexPath) ?? self.view)
                 .show(on: self)
         } else if indexPath.section == 1 {
+            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                let selection = UISelectionFeedbackGenerator()
+                selection.selectionChanged()
+            }
             self.textField.resignFirstResponder()
             self.hiddenTextField.becomeFirstResponder()
         } else {

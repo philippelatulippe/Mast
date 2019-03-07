@@ -1970,11 +1970,11 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     })
                     self.countcount1 = newestC
                     
-                    UIView.setAnimationsEnabled(false)
+//                    UIView.setAnimationsEnabled(false)
                     self.tableView.reloadData()
                     self.refreshControl.endRefreshing()
                     self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
-                    UIView.setAnimationsEnabled(true)
+//                    UIView.setAnimationsEnabled(true)
                         
                     } else {
                         
