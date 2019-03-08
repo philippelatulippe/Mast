@@ -772,6 +772,16 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         self.present(controller, animated: true, completion: nil)
     }
     
+    @objc func goToSettings() {
+        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {} else {
+            springWithDelay(duration: 0.4, delay: 0, animations: {
+                self.segmentedControl.alpha = 0
+            })
+        }
+        let controller = SettingsViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -793,6 +803,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeSeg), name: NSNotification.Name(rawValue: "changeSeg"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.segTheme), name: NSNotification.Name(rawValue: "segTheme"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.activateCrown), name: NSNotification.Name(rawValue: "activateCrown"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToSettings), name: NSNotification.Name(rawValue: "goToSettings"), object: nil)
         
         self.view.backgroundColor = Colours.white
         
@@ -1813,37 +1824,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
     }
     
-    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    //        if scrollView.contentOffset.y == 0 {
-    //            if self.currentIndex == 0 {
-    //
-    ////                if self.tableView.contentOffset.y == 0 {
-    ////                    StoreStruct.statusesHome = self.hMod.reversed() + StoreStruct.statusesHome
-    ////                    StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-    ////                    self.tableView.reloadData()
-    ////                    self.hMod = []
-    ////                }
-    //            } else if self.currentIndex == 1 {
-    //
-    //                if self.tableViewL.contentOffset.y == 0 {
-    //                    StoreStruct.statusesLocal = self.lMod.reversed() + StoreStruct.statusesLocal
-    //                    StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-    //                    self.tableViewL.reloadData()
-    //                    self.lMod = []
-    //                }
-    //            } else {
-    //
-    //                if self.tableViewF.contentOffset.y == 0 {
-    //                    StoreStruct.statusesFederated = self.fMod.reversed() + StoreStruct.statusesFederated
-    //                    StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-    //                    self.tableViewF.reloadData()
-    //                    self.fMod = []
-    //                }
-    //            }
-    //        }
-    //    }
-    
-    
     func firstRowHeight() -> CGFloat {
         return tableView(tableView, heightForRowAt: IndexPath(row: 0, section: 0))
     }
@@ -1858,11 +1838,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         } else if index == 1 {
             return "Local".localized
         } else {
-            if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-                return "Federated".localized
-            } else {
-                return "Fed".localized
-            }
+            return "All"
         }
     }
     

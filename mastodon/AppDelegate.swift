@@ -285,6 +285,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let detailViewController = DetailViewController()
             splitViewController.viewControllers = [rootViewController, detailViewController]
             splitViewController.preferredDisplayMode = .allVisible
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.4
+            let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
+            splitViewController.minimumPrimaryColumnWidth = minimumWidth/5*2
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
             self.window!.rootViewController = splitViewController
             self.window!.makeKeyAndVisible()
             
@@ -440,6 +444,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let detailViewController = DetailViewController()
                 splitViewController.viewControllers = [rootViewController, detailViewController]
                 splitViewController.preferredDisplayMode = .allVisible
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.4
+                let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
+                splitViewController.minimumPrimaryColumnWidth = minimumWidth/5*2
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
                 self.window!.rootViewController = splitViewController
                 self.window!.makeKeyAndVisible()
                 
@@ -534,6 +542,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let detailViewController = DetailViewController()
                 splitViewController.viewControllers = [rootViewController, detailViewController]
                 splitViewController.preferredDisplayMode = .allVisible
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.4
+                let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
+                splitViewController.minimumPrimaryColumnWidth = minimumWidth/5*2
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
                 self.window!.rootViewController = splitViewController
                 self.window!.makeKeyAndVisible()
                 

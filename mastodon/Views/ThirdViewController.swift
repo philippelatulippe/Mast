@@ -551,6 +551,16 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    @objc func goToSettings() {
+        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {} else {
+            springWithDelay(duration: 0.4, delay: 0, animations: {
+                self.segmentedControl.alpha = 0
+            })
+        }
+        let controller = SettingsViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -572,6 +582,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         NotificationCenter.default.addObserver(self, selector: #selector(self.tappedOnTag), name: NSNotification.Name(rawValue: "tappedOnTag"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setLeft), name: NSNotification.Name(rawValue: "setLeft"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refProf), name: NSNotification.Name(rawValue: "refProf"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToSettings), name: NSNotification.Name(rawValue: "goToSettings"), object: nil)
         
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem, queue: .main) { [weak self] _ in
             self?.player.seek(to: CMTime.zero)

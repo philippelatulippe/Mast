@@ -26,7 +26,7 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
             sectionInset: UIEdgeInsets(top: -10, left: 20, bottom: 0, right: 20)
         )
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 55, height: 55)
+        layout.itemSize = CGSize(width: 55, height: 80)
         if UIDevice.current.userInterfaceIdiom == .pad {
             collectionView = UICollectionView(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(540), height: CGFloat(105)), collectionViewLayout: layout)
         } else {
@@ -52,7 +52,7 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 55, height: 55)
+        return CGSize(width: 55, height: 80)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -75,27 +75,29 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
             
             let instances = InstanceData.getAllInstances()
             if instances.isEmpty {} else {
-            let curr = InstanceData.getCurrentInstance()
-            if curr?.clientID == instances[indexPath.item].clientID {
-                cell.image.layer.borderWidth = 3.6
-            } else {
-                cell.image.layer.borderWidth = 0
-            }
-            cell.image.layer.borderColor = Colours.tabSelected.cgColor
-            
-            let account = Account.getAccounts()[indexPath.item]
-        
-            cell.image.pin_setImage(from: URL(string: account.avatar))
-            
-            cell.image.backgroundColor = Colours.clear
+                let curr = InstanceData.getCurrentInstance()
+                if curr?.clientID == instances[indexPath.item].clientID {
+                    cell.image.layer.borderWidth = 3.6
+                } else {
+                    cell.image.layer.borderWidth = 0
+                }
+                cell.image.layer.borderColor = Colours.tabSelected.cgColor
+                
+                let account = Account.getAccounts()[indexPath.item]
+                
+                cell.image.pin_setImage(from: URL(string: account.avatar))
+                
+                cell.name.text = account.username
+                
+                cell.image.backgroundColor = Colours.clear
             }
         }
         
         cell.image.layer.cornerRadius = 27.5
         cell.image.layer.masksToBounds = true
         
-        cell.image.frame = CGRect(x: 0, y: 0, width: 55, height: 55)
-        cell.bgImage.frame = CGRect(x: 0, y: 0, width: 55, height: 55)
+        cell.image.frame = CGRect(x: 0, y: 5, width: 55, height: 55)
+        cell.bgImage.frame = CGRect(x: 0, y: 5, width: 55, height: 55)
         
         
         cell.bgImage.layer.masksToBounds = false
@@ -128,31 +130,31 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
             NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut2"), object: nil)
             
         } else {
-        
-        let instances = InstanceData.getAllInstances()
-        let curr = InstanceData.getCurrentInstance()
             
-        if curr?.clientID == instances[indexPath.item].clientID {
+            let instances = InstanceData.getAllInstances()
+            let curr = InstanceData.getCurrentInstance()
             
-        } else {
-        
-        
-        
-        if indexPath.item >= InstanceData.getAllInstances().count {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut2"), object: nil)
-        } else {
-            
-            
-            DispatchQueue.main.async {
+            if curr?.clientID == instances[indexPath.item].clientID {
                 
-                InstanceData.setCurrentInstance(instance: instances[indexPath.item])
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.reloadApplication()
+            } else {
+                
+                
+                
+                if indexPath.item >= InstanceData.getAllInstances().count {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut2"), object: nil)
+                } else {
+                    
+                    
+                    DispatchQueue.main.async {
+                        
+                        InstanceData.setCurrentInstance(instance: instances[indexPath.item])
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        appDelegate.reloadApplication()
+                        
+                    }
+                }
                 
             }
-        }
-            
-        }
             
         }
         

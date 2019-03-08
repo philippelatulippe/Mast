@@ -95,7 +95,7 @@ class MainFeedCellImage: SwipeTableViewCell {
         userName.numberOfLines = 0
         userTag.numberOfLines = 0
         toot.numberOfLines = 0
-        
+        date.textAlignment = .right
         userName.textColor = Colours.black
         userTag.textColor = Colours.black.withAlphaComponent(0.6)
         date.textColor = Colours.black.withAlphaComponent(0.6)
@@ -199,7 +199,7 @@ class MainFeedCellImage: SwipeTableViewCell {
             "more1" : more1,
             ]
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[name]-(>=5)-[date]-20-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[name]-(>=5)-[date(30)]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-40-[image2(26)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[artist]-(>=5)-[more(16)]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
@@ -313,9 +313,9 @@ class MainFeedCellImage: SwipeTableViewCell {
             
             
             if status.reblog!.emojis.isEmpty {
-                toot.text = "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.acct) boosted"
+                toot.text = "\(status.reblog?.content.stripHTML() ?? "")"
             } else {
-                let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.acct) boosted")
+                let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")")
                 for y in status.reblog!.emojis {
                     let textAttachment = NSTextAttachment()
                     textAttachment.loadImageUsingCache(withUrl: y.url.absoluteString)
@@ -324,7 +324,6 @@ class MainFeedCellImage: SwipeTableViewCell {
                     while attributedString.mutableString.contains(":\(y.shortcode):") {
                         let range: NSRange = (attributedString.mutableString as NSString).range(of: ":\(y.shortcode):")
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
-                        
                     }
                 }
                 self.toot.attributedText = attributedString
@@ -335,9 +334,24 @@ class MainFeedCellImage: SwipeTableViewCell {
             
             
             if status.reblog?.account.emojis.isEmpty ?? true {
-                userName.text = status.reblog?.account.displayName.stripHTML()
+                let imageAttachment = NSTextAttachment()
+                imageAttachment.image = UIImage(named:"boost")
+                imageAttachment.bounds = CGRect(x: 0, y: -3, width: Int(self.userName.font.lineHeight), height: Int(self.userName.font.lineHeight))
+                let attachmentString = NSAttributedString(attachment: imageAttachment)
+                let completeText = NSMutableAttributedString(string: "")
+                completeText.append(attachmentString)
+                let textAfterIcon = NSMutableAttributedString(string: " \(status.account.displayName) boosted\n\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
+                completeText.append(textAfterIcon)
+                userName.attributedText = completeText
             } else {
-                let attributedString = NSMutableAttributedString(string: status.reblog?.account.displayName.stripHTML() ?? "")
+                let imageAttachment =
+                    NSTextAttachment()
+                imageAttachment.image = UIImage(named:"boost")
+                imageAttachment.bounds = CGRect(x: 0, y: -3, width: Int(self.userName.font.lineHeight), height: Int(self.userName.font.lineHeight))
+                let attachmentString = NSAttributedString(attachment: imageAttachment)
+                let completeText = NSMutableAttributedString(string: "")
+                completeText.append(attachmentString)
+                let attributedString = NSMutableAttributedString(string: " \(status.account.displayName) boosted\n\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
                 for y in status.reblog?.account.emojis ?? [] {
                     let textAttachment = NSTextAttachment()
                     textAttachment.loadImageUsingCache(withUrl: y.url.absoluteString)
@@ -348,7 +362,8 @@ class MainFeedCellImage: SwipeTableViewCell {
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                     }
                 }
-                self.userName.attributedText = attributedString
+                completeText.append(attributedString)
+                self.userName.attributedText = completeText
                 self.reloadInputViews()
             }
             
@@ -358,8 +373,9 @@ class MainFeedCellImage: SwipeTableViewCell {
             profileImageView2.pin_updateWithProgress = true
             profileImageView2.pin_setImage(from: URL(string: "\(status.account.avatar)"))
             profileImageView2.layer.masksToBounds = true
-            profileImageView2.layer.borderColor = UIColor.black.cgColor
-            profileImageView2.layer.borderWidth = 0.2
+            profileImageView2.layer.borderColor = Colours.white.cgColor
+            profileImageView2.layer.borderWidth = 2
+            profileImageView2.alpha = 1
             if (UserDefaults.standard.object(forKey: "proCorner") == nil || UserDefaults.standard.object(forKey: "proCorner") as! Int == 0) {
                 profileImageView2.layer.cornerRadius = 13
             }
@@ -385,7 +401,6 @@ class MainFeedCellImage: SwipeTableViewCell {
                     while attributedString.mutableString.contains(":\(y.shortcode):") {
                         let range: NSRange = (attributedString.mutableString as NSString).range(of: ":\(y.shortcode):")
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
-                        
                     }
                 }
                 self.toot.attributedText = attributedString
@@ -416,7 +431,7 @@ class MainFeedCellImage: SwipeTableViewCell {
             profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo2345"))
             profileImageView2.layer.masksToBounds = true
             profileImageView2.layer.borderColor = UIColor.black.cgColor
-            profileImageView2.layer.borderWidth = 0
+            profileImageView2.layer.borderWidth = 1
             profileImageView2.alpha = 0
             if (UserDefaults.standard.object(forKey: "proCorner") == nil || UserDefaults.standard.object(forKey: "proCorner") as! Int == 0) {
                 profileImageView2.layer.cornerRadius = 13

@@ -156,7 +156,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
         formatter.dateStyle = .short
         formatter.timeStyle = .short
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? PollOptionCell {
-            cell.configure(formatter.string(from: self.timePicker.date), count: "This poll will run until:")
+            cell.configure(formatter.string(from: self.timePicker.date), count: "This poll will expire on:")
         }
         
         StoreStruct.pollPickerDate = self.timePicker.date

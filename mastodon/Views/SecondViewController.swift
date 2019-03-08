@@ -617,6 +617,16 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    @objc func goToSettings() {
+        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {} else {
+            springWithDelay(duration: 0.4, delay: 0, animations: {
+                self.segmentedControl.alpha = 0
+            })
+        }
+        let controller = SettingsViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -635,6 +645,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeSeg), name: NSNotification.Name(rawValue: "changeSeg"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.segTheme), name: NSNotification.Name(rawValue: "segTheme"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.startStream), name: NSNotification.Name(rawValue: "startStream"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToSettings), name: NSNotification.Name(rawValue: "goToSettings"), object: nil)
         
         self.view.backgroundColor = Colours.white
         
@@ -5008,9 +5019,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 self.tableView3.scrollToRow(at: IndexPath(row: newestC3, section: 0), at: .top, animated: false)
                             }
                         } else {
-                            if StoreStruct.notifications.count > newestC {
-                                self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 1), at: .top, animated: false)
-                            }
+//                            if StoreStruct.notifications.count > newestC {
+//                                self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 1), at: .top, animated: false)
+//                            }
                         }
 //                        self.restoreScroll()
 //                        UIView.setAnimationsEnabled(true)

@@ -349,12 +349,12 @@ class DetailCellImage: UITableViewCell {
             DispatchQueue.global(qos: .userInitiated).async {
                 self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.mainImageView.pin_updateWithProgress = true
-                self.mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].remoteURL ?? status.mediaAttachments[0].remoteURL!)"))
+                self.mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].remoteURL ?? status.mediaAttachments[0].remoteURL ?? status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
             }
             imageCountTag.setTitle("GIF", for: .normal)
             imageCountTag.backgroundColor = Colours.tabSelected
             imageCountTag.alpha = 1
-        } else if status.reblog?.mediaAttachments.count ?? status.mediaAttachments.count > 1 && (UIApplication.shared.isSplitOrSlideOver || UIDevice.current.userInterfaceIdiom == .phone) {
+        } else if status.reblog?.mediaAttachments.count ?? status.mediaAttachments.count > 1 {
             self.mainImageView.setImage(UIImage(), for: .normal)
             if status.reblog?.mediaAttachments.count ?? status.mediaAttachments.count == 2 {
                 self.smallImage1.frame = CGRect(x: -2, y: 0, width: (UIScreen.main.bounds.width)/2, height: 240)
@@ -364,7 +364,7 @@ class DetailCellImage: UITableViewCell {
                 DispatchQueue.global(qos: .userInitiated).async {
                 self.smallImage1.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.smallImage1.pin_updateWithProgress = true
-                self.smallImage1.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].remoteURL ?? status.mediaAttachments[0].remoteURL!)"))
+                self.smallImage1.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].remoteURL ?? status.mediaAttachments[0].remoteURL ?? status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
                 }
                 self.smallImage1.layer.masksToBounds = true
                 self.smallImage1.layer.borderColor = UIColor.black.cgColor
@@ -378,7 +378,7 @@ class DetailCellImage: UITableViewCell {
                 DispatchQueue.global(qos: .userInitiated).async {
                 self.smallImage2.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.smallImage2.pin_updateWithProgress = true
-                self.smallImage2.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[1].remoteURL ?? status.mediaAttachments[1].remoteURL!)"))
+                self.smallImage2.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[1].remoteURL ?? status.mediaAttachments[1].remoteURL ?? status.reblog?.mediaAttachments[1].previewURL ?? status.mediaAttachments[1].previewURL)"))
                 }
                 self.smallImage2.layer.masksToBounds = true
                 self.smallImage2.layer.borderColor = UIColor.black.cgColor
@@ -392,7 +392,7 @@ class DetailCellImage: UITableViewCell {
                 DispatchQueue.global(qos: .userInitiated).async {
                 self.smallImage1.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.smallImage1.pin_updateWithProgress = true
-                self.smallImage1.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].remoteURL ?? status.mediaAttachments[0].remoteURL!)"))
+                self.smallImage1.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].remoteURL ?? status.mediaAttachments[0].remoteURL ?? status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
                 }
                 self.smallImage1.layer.masksToBounds = true
                 self.smallImage1.layer.borderColor = UIColor.black.cgColor
@@ -406,7 +406,7 @@ class DetailCellImage: UITableViewCell {
                 DispatchQueue.global(qos: .userInitiated).async {
                 self.smallImage2.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.smallImage2.pin_updateWithProgress = true
-                self.smallImage2.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[1].remoteURL ?? status.mediaAttachments[1].remoteURL!)"))
+                self.smallImage2.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[1].remoteURL ?? status.mediaAttachments[1].remoteURL ?? status.reblog?.mediaAttachments[1].previewURL ?? status.mediaAttachments[1].previewURL)"))
                 }
                 self.smallImage2.layer.masksToBounds = true
                 self.smallImage2.layer.borderColor = UIColor.black.cgColor
@@ -420,7 +420,7 @@ class DetailCellImage: UITableViewCell {
                 DispatchQueue.global(qos: .userInitiated).async {
                 self.smallImage3.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.smallImage3.pin_updateWithProgress = true
-                self.smallImage3.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[2].remoteURL ?? status.mediaAttachments[2].remoteURL!)"))
+                self.smallImage3.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[2].remoteURL ?? status.mediaAttachments[2].remoteURL ?? status.reblog?.mediaAttachments[2].previewURL ?? status.mediaAttachments[2].previewURL)"))
                 }
                 self.smallImage3.layer.masksToBounds = true
                 self.smallImage3.layer.borderColor = UIColor.black.cgColor
@@ -434,7 +434,7 @@ class DetailCellImage: UITableViewCell {
                 DispatchQueue.global(qos: .userInitiated).async {
                 self.smallImage1.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.smallImage1.pin_updateWithProgress = true
-                self.smallImage1.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].remoteURL ?? status.mediaAttachments[0].remoteURL!)"))
+                self.smallImage1.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].remoteURL ?? status.mediaAttachments[0].remoteURL ?? status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
                 }
                 self.smallImage1.layer.masksToBounds = true
                 self.smallImage1.layer.borderColor = UIColor.black.cgColor
@@ -448,7 +448,7 @@ class DetailCellImage: UITableViewCell {
                 DispatchQueue.global(qos: .userInitiated).async {
                 self.smallImage2.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.smallImage2.pin_updateWithProgress = true
-                self.smallImage2.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[1].remoteURL ?? status.mediaAttachments[1].remoteURL!)"))
+                self.smallImage2.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[1].remoteURL ?? status.mediaAttachments[1].remoteURL ?? status.reblog?.mediaAttachments[1].previewURL ?? status.mediaAttachments[1].previewURL)"))
                 }
                 self.smallImage2.layer.masksToBounds = true
                 self.smallImage2.layer.borderColor = UIColor.black.cgColor
@@ -462,7 +462,7 @@ class DetailCellImage: UITableViewCell {
                 DispatchQueue.global(qos: .userInitiated).async {
                 self.smallImage3.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.smallImage3.pin_updateWithProgress = true
-                self.smallImage3.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[2].remoteURL ?? status.mediaAttachments[2].remoteURL!)"))
+                self.smallImage3.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[2].remoteURL ?? status.mediaAttachments[2].remoteURL ?? status.reblog?.mediaAttachments[2].previewURL ?? status.mediaAttachments[2].previewURL)"))
                 }
                 self.smallImage3.layer.masksToBounds = true
                 self.smallImage3.layer.borderColor = UIColor.black.cgColor
@@ -476,7 +476,7 @@ class DetailCellImage: UITableViewCell {
                 DispatchQueue.global(qos: .userInitiated).async {
                 self.smallImage4.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.smallImage4.pin_updateWithProgress = true
-                self.smallImage4.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[3].remoteURL ?? status.mediaAttachments[3].remoteURL!)"))
+                self.smallImage4.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[3].remoteURL ?? status.mediaAttachments[3].remoteURL ?? status.reblog?.mediaAttachments[3].previewURL ?? status.mediaAttachments[3].previewURL)"))
                 }
                 self.smallImage4.layer.masksToBounds = true
                 self.smallImage4.layer.borderColor = UIColor.black.cgColor
