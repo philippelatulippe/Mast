@@ -668,6 +668,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     StoreStruct.allowsMultiple = false
                     StoreStruct.totalsHidden = false
                     StoreStruct.newPollPost = []
+                    self.isPollAdded = false
                 }
                 .action(.cancel("Dismiss"))
                 .finally { action, index in
@@ -855,7 +856,70 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     
     @objc func panButton1(pan: UIPanGestureRecognizer) {
-        if self.isPollAdded {} else {
+        if self.isPollAdded {
+            
+            if pan.state == .began {
+                buttonCenter = self.selectedImage1.center
+                self.view.bringSubviewToFront(self.selectedImage1)
+                self.textView.resignFirstResponder()
+                springWithDelay(duration: 0.6, delay: 0, animations: {
+                    self.bgView.backgroundColor = Colours.red
+                    self.removeLabel.alpha = 1
+                    self.cameraButton.alpha = 0
+                    self.visibilityButton.alpha = 0
+                    self.warningButton.alpha = 0
+                    self.emotiButton.alpha = 0
+                    self.cameraCollectionView.alpha = 0
+                    self.galPickButton.alpha = 0
+                    self.camPickButton.alpha = 0
+                })
+            } else if pan.state == .ended || pan.state == .failed || pan.state == .cancelled {
+                
+                self.selectedImage1.image = nil
+                self.selectedImage2.image = nil
+                self.selectedImage3.image = nil
+                self.selectedImage4.image = nil
+                StoreStruct.currentOptions = []
+                StoreStruct.expiresIn = 86400
+                StoreStruct.allowsMultiple = false
+                StoreStruct.totalsHidden = false
+                StoreStruct.newPollPost = []
+                self.isPollAdded = false
+                
+                let location = pan.location(in: view)
+                if location.y > CGFloat(self.view.bounds.height) - CGFloat(40) - CGFloat(self.keyHeight) {
+                    self.selectedImage1.image = nil
+                    UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: [], animations: {
+                        self.selectedImage1.center = self.buttonCenter
+                    }, completion: { finished in
+                        self.selectedImage1.image = self.selectedImage2.image
+                        self.selectedImage2.image = self.selectedImage3.image
+                        self.selectedImage3.image = self.selectedImage4.image
+                        self.selectedImage4.image = nil
+                    })
+                } else {
+                    springWithDelay(duration: 0.6, delay: 0, animations: {
+                        self.selectedImage1.center = self.buttonCenter
+                    })
+                }
+                self.textView.becomeFirstResponder()
+                springWithDelay(duration: 0.6, delay: 0, animations: {
+                    if (UserDefaults.standard.object(forKey: "barhue1") == nil) || (UserDefaults.standard.object(forKey: "barhue1") as! Int == 0) {
+                        self.bgView.backgroundColor = Colours.tabSelected
+                    } else {
+                        self.bgView.backgroundColor = Colours.white3
+                    }
+                    self.removeLabel.alpha = 0
+                })
+            } else {
+                let location = pan.location(in: view)
+                print(location)
+                springWithDelay(duration: 0.6, delay: 0, animations: {
+                    self.selectedImage1.center = location
+                })
+            }
+            
+        } else {
         if pan.state == .began {
             buttonCenter = self.selectedImage1.center
             self.view.bringSubviewToFront(self.selectedImage1)
@@ -890,7 +954,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
             self.textView.becomeFirstResponder()
             springWithDelay(duration: 0.6, delay: 0, animations: {
-                self.bgView.backgroundColor = Colours.clear
+                if (UserDefaults.standard.object(forKey: "barhue1") == nil) || (UserDefaults.standard.object(forKey: "barhue1") as! Int == 0) {
+                    self.bgView.backgroundColor = Colours.tabSelected
+                } else {
+                    self.bgView.backgroundColor = Colours.white3
+                }
                 self.removeLabel.alpha = 0
             })
         } else {
@@ -938,7 +1006,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
             self.textView.becomeFirstResponder()
             springWithDelay(duration: 0.6, delay: 0, animations: {
-                self.bgView.backgroundColor = Colours.clear
+                if (UserDefaults.standard.object(forKey: "barhue1") == nil) || (UserDefaults.standard.object(forKey: "barhue1") as! Int == 0) {
+                    self.bgView.backgroundColor = Colours.tabSelected
+                } else {
+                    self.bgView.backgroundColor = Colours.white3
+                }
                 self.removeLabel.alpha = 0
             })
         } else {
@@ -983,7 +1055,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
             self.textView.becomeFirstResponder()
             springWithDelay(duration: 0.6, delay: 0, animations: {
-                self.bgView.backgroundColor = Colours.clear
+                if (UserDefaults.standard.object(forKey: "barhue1") == nil) || (UserDefaults.standard.object(forKey: "barhue1") as! Int == 0) {
+                    self.bgView.backgroundColor = Colours.tabSelected
+                } else {
+                    self.bgView.backgroundColor = Colours.white3
+                }
                 self.removeLabel.alpha = 0
             })
         } else {
@@ -1025,7 +1101,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
             self.textView.becomeFirstResponder()
             springWithDelay(duration: 0.6, delay: 0, animations: {
-                self.bgView.backgroundColor = Colours.clear
+                if (UserDefaults.standard.object(forKey: "barhue1") == nil) || (UserDefaults.standard.object(forKey: "barhue1") as! Int == 0) {
+                    self.bgView.backgroundColor = Colours.tabSelected
+                } else {
+                    self.bgView.backgroundColor = Colours.white3
+                }
                 self.removeLabel.alpha = 0
             })
         } else {

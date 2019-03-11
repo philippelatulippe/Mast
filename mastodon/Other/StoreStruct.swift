@@ -145,4 +145,6 @@ class StoreStruct {
     static var allowsMultiple = false
     static var totalsHidden = false
     static var pollPickerDate = Date()
+    
+    static var composedTootText = ""
 }

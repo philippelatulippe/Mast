@@ -296,8 +296,36 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
+        var offset = 88
+        var newoff = 45
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 2688:
+                offset = 88
+                newoff = 45
+            case 2436, 1792:
+                offset = 88
+                newoff = 45
+            default:
+                offset = 64
+                newoff = 24
+                tabHeight = Int(UITabBarController().tabBar.frame.size.height)
+            }
+        }
         
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: CGFloat(40)).isActive = true
+        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
+            self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(self.view.bounds.width - 40)).isActive = true
+            self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
+        } else {
+            self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(240)).isActive = true
+            self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(newoff)).isActive = true
+        }
+        
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
             self.tableView.translatesAutoresizingMaskIntoConstraints = false

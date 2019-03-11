@@ -497,42 +497,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
     }
     
-    
-    
-    
-    
-    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    //        var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
-    //        var offset = 88
-    //        if UIDevice().userInterfaceIdiom == .phone {
-    //            switch UIScreen.main.nativeBounds.height {
-    //            case 2688:
-    //                offset = 88
-    //            case 2436, 1792:
-    //                offset = 88
-    //            default:
-    //                offset = 64
-    //                tabHeight = Int(UITabBarController().tabBar.frame.size.height)
-    //            }
-    //        }
-    //        let scrollDiff = scrollView.contentOffset.y - self.previousScrollOffset
-    //
-    //        if scrollDiff > 0 {
-    //            // scrolling down
-    //            springWithDelay(duration: 1.1, delay: 0, animations: {
-    //                self.segmentedControl.frame.size.height = 0
-    //                self.tableView.frame = CGRect(x: 0, y: Int(offset + 20), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 25)
-    //            })
-    //        } else {
-    //            // scrolling up
-    //            springWithDelay(duration: 1.1, delay: 0, animations: {
-    //                self.segmentedControl.frame.size.height = 40
-    //                self.tableView.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 65)
-    //            })
-    //        }
-    //        self.previousScrollOffset = scrollView.contentOffset.y
-    //    }
-    
     @objc func changeSeg() {
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
@@ -1168,6 +1132,17 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             newSize = offset + 65
         } else {
             newSize = offset + 15
+        }
+        
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: CGFloat(40)).isActive = true
+        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
+            self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(self.view.bounds.width - 40)).isActive = true
+            self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
+        } else {
+            self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(200)).isActive = true
+            self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(newoff)).isActive = true
         }
         
         self.restoreScroll()

@@ -684,7 +684,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         if let stat = (statuses.value) {
                             controller.currentTags = stat
                             DispatchQueue.main.async {
-                                self.navigationController?.pushViewController(controller, animated: true)
+                                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                switch (deviceIdiom) {
+                                case .phone :
+                                    self.navigationController?.pushViewController(controller, animated: true)
+                                case .pad:
+                                    self.splitViewController?.showDetailViewController(controller, sender: self)
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                default:
+                                    print("nothing")
+                                }
                             }
                         }
                     }
@@ -741,7 +750,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 if stat.count > 0 {
                                     controller.userIDtoUse = stat[0].id
                                     DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
+                                        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                        switch (deviceIdiom) {
+                                        case .phone :
+                                            self.navigationController?.pushViewController(controller, animated: true)
+                                        case .pad:
+                                            self.splitViewController?.showDetailViewController(controller, sender: self)
+                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        default:
+                                            print("nothing")
+                                        }
                                     }
                                 }
                             }
@@ -787,7 +805,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if let stat = (statuses.value) {
                                 controller.currentTags = stat
                                 DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
+                                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                    switch (deviceIdiom) {
+                                    case .phone :
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    case .pad:
+                                        self.splitViewController?.showDetailViewController(controller, sender: self)
+                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                    default:
+                                        print("nothing")
+                                    }
                                 }
                             }
                         }
@@ -851,7 +878,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 if stat.count > 0 {
                                     controller.userIDtoUse = stat[0].id
                                     DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
+                                        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                        switch (deviceIdiom) {
+                                        case .phone :
+                                            self.navigationController?.pushViewController(controller, animated: true)
+                                        case .pad:
+                                            self.splitViewController?.showDetailViewController(controller, sender: self)
+                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        default:
+                                            print("nothing")
+                                        }
                                     }
                                 }
                             }
@@ -897,7 +933,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if let stat = (statuses.value) {
                                 controller.currentTags = stat
                                 DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
+                                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                    switch (deviceIdiom) {
+                                    case .phone :
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    case .pad:
+                                        self.splitViewController?.showDetailViewController(controller, sender: self)
+                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                    default:
+                                        print("nothing")
+                                    }
                                 }
                             }
                         }
@@ -962,7 +1007,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if stat.count > 0 {
                                 controller.userIDtoUse = stat[0].id
                                 DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
+                                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                    switch (deviceIdiom) {
+                                    case .phone :
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    case .pad:
+                                        self.splitViewController?.showDetailViewController(controller, sender: self)
+                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                    default:
+                                        print("nothing")
+                                    }
                                 }
                             }
                         }
@@ -1010,7 +1064,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         if let stat = (statuses.value) {
                             controller.currentTags = stat
                             DispatchQueue.main.async {
-                                self.navigationController?.pushViewController(controller, animated: true)
+                                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                switch (deviceIdiom) {
+                                case .phone :
+                                    self.navigationController?.pushViewController(controller, animated: true)
+                                case .pad:
+                                    self.splitViewController?.showDetailViewController(controller, sender: self)
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                default:
+                                    print("nothing")
+                                }
                             }
                         }
                     }
@@ -1069,7 +1132,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if stat.count > 0 {
                                 controller.userIDtoUse = stat[0].id
                                 DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
+                                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                    switch (deviceIdiom) {
+                                    case .phone :
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    case .pad:
+                                        self.splitViewController?.showDetailViewController(controller, sender: self)
+                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                    default:
+                                        print("nothing")
+                                    }
                                 }
                             }
                         }
@@ -1115,7 +1187,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         if let stat = (statuses.value) {
                             controller.currentTags = stat
                             DispatchQueue.main.async {
-                                self.navigationController?.pushViewController(controller, animated: true)
+                                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                switch (deviceIdiom) {
+                                case .phone :
+                                    self.navigationController?.pushViewController(controller, animated: true)
+                                case .pad:
+                                    self.splitViewController?.showDetailViewController(controller, sender: self)
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                default:
+                                    print("nothing")
+                                }
                             }
                         }
                     }
@@ -1305,7 +1386,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         if let stat = (statuses.value) {
                             controller.currentTags = stat
                             DispatchQueue.main.async {
-                                self.navigationController?.pushViewController(controller, animated: true)
+                                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                switch (deviceIdiom) {
+                                case .phone :
+                                    self.navigationController?.pushViewController(controller, animated: true)
+                                case .pad:
+                                    self.splitViewController?.showDetailViewController(controller, sender: self)
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                default:
+                                    print("nothing")
+                                }
                             }
                         }
                     }
@@ -1360,7 +1450,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     if stat.count > 0 {
                                         controller.userIDtoUse = stat[0].id
                                         DispatchQueue.main.async {
-                                            self.navigationController?.pushViewController(controller, animated: true)
+                                            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                            switch (deviceIdiom) {
+                                            case .phone :
+                                                self.navigationController?.pushViewController(controller, animated: true)
+                                            case .pad:
+                                                self.splitViewController?.showDetailViewController(controller, sender: self)
+                                                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                            default:
+                                                print("nothing")
+                                            }
                                         }
                                     }
                                 }
@@ -1406,7 +1505,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 if let stat = (statuses.value) {
                                     controller.currentTags = stat
                                     DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
+                                        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                        switch (deviceIdiom) {
+                                        case .phone :
+                                            self.navigationController?.pushViewController(controller, animated: true)
+                                        case .pad:
+                                            self.splitViewController?.showDetailViewController(controller, sender: self)
+                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        default:
+                                            print("nothing")
+                                        }
                                     }
                                 }
                             }
@@ -1450,7 +1558,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     if stat.count > 0 {
                                         controller.userIDtoUse = stat[0].id
                                         DispatchQueue.main.async {
-                                            self.navigationController?.pushViewController(controller, animated: true)
+                                            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                            switch (deviceIdiom) {
+                                            case .phone :
+                                                self.navigationController?.pushViewController(controller, animated: true)
+                                            case .pad:
+                                                self.splitViewController?.showDetailViewController(controller, sender: self)
+                                                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                            default:
+                                                print("nothing")
+                                            }
                                         }
                                     }
                                 }
@@ -1496,7 +1613,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 if let stat = (statuses.value) {
                                     controller.currentTags = stat
                                     DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
+                                        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                        switch (deviceIdiom) {
+                                        case .phone :
+                                            self.navigationController?.pushViewController(controller, animated: true)
+                                        case .pad:
+                                            self.splitViewController?.showDetailViewController(controller, sender: self)
+                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        default:
+                                            print("nothing")
+                                        }
                                     }
                                 }
                             }
@@ -1561,7 +1687,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     if stat.count > 0 {
                                         controller.userIDtoUse = stat[0].id
                                         DispatchQueue.main.async {
-                                            self.navigationController?.pushViewController(controller, animated: true)
+                                            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                            switch (deviceIdiom) {
+                                            case .phone :
+                                                self.navigationController?.pushViewController(controller, animated: true)
+                                            case .pad:
+                                                self.splitViewController?.showDetailViewController(controller, sender: self)
+                                                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                            default:
+                                                print("nothing")
+                                            }
                                         }
                                     }
                                 }
@@ -1607,7 +1742,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 if let stat = (statuses.value) {
                                     controller.currentTags = stat
                                     DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
+                                        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                        switch (deviceIdiom) {
+                                        case .phone :
+                                            self.navigationController?.pushViewController(controller, animated: true)
+                                        case .pad:
+                                            self.splitViewController?.showDetailViewController(controller, sender: self)
+                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        default:
+                                            print("nothing")
+                                        }
                                     }
                                 }
                             }
@@ -1662,7 +1806,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     if stat.count > 0 {
                                         controller.userIDtoUse = stat[0].id
                                         DispatchQueue.main.async {
-                                            self.navigationController?.pushViewController(controller, animated: true)
+                                            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                            switch (deviceIdiom) {
+                                            case .phone :
+                                                self.navigationController?.pushViewController(controller, animated: true)
+                                            case .pad:
+                                                self.splitViewController?.showDetailViewController(controller, sender: self)
+                                                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                            default:
+                                                print("nothing")
+                                            }
                                         }
                                     }
                                 }
@@ -1708,7 +1861,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 if let stat = (statuses.value) {
                                     controller.currentTags = stat
                                     DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
+                                        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                        switch (deviceIdiom) {
+                                        case .phone :
+                                            self.navigationController?.pushViewController(controller, animated: true)
+                                        case .pad:
+                                            self.splitViewController?.showDetailViewController(controller, sender: self)
+                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        default:
+                                            print("nothing")
+                                        }
                                     }
                                 }
                             }
@@ -2173,7 +2335,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     controller.statusLiked = stat
                                     controller.statusBoosted = stat0
                                     controller.profileStatus = self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id ?? ""
-                                    self.navigationController?.pushViewController(controller, animated: true)
+                                    
+                                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                                    switch (deviceIdiom) {
+                                    case .phone :
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    case .pad:
+                                        self.splitViewController?.showDetailViewController(controller, sender: self)
+                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                    default:
+                                        print("nothing")
+                                    }
                                     
                                 }
                                 
@@ -2991,7 +3163,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         controller.userIDtoUse = self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id
-        self.navigationController?.pushViewController(controller, animated: true)
+        
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone :
+            self.navigationController?.pushViewController(controller, animated: true)
+        case .pad:
+            self.splitViewController?.showDetailViewController(controller, sender: self)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+        default:
+            print("nothing")
+        }
         
     }
     
@@ -3001,16 +3183,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             selection.selectionChanged()
         }
         
-        print("pp1")
-        
         let controller = ThirdViewController()
         if self.allPrevious[sender.tag].account.username == StoreStruct.currentUser.username {} else {
             controller.fromOtherUser = true
         }
         
         controller.userIDtoUse = self.allPrevious[sender.tag].account.id
-        self.navigationController?.pushViewController(controller, animated: true)
         
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone :
+            self.navigationController?.pushViewController(controller, animated: true)
+        case .pad:
+            self.splitViewController?.showDetailViewController(controller, sender: self)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+        default:
+            print("nothing")
+        }
     }
     
     @objc func didTouchProfile(sender: UIButton) {
@@ -3027,8 +3216,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         controller.userIDtoUse = self.allReplies[sender.tag].account.id
-        self.navigationController?.pushViewController(controller, animated: true)
         
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone :
+            self.navigationController?.pushViewController(controller, animated: true)
+        case .pad:
+            self.splitViewController?.showDetailViewController(controller, sender: self)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+        default:
+            print("nothing")
+        }
     }
     
     @objc func tappedImagePrev(_ sender: UIButton) {

@@ -192,12 +192,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let viewController = window?.rootViewController as! ViewController
                 viewController.presentIntro()
                 return true
+            } else if url.host == "settings" {
+                let viewController = window?.rootViewController as! ViewController
+                viewController.goToSettings()
+                return true
             } else if url.absoluteString.contains("id=") {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.curID = y[1].description
                 let viewController = window?.rootViewController as! ViewController
                 viewController.gotoID()
+                return true
+            } else if url.absoluteString.contains("toot=") {
+                let x = url.absoluteString
+                let y = x.split(separator: "=")
+                StoreStruct.composedTootText = y[1].description
+                let viewController = window?.rootViewController as! ViewController
+                viewController.composedToot()
                 return true
             } else if url.absoluteString.contains("instance=") {
                 let x = url.absoluteString

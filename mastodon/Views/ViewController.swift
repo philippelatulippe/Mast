@@ -81,6 +81,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     var tableView = UITableView()
     var tableViewLists = UITableView()
     let volumeBar = VolumeBar.shared
+    let reachability = Reachability()!
     
     func siriLight() {
         UIApplication.shared.statusBarStyle = .default
@@ -705,6 +706,43 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     @objc func b4Touched() {
         self.tSearch()
+    }
+    
+    @objc func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+        switch reachability.connection {
+        case .wifi:
+            print("Reachable via WiFi")
+        case .cellular:
+            print("Reachable via Cellular")
+        case .none:
+            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                let warning = UINotificationFeedbackGenerator()
+                warning.notificationOccurred(.warning)
+            }
+            let label = ToppingLabel(text: "No Connection")
+            let biscuit = BiscuitViewController(title: "Oops!", toppings: [label], timeout: 2)
+            self.present(biscuit, animated: true, completion: nil)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("couldn't start network checker")
+        }
+    }
+    
+    func composedToot() {
+        let request0 = Statuses.create(status: StoreStruct.composedTootText, replyToID: nil, mediaIDs: [], sensitive: false, spoilerText: nil, scheduledAt: nil, poll: nil, visibility: .public)
+        DispatchQueue.global(qos: .userInitiated).async {
+            StoreStruct.client.run(request0) { (statuses) in
+                print(statuses)
+            }
+        }
     }
     
     override func viewDidLoad() {

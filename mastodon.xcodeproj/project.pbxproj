@@ -759,6 +759,27 @@
 		53E6F2B2216CCA9400912B83 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */; };
 		53E6F2B5216CDDF800912B83 /* StoreStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B3216CDDF800912B83 /* StoreStruct.swift */; };
 		53E6F2B7216CDE7D00912B83 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B6216CDE7D00912B83 /* DetailController.swift */; };
+		53E826BB2236C10100153721 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826BA2236C10000153721 /* NetworkCheck.swift */; };
+		53E826D42236C32D00153721 /* BiscuitDismissController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826BE2236C32C00153721 /* BiscuitDismissController.swift */; };
+		53E826D52236C32D00153721 /* BiscuitAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826BF2236C32C00153721 /* BiscuitAnimationController.swift */; };
+		53E826D62236C32D00153721 /* ToppingsVisualHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826C02236C32C00153721 /* ToppingsVisualHandler.swift */; };
+		53E826D72236C32D00153721 /* BiscuitViewController+Transitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826C12236C32C00153721 /* BiscuitViewController+Transitioning.swift */; };
+		53E826D82236C32D00153721 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826C22236C32C00153721 /* State.swift */; };
+		53E826D92236C32D00153721 /* BiscuitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826C32236C32C00153721 /* BiscuitView.swift */; };
+		53E826DA2236C32D00153721 /* battery.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 53E826C62236C32C00153721 /* battery.pdf */; };
+		53E826DB2236C32D00153721 /* battery.png in Resources */ = {isa = PBXBuildFile; fileRef = 53E826C72236C32C00153721 /* battery.png */; };
+		53E826DC2236C32D00153721 /* battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53E826C82236C32C00153721 /* battery@2x.png */; };
+		53E826DD2236C32D00153721 /* ToppingBattery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826C92236C32C00153721 /* ToppingBattery.swift */; };
+		53E826DE2236C32D00153721 /* battery@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53E826CA2236C32C00153721 /* battery@3x.png */; };
+		53E826DF2236C32D00153721 /* battery_charging@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53E826CB2236C32C00153721 /* battery_charging@2x.png */; };
+		53E826E02236C32D00153721 /* battery_charging@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53E826CC2236C32C00153721 /* battery_charging@3x.png */; };
+		53E826E12236C32D00153721 /* BatteryIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826CD2236C32C00153721 /* BatteryIndicator.swift */; };
+		53E826E22236C32D00153721 /* battery_charging.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 53E826CE2236C32C00153721 /* battery_charging.pdf */; };
+		53E826E32236C32D00153721 /* battery_charging.png in Resources */ = {isa = PBXBuildFile; fileRef = 53E826CF2236C32C00153721 /* battery_charging.png */; };
+		53E826E42236C32D00153721 /* ToppingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826D02236C32C00153721 /* ToppingButton.swift */; };
+		53E826E52236C32D00153721 /* ToppingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826D12236C32C00153721 /* ToppingLabel.swift */; };
+		53E826E62236C32D00153721 /* Toppable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826D22236C32C00153721 /* Toppable.swift */; };
+		53E826E72236C32D00153721 /* BiscuitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E826D32236C32C00153721 /* BiscuitViewController.swift */; };
 		53EBE6B52220030A000D007E /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBE6B42220030A000D007E /* UIImageColors.swift */; };
 		53EBE6BB22283FF9000D007E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBE6BA22283FF9000D007E /* SearchViewController.swift */; };
 		53EBE6BD222E7C4D000D007E /* Polls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBE6BC222E7C4D000D007E /* Polls.swift */; };
@@ -1657,6 +1678,28 @@
 		53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		53E6F2B3216CDDF800912B83 /* StoreStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreStruct.swift; sourceTree = "<group>"; };
 		53E6F2B6216CDE7D00912B83 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		53E826BA2236C10000153721 /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
+		53E826BD2236C32C00153721 /* BisKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BisKit.h; sourceTree = "<group>"; };
+		53E826BE2236C32C00153721 /* BiscuitDismissController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiscuitDismissController.swift; sourceTree = "<group>"; };
+		53E826BF2236C32C00153721 /* BiscuitAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiscuitAnimationController.swift; sourceTree = "<group>"; };
+		53E826C02236C32C00153721 /* ToppingsVisualHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToppingsVisualHandler.swift; sourceTree = "<group>"; };
+		53E826C12236C32C00153721 /* BiscuitViewController+Transitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BiscuitViewController+Transitioning.swift"; sourceTree = "<group>"; };
+		53E826C22236C32C00153721 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		53E826C32236C32C00153721 /* BiscuitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiscuitView.swift; sourceTree = "<group>"; };
+		53E826C62236C32C00153721 /* battery.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = battery.pdf; sourceTree = "<group>"; };
+		53E826C72236C32C00153721 /* battery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery.png; sourceTree = "<group>"; };
+		53E826C82236C32C00153721 /* battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "battery@2x.png"; sourceTree = "<group>"; };
+		53E826C92236C32C00153721 /* ToppingBattery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToppingBattery.swift; sourceTree = "<group>"; };
+		53E826CA2236C32C00153721 /* battery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "battery@3x.png"; sourceTree = "<group>"; };
+		53E826CB2236C32C00153721 /* battery_charging@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "battery_charging@2x.png"; sourceTree = "<group>"; };
+		53E826CC2236C32C00153721 /* battery_charging@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "battery_charging@3x.png"; sourceTree = "<group>"; };
+		53E826CD2236C32C00153721 /* BatteryIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryIndicator.swift; sourceTree = "<group>"; };
+		53E826CE2236C32C00153721 /* battery_charging.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = battery_charging.pdf; sourceTree = "<group>"; };
+		53E826CF2236C32C00153721 /* battery_charging.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery_charging.png; sourceTree = "<group>"; };
+		53E826D02236C32C00153721 /* ToppingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToppingButton.swift; sourceTree = "<group>"; };
+		53E826D12236C32C00153721 /* ToppingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToppingLabel.swift; sourceTree = "<group>"; };
+		53E826D22236C32C00153721 /* Toppable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toppable.swift; sourceTree = "<group>"; };
+		53E826D32236C32C00153721 /* BiscuitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiscuitViewController.swift; sourceTree = "<group>"; };
 		53EBE6B42220030A000D007E /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		53EBE6BA22283FF9000D007E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		53EBE6BC222E7C4D000D007E /* Polls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polls.swift; sourceTree = "<group>"; };
@@ -2824,6 +2867,7 @@
 			isa = PBXGroup;
 			children = (
 				531B61C0221960B200DD3845 /* push */,
+				53E826BC2236C32C00153721 /* BisKit */,
 				53659411222EB73300BFF3CD /* CoreCharts */,
 				53E1AE17221ADFE900A6E1E6 /* SLP */,
 				53E1ADE0221AB82100A6E1E6 /* Crown */,
@@ -2859,6 +2903,7 @@
 				53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */,
 				A9D80EEC21B8F27A00020ECE /* InstanceData.swift */,
 				A9D80EEE21BB154200020ECE /* AccountExtension.swift */,
+				53E826BA2236C10000153721 /* NetworkCheck.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -3203,6 +3248,50 @@
 				53E1AE1F221ADFE900A6E1E6 /* PreviewError.swift */,
 			);
 			path = SLP;
+			sourceTree = "<group>";
+		};
+		53E826BC2236C32C00153721 /* BisKit */ = {
+			isa = PBXGroup;
+			children = (
+				53E826BD2236C32C00153721 /* BisKit.h */,
+				53E826BE2236C32C00153721 /* BiscuitDismissController.swift */,
+				53E826BF2236C32C00153721 /* BiscuitAnimationController.swift */,
+				53E826C02236C32C00153721 /* ToppingsVisualHandler.swift */,
+				53E826C12236C32C00153721 /* BiscuitViewController+Transitioning.swift */,
+				53E826C22236C32C00153721 /* State.swift */,
+				53E826C32236C32C00153721 /* BiscuitView.swift */,
+				53E826C42236C32C00153721 /* Toppings */,
+				53E826D32236C32C00153721 /* BiscuitViewController.swift */,
+			);
+			path = BisKit;
+			sourceTree = "<group>";
+		};
+		53E826C42236C32C00153721 /* Toppings */ = {
+			isa = PBXGroup;
+			children = (
+				53E826C52236C32C00153721 /* BatteryIndicator */,
+				53E826D02236C32C00153721 /* ToppingButton.swift */,
+				53E826D12236C32C00153721 /* ToppingLabel.swift */,
+				53E826D22236C32C00153721 /* Toppable.swift */,
+			);
+			path = Toppings;
+			sourceTree = "<group>";
+		};
+		53E826C52236C32C00153721 /* BatteryIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				53E826C62236C32C00153721 /* battery.pdf */,
+				53E826C72236C32C00153721 /* battery.png */,
+				53E826C82236C32C00153721 /* battery@2x.png */,
+				53E826C92236C32C00153721 /* ToppingBattery.swift */,
+				53E826CA2236C32C00153721 /* battery@3x.png */,
+				53E826CB2236C32C00153721 /* battery_charging@2x.png */,
+				53E826CC2236C32C00153721 /* battery_charging@3x.png */,
+				53E826CD2236C32C00153721 /* BatteryIndicator.swift */,
+				53E826CE2236C32C00153721 /* battery_charging.pdf */,
+				53E826CF2236C32C00153721 /* battery_charging.png */,
+			);
+			path = BatteryIndicator;
 			sourceTree = "<group>";
 		};
 		7138629AB3761F8644F6E477 /* Frameworks */ = {
@@ -3557,7 +3646,9 @@
 				5373C9E2215173F000676F3D /* LaunchScreen.storyboard in Resources */,
 				535B33BA215C0EC6001A2A7F /* pause_24.png in Resources */,
 				530976B32179D8D900640D84 /* icon11@2x.png in Resources */,
+				53E826DE2236C32D00153721 /* battery@3x.png in Resources */,
 				5352D0CA215E74B400901B60 /* icon9@2x.png in Resources */,
+				53E826DA2236C32D00153721 /* battery.pdf in Resources */,
 				5373CA0F2151AC8D00676F3D /* Localizable.strings in Resources */,
 				530976AA2179D8D900640D84 /* icon10.png in Resources */,
 				53205821215D287700ED0C36 /* README.md in Resources */,
@@ -3566,6 +3657,7 @@
 				5352D0AB215E679300901B60 /* icon8@2x.png in Resources */,
 				530976B62179D8D900640D84 /* icon20@2x.png in Resources */,
 				5352D0C9215E74B400901B60 /* icon9.png in Resources */,
+				53E826DF2236C32D00153721 /* battery_charging@2x.png in Resources */,
 				5352D0C0215E683600901B60 /* icon1@3x.png in Resources */,
 				530976B12179D8D900640D84 /* icon19@3x.png in Resources */,
 				5352D0B5215E679400901B60 /* icon5.png in Resources */,
@@ -3577,11 +3669,14 @@
 				530976B92179D8D900640D84 /* icon16.png in Resources */,
 				530976AF2179D8D900640D84 /* icon10@2x.png in Resources */,
 				535B33BB215C0EC6001A2A7F /* minimize_24.png in Resources */,
+				53E826E02236C32D00153721 /* battery_charging@3x.png in Resources */,
 				530976BD2179D8D900640D84 /* icon13.png in Resources */,
+				53E826E32236C32D00153721 /* battery_charging.png in Resources */,
 				5315728D21FCC22300328053 /* Settings.bundle in Resources */,
 				530976C62179D8D900640D84 /* icon15.png in Resources */,
 				5352D0AC215E679300901B60 /* icon3@3x.png in Resources */,
 				530976A82179D8D900640D84 /* icon16@2x.png in Resources */,
+				53E826E22236C32D00153721 /* battery_charging.pdf in Resources */,
 				5352D0A6215E679300901B60 /* icon3.png in Resources */,
 				530976C02179D8D900640D84 /* icon18@2x.png in Resources */,
 				5373C9DF215173F000676F3D /* Assets.xcassets in Resources */,
@@ -3590,6 +3685,7 @@
 				5354BAD2216577FD0094C545 /* NormalHeader.bundle in Resources */,
 				530976BF2179D8D900640D84 /* icon14@2x.png in Resources */,
 				5352D0BA215E679400901B60 /* icon8.png in Resources */,
+				53E826DB2236C32D00153721 /* battery.png in Resources */,
 				530976C12179D8D900640D84 /* icon18@3x.png in Resources */,
 				530976C42179D8D900640D84 /* icon12@2x.png in Resources */,
 				5352D0B8215E679400901B60 /* icon2@3x.png in Resources */,
@@ -3608,6 +3704,7 @@
 				530976B42179D8D900640D84 /* icon12@3x.png in Resources */,
 				530976B52179D8D900640D84 /* icon19@2x.png in Resources */,
 				5352D0BE215E683600901B60 /* icon1.png in Resources */,
+				53E826DC2236C32D00153721 /* battery@2x.png in Resources */,
 				5352D0B9215E679400901B60 /* icon7@3x.png in Resources */,
 				530976C22179D8D900640D84 /* icon17.png in Resources */,
 				530976BE2179D8D900640D84 /* icon14.png in Resources */,
@@ -3993,6 +4090,8 @@
 				531E0F90216E2BA2003E8890 /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */,
 				5315308621B95223007E5C00 /* SearchFeedCell.swift in Sources */,
 				5373CAC42152C68000676F3D /* Request.swift in Sources */,
+				53E826D42236C32D00153721 /* BiscuitDismissController.swift in Sources */,
+				53E826D72236C32D00153721 /* BiscuitViewController+Transitioning.swift in Sources */,
 				5354BACF216577FD0094C545 /* FastArrowLayer.swift in Sources */,
 				531E0FAB216E2BA2003E8890 /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */,
 				5373CAC32152C68000676F3D /* Payload.swift in Sources */,
@@ -4035,6 +4134,7 @@
 				53631C38221364D0000D5B40 /* SAHistoryViewController.swift in Sources */,
 				531CCD682207457400A56145 /* NewFilterViewController.swift in Sources */,
 				5317C7B521DA334500746197 /* LineDrawingLayer.swift in Sources */,
+				53E826E42236C32D00153721 /* ToppingButton.swift in Sources */,
 				A9D80EEF21BB154200020ECE /* AccountExtension.swift in Sources */,
 				5316C895219D94A00003AB97 /* GiphyMultipleGIFResponse.swift in Sources */,
 				5373CAF62152EDB700676F3D /* Swipeable.swift in Sources */,
@@ -4075,6 +4175,7 @@
 				531E0FA2216E2BA2003E8890 /* NVActivityIndicatorAnimationTriangleSkewSpin.swift in Sources */,
 				5373CA582152B59A00676F3D /* PaddedTextField.swift in Sources */,
 				5373CAB12152C68000676F3D /* Emoji.swift in Sources */,
+				53E826E52236C32D00153721 /* ToppingLabel.swift in Sources */,
 				536A4FB1216B73D600A3D483 /* BulletinManager.swift in Sources */,
 				53BC45BA215AC7D30092223F /* SettingsViewController.swift in Sources */,
 				5351D75A21617FC40012960F /* VolumeBarWindow.swift in Sources */,
@@ -4131,6 +4232,7 @@
 				5320582A215D287700ED0C36 /* DKAssetGroupDetailCameraCell.swift in Sources */,
 				5354BAC9216577FD0094C545 /* RamotionWaveLayer.swift in Sources */,
 				5373CACB2152C68000676F3D /* FollowRequests.swift in Sources */,
+				53E826DD2236C32D00153721 /* ToppingBattery.swift in Sources */,
 				5316C894219D94A00003AB97 /* GiphySimpleItem.swift in Sources */,
 				53E1AE21221ADFEA00A6E1E6 /* NSURLSessionExtension.swift in Sources */,
 				5373CADC2152E29700676F3D /* PlainText.swift in Sources */,
@@ -4146,6 +4248,7 @@
 				531E0FAA216E2BA2003E8890 /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift in Sources */,
 				531E0F94216E2BA2003E8890 /* NVActivityIndicatorAnimationLineSpinFadeLoader.swift in Sources */,
 				53631C4822136A1D000D5B40 /* MisterFusion.swift in Sources */,
+				53E826E12236C32D00153721 /* BatteryIndicator.swift in Sources */,
 				53E1AE14221AB82200A6E1E6 /* CrownSurfaceController.swift in Sources */,
 				53BC45C2215AE4F10092223F /* SettingsCellToggle.swift in Sources */,
 				5316C88E219D94A00003AB97 /* GiphyImageSet.swift in Sources */,
@@ -4170,6 +4273,7 @@
 				5351D75821617FC40012960F /* VolumeBarStackView.swift in Sources */,
 				53E1AE08221AB82200A6E1E6 /* BackgroundView.swift in Sources */,
 				53C037B0220A2A6F0047EBC4 /* NewQRViewController.swift in Sources */,
+				53E826D92236C32D00153721 /* BiscuitView.swift in Sources */,
 				5373CAFA2152EDB700676F3D /* SwipeActionsView.swift in Sources */,
 				5373CB2F21541A0300676F3D /* UIImage+Rotation.swift in Sources */,
 				5320581A215D287700ED0C36 /* FontAwesomeTabBarItem.swift in Sources */,
@@ -4205,6 +4309,7 @@
 				5373CAB02152C68000676F3D /* Context.swift in Sources */,
 				5373CB3121541A0300676F3D /* GifIt.swift in Sources */,
 				5373CB402155049900676F3D /* ProfileHeaderCell.swift in Sources */,
+				53E826BB2236C10100153721 /* NetworkCheck.swift in Sources */,
 				5354BAC5216577FD0094C545 /* CRRefreshAnimator.swift in Sources */,
 				531CCD5D22073CCA00A56145 /* ChromaShadeSlider.swift in Sources */,
 				53E1AE11221AB82200A6E1E6 /* CrownIndicatorView.swift in Sources */,
@@ -4212,9 +4317,11 @@
 				7806850B21CC227100072C41 /* CollectionProCells.swift in Sources */,
 				5373CB162152FCF300676F3D /* ActionSheet.swift in Sources */,
 				5318D3E8220CCC1D00E5C41A /* Pulsator.swift in Sources */,
+				53E826D52236C32D00153721 /* BiscuitAnimationController.swift in Sources */,
 				5373CB052152EDB800676F3D /* SwipeOptions.swift in Sources */,
 				535B33BE215C1A08001A2A7F /* VisualActivityViewController.swift in Sources */,
 				5393859E217393A4002444FC /* DLTagInfo.swift in Sources */,
+				53E826E72236C32D00153721 /* BiscuitViewController.swift in Sources */,
 				5373CB042152EDB800676F3D /* SwipeFeedback.swift in Sources */,
 				5373CB3421541A0300676F3D /* SKDetectingImageView.swift in Sources */,
 				5373CAA02152C68000676F3D /* DateFormatter.swift in Sources */,
@@ -4290,6 +4397,7 @@
 				5373CB3021541A0300676F3D /* UIView+Radius.swift in Sources */,
 				5373CB192152FCF300676F3D /* AlertType.swift in Sources */,
 				5373C9F42151957200676F3D /* FourthViewController.swift in Sources */,
+				53E826D82236C32D00153721 /* State.swift in Sources */,
 				535B33CE215C3641001A2A7F /* HashtagViewController.swift in Sources */,
 				5373CA5A2152B76500676F3D /* Spring.swift in Sources */,
 				5352D0C2215E68C900901B60 /* AppIconsCells.swift in Sources */,
@@ -4338,7 +4446,9 @@
 				535B33B0215C0EC6001A2A7F /* XPlayerViewController+State.swift in Sources */,
 				5373CAF92152EDB700676F3D /* SwipeActionButton.swift in Sources */,
 				5354BAD1216577FD0094C545 /* FastCircleLayer.swift in Sources */,
+				53E826E62236C32D00153721 /* Toppable.swift in Sources */,
 				5373CAFE2152EDB800676F3D /* SwipeCollectionViewCell+Display.swift in Sources */,
+				53E826D62236C32D00153721 /* ToppingsVisualHandler.swift in Sources */,
 				5373CABB2152C68000676F3D /* RequestError.swift in Sources */,
 				531E0F9E216E2BA2003E8890 /* NVActivityIndicatorAnimationBallPulse.swift in Sources */,
 				531E0FA4216E2BA2003E8890 /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */,

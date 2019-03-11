@@ -1023,6 +1023,17 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         }
         
         
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: CGFloat(40)).isActive = true
+        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
+            self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(self.view.bounds.width - 40)).isActive = true
+            self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
+        } else {
+            self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(220)).isActive = true
+            self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(newoff)).isActive = true
+        }
+        
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .phone:
