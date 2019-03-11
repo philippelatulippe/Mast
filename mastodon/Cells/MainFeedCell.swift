@@ -274,7 +274,12 @@ class MainFeedCell: SwipeTableViewCell {
                 self.reloadInputViews()
             }
             
-            
+            var theUsernameTag = status.account.displayName
+            if (UserDefaults.standard.object(forKey: "boostusern") == nil) || (UserDefaults.standard.object(forKey: "boostusern") as! Int == 0) {
+                
+            } else {
+                theUsernameTag = "@\(status.account.acct)"
+            }
             
             if status.reblog?.account.emojis.isEmpty ?? true {
                 let imageAttachment = NSTextAttachment()
@@ -283,7 +288,7 @@ class MainFeedCell: SwipeTableViewCell {
                 let attachmentString = NSAttributedString(attachment: imageAttachment)
                 let completeText = NSMutableAttributedString(string: "")
                 completeText.append(attachmentString)
-                let textAfterIcon = NSMutableAttributedString(string: " \(status.account.displayName) boosted\n\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
+                let textAfterIcon = NSMutableAttributedString(string: " \(theUsernameTag) boosted\n\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
                 completeText.append(textAfterIcon)
                 userName.attributedText = completeText
             } else {
@@ -293,7 +298,7 @@ class MainFeedCell: SwipeTableViewCell {
                 let attachmentString = NSAttributedString(attachment: imageAttachment)
                 let completeText = NSMutableAttributedString(string: "")
                 completeText.append(attachmentString)
-                let attributedString = NSMutableAttributedString(string: " \(status.account.displayName) boosted\n\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
+                let attributedString = NSMutableAttributedString(string: " \(theUsernameTag) boosted\n\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
                 for y in status.reblog?.account.emojis ?? [] {
                     let textAttachment = NSTextAttachment()
                     textAttachment.loadImageUsingCache(withUrl: y.url.absoluteString)

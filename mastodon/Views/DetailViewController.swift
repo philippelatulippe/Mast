@@ -4809,15 +4809,34 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print(indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == 0 {
-            let controller = DetailViewController()
-            controller.mainStatus.append(self.allPrevious[indexPath.row])
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
-        if indexPath.section == 5 {
-            let controller = DetailViewController()
-            controller.mainStatus.append(self.allReplies[indexPath.row])
-            self.navigationController?.pushViewController(controller, animated: true)
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone :
+            if indexPath.section == 0 {
+                let controller = DetailViewController()
+                controller.mainStatus.append(self.allPrevious[indexPath.row])
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+            if indexPath.section == 5 {
+                let controller = DetailViewController()
+                controller.mainStatus.append(self.allReplies[indexPath.row])
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+        case .pad:
+            if indexPath.section == 0 {
+                let controller = DetailViewController()
+                controller.mainStatus.append(self.allPrevious[indexPath.row])
+                self.splitViewController?.showDetailViewController(controller, sender: self)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+            }
+            if indexPath.section == 5 {
+                let controller = DetailViewController()
+                controller.mainStatus.append(self.allReplies[indexPath.row])
+                self.splitViewController?.showDetailViewController(controller, sender: self)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+            }
+        default:
+            print("nothing")
         }
     }
     
