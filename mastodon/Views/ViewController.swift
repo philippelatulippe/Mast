@@ -1275,9 +1275,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "colcell2", for: indexPath) as! ProCells
                 cell.configure()
-                cell.backgroundColor = Colours.white
+                cell.backgroundColor = Colours.grayDark3
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark3
                 cell.selectedBackgroundView = bgColorView
                 cell.frame.size.width = 60
                 cell.frame.size.height = 80
@@ -1336,115 +1336,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 
             }
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        /*
-        if tableView == self.tableView {
-//        if StoreStruct.statusSearch[indexPath.row].mediaAttachments.isEmpty {
-            
-            if self.typeOfSearch == 2 {
-                print("oomp")
-            if StoreStruct.statusSearchUser.count > 0 {
-                print("oomp1")
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellfs", for: indexPath) as! FollowersCell
-                cell.configure(StoreStruct.statusSearchUser[indexPath.row])
-                cell.profileImageView.tag = indexPath.row
-                //cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                cell.backgroundColor = Colours.grayDark3
-                cell.userName.textColor = UIColor.white
-                cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
-                cell.toot.textColor = UIColor.white
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark3
-                cell.selectedBackgroundView = bgColorView
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as! MainFeedCell
-                cell.profileImageView.tag = indexPath.row
-                cell.backgroundColor = Colours.grayDark3
-                cell.userName.textColor = UIColor.white
-                cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
-                cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
-                cell.toot.textColor = UIColor.white
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark3
-                cell.selectedBackgroundView = bgColorView
-                return cell
-                }
-            } else {
-            
-            if StoreStruct.statusSearch.count > 0 {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as! MainFeedCell
-                    cell.configure(StoreStruct.statusSearch[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.backgroundColor = Colours.grayDark3
-                    cell.userName.textColor = UIColor.white
-                    cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
-                    cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
-                    cell.toot.textColor = UIColor.white
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.grayDark3
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as! MainFeedCell
-                cell.profileImageView.tag = indexPath.row
-                cell.backgroundColor = Colours.grayDark3
-                cell.userName.textColor = UIColor.white
-                cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
-                cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
-                cell.toot.textColor = UIColor.white
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark3
-                cell.selectedBackgroundView = bgColorView
-                return cell
-            }
-            }
-        } else {
-            if indexPath.section == 0 {
-            if indexPath.row == 0 {
-                let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as! ListCell
-                cell.userName.text = "Your instances"
-                cell.backgroundColor = Colours.grayDark3
-                cell.userName.textColor = Colours.tabSelected
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark3
-                cell.selectedBackgroundView = bgColorView
-                return cell
-            }  else {
-                let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as! ListCell
-                cell.delegate = self
-                let instance = InstanceData.getAllInstances()[indexPath.row - 1]
-                let account = Account.getAccounts()[indexPath.row - 1]
-                cell.configureInstance(instanceName: "\(account.username)@\(instance.returnedText)")
-                cell.backgroundColor = Colours.grayDark3
-                cell.userName.textColor = UIColor.white
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark3
-                cell.selectedBackgroundView = bgColorView
-                return cell
-            }
-            } else {
-                
-                let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l2", for: indexPath) as! ListCell2
-                cell.delegate = self
-                cell.configure(StoreStruct.instanceLocalToAdd[indexPath.row])
-                cell.backgroundColor = Colours.grayDark3
-                cell.userName.textColor = UIColor.white
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark3
-                cell.selectedBackgroundView = bgColorView
-                return cell
-                
-            }
-        }
-          */
     }
     
     

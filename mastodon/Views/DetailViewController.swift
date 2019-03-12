@@ -27,6 +27,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var likeButton = UIButton()
     var boostButton = UIButton()
     var moreButton = UIButton()
+    var splitButton = UIButton()
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
@@ -111,6 +112,115 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    @objc func didTouchSplit() {
+        
+        Alertift.actionSheet(title: "Split Ratio", message: nil)
+            .backgroundColor(Colours.white)
+            .titleTextColor(Colours.grayDark)
+            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+            .messageTextAlignment(.left)
+            .titleTextAlignment(.left)
+            .action(.default("20 : 80".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.2
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/10)*2
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("25 : 75".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.25
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/4)
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("30 : 70".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.3
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/10)*3
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("35 : 65".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.35
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/20)*7
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("40 : 60".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.4
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/5)*2
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("45 : 55".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.45
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/20)*9
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("50 : 50".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.5
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = minimumWidth/2
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("55 : 45".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.55
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/20)*11
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("60 : 40".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.6
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/5)*4
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("65 : 35".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.65
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/20)*13
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("70 : 30".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.7
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/10)*7
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("75 : 25".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.75
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/4)*3
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.default("80 : 20".localized), image: nil) { (action, ind) in
+                print(action, ind)
+                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.8
+                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
+                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/10)*8
+                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
+            }
+            .action(.cancel("Dismiss"))
+            .finally { action, index in
+                if action.style == .cancel {
+                    return
+                }
+            }
+            .popover(anchorView: self.splitButton)
+            .show(on: self)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
@@ -141,6 +251,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
             self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+            
+            splitButton.backgroundColor = Colours.white
+            splitButton.layer.masksToBounds = true
+            splitButton.setImage(UIImage(named: "splitRatio")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+            splitButton.addTarget(self, action: #selector(self.didTouchSplit), for: .touchUpInside)
+            self.view.addSubview(self.splitButton)
+            
+            self.splitButton.translatesAutoresizingMaskIntoConstraints = false
+            self.splitButton.widthAnchor.constraint(equalToConstant: 28).isActive = true
+            self.splitButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+            self.splitButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
+            self.splitButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 9).isActive = true
             
             if self.mainStatus.isEmpty {
                 
@@ -335,6 +457,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        self.mainStatus = []
+        self.allPrevious = []
+        self.allReplies = []
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -451,23 +580,26 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.addSubview(self.tableView)
         
         
-        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
-        
-        self.loadLoadLoad()
-        
-        tableView.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
-            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                let selection = UISelectionFeedbackGenerator()
-                selection.selectionChanged()
-            }
-            self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                self?.tableView.cr.endHeaderRefresh()
-            })
-        }
-        //tableView.cr.beginHeaderRefresh()
-        
         if self.mainStatus.isEmpty {} else {
+            
+            
+            refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
+            
+            self.loadLoadLoad()
+            
+            tableView.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                    let selection = UISelectionFeedbackGenerator()
+                    selection.selectionChanged()
+                }
+                self?.refreshCont()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    self?.tableView.cr.endHeaderRefresh()
+                })
+            }
+            
+            
+            
             let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {

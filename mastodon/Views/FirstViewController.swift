@@ -1134,23 +1134,67 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             newSize = offset + 15
         }
         
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: CGFloat(40)).isActive = true
-        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-            self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(self.view.bounds.width - 40)).isActive = true
-            self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
-        } else {
-            self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(200)).isActive = true
-            self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(newoff)).isActive = true
-        }
-        
         self.restoreScroll()
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "segTheme"), object: self)
+            
+            segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+            segmentedControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            segmentedControl.heightAnchor.constraint(equalToConstant: CGFloat(40)).isActive = true
+            if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
+                self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(self.view.bounds.width - 40)).isActive = true
+                self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
+            } else {
+                self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(200)).isActive = true
+                self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(30)).isActive = true
+            }
+            
+            if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
+            
+                self.tableView.translatesAutoresizingMaskIntoConstraints = false
+                self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
+                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
+                
+                self.tableViewL.translatesAutoresizingMaskIntoConstraints = false
+                self.tableViewL.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableViewL.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableViewL.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
+                self.tableViewL.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
+                
+                self.tableViewF.translatesAutoresizingMaskIntoConstraints = false
+                self.tableViewF.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableViewF.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableViewF.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
+                self.tableViewF.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
+        
+            } else {
+            
+                self.tableView.translatesAutoresizingMaskIntoConstraints = false
+                self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+                
+                self.tableViewL.translatesAutoresizingMaskIntoConstraints = false
+                self.tableViewL.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableViewL.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableViewL.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableViewL.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+                
+                self.tableViewF.translatesAutoresizingMaskIntoConstraints = false
+                self.tableViewF.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+                self.tableViewF.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+                self.tableViewF.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableViewF.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+        
+            }
+            
+            
+            
             if self.maybeDoOnce == false {
                 self.searchButton = MNGExpandedTouchAreaButton()
                 self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)

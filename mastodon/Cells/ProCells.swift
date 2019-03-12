@@ -111,7 +111,7 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
         cell.frame.size.width = 55
         cell.frame.size.height = 55
         
-        cell.backgroundColor = Colours.clear
+        cell.backgroundColor = Colours.grayDark3
         
         return cell
     }

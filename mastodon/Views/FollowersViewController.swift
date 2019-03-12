@@ -281,20 +281,21 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
             }
         }
         
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        segmentedControl.heightAnchor.constraint(equalToConstant: CGFloat(40)).isActive = true
-        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-            self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(self.view.bounds.width - 40)).isActive = true
-            self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
-        } else {
-            self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(240)).isActive = true
-            self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(newoff)).isActive = true
-        }
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
+            segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+            segmentedControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            segmentedControl.heightAnchor.constraint(equalToConstant: CGFloat(40)).isActive = true
+            if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
+                self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(self.view.bounds.width - 40)).isActive = true
+                self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
+            } else {
+                self.segmentedControl.widthAnchor.constraint(equalToConstant: CGFloat(240)).isActive = true
+                self.segmentedControl.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(30)).isActive = true
+            }
+            
             self.tableView.translatesAutoresizingMaskIntoConstraints = false
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
