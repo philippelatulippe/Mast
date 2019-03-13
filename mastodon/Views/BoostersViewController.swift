@@ -280,14 +280,6 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
         }
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            print("nothing")
-        case .pad:
-            self.title = "Activity"
-        default:
-            print("nothing")
-        }
         
         self.loadLoadLoad()
         

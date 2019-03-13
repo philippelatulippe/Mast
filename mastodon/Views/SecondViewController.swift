@@ -4097,6 +4097,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     if let myWebsite = sto[indexPath.row].status?.url {
                                         let objectsToShare = [myWebsite]
                                         let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                        vc.popoverPresentationController?.sourceView = self.view
                                         vc.previewNumberOfLines = 5
                                         vc.previewFont = UIFont.systemFont(ofSize: 14)
                                         self.present(vc, animated: true, completion: nil)
@@ -4107,6 +4108,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     
                                     let bodyText = sto[indexPath.row].status?.content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText ?? "")
+                                    vc.popoverPresentationController?.sourceView = self.view
                                     vc.previewNumberOfLines = 5
                                     vc.previewFont = UIFont.systemFont(ofSize: 14)
                                     self.present(vc, animated: true, completion: nil)
@@ -4714,6 +4716,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     if let myWebsite = sto[indexPath.row].status?.url {
                                         let objectsToShare = [myWebsite]
                                         let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                        vc.popoverPresentationController?.sourceView = self.view
                                         vc.previewNumberOfLines = 5
                                         vc.previewFont = UIFont.systemFont(ofSize: 14)
                                         self.present(vc, animated: true, completion: nil)
@@ -4724,6 +4727,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     
                                     let bodyText = sto[indexPath.row].status?.content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText ?? "")
+                                    vc.popoverPresentationController?.sourceView = self.view
                                     vc.previewNumberOfLines = 5
                                     vc.previewFont = UIFont.systemFont(ofSize: 14)
                                     self.present(vc, animated: true, completion: nil)

@@ -296,10 +296,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let detailViewController = DetailViewController()
             splitViewController.viewControllers = [rootViewController, detailViewController]
             splitViewController.preferredDisplayMode = .allVisible
-            splitViewController.preferredPrimaryColumnWidthFraction = 0.5
             let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
-            splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
-            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            
+            if (UserDefaults.standard.object(forKey: "splitra") == nil) || (UserDefaults.standard.object(forKey: "splitra") as? Int == 0) {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.5
+                splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 1 {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.25
+                splitViewController.minimumPrimaryColumnWidth = minimumWidth/4
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 2 {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.3
+                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*3
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 3 {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.35
+                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*7
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 4 {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.4
+                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*2
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 5 {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.45
+                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*9
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 6 {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.55
+                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*11
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 7 {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.6
+                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*4
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 8 {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.65
+                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*13
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 9 {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.7
+                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*7
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 10 {
+                splitViewController.preferredPrimaryColumnWidthFraction = 0.75
+                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/4)*3
+                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+            }
+                
             self.window!.rootViewController = splitViewController
             self.window!.makeKeyAndVisible()
             
@@ -455,10 +499,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let detailViewController = DetailViewController()
                 splitViewController.viewControllers = [rootViewController, detailViewController]
                 splitViewController.preferredDisplayMode = .allVisible
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.5
                 let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
-                splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                
+                if (UserDefaults.standard.object(forKey: "splitra") == nil) || (UserDefaults.standard.object(forKey: "splitra") as? Int == 0) {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.5
+                    splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 1 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.25
+                    splitViewController.minimumPrimaryColumnWidth = minimumWidth/4
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 2 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.3
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*3
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 3 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.35
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*7
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 4 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.4
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*2
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 5 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.45
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*9
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 6 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.55
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*11
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 7 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.6
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*4
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 8 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.65
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*13
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 9 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.7
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*7
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 10 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.75
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/4)*3
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                }
                 self.window!.rootViewController = splitViewController
                 self.window!.makeKeyAndVisible()
                 
@@ -553,10 +640,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let detailViewController = DetailViewController()
                 splitViewController.viewControllers = [rootViewController, detailViewController]
                 splitViewController.preferredDisplayMode = .allVisible
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.5
                 let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
-                splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                
+                if (UserDefaults.standard.object(forKey: "splitra") == nil) || (UserDefaults.standard.object(forKey: "splitra") as? Int == 0) {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.5
+                    splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 1 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.25
+                    splitViewController.minimumPrimaryColumnWidth = minimumWidth/4
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 2 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.3
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*3
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 3 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.35
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*7
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 4 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.4
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*2
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 5 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.45
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*9
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 6 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.55
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*11
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 7 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.6
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*4
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 8 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.65
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*13
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 9 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.7
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*7
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 10 {
+                    splitViewController.preferredPrimaryColumnWidthFraction = 0.75
+                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/4)*3
+                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
+                }
                 self.window!.rootViewController = splitViewController
                 self.window!.makeKeyAndVisible()
                 

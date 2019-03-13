@@ -120,15 +120,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
             .messageTextAlignment(.left)
             .titleTextAlignment(.left)
-            .action(.default("20 : 80".localized), image: nil) { (action, ind) in
-                print(action, ind)
-                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.2
-                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
-                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/10)*2
-                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
-            }
             .action(.default("25 : 75".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(1, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.25
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/4)
@@ -136,6 +130,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             .action(.default("30 : 70".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(2, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.3
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/10)*3
@@ -143,6 +138,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             .action(.default("35 : 65".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(3, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.35
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/20)*7
@@ -150,6 +146,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             .action(.default("40 : 60".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(4, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.4
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/5)*2
@@ -157,6 +154,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             .action(.default("45 : 55".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(5, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.45
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/20)*9
@@ -164,6 +162,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             .action(.default("50 : 50".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(0, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.5
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = minimumWidth/2
@@ -171,6 +170,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             .action(.default("55 : 45".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(6, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.55
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/20)*11
@@ -178,6 +178,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             .action(.default("60 : 40".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(7, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.6
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/5)*4
@@ -185,6 +186,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             .action(.default("65 : 35".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(8, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.65
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/20)*13
@@ -192,6 +194,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             .action(.default("70 : 30".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(9, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.7
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/10)*7
@@ -199,16 +202,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             .action(.default("75 : 25".localized), image: nil) { (action, ind) in
                 print(action, ind)
+                UserDefaults.standard.set(10, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.75
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
                 self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/4)*3
-                self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
-            }
-            .action(.default("80 : 20".localized), image: nil) { (action, ind) in
-                print(action, ind)
-                self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.8
-                let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
-                self.splitViewController?.minimumPrimaryColumnWidth = (minimumWidth/10)*8
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.cancel("Dismiss"))
@@ -266,6 +263,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             if self.mainStatus.isEmpty {
                 
+                self.tableView.alpha = 0
                 let introLogo = UIImageView()
                 introLogo.contentMode = .scaleAspectFit
                 self.view.addSubview(introLogo)
@@ -278,6 +276,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             } else {
                 
+                self.tableView.alpha = 1
                 replyButton.backgroundColor = Colours.white
                 likeButton.backgroundColor = Colours.white
                 boostButton.backgroundColor = Colours.white
@@ -821,8 +820,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 case .phone :
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 case .pad:
-                                    self.splitViewController?.showDetailViewController(controller, sender: self)
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                    if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                        if StoreStruct.currentPage == 0 {
+                                            nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                        if StoreStruct.currentPage == 1 {
+                                            nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                        if StoreStruct.currentPage == 2 {
+                                            nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                    }
                                 default:
                                     print("nothing")
                                 }
@@ -887,8 +895,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         case .phone :
                                             self.navigationController?.pushViewController(controller, animated: true)
                                         case .pad:
-                                            self.splitViewController?.showDetailViewController(controller, sender: self)
-                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                            if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                                if StoreStruct.currentPage == 0 {
+                                                    nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 1 {
+                                                    nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 2 {
+                                                    nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                            }
                                         default:
                                             print("nothing")
                                         }
@@ -942,8 +959,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     case .phone :
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     case .pad:
-                                        self.splitViewController?.showDetailViewController(controller, sender: self)
-                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                            if StoreStruct.currentPage == 0 {
+                                                nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                            if StoreStruct.currentPage == 1 {
+                                                nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                            if StoreStruct.currentPage == 2 {
+                                                nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                        }
                                     default:
                                         print("nothing")
                                     }
@@ -1015,8 +1041,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         case .phone :
                                             self.navigationController?.pushViewController(controller, animated: true)
                                         case .pad:
-                                            self.splitViewController?.showDetailViewController(controller, sender: self)
-                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                            if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                                if StoreStruct.currentPage == 0 {
+                                                    nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 1 {
+                                                    nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 2 {
+                                                    nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                            }
                                         default:
                                             print("nothing")
                                         }
@@ -1070,8 +1105,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     case .phone :
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     case .pad:
-                                        self.splitViewController?.showDetailViewController(controller, sender: self)
-                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                            if StoreStruct.currentPage == 0 {
+                                                nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                            if StoreStruct.currentPage == 1 {
+                                                nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                            if StoreStruct.currentPage == 2 {
+                                                nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                        }
                                     default:
                                         print("nothing")
                                     }
@@ -1144,8 +1188,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     case .phone :
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     case .pad:
-                                        self.splitViewController?.showDetailViewController(controller, sender: self)
-                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                            if StoreStruct.currentPage == 0 {
+                                                nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                            if StoreStruct.currentPage == 1 {
+                                                nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                            if StoreStruct.currentPage == 2 {
+                                                nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                        }
                                     default:
                                         print("nothing")
                                     }
@@ -1201,8 +1254,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 case .phone :
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 case .pad:
-                                    self.splitViewController?.showDetailViewController(controller, sender: self)
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                    if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                        if StoreStruct.currentPage == 0 {
+                                            nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                        if StoreStruct.currentPage == 1 {
+                                            nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                        if StoreStruct.currentPage == 2 {
+                                            nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                    }
                                 default:
                                     print("nothing")
                                 }
@@ -1269,8 +1331,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     case .phone :
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     case .pad:
-                                        self.splitViewController?.showDetailViewController(controller, sender: self)
-                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                            if StoreStruct.currentPage == 0 {
+                                                nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                            if StoreStruct.currentPage == 1 {
+                                                nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                            if StoreStruct.currentPage == 2 {
+                                                nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                        }
                                     default:
                                         print("nothing")
                                     }
@@ -1324,8 +1395,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 case .phone :
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 case .pad:
-                                    self.splitViewController?.showDetailViewController(controller, sender: self)
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                    if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                        if StoreStruct.currentPage == 0 {
+                                            nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                        if StoreStruct.currentPage == 1 {
+                                            nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                        if StoreStruct.currentPage == 2 {
+                                            nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                    }
                                 default:
                                     print("nothing")
                                 }
@@ -1523,8 +1603,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 case .phone :
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 case .pad:
-                                    self.splitViewController?.showDetailViewController(controller, sender: self)
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                    if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                        if StoreStruct.currentPage == 0 {
+                                            nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                        if StoreStruct.currentPage == 1 {
+                                            nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                        if StoreStruct.currentPage == 2 {
+                                            nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                        }
+                                    }
                                 default:
                                     print("nothing")
                                 }
@@ -1587,8 +1676,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             case .phone :
                                                 self.navigationController?.pushViewController(controller, animated: true)
                                             case .pad:
-                                                self.splitViewController?.showDetailViewController(controller, sender: self)
-                                                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                                if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                                    if StoreStruct.currentPage == 0 {
+                                                        nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                    if StoreStruct.currentPage == 1 {
+                                                        nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                    if StoreStruct.currentPage == 2 {
+                                                        nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                }
                                             default:
                                                 print("nothing")
                                             }
@@ -1642,8 +1740,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         case .phone :
                                             self.navigationController?.pushViewController(controller, animated: true)
                                         case .pad:
-                                            self.splitViewController?.showDetailViewController(controller, sender: self)
-                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                            if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                                if StoreStruct.currentPage == 0 {
+                                                    nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 1 {
+                                                    nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 2 {
+                                                    nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                            }
                                         default:
                                             print("nothing")
                                         }
@@ -1695,8 +1802,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             case .phone :
                                                 self.navigationController?.pushViewController(controller, animated: true)
                                             case .pad:
-                                                self.splitViewController?.showDetailViewController(controller, sender: self)
-                                                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                                if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                                    if StoreStruct.currentPage == 0 {
+                                                        nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                    if StoreStruct.currentPage == 1 {
+                                                        nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                    if StoreStruct.currentPage == 2 {
+                                                        nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                }
                                             default:
                                                 print("nothing")
                                             }
@@ -1750,8 +1866,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         case .phone :
                                             self.navigationController?.pushViewController(controller, animated: true)
                                         case .pad:
-                                            self.splitViewController?.showDetailViewController(controller, sender: self)
-                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                            if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                                if StoreStruct.currentPage == 0 {
+                                                    nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 1 {
+                                                    nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 2 {
+                                                    nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                            }
                                         default:
                                             print("nothing")
                                         }
@@ -1824,8 +1949,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             case .phone :
                                                 self.navigationController?.pushViewController(controller, animated: true)
                                             case .pad:
-                                                self.splitViewController?.showDetailViewController(controller, sender: self)
-                                                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                                if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                                    if StoreStruct.currentPage == 0 {
+                                                        nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                    if StoreStruct.currentPage == 1 {
+                                                        nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                    if StoreStruct.currentPage == 2 {
+                                                        nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                }
                                             default:
                                                 print("nothing")
                                             }
@@ -1879,8 +2013,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         case .phone :
                                             self.navigationController?.pushViewController(controller, animated: true)
                                         case .pad:
-                                            self.splitViewController?.showDetailViewController(controller, sender: self)
-                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                            if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                                if StoreStruct.currentPage == 0 {
+                                                    nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 1 {
+                                                    nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 2 {
+                                                    nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                            }
                                         default:
                                             print("nothing")
                                         }
@@ -1943,8 +2086,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             case .phone :
                                                 self.navigationController?.pushViewController(controller, animated: true)
                                             case .pad:
-                                                self.splitViewController?.showDetailViewController(controller, sender: self)
-                                                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                                if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                                    if StoreStruct.currentPage == 0 {
+                                                        nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                    if StoreStruct.currentPage == 1 {
+                                                        nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                    if StoreStruct.currentPage == 2 {
+                                                        nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                                    }
+                                                }
                                             default:
                                                 print("nothing")
                                             }
@@ -1998,8 +2150,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         case .phone :
                                             self.navigationController?.pushViewController(controller, animated: true)
                                         case .pad:
-                                            self.splitViewController?.showDetailViewController(controller, sender: self)
-                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                            if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                                if StoreStruct.currentPage == 0 {
+                                                    nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 1 {
+                                                    nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                                if StoreStruct.currentPage == 2 {
+                                                    nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                                }
+                                            }
                                         default:
                                             print("nothing")
                                         }
@@ -2473,8 +2634,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     case .phone :
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     case .pad:
-                                        self.splitViewController?.showDetailViewController(controller, sender: self)
-                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                                        if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                                            if StoreStruct.currentPage == 0 {
+                                                nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                            if StoreStruct.currentPage == 1 {
+                                                nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                            if StoreStruct.currentPage == 2 {
+                                                nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                                            }
+                                        }
                                     default:
                                         print("nothing")
                                     }
@@ -2897,6 +3067,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if let myWebsite = self.mainStatus[0].url {
                                 let objectsToShare = [myWebsite]
                                 let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                vc.popoverPresentationController?.sourceView = self.view
                                 vc.previewNumberOfLines = 5
                                 vc.previewFont = UIFont.systemFont(ofSize: 14)
                                 self.present(vc, animated: true, completion: nil)
@@ -2907,6 +3078,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                             let bodyText = self.mainStatus[0].content.stripHTML()
                             let vc = VisualActivityViewController(text: bodyText)
+                            vc.popoverPresentationController?.sourceView = self.view
                             vc.previewNumberOfLines = 5
                             vc.previewFont = UIFont.systemFont(ofSize: 14)
                             self.present(vc, animated: true, completion: nil)
@@ -3234,6 +3406,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if let myWebsite = self.mainStatus[0].reblog?.url ?? self.mainStatus[0].url {
                                 let objectsToShare = [myWebsite]
                                 let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                vc.popoverPresentationController?.sourceView = self.view
                                 vc.previewNumberOfLines = 5
                                 vc.previewFont = UIFont.systemFont(ofSize: 14)
                                 self.present(vc, animated: true, completion: nil)
@@ -3244,6 +3417,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                             let bodyText = self.mainStatus[0].reblog?.content.stripHTML() ?? self.mainStatus[0].content.stripHTML()
                             let vc = VisualActivityViewController(text: bodyText)
+                            vc.popoverPresentationController?.sourceView = self.view
                             vc.previewNumberOfLines = 5
                             vc.previewFont = UIFont.systemFont(ofSize: 14)
                             self.present(vc, animated: true, completion: nil)
@@ -3301,8 +3475,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         case .phone :
             self.navigationController?.pushViewController(controller, animated: true)
         case .pad:
-            self.splitViewController?.showDetailViewController(controller, sender: self)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+            if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                if StoreStruct.currentPage == 0 {
+                    nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                }
+                if StoreStruct.currentPage == 1 {
+                    nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                }
+                if StoreStruct.currentPage == 2 {
+                    nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                }
+            }
         default:
             print("nothing")
         }
@@ -3327,8 +3510,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         case .phone :
             self.navigationController?.pushViewController(controller, animated: true)
         case .pad:
-            self.splitViewController?.showDetailViewController(controller, sender: self)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+            if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                if StoreStruct.currentPage == 0 {
+                    nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                }
+                if StoreStruct.currentPage == 1 {
+                    nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                }
+                if StoreStruct.currentPage == 2 {
+                    nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                }
+            }
         default:
             print("nothing")
         }
@@ -3354,8 +3546,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         case .phone :
             self.navigationController?.pushViewController(controller, animated: true)
         case .pad:
-            self.splitViewController?.showDetailViewController(controller, sender: self)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+            if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                if StoreStruct.currentPage == 0 {
+                    nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                }
+                if StoreStruct.currentPage == 1 {
+                    nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                }
+                if StoreStruct.currentPage == 2 {
+                    nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                }
+            }
         default:
             print("nothing")
         }
@@ -4711,6 +4912,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     if let myWebsite = sto[indexPath.row].url {
                                         let objectsToShare = [myWebsite]
                                         let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                        vc.popoverPresentationController?.sourceView = self.view
                                         vc.previewNumberOfLines = 5
                                         vc.previewFont = UIFont.systemFont(ofSize: 14)
                                         self.present(vc, animated: true, completion: nil)
@@ -4721,6 +4923,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     
                                     let bodyText = sto[indexPath.row].content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText)
+                                    vc.popoverPresentationController?.sourceView = self.view
                                     vc.previewNumberOfLines = 5
                                     vc.previewFont = UIFont.systemFont(ofSize: 14)
                                     self.present(vc, animated: true, completion: nil)
@@ -5051,6 +5254,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     if let myWebsite = sto[indexPath.row].url {
                                         let objectsToShare = [myWebsite]
                                         let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                                        vc.popoverPresentationController?.sourceView = self.view
                                         vc.previewNumberOfLines = 5
                                         vc.previewFont = UIFont.systemFont(ofSize: 14)
                                         self.present(vc, animated: true, completion: nil)
@@ -5061,6 +5265,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     
                                     let bodyText = sto[indexPath.row].content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText)
+                                    vc.popoverPresentationController?.sourceView = self.view
                                     vc.previewNumberOfLines = 5
                                     vc.previewFont = UIFont.systemFont(ofSize: 14)
                                     self.present(vc, animated: true, completion: nil)
@@ -5156,14 +5361,32 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if indexPath.section == 0 {
                 let controller = DetailViewController()
                 controller.mainStatus.append(self.allPrevious[indexPath.row])
-                self.splitViewController?.showDetailViewController(controller, sender: self)
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                    if StoreStruct.currentPage == 0 {
+                        nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                    }
+                    if StoreStruct.currentPage == 1 {
+                        nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                    }
+                    if StoreStruct.currentPage == 2 {
+                        nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
             }
             if indexPath.section == 5 {
                 let controller = DetailViewController()
                 controller.mainStatus.append(self.allReplies[indexPath.row])
-                self.splitViewController?.showDetailViewController(controller, sender: self)
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                if let nav = self.splitViewController?.viewControllers[0] as? ViewController {
+                    if StoreStruct.currentPage == 0 {
+                        nav.firstView.navigationController?.pushViewController(controller, animated: true)
+                    }
+                    if StoreStruct.currentPage == 1 {
+                        nav.secondView.navigationController?.pushViewController(controller, animated: true)
+                    }
+                    if StoreStruct.currentPage == 2 {
+                        nav.thirdView.navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
             }
         default:
             print("nothing")

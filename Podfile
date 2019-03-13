@@ -21,5 +21,6 @@ pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'SwiftyGiphy'
 pod 'QuickLayout'
+pod 'iOSPhotoEditor'
 
 end

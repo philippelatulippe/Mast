@@ -15,8 +15,9 @@ import MobileCoreServices
 import SwiftyJSON
 import AVKit
 import AVFoundation
+import iOSPhotoEditor
 
-class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate {
+class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, PhotoEditorDelegate {
     
     let gifCont = SwiftyGiphyViewController()
     var isGifVid = false
@@ -44,519 +45,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.gifCont.dismiss(animated: true, completion: nil)
     }
     
-    
-    var ASCIIFace: [String] = ["¯\\_(ツ)_/¯", "( ͡° ͜ʖ ͡°)", "( ͡° ʖ̯ ͡°)", "ಠ_ಠ", "(╯°□°）╯︵ ┻━┻", "┬──┬◡ﾉ(° -°ﾉ)", "( •_•)", "( •_•)>⌐■-■", "(⌐■_■)", "(̿▀̿‿ ̿▀̿ ̿)", "ᕕ( ᐛ )ᕗ", "(☞ﾟヮﾟ)☞", "ʕ•ᴥ•ʔ", "(°ー°〃)", "༼ つ ◕_◕ ༽つ", "ԅ(≖‿≖ԅ)", "(•̀ᴗ•́)و ̑̑", "ಠᴗಠ", "ಥ_ಥ", "(ಥ﹏ಥ)", "(づ￣ ³￣)づ", "ლ(ಠ_ಠლ)", "(⊙_☉)", "ʘ‿ʘ", "ᕦ(ò_óˇ)ᕤ", "( ˘ ³˘)♥", "ಠ_ರೃ", "( ˇ෴ˇ )", "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧", "(∩｀-´)⊃━☆ﾟ.*･｡ﾟ", "(ง •̀_•́)ง", "(◕‿◕✿)", "(~‾▿‾)~", "ヾ(-_- )ゞ", "|_・)", "(●__●)", "｡◕‿◕｡", "ᕙ(⇀‸↼‶)ᕗ", "｡^‿^｡", "(ง^ᗜ^)ง", "(⊙﹏⊙✿)", "(๑•́ ヮ •̀๑)", "\\_(-_-)_/", "┬┴┬┴┤(･_├┬┴┬┴", "ツ", "ε(´סּ︵סּ`)з", "O=('-'Q)", "L(° O °L)", "._.)/\\(._.", "٩(^‿^)۶", "ᶘ ᵒᴥᵒᶅ", "ᵔᴥᵔ", "ʕ·͡ˑ·ཻʔ", "ʕ⁎̯͡⁎ʔ༄", "ʕ•ᴥ•ʔ", "ʕ￫ᴥ￩ʔ", "ʕ·ᴥ·　ʔ", "ʕ　·ᴥ·ʔ", "ʕっ˘ڡ˘ςʔ", "ʕ´•ᴥ•`ʔ", "ʕ◕ ͜ʖ◕ʔ", "o(^∀^*)o", "( ƅ°ਉ°)ƅ", "⁽(◍˃̵͈̑ᴗ˂̵͈̑)⁽", "ヽ(〃･ω･)ﾉ", "(p^-^)p", "（ﾉ｡≧◇≦）ﾉ", "ヽ/❀o ل͜ o\\ﾉ", "⌒°(ᴖ◡ᴖ)°⌒", "ヽ( ´ー`)ノ", "ヽ(^o^)丿", "(｡♥‿♥｡)", "✿♥‿♥✿", "໒( ♥ ◡ ♥ )७", "ლ(́◉◞౪◟◉‵ლ)", "(^～^;)ゞ", "(-_-)ゞ゛", "⁀⊙﹏☉⁀", "ヾ|`･､●･|ﾉ", "ﾍ(ﾟ∇ﾟﾍ)", "ヽ(๏∀◕ )ﾉ", "ミ●﹏☉ミ", "へ[ ᴼ ▃ ᴼ ]_/¯", "╰། ￣ ۝ ￣ །╯", "╰། ❛ ڡ ❛ །╯", "(*´ڡ`●)", "¯\\(°_o)/¯", "¯\\_༼ ಥ ‿ ಥ ༽_/¯", "＼（〇_ｏ）／", "(‘-’*)", "(*´∀`*)", "(￣ω￣)", "(」゜ロ゜)」", "(ꐦ ಠ皿ಠ )", "（╬ಠ益ಠ)", "༼ つ ͠° ͟ ͟ʖ ͡° ༽つ", ".( ̵˃﹏˂̵ )", "(˃̶᷄︿๏）", "~(>_<~)", "(っ- ‸ – ς)", "✧*。ヾ(｡>﹏<｡)ﾉﾞ✧*。", "(⌣_⌣”)", "(｡•́︿•̀｡)", "ಠ╭╮ಠ", "(˵¯͒⌢͗¯͒˵)", "(⌯˃̶᷄ ﹏ ˂̶᷄⌯)", "( ˃̶͈ ̯ ̜ ˂̶͈ˊ ) ︠³", "(⊃д⊂)", "( ⚆ _ ⚆ )", "(๑˃̵ᴗ˂̵)و", "ಠ_ಠ", "ಠoಠ", "ಠ~ಠ", "ಠ‿ಠ", "ಠ⌣ಠ", "ಠ╭╮ಠ", "ರ_ರ", "ง ͠° ل͜ °)ง", "๏̯͡๏﴿", "( ° ͜ ʖ °)", "( ͡° ͜ʖ ͡°)", "( ⚆ _ ⚆ )", "( ︶︿︶)", "( ﾟヮﾟ)", "┌( ಠ_ಠ)┘", "╚(ಠ_ಠ)=┐", "⚆ _ ⚆"]
-    
-    
-    func boldTheText(string: String) -> String {
-        var string2 = string
-        string2 = string.replacingOccurrences(of: "a", with: "𝗮")
-        string2 = string2.replacingOccurrences(of: "b", with: "𝗯")
-        string2 = string2.replacingOccurrences(of: "c", with: "𝗰")
-        string2 = string2.replacingOccurrences(of: "d", with: "𝗱")
-        string2 = string2.replacingOccurrences(of: "e", with: "𝗲")
-        string2 = string2.replacingOccurrences(of: "f", with: "𝗳")
-        string2 = string2.replacingOccurrences(of: "g", with: "𝗴")
-        string2 = string2.replacingOccurrences(of: "h", with: "𝗵")
-        string2 = string2.replacingOccurrences(of: "i", with: "𝗶")
-        string2 = string2.replacingOccurrences(of: "j", with: "𝗷")
-        string2 = string2.replacingOccurrences(of: "k", with: "𝗸")
-        string2 = string2.replacingOccurrences(of: "l", with: "𝗹")
-        string2 = string2.replacingOccurrences(of: "m", with: "𝗺")
-        string2 = string2.replacingOccurrences(of: "n", with: "𝗻")
-        string2 = string2.replacingOccurrences(of: "o", with: "𝗼")
-        string2 = string2.replacingOccurrences(of: "p", with: "𝗽")
-        string2 = string2.replacingOccurrences(of: "q", with: "𝗾")
-        string2 = string2.replacingOccurrences(of: "r", with: "𝗿")
-        string2 = string2.replacingOccurrences(of: "s", with: "𝘀")
-        string2 = string2.replacingOccurrences(of: "t", with: "𝘁")
-        string2 = string2.replacingOccurrences(of: "u", with: "𝘂")
-        string2 = string2.replacingOccurrences(of: "v", with: "𝘃")
-        string2 = string2.replacingOccurrences(of: "w", with: "𝘄")
-        string2 = string2.replacingOccurrences(of: "x", with: "𝘅")
-        string2 = string2.replacingOccurrences(of: "y", with: "𝘆")
-        string2 = string2.replacingOccurrences(of: "z", with: "𝘇")
-        
-        string2 = string2.replacingOccurrences(of: "A", with: "𝗔")
-        string2 = string2.replacingOccurrences(of: "B", with: "𝗕")
-        string2 = string2.replacingOccurrences(of: "C", with: "𝗖")
-        string2 = string2.replacingOccurrences(of: "D", with: "𝗗")
-        string2 = string2.replacingOccurrences(of: "E", with: "𝗘")
-        string2 = string2.replacingOccurrences(of: "F", with: "𝗙")
-        string2 = string2.replacingOccurrences(of: "G", with: "𝗚")
-        string2 = string2.replacingOccurrences(of: "H", with: "𝗛")
-        string2 = string2.replacingOccurrences(of: "I", with: "𝗜")
-        string2 = string2.replacingOccurrences(of: "J", with: "𝗝")
-        string2 = string2.replacingOccurrences(of: "K", with: "𝗞")
-        string2 = string2.replacingOccurrences(of: "L", with: "𝗟")
-        string2 = string2.replacingOccurrences(of: "M", with: "𝗠")
-        string2 = string2.replacingOccurrences(of: "N", with: "𝗡")
-        string2 = string2.replacingOccurrences(of: "O", with: "𝗢")
-        string2 = string2.replacingOccurrences(of: "P", with: "𝗣")
-        string2 = string2.replacingOccurrences(of: "Q", with: "𝗤")
-        string2 = string2.replacingOccurrences(of: "R", with: "𝗥")
-        string2 = string2.replacingOccurrences(of: "S", with: "𝗦")
-        string2 = string2.replacingOccurrences(of: "T", with: "𝗧")
-        string2 = string2.replacingOccurrences(of: "U", with: "𝗨")
-        string2 = string2.replacingOccurrences(of: "V", with: "𝗩")
-        string2 = string2.replacingOccurrences(of: "W", with: "𝗪")
-        string2 = string2.replacingOccurrences(of: "X", with: "𝗫")
-        string2 = string2.replacingOccurrences(of: "Y", with: "𝗬")
-        string2 = string2.replacingOccurrences(of: "Z", with: "𝗭")
-        
-        string2 = string2.replacingOccurrences(of: "1", with: "𝟭")
-        string2 = string2.replacingOccurrences(of: "2", with: "𝟮")
-        string2 = string2.replacingOccurrences(of: "3", with: "𝟯")
-        string2 = string2.replacingOccurrences(of: "4", with: "𝟰")
-        string2 = string2.replacingOccurrences(of: "5", with: "𝟱")
-        string2 = string2.replacingOccurrences(of: "6", with: "𝟲")
-        string2 = string2.replacingOccurrences(of: "7", with: "𝟳")
-        string2 = string2.replacingOccurrences(of: "8", with: "𝟴")
-        string2 = string2.replacingOccurrences(of: "9", with: "𝟵")
-        string2 = string2.replacingOccurrences(of: "0", with: "𝟬")
-        
-        return string2
-    }
-    
-    func italicsTheText(string: String) -> String {
-        var string2 = string
-        string2 = string.replacingOccurrences(of: "a", with: "𝘢")
-        string2 = string2.replacingOccurrences(of: "b", with: "𝘣")
-        string2 = string2.replacingOccurrences(of: "c", with: "𝘤")
-        string2 = string2.replacingOccurrences(of: "d", with: "𝘥")
-        string2 = string2.replacingOccurrences(of: "e", with: "𝘦")
-        string2 = string2.replacingOccurrences(of: "f", with: "𝘧")
-        string2 = string2.replacingOccurrences(of: "g", with: "𝘨")
-        string2 = string2.replacingOccurrences(of: "h", with: "𝘩")
-        string2 = string2.replacingOccurrences(of: "i", with: "𝘪")
-        string2 = string2.replacingOccurrences(of: "j", with: "𝘫")
-        string2 = string2.replacingOccurrences(of: "k", with: "𝘬")
-        string2 = string2.replacingOccurrences(of: "l", with: "𝘭")
-        string2 = string2.replacingOccurrences(of: "m", with: "𝘮")
-        string2 = string2.replacingOccurrences(of: "n", with: "𝘯")
-        string2 = string2.replacingOccurrences(of: "o", with: "𝘰")
-        string2 = string2.replacingOccurrences(of: "p", with: "𝘱")
-        string2 = string2.replacingOccurrences(of: "q", with: "𝘲")
-        string2 = string2.replacingOccurrences(of: "r", with: "𝘳")
-        string2 = string2.replacingOccurrences(of: "s", with: "𝘴")
-        string2 = string2.replacingOccurrences(of: "t", with: "𝘵")
-        string2 = string2.replacingOccurrences(of: "u", with: "𝘶")
-        string2 = string2.replacingOccurrences(of: "v", with: "𝘷")
-        string2 = string2.replacingOccurrences(of: "w", with: "𝘸")
-        string2 = string2.replacingOccurrences(of: "x", with: "𝘹")
-        string2 = string2.replacingOccurrences(of: "y", with: "𝘺")
-        string2 = string2.replacingOccurrences(of: "z", with: "𝘻")
-        
-        string2 = string2.replacingOccurrences(of: "A", with: "𝘈")
-        string2 = string2.replacingOccurrences(of: "B", with: "𝘉")
-        string2 = string2.replacingOccurrences(of: "C", with: "𝘊")
-        string2 = string2.replacingOccurrences(of: "D", with: "𝘋")
-        string2 = string2.replacingOccurrences(of: "E", with: "𝘌")
-        string2 = string2.replacingOccurrences(of: "F", with: "𝘍")
-        string2 = string2.replacingOccurrences(of: "G", with: "𝘎")
-        string2 = string2.replacingOccurrences(of: "H", with: "𝘏")
-        string2 = string2.replacingOccurrences(of: "I", with: "𝘐")
-        string2 = string2.replacingOccurrences(of: "J", with: "𝘑")
-        string2 = string2.replacingOccurrences(of: "K", with: "𝘒")
-        string2 = string2.replacingOccurrences(of: "L", with: "𝘓")
-        string2 = string2.replacingOccurrences(of: "M", with: "𝘔")
-        string2 = string2.replacingOccurrences(of: "N", with: "𝘕")
-        string2 = string2.replacingOccurrences(of: "O", with: "𝘖")
-        string2 = string2.replacingOccurrences(of: "P", with: "𝘗")
-        string2 = string2.replacingOccurrences(of: "Q", with: "𝘘")
-        string2 = string2.replacingOccurrences(of: "R", with: "𝘙")
-        string2 = string2.replacingOccurrences(of: "S", with: "𝘚")
-        string2 = string2.replacingOccurrences(of: "T", with: "𝘛")
-        string2 = string2.replacingOccurrences(of: "U", with: "𝘜")
-        string2 = string2.replacingOccurrences(of: "V", with: "𝘝")
-        string2 = string2.replacingOccurrences(of: "W", with: "𝘞")
-        string2 = string2.replacingOccurrences(of: "X", with: "𝘟")
-        string2 = string2.replacingOccurrences(of: "Y", with: "𝘠")
-        string2 = string2.replacingOccurrences(of: "Z", with: "𝘡")
-        
-        return string2
-    }
-    
-    func monoTheText(string: String) -> String {
-        var string2 = string
-        string2 = string.replacingOccurrences(of: "a", with: "𝚊")
-        string2 = string2.replacingOccurrences(of: "b", with: "𝚋")
-        string2 = string2.replacingOccurrences(of: "c", with: "𝚌")
-        string2 = string2.replacingOccurrences(of: "d", with: "𝚍")
-        string2 = string2.replacingOccurrences(of: "e", with: "𝚎")
-        string2 = string2.replacingOccurrences(of: "f", with: "𝚏")
-        string2 = string2.replacingOccurrences(of: "g", with: "𝚐")
-        string2 = string2.replacingOccurrences(of: "h", with: "𝚑")
-        string2 = string2.replacingOccurrences(of: "i", with: "𝚒")
-        string2 = string2.replacingOccurrences(of: "j", with: "𝚓")
-        string2 = string2.replacingOccurrences(of: "k", with: "𝚔")
-        string2 = string2.replacingOccurrences(of: "l", with: "𝚕")
-        string2 = string2.replacingOccurrences(of: "m", with: "𝚖")
-        string2 = string2.replacingOccurrences(of: "n", with: "𝚗")
-        string2 = string2.replacingOccurrences(of: "o", with: "𝚘")
-        string2 = string2.replacingOccurrences(of: "p", with: "𝚙")
-        string2 = string2.replacingOccurrences(of: "q", with: "𝚚")
-        string2 = string2.replacingOccurrences(of: "r", with: "𝚛")
-        string2 = string2.replacingOccurrences(of: "s", with: "𝚜")
-        string2 = string2.replacingOccurrences(of: "t", with: "𝚝")
-        string2 = string2.replacingOccurrences(of: "u", with: "𝚞")
-        string2 = string2.replacingOccurrences(of: "v", with: "𝚟")
-        string2 = string2.replacingOccurrences(of: "w", with: "𝚠")
-        string2 = string2.replacingOccurrences(of: "x", with: "𝚡")
-        string2 = string2.replacingOccurrences(of: "y", with: "𝚢")
-        string2 = string2.replacingOccurrences(of: "z", with: "𝚣")
-        
-        string2 = string2.replacingOccurrences(of: "A", with: "𝙰")
-        string2 = string2.replacingOccurrences(of: "B", with: "𝙱")
-        string2 = string2.replacingOccurrences(of: "C", with: "𝙲")
-        string2 = string2.replacingOccurrences(of: "D", with: "𝙳")
-        string2 = string2.replacingOccurrences(of: "E", with: "𝙴")
-        string2 = string2.replacingOccurrences(of: "F", with: "𝙵")
-        string2 = string2.replacingOccurrences(of: "G", with: "𝙶")
-        string2 = string2.replacingOccurrences(of: "H", with: "𝙷")
-        string2 = string2.replacingOccurrences(of: "I", with: "𝙸")
-        string2 = string2.replacingOccurrences(of: "J", with: "𝙹")
-        string2 = string2.replacingOccurrences(of: "K", with: "𝙺")
-        string2 = string2.replacingOccurrences(of: "L", with: "𝙻")
-        string2 = string2.replacingOccurrences(of: "M", with: "𝙼")
-        string2 = string2.replacingOccurrences(of: "N", with: "𝙽")
-        string2 = string2.replacingOccurrences(of: "O", with: "𝙾")
-        string2 = string2.replacingOccurrences(of: "P", with: "𝙿")
-        string2 = string2.replacingOccurrences(of: "Q", with: "𝚀")
-        string2 = string2.replacingOccurrences(of: "R", with: "𝚁")
-        string2 = string2.replacingOccurrences(of: "S", with: "𝚂")
-        string2 = string2.replacingOccurrences(of: "T", with: "𝚃")
-        string2 = string2.replacingOccurrences(of: "U", with: "𝚄")
-        string2 = string2.replacingOccurrences(of: "V", with: "𝚅")
-        string2 = string2.replacingOccurrences(of: "W", with: "𝚆")
-        string2 = string2.replacingOccurrences(of: "X", with: "𝚇")
-        string2 = string2.replacingOccurrences(of: "Y", with: "𝚈")
-        string2 = string2.replacingOccurrences(of: "Z", with: "𝚉")
-        
-        string2 = string2.replacingOccurrences(of: "1", with: "𝟷")
-        string2 = string2.replacingOccurrences(of: "2", with: "𝟸")
-        string2 = string2.replacingOccurrences(of: "3", with: "𝟹")
-        string2 = string2.replacingOccurrences(of: "4", with: "𝟺")
-        string2 = string2.replacingOccurrences(of: "5", with: "𝟻")
-        string2 = string2.replacingOccurrences(of: "6", with: "𝟼")
-        string2 = string2.replacingOccurrences(of: "7", with: "𝟽")
-        string2 = string2.replacingOccurrences(of: "8", with: "𝟾")
-        string2 = string2.replacingOccurrences(of: "9", with: "𝟿")
-        string2 = string2.replacingOccurrences(of: "0", with: "𝟶")
-        
-        return string2
-    }
-    
-    func frakturTheText(string: String) -> String {
-        var string2 = string
-        string2 = string.replacingOccurrences(of: "a", with: "𝔞")
-        string2 = string2.replacingOccurrences(of: "b", with: "𝔟")
-        string2 = string2.replacingOccurrences(of: "c", with: "𝔠")
-        string2 = string2.replacingOccurrences(of: "d", with: "𝔡")
-        string2 = string2.replacingOccurrences(of: "e", with: "𝔢")
-        string2 = string2.replacingOccurrences(of: "f", with: "𝔣")
-        string2 = string2.replacingOccurrences(of: "g", with: "𝔤")
-        string2 = string2.replacingOccurrences(of: "h", with: "𝔥")
-        string2 = string2.replacingOccurrences(of: "i", with: "𝔦")
-        string2 = string2.replacingOccurrences(of: "j", with: "𝔧")
-        string2 = string2.replacingOccurrences(of: "k", with: "𝔨")
-        string2 = string2.replacingOccurrences(of: "l", with: "𝔩")
-        string2 = string2.replacingOccurrences(of: "m", with: "𝔪")
-        string2 = string2.replacingOccurrences(of: "n", with: "𝔫")
-        string2 = string2.replacingOccurrences(of: "o", with: "𝔬")
-        string2 = string2.replacingOccurrences(of: "p", with: "𝔭")
-        string2 = string2.replacingOccurrences(of: "q", with: "𝔮")
-        string2 = string2.replacingOccurrences(of: "r", with: "𝔯")
-        string2 = string2.replacingOccurrences(of: "s", with: "𝔰")
-        string2 = string2.replacingOccurrences(of: "t", with: "𝔱")
-        string2 = string2.replacingOccurrences(of: "u", with: "𝔲")
-        string2 = string2.replacingOccurrences(of: "v", with: "𝔳")
-        string2 = string2.replacingOccurrences(of: "w", with: "𝔴")
-        string2 = string2.replacingOccurrences(of: "x", with: "𝔵")
-        string2 = string2.replacingOccurrences(of: "y", with: "𝔶")
-        string2 = string2.replacingOccurrences(of: "z", with: "𝔷")
-        
-        string2 = string2.replacingOccurrences(of: "A", with: "𝔄")
-        string2 = string2.replacingOccurrences(of: "B", with: "𝔅")
-        string2 = string2.replacingOccurrences(of: "C", with: "ℭ")
-        string2 = string2.replacingOccurrences(of: "D", with: "𝔇")
-        string2 = string2.replacingOccurrences(of: "E", with: "𝔈")
-        string2 = string2.replacingOccurrences(of: "F", with: "𝔉")
-        string2 = string2.replacingOccurrences(of: "G", with: "𝔊")
-        string2 = string2.replacingOccurrences(of: "H", with: "ℌ")
-        string2 = string2.replacingOccurrences(of: "I", with: "ℑ")
-        string2 = string2.replacingOccurrences(of: "J", with: "𝔍")
-        string2 = string2.replacingOccurrences(of: "K", with: "𝔎")
-        string2 = string2.replacingOccurrences(of: "L", with: "𝔏")
-        string2 = string2.replacingOccurrences(of: "M", with: "𝔐")
-        string2 = string2.replacingOccurrences(of: "N", with: "𝔑")
-        string2 = string2.replacingOccurrences(of: "O", with: "𝔒")
-        string2 = string2.replacingOccurrences(of: "P", with: "𝔓")
-        string2 = string2.replacingOccurrences(of: "Q", with: "𝔔")
-        string2 = string2.replacingOccurrences(of: "R", with: "ℜ")
-        string2 = string2.replacingOccurrences(of: "S", with: "𝔖")
-        string2 = string2.replacingOccurrences(of: "T", with: "𝔗")
-        string2 = string2.replacingOccurrences(of: "U", with: "𝔘")
-        string2 = string2.replacingOccurrences(of: "V", with: "𝔙")
-        string2 = string2.replacingOccurrences(of: "W", with: "𝔚")
-        string2 = string2.replacingOccurrences(of: "X", with: "𝔛")
-        string2 = string2.replacingOccurrences(of: "Y", with: "𝔜")
-        string2 = string2.replacingOccurrences(of: "Z", with: "ℨ")
-        
-        string2 = string2.replacingOccurrences(of: "1", with: "յ")
-        string2 = string2.replacingOccurrences(of: "2", with: "շ")
-        string2 = string2.replacingOccurrences(of: "3", with: "Յ")
-        string2 = string2.replacingOccurrences(of: "4", with: "կ")
-        string2 = string2.replacingOccurrences(of: "5", with: "Տ")
-        string2 = string2.replacingOccurrences(of: "6", with: "ճ")
-        string2 = string2.replacingOccurrences(of: "7", with: "Դ")
-        string2 = string2.replacingOccurrences(of: "8", with: "Ց")
-        string2 = string2.replacingOccurrences(of: "9", with: "գ")
-        string2 = string2.replacingOccurrences(of: "0", with: "օ")
-        
-        return string2
-    }
-    
-    func bubbleTheText(string: String) -> String {
-        var string2 = string
-        string2 = string.replacingOccurrences(of: "a", with: "ⓐ")
-        string2 = string2.replacingOccurrences(of: "b", with: "ⓑ")
-        string2 = string2.replacingOccurrences(of: "c", with: "ⓒ")
-        string2 = string2.replacingOccurrences(of: "d", with: "ⓓ")
-        string2 = string2.replacingOccurrences(of: "e", with: "ⓔ")
-        string2 = string2.replacingOccurrences(of: "f", with: "ⓕ")
-        string2 = string2.replacingOccurrences(of: "g", with: "ⓖ")
-        string2 = string2.replacingOccurrences(of: "h", with: "ⓗ")
-        string2 = string2.replacingOccurrences(of: "i", with: "ⓘ")
-        string2 = string2.replacingOccurrences(of: "j", with: "ⓙ")
-        string2 = string2.replacingOccurrences(of: "k", with: "ⓚ")
-        string2 = string2.replacingOccurrences(of: "l", with: "ⓛ")
-        string2 = string2.replacingOccurrences(of: "m", with: "ⓜ")
-        string2 = string2.replacingOccurrences(of: "n", with: "ⓝ")
-        string2 = string2.replacingOccurrences(of: "o", with: "ⓞ")
-        string2 = string2.replacingOccurrences(of: "p", with: "ⓟ")
-        string2 = string2.replacingOccurrences(of: "q", with: "ⓠ")
-        string2 = string2.replacingOccurrences(of: "r", with: "ⓡ")
-        string2 = string2.replacingOccurrences(of: "s", with: "ⓢ")
-        string2 = string2.replacingOccurrences(of: "t", with: "ⓣ")
-        string2 = string2.replacingOccurrences(of: "u", with: "ⓤ")
-        string2 = string2.replacingOccurrences(of: "v", with: "ⓥ")
-        string2 = string2.replacingOccurrences(of: "w", with: "ⓦ")
-        string2 = string2.replacingOccurrences(of: "x", with: "ⓧ")
-        string2 = string2.replacingOccurrences(of: "y", with: "ⓨ")
-        string2 = string2.replacingOccurrences(of: "z", with: "ⓩ")
-        
-        string2 = string2.replacingOccurrences(of: "A", with: "Ⓐ")
-        string2 = string2.replacingOccurrences(of: "B", with: "Ⓑ")
-        string2 = string2.replacingOccurrences(of: "C", with: "Ⓒ")
-        string2 = string2.replacingOccurrences(of: "D", with: "Ⓓ")
-        string2 = string2.replacingOccurrences(of: "E", with: "Ⓔ")
-        string2 = string2.replacingOccurrences(of: "F", with: "Ⓕ")
-        string2 = string2.replacingOccurrences(of: "G", with: "Ⓖ")
-        string2 = string2.replacingOccurrences(of: "H", with: "Ⓗ")
-        string2 = string2.replacingOccurrences(of: "I", with: "Ⓘ")
-        string2 = string2.replacingOccurrences(of: "J", with: "Ⓙ")
-        string2 = string2.replacingOccurrences(of: "K", with: "Ⓚ")
-        string2 = string2.replacingOccurrences(of: "L", with: "Ⓛ")
-        string2 = string2.replacingOccurrences(of: "M", with: "Ⓜ")
-        string2 = string2.replacingOccurrences(of: "N", with: "Ⓝ")
-        string2 = string2.replacingOccurrences(of: "O", with: "Ⓞ")
-        string2 = string2.replacingOccurrences(of: "P", with: "Ⓟ")
-        string2 = string2.replacingOccurrences(of: "Q", with: "Ⓠ")
-        string2 = string2.replacingOccurrences(of: "R", with: "Ⓡ")
-        string2 = string2.replacingOccurrences(of: "S", with: "Ⓢ")
-        string2 = string2.replacingOccurrences(of: "T", with: "Ⓣ")
-        string2 = string2.replacingOccurrences(of: "U", with: "Ⓤ")
-        string2 = string2.replacingOccurrences(of: "V", with: "Ⓥ")
-        string2 = string2.replacingOccurrences(of: "W", with: "Ⓦ")
-        string2 = string2.replacingOccurrences(of: "X", with: "Ⓧ")
-        string2 = string2.replacingOccurrences(of: "Y", with: "Ⓨ")
-        string2 = string2.replacingOccurrences(of: "Z", with: "Ⓩ")
-        
-        string2 = string2.replacingOccurrences(of: "1", with: "①")
-        string2 = string2.replacingOccurrences(of: "2", with: "②")
-        string2 = string2.replacingOccurrences(of: "3", with: "③")
-        string2 = string2.replacingOccurrences(of: "4", with: "④")
-        string2 = string2.replacingOccurrences(of: "5", with: "⑤")
-        string2 = string2.replacingOccurrences(of: "6", with: "⑥")
-        string2 = string2.replacingOccurrences(of: "7", with: "⑦")
-        string2 = string2.replacingOccurrences(of: "8", with: "⑧")
-        string2 = string2.replacingOccurrences(of: "9", with: "⑨")
-        string2 = string2.replacingOccurrences(of: "0", with: "⓪")
-        
-        return string2
-    }
-    
-    func bubbleTheText2(string: String) -> String {
-        var string2 = string
-        string2 = string.replacingOccurrences(of: "a", with: "🅐")
-        string2 = string2.replacingOccurrences(of: "b", with: "🅑")
-        string2 = string2.replacingOccurrences(of: "c", with: "🅒")
-        string2 = string2.replacingOccurrences(of: "d", with: "🅓")
-        string2 = string2.replacingOccurrences(of: "e", with: "🅔")
-        string2 = string2.replacingOccurrences(of: "f", with: "🅕")
-        string2 = string2.replacingOccurrences(of: "g", with: "🅖")
-        string2 = string2.replacingOccurrences(of: "h", with: "🅗")
-        string2 = string2.replacingOccurrences(of: "i", with: "🅘")
-        string2 = string2.replacingOccurrences(of: "j", with: "🅙")
-        string2 = string2.replacingOccurrences(of: "k", with: "🅚")
-        string2 = string2.replacingOccurrences(of: "l", with: "🅛")
-        string2 = string2.replacingOccurrences(of: "m", with: "🅜")
-        string2 = string2.replacingOccurrences(of: "n", with: "🅝")
-        string2 = string2.replacingOccurrences(of: "o", with: "🅞")
-        string2 = string2.replacingOccurrences(of: "p", with: "🅟")
-        string2 = string2.replacingOccurrences(of: "q", with: "🅠")
-        string2 = string2.replacingOccurrences(of: "r", with: "🅡")
-        string2 = string2.replacingOccurrences(of: "s", with: "🅢")
-        string2 = string2.replacingOccurrences(of: "t", with: "🅣")
-        string2 = string2.replacingOccurrences(of: "u", with: "🅤")
-        string2 = string2.replacingOccurrences(of: "v", with: "🅥")
-        string2 = string2.replacingOccurrences(of: "w", with: "🅦")
-        string2 = string2.replacingOccurrences(of: "x", with: "🅧")
-        string2 = string2.replacingOccurrences(of: "y", with: "🅨")
-        string2 = string2.replacingOccurrences(of: "z", with: "🅩")
-        
-        string2 = string2.replacingOccurrences(of: "1", with: "➊")
-        string2 = string2.replacingOccurrences(of: "2", with: "➋")
-        string2 = string2.replacingOccurrences(of: "3", with: "➌")
-        string2 = string2.replacingOccurrences(of: "4", with: "➍")
-        string2 = string2.replacingOccurrences(of: "5", with: "➎")
-        string2 = string2.replacingOccurrences(of: "6", with: "➏")
-        string2 = string2.replacingOccurrences(of: "7", with: "➐")
-        string2 = string2.replacingOccurrences(of: "8", with: "➑")
-        string2 = string2.replacingOccurrences(of: "9", with: "➒")
-        string2 = string2.replacingOccurrences(of: "0", with: "⓿")
-        
-        return string2
-    }
-    
-    func handwriteTheText(string: String) -> String {
-        var string2 = string
-        string2 = string.replacingOccurrences(of: "a", with: "𝒶")
-        string2 = string2.replacingOccurrences(of: "b", with: "𝒷")
-        string2 = string2.replacingOccurrences(of: "c", with: "𝒸")
-        string2 = string2.replacingOccurrences(of: "d", with: "𝒹")
-        string2 = string2.replacingOccurrences(of: "e", with: "𝑒")
-        string2 = string2.replacingOccurrences(of: "f", with: "𝒻")
-        string2 = string2.replacingOccurrences(of: "g", with: "𝑔")
-        string2 = string2.replacingOccurrences(of: "h", with: "𝒽")
-        string2 = string2.replacingOccurrences(of: "i", with: "𝒾")
-        string2 = string2.replacingOccurrences(of: "j", with: "𝒿")
-        string2 = string2.replacingOccurrences(of: "k", with: "𝓀")
-        string2 = string2.replacingOccurrences(of: "l", with: "𝓁")
-        string2 = string2.replacingOccurrences(of: "m", with: "𝓂")
-        string2 = string2.replacingOccurrences(of: "n", with: "𝓃")
-        string2 = string2.replacingOccurrences(of: "o", with: "𝑜")
-        string2 = string2.replacingOccurrences(of: "p", with: "𝓅")
-        string2 = string2.replacingOccurrences(of: "q", with: "𝓆")
-        string2 = string2.replacingOccurrences(of: "r", with: "𝓇")
-        string2 = string2.replacingOccurrences(of: "s", with: "𝓈")
-        string2 = string2.replacingOccurrences(of: "t", with: "𝓉")
-        string2 = string2.replacingOccurrences(of: "u", with: "𝓊")
-        string2 = string2.replacingOccurrences(of: "v", with: "𝓋")
-        string2 = string2.replacingOccurrences(of: "w", with: "𝓌")
-        string2 = string2.replacingOccurrences(of: "x", with: "𝓍")
-        string2 = string2.replacingOccurrences(of: "y", with: "𝓎")
-        string2 = string2.replacingOccurrences(of: "z", with: "𝓏")
-        
-        string2 = string2.replacingOccurrences(of: "A", with: "𝒜")
-        string2 = string2.replacingOccurrences(of: "B", with: "𝐵")
-        string2 = string2.replacingOccurrences(of: "C", with: "𝒞")
-        string2 = string2.replacingOccurrences(of: "D", with: "𝒟")
-        string2 = string2.replacingOccurrences(of: "E", with: "𝐸")
-        string2 = string2.replacingOccurrences(of: "F", with: "𝐹")
-        string2 = string2.replacingOccurrences(of: "G", with: "𝒢")
-        string2 = string2.replacingOccurrences(of: "H", with: "𝐻")
-        string2 = string2.replacingOccurrences(of: "I", with: "𝐼")
-        string2 = string2.replacingOccurrences(of: "J", with: "𝒥")
-        string2 = string2.replacingOccurrences(of: "K", with: "𝒦")
-        string2 = string2.replacingOccurrences(of: "L", with: "𝐿")
-        string2 = string2.replacingOccurrences(of: "M", with: "𝑀")
-        string2 = string2.replacingOccurrences(of: "N", with: "𝒩")
-        string2 = string2.replacingOccurrences(of: "O", with: "𝒪")
-        string2 = string2.replacingOccurrences(of: "P", with: "𝒫")
-        string2 = string2.replacingOccurrences(of: "Q", with: "𝒬")
-        string2 = string2.replacingOccurrences(of: "R", with: "𝑅")
-        string2 = string2.replacingOccurrences(of: "S", with: "𝒮")
-        string2 = string2.replacingOccurrences(of: "T", with: "𝒯")
-        string2 = string2.replacingOccurrences(of: "U", with: "𝒰")
-        string2 = string2.replacingOccurrences(of: "V", with: "𝒱")
-        string2 = string2.replacingOccurrences(of: "W", with: "𝒲")
-        string2 = string2.replacingOccurrences(of: "X", with: "𝒳")
-        string2 = string2.replacingOccurrences(of: "Y", with: "𝒴")
-        string2 = string2.replacingOccurrences(of: "Z", with: "𝒵")
-        
-        return string2
-    }
-    
-    func doubleTheText(string: String) -> String {
-        var string2 = string
-        string2 = string.replacingOccurrences(of: "a", with: "𝕒")
-        string2 = string2.replacingOccurrences(of: "b", with: "𝕓")
-        string2 = string2.replacingOccurrences(of: "c", with: "𝕔")
-        string2 = string2.replacingOccurrences(of: "d", with: "𝕕")
-        string2 = string2.replacingOccurrences(of: "e", with: "𝕖")
-        string2 = string2.replacingOccurrences(of: "f", with: "𝕗")
-        string2 = string2.replacingOccurrences(of: "g", with: "𝕘")
-        string2 = string2.replacingOccurrences(of: "h", with: "𝕙")
-        string2 = string2.replacingOccurrences(of: "i", with: "𝕚")
-        string2 = string2.replacingOccurrences(of: "j", with: "𝕛")
-        string2 = string2.replacingOccurrences(of: "k", with: "𝕜")
-        string2 = string2.replacingOccurrences(of: "l", with: "𝕝")
-        string2 = string2.replacingOccurrences(of: "m", with: "𝕞")
-        string2 = string2.replacingOccurrences(of: "n", with: "𝕟")
-        string2 = string2.replacingOccurrences(of: "o", with: "𝕠")
-        string2 = string2.replacingOccurrences(of: "p", with: "𝕡")
-        string2 = string2.replacingOccurrences(of: "q", with: "𝕢")
-        string2 = string2.replacingOccurrences(of: "r", with: "𝕣")
-        string2 = string2.replacingOccurrences(of: "s", with: "𝕤")
-        string2 = string2.replacingOccurrences(of: "t", with: "𝕥")
-        string2 = string2.replacingOccurrences(of: "u", with: "𝕦")
-        string2 = string2.replacingOccurrences(of: "v", with: "𝕧")
-        string2 = string2.replacingOccurrences(of: "w", with: "𝕨")
-        string2 = string2.replacingOccurrences(of: "x", with: "𝕩")
-        string2 = string2.replacingOccurrences(of: "y", with: "𝕪")
-        string2 = string2.replacingOccurrences(of: "z", with: "𝕫")
-        
-        string2 = string2.replacingOccurrences(of: "A", with: "𝔸")
-        string2 = string2.replacingOccurrences(of: "B", with: "𝔹")
-        string2 = string2.replacingOccurrences(of: "C", with: "ℂ")
-        string2 = string2.replacingOccurrences(of: "D", with: "𝔻")
-        string2 = string2.replacingOccurrences(of: "E", with: "𝔼")
-        string2 = string2.replacingOccurrences(of: "F", with: "𝔽")
-        string2 = string2.replacingOccurrences(of: "G", with: "𝔾")
-        string2 = string2.replacingOccurrences(of: "H", with: "ℍ")
-        string2 = string2.replacingOccurrences(of: "I", with: "𝕀")
-        string2 = string2.replacingOccurrences(of: "J", with: "𝕁")
-        string2 = string2.replacingOccurrences(of: "K", with: "𝕂")
-        string2 = string2.replacingOccurrences(of: "L", with: "𝕃")
-        string2 = string2.replacingOccurrences(of: "M", with: "𝕄")
-        string2 = string2.replacingOccurrences(of: "N", with: "ℕ")
-        string2 = string2.replacingOccurrences(of: "O", with: "𝕆")
-        string2 = string2.replacingOccurrences(of: "P", with: "ℙ")
-        string2 = string2.replacingOccurrences(of: "Q", with: "ℚ")
-        string2 = string2.replacingOccurrences(of: "R", with: "ℝ")
-        string2 = string2.replacingOccurrences(of: "S", with: "𝕊")
-        string2 = string2.replacingOccurrences(of: "T", with: "𝕋")
-        string2 = string2.replacingOccurrences(of: "U", with: "𝕌")
-        string2 = string2.replacingOccurrences(of: "V", with: "𝕍")
-        string2 = string2.replacingOccurrences(of: "W", with: "𝕎")
-        string2 = string2.replacingOccurrences(of: "X", with: "𝕏")
-        string2 = string2.replacingOccurrences(of: "Y", with: "𝕐")
-        string2 = string2.replacingOccurrences(of: "Z", with: "ℤ")
-        
-        string2 = string2.replacingOccurrences(of: "1", with: "𝟙")
-        string2 = string2.replacingOccurrences(of: "2", with: "𝟚")
-        string2 = string2.replacingOccurrences(of: "3", with: "𝟛")
-        string2 = string2.replacingOccurrences(of: "4", with: "𝟜")
-        string2 = string2.replacingOccurrences(of: "5", with: "𝟝")
-        string2 = string2.replacingOccurrences(of: "6", with: "𝟞")
-        string2 = string2.replacingOccurrences(of: "7", with: "𝟟")
-        string2 = string2.replacingOccurrences(of: "8", with: "𝟠")
-        string2 = string2.replacingOccurrences(of: "9", with: "𝟡")
-        string2 = string2.replacingOccurrences(of: "0", with: "𝟘")
-        
-        return string2
+    func clearTheText() {
+        self.textView.text = StoreStruct.holdOnTempText
     }
     
     var closeButton = MNGExpandedTouchAreaButton()
@@ -636,6 +126,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         }
     }
     
+    func doneEditing(image: UIImage) {
+        // the edited image
+    }
+    
+    func canceledEditing() {
+        print("Canceled")
+    }
     
     @objc func tappedImageView1(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -696,6 +193,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: sender.view)
                 browser.initializePageIndex(0)
                 self.present(browser, animated: true, completion: {})
+            }
+            .action(.default("Edit Image".localized), image: nil) { (action, ind) in
+                let photoEditor = PhotoEditorViewController(nibName: "PhotoEditorViewController", bundle: Bundle(for: PhotoEditorViewController.self))
+                photoEditor.photoEditorDelegate = self
+                photoEditor.image = self.selectedImage1.image!
+//                photoEditor.stickers.append(UIImage(named: "sticker" )!)
+                photoEditor.hiddenControls = [.share, .save, .sticker]
+                photoEditor.colors = StoreStruct.colArray
+                self.present(photoEditor, animated: true, completion: nil)
             }
             .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                 
@@ -1132,10 +638,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         textView.becomeFirstResponder()
         
         
-//        self.textField.text = StoreStruct.spoilerText
-        
-        
-        
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
         var closeB = 47
@@ -1282,6 +784,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             UIMenuItem(
                 title: "Double Stroke",
                 action: #selector(self.dsText)
+            ),
+            UIMenuItem(
+                title: "Clear Styling",
+                action: #selector(self.clText)
             )
         ]
         return super.canPerformAction(action, withSender: sender)
@@ -1290,10 +796,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc func bText() {
         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
             if selectedText == "" {
-                let boldT = self.boldTheText(string: self.textView.text)
+                let boldT = TextStyling().boldTheText(string: self.textView.text)
                 self.textView.text = boldT
             } else {
-                let boldT = self.boldTheText(string: selectedText)
+                let boldT = TextStyling().boldTheText(string: selectedText)
                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: boldT)
             }
         }
@@ -1302,10 +808,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc func iText() {
         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
             if selectedText == "" {
-                let itaT = self.italicsTheText(string: self.textView.text)
+                let itaT = TextStyling().italicsTheText(string: self.textView.text)
                 self.textView.text = itaT
             } else {
-                let itaT = self.italicsTheText(string: selectedText)
+                let itaT = TextStyling().italicsTheText(string: selectedText)
                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: itaT)
             }
         }
@@ -1314,10 +820,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc func mText() {
         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
             if selectedText == "" {
-                let monoT = self.monoTheText(string: self.textView.text)
+                let monoT = TextStyling().monoTheText(string: self.textView.text)
                 self.textView.text = monoT
             } else {
-                let monoT = self.monoTheText(string: selectedText)
+                let monoT = TextStyling().monoTheText(string: selectedText)
                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
             }
         }
@@ -1326,10 +832,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc func hText() {
         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
             if selectedText == "" {
-                let monoT = self.handwriteTheText(string: self.textView.text)
+                let monoT = TextStyling().handwriteTheText(string: self.textView.text)
                 self.textView.text = monoT
             } else {
-                let monoT = self.handwriteTheText(string: selectedText)
+                let monoT = TextStyling().handwriteTheText(string: selectedText)
                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
             }
         }
@@ -1338,10 +844,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc func fText() {
         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
             if selectedText == "" {
-                let monoT = self.frakturTheText(string: self.textView.text)
+                let monoT = TextStyling().frakturTheText(string: self.textView.text)
                 self.textView.text = monoT
             } else {
-                let monoT = self.frakturTheText(string: selectedText)
+                let monoT = TextStyling().frakturTheText(string: selectedText)
                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
             }
         }
@@ -1350,10 +856,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc func b2Text() {
         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
             if selectedText == "" {
-                let monoT = self.bubbleTheText(string: self.textView.text)
+                let monoT = TextStyling().bubbleTheText(string: self.textView.text)
                 self.textView.text = monoT
             } else {
-                let monoT = self.bubbleTheText(string: selectedText)
+                let monoT = TextStyling().bubbleTheText(string: selectedText)
                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
             }
         }
@@ -1362,10 +868,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc func fbText() {
         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
             if selectedText == "" {
-                let monoT = self.bubbleTheText2(string: self.textView.text)
+                let monoT = TextStyling().bubbleTheText2(string: self.textView.text)
                 self.textView.text = monoT
             } else {
-                let monoT = self.bubbleTheText2(string: selectedText)
+                let monoT = TextStyling().bubbleTheText2(string: selectedText)
                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
             }
         }
@@ -1374,13 +880,17 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc func dsText() {
         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
             if selectedText == "" {
-                let monoT = self.doubleTheText(string: self.textView.text)
+                let monoT = TextStyling().doubleTheText(string: self.textView.text)
                 self.textView.text = monoT
             } else {
-                let monoT = self.doubleTheText(string: selectedText)
+                let monoT = TextStyling().doubleTheText(string: selectedText)
                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
             }
         }
+    }
+    
+    @objc func clText() {
+        self.clearTheText()
     }
     
     @objc override func paste(_ sender: Any?) {
@@ -1443,7 +953,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         super.viewDidLoad()
         
         StoreStruct.spoilerText = ""
-        
+        StoreStruct.holdOnTempText = ""
         StoreStruct.currentOptions = []
         StoreStruct.expiresIn = 86400
         StoreStruct.allowsMultiple = false
@@ -1503,7 +1013,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableView.rowHeight = UITableView.automaticDimension
         self.bgView.addSubview(self.tableView)
         
-        
         if UserDefaults.standard.object(forKey: "savedDrafts") != nil {
             StoreStruct.drafts = UserDefaults.standard.object(forKey: "savedDrafts") as! [String]
             print("dr1")
@@ -1537,7 +1046,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableViewASCII.reloadData()
         self.bgView.addSubview(self.tableViewASCII)
         
-        
         self.tableViewEmoti.register(UITableViewCell.self, forCellReuseIdentifier: "TweetCellEmoti")
         self.tableViewEmoti.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60))
         self.tableViewEmoti.alpha = 0
@@ -1552,7 +1060,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableViewEmoti.reloadData()
         self.bgView.addSubview(self.tableViewEmoti)
         self.tableViewEmoti.reloadData()
-        
         
         self.textField.frame = CGRect(x: 20, y: 0, width: self.view.bounds.width - 40, height: 50)
         self.textField.backgroundColor = UIColor.clear
@@ -1778,19 +1285,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         self.view.addSubview(textView)
         
-        
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeDown.direction = .down
         textView.addGestureRecognizer(swipeDown)
-        
-        
-        
-        
-        
-        
     }
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.images.count
@@ -2337,10 +1835,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         self.bringBackDrawer()
                         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
                             if selectedText == "" {
-                                let boldT = self.boldTheText(string: self.textView.text)
+                                let boldT = TextStyling().boldTheText(string: self.textView.text)
                                 self.textView.text = boldT
                             } else {
-                                let boldT = self.boldTheText(string: selectedText)
+                                let boldT = TextStyling().boldTheText(string: selectedText)
                                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: boldT)
                             }
                         }
@@ -2352,10 +1850,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         self.bringBackDrawer()
                         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
                             if selectedText == "" {
-                                let itaT = self.italicsTheText(string: self.textView.text)
+                                let itaT = TextStyling().italicsTheText(string: self.textView.text)
                                 self.textView.text = itaT
                             } else {
-                                let itaT = self.italicsTheText(string: selectedText)
+                                let itaT = TextStyling().italicsTheText(string: selectedText)
                                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: itaT)
                             }
                         }
@@ -2367,10 +1865,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         self.bringBackDrawer()
                         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
                             if selectedText == "" {
-                                let monoT = self.monoTheText(string: self.textView.text)
+                                let monoT = TextStyling().monoTheText(string: self.textView.text)
                                 self.textView.text = monoT
                             } else {
-                                let monoT = self.monoTheText(string: selectedText)
+                                let monoT = TextStyling().monoTheText(string: selectedText)
                                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
                             }
                         }
@@ -2382,10 +1880,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         self.bringBackDrawer()
                         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
                             if selectedText == "" {
-                                let monoT = self.handwriteTheText(string: self.textView.text)
+                                let monoT = TextStyling().handwriteTheText(string: self.textView.text)
                                 self.textView.text = monoT
                             } else {
-                                let monoT = self.handwriteTheText(string: selectedText)
+                                let monoT = TextStyling().handwriteTheText(string: selectedText)
                                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
                             }
                         }
@@ -2397,10 +1895,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         self.bringBackDrawer()
                         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
                             if selectedText == "" {
-                                let monoT = self.frakturTheText(string: self.textView.text)
+                                let monoT = TextStyling().frakturTheText(string: self.textView.text)
                                 self.textView.text = monoT
                             } else {
-                                let monoT = self.frakturTheText(string: selectedText)
+                                let monoT = TextStyling().frakturTheText(string: selectedText)
                                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
                             }
                         }
@@ -2412,10 +1910,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         self.bringBackDrawer()
                         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
                             if selectedText == "" {
-                                let monoT = self.bubbleTheText(string: self.textView.text)
+                                let monoT = TextStyling().bubbleTheText(string: self.textView.text)
                                 self.textView.text = monoT
                             } else {
-                                let monoT = self.bubbleTheText(string: selectedText)
+                                let monoT = TextStyling().bubbleTheText(string: selectedText)
                                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
                             }
                         }
@@ -2427,10 +1925,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         self.bringBackDrawer()
                         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
                             if selectedText == "" {
-                                let monoT = self.bubbleTheText2(string: self.textView.text)
+                                let monoT = TextStyling().bubbleTheText2(string: self.textView.text)
                                 self.textView.text = monoT
                             } else {
-                                let monoT = self.bubbleTheText2(string: selectedText)
+                                let monoT = TextStyling().bubbleTheText2(string: selectedText)
                                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
                             }
                         }
@@ -2442,15 +1940,22 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         self.bringBackDrawer()
                         if let range = self.textView.selectedTextRange, let selectedText = self.textView.text(in: range) {
                             if selectedText == "" {
-                                let monoT = self.doubleTheText(string: self.textView.text)
+                                let monoT = TextStyling().doubleTheText(string: self.textView.text)
                                 self.textView.text = monoT
                             } else {
-                                let monoT = self.doubleTheText(string: selectedText)
+                                let monoT = TextStyling().doubleTheText(string: selectedText)
                                 self.textView.text = self.textView.text.replacingOccurrences(of: selectedText, with: monoT)
                             }
                         }
                         
                     }
+                    .action(.default(" Clear Text Styling"), image: UIImage(named: "block")) { (action, ind) in
+                        print(action, ind)
+                        
+                        self.bringBackDrawer()
+                        self.clearTheText()
+                        
+                }
                     .action(.cancel("Dismiss"))
                     .finally { action, index in
                         if action.style == .cancel {
@@ -3739,7 +3244,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             .messageTextColor(Colours.grayDark)
             .messageTextAlignment(.left)
             .titleTextAlignment(.left)
-            .action(.default("Save as Draft"), image: UIImage(named: "draftsav2")) { (action, ind) in
+            .action(.default("Save as Draft"), image: nil) { (action, ind) in
                 print(action, ind)
                 
                 StoreStruct.drafts.append(self.textView.text!)
@@ -3755,7 +3260,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.dismiss(animated: true, completion: nil)
                 
             }
-            .action(.default("Discard Draft"), image: UIImage(named: "draftdis2")) { (action, ind) in
+            .action(.default("Discard Draft"), image: nil) { (action, ind) in
                 self.textView.resignFirstResponder()
                 
                 StoreStruct.caption1 = ""
@@ -3825,7 +3330,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         if tableView == self.tableView {
             return StoreStruct.statusSearchUser.count
         } else if tableView == self.tableViewASCII {
-            return self.ASCIIFace.count
+            return StoreStruct.ASCIIFace.count
         } else if tableView == self.tableViewEmoti {
             return StoreStruct.mainResult.count
         } else {
@@ -3857,7 +3362,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             
             let cell = tableViewASCII.dequeueReusableCell(withIdentifier: "TweetCellASCII", for: indexPath) as! UITableViewCell
             
-            cell.textLabel?.text = self.ASCIIFace[indexPath.row]
+            cell.textLabel?.text = StoreStruct.ASCIIFace[indexPath.row]
             cell.textLabel?.textAlignment = .left
             
                 let backgroundView = UIView()
@@ -3961,12 +3466,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.tableViewASCII.deselectRow(at: indexPath, animated: true)
             
             if self.textView.text == "" {
-                self.textView.text = self.ASCIIFace[indexPath.row]
+                self.textView.text = StoreStruct.ASCIIFace[indexPath.row]
             } else {
                 if self.textView.text.last == " " {
-                    self.textView.text = "\(self.textView.text ?? "")\(self.ASCIIFace[indexPath.row])"
+                    self.textView.text = "\(self.textView.text ?? "")\(StoreStruct.ASCIIFace[indexPath.row])"
                 } else {
-                    self.textView.text = "\(self.textView.text ?? "") \(self.ASCIIFace[indexPath.row])"
+                    self.textView.text = "\(self.textView.text ?? "") \(StoreStruct.ASCIIFace[indexPath.row])"
                 }
             }
             

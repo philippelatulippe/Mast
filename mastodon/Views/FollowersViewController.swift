@@ -314,23 +314,23 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
         
         StoreStruct.historyBool = false
         
-//        let request = Accounts.following(id: self.profileStatus)
-//        StoreStruct.client.run(request) { (statuses) in
-//            if let stat = (statuses.value) {
-//                DispatchQueue.main.async {
-//                    self.statusFollows = stat
-//                    self.statusFollows = self.statusFollows.removeDuplicates()
-//                    self.tableView.reloadData()
-//                }
-//            }
-//        }
+        let request = Accounts.following(id: self.profileStatus)
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                DispatchQueue.main.async {
+                    self.statusFollows = stat
+                    self.statusFollows = self.statusFollows.removeDuplicates()
+                    self.tableView.reloadData()
+                }
+            }
+        }
         
         let request2 = Accounts.followers(id: self.profileStatus)
         StoreStruct.client.run(request2) { (statuses) in
             if let stat = (statuses.value) {
                 DispatchQueue.main.async {
                     self.statusFollowers = stat
-                    self.statusFollowers = self.statusFollows.removeDuplicates()
+                    self.statusFollowers = self.statusFollowers.removeDuplicates()
                     self.tableView.reloadData()
                 }
             }
