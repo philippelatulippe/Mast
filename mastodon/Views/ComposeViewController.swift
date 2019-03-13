@@ -15,9 +15,9 @@ import MobileCoreServices
 import SwiftyJSON
 import AVKit
 import AVFoundation
-import iOSPhotoEditor
+import Sharaku
 
-class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, PhotoEditorDelegate {
+class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate {
     
     let gifCont = SwiftyGiphyViewController()
     var isGifVid = false
@@ -93,6 +93,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var scheduleTime: String?
     var boosterText = ""
     var isPollAdded = false
+    var filterFromWhichImage = 0
     
     @objc func actOnSpecialNotificationAuto() {
         //dothestuff
@@ -126,12 +127,23 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         }
     }
     
-    func doneEditing(image: UIImage) {
-        // the edited image
+    func shViewControllerImageDidFilter(image: UIImage) {
+        if self.filterFromWhichImage == 0 {
+            self.selectedImage1.image = image
+        }
+        if self.filterFromWhichImage == 1 {
+            self.selectedImage2.image = image
+        }
+        if self.filterFromWhichImage == 2 {
+            self.selectedImage3.image = image
+        }
+        if self.filterFromWhichImage == 3 {
+            self.selectedImage4.image = image
+        }
     }
     
-    func canceledEditing() {
-        print("Canceled")
+    func shViewControllerDidCancel() {
+        
     }
     
     @objc func tappedImageView1(_ sender: AnyObject) {
@@ -194,14 +206,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 browser.initializePageIndex(0)
                 self.present(browser, animated: true, completion: {})
             }
-            .action(.default("Edit Image".localized), image: nil) { (action, ind) in
-                let photoEditor = PhotoEditorViewController(nibName: "PhotoEditorViewController", bundle: Bundle(for: PhotoEditorViewController.self))
-                photoEditor.photoEditorDelegate = self
-                photoEditor.image = self.selectedImage1.image!
-//                photoEditor.stickers.append(UIImage(named: "sticker" )!)
-                photoEditor.hiddenControls = [.share, .save, .sticker]
-                photoEditor.colors = StoreStruct.colArray
-                self.present(photoEditor, animated: true, completion: nil)
+            .action(.default("Filter Image".localized), image: nil) { (action, ind) in
+                self.filterFromWhichImage = 0
+                let imageToBeFiltered = self.selectedImage1.image!
+                let vc = SHViewController(image: imageToBeFiltered)
+                vc.delegate = self
+                self.present(vc, animated:true, completion: nil)
             }
             .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                 
@@ -250,6 +260,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.present(browser, animated: true, completion: {})
                 
             }
+            .action(.default("Filter Image".localized), image: nil) { (action, ind) in
+                self.filterFromWhichImage = 1
+                let imageToBeFiltered = self.selectedImage2.image!
+                let vc = SHViewController(image: imageToBeFiltered)
+                vc.delegate = self
+                self.present(vc, animated:true, completion: nil)
+            }
             .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                 
                 let controller = NewCaptionViewController()
@@ -294,6 +311,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         browser.initializePageIndex(0)
         self.present(browser, animated: true, completion: {})
             }
+            .action(.default("Filter Image".localized), image: nil) { (action, ind) in
+                self.filterFromWhichImage = 2
+                let imageToBeFiltered = self.selectedImage3.image!
+                let vc = SHViewController(image: imageToBeFiltered)
+                vc.delegate = self
+                self.present(vc, animated:true, completion: nil)
+            }
             .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                 
                 let controller = NewCaptionViewController()
@@ -335,6 +359,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: sender.view)
         browser.initializePageIndex(0)
         self.present(browser, animated: true, completion: {})
+            }
+            .action(.default("Filter Image".localized), image: nil) { (action, ind) in
+                self.filterFromWhichImage = 3
+                let imageToBeFiltered = self.selectedImage4.image!
+                let vc = SHViewController(image: imageToBeFiltered)
+                vc.delegate = self
+                self.present(vc, animated:true, completion: nil)
             }
             .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                 

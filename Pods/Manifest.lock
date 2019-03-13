@@ -3,7 +3,6 @@ PODS:
   - Disk (0.4.0)
   - FLAnimatedImage (1.0.12)
   - FootlessParser (0.4.1)
-  - iOSPhotoEditor (0.6)
   - NextLevel (0.9.2)
   - NSTimer-Blocks (0.0.1)
   - ObjectMapper (3.3.0)
@@ -28,6 +27,7 @@ PODS:
   - SDWebImage/GIF (4.4.2):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - Sharaku (1.0.2)
   - SJFluidSegmentedControl (1.1.2)
   - StatusAlert (0.9.4)
   - SwiftyGiphy (1.1.1):
@@ -41,7 +41,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Disk
-  - iOSPhotoEditor
   - NextLevel
   - PINRemoteImage
   - QuickLayout
@@ -49,6 +48,7 @@ DEPENDENCIES:
   - ReactiveSwift
   - Regift
   - SAConfettiView
+  - Sharaku
   - SJFluidSegmentedControl
   - StatusAlert
   - SwiftyGiphy
@@ -61,7 +61,6 @@ SPEC REPOS:
     - Disk
     - FLAnimatedImage
     - FootlessParser
-    - iOSPhotoEditor
     - NextLevel
     - NSTimer-Blocks
     - ObjectMapper
@@ -74,6 +73,7 @@ SPEC REPOS:
     - Result
     - SAConfettiView
     - SDWebImage
+    - Sharaku
     - SJFluidSegmentedControl
     - StatusAlert
     - SwiftyGiphy
@@ -85,7 +85,6 @@ SPEC CHECKSUMS:
   Disk: ef2956657d5bb56034b38b29b352170165226440
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FootlessParser: 4705a9a740675b7439d9563f2fad83f7b84fc773
-  iOSPhotoEditor: d597c2797033bb06e2a705560ae748136c8ac2ea
   NextLevel: 6a40968816dc1ae737944559378343cf2057dece
   NSTimer-Blocks: 88faf9aef5f250ead087f3f67ae642517083bf36
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
@@ -98,12 +97,13 @@ SPEC CHECKSUMS:
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SAConfettiView: c87031a2280659261b730fce3669fb10e73636ee
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  Sharaku: c18de569fc99f6e936f46ca812b571826cc658a7
   SJFluidSegmentedControl: efd26ea5f0832c715e2750314a2dc0cc81e39ae5
   StatusAlert: 7f8a54b6031f7805bc3ac960cee531b61757ab2d
   SwiftyGiphy: 87930387b007b84c463bee2ec2a2d28d88b78b93
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   TinyConstraints: 4721a4b303c799328867078ade6560e152df54d1
 
-PODFILE CHECKSUM: 6c1e9b5d9fe296ce747aa8d94930355a614175f4
+PODFILE CHECKSUM: 7661aae006e2249b8b820b410ea574989cca71f5
 
 COCOAPODS: 1.5.3

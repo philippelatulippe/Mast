@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2BF53E8DB8DB3CF96CF41592E3E74A68"
-               BlueprintName = "SDWebImage"
+               BlueprintIdentifier = "230EE60A23D667218A36B09E5B89B171"
+               BlueprintName = "Sharaku"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SDWebImage.framework">
+               BuildableName = "Sharaku.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
