@@ -33,14 +33,14 @@ public class SHViewController: UIViewController {
         "Normal",
         "Chrome",
         "Fade",
-        "Instant",
+        "Cherry",
         "Mono",
         "Noir",
         "Process",
-        "Tonal",
-        "Transfer",
-        "Tone",
-        "Linear"
+        "Tusk",
+        "Dumbo",
+        "Trunk",
+        "Ellie"
     ]
 
     fileprivate var filterIndex = 0
@@ -172,6 +172,8 @@ extension  SHViewController: UICollectionViewDataSource, UICollectionViewDelegat
         }
 
         cell.imageView.image = filteredImage
+        cell.imageView.layer.cornerRadius = 15
+        cell.imageView.layer.masksToBounds = true
         cell.filterNameLabel.text = filterDisplayNameList[indexPath.row]
         updateCellFont()
         return cell

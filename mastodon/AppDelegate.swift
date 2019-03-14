@@ -207,8 +207,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.composedTootText = y[1].description
-                let viewController = window?.rootViewController as! ViewController
-                viewController.composedToot()
+//                let viewController = window?.rootViewController as! ViewController
+//                viewController.composedToot()
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "switch44"), object: self)
                 return true
             } else if url.absoluteString.contains("instance=") {
                 let x = url.absoluteString
@@ -410,6 +411,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if StoreStruct.currentPage == 587 {
             UserDefaults.standard.set(StoreStruct.savedComposeText, forKey: "composeSaved")
             UserDefaults.standard.set(StoreStruct.savedInReplyText, forKey: "savedInReplyText")
+        } else {
+            UserDefaults.standard.set("", forKey: "composeSaved")
+            UserDefaults.standard.set("", forKey: "savedInReplyText")
         }
     }
     

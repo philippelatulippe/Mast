@@ -530,43 +530,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell900")
         self.tableView.register(RepliesCellImage.self, forCellReuseIdentifier: "cell90")
         self.tableView.register(PollCell.self, forCellReuseIdentifier: "PollCell")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink")
         self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink0")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink1")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink2")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink3")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink4")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink5")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink6")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink7")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink8")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink9")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink10")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink11")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink12")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink13")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink14")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink15")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink16")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink17")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink18")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink19")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink20")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink21")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink22")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink23")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink24")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink25")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink26")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink27")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink28")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink29")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink30")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink31")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink32")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink33")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink34")
-        self.tableView.register(DetailCellLink.self, forCellReuseIdentifier: "DetailCellLink35")
         self.tableView.alpha = 1
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -664,7 +628,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if self.allReplies.isEmpty {
                 return nil
             } else {
-                title.text = "All Replies".localized
+                let repC = self.mainStatus[0].repliesCount
+                if repC == 0 || repC == 1 {
+                    title.text = "1 Reply".localized
+                } else {
+                    title.text = "\(repC) Replies".localized
+                }
             }
         }
         title.textColor = Colours.grayDark2
@@ -703,12 +672,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if self.mainStatus.isEmpty {
                 return 0
             } else {
-                let newCont = "\(self.mainStatus[0].content) "
                 if (UserDefaults.standard.object(forKey: "linkcards") == nil) || (UserDefaults.standard.object(forKey: "linkcards") as! Int == 0) {
-                    let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-                    let matches = detector.matches(in: newCont, options: [], range: NSRange(location: 0, length: newCont.utf16.count))
-                    if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
-                        return matches.count
+                    if self.mainStatus[0].card?.authorUrl != nil {
+                        return 1
+                    } else {
+                        return 0
                     }
                 } else {
                     return 0
@@ -719,7 +687,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             return self.allReplies.count
         }
-        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -1441,13 +1408,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else if indexPath.section == 3 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCellLink\(indexPath.row)", for: indexPath) as! DetailCellLink
-            let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-            let matches = detector.matches(in: self.mainStatus[0].content, options: [], range: NSRange(location: 0, length: self.mainStatus[0].content.utf16.count))
-            if matches.count > 0 && !matches.description.contains("@") && matches.description != "https://www" {
-                if let range = Range(matches[indexPath.row].range, in: self.mainStatus[0].content) {
-                    let url = self.mainStatus[0].content[range]
-                    cell.configure(String(url))
-                }
+            if self.mainStatus[0].card?.authorUrl != nil {
+                cell.configure(self.mainStatus[0].card!)
             }
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()

@@ -94,6 +94,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var boosterText = ""
     var isPollAdded = false
     var filterFromWhichImage = 0
+    var isVidText: [String] = []
+    var isVidBG: [UIColor] = []
     
     @objc func actOnSpecialNotificationAuto() {
         //dothestuff
@@ -706,11 +708,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             print("nothing")
         }
         
-        
-        
-        
-        
-        
+        if StoreStruct.composedTootText != "" {
+            self.textView.text = StoreStruct.composedTootText
+            StoreStruct.composedTootText = ""
+        }
         
         // images
         
@@ -1329,6 +1330,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionProfileCellc", for: indexPath) as! CollectionProfileCell
         if self.images.count > 0 {
         cell.configure()
+        cell.imageCountTag.setTitle(self.isVidText[indexPath.row], for: .normal)
+        cell.imageCountTag.backgroundColor = self.isVidBG[indexPath.row]
         cell.image.contentMode = .scaleAspectFill
         cell.image.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
         cell.image.backgroundColor = Colours.white
@@ -1410,16 +1413,23 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     private func getPhotosAndVideos() {
         
         let fetchOptions = PHFetchOptions()
-        fetchOptions.fetchLimit = 16
+        fetchOptions.fetchLimit = 20
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        fetchOptions.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue)
+        fetchOptions.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
         let imagesAndVideos = PHAsset.fetchAssets(with: fetchOptions)
         if imagesAndVideos.count == 0 { return }
         var theCount = imagesAndVideos.count
-        if imagesAndVideos.count >= 16 {
-            theCount = 16
+        if imagesAndVideos.count >= 20 {
+            theCount = 20
         }
         for x in 0...theCount - 1 {
+            if imagesAndVideos[x].mediaType == .video {
+                self.isVidText.append("\u{25b6}")
+                self.isVidBG.append(Colours.tabSelected)
+            } else {
+                self.isVidText.append("")
+                self.isVidBG.append(Colours.clear)
+            }
             self.images.append(self.getAssetThumbnail(asset: imagesAndVideos.object(at: x)))
         }
     }
@@ -1454,13 +1464,28 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     do {
                         self.isGifVid = true
                         self.gifVidData = try NSData(contentsOf: videoURL as URL, options: .mappedIfSafe) as Data
+                        self.selectedImage1.image = self.thumbnailForVideoAtURL(url: videoURL)
+                        self.selectedImage1.isUserInteractionEnabled = true
+                        self.selectedImage1.contentMode = .scaleAspectFill
+                        self.selectedImage1.layer.masksToBounds = true
                     } catch {
                         print("err")
+                        
+                        Alertift.actionSheet(title: "Couldn't add GIF or video", message: "Please try again, or try adding a different GIF or video to the toot.")
+                            .backgroundColor(Colours.white)
+                            .titleTextColor(Colours.grayDark)
+                            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                            .messageTextAlignment(.left)
+                            .titleTextAlignment(.left)
+                            .action(.cancel("Dismiss"))
+                            .finally { action, index in
+                                if action.style == .cancel {
+                                    return
+                                }
+                            }
+                            .popover(anchorView: self.view)
+                            .show(on: self)
                     }
-                    self.selectedImage1.image = self.thumbnailForVideoAtURL(url: videoURL)
-                    self.selectedImage1.isUserInteractionEnabled = true
-                    self.selectedImage1.contentMode = .scaleAspectFill
-                    self.selectedImage1.layer.masksToBounds = true
                     
                 } else {
             StoreStruct.photoNew = info[UIImagePickerController.InfoKey.originalImage] as? UIImage ?? UIImage()

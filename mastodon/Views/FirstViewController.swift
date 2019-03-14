@@ -60,13 +60,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
             guard let cell = self.tableView.cellForRow(at: indexPath) else { return nil }
             let detailVC = DetailViewController()
-            if self.currentIndex == 0 {
-                detailVC.mainStatus.append(StoreStruct.statusesHome[indexPath.row])
-            } else if self.currentIndex == 1 {
-                detailVC.mainStatus.append(StoreStruct.statusesLocal[indexPath.row])
-            } else {
-                detailVC.mainStatus.append(StoreStruct.statusesFederated[indexPath.row])
-            }
+            detailVC.mainStatus.append(StoreStruct.statusesHome[indexPath.row])
             detailVC.isPeeking = true
             previewingContext.sourceRect = cell.frame
             return detailVC
@@ -77,13 +71,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             guard let indexPath = self.tableViewL.indexPathForRow(at: location) else { return nil }
             guard let cell = self.tableViewL.cellForRow(at: indexPath) else { return nil }
             let detailVC = DetailViewController()
-            if self.currentIndex == 0 {
-                detailVC.mainStatus.append(StoreStruct.statusesHome[indexPath.row])
-            } else if self.currentIndex == 1 {
-                detailVC.mainStatus.append(StoreStruct.statusesLocal[indexPath.row])
-            } else {
-                detailVC.mainStatus.append(StoreStruct.statusesFederated[indexPath.row])
-            }
+            detailVC.mainStatus.append(StoreStruct.statusesLocal[indexPath.row])
             detailVC.isPeeking = true
             previewingContext.sourceRect = cell.frame
             return detailVC
@@ -95,13 +83,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             guard let indexPath = self.tableViewF.indexPathForRow(at: location) else { return nil }
             guard let cell = self.tableViewF.cellForRow(at: indexPath) else { return nil }
             let detailVC = DetailViewController()
-            if self.currentIndex == 0 {
-                detailVC.mainStatus.append(StoreStruct.statusesHome[indexPath.row])
-            } else if self.currentIndex == 1 {
-                detailVC.mainStatus.append(StoreStruct.statusesLocal[indexPath.row])
-            } else {
-                detailVC.mainStatus.append(StoreStruct.statusesFederated[indexPath.row])
-            }
+            detailVC.mainStatus.append(StoreStruct.statusesFederated[indexPath.row])
             detailVC.isPeeking = true
             previewingContext.sourceRect = cell.frame
             return detailVC

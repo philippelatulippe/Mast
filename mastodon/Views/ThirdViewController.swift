@@ -252,7 +252,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         } else {
             
-            print("herer")
             Alertift.actionSheet(title: nil, message: StoreStruct.tappedTag)
                 .backgroundColor(Colours.white)
                 .titleTextColor(Colours.grayDark)
@@ -1979,7 +1978,15 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 .action(.default("Instance Details".localized), image: UIImage(named: "instats")) { (action, ind) in
                     print(action, ind)
+                    var instImage = UIImage()
+                    if StoreStruct.currentInstanceDetails.first?.thumbnail != nil {
+                        if let url = URL(string: StoreStruct.currentInstanceDetails.first?.thumbnail ?? "https://mastodon.social/") {
+                            let data = try? Data(contentsOf: url)
+                            instImage = UIImage(data: data!) ?? UIImage()
+                        }
+                    }
                     Alertift.actionSheet(title: "\(StoreStruct.currentInstanceDetails.first?.title.stripHTML() ?? "Instance") (\(StoreStruct.currentInstanceDetails.first?.version ?? "1.0.0"))", message: "\(StoreStruct.currentInstanceDetails.first?.stats.userCount ?? 0) users\n\(StoreStruct.currentInstanceDetails.first?.stats.statusCount ?? 0) statuses\n\(StoreStruct.currentInstanceDetails.first?.stats.domainCount ?? 0) domains\n\n\(StoreStruct.currentInstanceDetails.first?.description.stripHTML() ?? "")")
+                        .image(instImage)
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
                         .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
