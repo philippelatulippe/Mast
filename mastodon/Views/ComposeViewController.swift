@@ -21,6 +21,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     let gifCont = SwiftyGiphyViewController()
     var isGifVid = false
+    var player = AVPlayer()
     
     func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem) {
         print(item.fixedHeightStillImage)
@@ -63,6 +64,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var bgView = UIView()
     var cameraCollectionView: UICollectionView!
     var images: [UIImage] = []
+    var images2: [PHAsset] = []
     var camPickButton = MNGExpandedTouchAreaButton()
     var galPickButton = MNGExpandedTouchAreaButton()
     var selectedImage1 = UIImageView()
@@ -192,6 +194,48 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 .show(on: self)
             
         } else {
+            
+            if self.isGifVid {
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("View GIF/Video".localized), image: nil) { (action, ind) in
+                        let originImage = self.selectedImage1.image
+                        var images = [SKPhoto]()
+                        let photo = SKPhoto.photoWithImage(self.selectedImage1.image!)
+                        images.append(photo)
+                        let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: sender.view)
+                        browser.initializePageIndex(0)
+                        self.present(browser, animated: true, completion: {})
+                    }
+                    .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
+                        
+                        let controller = NewCaptionViewController()
+                        controller.editListName = StoreStruct.caption1
+                        controller.fromWhich = 0
+                        self.present(controller, animated: true, completion: nil)
+                        
+                    }
+                    .action(.default("Remove GIF/Video".localized), image: nil) { (action, ind) in
+                        self.selectedImage1.image = self.selectedImage2.image
+                        self.selectedImage2.image = self.selectedImage3.image
+                        self.selectedImage3.image = self.selectedImage4.image
+                        self.selectedImage4.image = nil
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.selectedImage1)
+                    .show(on: self)
+                
+            } else {
         
         Alertift.actionSheet(title: nil, message: nil)
             .backgroundColor(Colours.white)
@@ -237,6 +281,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
             .popover(anchorView: self.selectedImage1)
             .show(on: self)
+                
+            }
         
         }
     }
@@ -1369,6 +1415,27 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             let selection = UISelectionFeedbackGenerator()
             selection.selectionChanged()
         }
+        
+        if isVidText[indexPath.row] != "" {
+            self.isGifVid = true
+            var videoURL = URL(string: "")
+            self.images2[indexPath.row].getURL { (test) in
+                videoURL = test
+                do {
+                    self.gifVidData = try NSData(contentsOf: videoURL!, options: .mappedIfSafe) as Data
+                    DispatchQueue.main.async {
+                        self.selectedImage1.image = self.images[indexPath.row]
+                        self.selectedImage1.isUserInteractionEnabled = true
+                        self.selectedImage1.contentMode = .scaleAspectFill
+                        self.selectedImage1.layer.masksToBounds = true
+                    }
+                } catch {
+                    print("err")
+                }
+            }
+            return
+        }
+        
         if self.selectedImage1.image == nil {
             self.selectedImage1.image = images[indexPath.row]
             self.selectedImage1.isUserInteractionEnabled = true
@@ -1430,6 +1497,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.isVidText.append("")
                 self.isVidBG.append(Colours.clear)
             }
+            self.images2.append(imagesAndVideos.object(at: x))
             self.images.append(self.getAssetThumbnail(asset: imagesAndVideos.object(at: x)))
         }
     }
@@ -1454,6 +1522,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.imag.dismiss(animated: true, completion: nil)
         DispatchQueue.main.async {
             self.textView.becomeFirstResponder()
+            
+            print("selected image123 = \(info[UIImagePickerController.InfoKey.mediaType] as? String)")
+            print("selected image1233 = \(info[UIImagePickerController.InfoKey.mediaType] as? PHAssetMediaType)")
             
             if let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String {
             
@@ -3566,4 +3637,30 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     }
     
     
+}
+
+extension PHAsset {
+    
+    func getURL(completionHandler : @escaping ((_ responseURL : URL?) -> Void)){
+        if self.mediaType == .image {
+            let options: PHContentEditingInputRequestOptions = PHContentEditingInputRequestOptions()
+            options.canHandleAdjustmentData = {(adjustmeta: PHAdjustmentData) -> Bool in
+                return true
+            }
+            self.requestContentEditingInput(with: options, completionHandler: {(contentEditingInput: PHContentEditingInput?, info: [AnyHashable : Any]) -> Void in
+                completionHandler(contentEditingInput!.fullSizeImageURL as URL?)
+            })
+        } else if self.mediaType == .video {
+            let options: PHVideoRequestOptions = PHVideoRequestOptions()
+            options.version = .original
+            PHImageManager.default().requestAVAsset(forVideo: self, options: options, resultHandler: {(asset: AVAsset?, audioMix: AVAudioMix?, info: [AnyHashable : Any]?) -> Void in
+                if let urlAsset = asset as? AVURLAsset {
+                    let localVideoUrl: URL = urlAsset.url as URL
+                    completionHandler(localVideoUrl)
+                } else {
+                    completionHandler(nil)
+                }
+            })
+        }
+    }
 }

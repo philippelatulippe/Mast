@@ -24,6 +24,7 @@ class DetailCellLink: UITableViewCell {
     var currentURL = ""
     var currentType: CardType = .link
     var player = AVPlayer()
+    var realURL = URL(string: "")
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -83,6 +84,7 @@ class DetailCellLink: UITableViewCell {
     func configure(_ card: Card) {
         self.currentType = card.type
         self.currentURL = card.authorUrl ?? card.providerUrl ?? ""
+        self.realURL = card.url
         
         if self.name.text == "" {
             self.name.text = "URL"
@@ -95,23 +97,45 @@ class DetailCellLink: UITableViewCell {
         self.name.text = card.title
         self.auth.text = card.authorName ?? card.providerName ?? "Tap to view"
         if card.description == "" {
-            self.name2.text = self.currentURL
+            self.name2.text = card.url.absoluteString
         } else {
             self.name2.text = card.description
         }
-        self.image1.pin_setImage(from: card.image!)
+        self.image1.pin_setImage(from: card.image ?? nil)
         self.containerView.addTarget(self, action: #selector(self.didTouchLink), for: .touchUpInside)
     }
     
     @objc func didTouchLink() {
-        print(self.currentURL)
+        
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let selection = UISelectionFeedbackGenerator()
+            selection.selectionChanged()
+        }
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if self.currentType == .video {
             if self.currentURL.contains("youtube") {
-                // todo: handle YouTube videos
+                let videoURL = NSURL(string: self.realURL!.absoluteString)!
+                Youtube.h264videosWithYoutubeURL(youtubeURL: videoURL) { (videoInfo, error) -> Void in
+                    if let videoURLStr = videoInfo?["url"] as? String {
+                        let videoURL = URL(string: videoURLStr)!
+                        if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {
+                            XPlayer.play(videoURL)
+                        } else {
+                            self.player = AVPlayer(url: videoURL)
+                            let playerViewController = AVPlayerViewController()
+                            playerViewController.player = self.player
+                            appDelegate.window?.rootViewController?.present(playerViewController, animated: true) {
+                                playerViewController.player!.play()
+                            }
+                        }
+                        
+                    }
+                }
+                return
             }
-            let videoURL = URL(string: self.currentURL)!
+            let videoURL = self.realURL!
             if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {
                 XPlayer.play(videoURL)
             } else {
@@ -124,24 +148,13 @@ class DetailCellLink: UITableViewCell {
             }
             return
         }
-        
-        if self.currentURL.contains("http") {} else {
-            self.currentURL = "http://\(self.currentURL)"
-        }
-        
-        if self.currentURL.contains("http") {
-            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                let selection = UISelectionFeedbackGenerator()
-                selection.selectionChanged()
-            }
-            let url = URL(string: self.currentURL) ?? URL(string: "google.com")!
-            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
-                if !success {
-                    self.safariVC = SFSafariViewController(url: url)
-                    self.safariVC?.preferredBarTintColor = Colours.white
-                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                    appDelegate.window?.rootViewController?.present(self.safariVC!, animated: true, completion: nil)
-                }
+        let url = self.realURL!
+        UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+            if !success {
+                self.safariVC = SFSafariViewController(url: url)
+                self.safariVC?.preferredBarTintColor = Colours.white
+                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                appDelegate.window?.rootViewController?.present(self.safariVC!, animated: true, completion: nil)
             }
         }
     }
