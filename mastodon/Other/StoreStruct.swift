@@ -150,6 +150,8 @@ class StoreStruct {
     
     static var composedTootText = ""
     static var holdOnTempText = ""
+    
+    static var tappedSignInCheck = false
 }
 
 class TextStyling {

@@ -1883,9 +1883,28 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
             .action(.default("Direct".localized), image: UIImage(named: "direct")) { (action, ind) in
                 print(action, ind)
-                self.visibility = .direct
-                self.visibilityButton.setImage(UIImage(named: "direct"), for: .normal)
-                self.bringBackDrawer()
+                
+                Alertift.actionSheet(title: "Direct Visibility", message: "Please note that all mentioned users will still see this message. Set direct visibility?")
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Sure!".localized), image: nil) { (action, ind) in
+                        print(action, ind)
+                        self.visibility = .direct
+                        self.visibilityButton.setImage(UIImage(named: "direct"), for: .normal)
+                        self.bringBackDrawer()
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            self.bringBackDrawer()
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.visibilityButton)
+                    .show(on: self)
             }
             .action(.cancel("Dismiss"))
             .finally { action, index in

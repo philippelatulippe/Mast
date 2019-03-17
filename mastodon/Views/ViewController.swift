@@ -252,6 +252,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     @objc func logged() {
         
+        StoreStruct.tappedSignInCheck = false
+        
         self.loginBG.removeFromSuperview()
         self.loginLogo.removeFromSuperview()
         self.loginLabel.removeFromSuperview()
@@ -334,6 +336,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     
     @objc func newInstanceLogged(){
+        
+        StoreStruct.tappedSignInCheck = false
         
         var request = URLRequest(url: URL(string: "https://\(StoreStruct.shared.newInstance!.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.shared.newInstance!.authCode)&redirect_uri=\(StoreStruct.shared.newInstance!.redirect)&client_id=\(StoreStruct.shared.newInstance!.clientID)&client_secret=\(StoreStruct.shared.newInstance!.clientSecret)&scope=read%20write%20follow%20push")!)
         request.httpMethod = "POST"

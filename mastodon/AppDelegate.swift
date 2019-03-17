@@ -207,8 +207,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.composedTootText = y[1].description
-//                let viewController = window?.rootViewController as! ViewController
-//                viewController.composedToot()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "switch44"), object: self)
                 return true
             } else if url.absoluteString.contains("instance=") {
@@ -233,6 +231,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.shared.newInstance!.authCode = y.last?.description ?? ""
+                StoreStruct.tappedSignInCheck = true
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "newInstancelogged"), object: nil)
                 return true
             } else if url.host == "success" {
@@ -240,6 +239,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.shared.currentInstance.authCode = y[1].description
+                StoreStruct.tappedSignInCheck = true
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
                 return true
             } else {
