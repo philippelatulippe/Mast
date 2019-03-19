@@ -2559,13 +2559,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         
         //text field
         
-        searchTextField.frame = CGRect(x: 10, y: 10, width: Int(Int(wid) - 20), height: 40)
+        searchTextField.frame = CGRect(x: 0, y: 10, width: Int(Int(wid) - 20), height: 40)
         searchTextField.backgroundColor = Colours.grayDark3
         searchTextField.font = UIFont.systemFont(ofSize: 16)
         searchTextField.layer.cornerRadius = 10
         searchTextField.alpha = 1
         searchTextField.attributedPlaceholder = NSAttributedString(string: "Search...".localized,
-                                                                   attributes: [NSAttributedString.Key.foregroundColor: Colours.tabUnselected])
+                                                                   attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 67/255.0, green: 67/255.0, blue: 75/255.0, alpha: 1.0)])
         searchTextField.becomeFirstResponder()
         searchTextField.returnKeyType = .search
         searchTextField.delegate = self
@@ -2577,7 +2577,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         
         self.searchIcon.frame = CGRect(x: 15, y: 10, width: 20, height: 20)
         self.searchIcon.backgroundColor = UIColor.clear
-        self.searchIcon.image = UIImage(named: "search")?.maskWithColor(color: Colours.tabUnselected)
+        self.searchIcon.image = UIImage(named: "search")?.maskWithColor(color: UIColor(red: 67/255.0, green: 67/255.0, blue: 75/255.0, alpha: 1.0))
         self.searchTextField.addSubview(self.searchIcon)
         
         segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: 20, y: 60, width: Int(wid - 40), height: Int(40)))

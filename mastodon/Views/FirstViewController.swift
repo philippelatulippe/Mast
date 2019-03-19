@@ -1116,8 +1116,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             newSize = offset + 15
         }
         
-        self.restoreScroll()
-        
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -1198,6 +1196,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         default:
             print("nothing")
         }
+        
+        self.restoreScroll()
         
         if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
             settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)
@@ -2087,28 +2087,17 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         var newString = string
                         for z2 in StoreStruct.statusesHome[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
-                        
-                        print("tapmedemp")
-                        print(newString)
-                        
                         
                         let controller = ThirdViewController()
                         if newString == StoreStruct.currentUser?.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
                     cell.toot.handleURLTap { (url) in
@@ -2208,7 +2197,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         var newString = string
                         for z2 in StoreStruct.statusesHome[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -2217,16 +2206,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         if newString == StoreStruct.currentUser?.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
                     cell.toot.handleURLTap { (url) in
@@ -2356,7 +2338,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         var newString = string
                         for z2 in StoreStruct.statusesLocal[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -2365,16 +2347,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         if newString == StoreStruct.currentUser?.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
                     cell.toot.handleURLTap { (url) in
@@ -2468,7 +2443,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         var newString = string
                         for z2 in StoreStruct.statusesLocal[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -2477,16 +2452,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         if newString == StoreStruct.currentUser?.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
                     cell.toot.handleURLTap { (url) in
@@ -2609,7 +2577,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         var newString = string
                         for z2 in StoreStruct.statusesFederated[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -2618,16 +2586,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         if newString == StoreStruct.currentUser?.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
                     cell.toot.handleURLTap { (url) in
@@ -2721,7 +2682,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         var newString = string
                         for z2 in StoreStruct.statusesFederated[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -2730,16 +2691,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         if newString == StoreStruct.currentUser?.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
                     cell.toot.handleURLTap { (url) in
@@ -5290,25 +5244,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         self.tableViewF.separatorColor = Colours.cellQuote
         self.tableViewF.reloadData()
         self.tableViewF.reloadInputViews()
-        
-        //        if (UserDefaults.standard.object(forKey: "savedOffsetHome") == nil) {} else {
-        //            print("787878")
-        //            print((UserDefaults.standard.object(forKey: "savedOffsetHome") as! CGFloat))
-        //            self.tableView.setContentOffset(CGPoint(x: 0, y: (UserDefaults.standard.object(forKey: "savedOffsetHome") as! CGFloat)), animated: false)
-        //        }
-        
-        //        var customStyle = VolumeBarStyle.likeInstagram
-        //        customStyle.trackTintColor = Colours.cellQuote
-        //        customStyle.progressTintColor = Colours.grayDark
-        //        customStyle.backgroundColor = Colours.cellNorm
-        //        volumeBar.style = customStyle
-        //        volumeBar.start()
-        //
-        //        self.missingView.image = UIImage(named: "missing")?.maskWithColor(color: Colours.tabUnselected)
-        //
-        //        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.grayDark]
-        //        self.collectionView.backgroundColor = Colours.white
-        //        self.removeTabbarItemsText()
     }
     
     

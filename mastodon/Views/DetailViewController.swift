@@ -673,7 +673,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 return 0
             } else {
                 if (UserDefaults.standard.object(forKey: "linkcards") == nil) || (UserDefaults.standard.object(forKey: "linkcards") as! Int == 0) {
-                    if self.mainStatus[0].card?.authorUrl != nil {
+                    if self.mainStatus[0].reblog?.card?.authorUrl != nil || self.mainStatus[0].card?.authorUrl != nil {
                         return 1
                     } else {
                         return 0
@@ -842,7 +842,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         var newString = string
                         for z2 in self.allPrevious[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -851,11 +851,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         if newString == StoreStruct.currentUser.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
+                        
+                                    controller.userIDtoUse = newString
                                     DispatchQueue.main.async {
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
@@ -877,9 +874,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             print("nothing")
                                         }
                                     }
-                                }
-                            }
-                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -988,7 +982,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         var newString = string
                         for z2 in self.allPrevious[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -997,11 +991,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         if newString == StoreStruct.currentUser.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
+                                    controller.userIDtoUse = newString
                                     DispatchQueue.main.async {
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
@@ -1023,9 +1013,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             print("nothing")
                                         }
                                     }
-                                }
-                            }
-                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -1135,7 +1122,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     var newString = string
                     for z2 in self.mainStatus[0].mentions {
                         if z2.acct.contains(string) {
-                            newString = z2.acct
+                            newString = z2.id
                         }
                     }
                     
@@ -1144,11 +1131,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if newString == StoreStruct.currentUser.username {} else {
                         controller.fromOtherUser = true
                     }
-                    let request = Accounts.search(query: newString)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            if stat.count > 0 {
-                                controller.userIDtoUse = stat[0].id
+                                controller.userIDtoUse = newString
                                 DispatchQueue.main.async {
                                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                     switch (deviceIdiom) {
@@ -1170,9 +1153,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         print("nothing")
                                     }
                                 }
-                            }
-                        }
-                    }
                 }
                 cell.toot.handleURLTap { (url) in
                     // safari
@@ -1278,7 +1258,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     var newString = string
                     for z2 in self.mainStatus[0].mentions {
                         if z2.acct.contains(string) {
-                            newString = z2.acct
+                            newString = z2.id
                         }
                     }
                     
@@ -1287,11 +1267,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if newString == StoreStruct.currentUser.username {} else {
                         controller.fromOtherUser = true
                     }
-                    let request = Accounts.search(query: newString)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            if stat.count > 0 {
-                                controller.userIDtoUse = stat[0].id
+                                controller.userIDtoUse = newString
                                 DispatchQueue.main.async {
                                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                     switch (deviceIdiom) {
@@ -1313,9 +1289,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         print("nothing")
                                     }
                                 }
-                            }
-                        }
-                    }
                 }
                 cell.toot.handleURLTap { (url) in
                     // safari
@@ -1408,8 +1381,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else if indexPath.section == 3 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCellLink\(indexPath.row)", for: indexPath) as! DetailCellLink
-            if self.mainStatus[0].card?.authorUrl != nil {
-                cell.configure(self.mainStatus[0].card!)
+            if self.mainStatus[0].reblog?.card?.authorUrl != nil || self.mainStatus[0].card?.authorUrl != nil {
+                cell.configure(self.mainStatus[0].reblog?.card ?? self.mainStatus[0].card!)
             }
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
@@ -1618,7 +1591,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             var newString = string
                             for z2 in self.allReplies[indexPath.row].mentions {
                                 if z2.acct.contains(string) {
-                                    newString = z2.acct
+                                    newString = z2.id
                                 }
                             }
                             
@@ -1627,11 +1600,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if newString == StoreStruct.currentUser.username {} else {
                                 controller.fromOtherUser = true
                             }
-                            let request = Accounts.search(query: newString)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    if stat.count > 0 {
-                                        controller.userIDtoUse = stat[0].id
+                                        controller.userIDtoUse = newString
                                         DispatchQueue.main.async {
                                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                             switch (deviceIdiom) {
@@ -1653,9 +1622,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                 print("nothing")
                                             }
                                         }
-                                    }
-                                }
-                            }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -1744,7 +1710,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             var newString = string
                             for z2 in self.allReplies[indexPath.row].mentions {
                                 if z2.acct.contains(string) {
-                                    newString = z2.acct
+                                    newString = z2.id
                                 }
                             }
                             
@@ -1753,11 +1719,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if newString == StoreStruct.currentUser.username {} else {
                                 controller.fromOtherUser = true
                             }
-                            let request = Accounts.search(query: newString)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    if stat.count > 0 {
-                                        controller.userIDtoUse = stat[0].id
+                                        controller.userIDtoUse = newString
                                         DispatchQueue.main.async {
                                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                             switch (deviceIdiom) {
@@ -1779,9 +1741,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                 print("nothing")
                                             }
                                         }
-                                    }
-                                }
-                            }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -1891,7 +1850,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             var newString = string
                             for z2 in self.allReplies[indexPath.row].mentions {
                                 if z2.acct.contains(string) {
-                                    newString = z2.acct
+                                    newString = z2.id
                                 }
                             }
                             
@@ -1900,11 +1859,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if newString == StoreStruct.currentUser.username {} else {
                                 controller.fromOtherUser = true
                             }
-                            let request = Accounts.search(query: newString)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    if stat.count > 0 {
-                                        controller.userIDtoUse = stat[0].id
+                                        controller.userIDtoUse = newString
                                         DispatchQueue.main.async {
                                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                             switch (deviceIdiom) {
@@ -1926,9 +1881,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                 print("nothing")
                                             }
                                         }
-                                    }
-                                }
-                            }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -2028,7 +1980,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             var newString = string
                             for z2 in self.allReplies[indexPath.row].mentions {
                                 if z2.acct.contains(string) {
-                                    newString = z2.acct
+                                    newString = z2.id
                                 }
                             }
                             
@@ -2037,11 +1989,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if newString == StoreStruct.currentUser.username {} else {
                                 controller.fromOtherUser = true
                             }
-                            let request = Accounts.search(query: newString)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    if stat.count > 0 {
-                                        controller.userIDtoUse = stat[0].id
+                                        controller.userIDtoUse = newString
                                         DispatchQueue.main.async {
                                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                             switch (deviceIdiom) {
@@ -2063,9 +2011,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                 print("nothing")
                                             }
                                         }
-                                    }
-                                }
-                            }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -5357,13 +5302,15 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @objc func refreshCont() {
-        let request = Statuses.context(id: self.mainStatus[0].id)
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                self.allReplies = (stat.descendants)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.refreshControl.endRefreshing()
+        if self.mainStatus.isEmpty {} else {
+            let request = Statuses.context(id: self.mainStatus[0].id)
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    self.allReplies = (stat.descendants)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.refreshControl.endRefreshing()
+                    }
                 }
             }
         }

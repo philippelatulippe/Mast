@@ -495,7 +495,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                         var newString = string
                         for z2 in StoreStruct.statusSearch[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -504,16 +504,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                         if newString == StoreStruct.currentUser.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
                     cell.toot.handleURLTap { (url) in
@@ -605,7 +598,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                         var newString = string
                         for z2 in StoreStruct.statusSearch[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -614,16 +607,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                         if newString == StoreStruct.currentUser.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
                     cell.toot.handleURLTap { (url) in
@@ -2157,7 +2143,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
 
 
 class SearchField: UITextField {
-    let padding = UIEdgeInsets(top: 0, left: 45, bottom: 0, right: 15)
+    let padding = UIEdgeInsets(top: 0, left: 43, bottom: 0, right: 15)
     
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)

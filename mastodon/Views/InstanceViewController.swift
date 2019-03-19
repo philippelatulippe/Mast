@@ -365,7 +365,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     var newString = string
                     for z2 in StoreStruct.newInstanceTags[indexPath.row].mentions {
                         if z2.acct.contains(string) {
-                            newString = z2.acct
+                            newString = z2.id
                         }
                     }
                     
@@ -374,16 +374,9 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     if newString == StoreStruct.currentUser.username {} else {
                         controller.fromOtherUser = true
                     }
-                    let request = Accounts.search(query: newString)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            if stat.count > 0 {
-                                controller.userIDtoUse = stat[0].id
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
+                    controller.userIDtoUse = newString
+                    DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(controller, animated: true)
                     }
                 }
                 cell.toot.handleURLTap { (url) in
@@ -477,7 +470,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     var newString = string
                     for z2 in StoreStruct.newInstanceTags[indexPath.row].mentions {
                         if z2.acct.contains(string) {
-                            newString = z2.acct
+                            newString = z2.id
                         }
                     }
                     
@@ -486,16 +479,9 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     if newString == StoreStruct.currentUser.username {} else {
                         controller.fromOtherUser = true
                     }
-                    let request = Accounts.search(query: newString)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            if stat.count > 0 {
-                                controller.userIDtoUse = stat[0].id
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
+                    controller.userIDtoUse = newString
+                    DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(controller, animated: true)
                     }
                 }
                 cell.toot.handleURLTap { (url) in

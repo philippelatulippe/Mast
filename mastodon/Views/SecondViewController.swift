@@ -1848,7 +1848,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             var newString = string
                             for z2 in StoreStruct.notificationsDirect[indexPath.row].status!.mentions {
                                 if z2.acct.contains(string) {
-                                    newString = z2.acct
+                                    newString = z2.id
                                 }
                             }
                             
@@ -1857,16 +1857,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             if newString == StoreStruct.currentUser.username {} else {
                                 controller.fromOtherUser = true
                             }
-                            let request = Accounts.search(query: newString)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    if stat.count > 0 {
-                                        controller.userIDtoUse = stat[0].id
-                                        DispatchQueue.main.async {
-                                            self.navigationController?.pushViewController(controller, animated: true)
-                                        }
-                                    }
-                                }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
                             }
                         }
                         cell.toot.handleURLTap { (url) in
@@ -1959,7 +1952,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             var newString = string
                             for z2 in StoreStruct.notificationsDirect[indexPath.row].status!.mentions {
                                 if z2.acct.contains(string) {
-                                    newString = z2.acct
+                                    newString = z2.id
                                 }
                             }
                             
@@ -1968,16 +1961,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             if newString == StoreStruct.currentUser.username {} else {
                                 controller.fromOtherUser = true
                             }
-                            let request = Accounts.search(query: newString)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    if stat.count > 0 {
-                                        controller.userIDtoUse = stat[0].id
-                                        DispatchQueue.main.async {
-                                            self.navigationController?.pushViewController(controller, animated: true)
-                                        }
-                                    }
-                                }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
                             }
                         }
                         cell.toot.handleURLTap { (url) in
@@ -2059,7 +2045,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         var newString = string
                         for z2 in StoreStruct.notificationsDirect[indexPath.row].status!.mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -2068,16 +2054,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         if newString == StoreStruct.currentUser.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
                     cell.toot.handleURLTap { (url) in
@@ -2216,7 +2195,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 var newString = string
                                 for z2 in StoreStruct.notifications[indexPath.row].status!.mentions {
                                     if z2.acct.contains(string) {
-                                        newString = z2.acct
+                                        newString = z2.id
                                     }
                                 }
                                 
@@ -2225,16 +2204,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 if newString == StoreStruct.currentUser.username {} else {
                                     controller.fromOtherUser = true
                                 }
-                                let request = Accounts.search(query: newString)
-                                StoreStruct.client.run(request) { (statuses) in
-                                    if let stat = (statuses.value) {
-                                        if stat.count > 0 {
-                                            controller.userIDtoUse = stat[0].id
-                                            DispatchQueue.main.async {
-                                                self.navigationController?.pushViewController(controller, animated: true)
-                                            }
-                                        }
-                                    }
+                                controller.userIDtoUse = newString
+                                DispatchQueue.main.async {
+                                    self.navigationController?.pushViewController(controller, animated: true)
                                 }
                             }
                             cell.toot.handleURLTap { (url) in
@@ -2327,7 +2299,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 var newString = string
                                 for z2 in StoreStruct.notifications[indexPath.row].status!.mentions {
                                     if z2.acct.contains(string) {
-                                        newString = z2.acct
+                                        newString = z2.id
                                     }
                                 }
                                 
@@ -2336,16 +2308,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 if newString == StoreStruct.currentUser.username {} else {
                                     controller.fromOtherUser = true
                                 }
-                                let request = Accounts.search(query: newString)
-                                StoreStruct.client.run(request) { (statuses) in
-                                    if let stat = (statuses.value) {
-                                        if stat.count > 0 {
-                                            controller.userIDtoUse = stat[0].id
-                                            DispatchQueue.main.async {
-                                                self.navigationController?.pushViewController(controller, animated: true)
-                                            }
-                                        }
-                                    }
+                                controller.userIDtoUse = newString
+                                DispatchQueue.main.async {
+                                    self.navigationController?.pushViewController(controller, animated: true)
                                 }
                             }
                             cell.toot.handleURLTap { (url) in
@@ -2429,7 +2394,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             var newString = string
                             for z2 in StoreStruct.notifications[indexPath.row].status!.mentions {
                                 if z2.acct.contains(string) {
-                                    newString = z2.acct
+                                    newString = z2.id
                                 }
                             }
                             
@@ -2438,16 +2403,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             if newString == StoreStruct.currentUser.username {} else {
                                 controller.fromOtherUser = true
                             }
-                            let request = Accounts.search(query: newString)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    if stat.count > 0 {
-                                        controller.userIDtoUse = stat[0].id
-                                        DispatchQueue.main.async {
-                                            self.navigationController?.pushViewController(controller, animated: true)
-                                        }
-                                    }
-                                }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
                             }
                         }
                         cell.toot.handleURLTap { (url) in
@@ -2562,7 +2520,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             var newString = string
                             for z2 in StoreStruct.notificationsMentions[indexPath.row].status!.mentions {
                                 if z2.acct.contains(string) {
-                                    newString = z2.acct
+                                    newString = z2.id
                                 }
                             }
                             
@@ -2571,16 +2529,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             if newString == StoreStruct.currentUser.username {} else {
                                 controller.fromOtherUser = true
                             }
-                            let request = Accounts.search(query: newString)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    if stat.count > 0 {
-                                        controller.userIDtoUse = stat[0].id
-                                        DispatchQueue.main.async {
-                                            self.navigationController?.pushViewController(controller, animated: true)
-                                        }
-                                    }
-                                }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
                             }
                         }
                         cell.toot.handleURLTap { (url) in
@@ -2673,7 +2624,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             var newString = string
                             for z2 in StoreStruct.notificationsMentions[indexPath.row].status!.mentions {
                                 if z2.acct.contains(string) {
-                                    newString = z2.acct
+                                    newString = z2.id
                                 }
                             }
                             
@@ -2682,16 +2633,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             if newString == StoreStruct.currentUser.username {} else {
                                 controller.fromOtherUser = true
                             }
-                            let request = Accounts.search(query: newString)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    if stat.count > 0 {
-                                        controller.userIDtoUse = stat[0].id
-                                        DispatchQueue.main.async {
-                                            self.navigationController?.pushViewController(controller, animated: true)
-                                        }
-                                    }
-                                }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
                             }
                         }
                         cell.toot.handleURLTap { (url) in
@@ -2773,7 +2717,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         var newString = string
                         for z2 in StoreStruct.notificationsMentions[indexPath.row].status!.mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -2782,16 +2726,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         if newString == StoreStruct.currentUser.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
-                                        self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
                     cell.toot.handleURLTap { (url) in
@@ -4940,6 +4877,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         self.tableView3.reloadData()
                     } else {
                         self.tableView2.reloadData()
+                    }
+                    
+                    if StoreStruct.notifications.isEmpty {
+                        self.fetchMoreNotifications()
                     }
                     
                     if StoreStruct.notificationsDirect.isEmpty || self.tempFetchedDirect == false {

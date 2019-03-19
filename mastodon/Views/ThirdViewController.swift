@@ -2128,7 +2128,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             self.present(controller, animated: true, completion: nil)
                             
                         }
-                        .action(.default("Edit Note"), image: nil) { (action, ind) in
+                        .action(.default("Edit Bio"), image: nil) { (action, ind) in
                             print(action, ind)
                             
                             let controller = NewProfileNoteViewController()
@@ -2886,21 +2886,21 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     //                    let selection = UISelectionFeedbackGenerator()
                     //                    selection.selectionChanged()
                     
+                    var newString = string
+                    for z2 in zzz[indexPath.row].mentions {
+                        if z2.acct.contains(string) {
+                            newString = z2.id
+                        }
+                    }
+                    
                     let controller = ThirdViewController()
                     if string == StoreStruct.currentUser.username {} else {
                         controller.fromOtherUser = true
                     }
-                    let request = Accounts.search(query: string)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            if stat.count > 0 {
-                                controller.userIDtoUse = stat[0].id
+                    controller.userIDtoUse = newString
                                 DispatchQueue.main.async {
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 }
-                            }
-                        }
-                    }
                 }
                 cell.toot.handleURLTap { (url) in
                     // safari
@@ -2986,7 +2986,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         var newString = string
                         for z2 in zzz[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -2995,17 +2995,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         if newString == StoreStruct.currentUser.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
+                                    controller.userIDtoUse = newString
                                     DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     }
-                                }
-                            }
-                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -3096,7 +3089,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         var newString = string
                         for z2 in zzz[indexPath.row].mentions {
                             if z2.acct.contains(string) {
-                                newString = z2.acct
+                                newString = z2.id
                             }
                         }
                         
@@ -3105,17 +3098,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         if newString == StoreStruct.currentUser.username {} else {
                             controller.fromOtherUser = true
                         }
-                        let request = Accounts.search(query: newString)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.count > 0 {
-                                    controller.userIDtoUse = stat[0].id
-                                    DispatchQueue.main.async {
+                        controller.userIDtoUse = newString
+                        DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     }
-                                }
-                            }
-                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
