@@ -926,6 +926,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.crownScroll2()
             self.crownScroll3()
         }
+        
+        
+        self.restoreScroll()
     }
     
     func crownScroll() {
@@ -991,8 +994,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         if StoreStruct.historyBool {
             self.changeSeg()
         }
-        
-        self.restoreScroll()
         
         StoreStruct.historyBool = false
         
@@ -4844,6 +4845,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     var lastThing = ""
     var tempFetchedDirect = false
     func fetchMoreNotifications() {
+        let oldNot = StoreStruct.notifications
+        let oldNotMentions = StoreStruct.notificationsMentions
+        let oldNotDirect = StoreStruct.notificationsDirect
+        
         let request = Notifications.all(range: .max(id: StoreStruct.notifications.last?.id ?? "", limit: 5000))
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
@@ -4862,10 +4867,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     }
                 }
                 
-                DispatchQueue.main.async {
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                     StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
+
+                DispatchQueue.main.async {
                     
                     StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
@@ -4913,8 +4919,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                     }
                     
-                    DispatchQueue.main.async {
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
+
+                    DispatchQueue.main.async {
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         
                         if self.currentIndex == 5 {
@@ -5027,7 +5034,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
 //                                self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 1), at: .top, animated: false)
 //                            }
                         }
-//                        self.restoreScroll()
 //                        UIView.setAnimationsEnabled(true)
                             
                         } else {
@@ -5177,19 +5183,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         self.tableView3.separatorColor = Colours.cellQuote
         self.tableView3.reloadData()
         self.tableView3.reloadInputViews()
-        
-        //        var customStyle = VolumeBarStyle.likeInstagram
-        //        customStyle.trackTintColor = Colours.cellQuote
-        //        customStyle.progressTintColor = Colours.grayDark
-        //        customStyle.backgroundColor = Colours.cellNorm
-        //        volumeBar.style = customStyle
-        //        volumeBar.start()
-        //
-        //        self.missingView.image = UIImage(named: "missing")?.maskWithColor(color: Colours.tabUnselected)
-        //
-        //        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.grayDark]
-        //        self.collectionView.backgroundColor = Colours.white
-        //        self.removeTabbarItemsText()
     }
     
     @objc func segTheme() {

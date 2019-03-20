@@ -735,6 +735,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.restorationIdentifier = "FirstViewController"
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.savedComposePresent), name: NSNotification.Name(rawValue: "savedComposePresent"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti"), object: nil)
@@ -1200,8 +1202,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         default:
             print("nothing")
         }
-        
-        self.restoreScroll()
         
         if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
             settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)
@@ -5081,7 +5081,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             
                             do {
-//                                self.restoreScroll()
                                 try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
                                 try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
                                 try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")

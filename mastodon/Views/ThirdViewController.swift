@@ -341,11 +341,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         
-        //        self.ai = NVActivityIndicatorView(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 20), y: CGFloat(offset + 65), width: 40, height: 40), type: .circleStrokeSpin, color: Colours.tabSelected)
-        //        self.view.addSubview(self.ai)
-        //        self.loadLoadLoad()
-        
-        
         if self.fromOtherUser == true {
             let request = Accounts.statuses(id: StoreStruct.currentUser.id)
             StoreStruct.client.run(request) { (statuses) in
@@ -371,14 +366,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             self.ai.removeFromSuperview()
                             self.tableView.reloadData()
                         }
-                        
-                        //                        var xx = 0
-                        //                        for sta in self.profileStatuses {
-                        //                            if self.profileStatuses[xx].mediaAttachments.isEmpty {} else {
-                        //                                self.profileStatusesHasImage.append(sta)
-                        //                            }
-                        //                            xx = xx + 1
-                        //                        }
                         
                     }
                 }
@@ -415,14 +402,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         self.tableView.reloadData()
                                     }
                                     
-                                    //                                var xx = 0
-                                    //                                for sta in self.profileStatuses {
-                                    //                                    if self.profileStatuses[xx].mediaAttachments.isEmpty {} else {
-                                    //                                        self.profileStatusesHasImage.append(sta)
-                                    //                                    }
-                                    //                                    xx = xx + 1
-                                    //                                }
-                                    
                                 }
                                 
                             }
@@ -456,14 +435,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 self.tableView.reloadData()
                             }
                             
-                            //                        var xx = 0
-                            //                        for sta in self.profileStatuses {
-                            //                            if self.profileStatuses[xx].mediaAttachments.isEmpty {} else {
-                            //                                self.profileStatusesHasImage.append(sta)
-                            //                            }
-                            //                            xx = xx + 1
-                            //                        }
-                            
                         }
                         
                     }
@@ -472,12 +443,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
             }
         }
-        
-        
-        
-        
-        // test media
-        
         
         self.tableView.reloadData()
     }

@@ -545,23 +545,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if self.mainStatus.isEmpty {} else {
             
-            
-            refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
-            
             self.loadLoadLoad()
-            
-//            tableView.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
-//                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//                    let selection = UISelectionFeedbackGenerator()
-//                    selection.selectionChanged()
-//                }
-//                self?.refreshCont()
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-//                    self?.tableView.cr.endHeaderRefresh()
-//                })
-//            }
-            
-            
             
             let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
@@ -572,7 +556,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         self.tableView.reloadData()
                         if self.allPrevious.count == 0 {} else {
                             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: false)
-                            self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentOffset.y + 1), animated: false)
+//                            self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentOffset.y + 1), animated: false)
                         }
                     }
                 }
@@ -3416,6 +3400,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         let controller = ThirdViewController()
+        if self.mainStatus.isEmpty {} else {
         if self.mainStatus[0].reblog?.account.username ?? self.mainStatus[0].account.username == StoreStruct.currentUser.username {} else {
             controller.fromOtherUser = true
         }
@@ -3441,7 +3426,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         default:
             print("nothing")
         }
-        
+        }
     }
     
     @objc func didTouchProfileP(sender: UIButton) {
