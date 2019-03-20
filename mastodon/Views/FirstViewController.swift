@@ -329,6 +329,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        if self.countcount1 < 0 {
+            self.countcount1 = 0
+        }
+        
         if self.currentIndex == 0 {
             
             if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
@@ -2096,9 +2100,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
+//                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-                        }
+//                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -2207,9 +2211,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
+//                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-                        }
+//                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -2348,9 +2352,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
+//                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-                        }
+//                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -2453,9 +2457,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
+//                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-                        }
+//                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -2587,9 +2591,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
+//                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-                        }
+//                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -2692,9 +2696,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
+//                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-                        }
+//                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari

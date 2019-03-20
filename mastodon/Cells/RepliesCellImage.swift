@@ -157,52 +157,6 @@ class RepliesCellImage: SwipeTableViewCell {
             date.text = status.reblog?.createdAt.toString(dateStyle: .short, timeStyle: .short) ?? status.createdAt.toString(dateStyle: .short, timeStyle: .short)
         }
         
-        if status.reblog?.content.stripHTML() != nil {
-            
-            
-            if status.reblog!.emojis.isEmpty {
-                toot.text = "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.acct) boosted"
-            } else {
-                let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.acct) boosted")
-                for y in status.reblog!.emojis {
-                    let textAttachment = NSTextAttachment()
-                    textAttachment.loadImageUsingCache(withUrl: y.url.absoluteString)
-                    textAttachment.bounds = CGRect(x:0, y: Int(-4), width: Int(self.toot.font.lineHeight), height: Int(self.toot.font.lineHeight))
-                    let attrStringWithImage = NSAttributedString(attachment: textAttachment)
-                    while attributedString.mutableString.contains(":\(y.shortcode):") {
-                        let range: NSRange = (attributedString.mutableString as NSString).range(of: ":\(y.shortcode):")
-                        attributedString.replaceCharacters(in: range, with: attrStringWithImage)
-                        
-                    }
-                }
-                self.toot.attributedText = attributedString
-                self.reloadInputViews()
-            }
-            
-            
-            
-            if status.reblog?.account.emojis.isEmpty ?? true {
-                userName.text = status.reblog?.account.displayName.stripHTML()
-            } else {
-                let attributedString = NSMutableAttributedString(string: status.reblog?.account.displayName.stripHTML() ?? "")
-                for y in status.reblog?.account.emojis ?? [] {
-                    let textAttachment = NSTextAttachment()
-                    textAttachment.loadImageUsingCache(withUrl: y.url.absoluteString)
-                    textAttachment.bounds = CGRect(x:0, y: Int(-4), width: Int(self.userName.font.lineHeight), height: Int(self.userName.font.lineHeight))
-                    let attrStringWithImage = NSAttributedString(attachment: textAttachment)
-                    while attributedString.mutableString.contains(":\(y.shortcode):") {
-                        let range: NSRange = (attributedString.mutableString as NSString).range(of: ":\(y.shortcode):")
-                        attributedString.replaceCharacters(in: range, with: attrStringWithImage)
-                    }
-                }
-                self.userName.attributedText = attributedString
-                self.reloadInputViews()
-            }
-            
-            
-            
-            
-        } else {
             
             if status.emojis.isEmpty {
                 toot.text = status.content.stripHTML()
@@ -244,7 +198,6 @@ class RepliesCellImage: SwipeTableViewCell {
             }
             
             
-        }
         
         userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
         userTag.font = UIFont.systemFont(ofSize: Colours.fontSize3)

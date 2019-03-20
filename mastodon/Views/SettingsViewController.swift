@@ -2022,12 +2022,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 var filledSet1 = UIImage(named: "unfilledset")
                 var filledSet2 = UIImage(named: "unfilledset")
+                var filledSet3 = UIImage(named: "unfilledset")
                 if (UserDefaults.standard.object(forKey: "likepin") == nil) || (UserDefaults.standard.object(forKey: "likepin") as! Int == 0) {
                     filledSet1 = UIImage(named: "filledset")
                     filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "likepin") as! Int == 1) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "filledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "likepin") as! Int == 2) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "filledset")
                 }
                 
                 Alertift.actionSheet(title: title, message: nil)
@@ -2044,6 +2051,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .action(.default("Pinned".localized), image: filledSet2) { (action, ind) in
                         print(action, ind)
                         UserDefaults.standard.set(1, forKey: "likepin")
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+                    }
+                    .action(.default("Edit Profile".localized), image: filledSet3) { (action, ind) in
+                        print(action, ind)
+                        UserDefaults.standard.set(2, forKey: "likepin")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                     }
                     .action(.cancel("Dismiss"))

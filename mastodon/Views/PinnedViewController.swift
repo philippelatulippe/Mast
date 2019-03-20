@@ -307,9 +307,9 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     controller.fromOtherUser = true
                 }
                 controller.userIDtoUse = newString
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     self.navigationController?.pushViewController(controller, animated: true)
-                }
+//                }
             }
             cell.toot.handleURLTap { (url) in
                 // safari
@@ -412,9 +412,9 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     controller.fromOtherUser = true
                 }
                 controller.userIDtoUse = newString
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     self.navigationController?.pushViewController(controller, animated: true)
-                }
+//                }
             }
             cell.toot.handleURLTap { (url) in
                 // safari

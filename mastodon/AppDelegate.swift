@@ -165,43 +165,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
             if url.host == "light" {
-                let viewController = window?.rootViewController as! ViewController
-                viewController.siriLight()
+                if let viewController = window?.rootViewController as? ViewController {
+                    viewController.siriLight()
+                }
                 return true
             } else if url.host == "dark" {
-                let viewController = window?.rootViewController as! ViewController
-                viewController.siriDark()
+                if let viewController = window?.rootViewController as? ViewController {
+                    viewController.siriDark()
+                }
                 return true
             } else if url.host == "darker" {
-                let viewController = window?.rootViewController as! ViewController
-                viewController.siriDark2()
+                if let viewController = window?.rootViewController as? ViewController {
+                    viewController.siriDark2()
+                }
                 return true
             } else if url.host == "black" {
-                let viewController = window?.rootViewController as! ViewController
-                viewController.siriOled()
+                if let viewController = window?.rootViewController as? ViewController {
+                    viewController.siriOled()
+                }
                 return true
             } else if url.host == "blue" {
-                let viewController = window?.rootViewController as! ViewController
-                viewController.siriBlue()
+                if let viewController = window?.rootViewController as? ViewController {
+                    viewController.siriBlue()
+                }
                 return true
             } else if url.host == "confetti" {
-                let viewController = window?.rootViewController as! ViewController
-                viewController.siriConfetti()
+                if let viewController = window?.rootViewController as? ViewController {
+                    viewController.siriConfetti()
+                }
                 return true
             } else if url.host == "onboard" {
-                let viewController = window?.rootViewController as! ViewController
-                viewController.presentIntro()
+                if let viewController = window?.rootViewController as? ViewController {
+                    viewController.presentIntro()
+                }
                 return true
             } else if url.host == "settings" {
-                let viewController = window?.rootViewController as! ViewController
-                viewController.goToSettings()
+                if let viewController = window?.rootViewController as? ViewController {
+                    viewController.goToSettings()
+                }
                 return true
             } else if url.absoluteString.contains("id=") {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.curID = y[1].description
-                let viewController = window?.rootViewController as! ViewController
-                viewController.gotoID()
+                if let viewController = window?.rootViewController as? ViewController {
+                    viewController.gotoID()
+                }
                 return true
             } else if url.absoluteString.contains("toot=") {
                 let x = url.absoluteString

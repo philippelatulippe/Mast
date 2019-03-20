@@ -83,11 +83,11 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
                 }
                 cell.image.layer.borderColor = Colours.tabSelected.cgColor
                 
-                let account = Account.getAccounts()[indexPath.item]
-                
-                cell.image.pin_setImage(from: URL(string: account.avatar))
-                
-                cell.name.text = account.username
+                if Account.getAccounts().isEmpty {} else {
+                    let account = Account.getAccounts()[indexPath.item]
+                    cell.image.pin_setImage(from: URL(string: account.avatar))
+                    cell.name.text = account.username
+                }
                 
                 cell.image.backgroundColor = Colours.clear
             }
