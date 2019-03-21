@@ -1433,6 +1433,217 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.present(controller, animated: true, completion: nil)
                 
             }
+            .action(.default("Edit Links"), image: nil) { (action, ind) in
+                print(action, ind)
+                
+                var field1 = "Link 1"
+                var field2 = "Link 2"
+                var field3 = "Link 3"
+                var field4 = "Link 4"
+                var field01: String? = ""
+                var field02: String? = ""
+                var field03: String? = ""
+                var field04: String? = ""
+                var fieldVal1: String? = ""
+                var fieldVal2: String? = ""
+                var fieldVal3: String? = ""
+                var fieldVal4: String? = ""
+                
+                if self.chosenUser.fields.count > 0 {
+                    field1 = self.chosenUser.fields[0].name
+                    field01 = field1
+                    fieldVal1 = self.chosenUser.fields[0].value
+                    if field1 == "" {
+                        field1 = "Link 1"
+                        field01 = nil
+                        fieldVal1 = nil
+                    }
+                    if self.chosenUser.fields.count > 1 {
+                        field2 = self.chosenUser.fields[1].name
+                        field02 = field2
+                        fieldVal2 = self.chosenUser.fields[1].value
+                        if field2 == "" {
+                            field2 = "Link 2"
+                            field02 = nil
+                            fieldVal2 = nil
+                        }
+                        if self.chosenUser.fields.count > 2 {
+                            field3 = self.chosenUser.fields[2].name
+                            field03 = field3
+                            fieldVal3 = self.chosenUser.fields[2].value
+                            if field3 == "" {
+                                field3 = "Link 3"
+                                field03 = nil
+                                fieldVal3 = nil
+                            }
+                            if self.chosenUser.fields.count > 3 {
+                                field4 = self.chosenUser.fields[3].name
+                                field04 = field4
+                                fieldVal4 = self.chosenUser.fields[3].value
+                                if field4 == "" {
+                                    field4 = "Link 4"
+                                    field04 = nil
+                                    fieldVal4 = nil
+                                }
+                            }
+                        }
+                    }
+                }
+
+        Alertift.actionSheet()
+            .backgroundColor(Colours.white)
+            .titleTextColor(Colours.grayDark)
+            .messageTextColor(Colours.grayDark)
+            .messageTextAlignment(.left)
+            .titleTextAlignment(.left)
+            .action(.default(field1), image: nil) { (action, ind) in
+                print(action, ind)
+                
+                Alertift.alert(title: field4, message: "Input the link name and URL")
+                    .textField { textField in
+                        textField.placeholder = "Name"
+                    }
+                    .textField { textField in
+                        textField.placeholder = "URL"
+                    }
+                    .action(.cancel("Cancel"))
+                    .action(.default("Update")) { _, _, textFields in
+                        let name = textFields?.first?.text ?? ""
+                        let url = textFields?.last?.text ?? ""
+                        
+                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: nil, locked: nil, fieldName1: name, fieldValue1: url, fieldName2: field02, fieldValue2: fieldVal2, fieldName3: field03, fieldValue3: fieldVal3, fieldName4: field04, fieldValue4: fieldVal4)
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
+                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                    .show()
+                
+            }
+            .action(.default(field2), image: nil) { (action, ind) in
+                print(action, ind)
+                
+                Alertift.alert(title: field4, message: "Input the link name and URL")
+                    .textField { textField in
+                        textField.placeholder = "Name"
+                    }
+                    .textField { textField in
+                        textField.placeholder = "URL"
+                    }
+                    .action(.cancel("Cancel"))
+                    .action(.default("Update")) { _, _, textFields in
+                        let name = textFields?.first?.text ?? ""
+                        let url = textFields?.last?.text ?? ""
+                        
+                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: nil, locked: nil, fieldName1: field01, fieldValue1: fieldVal1, fieldName2: name, fieldValue2: url, fieldName3: field03, fieldValue3: fieldVal3, fieldName4: field04, fieldValue4: fieldVal4)
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
+                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                    .show()
+                
+            }
+            .action(.default(field3), image: nil) { (action, ind) in
+                print(action, ind)
+                
+                Alertift.alert(title: field4, message: "Input the link name and URL")
+                    .textField { textField in
+                        textField.placeholder = "Name"
+                    }
+                    .textField { textField in
+                        textField.placeholder = "URL"
+                    }
+                    .action(.cancel("Cancel"))
+                    .action(.default("Update")) { _, _, textFields in
+                        let name = textFields?.first?.text ?? ""
+                        let url = textFields?.last?.text ?? ""
+                        
+                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: nil, locked: nil, fieldName1: field01, fieldValue1: fieldVal1, fieldName2: field02, fieldValue2: fieldVal2, fieldName3: name, fieldValue3: url, fieldName4: field04, fieldValue4: fieldVal4)
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
+                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                    .show()
+                
+            }
+            .action(.default(field4), image: nil) { (action, ind) in
+                print(action, ind)
+                
+                Alertift.alert(title: field4, message: "Input the link name and URL")
+                    .textField { textField in
+                        textField.placeholder = "Name"
+                    }
+                    .textField { textField in
+                        textField.placeholder = "URL"
+                    }
+                    .action(.cancel("Cancel"))
+                    .action(.default("Update")) { _, _, textFields in
+                        let name = textFields?.first?.text ?? ""
+                        let url = textFields?.last?.text ?? ""
+                        
+                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: nil, locked: nil, fieldName1: field01, fieldValue1: fieldVal1, fieldName2: field02, fieldValue2: fieldVal2, fieldName3: field03, fieldValue3: fieldVal3, fieldName4: name, fieldValue4: url)
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                
+                                DispatchQueue.main.async {
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
+                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                    .show()
+                
+            }
+            .action(.cancel("Dismiss"))
+            .finally { action, index in
+                if action.style == .cancel {
+                    return
+                }
+            }
+            .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.contentView ?? self.view)
+            .show(on: self)
+
+                
+
+            }
             .action(.default(lockText), image: nil) { (action, ind) in
                 
                 //bh2
