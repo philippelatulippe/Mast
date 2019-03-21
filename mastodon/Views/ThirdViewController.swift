@@ -1332,13 +1332,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 if assets.count > 0 {
                     assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-                        let imageData = (image ?? UIImage()).jpegData(compressionQuality: 0.82)
-                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: .jpeg(imageData), header: nil)
+                        let imageData = (image ?? UIImage()).pngData()
+                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: .png(imageData), header: nil)
                         StoreStruct.client.run(request) { (statuses) in
                             print(statuses)
                             if let stat = (statuses.value) {
-                                print(stat)
-                                print("updated")
                                 DispatchQueue.main.async {
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -1378,15 +1376,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     if assets.count > 0 {
                         assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-                            print("fetched header")
-                            let imageData = (image ?? UIImage()).jpegData(compressionQuality: 0.5)
-                            let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: .jpeg(imageData))
+                            let imageData = (image ?? UIImage()).pngData()
+                            let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: .png(imageData))
                             StoreStruct.client.run(request) { (statuses) in
-                                print("fetched header 2")
                                 print(statuses)
                                 if let stat = (statuses.value) {
-                                    print(stat)
-                                    print("updated")
                                     print(stat.headerStatic)
                                     DispatchQueue.main.async {
                                         NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)

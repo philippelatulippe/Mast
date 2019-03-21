@@ -56,8 +56,6 @@ public struct Accounts {
         let parameters = [
             Parameter(name: "display_name", value: displayName),
             Parameter(name: "note", value: note),
-            Parameter(name: "avatar", value: avatar?.base64EncondedString),
-            Parameter(name: "header", value: header?.base64EncondedString),
             Parameter(name: "locked", value: lockText),
             Parameter(name: "fields_attributes[0][name]", value: fieldName1),
             Parameter(name: "fields_attributes[0][value]", value: fieldValue1),
@@ -69,8 +67,16 @@ public struct Accounts {
             Parameter(name: "fields_attributes[3][value]", value: fieldValue4)
         ]
 
-        let method = HTTPMethod.patch(.parameters(parameters))
-        return Request<Account>(path: "/api/v1/accounts/update_credentials", method: method)
+        if avatar != nil {
+            let method = HTTPMethod.patch(.media(avatar!))
+            return Request<Account>(path: "/api/v1/accounts/update_credentials", method: method)
+        } else if header != nil {
+            let method = HTTPMethod.patch(.media(header!))
+            return Request<Account>(path: "/api/v1/accounts/update_credentials", method: method)
+        } else {
+            let method = HTTPMethod.patch(.parameters(parameters))
+            return Request<Account>(path: "/api/v1/accounts/update_credentials", method: method)
+        }
     }
 
     /// Gets an account's followers.

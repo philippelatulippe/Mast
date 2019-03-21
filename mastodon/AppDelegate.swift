@@ -248,16 +248,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.shared.newInstance!.authCode = y.last?.description ?? ""
-                StoreStruct.tappedSignInCheck = true
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "newInstancelogged"), object: nil)
+                if StoreStruct.tappedSignInCheck == false {
+                    StoreStruct.tappedSignInCheck = true
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "newInstancelogged"), object: nil)
+                }
                 return true
             } else if url.host == "success" {
                 print("Response ==> \(url.absoluteString)")
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.shared.currentInstance.authCode = y[1].description
-                StoreStruct.tappedSignInCheck = true
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+                if StoreStruct.tappedSignInCheck == false {
+                    StoreStruct.tappedSignInCheck = true
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+                }
                 return true
             } else {
                 return true
