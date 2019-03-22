@@ -280,6 +280,14 @@ class ShareViewController: UIViewController, UITextViewDelegate {
                                 }
                             }
                         }
+                    } else if x.hasItemConformingToTypeIdentifier(kUTTypeURL as! String) {
+                        x.loadItem(forTypeIdentifier: kUTTypeURL as! String) { [unowned self] (url, error) in
+                            DispatchQueue.main.async {
+                                if let shareURL = url as? NSURL {
+                                    self.textView.text = "\(theText)\n\n\(shareURL)"
+                                }
+                            }
+                        }
                     }
                 }
             }

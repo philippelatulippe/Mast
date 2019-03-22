@@ -3498,6 +3498,23 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 present(browser, animated: true, completion: nil)
             }
             
+        } else if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCell2 {
+            var images = [SKPhoto]()
+            
+            let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatar, holder: cell.profileImageView.currentImage ?? nil)
+            photo.shouldCachePhotoURLImage = true
+            images.append(photo)
+            
+            let originImage = sender.currentImage
+            if originImage != nil {
+                let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.profileImageView)
+                browser.displayToolbar = true
+                browser.displayAction = true
+                browser.delegate = self
+                browser.initializePageIndex(0)
+                present(browser, animated: true, completion: nil)
+            }
+            
         } else {
             if self.chosenUser.fields.count > 0 {
                 if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCellOwn {
@@ -3516,6 +3533,22 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     browser.initializePageIndex(0)
                     present(browser, animated: true, completion: nil)
                 }
+                } else if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCellOwn2 {
+                    var images = [SKPhoto]()
+                    
+                    let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatar, holder: nil)
+                    photo.shouldCachePhotoURLImage = true
+                    images.append(photo)
+                    
+                    let originImage = sender.currentImage
+                    if originImage != nil {
+                        let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.profileImageView)
+                        browser.displayToolbar = true
+                        browser.displayAction = true
+                        browser.delegate = self
+                        browser.initializePageIndex(0)
+                        present(browser, animated: true, completion: nil)
+                    }
                 }
             } else {
                 
@@ -3536,6 +3569,22 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     browser.initializePageIndex(0)
                     present(browser, animated: true, completion: nil)
                 }
+                } else if let cell = tableView.cellForRow(at: indexPath) as? ProfileHeaderCellOwn {
+                    var images = [SKPhoto]()
+                    
+                    let photo = SKPhoto.photoWithImageURL(self.chosenUser.avatar, holder: nil)
+                    photo.shouldCachePhotoURLImage = true
+                    images.append(photo)
+                    
+                    let originImage = sender.currentImage
+                    if originImage != nil {
+                        let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.profileImageView)
+                        browser.displayToolbar = true
+                        browser.displayAction = true
+                        browser.delegate = self
+                        browser.initializePageIndex(0)
+                        present(browser, animated: true, completion: nil)
+                    }
                 }
                 
             }
