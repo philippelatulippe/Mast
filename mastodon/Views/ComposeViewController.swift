@@ -3513,7 +3513,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             
         } else if tableView == self.tableViewASCII {
             
-            let cell = tableViewASCII.dequeueReusableCell(withIdentifier: "TweetCellASCII", for: indexPath) as! UITableViewCell
+            let cell = tableViewASCII.dequeueReusableCell(withIdentifier: "TweetCellASCII", for: indexPath) 
             
             cell.textLabel?.text = StoreStruct.ASCIIFace[indexPath.row]
             cell.textLabel?.textAlignment = .left
@@ -3529,7 +3529,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             
         } else if tableView == self.tableViewEmoti {
             
-            let cell = tableViewEmoti.dequeueReusableCell(withIdentifier: "TweetCellEmoti", for: indexPath) as! UITableViewCell
+            let cell = tableViewEmoti.dequeueReusableCell(withIdentifier: "TweetCellEmoti", for: indexPath) 
             
             
                 cell.textLabel?.attributedText = StoreStruct.mainResult[indexPath.row]
@@ -3549,7 +3549,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             
         } else {
             
-            let cell = tableViewDrafts.dequeueReusableCell(withIdentifier: "TweetCellDraft", for: indexPath) as! UITableViewCell
+            let cell = tableViewDrafts.dequeueReusableCell(withIdentifier: "TweetCellDraft", for: indexPath) 
             
             if StoreStruct.drafts.isEmpty {
                 cell.textLabel?.text = "No saved drafts"
