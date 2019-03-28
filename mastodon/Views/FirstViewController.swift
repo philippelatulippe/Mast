@@ -4890,6 +4890,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         }
                         
+                        do {
+                            try Disk.save(StoreStruct.statusesHome.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                            try Disk.save(StoreStruct.statusesLocal.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                            try Disk.save(StoreStruct.statusesFederated.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                        } catch {
+                            print("Couldn't save")
+                        }
                         
                         DispatchQueue.main.async {
                             StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
@@ -4926,13 +4933,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.tableView.reloadData()
                                 self.refreshControl.endRefreshing()
                             }
-                            do {
-                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                            } catch {
-                                print("Couldn't save")
-                            }
                             
                         }
                     }
@@ -4968,6 +4968,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                         }
                         
+                        
+                        do {
+                            try Disk.save(StoreStruct.statusesHome.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                            try Disk.save(StoreStruct.statusesLocal.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                            try Disk.save(StoreStruct.statusesFederated.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                        } catch {
+                            print("Couldn't save")
+                        }
                         
                         DispatchQueue.main.async {
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
@@ -5009,14 +5017,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                             
                             
-                            do {
-                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                            } catch {
-                                print("Couldn't save")
-                            }
-                            
                         }
                     }
                 }
@@ -5050,6 +5050,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                         }
                         
+                        
+                        do {
+                            try Disk.save(StoreStruct.statusesHome.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                            try Disk.save(StoreStruct.statusesLocal.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                            try Disk.save(StoreStruct.statusesFederated.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                        } catch {
+                            print("Couldn't save")
+                        }
                         
                         DispatchQueue.main.async {
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
@@ -5089,15 +5097,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.tableViewF.reloadData()
                                 self.refreshControl.endRefreshing()
                                 
-                            }
-                            
-                            
-                            do {
-                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                            } catch {
-                                print("Couldn't save")
                             }
                             
                             

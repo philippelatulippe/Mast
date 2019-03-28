@@ -223,7 +223,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if url.absoluteString.contains("toot=") {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
-                StoreStruct.composedTootText = y[1].description
+                StoreStruct.composedTootText = y[1].description.replace("%20", with: " ")
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "switch44"), object: self)
                 return true
             } else if url.absoluteString.contains("instance=") {

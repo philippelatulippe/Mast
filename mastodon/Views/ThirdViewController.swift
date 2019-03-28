@@ -216,13 +216,20 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func tappedOnTag() {
         print(StoreStruct.tappedTag)
         
-        if StoreStruct.tappedTag.contains("https") || StoreStruct.tappedTag.contains("http") {
+        if StoreStruct.tappedTag.contains("https") || StoreStruct.tappedTag.contains("http") || StoreStruct.tappedTag.contains("www.") {
             
-            if let ur = URL(string: String(StoreStruct.tappedTag)) {
+            var theUR = StoreStruct.tappedTag
+            if StoreStruct.tappedTag.contains("href=") {
+                var x = StoreStruct.tappedTag.split(separator: "\"")
+                theUR = String(x[1])
+            }
+            
+            
+            if let ur = URL(string: String(theUR)) {
                 
                 
                 
-                Alertift.actionSheet(title: nil, message: StoreStruct.tappedTag)
+                Alertift.actionSheet(title: nil, message: theUR)
                     .backgroundColor(Colours.white)
                     .titleTextColor(Colours.grayDark)
                     .messageTextColor(Colours.grayDark)
@@ -3128,6 +3135,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     self.fetchMoreProfile()
                 }
                 
+                if indexPath.row >= zzz.count {
+                
                 if zzz[indexPath.row].reblog?.mediaAttachments.isEmpty ?? zzz[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell5", for: indexPath) as! MainFeedCell
                     cell.delegate = self
@@ -3327,7 +3336,112 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.selectedBackgroundView = bgColorView
                     return cell
                 }
-                
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell6", for: indexPath) as! MainFeedCellImage
+                    cell.delegate = self
+                    
+                    cell.rep1.tag = indexPath.row
+                    cell.like1.tag = indexPath.row
+                    cell.boost1.tag = indexPath.row
+                    cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                    cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                    cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                    
+                    cell.configure(zzz[indexPath.row])
+                    cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
+                    cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
+                    cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
+                    cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
+                    cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
+                    cell.mainImageView.tag = indexPath.row
+                    cell.smallImage1.tag = indexPath.row
+                    cell.smallImage2.tag = indexPath.row
+                    cell.smallImage3.tag = indexPath.row
+                    cell.smallImage4.tag = indexPath.row
+                    cell.backgroundColor = Colours.white
+                    cell.profileImageView.tag = indexPath.row
+                    cell.userTag.tag = indexPath.row
+                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.userName.textColor = Colours.black
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
+                    cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.toot.textColor = Colours.black
+                    cell.mainImageView.backgroundColor = Colours.white
+                    cell.mainImageViewBG.backgroundColor = Colours.white
+                    cell.toot.handleMentionTap { (string) in
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let selection = UISelectionFeedbackGenerator()
+                            selection.selectionChanged()
+                        }
+                        
+                        var newString = string
+                        for z2 in zzz[indexPath.row].mentions {
+                            if z2.acct.contains(string) {
+                                newString = z2.id
+                            }
+                        }
+                        
+                        
+                        let controller = ThirdViewController()
+                        if newString == StoreStruct.currentUser.username {} else {
+                            controller.fromOtherUser = true
+                        }
+                        controller.userIDtoUse = newString
+                        //                        DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(controller, animated: true)
+                        //                                    }
+                    }
+                    cell.toot.handleURLTap { (url) in
+                        // safari
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let selection = UISelectionFeedbackGenerator()
+                            selection.selectionChanged()
+                        }
+                        if url.absoluteString.hasPrefix(".") {
+                            let z = URL(string: String(url.absoluteString.dropFirst()))!
+                            UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                if !success {
+                                    self.safariVC = SFSafariViewController(url: z)
+                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                    self.present(self.safariVC!, animated: true, completion: nil)
+                                }
+                            }
+                        } else {
+                            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                if !success {
+                                    self.safariVC = SFSafariViewController(url: url)
+                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                    self.present(self.safariVC!, animated: true, completion: nil)
+                                }
+                            }
+                        }
+                    }
+                    cell.toot.handleHashtagTap { (string) in
+                        // hash
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let selection = UISelectionFeedbackGenerator()
+                            selection.selectionChanged()
+                        }
+                        let controller = HashtagViewController()
+                        controller.currentTagTitle = string
+                        let request = Timelines.tag(string)
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                controller.currentTags = stat
+                                DispatchQueue.main.async {
+                                    self.navigationController?.pushViewController(controller, animated: true)
+                                }
+                            }
+                        }
+                    }
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = Colours.white
+                    cell.selectedBackgroundView = bgColorView
+                    return cell
+                }
             }
         }
     }
