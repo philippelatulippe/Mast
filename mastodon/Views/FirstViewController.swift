@@ -2077,9 +2077,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     cell.configure(StoreStruct.statusesHome[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
+                    cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                     cell.toot.textColor = Colours.black
                     cell.toot.handleMentionTap { (string) in
@@ -2169,7 +2171,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     cell.configure(StoreStruct.statusesHome[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
+                    cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     
                     cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
                     cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
@@ -2186,7 +2190,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     
                     cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                     cell.toot.textColor = Colours.black
                     cell.mainImageView.backgroundColor = Colours.white
@@ -2328,9 +2332,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     cell.configure(StoreStruct.statusesLocal[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
+                    cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                     cell.toot.textColor = Colours.black
                     cell.toot.handleMentionTap { (string) in
@@ -2421,7 +2427,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     cell.configure(StoreStruct.statusesLocal[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
+                    cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
                     cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
                     cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
@@ -2433,7 +2441,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     cell.smallImage3.tag = indexPath.row
                     cell.smallImage4.tag = indexPath.row
                     cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                     cell.toot.textColor = Colours.black
                     cell.mainImageView.backgroundColor = Colours.white
@@ -2567,9 +2575,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     cell.configure(StoreStruct.statusesFederated[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
+                    cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                     cell.toot.textColor = Colours.black
                     cell.toot.handleMentionTap { (string) in
@@ -2660,7 +2670,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     cell.configure(StoreStruct.statusesFederated[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
+                    cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
                     cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
                     cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
@@ -2672,7 +2684,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     cell.smallImage3.tag = indexPath.row
                     cell.smallImage4.tag = indexPath.row
                     cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                     cell.toot.textColor = Colours.black
                     cell.mainImageView.backgroundColor = Colours.white
@@ -3608,7 +3620,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 }
                 
                 
-                if sto[indexPath.row].reblog?.favourited! ?? sto[indexPath.row].favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id) {
+                if sto[indexPath.row].reblog?.favourited ?? sto[indexPath.row].favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id) {
                     StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id }
                     let request2 = Statuses.unfavourite(id: sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id)
                     StoreStruct.client.run(request2) { (statuses) in

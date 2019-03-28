@@ -16,7 +16,7 @@ class MainFeedCellImage: SwipeTableViewCell {
     var profileImageView2 = UIButton()
     var warningB = UIButton()
     var userName = UILabel()
-    var userTag = UILabel()
+    var userTag = UIButton()
     var date = UILabel()
     var toot = ActiveLabel()
     var mainImageView = UIButton()
@@ -93,17 +93,16 @@ class MainFeedCellImage: SwipeTableViewCell {
         mainImageViewBG.layer.masksToBounds = false
         
         userName.numberOfLines = 0
-        userTag.numberOfLines = 0
         toot.numberOfLines = 0
         date.textAlignment = .right
         userName.textColor = Colours.black
-        userTag.textColor = Colours.black.withAlphaComponent(0.6)
+        userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
         date.textColor = Colours.black.withAlphaComponent(0.6)
         toot.textColor = Colours.black
         
         
         userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
-        userTag.font = UIFont.systemFont(ofSize: Colours.fontSize3)
+        userTag.titleLabel?.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         
@@ -258,17 +257,29 @@ class MainFeedCellImage: SwipeTableViewCell {
         }
         
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {} else {
-            rep1.setTitle("\(status.reblog?.repliesCount ?? status.repliesCount)", for: .normal)
+            var repc1 = "\(status.reblog?.repliesCount ?? status.repliesCount)"
+            if repc1 == "0" {
+                repc1 = ""
+            }
+            var likec1 = "\(status.reblog?.favouritesCount ?? status.favouritesCount)"
+            if likec1 == "0" {
+                likec1 = ""
+            }
+            var boostc1 = "\(status.reblog?.reblogsCount ?? status.reblogsCount)"
+            if boostc1 == "0" {
+                boostc1 = ""
+            }
+            rep1.setTitle(repc1, for: .normal)
             rep1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
             rep1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             rep1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
             rep1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
-            like1.setTitle("\(status.reblog?.favouritesCount ?? status.favouritesCount)", for: .normal)
+            like1.setTitle(likec1, for: .normal)
             like1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
             like1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             like1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
             like1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
-            boost1.setTitle("\(status.reblog?.reblogsCount ?? status.reblogsCount)", for: .normal)
+            boost1.setTitle(boostc1, for: .normal)
             boost1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
             boost1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             boost1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
@@ -303,9 +314,9 @@ class MainFeedCellImage: SwipeTableViewCell {
         
         userName.text = status.reblog?.account.displayName ?? status.account.displayName
         if (UserDefaults.standard.object(forKey: "mentionToggle") == nil || UserDefaults.standard.object(forKey: "mentionToggle") as! Int == 0) {
-            userTag.text = "@\(status.reblog?.account.acct ?? status.account.acct)"
+            userTag.setTitle("@\(status.reblog?.account.acct ?? status.account.acct)", for: .normal)
         } else {
-            userTag.text = "@\(status.reblog?.account.username ?? status.account.username)"
+            userTag.setTitle("@\(status.reblog?.account.username ?? status.account.username)", for: .normal)
         }
         if (UserDefaults.standard.object(forKey: "timerel") == nil) || (UserDefaults.standard.object(forKey: "timerel") as! Int == 0) {
             date.text = status.reblog?.createdAt.toStringWithRelativeTime() ?? status.createdAt.toStringWithRelativeTime()
@@ -473,7 +484,7 @@ class MainFeedCellImage: SwipeTableViewCell {
         profileImageView2.isUserInteractionEnabled = false
         
         userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
-        userTag.font = UIFont.systemFont(ofSize: Colours.fontSize3)
+        userTag.titleLabel?.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         

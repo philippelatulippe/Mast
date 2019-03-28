@@ -1834,7 +1834,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         cell.configure(StoreStruct.notificationsDirect[indexPath.row].status!)
                         cell.moreImage.image = nil
                         cell.profileImageView.tag = indexPath.row
+                        cell.userTag.tag = indexPath.row
                         cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.backgroundColor = Colours.white
                         //cell.userName.textColor = Colours.black
                         //cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
@@ -1926,7 +1928,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         cell.configure(StoreStruct.notificationsDirect[indexPath.row].status!)
                         cell.moreImage.image = nil
                         cell.profileImageView.tag = indexPath.row
+                        cell.userTag.tag = indexPath.row
                         cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
                     cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
                     cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
@@ -2180,7 +2184,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                             cell.configure(StoreStruct.notifications[indexPath.row])
                             cell.profileImageView.tag = indexPath.row
+                            cell.userTag.tag = indexPath.row
                             cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                            cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                             cell.backgroundColor = Colours.white
                             //cell.userName.textColor = Colours.black
                             //cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
@@ -2272,7 +2278,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                             cell.configure(StoreStruct.notifications[indexPath.row])
                             cell.profileImageView.tag = indexPath.row
+                            cell.userTag.tag = indexPath.row
                             cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                            cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                             cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
                     cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
                     cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
@@ -2505,7 +2513,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         
                         cell.configure(StoreStruct.notificationsMentions[indexPath.row])
                         cell.profileImageView.tag = indexPath.row
+                        cell.userTag.tag = indexPath.row
                         cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.backgroundColor = Colours.white
                         //cell.userName.textColor = Colours.black
                         //cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
@@ -2597,7 +2607,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         
                         cell.configure(StoreStruct.notificationsMentions[indexPath.row])
                         cell.profileImageView.tag = indexPath.row
+                        cell.userTag.tag = indexPath.row
                         cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
                     cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
                     cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)

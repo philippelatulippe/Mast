@@ -351,9 +351,11 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 cell.configure(StoreStruct.newInstanceTags[indexPath.row])
                 cell.profileImageView.tag = indexPath.row
+                cell.userTag.tag = indexPath.row
                 cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                 cell.userName.textColor = Colours.black
-                cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                 cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                 cell.toot.textColor = Colours.black
                 cell.toot.handleMentionTap { (string) in
@@ -444,7 +446,9 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 cell.configure(StoreStruct.newInstanceTags[indexPath.row])
                 cell.profileImageView.tag = indexPath.row
+                cell.userTag.tag = indexPath.row
                 cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                 cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
                     cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
                     cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
@@ -456,7 +460,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     cell.smallImage3.tag = indexPath.row
                     cell.smallImage4.tag = indexPath.row
                 cell.userName.textColor = Colours.black
-                cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                 cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                 cell.toot.textColor = Colours.black
                 cell.mainImageView.backgroundColor = Colours.white

@@ -356,8 +356,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
                     print(json)
                     
+                    if let access1 = (json["access_token"] as? String) {
                     
-                    newInsatnce.accessToken = (json["access_token"] as! String)
+                    newInsatnce.accessToken = access1
                     
                     InstanceData.setCurrentInstance(instance: newInsatnce)
                     var instances = InstanceData.getAllInstances()
@@ -406,6 +407,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         
                     }
                     
+                    }
                     
                 }
             } catch let error {
@@ -1241,7 +1243,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     cell.profileImageView.isUserInteractionEnabled = false
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = UIColor.white
-                    cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                     cell.toot.textColor = UIColor.white
                     let bgColorView = UIView()
@@ -1257,9 +1259,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     cell.configure(StoreStruct.statusSearch[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
                         cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = UIColor.white
-                    cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
+                        cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                     cell.toot.textColor = UIColor.white
                     let bgColorView = UIView()
@@ -1272,9 +1275,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         cell.configure(StoreStruct.statusSearch[indexPath.row])
                         cell.profileImageView.tag = indexPath.row
                         cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.backgroundColor = Colours.grayDark3
                         cell.userName.textColor = UIColor.white
-                        cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
+                        cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                         cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                         cell.toot.textColor = UIColor.white
                         cell.mainImageView.backgroundColor = Colours.white
@@ -1289,7 +1293,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     cell.profileImageView.tag = indexPath.row
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = UIColor.white
-                    cell.userTag.textColor = UIColor.white.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                     cell.toot.textColor = UIColor.white
                     let bgColorView = UIView()

@@ -517,8 +517,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc func goToSettings() {
         if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {} else {
-            springWithDelay(duration: 0.4, delay: 0, animations: { [unowned self] in
-                self.segmentedControl.alpha = 0
+            springWithDelay(duration: 0.4, delay: 0, animations: { [weak self] in
+                self?.segmentedControl.alpha = 0
             })
         }
         let controller = SettingsViewController()
@@ -1163,13 +1163,17 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if toIndex == 0 {
             self.currentIndex = 0
             DispatchQueue.main.async {
-                self.tableView.reloadSections([2], with: .fade)
+                self.tableView.beginUpdates()
+                self.tableView.reloadSections([2], with: .none)
+                self.tableView.endUpdates()
             }
         }
         if toIndex == 1 {
             self.currentIndex = 1
             DispatchQueue.main.async {
-                self.tableView.reloadSections([2], with: .fade)
+                self.tableView.beginUpdates()
+                self.tableView.reloadSections([2], with: .none)
+                self.tableView.endUpdates()
             }
         }
     }
@@ -3044,7 +3048,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 //cell.configure(zzz[indexPath.row])
                 cell.backgroundColor = Colours.white
                 cell.userName.textColor = Colours.black
-                cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                 cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                 cell.toot.textColor = Colours.black
                 cell.toot.handleMentionTap { (string) in
@@ -3137,10 +3141,12 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     cell.configure(zzz[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
+                    cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.backgroundColor = Colours.white
                     cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                     cell.toot.textColor = Colours.black
                     cell.toot.handleMentionTap { (string) in
@@ -3239,9 +3245,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.smallImage4.tag = indexPath.row
                     cell.backgroundColor = Colours.white
                     cell.profileImageView.tag = indexPath.row
+                    cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userName.textColor = Colours.black
-                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
                     cell.date.textColor = Colours.black.withAlphaComponent(0.6)
                     cell.toot.textColor = Colours.black
                     cell.mainImageView.backgroundColor = Colours.white
