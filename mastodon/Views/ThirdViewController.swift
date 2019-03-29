@@ -536,7 +536,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         self.view.backgroundColor = Colours.white
-        self.title = "You"
+        self.title = "Profile"
         self.removeTabbarItemsText()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid3"), object: nil)

@@ -26,6 +26,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     var countcount2 = 0
     var countcount5 = 0
     
+    var notifications: [Notificationt] = []
     var maybeDoOnce = false
     var searchButton = MNGExpandedTouchAreaButton()
     var settingsButton = UIButton(type: .custom)
@@ -446,18 +447,19 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.view.addSubview(self.ai)
         self.loadLoadLoad()
         
+        self.fetchMoreNotifications()
         
-        if StoreStruct.notifications.isEmpty {
+        if self.notifications.isEmpty {
             let request = Notifications.all(range: .default)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    StoreStruct.notifications = stat
+                    self.notifications = stat
                     
                     
-                    StoreStruct.notificationsDirect = []
+//                    StoreStruct.notificationsDirect = []
                     
                     
-                    StoreStruct.notificationsDirect = StoreStruct.notifications.filter({ (test) -> Bool in
+                    StoreStruct.notificationsDirect = self.notifications.filter({ (test) -> Bool in
                         test.type == .mention && test.status?.visibility == .direct
                     })
                     
@@ -479,10 +481,10 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         } else {
             
             
-            StoreStruct.notificationsDirect = []
+//            StoreStruct.notificationsDirect = []
             
             
-            StoreStruct.notificationsDirect = StoreStruct.notifications.filter({ (test) -> Bool in
+            StoreStruct.notificationsDirect = self.notifications.filter({ (test) -> Bool in
                 test.type == .mention && test.status?.visibility == .direct
             })
             
@@ -626,11 +628,11 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.currentIndex = 0
             self.tableView.alpha = 0
             
-            if StoreStruct.notifications.isEmpty {
+            if self.notifications.isEmpty {
                 let request = Notifications.all(range: .default)
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
-                        StoreStruct.notifications = stat
+                        self.notifications = stat
                         
                         for x in stat {
                             if x.type == .mention {
@@ -828,6 +830,15 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             if StoreStruct.notificationsDirect.count == 0 || indexPath.row >= StoreStruct.notificationsDirect.count {
                 
                 self.fetchMoreNotifications()
+                if indexPath.row == StoreStruct.notificationsDirect.count {
+                    self.fetchMoreNotifications()
+                }
+                if indexPath.row < 7 {
+                    self.fetchMoreNotifications()
+                }
+                if indexPath.row == StoreStruct.notificationsDirect.count - 10 {
+                    self.fetchMoreNotifications()
+                }
                 
                 self.ai.stopAnimating()
                 self.ai.removeFromSuperview()
@@ -842,13 +853,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 
                 
                 if indexPath.row == StoreStruct.notificationsDirect.count {
-                    self.fetchMoreNotificationsD()
+                    self.fetchMoreNotifications()
                 }
                 if indexPath.row < 7 {
-                    self.fetchMoreNotificationsD()
+                    self.fetchMoreNotifications()
                 }
                 if indexPath.row == StoreStruct.notificationsDirect.count - 10 {
-                    self.fetchMoreNotificationsD()
+                    self.fetchMoreNotifications()
                 }
                 
                 if let hasStatus = StoreStruct.notificationsDirect[indexPath.row].status {
@@ -2355,16 +2366,16 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     func fetchMoreNotifications() {
         let oldNotDirect = StoreStruct.notificationsDirect
         
-        let request = Notifications.all(range: .max(id: StoreStruct.notifications.last?.id ?? "", limit: 5000))
+        let request = Notifications.all(range: .max(id: self.notifications.last?.id ?? "", limit: 5000))
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
                     DispatchQueue.main.async {
                     self.lastThing = stat.first?.id ?? ""
-                    StoreStruct.notifications = StoreStruct.notifications + stat
+                    self.notifications = self.notifications + stat
                     
-                    for x in stat {
+                    for x in self.notifications {
                         if x.type == .mention {
                             if x.status?.visibility == .direct {
                                 if self.prevUsersAdded.contains(x.account.acct) {} else {
@@ -2375,6 +2386,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             }
                         }
                     }
+                        
                     
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
                     
@@ -2383,53 +2395,10 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         
                         self.tableView.reloadData()
                         
-                        if StoreStruct.notificationsDirect.isEmpty {
-                            self.fetchMoreNotificationsD()
-                        }
+                        self.fetchMoreNotifications()
                         
                         self.tempFetchedDirect = false
                     }
-                    
-                }
-            }
-        }
-    }
-    
-    func fetchMoreNotificationsD() {
-        let request = Notifications.all(range: .max(id: StoreStruct.notifications.last?.id ?? "", limit: 5000))
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                
-                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
-                    DispatchQueue.main.async {
-                    self.lastThing = stat.first?.id ?? ""
-                    StoreStruct.notifications = StoreStruct.notifications + stat
-                    
-                    for x in stat {
-                        if x.type == .mention {
-                            if x.status?.visibility == .direct {
-                                if self.prevUsersAdded.contains(x.account.acct) {} else {
-                                    self.prevUsersAdded.append(x.account.acct)
-                                    self.tempFetchedDirect = true
-                                    StoreStruct.notificationsDirect.append(x)
-                                }
-                            }
-                        }
-                    }
-                    
-                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
-                    
-                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
-                        
-                        self.tableView.reloadData()
-                        
-                        if StoreStruct.notificationsDirect.isEmpty {
-                            self.fetchMoreNotificationsD()
-                        }
-                        
-                        self.tempFetchedDirect = false
-                    }
-                    
                     
                 }
             }
@@ -2437,15 +2406,15 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     @objc func refreshCont() {
-        let request = Notifications.all(range: .min(id: StoreStruct.notifications.first?.id ?? "", limit: 5000))
+        let request = Notifications.all(range: .min(id: self.notifications.first?.id ?? "", limit: 5000))
         DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     DispatchQueue.main.async {
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     
-                    StoreStruct.notifications = stat + StoreStruct.notifications
-                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
+                    self.notifications = stat + StoreStruct.notifications
+                    self.notifications = self.notifications.removeDuplicates()
                     var co = 0
                     for x in stat {
                         if x.type == .mention {
