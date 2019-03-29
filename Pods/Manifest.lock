@@ -3,6 +3,7 @@ PODS:
   - Disk (0.4.0)
   - FLAnimatedImage (1.0.12)
   - FootlessParser (0.4.1)
+  - MessageKit (1.0.0)
   - NextLevel (0.9.2)
   - NSTimer-Blocks (0.0.1)
   - ObjectMapper (3.3.0)
@@ -41,6 +42,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Disk
+  - MessageKit
   - NextLevel
   - PINRemoteImage
   - QuickLayout
@@ -61,6 +63,7 @@ SPEC REPOS:
     - Disk
     - FLAnimatedImage
     - FootlessParser
+    - MessageKit
     - NextLevel
     - NSTimer-Blocks
     - ObjectMapper
@@ -85,6 +88,7 @@ SPEC CHECKSUMS:
   Disk: ef2956657d5bb56034b38b29b352170165226440
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FootlessParser: 4705a9a740675b7439d9563f2fad83f7b84fc773
+  MessageKit: 16160036b16476b04bd0e9f2c7ce67e662e503e4
   NextLevel: 6a40968816dc1ae737944559378343cf2057dece
   NSTimer-Blocks: 88faf9aef5f250ead087f3f67ae642517083bf36
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
@@ -104,6 +108,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   TinyConstraints: 4721a4b303c799328867078ade6560e152df54d1
 
-PODFILE CHECKSUM: 7661aae006e2249b8b820b410ea574989cca71f5
+PODFILE CHECKSUM: 5bd2ae3092e3baa692ad72dc2579538120499710
 
 COCOAPODS: 1.5.3

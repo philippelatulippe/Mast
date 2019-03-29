@@ -22,5 +22,6 @@ pod 'SwiftyJSON'
 pod 'SwiftyGiphy'
 pod 'QuickLayout'
 pod 'Sharaku'
+pod 'MessageKit'
 
 end
