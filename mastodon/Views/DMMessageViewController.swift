@@ -266,7 +266,29 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        let url = URL(string: self.allPosts[indexPath.row].account.avatar)
+        
+        var avString = self.allPosts[0].account.avatar
+        if self.allPosts[0].account.avatar == StoreStruct.currentUser.avatar {
+            if self.allPosts.count > 1 {
+                avString = self.allPosts[1].account.avatar
+                if self.allPosts[1].account.avatar == StoreStruct.currentUser.avatar {
+                    if self.allPosts.count > 2 {
+                        avString = self.allPosts[2].account.avatar
+                        if self.allPosts[2].account.avatar == StoreStruct.currentUser.avatar {
+                            if self.allPosts.count > 3 {
+                                avString = self.allPosts[3].account.avatar
+                                if self.allPosts[3].account.avatar == StoreStruct.currentUser.avatar {
+                                    if self.allPosts.count > 4 {
+                                        avString = self.allPosts[4].account.avatar
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        let url = URL(string: avString)
         let imageData = try! Data(contentsOf: url!)
         let image1 = UIImage(data: imageData)
         let avatar = Avatar(image: image1, initials: "")

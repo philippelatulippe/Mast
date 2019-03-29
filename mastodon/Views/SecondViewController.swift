@@ -822,6 +822,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         self.view.addSubview(self.ai)
         self.loadLoadLoad()
         
+        self.fetchMoreNotifications()
         
         if StoreStruct.notifications.isEmpty {
             let request = Notifications.all(range: .default)
@@ -829,7 +830,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 if let stat = (statuses.value) {
                     StoreStruct.notifications = stat
                     
-                    StoreStruct.notificationsMentions = []
+//                    StoreStruct.notificationsMentions = []
                     
                     StoreStruct.notificationsMentions = StoreStruct.notifications.filter({ (test) -> Bool in
                         test.type == .mention
@@ -853,7 +854,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 }
             }
         } else {
-            StoreStruct.notificationsMentions = []
+//            StoreStruct.notificationsMentions = []
             
             
             StoreStruct.notificationsMentions = StoreStruct.notifications.filter({ (test) -> Bool in
@@ -1726,7 +1727,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
-                
                 
                 if indexPath.row < 7 {
                     self.fetchMoreNotifications()
@@ -4743,6 +4743,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     self.lastThing = stat.first?.id ?? ""
                 StoreStruct.notifications = StoreStruct.notifications + stat
                 
+                    for x in stat {
+                        if x.type == .mention {
+                            StoreStruct.notificationsMentions.append(x)
+                        }
+                    }
                 
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                     StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
@@ -4760,9 +4765,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         self.tableView2.reloadData()
                     }
                     
-                    if StoreStruct.notifications.isEmpty {
+//                    if StoreStruct.notifications.isEmpty {
                         self.fetchMoreNotifications()
-                    }
+//                    }
                     
                     self.tempFetchedDirect = false
                 }

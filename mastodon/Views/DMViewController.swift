@@ -836,9 +836,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 if indexPath.row < 7 {
                     self.fetchMoreNotifications()
                 }
-                if indexPath.row == StoreStruct.notificationsDirect.count - 10 {
-                    self.fetchMoreNotifications()
-                }
                 
                 self.ai.stopAnimating()
                 self.ai.removeFromSuperview()
@@ -856,9 +853,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     self.fetchMoreNotifications()
                 }
                 if indexPath.row < 7 {
-                    self.fetchMoreNotifications()
-                }
-                if indexPath.row == StoreStruct.notificationsDirect.count - 10 {
                     self.fetchMoreNotifications()
                 }
                 
@@ -1743,7 +1737,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 more.textColor = Colours.tabUnselected
                 return [more]
             }
-        } else if StoreStruct.notifications[indexPath.row].type == .mention || self.currentIndex == 1 || self.currentIndex == 5 {
+        } else if self.notifications[indexPath.row].type == .mention || self.currentIndex == 1 || self.currentIndex == 5 {
             if orientation == .left {
                 let impact = UIImpactFeedbackGenerator(style: .medium)
                 
