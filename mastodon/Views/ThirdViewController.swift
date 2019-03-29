@@ -536,7 +536,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         self.view.backgroundColor = Colours.white
-        self.title = ""
+        self.title = "You"
+        self.removeTabbarItemsText()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid3"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti3"), object: nil)
@@ -621,11 +622,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //            self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height))
         default:
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
-        }
-        if UIApplication.shared.isSplitOrSlideOver {
-            
-        } else {
-            self.title = ""
         }
         self.tableView.register(ProfileHeaderCell.self, forCellReuseIdentifier: "ProfileHeaderCell")
         self.tableView.register(ProfileHeaderCellOwn.self, forCellReuseIdentifier: "ProfileHeaderCellOwn")
@@ -5359,6 +5355,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             UIApplication.shared.statusBarStyle = .lightContent
         }
         
+        self.navigationController?.navigationBar.barTintColor = Colours.grayDark
+        self.navigationController?.navigationBar.tintColor = Colours.grayDark
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.grayDark]
+        
         self.view.backgroundColor = Colours.white
         
         if (UserDefaults.standard.object(forKey: "systemText") == nil) || (UserDefaults.standard.object(forKey: "systemText") as! Int == 0) {
@@ -5432,5 +5432,18 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.grayDark]
         //        self.collectionView.backgroundColor = Colours.white
         //        self.removeTabbarItemsText()
+    }
+    
+    func removeTabbarItemsText() {
+        var offset: CGFloat = 6.0
+        if #available(iOS 11.0, *), traitCollection.horizontalSizeClass == .regular {
+            offset = 0.0
+        }
+        if let items = self.tabBarController?.tabBar.items {
+            for item in items {
+                item.title = ""
+                item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0);
+            }
+        }
     }
 }

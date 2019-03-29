@@ -80,14 +80,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
-    @objc func loadNewest() {
-            if self.tableView.contentOffset.y == 0 {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-    }
-    
     @objc func search() {
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
@@ -316,10 +308,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         NotificationCenter.default.post(name: Notification.Name(rawValue: "touchList"), object: nil)
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowDirect")
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -350,12 +338,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
             }
-        }
-    }
-    
-    @objc func refreshgraph() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
         }
     }
     
@@ -395,7 +377,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshgraph), name: NSNotification.Name(rawValue: "refrefref"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers2"), object: nil)
@@ -406,13 +387,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         NotificationCenter.default.addObserver(self, selector: #selector(self.searchUser), name: NSNotification.Name(rawValue: "searchUser2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTop2), name: NSNotification.Name(rawValue: "scrollTop2"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.loadNewest), name: NSNotification.Name(rawValue: "loadNewest"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeSeg), name: NSNotification.Name(rawValue: "changeSeg"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToSettings), name: NSNotification.Name(rawValue: "goToSettings"), object: nil)
         
         self.view.backgroundColor = Colours.white
-        
-        
+        self.title = "Direct Messages"
+        self.removeTabbarItemsText()
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -521,9 +501,9 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         
-        if (traitCollection.forceTouchCapability == .available) {
-            registerForPreviewing(with: self, sourceView: self.tableView)
-        }
+//        if (traitCollection.forceTouchCapability == .available) {
+//            registerForPreviewing(with: self, sourceView: self.tableView)
+//        }
         
         if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
             self.crownScroll()
@@ -791,7 +771,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.ai.alpha = 0
             self.ai.removeFromSuperview()
         }
-        UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowDirect")
         
         self.settingsButton.removeFromSuperview()
     }
@@ -2350,26 +2329,24 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         print(indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
         
-            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowDirect")
+//        let controller = DMMessageViewController()
+//        controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
+//        self.navigationController?.pushViewController(controller, animated: true)
         
-        let controller = DMMessageViewController()
-        controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
-        self.navigationController?.pushViewController(controller, animated: true)
-        
-//        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-//        switch (deviceIdiom) {
-//        case .phone :
-//            let controller = DetailViewController()
-//                controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
-//                self.navigationController?.pushViewController(controller, animated: true)
-//        case .pad:
-//                let controller = DetailViewController()
-//                controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
-//                self.splitViewController?.showDetailViewController(controller, sender: self)
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
-//        default:
-//            print("nothing")
-//        }
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone :
+            let controller = DMMessageViewController()
+            controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
+            self.navigationController?.pushViewController(controller, animated: true)
+        case .pad:
+            let controller = DMMessageViewController()
+            controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
+            self.splitViewController?.showDetailViewController(controller, sender: self)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+        default:
+            print("nothing")
+        }
     }
     
     var prevUsersAdded: [String] = []
@@ -2383,6 +2360,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                    DispatchQueue.main.async {
                     self.lastThing = stat.first?.id ?? ""
                     StoreStruct.notifications = StoreStruct.notifications + stat
                     
@@ -2400,7 +2378,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
                     
-                    DispatchQueue.main.async {
                         
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         
@@ -2424,6 +2401,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                    DispatchQueue.main.async {
                     self.lastThing = stat.first?.id ?? ""
                     StoreStruct.notifications = StoreStruct.notifications + stat
                     
@@ -2441,7 +2419,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
                     
-                    DispatchQueue.main.async {
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         
                         self.tableView.reloadData()
@@ -2464,6 +2441,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    DispatchQueue.main.async {
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     
                     StoreStruct.notifications = stat + StoreStruct.notifications
@@ -2481,7 +2459,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         }
                     }
                     
-                    DispatchQueue.main.async {
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         self.tableView.reloadData()
@@ -2564,6 +2541,10 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             UIApplication.shared.statusBarStyle = .lightContent
         }
         
+        self.navigationController?.navigationBar.barTintColor = Colours.grayDark
+        self.navigationController?.navigationBar.tintColor = Colours.grayDark
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.grayDark]
+        
         self.view.backgroundColor = Colours.white
         
         if (UserDefaults.standard.object(forKey: "systemText") == nil) || (UserDefaults.standard.object(forKey: "systemText") as! Int == 0) {
@@ -2619,4 +2600,16 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.tableView.reloadInputViews()
     }
     
+    func removeTabbarItemsText() {
+        var offset: CGFloat = 6.0
+        if #available(iOS 11.0, *), traitCollection.horizontalSizeClass == .regular {
+            offset = 0.0
+        }
+        if let items = self.tabBarController?.tabBar.items {
+            for item in items {
+                item.title = ""
+                item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0);
+            }
+        }
+    }
 }

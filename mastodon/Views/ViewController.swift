@@ -3087,33 +3087,28 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             
             //bh5
-            var tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
-            var backBit = self.view.bounds.width - 61
-            if UIDevice().userInterfaceIdiom == .phone {
-                switch UIScreen.main.nativeBounds.height {
-                case 2688:
-                    backBit = self.view.bounds.width - 66
-                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
-                case 2436:
-                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
-                case 1792:
-                    backBit = self.view.bounds.width - 64
-                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
-                case 1136:
-                    backBit = self.view.bounds.width - 54
-                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height)
-                case 1920, 2208:
-                    backBit = self.view.bounds.width - 66
-                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height)
-                default:
-                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height)
-                }
-            }
-            self.ai = NVActivityIndicatorView(frame: CGRect(x: backBit, y: self.view.bounds.height - tabHeight + 11, width: 27, height: 27), type: .circleStrokeSpin, color: Colours.tabSelected)
-            self.ai.isUserInteractionEnabled = false
-            self.ai.alpha = 0
-            self.view.addSubview(self.ai)
-//            self.ai.startAnimating()
+//            var tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
+//            var backBit = self.view.bounds.width - 61
+//            if UIDevice().userInterfaceIdiom == .phone {
+//                switch UIScreen.main.nativeBounds.height {
+//                case 2688:
+//                    backBit = self.view.bounds.width - 66
+//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
+//                case 2436:
+//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
+//                case 1792:
+//                    backBit = self.view.bounds.width - 64
+//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
+//                case 1136:
+//                    backBit = self.view.bounds.width - 54
+//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height)
+//                case 1920, 2208:
+//                    backBit = self.view.bounds.width - 66
+//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height)
+//                default:
+//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height)
+//                }
+//            }
             
             let viewControllerList = [self.tabOne, self.tabTwo, self.tabDM, self.tabThree, self.tabFour]
             
@@ -3221,6 +3216,16 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             self.viewControllers = viewControllerList
             
+            self.ai = NVActivityIndicatorView(frame: CGRect(x: -100, y: self.view.bounds.height + 100, width: 27, height: 27), type: .circleStrokeSpin, color: Colours.tabSelected)
+            
+            guard let view1 = self.tabBar.items?[4].value(forKey: "view") as? UIView else {
+                return
+            }
+            self.ai.center = CGPoint(x: view1.center.x, y: view1.center.y)
+            
+            self.ai.isUserInteractionEnabled = false
+            self.ai.alpha = 0
+            self.view.addSubview(self.ai)
         }
     }
 }

@@ -188,6 +188,11 @@ class DMFeedCell: SwipeTableViewCell {
     
     func configure(_ status: Status) {
         
+        userName.textColor = Colours.black
+        userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
+        date.textColor = Colours.black.withAlphaComponent(0.6)
+        toot.textColor = Colours.black
+        
         rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.gray), for: .normal)
         more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.gray), for: .normal)
         if StoreStruct.allBoosts.contains(status.reblog?.id ?? status.id) || status.reblog?.reblogged ?? status.reblogged ?? false {
