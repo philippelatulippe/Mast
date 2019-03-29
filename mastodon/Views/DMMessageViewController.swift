@@ -277,11 +277,6 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                         if self.allPosts[2].account.avatar == StoreStruct.currentUser.avatar {
                             if self.allPosts.count > 3 {
                                 avString = self.allPosts[3].account.avatar
-                                if self.allPosts[3].account.avatar == StoreStruct.currentUser.avatar {
-                                    if self.allPosts.count > 4 {
-                                        avString = self.allPosts[4].account.avatar
-                                    }
-                                }
                             }
                         }
                     }

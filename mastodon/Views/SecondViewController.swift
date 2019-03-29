@@ -946,6 +946,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        self.tabBarController?.tabBar.items?[1].badgeValue = nil
+        
         StoreStruct.currentPage = 1
 //        self.tableView.reloadData()
 //        self.tableView2.reloadData()
@@ -4765,9 +4767,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         self.tableView2.reloadData()
                     }
                     
-//                    if StoreStruct.notifications.isEmpty {
+                    if StoreStruct.notifications.isEmpty {
                         self.fetchMoreNotifications()
-//                    }
+                    }
                     
                     self.tempFetchedDirect = false
                 }

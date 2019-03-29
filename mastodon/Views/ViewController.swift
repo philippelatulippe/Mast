@@ -572,8 +572,11 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     @objc func switch22() {
         self.viewControllers?.last?.tabBarController?.selectedIndex = 1
     }
-    @objc func switch33() {
+    @objc func switch222() {
         self.viewControllers?.last?.tabBarController?.selectedIndex = 2
+    }
+    @objc func switch33() {
+        self.viewControllers?.last?.tabBarController?.selectedIndex = 3
     }
     @objc func switch44() {
         let controller = ComposeViewController()
@@ -660,7 +663,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     
     func switchTo3() {
-        self.tabBarController?.selectedIndex = 2
+        self.tabBarController?.selectedIndex = 3
     }
     
     func gotoID() {
@@ -677,14 +680,15 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         //shortkeys
         let op1 = UIKeyCommand(input: "1", modifierFlags: .control, action: #selector(b1Touched), discoverabilityTitle: "Home Timelines")
         let op2 = UIKeyCommand(input: "2", modifierFlags: .control, action: #selector(b2Touched), discoverabilityTitle: "Notification Timelines")
-        let op3 = UIKeyCommand(input: "3", modifierFlags: .control, action: #selector(b3Touched), discoverabilityTitle: "Profile Timelines")
+        let op3 = UIKeyCommand(input: "3", modifierFlags: .control, action: #selector(b22Touched), discoverabilityTitle: "Direct Messages")
+        let op4 = UIKeyCommand(input: "4", modifierFlags: .control, action: #selector(b3Touched), discoverabilityTitle: "Profile Timelines")
         let listThing = UIKeyCommand(input: "l", modifierFlags: .control, action: #selector(b56Touched), discoverabilityTitle: "Lists")
         let searchThing = UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(b4Touched), discoverabilityTitle: "Search")
         let newToot = UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(switch44), discoverabilityTitle: "New Toot")
         let settings = UIKeyCommand(input: ";", modifierFlags: .command, action: #selector(goToSettings), discoverabilityTitle: "Settings")
         let esca = UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(dismissDetail), discoverabilityTitle: "Close Detail")
         return [
-            op1, op2, op3, listThing, searchThing, newToot, settings, esca
+            op1, op2, op3, op4, listThing, searchThing, newToot, settings, esca
         ]
     }
     override var canBecomeFirstResponder: Bool {
@@ -710,8 +714,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.selectedIndex = 1
     }
     
-    @objc func b3Touched() {
+    @objc func b22Touched() {
         self.selectedIndex = 2
+    }
+    
+    @objc func b3Touched() {
+        self.selectedIndex = 3
     }
     
     @objc func b56Touched() {
@@ -776,6 +784,11 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.textField.text = StoreStruct.tappedTag
     }
     
+    @objc func addBadge() {
+        print("recremote-")
+        self.tabBar.items?[1].badgeValue = "1"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colours.white
@@ -808,6 +821,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         NotificationCenter.default.addObserver(self, selector: #selector(self.signOut), name: NSNotification.Name(rawValue: "signOut"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.signOutNewInstance), name: NSNotification.Name(rawValue: "signOut2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didTouchSearch), name: NSNotification.Name(rawValue: "searchthething"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.addBadge), name: NSNotification.Name(rawValue: "addBadge"), object: nil)
         
         
         

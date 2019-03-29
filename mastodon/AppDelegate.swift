@@ -76,7 +76,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     userDefaults.set(nil, forKey: "notidpush")
                 }
             }
+        } else if application.applicationState == .active {
+            if (UserDefaults.standard.object(forKey: "badgeMent") == nil) || (UserDefaults.standard.object(forKey: "badgeMent") as! Int == 0) {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "addBadge"), object: nil)
+            }
         }
+        
         
         UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
     }
@@ -236,6 +241,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return true
             } else if url.host == "mentions" {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "switch22"), object: self)
+                return true
+            } else if url.host == "direct" {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "switch222"), object: self)
                 return true
             } else if url.host == "profile" {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "switch33"), object: self)
