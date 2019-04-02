@@ -147,11 +147,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
             
 //            if StoreStruct.client.baseURL == "" {
-        self.client = Client(
-            baseURL: "https://\(UserDefaults.standard.object(forKey: "key2") ?? "")",
-            accessToken: UserDefaults.standard.object(forKey: "key1") as? String ?? ""
-        )
-        StoreStruct.client = self.client
+//        self.client = Client(
+//            baseURL: "https://\(UserDefaults.standard.object(forKey: "key2") ?? "")",
+//            accessToken: UserDefaults.standard.object(forKey: "key1") as? String ?? ""
+//        )
+//        StoreStruct.client = self.client
 //            }
         
         let request = Timelines.home()

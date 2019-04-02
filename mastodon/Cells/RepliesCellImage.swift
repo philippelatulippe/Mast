@@ -31,7 +31,7 @@ class RepliesCellImage: SwipeTableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         profileImageView.backgroundColor = Colours.white
-        moreImage.backgroundColor = Colours.clear
+        moreImage.backgroundColor = Colours.white
         
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         mainImageView.translatesAutoresizingMaskIntoConstraints = false

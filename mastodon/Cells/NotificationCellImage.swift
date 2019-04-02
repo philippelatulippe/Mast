@@ -39,8 +39,8 @@ class NotificationCellImage: SwipeTableViewCell {
         
         profileImageView.backgroundColor = Colours.white
         typeImage.backgroundColor = Colours.white
-        moreImage.backgroundColor = Colours.clear
-        warningB.backgroundColor = Colours.clear
+        moreImage.backgroundColor = Colours.white
+        warningB.backgroundColor = Colours.white
         
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         typeImage.translatesAutoresizingMaskIntoConstraints = false
@@ -135,7 +135,7 @@ class NotificationCellImage: SwipeTableViewCell {
         
         rep1.translatesAutoresizingMaskIntoConstraints = false
         rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.gray), for: .normal)
-        rep1.backgroundColor = UIColor.clear
+        rep1.backgroundColor = Colours.white
         rep1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
             self.rep1.alpha = 0
@@ -144,7 +144,7 @@ class NotificationCellImage: SwipeTableViewCell {
         }
         like1.translatesAutoresizingMaskIntoConstraints = false
         like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
-        like1.backgroundColor = UIColor.clear
+        like1.backgroundColor = Colours.white
         like1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
             self.like1.alpha = 0
@@ -153,7 +153,7 @@ class NotificationCellImage: SwipeTableViewCell {
         }
         boost1.translatesAutoresizingMaskIntoConstraints = false
         boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
-        boost1.backgroundColor = UIColor.clear
+        boost1.backgroundColor = Colours.white
         boost1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
             self.boost1.alpha = 0
@@ -162,7 +162,7 @@ class NotificationCellImage: SwipeTableViewCell {
         }
         more1.translatesAutoresizingMaskIntoConstraints = false
         more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.gray), for: .normal)
-        more1.backgroundColor = UIColor.clear
+        more1.backgroundColor = Colours.white
         more1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
             self.more1.alpha = 0
@@ -215,7 +215,7 @@ class NotificationCellImage: SwipeTableViewCell {
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImageBG(160)]-23-[like1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImageBG(160)]-23-[boost1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-10-[mainImageBG(160)]-23-[more1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
-                contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-107-[rep1(36)]-24-[like1(40)]-15-[boost1(40)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
+                contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-107-[rep1(36)]-20-[like1(40)]-15-[boost1(40)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
             }
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[countTag(30)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
@@ -249,6 +249,15 @@ class NotificationCellImage: SwipeTableViewCell {
     }
     
     func configure(_ status: Notificationt) {
+        
+        profileImageView.backgroundColor = Colours.white
+        typeImage.backgroundColor = Colours.white
+        moreImage.backgroundColor = Colours.white
+        warningB.backgroundColor = Colours.white
+        rep1.backgroundColor = Colours.white
+        like1.backgroundColor = Colours.white
+        boost1.backgroundColor = Colours.white
+        more1.backgroundColor = Colours.white
         
         rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.gray), for: .normal)
         more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.gray), for: .normal)
@@ -661,12 +670,12 @@ class NotificationCellImage: SwipeTableViewCell {
                 warningB.addTarget(self, action: #selector(self.didTouchWarning), for: .touchUpInside)
                 warningB.alpha = 1
             } else {
-                warningB.backgroundColor = Colours.clear
+                warningB.backgroundColor = Colours.white
                 warningB.alpha = 0
             }
             
         } else {
-            warningB.backgroundColor = Colours.clear
+            warningB.backgroundColor = Colours.white
             warningB.alpha = 0
         }
         
@@ -674,7 +683,7 @@ class NotificationCellImage: SwipeTableViewCell {
     }
     
     @objc func didTouchWarning() {
-        warningB.backgroundColor = Colours.clear
+        warningB.backgroundColor = Colours.white
         warningB.alpha = 0
         
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
