@@ -750,11 +750,26 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    @objc func currentSegIndex(_ notification: NSNotification) {
+        if let index = notification.userInfo?["index"] as? Int {
+            if index == 0 {
+                self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }
+            if index == 1 {
+                self.tableViewL.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }
+            if index == 2 {
+                self.tableViewF.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.restorationIdentifier = "FirstViewController"
-        
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currentSegIndex), name: NSNotification.Name(rawValue: "setCurrentSegmentIndex"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.savedComposePresent), name: NSNotification.Name(rawValue: "savedComposePresent"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti"), object: nil)
@@ -889,7 +904,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
             self.tableView.register(SettingsCell.self, forCellReuseIdentifier: "cellmore")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5 - tabHeight)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0 - tabHeight)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -1291,19 +1306,28 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 
                 for x in StoreStruct.notifications {
                     if x.type == .mention {
-                        DispatchQueue.main.async {
+//                        DispatchQueue.main.async {
                             StoreStruct.notificationsMentions.append(x)
                             StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                             StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
-                        }
+//                        }
                     }
                 }
                 
             }
         }
         
-        
-        
+        let request3 = Timelines.conversations(range: .max(id: StoreStruct.notificationsDirect.last?.id ?? "", limit: 5000))
+        StoreStruct.client.run(request3) { (statuses) in
+            if let stat = (statuses.value) {
+                if stat.isEmpty {} else {
+//                    DispatchQueue.main.async {
+                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
+                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
+//                    }
+                }
+            }
+        }
         
         
         let request4 = Instances.current()
@@ -1888,6 +1912,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             selection.selectionChanged()
         }
         
+        print("toindex:- \(toIndex)")
+        if fromIndex == toIndex {
+            return
+        }
         
         
         if toIndex == 0 {
@@ -5351,7 +5379,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 print("nothing")
             }
         } else {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(30), width: CGFloat(200), height: CGFloat(40)))
+            if UIApplication.shared.isSplitOrSlideOver {
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(30), width: CGFloat(200), height: CGFloat(40)))
+            } else {
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(newoff), width: CGFloat(200), height: CGFloat(40)))
+            }
             segmentedControl.dataSource = self
             if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
                 segmentedControl.shapeStyle = .roundedRect

@@ -634,7 +634,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     
     @objc func startindi() {
-        self.ai.alpha = 0
+        self.ai.alpha = 1
         self.ai.startAnimating()
     }
     
@@ -1276,6 +1276,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     if StoreStruct.statusSearch[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as! MainFeedCell
                     cell.configure(StoreStruct.statusSearch[indexPath.row])
+                    cell.warningB.backgroundColor = Colours.grayDark3
+                    cell.moreImage.backgroundColor = Colours.grayDark3
+                    cell.rep1.backgroundColor = Colours.grayDark3
+                    cell.like1.backgroundColor = Colours.grayDark3
+                    cell.boost1.backgroundColor = Colours.grayDark3
+                    cell.more1.backgroundColor = Colours.grayDark3
                     cell.profileImageView.tag = indexPath.row
                         cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
@@ -1292,6 +1298,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         //bhere7
                         let cell = tableView.dequeueReusableCell(withIdentifier: "cell002", for: indexPath) as! MainFeedCellImage
                         cell.configure(StoreStruct.statusSearch[indexPath.row])
+                        cell.warningB.backgroundColor = Colours.grayDark3
+                        cell.moreImage.backgroundColor = Colours.grayDark3
+                        cell.rep1.backgroundColor = Colours.grayDark3
+                        cell.like1.backgroundColor = Colours.grayDark3
+                        cell.boost1.backgroundColor = Colours.grayDark3
+                        cell.more1.backgroundColor = Colours.grayDark3
                         cell.profileImageView.tag = indexPath.row
                         cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
@@ -3098,31 +3110,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             self.tabFour.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.tabFour.tabBarItem.tag = 4
             
-            
-            //bh5
-//            var tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
-//            var backBit = self.view.bounds.width - 61
-//            if UIDevice().userInterfaceIdiom == .phone {
-//                switch UIScreen.main.nativeBounds.height {
-//                case 2688:
-//                    backBit = self.view.bounds.width - 66
-//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
-//                case 2436:
-//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
-//                case 1792:
-//                    backBit = self.view.bounds.width - 64
-//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height) + CGFloat(34)
-//                case 1136:
-//                    backBit = self.view.bounds.width - 54
-//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height)
-//                case 1920, 2208:
-//                    backBit = self.view.bounds.width - 66
-//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height)
-//                default:
-//                    tabHeight = CGFloat(UITabBarController().tabBar.frame.size.height)
-//                }
-//            }
-            
             let viewControllerList = [self.tabOne, self.tabTwo, self.tabDM, self.tabThree, self.tabFour]
             
             for x in viewControllerList {
@@ -3131,97 +3118,36 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     switch UIScreen.main.nativeBounds.height {
                     case 2688:
                         print("iPhone Xs Max")
-                        
-//                        self.bgView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 88)
-//                        self.bgView.backgroundColor = Colours.cellNorm
-//                        self.navigationController?.view.addSubview(self.bgView)
-                        
                         let topIcon = UIButton(frame:(CGRect(x: self.view.bounds.width/2 - 100, y: 50, width: 200, height: 30)))
-                        //topIcon.setImage(UIImage(named: "IconSmall"), for: .normal)
-                        //topIcon.setTitle(titleToGo, for: .normal)
                         topIcon.setTitleColor(Colours.grayDark, for: .normal)
                         topIcon.adjustsImageWhenHighlighted = false
-                        //topIcon.addTarget(self, action: #selector(self.didTouchMiddle), for: .touchUpInside)
-                        //let longPressRecognizer1 = UILongPressGestureRecognizer(target: self, action: #selector(self.recognizerFiredNav))
-                        //longPressRecognizer1.minimumPressDuration = 0.25
-                        //topIcon.addGestureRecognizer(longPressRecognizer1)
-//                        self.navigationController?.view.addSubview(topIcon)
-                        
                         self.searchButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: self.view.bounds.width - 50, y: 50, width: 32, height: 32)))
                         self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
                         self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
                         self.searchButton.adjustsImageWhenHighlighted = false
                         self.searchButton.addTarget(self, action: #selector(self.didTouchSearch), for: .touchUpInside)
-                        
-//                        x.view.addSubview(topIcon)
                         x.view.addSubview(self.searchButton)
-//                        self.firstView.navigationItem.setLeftBarButton(done, animated: true)
-//                        self.secondView.navigationItem.setLeftBarButton(done, animated: true)
-//                        self.thirdView.navigationItem.setLeftBarButton(done, animated: true)
-//                        self.fourthView.navigationItem.setLeftBarButton(done, animated: true)
-                        
-                        
                     case 2436, 1792:
                         print("iPhone X")
-                        
-//                        self.bgView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 88)
-//                        self.bgView.backgroundColor = Colours.cellNorm
-//                        self.navigationController?.view.addSubview(self.bgView)
-                        
                         let topIcon = UIButton(frame:(CGRect(x: self.view.bounds.width/2 - 100, y: 50, width: 200, height: 30)))
-                        //topIcon.setImage(UIImage(named: "IconSmall"), for: .normal)
-                        //topIcon.setTitle(titleToGo, for: .normal)
                         topIcon.setTitleColor(Colours.grayDark, for: .normal)
                         topIcon.adjustsImageWhenHighlighted = false
-                        //topIcon.addTarget(self, action: #selector(self.didTouchMiddle), for: .touchUpInside)
-                        //let longPressRecognizer1 = UILongPressGestureRecognizer(target: self, action: #selector(self.recognizerFiredNav))
-                        //longPressRecognizer1.minimumPressDuration = 0.25
-                        //topIcon.addGestureRecognizer(longPressRecognizer1)
-//                        self.navigationController?.view.addSubview(topIcon)
-                        
                         self.searchButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: self.view.bounds.width - 50, y: 50, width: 32, height: 32)))
                         self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
                         self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
                         self.searchButton.adjustsImageWhenHighlighted = false
                         self.searchButton.addTarget(self, action: #selector(self.didTouchSearch), for: .touchUpInside)
-                        
-                        
-//                        x.view.addSubview(topIcon)
                         x.view.addSubview(self.searchButton)
-//                        self.firstView.navigationItem.setLeftBarButton(done, animated: true)
-//                        self.secondView.navigationItem.setLeftBarButton(done, animated: true)
-//                        self.thirdView.navigationItem.setLeftBarButton(done, animated: true)
-//                        self.fourthView.navigationItem.setLeftBarButton(done, animated: true)
                     default:
-                        
-//                        self.bgView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 64)
-//                        self.bgView.backgroundColor = Colours.cellNorm
-//                        self.navigationController?.view.addSubview(self.bgView)
-                        
                         let topIcon = UIButton(frame:(CGRect(x: self.view.bounds.width/2 - 100, y: 26, width: 200, height: 30)))
-                        //topIcon.setImage(UIImage(named: "IconSmall"), for: .normal)
-                        //topIcon.setTitle(titleToGo, for: .normal)
                         topIcon.setTitleColor(Colours.grayDark, for: .normal)
                         topIcon.adjustsImageWhenHighlighted = false
-                        //topIcon.addTarget(self, action: #selector(self.didTouchMiddle), for: .touchUpInside)
-                        //let longPressRecognizer1 = UILongPressGestureRecognizer(target: self, action: #selector(self.recognizerFiredNav))
-                        //longPressRecognizer1.minimumPressDuration = 0.25
-                        //topIcon.addGestureRecognizer(longPressRecognizer1)
-//                        self.navigationController?.view.addSubview(topIcon)
-                        
                         self.searchButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: self.view.bounds.width - 50, y: 27, width: 32, height: 32)))
                         self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
                         self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
                         self.searchButton.adjustsImageWhenHighlighted = false
                         self.searchButton.addTarget(self, action: #selector(self.didTouchSearch), for: .touchUpInside)
-                        
-//                        x.view.addSubview(topIcon)
                         x.view.addSubview(self.searchButton)
-//                        self.firstView.navigationItem.setLeftBarButton(done, animated: true)
-//                        self.secondView.navigationItem.setLeftBarButton(done, animated: true)
-//                        self.thirdView.navigationItem.setLeftBarButton(done, animated: true)
-//                        self.fourthView.navigationItem.setLeftBarButton(done, animated: true)
-                        
                     }
                 }
                 
@@ -3229,13 +3155,27 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             self.viewControllers = viewControllerList
             
-            self.ai = NVActivityIndicatorView(frame: CGRect(x: -100, y: self.view.bounds.height + 100, width: 27, height: 27), type: .circleStrokeSpin, color: Colours.tabSelected)
-            
-            guard let view1 = self.tabBar.items?[4].value(forKey: "view") as? UIView else {
-                return
+            var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
+            var offset = 88
+            var newoff = 45
+            if UIDevice().userInterfaceIdiom == .phone {
+                switch UIScreen.main.nativeBounds.height {
+                case 2688:
+                    offset = 88
+                    newoff = 45
+                case 2436, 1792:
+                    offset = 88
+                    newoff = 45
+                default:
+                    offset = 64
+                    newoff = 24
+                    tabHeight = Int(UITabBarController().tabBar.frame.size.height)
+                }
             }
-            self.ai.center = CGPoint(x: view1.center.x, y: view1.center.y)
             
+            self.ai = NVActivityIndicatorView(frame: CGRect(x: -100, y: self.view.bounds.height + 100, width: 27, height: 27), type: .circleStrokeSpin, color: Colours.tabSelected)
+            let xOffset = (self.view.bounds.width/10) * 9
+            self.ai.center = CGPoint(x: CGFloat(xOffset), y: CGFloat(self.view.bounds.height) - CGFloat(tabHeight) + 24)
             self.ai.isUserInteractionEnabled = false
             self.ai.alpha = 0
             self.view.addSubview(self.ai)

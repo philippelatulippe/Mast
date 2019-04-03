@@ -3446,6 +3446,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func didTouchProfile(sender: UIButton) {
         
         var sto = self.profileStatuses
+        if self.currentIndex == 0 {
+            sto = self.profileStatuses
+        } else {
+            sto = self.profileStatuses2
+        }
         
         if sto[sender.tag].reblog?.account.username != nil {
             
@@ -3717,6 +3722,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         var sto = self.profileStatuses
+        if self.currentIndex == 0 {
+            sto = self.profileStatuses
+        } else {
+            sto = self.profileStatuses2
+        }
         StoreStruct.newIDtoGoTo = sto[sender.tag].id
         
         StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
@@ -3791,6 +3801,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         var sto = self.profileStatuses
+        if self.currentIndex == 0 {
+            sto = self.profileStatuses
+        } else {
+            sto = self.profileStatuses2
+        }
         StoreStruct.newIDtoGoTo = sto[sender.tag].id
         
         StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
@@ -3853,6 +3868,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         var sto = self.profileStatuses
+        if self.currentIndex == 0 {
+            sto = self.profileStatuses
+        } else {
+            sto = self.profileStatuses2
+        }
         StoreStruct.newIDtoGoTo = sto[sender.tag].id
         
         StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
@@ -3916,6 +3936,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         var sto = self.profileStatuses
+        if self.currentIndex == 0 {
+            sto = self.profileStatuses
+        } else {
+            sto = self.profileStatuses2
+        }
         StoreStruct.newIDtoGoTo = sto[sender.tag].id
         
         StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
@@ -3980,6 +4005,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         var sto = self.profileStatuses
+        if self.currentIndex == 0 {
+            sto = self.profileStatuses
+        } else {
+            sto = self.profileStatuses2
+        }
         StoreStruct.newIDtoGoTo = sto[sender.tag].id
         
         StoreStruct.currentImageURL = sto[sender.tag].reblog?.url ?? sto[sender.tag].url
@@ -4045,6 +4075,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let theTable = self.tableView
         var sto = self.profileStatuses
+        if self.currentIndex == 0 {
+            sto = self.profileStatuses
+        } else {
+            sto = self.profileStatuses2
+        }
         
         if sto[sender.tag].reblog?.reblogged! ?? sto[sender.tag].reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
             StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != sto[sender.tag].reblog?.id ?? sto[sender.tag].id }
@@ -4131,6 +4166,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var theTable = self.tableView
         var sto = self.profileStatuses
+        if self.currentIndex == 0 {
+            sto = self.profileStatuses
+        } else {
+            sto = self.profileStatuses2
+        }
         
         if sto[sender.tag].reblog?.favourited! ?? sto[sender.tag].favourited! || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
             StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[sender.tag].reblog?.id ?? sto[sender.tag].id }
@@ -4211,6 +4251,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var theTable = self.tableView
         var sto = self.profileStatuses
+        if self.currentIndex == 0 {
+            sto = self.profileStatuses
+        } else {
+            sto = self.profileStatuses2
+        }
         
         let controller = ComposeViewController()
         StoreStruct.spoilerText = sto[sender.tag].reblog?.spoilerText ?? sto[sender.tag].spoilerText

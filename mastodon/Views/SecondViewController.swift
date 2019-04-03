@@ -389,7 +389,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView.register(GraphCell.self, forCellReuseIdentifier: "cellG")
             self.tableView.register(NotificationCell.self, forCellReuseIdentifier: "cell3")
             self.tableView.register(NotificationCellImage.self, forCellReuseIdentifier: "cell4")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -403,7 +403,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             
             self.tableView3.register(MainFeedCell.self, forCellReuseIdentifier: "cell444")
             self.tableView3.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell555")
-            self.tableView3.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5)
+            self.tableView3.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0)
             self.tableView3.alpha = 0
             self.tableView3.delegate = self
             self.tableView3.dataSource = self
@@ -418,7 +418,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
             self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
-            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5)
+            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
             self.tableView2.dataSource = self
@@ -609,9 +609,21 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    @objc func currentSegIndex(_ notification: NSNotification) {
+        if let index = notification.userInfo?["index"] as? Int {
+            if index == 0 {
+                self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }
+            if index == 1 {
+                self.tableView2.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currentSegIndex), name: NSNotification.Name(rawValue: "setCurrentSegmentIndex"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshgraph), name: NSNotification.Name(rawValue: "refrefref"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti2"), object: nil)
@@ -739,7 +751,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView.register(GraphCell.self, forCellReuseIdentifier: "cellG")
             self.tableView.register(NotificationCell.self, forCellReuseIdentifier: "cell3")
             self.tableView.register(NotificationCellImage.self, forCellReuseIdentifier: "cell4")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5 - tabHeight)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0 - tabHeight)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -753,7 +765,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             
             self.tableView3.register(MainFeedCell.self, forCellReuseIdentifier: "cell444")
             self.tableView3.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell555")
-            self.tableView3.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5 - tabHeight)
+            self.tableView3.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0 - tabHeight)
             self.tableView3.alpha = 0
             self.tableView3.delegate = self
             self.tableView3.dataSource = self
@@ -768,7 +780,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
             self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
-            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5 - tabHeight)
+            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0 - tabHeight)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
             self.tableView2.dataSource = self
@@ -5069,7 +5081,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 print("nothing")
             }
         } else {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
+            if UIApplication.shared.isSplitOrSlideOver {
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(30), width: CGFloat(200), height: CGFloat(40)))
+            } else {
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(newoff), width: CGFloat(200), height: CGFloat(40)))
+            }
             segmentedControl.dataSource = self
             if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
                 segmentedControl.shapeStyle = .roundedRect
