@@ -1734,7 +1734,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     self.fetchMoreNotifications()
                 }
                 
-                if let hasStatus = StoreStruct.notificationsDirect[indexPath.row].status {
+                if let hasStatus = StoreStruct.notificationsDirect[indexPath.row].lastStatus {
                     
                     if hasStatus.mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "cell444", for: indexPath) as! MainFeedCell
@@ -1746,7 +1746,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                         cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
                         
-                        cell.configure(StoreStruct.notificationsDirect[indexPath.row].status!)
+                        cell.configure(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
                         cell.moreImage.image = nil
                         cell.profileImageView.tag = indexPath.row
                         cell.userTag.tag = indexPath.row
@@ -1835,7 +1835,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                         cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
                         
-                        cell.configure(StoreStruct.notificationsDirect[indexPath.row].status!)
+                        cell.configure(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
                         cell.moreImage.image = nil
                         cell.profileImageView.tag = indexPath.row
                         cell.userTag.tag = indexPath.row
@@ -1939,7 +1939,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                     cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
                     
-                    cell.configure(StoreStruct.notificationsDirect[indexPath.row].status!)
+                    cell.configure(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
                     cell.moreImage.image = nil
                     cell.backgroundColor = Colours.white
                     //cell.userName.textColor = Colours.black

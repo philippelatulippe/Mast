@@ -25,3 +25,13 @@ public class Conversation: Codable {
         case unread
     }
 }
+
+extension Conversation: Equatable {}
+
+public func ==(lhs: Conversation, rhs: Conversation) -> Bool {
+    let areEqual = lhs.id == rhs.id &&
+        lhs.id == rhs.id
+    
+    return areEqual
+}
+

@@ -75,7 +75,7 @@ class StoreStruct {
     
     static var notifications: [Notificationt] = []
     static var notificationsMentions: [Notificationt] = []
-    static var notificationsDirect: [Notificationt] = []
+    static var notificationsDirect: [Conversation] = []
     
     static var fromOtherUser = false
     static var userIDtoUse = ""

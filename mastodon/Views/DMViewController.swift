@@ -52,7 +52,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             guard let cell = self.tableView.cellForRow(at: indexPath) else { return nil }
             let detailVC = DetailViewController()
             if self.currentIndex == 5 {
-                detailVC.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
+                detailVC.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
             }
             detailVC.isPeeking = true
             previewingContext.sourceRect = cell.frame
@@ -446,60 +446,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         self.fetchMoreNotifications()
         
-        if self.notifications.isEmpty {
-            let request = Notifications.all(range: .default)
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
-                    self.notifications = stat
-                    
-                    
-//                    StoreStruct.notificationsDirect = []
-                    
-                    
-                    StoreStruct.notificationsDirect = self.notifications.filter({ (test) -> Bool in
-                        test.type == .mention && test.status?.visibility == .direct
-                    })
-                    
-                    
-                    DispatchQueue.main.async {
-                        
-                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
-                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
-                        
-                        self.ai.alpha = 0
-                        self.ai.removeFromSuperview()
-                        
-                        self.tableView.reloadData()
-                        
-                    }
-                    
-                }
-            }
-        } else {
-            
-            
-//            StoreStruct.notificationsDirect = []
-            
-            
-            StoreStruct.notificationsDirect = self.notifications.filter({ (test) -> Bool in
-                test.type == .mention && test.status?.visibility == .direct
-            })
-            
-            
-            DispatchQueue.main.async {
-                
-                StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
-                StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
-                
-                self.ai.alpha = 0
-                self.ai.removeFromSuperview()
-                
-                self.tableView.reloadData()
-                
-            }
-        }
-        
-        
 //        if (traitCollection.forceTouchCapability == .available) {
 //            registerForPreviewing(with: self, sourceView: self.tableView)
 //        }
@@ -616,42 +562,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
         self.navigationController?.view.addSubview(settingsButton)
         
-        
-        
-        if (UserDefaults.standard.object(forKey: "mentdef2") == nil) || (UserDefaults.standard.object(forKey: "mentdef2") as! Int == 0) {
-            
-        } else {
-            
-            self.currentIndex = 0
-            self.tableView.alpha = 0
-            
-            if self.notifications.isEmpty {
-                let request = Notifications.all(range: .default)
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        self.notifications = stat
-                        
-                        for x in stat {
-                            if x.type == .mention {
-                                if x.status?.visibility == .direct {
-                                    if self.prevUsersAdded.contains(x.account.acct) {} else {
-                                        self.prevUsersAdded.append(x.account.acct)
-                                        StoreStruct.notificationsDirect.append(x)
-                                    }
-                                }
-                            }
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                        
-                    }
-                }
-            } else {
-                self.tableView.reloadData()
-            }
-        }
     }
     
     
@@ -826,13 +736,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
             if StoreStruct.notificationsDirect.count == 0 || indexPath.row >= StoreStruct.notificationsDirect.count {
                 
-                self.fetchMoreNotifications()
-                if indexPath.row == StoreStruct.notificationsDirect.count {
-                    self.fetchMoreNotifications()
-                }
-                if indexPath.row < 7 {
-                    self.fetchMoreNotifications()
-                }
+//                self.fetchMoreNotifications()
                 
                 self.ai.stopAnimating()
                 self.ai.removeFromSuperview()
@@ -845,15 +749,11 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 return cell
             } else {
                 
-                
-                if indexPath.row == StoreStruct.notificationsDirect.count {
-                    self.fetchMoreNotifications()
-                }
-                if indexPath.row < 7 {
+                if indexPath.row == StoreStruct.notificationsDirect.count - 7 {
                     self.fetchMoreNotifications()
                 }
                 
-                if let hasStatus = StoreStruct.notificationsDirect[indexPath.row].status {
+                if let hasStatus = StoreStruct.notificationsDirect[indexPath.row].lastStatus {
                     
                         let cell = tableView.dequeueReusableCell(withIdentifier: "cell444", for: indexPath) as! DMFeedCell
                         cell.delegate = self
@@ -864,7 +764,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                         cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
                         
-                        cell.configure(StoreStruct.notificationsDirect[indexPath.row].status!)
+                        cell.configure(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
                         cell.moreImage.image = nil
                         cell.profileImageView.tag = indexPath.row
                         cell.userTag.tag = indexPath.row
@@ -882,7 +782,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             }
                             
                             var newString = string
-                            for z2 in StoreStruct.notificationsDirect[indexPath.row].status!.mentions {
+                            for z2 in StoreStruct.notificationsDirect[indexPath.row].lastStatus!.mentions {
                                 if z2.acct.contains(string) {
                                     newString = z2.id
                                 }
@@ -960,7 +860,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                     cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
                     
-                    cell.configure(StoreStruct.notificationsDirect[indexPath.row].status!)
+                    cell.configure(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
                     cell.moreImage.image = nil
                     cell.backgroundColor = Colours.white
                     //cell.userName.textColor = Colours.black
@@ -974,7 +874,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         }
                         
                         var newString = string
-                        for z2 in StoreStruct.notificationsDirect[indexPath.row].status!.mentions {
+                        for z2 in StoreStruct.notificationsDirect[indexPath.row].lastStatus!.mentions {
                             if z2.acct.contains(string) {
                                 newString = z2.id
                             }
@@ -1053,19 +953,14 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             let selection = UISelectionFeedbackGenerator()
             selection.selectionChanged()
         }
-        
+
         var sto = StoreStruct.notificationsDirect
-        
-        print(sender.tag)
-        print(sto[sender.tag].account.username)
-        print(sto[0].account.username)
-        print("test")
-        
+
         let controller = ThirdViewController()
-        if sto[sender.tag].account.username == StoreStruct.currentUser.username {} else {
+        if sto[sender.tag].lastStatus!.account.username == StoreStruct.currentUser.username {} else {
             controller.fromOtherUser = true
         }
-        controller.userIDtoUse = sto[sender.tag].account.id
+        controller.userIDtoUse = sto[sender.tag].lastStatus!.account.id
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -1089,13 +984,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             rrr = 1
         }
         
-        if sto[sender.tag].status!.reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].status?.id ?? "" ) {
-            StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != sto[sender.tag].status?.id ?? ""  }
-            let request2 = Statuses.unreblog(id: sto[sender.tag].status?.id ?? "" )
+        if sto[sender.tag].lastStatus!.reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
+            StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != sto[sender.tag].lastStatus?.id ?? ""  }
+            let request2 = Statuses.unreblog(id: sto[sender.tag].lastStatus?.id ?? "" )
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
-                        if sto[sender.tag].status!.favourited! || StoreStruct.allLikes.contains(sto[sender.tag].status?.id ?? "" ) {
+                        if sto[sender.tag].lastStatus!.favourited! || StoreStruct.allLikes.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "like")
                         } else {
@@ -1108,8 +1003,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 }
             }
         } else {
-            StoreStruct.allBoosts.append(sto[sender.tag].status?.id ?? "" )
-            let request2 = Statuses.reblog(id: sto[sender.tag].status?.id ?? "" )
+            StoreStruct.allBoosts.append(sto[sender.tag].lastStatus?.id ?? "" )
+            let request2 = Statuses.reblog(id: sto[sender.tag].lastStatus?.id ?? "" )
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
                     if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
@@ -1117,7 +1012,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     }
                     
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
-                        if sto[sender.tag].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].status?.id ?? "" ) {
+                        if sto[sender.tag].lastStatus!.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
@@ -1151,13 +1046,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             rrr = 1
         }
         
-        if sto[sender.tag].status!.favourited! || StoreStruct.allLikes.contains(sto[sender.tag].status?.id ?? "" ) {
-            StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[sender.tag].status?.id ?? "" }
-            let request2 = Statuses.unfavourite(id: sto[sender.tag].status?.id ?? "" )
+        if sto[sender.tag].lastStatus!.favourited! || StoreStruct.allLikes.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
+            StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[sender.tag].lastStatus?.id ?? "" }
+            let request2 = Statuses.unfavourite(id: sto[sender.tag].lastStatus?.id ?? "" )
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
-                        if sto[sender.tag].status!.reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].status?.id ?? "" ) {
+                        if sto[sender.tag].lastStatus!.reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "boost")
                         } else {
@@ -1170,15 +1065,15 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 }
             }
         } else {
-            StoreStruct.allLikes.append(sto[sender.tag].status?.id ?? "" )
-            let request2 = Statuses.favourite(id: sto[sender.tag].status?.id ?? "" )
+            StoreStruct.allLikes.append(sto[sender.tag].lastStatus?.id ?? "" )
+            let request2 = Statuses.favourite(id: sto[sender.tag].lastStatus?.id ?? "" )
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
                     if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateLi"), object: nil)
                     }
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
-                        if sto[sender.tag].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].status?.id ?? "" ) {
+                        if sto[sender.tag].lastStatus!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
@@ -1208,11 +1103,11 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             theTable = self.tableView
         
         let controller = ComposeViewController()
-        StoreStruct.spoilerText = sto[sender.tag].status?.spoilerText ?? ""
-        controller.inReply = [sto[sender.tag].status!]
-        controller.inReplyText = sto[sender.tag].account.username
-        controller.prevTextReply = sto[sender.tag].status!.content.stripHTML()
-        print(sto[sender.tag].account.username)
+        StoreStruct.spoilerText = sto[sender.tag].lastStatus?.spoilerText ?? ""
+        controller.inReply = [sto[sender.tag].lastStatus!]
+        controller.inReplyText = sto[sender.tag].lastStatus!.account.username
+        controller.prevTextReply = sto[sender.tag].lastStatus!.content.stripHTML()
+        print(sto[sender.tag].lastStatus!.account.username)
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -1257,13 +1152,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     
                     
                     
-                    if sto[indexPath.row].status!.favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
-                        StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[indexPath.row].status?.id ?? "" }
-                        let request2 = Statuses.unfavourite(id: sto[indexPath.row].status?.id ?? "" )
+                    if sto[indexPath.row].lastStatus!.favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
+                        StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[indexPath.row].lastStatus?.id ?? "" }
+                        let request2 = Statuses.unfavourite(id: sto[indexPath.row].lastStatus?.id ?? "" )
                         StoreStruct.client.run(request2) { (statuses) in
                             DispatchQueue.main.async {
                                 if let cell = theTable.cellForRow(at: indexPath) as? DMFeedCell {
-                                    if sto[indexPath.row].status!.reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
+                                    if sto[indexPath.row].lastStatus!.reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "boost")
                                     } else {
@@ -1274,15 +1169,15 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             }
                         }
                     } else {
-                        StoreStruct.allLikes.append(sto[indexPath.row].status?.id ?? "" )
-                        let request2 = Statuses.favourite(id: sto[indexPath.row].status?.id ?? "" )
+                        StoreStruct.allLikes.append(sto[indexPath.row].lastStatus?.id ?? "" )
+                        let request2 = Statuses.favourite(id: sto[indexPath.row].lastStatus?.id ?? "" )
                         StoreStruct.client.run(request2) { (statuses) in
                             DispatchQueue.main.async {
                                 if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateLi"), object: nil)
                                 }
                                 if let cell = theTable.cellForRow(at: indexPath) as? DMFeedCell {
-                                    if sto[indexPath.row].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
+                                    if sto[indexPath.row].lastStatus!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
                                     } else {
@@ -1314,11 +1209,11 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
-                    StoreStruct.spoilerText = sto[indexPath.row].status?.spoilerText ?? ""
-                    controller.inReply = [sto[indexPath.row].status!]
-                    controller.inReplyText = sto[indexPath.row].account.username
-                    controller.prevTextReply = sto[indexPath.row].status!.content.stripHTML()
-                    print(sto[indexPath.row].account.username)
+                    StoreStruct.spoilerText = sto[indexPath.row].lastStatus?.spoilerText ?? ""
+                    controller.inReply = [sto[indexPath.row].lastStatus!]
+                    controller.inReplyText = sto[indexPath.row].lastStatus!.account.username
+                    controller.prevTextReply = sto[indexPath.row].lastStatus!.content.stripHTML()
+                    print(sto[indexPath.row].lastStatus!.account.username)
                     self.present(controller, animated: true, completion: nil)
                     
                     
@@ -1327,7 +1222,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     }
                 }
                 reply.backgroundColor = Colours.white
-                if sto[indexPath.row].status?.visibility == .direct {
+                if sto[indexPath.row].lastStatus?.visibility == .direct {
                     reply.image = UIImage(named: "direct2")
                 } else {
                     reply.image = UIImage(named: "reply")
@@ -1365,7 +1260,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     let request0 = Mutes.all()
                     StoreStruct.client.run(request0) { (statuses) in
                         if let stat = (statuses.value) {
-                            let s = stat.filter { $0.id == sto[indexPath.row].account.id }
+                            let s = stat.filter { $0.id == sto[indexPath.row].lastStatus!.account.id }
                             if s.isEmpty {
                                 isMuted = false
                             } else {
@@ -1377,7 +1272,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     let request01 = Blocks.all()
                     StoreStruct.client.run(request01) { (statuses) in
                         if let stat = (statuses.value) {
-                            let s = stat.filter { $0.id == sto[indexPath.row].account.id }
+                            let s = stat.filter { $0.id == sto[indexPath.row].lastStatus!.account.id }
                             if s.isEmpty {
                                 isBlocked = false
                             } else {
@@ -1386,7 +1281,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         }
                     }
                     
-                    let wordsInThis = (sto[indexPath.row].status?.content.stripHTML() ?? "").components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+                    let wordsInThis = (sto[indexPath.row].lastStatus?.content.stripHTML() ?? "").components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
                     let newSeconds = Double(wordsInThis) * 0.38
                     var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
                     if newSeconds >= 60 {
@@ -1415,12 +1310,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
                                 statusAlert.title = "Muted".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].account.displayName
+                                statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                                     statusAlert.show()
                                 }
                                 
-                                let request = Accounts.mute(id: sto[indexPath.row].account.id)
+                                let request = Accounts.mute(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("muted")
@@ -1436,12 +1331,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
                                 statusAlert.title = "Unmuted".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].account.displayName
+                                statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                                     statusAlert.show()
                                 }
                                 
-                                let request = Accounts.unmute(id: sto[indexPath.row].account.id)
+                                let request = Accounts.unmute(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("unmuted")
@@ -1463,12 +1358,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
                                 statusAlert.title = "Blocked".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].account.displayName
+                                statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                                     statusAlert.show()
                                 }
                                 
-                                let request = Accounts.block(id: sto[indexPath.row].account.id)
+                                let request = Accounts.block(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("blocked")
@@ -1484,12 +1379,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
                                 statusAlert.title = "Unblocked".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].account.displayName
+                                statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                                     statusAlert.show()
                                 }
                                 
-                                let request = Accounts.unblock(id: sto[indexPath.row].account.id)
+                                let request = Accounts.unblock(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("unblocked")
@@ -1526,7 +1421,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                         statusAlert.show()
                                     }
                                     
-                                    let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "Harassment")
+                                    let request = Reports.report(accountID: sto[indexPath.row].lastStatus!.account.id, statusIDs: [sto[indexPath.row].lastStatus?.id ?? ""], reason: "Harassment")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
@@ -1552,7 +1447,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                         statusAlert.show()
                                     }
                                     
-                                    let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "No Content Warning")
+                                    let request = Reports.report(accountID: sto[indexPath.row].lastStatus!.account.id, statusIDs: [sto[indexPath.row].lastStatus?.id ?? ""], reason: "No Content Warning")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
@@ -1578,7 +1473,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                         statusAlert.show()
                                     }
                                     
-                                    let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "Spam")
+                                    let request = Reports.report(accountID: sto[indexPath.row].lastStatus!.account.id, statusIDs: [sto[indexPath.row].lastStatus?.id ?? ""], reason: "Spam")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
@@ -1604,7 +1499,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             let unreserved = "-._~/?"
                             let allowed = NSMutableCharacterSet.alphanumeric()
                             allowed.addCharacters(in: unreserved)
-                            let bodyText = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            let bodyText = sto[indexPath.row].lastStatus?.content.stripHTML() ?? ""
                             let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
                             let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
                             var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
@@ -1654,7 +1549,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             let controller = ComposeViewController()
                             controller.inReply = []
                             controller.inReplyText = ""
-                            controller.filledTextFieldText = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            controller.filledTextFieldText = sto[indexPath.row].lastStatus?.content.stripHTML() ?? ""
                             self.present(controller, animated: true, completion: nil)
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
@@ -1672,7 +1567,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
                                     print(action, ind)
                                     
-                                    if let myWebsite = sto[indexPath.row].status?.url {
+                                    if let myWebsite = sto[indexPath.row].lastStatus?.url {
                                         let objectsToShare = [myWebsite]
                                         let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
                                         vc.popoverPresentationController?.sourceView = self.view
@@ -1684,7 +1579,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
                                     print(action, ind)
                                     
-                                    let bodyText = sto[indexPath.row].status?.content.stripHTML()
+                                    let bodyText = sto[indexPath.row].lastStatus?.content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText ?? "")
                                     vc.popoverPresentationController?.sourceView = self.view
                                     vc.previewNumberOfLines = 5
@@ -1696,7 +1591,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     print(action, ind)
                                     
                                     let controller = NewQRViewController()
-                                    controller.ur = sto[indexPath.row].status?.url?.absoluteString ?? "https://www.thebluebird.app"
+                                    controller.ur = sto[indexPath.row].lastStatus?.url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     
                                 }
@@ -1745,13 +1640,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     }
                     
                     
-                    if sto[indexPath.row].status!.reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
-                        StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != sto[indexPath.row].status?.id ?? ""  }
-                        let request2 = Statuses.unreblog(id: sto[indexPath.row].status?.id ?? "" )
+                    if sto[indexPath.row].lastStatus!.reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
+                        StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != sto[indexPath.row].lastStatus?.id ?? ""  }
+                        let request2 = Statuses.unreblog(id: sto[indexPath.row].lastStatus?.id ?? "" )
                         StoreStruct.client.run(request2) { (statuses) in
                             DispatchQueue.main.async {
                                 if let cell = theTable.cellForRow(at: indexPath) as? DMFeedCell {
-                                    if sto[indexPath.row].status!.favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
+                                    if sto[indexPath.row].lastStatus!.favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "like")
                                     } else {
@@ -1762,8 +1657,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             }
                         }
                     } else {
-                        StoreStruct.allBoosts.append(sto[indexPath.row].status?.id ?? "" )
-                        let request2 = Statuses.reblog(id: sto[indexPath.row].status?.id ?? "" )
+                        StoreStruct.allBoosts.append(sto[indexPath.row].lastStatus?.id ?? "" )
+                        let request2 = Statuses.reblog(id: sto[indexPath.row].lastStatus?.id ?? "" )
                         StoreStruct.client.run(request2) { (statuses) in
                             DispatchQueue.main.async {
                                 if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
@@ -1771,7 +1666,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 }
                                 
                                 if let cell = theTable.cellForRow(at: indexPath) as? DMFeedCell {
-                                    if sto[indexPath.row].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
+                                    if sto[indexPath.row].lastStatus!.favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
                                     } else {
@@ -1811,13 +1706,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     
                     
                     
-                    if sto[indexPath.row].status!.favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
-                        StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[indexPath.row].status?.id ?? "" }
-                        let request2 = Statuses.unfavourite(id: sto[indexPath.row].status?.id ?? "" )
+                    if sto[indexPath.row].lastStatus!.favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
+                        StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[indexPath.row].lastStatus?.id ?? "" }
+                        let request2 = Statuses.unfavourite(id: sto[indexPath.row].lastStatus?.id ?? "" )
                         StoreStruct.client.run(request2) { (statuses) in
                             DispatchQueue.main.async {
                                 if let cell = theTable.cellForRow(at: indexPath) as? DMFeedCell {
-                                    if sto[indexPath.row].status!.reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
+                                    if sto[indexPath.row].lastStatus!.reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "boost")
                                     } else {
@@ -1828,15 +1723,15 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             }
                         }
                     } else {
-                        StoreStruct.allLikes.append(sto[indexPath.row].status?.id ?? "" )
-                        let request2 = Statuses.favourite(id: sto[indexPath.row].status?.id ?? "" )
+                        StoreStruct.allLikes.append(sto[indexPath.row].lastStatus?.id ?? "" )
+                        let request2 = Statuses.favourite(id: sto[indexPath.row].lastStatus?.id ?? "" )
                         StoreStruct.client.run(request2) { (statuses) in
                             DispatchQueue.main.async {
                                 if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateLi"), object: nil)
                                 }
                                 if let cell = theTable.cellForRow(at: indexPath) as? DMFeedCell {
-                                    if sto[indexPath.row].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
+                                    if sto[indexPath.row].lastStatus!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
                                     } else {
@@ -1868,11 +1763,11 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
-                    StoreStruct.spoilerText = sto[indexPath.row].status?.spoilerText ?? ""
-                    controller.inReply = [sto[indexPath.row].status!]
-                    controller.inReplyText = sto[indexPath.row].account.username
-                    controller.prevTextReply = sto[indexPath.row].status!.content.stripHTML()
-                    print(sto[indexPath.row].account.username)
+                    StoreStruct.spoilerText = sto[indexPath.row].lastStatus?.spoilerText ?? ""
+                    controller.inReply = [sto[indexPath.row].lastStatus!]
+                    controller.inReplyText = sto[indexPath.row].lastStatus!.account.username
+                    controller.prevTextReply = sto[indexPath.row].lastStatus!.content.stripHTML()
+                    print(sto[indexPath.row].lastStatus!.account.username)
                     self.present(controller, animated: true, completion: nil)
                     
                     
@@ -1881,7 +1776,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     }
                 }
                 reply.backgroundColor = Colours.white
-                if sto[indexPath.row].status?.visibility == .direct {
+                if sto[indexPath.row].lastStatus?.visibility == .direct {
                     reply.image = UIImage(named: "direct2")
                 } else {
                     reply.image = UIImage(named: "reply")
@@ -1890,7 +1785,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 reply.textColor = Colours.tabUnselected
                 
                 
-                if sto[indexPath.row].status?.visibility == .direct {
+                if sto[indexPath.row].lastStatus?.visibility == .direct {
                     if (UserDefaults.standard.object(forKey: "sworder") == nil) || (UserDefaults.standard.object(forKey: "sworder") as! Int == 0) {
                         return [reply, like]
                     } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 1) {
@@ -1935,7 +1830,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     let request0 = Mutes.all()
                     StoreStruct.client.run(request0) { (statuses) in
                         if let stat = (statuses.value) {
-                            let s = stat.filter { $0.id == sto[indexPath.row].account.id }
+                            let s = stat.filter { $0.id == sto[indexPath.row].lastStatus!.account.id }
                             if s.isEmpty {
                                 isMuted = false
                             } else {
@@ -1947,7 +1842,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     let request01 = Blocks.all()
                     StoreStruct.client.run(request01) { (statuses) in
                         if let stat = (statuses.value) {
-                            let s = stat.filter { $0.id == sto[indexPath.row].account.id }
+                            let s = stat.filter { $0.id == sto[indexPath.row].lastStatus!.account.id }
                             if s.isEmpty {
                                 isBlocked = false
                             } else {
@@ -1956,7 +1851,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         }
                     }
                     
-                    let wordsInThis = (sto[indexPath.row].status?.content.stripHTML() ?? "").components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+                    let wordsInThis = (sto[indexPath.row].lastStatus?.content.stripHTML() ?? "").components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
                     let newSeconds = Double(wordsInThis) * 0.38
                     var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
                     if newSeconds >= 60 {
@@ -1985,12 +1880,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
                                 statusAlert.title = "Muted".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].account.displayName
+                                statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                                     statusAlert.show()
                                 }
                                 
-                                let request = Accounts.mute(id: sto[indexPath.row].account.id)
+                                let request = Accounts.mute(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("muted")
@@ -2006,12 +1901,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
                                 statusAlert.title = "Unmuted".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].account.displayName
+                                statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                                     statusAlert.show()
                                 }
                                 
-                                let request = Accounts.unmute(id: sto[indexPath.row].account.id)
+                                let request = Accounts.unmute(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("unmuted")
@@ -2033,12 +1928,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
                                 statusAlert.title = "Blocked".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].account.displayName
+                                statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                                     statusAlert.show()
                                 }
                                 
-                                let request = Accounts.block(id: sto[indexPath.row].account.id)
+                                let request = Accounts.block(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("blocked")
@@ -2054,12 +1949,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.image = UIImage(named: "block2large")?.maskWithColor(color: Colours.grayDark)
                                 statusAlert.title = "Unblocked".localized
                                 statusAlert.contentColor = Colours.grayDark
-                                statusAlert.message = sto[indexPath.row].account.displayName
+                                statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                                     statusAlert.show()
                                 }
                                 
-                                let request = Accounts.unblock(id: sto[indexPath.row].account.id)
+                                let request = Accounts.unblock(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("unblocked")
@@ -2096,7 +1991,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                         statusAlert.show()
                                     }
                                     
-                                    let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "Harassment")
+                                    let request = Reports.report(accountID: sto[indexPath.row].lastStatus!.account.id, statusIDs: [sto[indexPath.row].lastStatus?.id ?? ""], reason: "Harassment")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
@@ -2122,7 +2017,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                         statusAlert.show()
                                     }
                                     
-                                    let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "No Content Warning")
+                                    let request = Reports.report(accountID: sto[indexPath.row].lastStatus!.account.id, statusIDs: [sto[indexPath.row].lastStatus?.id ?? ""], reason: "No Content Warning")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
@@ -2148,7 +2043,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                         statusAlert.show()
                                     }
                                     
-                                    let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "Spam")
+                                    let request = Reports.report(accountID: sto[indexPath.row].lastStatus!.account.id, statusIDs: [sto[indexPath.row].lastStatus?.id ?? ""], reason: "Spam")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
@@ -2174,7 +2069,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             let unreserved = "-._~/?"
                             let allowed = NSMutableCharacterSet.alphanumeric()
                             allowed.addCharacters(in: unreserved)
-                            let bodyText = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            let bodyText = sto[indexPath.row].lastStatus?.content.stripHTML() ?? ""
                             let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
                             let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
                             var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
@@ -2224,7 +2119,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             let controller = ComposeViewController()
                             controller.inReply = []
                             controller.inReplyText = ""
-                            controller.filledTextFieldText = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            controller.filledTextFieldText = sto[indexPath.row].lastStatus?.content.stripHTML() ?? ""
                             self.present(controller, animated: true, completion: nil)
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
@@ -2242,7 +2137,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
                                     print(action, ind)
                                     
-                                    if let myWebsite = sto[indexPath.row].status?.url {
+                                    if let myWebsite = sto[indexPath.row].lastStatus?.url {
                                         let objectsToShare = [myWebsite]
                                         let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
                                         vc.popoverPresentationController?.sourceView = self.view
@@ -2254,7 +2149,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
                                     print(action, ind)
                                     
-                                    let bodyText = sto[indexPath.row].status?.content.stripHTML()
+                                    let bodyText = sto[indexPath.row].lastStatus?.content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText ?? "")
                                     vc.popoverPresentationController?.sourceView = self.view
                                     vc.previewNumberOfLines = 5
@@ -2266,7 +2161,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     print(action, ind)
                                     
                                     let controller = NewQRViewController()
-                                    controller.ur = sto[indexPath.row].status?.url?.absoluteString ?? "https://www.thebluebird.app"
+                                    controller.ur = sto[indexPath.row].lastStatus?.url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     
                                 }
@@ -2331,19 +2226,15 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         print(indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
         
-//        let controller = DMMessageViewController()
-//        controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
-//        self.navigationController?.pushViewController(controller, animated: true)
-        
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .phone :
             let controller = DMMessageViewController()
-            controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
+            controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
             self.navigationController?.pushViewController(controller, animated: true)
         case .pad:
             let controller = DMMessageViewController()
-            controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].status!)
+            controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
             self.splitViewController?.showDetailViewController(controller, sender: self)
             NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
         default:
@@ -2351,85 +2242,41 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
-    var prevUsersAdded: [String] = []
-    var lastThing = ""
-    var tempFetchedDirect = false
     func fetchMoreNotifications() {
-        let oldNotDirect = StoreStruct.notificationsDirect
-        
-        let request = Notifications.all(range: .max(id: self.notifications.last?.id ?? "", limit: 5000))
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                
-                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
-                    DispatchQueue.main.async {
-                    self.lastThing = stat.first?.id ?? ""
-                    self.notifications = self.notifications + stat
-                    
-                    for x in self.notifications {
-                        if x.type == .mention {
-                            if x.status?.visibility == .direct {
-                                if self.prevUsersAdded.contains(x.account.acct) {} else {
-                                    self.prevUsersAdded.append(x.account.acct)
-                                    self.tempFetchedDirect = true
-                                    StoreStruct.notificationsDirect.append(x)
-                                }
-                            }
+        let request = Timelines.conversations(range: .max(id: StoreStruct.notificationsDirect.last?.id ?? "", limit: 5000))
+//        DispatchQueue.global(qos: .userInitiated).async {
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    if stat.isEmpty {} else {
+                        DispatchQueue.main.async {
+                            self.ai.stopAnimating()
+                            self.ai.alpha = 0
+                            StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
+                            StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
+                            self.tableView.reloadData()
                         }
                     }
-                        
-                    
-                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
-                    
-                        
-                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
-                        
-                        self.tableView.reloadData()
-                        
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            self.fetchMoreNotifications()
-                        }
-                        
-                        self.tempFetchedDirect = false
-                    }
-                    
                 }
             }
-        }
+//        }
     }
     
     @objc func refreshCont() {
-        let request = Notifications.all(range: .min(id: self.notifications.first?.id ?? "", limit: 5000))
-        DispatchQueue.global(qos: .userInitiated).async {
+        let request = Timelines.conversations(range: .since(id: StoreStruct.notificationsDirect.first?.id ?? "", limit: 5000))
+//        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    DispatchQueue.main.async {
-                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
-                    
-                    self.notifications = stat + StoreStruct.notifications
-                    self.notifications = self.notifications.removeDuplicates()
-                    var co = 0
-                    for x in stat {
-                        if x.type == .mention {
-                            if x.status?.visibility == .direct {
-                                if self.prevUsersAdded.contains(x.account.acct) {} else {
-                                    self.prevUsersAdded.append(x.account.acct)
-                                    StoreStruct.notificationsDirect.append(x)
-                                }
-                            }
-                            co = co + 1
+                    if stat.isEmpty {} else {
+                        DispatchQueue.main.async {
+                            StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
+                            StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
+                            self.tableView.reloadData()
+                            self.refreshControl.endRefreshing()
                         }
-                    }
-                    
-                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { $0.createdAt > $1.createdAt })
-                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
-                        self.tableView.reloadData()
-                        self.refreshControl.endRefreshing()
-                        
                     }
                 }
             }
-        }
+//        }
     }
     
     
