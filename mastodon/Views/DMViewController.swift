@@ -48,8 +48,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     private var crownControl3: CrownControl!
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        
-            
             guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
             guard let cell = self.tableView.cellForRow(at: indexPath) else { return nil }
             let detailVC = DetailViewController()
@@ -59,7 +57,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             detailVC.isPeeking = true
             previewingContext.sourceRect = cell.frame
             return detailVC
-        
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
