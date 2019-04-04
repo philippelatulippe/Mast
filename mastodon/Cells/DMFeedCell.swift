@@ -34,6 +34,11 @@ class DMFeedCell: SwipeTableViewCell {
         warningB.backgroundColor = Colours.clear
         moreImage.backgroundColor = Colours.clear
         
+        userName.adjustsFontForContentSizeCategory = true
+        userTag.titleLabel?.adjustsFontForContentSizeCategory = true
+        date.adjustsFontForContentSizeCategory = true
+        toot.adjustsFontForContentSizeCategory = true
+        
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView2.translatesAutoresizingMaskIntoConstraints = false
         warningB.translatesAutoresizingMaskIntoConstraints = false

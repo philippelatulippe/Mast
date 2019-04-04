@@ -4702,17 +4702,38 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     }
                     controller.userIDtoUse = StoreStruct.notifications[indexPath.row].account.id
                     self.navigationController?.pushViewController(controller, animated: true)
+                } else if StoreStruct.notifications[indexPath.row].type == .mention && StoreStruct.notifications[indexPath.row].status?.visibility == .direct {
+                    if (UserDefaults.standard.object(forKey: "dmchats") == nil) || (UserDefaults.standard.object(forKey: "dmchats") as! Int == 0) {
+                        let controller = DMMessageViewController()
+                        controller.mainStatus.append(StoreStruct.notifications[indexPath.row].status!)
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    } else {
+                        let controller = DetailViewController()
+                        controller.mainStatus.append(StoreStruct.notifications[indexPath.row].status!)
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
                 } else {
                     let controller = DetailViewController()
                     controller.mainStatus.append(StoreStruct.notifications[indexPath.row].status!)
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
             }
-        } else if self.currentIndex == 5 {
         } else {
-            let controller = DetailViewController()
-            controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
-            self.navigationController?.pushViewController(controller, animated: true)
+            if StoreStruct.notificationsMentions[indexPath.row].status?.visibility == .direct {
+                if (UserDefaults.standard.object(forKey: "dmchats") == nil) || (UserDefaults.standard.object(forKey: "dmchats") as! Int == 0) {
+                    let controller = DMMessageViewController()
+                    controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
+                    self.navigationController?.pushViewController(controller, animated: true)
+                } else {
+                    let controller = DetailViewController()
+                    controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }
+            } else {
+                let controller = DetailViewController()
+                controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
         }
         case .pad:
             if self.currentIndex == 0 {
@@ -4724,6 +4745,18 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                         controller.userIDtoUse = StoreStruct.notifications[indexPath.row].account.id
                         self.navigationController?.pushViewController(controller, animated: true)
+                    } else if StoreStruct.notifications[indexPath.row].type == .mention && StoreStruct.notifications[indexPath.row].status?.visibility == .direct {
+                        if (UserDefaults.standard.object(forKey: "dmchats") == nil) || (UserDefaults.standard.object(forKey: "dmchats") as! Int == 0) {
+                            let controller = DMMessageViewController()
+                            controller.mainStatus.append(StoreStruct.notifications[indexPath.row].status!)
+                            self.splitViewController?.showDetailViewController(controller, sender: self)
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                        } else {
+                            let controller = DetailViewController()
+                            controller.mainStatus.append(StoreStruct.notifications[indexPath.row].status!)
+                            self.splitViewController?.showDetailViewController(controller, sender: self)
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                        }
                     } else {
                         let controller = DetailViewController()
                         controller.mainStatus.append(StoreStruct.notifications[indexPath.row].status!)
@@ -4731,12 +4764,25 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
                     }
                 }
-            } else if self.currentIndex == 5 {
             } else {
-                let controller = DetailViewController()
-                controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
-                self.splitViewController?.showDetailViewController(controller, sender: self)
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                if StoreStruct.notificationsMentions[indexPath.row].status?.visibility == .direct {
+                    if (UserDefaults.standard.object(forKey: "dmchats") == nil) || (UserDefaults.standard.object(forKey: "dmchats") as! Int == 0) {
+                        let controller = DMMessageViewController()
+                        controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
+                        self.splitViewController?.showDetailViewController(controller, sender: self)
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                    } else {
+                        let controller = DetailViewController()
+                        controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
+                        self.splitViewController?.showDetailViewController(controller, sender: self)
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                    }
+                } else {
+                    let controller = DetailViewController()
+                    controller.mainStatus.append(StoreStruct.notificationsMentions[indexPath.row].status!)
+                    self.splitViewController?.showDetailViewController(controller, sender: self)
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+                }
             }
         default:
             print("nothing")
