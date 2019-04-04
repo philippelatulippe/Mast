@@ -15,7 +15,7 @@ import AVFoundation
 
 class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate {
     
-    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .circleStrokeSpin, color: Colours.tabSelected)
+    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var segmentedControl: SJFluidSegmentedControl!
     var tableView = UITableView()
     var currentIndex = 0
@@ -84,7 +84,7 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
         self.tableView.backgroundColor = Colours.white
         self.tableView.separatorColor = Colours.cellQuote
         self.tableView.layer.masksToBounds = true
-        self.tableView.estimatedRowHeight = 89
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
         

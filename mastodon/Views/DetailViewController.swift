@@ -538,7 +538,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.backgroundColor = Colours.white
         self.tableView.separatorColor = Colours.cellQuote
         self.tableView.layer.masksToBounds = true
-        self.tableView.estimatedRowHeight = 89
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
         
@@ -555,8 +555,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         if self.allPrevious.count == 0 {} else {
+                            var zCount = 0
+                            var zHeights: CGFloat = 0
+                            for _ in self.allReplies {
+                                zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount, section: 5)).height)
+                                zCount += 1
+                            }
+                            if self.allReplies.count != 0 {
+                                zHeights = zHeights + 40
+                            }
+                            let footerHe0 = self.tableView.bounds.height - self.tableView.rectForRow(at: IndexPath(row: 0, section: 1)).height - self.tableView.rectForRow(at: IndexPath(row: 0, section: 2)).height
+                            var footerHe = footerHe0 - self.tableView.rectForRow(at: IndexPath(row: 0, section: 3)).height - self.tableView.rectForRow(at: IndexPath(row: 0, section: 4)).height - zHeights
+                            if footerHe < 0 {
+                                footerHe = 0
+                            }
+                            let customViewFooter = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: footerHe))
+                            self.tableView.tableFooterView = customViewFooter
                             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: false)
-//                            self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentOffset.y + 1), animated: false)
                         }
                     }
                 }
@@ -568,8 +583,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             registerForPreviewing(with: self, sourceView: self.tableView)
         }
     }
-    
-    
     
     // Table stuff
     

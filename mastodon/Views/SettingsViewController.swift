@@ -247,7 +247,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.backgroundColor = Colours.white
         self.tableView.separatorColor = Colours.cellQuote
         self.tableView.layer.masksToBounds = true
-        self.tableView.estimatedRowHeight = 89
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
         

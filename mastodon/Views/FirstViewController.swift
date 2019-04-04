@@ -38,7 +38,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     var maybeDoOnce = false
     var searchButton = MNGExpandedTouchAreaButton()
     var settingsButton = MNGExpandedTouchAreaButton()
-    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .circleStrokeSpin, color: Colours.tabSelected)
+    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
     var segmentedControl: SJFluidSegmentedControl!
     var tableView = UITableView()
@@ -551,7 +551,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.backgroundColor = Colours.white
             self.tableView.separatorColor = Colours.cellQuote
             self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
             
@@ -566,7 +566,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewL.backgroundColor = Colours.white
             self.tableViewL.separatorColor = Colours.cellQuote
             self.tableViewL.layer.masksToBounds = true
-            self.tableViewL.estimatedRowHeight = 89
+            self.tableViewL.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewL.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewL)
             
@@ -581,7 +581,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewF.backgroundColor = Colours.white
             self.tableViewF.separatorColor = Colours.cellQuote
             self.tableViewF.layer.masksToBounds = true
-            self.tableViewF.estimatedRowHeight = 89
+            self.tableViewF.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewF.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewF)
             self.loadLoadLoad()
@@ -615,7 +615,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.backgroundColor = Colours.white
             self.tableView.separatorColor = Colours.cellQuote
             self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
             
@@ -630,7 +630,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewL.backgroundColor = Colours.white
             self.tableViewL.separatorColor = Colours.cellQuote
             self.tableViewL.layer.masksToBounds = true
-            self.tableViewL.estimatedRowHeight = 89
+            self.tableViewL.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewL.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewL)
             
@@ -645,7 +645,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewF.backgroundColor = Colours.white
             self.tableViewF.separatorColor = Colours.cellQuote
             self.tableViewF.layer.masksToBounds = true
-            self.tableViewF.estimatedRowHeight = 89
+            self.tableViewF.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewF.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewF)
             self.loadLoadLoad()
@@ -849,7 +849,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.backgroundColor = Colours.white
             self.tableView.separatorColor = Colours.cellQuote
             self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
             
@@ -864,7 +864,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewL.backgroundColor = Colours.white
             self.tableViewL.separatorColor = Colours.cellQuote
             self.tableViewL.layer.masksToBounds = true
-            self.tableViewL.estimatedRowHeight = 89
+            self.tableViewL.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewL.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewL)
             
@@ -879,7 +879,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewF.backgroundColor = Colours.white
             self.tableViewF.separatorColor = Colours.cellQuote
             self.tableViewF.layer.masksToBounds = true
-            self.tableViewF.estimatedRowHeight = 89
+            self.tableViewF.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewF.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewF)
         } else {
@@ -912,7 +912,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.backgroundColor = Colours.white
             self.tableView.separatorColor = Colours.cellQuote
             self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
             
@@ -927,7 +927,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewL.backgroundColor = Colours.white
             self.tableViewL.separatorColor = Colours.cellQuote
             self.tableViewL.layer.masksToBounds = true
-            self.tableViewL.estimatedRowHeight = 89
+            self.tableViewL.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewL.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewL)
             
@@ -942,7 +942,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewF.backgroundColor = Colours.white
             self.tableViewF.separatorColor = Colours.cellQuote
             self.tableViewF.layer.masksToBounds = true
-            self.tableViewF.estimatedRowHeight = 89
+            self.tableViewF.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewF.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewF)
         }
@@ -956,7 +956,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //self.tableView.addSubview(refreshControl)
         
-        tableView.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+        tableView.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let selection = UISelectionFeedbackGenerator()
                 selection.selectionChanged()
@@ -966,7 +966,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 self?.tableView.cr.endHeaderRefresh()
             })
         }
-        tableViewL.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+        tableViewL.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let selection = UISelectionFeedbackGenerator()
                 selection.selectionChanged()
@@ -977,7 +977,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 self?.tableViewL.cr.endHeaderRefresh()
             })
         }
-        tableViewF.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+        tableViewF.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let selection = UISelectionFeedbackGenerator()
                 selection.selectionChanged()
@@ -995,7 +995,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         
         
         
-        self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .circleStrokeSpin, color: Colours.tabSelected)
+        self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
         self.loadLoadLoad()
         
@@ -1871,9 +1871,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
     }
     
-    func firstRowHeight() -> CGFloat {
-        return tableView(tableView, heightForRowAt: IndexPath(row: 0, section: 0))
-    }
+//    func firstRowHeight() -> CGFloat {
+//        return tableView(tableView, heightForRowAt: IndexPath(row: 0, section: 0))
+//    }
     
     func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
         return 3
@@ -2062,9 +2062,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

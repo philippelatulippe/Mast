@@ -1087,7 +1087,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableView.backgroundColor = Colours.clear
         self.tableView.separatorColor = Colours.clear
         self.tableView.layer.masksToBounds = true
-        self.tableView.estimatedRowHeight = 89
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.bgView.addSubview(self.tableView)
         
@@ -1105,7 +1105,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableViewDrafts.backgroundColor = Colours.clear
         self.tableViewDrafts.separatorColor = Colours.clear
         self.tableViewDrafts.layer.masksToBounds = true
-        self.tableViewDrafts.estimatedRowHeight = 89
+        self.tableViewDrafts.estimatedRowHeight = UITableView.automaticDimension
         self.tableViewDrafts.rowHeight = UITableView.automaticDimension
         self.tableViewDrafts.reloadData()
         self.bgView.addSubview(self.tableViewDrafts)
@@ -1119,7 +1119,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableViewASCII.backgroundColor = Colours.clear
         self.tableViewASCII.separatorColor = Colours.clear
         self.tableViewASCII.layer.masksToBounds = true
-        self.tableViewASCII.estimatedRowHeight = 89
+        self.tableViewASCII.estimatedRowHeight = UITableView.automaticDimension
         self.tableViewASCII.rowHeight = UITableView.automaticDimension
         self.tableViewASCII.reloadData()
         self.bgView.addSubview(self.tableViewASCII)
@@ -1133,7 +1133,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableViewEmoti.backgroundColor = Colours.clear
         self.tableViewEmoti.separatorColor = Colours.clear
         self.tableViewEmoti.layer.masksToBounds = true
-        self.tableViewEmoti.estimatedRowHeight = 89
+        self.tableViewEmoti.estimatedRowHeight = UITableView.automaticDimension
         self.tableViewEmoti.rowHeight = UITableView.automaticDimension
         self.tableViewEmoti.reloadData()
         self.bgView.addSubview(self.tableViewEmoti)

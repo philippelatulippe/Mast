@@ -2618,7 +2618,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.tableViewLists.backgroundColor = Colours.grayDark3
         self.tableViewLists.separatorColor = UIColor(red: 50/250, green: 53/250, blue: 63/250, alpha: 1.0)
         self.tableViewLists.layer.masksToBounds = true
-        self.tableViewLists.estimatedRowHeight = 89
+        self.tableViewLists.estimatedRowHeight = UITableView.automaticDimension
         self.tableViewLists.rowHeight = UITableView.automaticDimension
         self.searcherView.addSubview(self.tableViewLists)
         
@@ -2744,7 +2744,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.tableView.backgroundColor = Colours.grayDark3
         self.tableView.separatorColor = UIColor(red: 50/250, green: 53/250, blue: 63/250, alpha: 1.0)
         self.tableView.layer.masksToBounds = true
-        self.tableView.estimatedRowHeight = 89
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.searcherView.addSubview(self.tableView)
         

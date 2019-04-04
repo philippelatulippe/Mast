@@ -19,7 +19,7 @@ import MessageUI
 
 class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, CrownControlDelegate, MFMailComposeViewControllerDelegate {
     
-    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .circleStrokeSpin, color: Colours.tabSelected)
+    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
     var profileImageView = UIImageView()
     var tableView = UITableView()
@@ -636,14 +636,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.tableView.backgroundColor = Colours.white
         self.tableView.separatorColor = Colours.cellQuote
         self.tableView.layer.masksToBounds = true
-        self.tableView.estimatedRowHeight = 89
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
         
         refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //self.tableView.addSubview(refreshControl)
         
-        self.ai = NVActivityIndicatorView(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 20), y: CGFloat(offset + 65), width: 40, height: 40), type: .circleStrokeSpin, color: Colours.tabSelected)
+        self.ai = NVActivityIndicatorView(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 20), y: CGFloat(offset + 65), width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
         self.loadLoadLoad()
         
@@ -651,7 +651,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         switch (deviceIdiom) {
         case .phone:
-            tableView.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+            tableView.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     let selection = UISelectionFeedbackGenerator()
                     selection.selectionChanged()
@@ -664,7 +664,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         case .pad:
             print("nothing")
         default:
-            tableView.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+            tableView.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     let selection = UISelectionFeedbackGenerator()
                     selection.selectionChanged()

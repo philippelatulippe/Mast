@@ -17,7 +17,7 @@ import AVFoundation
 
 class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate {
     
-    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .circleStrokeSpin, color: Colours.tabSelected)
+    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
     var segmentedControl: SJFluidSegmentedControl!
     var tableView = UITableView()
@@ -198,7 +198,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.tableView.backgroundColor = Colours.white
         self.tableView.separatorColor = Colours.cellQuote
         self.tableView.layer.masksToBounds = true
-        self.tableView.estimatedRowHeight = 89
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
         //        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
@@ -328,9 +328,9 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return self.currentTags.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

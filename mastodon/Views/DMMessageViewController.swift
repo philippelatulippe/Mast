@@ -20,7 +20,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
     var allReplies: [Status] = []
     var allPosts: [Status] = []
     var player = AVPlayer()
-    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .circleStrokeSpin, color: Colours.tabSelected)
+    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -81,7 +81,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         super.viewDidLoad()
         self.view.backgroundColor = Colours.white
         
-        self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .circleStrokeSpin, color: Colours.tabSelected)
+        self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
         
         messagesCollectionView.messageCellDelegate = self

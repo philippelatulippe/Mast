@@ -35,7 +35,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     var hMod: [Notificationt] = []
     var fMod: [Notificationt] = []
     var nsocket: WebSocket!
-    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .circleStrokeSpin, color: Colours.tabSelected)
+    var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
     var segmentedControl: SJFluidSegmentedControl!
     var tableView = UITableView()
@@ -334,7 +334,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView.backgroundColor = Colours.white
             self.tableView.separatorColor = Colours.cellQuote
             self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
             
@@ -348,7 +348,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView3.backgroundColor = Colours.white
             self.tableView3.separatorColor = Colours.cellQuote
             self.tableView3.layer.masksToBounds = true
-            self.tableView3.estimatedRowHeight = 89
+            self.tableView3.estimatedRowHeight = UITableView.automaticDimension
             self.tableView3.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView3)
             
@@ -363,7 +363,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.backgroundColor = Colours.white
             self.tableView2.separatorColor = Colours.cellQuote
             self.tableView2.layer.masksToBounds = true
-            self.tableView2.estimatedRowHeight = 89
+            self.tableView2.estimatedRowHeight = UITableView.automaticDimension
             self.tableView2.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView2)
             self.loadLoadLoad()
@@ -397,7 +397,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView.backgroundColor = Colours.white
             self.tableView.separatorColor = Colours.cellQuote
             self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
             
@@ -411,7 +411,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView3.backgroundColor = Colours.white
             self.tableView3.separatorColor = Colours.cellQuote
             self.tableView3.layer.masksToBounds = true
-            self.tableView3.estimatedRowHeight = 89
+            self.tableView3.estimatedRowHeight = UITableView.automaticDimension
             self.tableView3.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView3)
             
@@ -426,7 +426,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.backgroundColor = Colours.white
             self.tableView2.separatorColor = Colours.cellQuote
             self.tableView2.layer.masksToBounds = true
-            self.tableView2.estimatedRowHeight = 89
+            self.tableView2.estimatedRowHeight = UITableView.automaticDimension
             self.tableView2.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView2)
             self.loadLoadLoad()
@@ -697,7 +697,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView.backgroundColor = Colours.white
             self.tableView.separatorColor = Colours.cellQuote
             self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
             
@@ -711,7 +711,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView3.backgroundColor = Colours.white
             self.tableView3.separatorColor = Colours.cellQuote
             self.tableView3.layer.masksToBounds = true
-            self.tableView3.estimatedRowHeight = 89
+            self.tableView3.estimatedRowHeight = UITableView.automaticDimension
             self.tableView3.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView3)
             
@@ -726,7 +726,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.backgroundColor = Colours.white
             self.tableView2.separatorColor = Colours.cellQuote
             self.tableView2.layer.masksToBounds = true
-            self.tableView2.estimatedRowHeight = 89
+            self.tableView2.estimatedRowHeight = UITableView.automaticDimension
             self.tableView2.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView2)
         } else {
@@ -759,7 +759,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView.backgroundColor = Colours.white
             self.tableView.separatorColor = Colours.cellQuote
             self.tableView.layer.masksToBounds = true
-            self.tableView.estimatedRowHeight = 89
+            self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
             
@@ -773,7 +773,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView3.backgroundColor = Colours.white
             self.tableView3.separatorColor = Colours.cellQuote
             self.tableView3.layer.masksToBounds = true
-            self.tableView3.estimatedRowHeight = 89
+            self.tableView3.estimatedRowHeight = UITableView.automaticDimension
             self.tableView3.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView3)
             
@@ -788,7 +788,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.backgroundColor = Colours.white
             self.tableView2.separatorColor = Colours.cellQuote
             self.tableView2.layer.masksToBounds = true
-            self.tableView2.estimatedRowHeight = 89
+            self.tableView2.estimatedRowHeight = UITableView.automaticDimension
             self.tableView2.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView2)
         }
@@ -797,7 +797,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //self.tableView.addSubview(refreshControl)
         
-        tableView.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+        tableView.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let selection = UISelectionFeedbackGenerator()
                 selection.selectionChanged()
@@ -807,7 +807,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 self?.tableView.cr.endHeaderRefresh()
             })
         }
-        tableView2.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+        tableView2.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let selection = UISelectionFeedbackGenerator()
                 selection.selectionChanged()
@@ -817,7 +817,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 self?.tableView2.cr.endHeaderRefresh()
             })
         }
-        tableView3.cr.addHeadRefresh(animator: FastAnimator()) { [weak self] in
+        tableView3.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let selection = UISelectionFeedbackGenerator()
                 selection.selectionChanged()
@@ -830,7 +830,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         //tableView.cr.beginHeaderRefresh()
         
         
-        self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .circleStrokeSpin, color: Colours.tabSelected)
+        self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
         self.loadLoadLoad()
         
@@ -844,7 +844,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     
 //                    StoreStruct.notificationsMentions = []
                     
-                    StoreStruct.notificationsMentions = StoreStruct.notifications.filter({ (test) -> Bool in
+                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + StoreStruct.notifications.filter({ (test) -> Bool in
                         test.type == .mention
                     })
                     
@@ -869,7 +869,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
 //            StoreStruct.notificationsMentions = []
             
             
-            StoreStruct.notificationsMentions = StoreStruct.notifications.filter({ (test) -> Bool in
+            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + StoreStruct.notifications.filter({ (test) -> Bool in
                 test.type == .mention
             })
             
@@ -4792,9 +4792,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     var lastThing = ""
     var tempFetchedDirect = false
     func fetchMoreNotifications() {
-        let oldNot = StoreStruct.notifications
-        let oldNotMentions = StoreStruct.notificationsMentions
-        
         let request = Notifications.all(range: .max(id: StoreStruct.notifications.last?.id ?? "", limit: 5000))
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
