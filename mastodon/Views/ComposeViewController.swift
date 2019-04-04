@@ -1857,7 +1857,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         })
         
         
-        Alertift.actionSheet(title: nil, message: nil)
+        Alertift.actionSheet(title: nil, message: "Public: Ee=veryone can see\n\nUnlisted: Everyone apart from local and federated timelines can see\n\nPrivate: Followers and mentioned users can see\n\nDirect: Only the mentioned users can see")
             .backgroundColor(Colours.white)
             .titleTextColor(Colours.grayDark)
             .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))

@@ -14,7 +14,7 @@ import SAConfettiView
 import AVKit
 import AVFoundation
 
-class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate {
+class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, UIScrollViewDelegate {
     
     var safariVC: SFSafariViewController?
     var tableView = UITableView()
@@ -28,6 +28,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var boostButton = UIButton()
     var moreButton = UIButton()
     var splitButton = UIButton()
+    let detailPrev = UIButton()
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
@@ -542,6 +543,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
         
+        self.detailPrev.frame = CGRect(x: Int(self.view.bounds.width) - 53, y: Int(offset + 15), width: 40, height: 40)
+        self.detailPrev.setImage(UIImage(named: "detailprev"), for: .normal)
+        self.detailPrev.backgroundColor = UIColor.clear
+        self.detailPrev.alpha = 0
+        self.detailPrev.addTarget(self, action: #selector(self.didTouchDetailPrev), for: .touchUpInside)
+        self.view.addSubview(self.detailPrev)
         
         if self.mainStatus.isEmpty {} else {
             
@@ -555,6 +562,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         if self.allPrevious.count == 0 {} else {
+                            self.detailPrev.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+                            UIView.animate(withDuration: 0.18, delay: 0, options: .curveEaseOut, animations: {
+                                self.detailPrev.alpha = 1
+                                self.detailPrev.transform = CGAffineTransform(scaleX: 1, y: 1)
+                            }) { (completed: Bool) in
+                            }
                             var zCount = 0
                             var zHeights: CGFloat = 0
                             for _ in self.allReplies {
@@ -581,6 +594,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if (traitCollection.forceTouchCapability == .available) {
             registerForPreviewing(with: self, sourceView: self.tableView)
+        }
+    }
+    
+    @objc func didTouchDetailPrev() {
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        UIView.animate(withDuration: 0.18, delay: 0, options: .curveEaseOut, animations: {
+            self.detailPrev.alpha = 0
+            self.detailPrev.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        }) { (completed: Bool) in
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        UIView.animate(withDuration: 0.18, delay: 0, options: .curveEaseOut, animations: {
+            self.detailPrev.alpha = 0
+            self.detailPrev.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        }) { (completed: Bool) in
         }
     }
     
