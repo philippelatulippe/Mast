@@ -26,45 +26,6 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         super.viewWillAppear(true)
         
         self.ai.startAnimating()
-        
-        if self.mainStatus.isEmpty {} else {
-            let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
-                    self.allPrevious = (stat.ancestors)
-                    self.allReplies = (stat.descendants)
-                    
-                    DispatchQueue.main.async {
-                        for z in self.allPrevious + self.mainStatus + self.allReplies {
-                            var theType = "0"
-                            if z.account.acct == StoreStruct.currentUser.acct {
-                                theType = "1"
-                            }
-                            let sender = Sender(id: theType, displayName: "\(z.account.displayName)")
-                            let x = MockMessage.init(text: z.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""), sender: sender, messageId: z.id, date: Date())
-                            self.messages.append(x)
-                            self.allPosts.append(z)
-                            
-                            if z.mediaAttachments.isEmpty {} else {
-                                let url = URL(string: z.mediaAttachments.first?.previewURL ?? "")
-                                let imageData = try! Data(contentsOf: url!)
-                                let image1 = UIImage(data: imageData)
-                                let y = MockMessage.init(image: image1!, sender: sender, messageId: z.id, date: Date())
-                                self.messages.append(y)
-                                self.allPosts.append(z)
-                            }
-                            
-                            self.ai.stopAnimating()
-                            self.ai.alpha = 0
-                            self.ai.removeFromSuperview()
-                            
-                            self.messagesCollectionView.reloadData()
-                            self.messagesCollectionView.scrollToBottom()
-                        }
-                    }
-                }
-            }
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -148,6 +109,45 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         }
         let bottomItems = [charCountButton]
         messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
+        
+        if self.mainStatus.isEmpty {} else {
+            let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    self.allPrevious = (stat.ancestors)
+                    self.allReplies = (stat.descendants)
+                    
+                    DispatchQueue.main.async {
+                        for z in self.allPrevious + self.mainStatus + self.allReplies {
+                            var theType = "0"
+                            if z.account.acct == StoreStruct.currentUser.acct {
+                                theType = "1"
+                            }
+                            let sender = Sender(id: theType, displayName: "\(z.account.displayName)")
+                            let x = MockMessage.init(text: z.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""), sender: sender, messageId: z.id, date: Date())
+                            self.messages.append(x)
+                            self.allPosts.append(z)
+                            
+                            if z.mediaAttachments.isEmpty {} else {
+                                let url = URL(string: z.mediaAttachments.first?.previewURL ?? "")
+                                let imageData = try! Data(contentsOf: url!)
+                                let image1 = UIImage(data: imageData)
+                                let y = MockMessage.init(image: image1!, sender: sender, messageId: z.id, date: Date())
+                                self.messages.append(y)
+                                self.allPosts.append(z)
+                            }
+                            
+                            self.ai.stopAnimating()
+                            self.ai.alpha = 0
+                            self.ai.removeFromSuperview()
+                            
+                            self.messagesCollectionView.reloadData()
+                            self.messagesCollectionView.scrollToBottom()
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func didTapAvatar(in cell: MessageCollectionViewCell) {

@@ -301,27 +301,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.ai.startAnimating()
         }
         
-        
-        if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
-            settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)
-            settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-            settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-            settingsButton.imageView?.layer.cornerRadius = 0
-            settingsButton.imageView?.contentMode = .scaleAspectFill
-            settingsButton.layer.masksToBounds = true
-        } else {
-            settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 36, height: 36)
-            if StoreStruct.currentUser != nil {
-                settingsButton.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatarStatic)"))
-            }
-            settingsButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            settingsButton.imageView?.layer.cornerRadius = 18
-            settingsButton.imageView?.contentMode = .scaleAspectFill
-            settingsButton.layer.masksToBounds = true
-        }
-        settingsButton.adjustsImageWhenHighlighted = false
-        settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
-        self.navigationController?.view.addSubview(settingsButton)
     }
     
     
@@ -1127,6 +1106,28 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        
+        if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
+            settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)
+            settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+            settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            settingsButton.imageView?.layer.cornerRadius = 0
+            settingsButton.imageView?.contentMode = .scaleAspectFill
+            settingsButton.layer.masksToBounds = true
+        } else {
+            settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 36, height: 36)
+            if StoreStruct.currentUser != nil {
+                settingsButton.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatarStatic)"))
+            }
+            settingsButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            settingsButton.imageView?.layer.cornerRadius = 18
+            settingsButton.imageView?.contentMode = .scaleAspectFill
+            settingsButton.layer.masksToBounds = true
+        }
+        settingsButton.adjustsImageWhenHighlighted = false
+        settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
+        self.navigationController?.view.addSubview(settingsButton)
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -4963,7 +4964,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.countcount1 = newestC
                                 
 //                                UIView.setAnimationsEnabled(false)
-                                self.tableView.reloadData()
+                                if stat.count > 0 {
+                                    self.tableView.reloadData()
+                                }
                                 self.refreshControl.endRefreshing()
                                 if newestC <= 0 {
                                     
@@ -4980,7 +4983,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 }
 //                                UIView.setAnimationsEnabled(true)
                             } else {
-                                self.tableView.reloadData()
+                                if stat.count > 0 {
+                                    self.tableView.reloadData()
+                                }
                                 self.refreshControl.endRefreshing()
                             }
                             
@@ -5047,7 +5052,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.countcount2 = newestC
                                 
 //                                UIView.setAnimationsEnabled(false)
-                                self.tableViewL.reloadData()
+                                if stat.count > 0 {
+                                    self.tableViewL.reloadData()
+                                }
                                 self.refreshControl.endRefreshing()
                                 if newestC <= 0 {
                                     
@@ -5065,7 +5072,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
 //                                UIView.setAnimationsEnabled(true)
                             } else {
                                 
-                                self.tableViewL.reloadData()
+                                if stat.count > 0 {
+                                    self.tableViewL.reloadData()
+                                }
                                 self.refreshControl.endRefreshing()
                                 
                             }
@@ -5133,7 +5142,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.countcount3 = newestC
                                 
 //                                UIView.setAnimationsEnabled(false)
-                                self.tableViewF.reloadData()
+                                if stat.count > 0 {
+                                    self.tableViewF.reloadData()
+                                }
                                 self.refreshControl.endRefreshing()
                                 if newestC <= 0 {
                                     
@@ -5152,7 +5163,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 
                             } else {
                                 
-                                self.tableViewF.reloadData()
+                                if stat.count > 0 {
+                                    self.tableViewF.reloadData()
+                                }
                                 self.refreshControl.endRefreshing()
                                 
                             }

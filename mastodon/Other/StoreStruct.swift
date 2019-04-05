@@ -152,6 +152,7 @@ class StoreStruct {
     static var holdOnTempText = ""
     
     static var tappedSignInCheck = false
+    static var markedReadIDs: [String] = []
 }
 
 class TextStyling {

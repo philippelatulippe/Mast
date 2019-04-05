@@ -59,4 +59,12 @@ public struct Timelines {
         
         return Request<[Conversation]>(path: "/api/v1/conversations", method: method)
     }
+    
+    /// Updates the conversation read status.
+    ///
+    /// - Parameter id: The conversation id.
+    /// - Returns: Request for `Status`.
+    public static func markRead(id: String) -> Request<Conversation> {
+        return Request<Conversation>(path: "/api/v1/conversations/\(id)/read", method: .post(.empty))
+    }
 }

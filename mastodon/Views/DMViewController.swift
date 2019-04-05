@@ -237,27 +237,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         if (UserDefaults.standard.object(forKey: "biometricsnot") == nil) || (UserDefaults.standard.object(forKey: "biometricsnot") as! Int == 0) {} else {
             self.biometricAuthenticationClicked(self)
         }
-        
-        if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
-            settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)
-            settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-            settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-            settingsButton.imageView?.layer.cornerRadius = 0
-            settingsButton.imageView?.contentMode = .scaleAspectFill
-            settingsButton.layer.masksToBounds = true
-        } else {
-            settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 36, height: 36)
-            if StoreStruct.currentUser != nil {
-                settingsButton.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatarStatic)"))
-            }
-            settingsButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            settingsButton.imageView?.layer.cornerRadius = 18
-            settingsButton.imageView?.contentMode = .scaleAspectFill
-            settingsButton.layer.masksToBounds = true
-        }
-        settingsButton.adjustsImageWhenHighlighted = false
-        settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
-        self.navigationController?.view.addSubview(settingsButton)
     }
     
     
@@ -486,6 +465,28 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         StoreStruct.currentPage = 101010
         
         StoreStruct.historyBool = false
+        
+        
+        if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
+            settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)
+            settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+            settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            settingsButton.imageView?.layer.cornerRadius = 0
+            settingsButton.imageView?.contentMode = .scaleAspectFill
+            settingsButton.layer.masksToBounds = true
+        } else {
+            settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 36, height: 36)
+            if StoreStruct.currentUser != nil {
+                settingsButton.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatarStatic)"))
+            }
+            settingsButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            settingsButton.imageView?.layer.cornerRadius = 18
+            settingsButton.imageView?.contentMode = .scaleAspectFill
+            settingsButton.layer.masksToBounds = true
+        }
+        settingsButton.adjustsImageWhenHighlighted = false
+        settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
+        self.navigationController?.view.addSubview(settingsButton)
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -769,7 +770,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
                         cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                         cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
-                        
+                    
+                    cell.configure2(StoreStruct.notificationsDirect[indexPath.row].unread, id: StoreStruct.notificationsDirect[indexPath.row].id)
                         cell.configure(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
                         cell.moreImage.image = nil
                         cell.profileImageView.tag = indexPath.row
@@ -866,6 +868,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                     cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
                     
+                    cell.configure2(StoreStruct.notificationsDirect[indexPath.row].unread, id: StoreStruct.notificationsDirect[indexPath.row].id)
                     cell.configure(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
                     cell.moreImage.image = nil
                     cell.backgroundColor = Colours.white
@@ -1650,7 +1653,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
-        
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .phone :
@@ -1664,6 +1666,14 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
         default:
             print("nothing")
+        }
+        
+        let request2 = Timelines.markRead(id: StoreStruct.notificationsDirect[indexPath.row].id)
+        StoreStruct.client.run(request2) { (statuses) in
+            DispatchQueue.main.async {
+                StoreStruct.markedReadIDs.append(StoreStruct.notificationsDirect[indexPath.row].id)
+                self.tableView.reloadRows(at: [indexPath], with: .none)
+            }
         }
     }
     

@@ -532,6 +532,25 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    @objc func currentSegIndex(_ notification: NSNotification) {
+        if let index = notification.userInfo?["index"] as? Int {
+            if index == 0 {
+                if self.profileStatuses.isEmpty {
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                } else {
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
+                }
+            }
+            if index == 1 {
+                if self.profileStatuses2.isEmpty {
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                } else {
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -539,6 +558,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.title = "Profile"
         self.removeTabbarItemsText()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.currentSegIndex), name: NSNotification.Name(rawValue: "setCurrentSegmentIndex"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid3"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti3"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers3"), object: nil)
@@ -5295,7 +5315,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     DispatchQueue.main.async {
                         
                         self.profileStatuses = self.profileStatuses.removeDuplicates()
-                        self.tableView.reloadData()
+                        if stat.count > 0 {
+                            self.tableView.reloadData()
+                        }
                         self.refreshControl.endRefreshing()
                     }
                 }
@@ -5319,7 +5341,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     DispatchQueue.main.async {
                         
                         self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
-                        self.tableView.reloadData()
+                        if stat.count > 0 {
+                            self.tableView.reloadData()
+                        }
                         self.refreshControl.endRefreshing()
                     }
                 }

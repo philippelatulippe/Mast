@@ -20,6 +20,7 @@ class DMFeedCell: SwipeTableViewCell {
     var date = UILabel()
     var toot = ActiveLabel()
     var moreImage = UIImageView()
+    var readIndi = UIView()
     
     var rep1 = UIButton()
     var like1 = UIButton()
@@ -47,6 +48,7 @@ class DMFeedCell: SwipeTableViewCell {
         date.translatesAutoresizingMaskIntoConstraints = false
         toot.translatesAutoresizingMaskIntoConstraints = false
         moreImage.translatesAutoresizingMaskIntoConstraints = false
+        readIndi.translatesAutoresizingMaskIntoConstraints = false
         
         if (UserDefaults.standard.object(forKey: "proCorner") == nil || UserDefaults.standard.object(forKey: "proCorner") as! Int == 0) {
             profileImageView.layer.cornerRadius = 20
@@ -89,6 +91,11 @@ class DMFeedCell: SwipeTableViewCell {
         toot.hashtagColor = Colours.tabSelected
         toot.URLColor = Colours.tabSelected
         
+        readIndi.backgroundColor = Colours.tabSelected
+        readIndi.layer.cornerRadius = 4
+        readIndi.layer.masksToBounds = true
+        readIndi.alpha = 0
+        
         contentView.addSubview(profileImageView)
         contentView.addSubview(profileImageView2)
         contentView.addSubview(userName)
@@ -96,6 +103,7 @@ class DMFeedCell: SwipeTableViewCell {
         contentView.addSubview(date)
         contentView.addSubview(toot)
         contentView.addSubview(moreImage)
+        contentView.addSubview(readIndi)
         
         
         rep1.translatesAutoresizingMaskIntoConstraints = false
@@ -155,14 +163,16 @@ class DMFeedCell: SwipeTableViewCell {
             "like1" : like1,
             "boost1" : boost1,
             "more1" : more1,
+            "readIndi" : readIndi,
         ]
         
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[name]-5-[artist]-(>=5)-[date]-20-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-40-[image2(26)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[readIndi(8)]-5-[image(40)]-13-[name]-5-[artist]-(>=5)-[date]-20-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-43-[image2(26)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[readIndi(8)]-5-[image(40)]-13-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[image(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-32-[image2(26)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-28-[readIndi(8)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
             contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[date]-5-[episodes]-12-|", options: [], metrics: nil, views: viewsDict))
@@ -178,7 +188,7 @@ class DMFeedCell: SwipeTableViewCell {
             contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[rep1(36)]-24-[like1(40)]-15-[boost1(40)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
         }
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-71-[warning]-17-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-74-[warning]-17-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-5-[warning]-9-|", options: [], metrics: nil, views: viewsDict))
     }
     
@@ -190,6 +200,18 @@ class DMFeedCell: SwipeTableViewCell {
 //        self.profileImageView.imageView?.image = nil
 //        self.profileImageView2.imageView?.image = nil
 //    }
+    
+    func configure2(_ unread: Bool, id: String) {
+        if StoreStruct.markedReadIDs.contains(id) {
+            self.readIndi.alpha = 0
+        } else {
+            if unread {
+                self.readIndi.alpha = 1
+            } else {
+                self.readIndi.alpha = 0
+            }
+        }
+    }
     
     func configure(_ status: Status) {
         
