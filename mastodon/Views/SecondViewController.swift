@@ -4892,12 +4892,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
 //                                self.newUpdatesB2.transform = CGAffineTransform(translationX: 0, y: 0)
                                 self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
                             })
-                            self.countcount2 = newestC
+                            self.countcount2 = stat.count
                             
                             
                         }
                         
-//                        UIView.setAnimationsEnabled(false)
                             if stat.count > 0 {
                                 self.tableView.reloadData()
                                 self.tableView2.reloadData()
@@ -4906,18 +4905,16 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         self.refreshControl.endRefreshing()
                         if self.currentIndex == 1 {
                             if StoreStruct.notificationsMentions.count > newestC2 {
-                                self.tableView.scrollToRow(at: IndexPath(row: newestC2, section: 0), at: .top, animated: false)
+                                var zCount = 0
+                                var zHeights: CGFloat = 0
+                                for _ in stat {
+                                    zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+                                    zCount += 1
+                                }
+                                self.tableView.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+//                                self.tableView.scrollToRow(at: IndexPath(row: newestC2, section: 0), at: .top, animated: false)
                             }
-                        } else if self.currentIndex == 5 {
-//                            if StoreStruct.notificationsDirect.count > newestC2 {
-//                                self.tableView3.scrollToRow(at: IndexPath(row: newestC3, section: 0), at: .top, animated: false)
-//                            }
-                        } else {
-//                            if StoreStruct.notifications.count > newestC {
-//                                self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 1), at: .top, animated: false)
-//                            }
                         }
-//                        UIView.setAnimationsEnabled(true)
                             
                         } else {
                             if stat.count > 0 {

@@ -19,7 +19,7 @@ import Disk
 import AVKit
 import AVFoundation
 
-class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, URLSessionDataDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate, UIPencilInteractionDelegate {
+class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, URLSessionDataDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate, UIPencilInteractionDelegate, UIScrollViewDelegate {
     
     var socket: WebSocket!
     var lsocket: WebSocket!
@@ -1083,6 +1083,16 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
     }
     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if self.currentIndex == 0 {
+            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
+        } else if self.currentIndex == 1 {
+            UserDefaults.standard.set(self.tableViewL.contentOffset.y, forKey: "savedRowLocal1")
+        } else {
+            UserDefaults.standard.set(self.tableViewF.contentOffset.y, forKey: "savedRowFed1")
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
@@ -1092,12 +1102,16 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             })
         }
         
+        self.settingsButton.removeFromSuperview()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        
         UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
         UserDefaults.standard.set(self.tableViewL.contentOffset.y, forKey: "savedRowLocal1")
         UserDefaults.standard.set(self.tableViewF.contentOffset.y, forKey: "savedRowFed1")
         
-        
-        self.settingsButton.removeFromSuperview()
     }
     
     @objc func search9() {
@@ -1362,9 +1376,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 self.tableView.alpha = 1
                 self.tableViewL.alpha = 0
                 self.tableViewF.alpha = 0
-                if (UserDefaults.standard.object(forKey: "savedRowHome1") == nil) {} else {
-                    
-                }
                 
                 // stream
                 if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
@@ -1942,9 +1953,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.alpha = 1
             self.tableViewL.alpha = 0
             self.tableViewF.alpha = 0
-            if (UserDefaults.standard.object(forKey: "savedRowHome1") == nil) {} else {
-                
-            }
             
             // stream
             if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
@@ -4574,15 +4582,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         default:
             print("nothing")
         }
-        
-        
-        if self.currentIndex == 0 {
-            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
-        } else if self.currentIndex == 1 {
-            UserDefaults.standard.set(self.tableViewL.contentOffset.y, forKey: "savedRowLocal1")
-        } else {
-            UserDefaults.standard.set(self.tableViewF.contentOffset.y, forKey: "savedRowFed1")
-        }
     }
     
     func fetchGap() {
@@ -4629,7 +4628,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     self.newUpdatesB1.alpha = 1
                                     self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
                                 })
-                                self.countcount1 = newestC
+                                self.countcount1 = stat.count
                                 
                                 DispatchQueue.main.async {
                                     UIView.setAnimationsEnabled(false)
@@ -4638,8 +4637,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
-                                            if newestC >= 0 && StoreStruct.statusesHome.count >= 0 {
-                                                self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            if stat.count > 0 {
+                                                var zCount = 0
+                                                var zHeights: CGFloat = 0
+                                                for _ in (y.first! + stat) {
+                                                    zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+                                                    zCount += 1
+                                                }
+                                                self.tableView.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+//                                                self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
                                             }
                                             
                                             do {
@@ -4704,7 +4710,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     self.newUpdatesB1.alpha = 1
                                     self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
                                 })
-                                self.countcount1 = newestC
+                                self.countcount1 = stat.count
                                 
                                 DispatchQueue.main.async {
                                     UIView.setAnimationsEnabled(false)
@@ -4713,8 +4719,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
-                                            if newestC >= 0 && StoreStruct.statusesLocal.count >= 0 {
-                                                self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            if stat.count > 0 {
+                                                var zCount = 0
+                                                var zHeights: CGFloat = 0
+                                                for _ in (y.first! + stat) {
+                                                    zHeights = CGFloat(zHeights) + CGFloat(self.tableViewL.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+                                                    zCount += 1
+                                                }
+                                                self.tableViewL.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+//                                                self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
                                             }
                                             
                                             do {
@@ -4779,7 +4792,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     self.newUpdatesB1.alpha = 1
                                     self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
                                 })
-                                self.countcount1 = newestC
+                                self.countcount1 = stat.count
                                 
                                 DispatchQueue.main.async {
                                     UIView.setAnimationsEnabled(false)
@@ -4788,8 +4801,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
-                                            if newestC >= 0 && StoreStruct.statusesFederated.count >= 0 {
-                                                self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                            if stat.count > 0 {
+                                                var zCount = 0
+                                                var zHeights: CGFloat = 0
+                                                for _ in (y.first! + stat) {
+                                                    zHeights = CGFloat(zHeights) + CGFloat(self.tableViewF.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+                                                    zCount += 1
+                                                }
+                                                self.tableViewF.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+//                                                self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
                                             }
                                             
                                             do {
@@ -4961,27 +4981,33 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     self.newUpdatesB1.alpha = 1
                                     self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
                                 })
-                                self.countcount1 = newestC
+                                self.countcount1 = stat.count
                                 
-//                                UIView.setAnimationsEnabled(false)
                                 if stat.count > 0 {
                                     self.tableView.reloadData()
                                 }
                                 self.refreshControl.endRefreshing()
-                                if newestC <= 0 {
+                                if stat.count == 0 {
                                     
-                                } else if StoreStruct.statusesHome.count > newestC + 1 && (newestC + 1 >= 0) {
+                                } else {
                                     if StoreStruct.statusesHome.count == 0 {
                                         
                                     } else {
-                                        if StoreStruct.statusesHome.count > newestC + 1 {
-                                            self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
-                                        } else {
-                                            self.tableView.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+                                        var zCount = 0
+                                        var zHeights: CGFloat = 0
+                                        for _ in stat {
+                                            zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+                                            zCount += 1
                                         }
+                                        self.tableView.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+                                        
+//                                        if StoreStruct.statusesHome.count > newestC + 1 {
+//                                            self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+//                                        } else {
+//                                            self.tableView.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+//                                        }
                                     }
                                 }
-//                                UIView.setAnimationsEnabled(true)
                             } else {
                                 if stat.count > 0 {
                                     self.tableView.reloadData()
@@ -5042,34 +5068,40 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                 self.newUpdatesB2.setTitle("\(newestC)  ", for: .normal)
-                                //                            self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
                                 self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
                                 springWithDelay(duration: 0.5, delay: 0, animations: {
                                     self.newUpdatesB2.alpha = 1
                                     self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                    //                                self.newUpdatesB2.transform = CGAffineTransform(translationX: 0, y: 0)
                                 })
-                                self.countcount2 = newestC
+                                self.countcount2 = stat.count
                                 
-//                                UIView.setAnimationsEnabled(false)
                                 if stat.count > 0 {
                                     self.tableViewL.reloadData()
                                 }
                                 self.refreshControl.endRefreshing()
-                                if newestC <= 0 {
+                                if stat.count == 0 {
                                     
-                                } else if StoreStruct.statusesLocal.count > newestC + 1 && (newestC + 1 >= 0) {
+                                } else {
                                     if StoreStruct.statusesLocal.count == 0 {
                                         
                                     } else {
-                                        if StoreStruct.statusesLocal.count > newestC + 1 {
-                                            self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
-                                        } else {
-                                            self.tableViewL.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+                                        
+                                        
+                                        var zCount = 0
+                                        var zHeights: CGFloat = 0
+                                        for _ in stat {
+                                            zHeights = CGFloat(zHeights) + CGFloat(self.tableViewL.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+                                            zCount += 1
                                         }
+                                        self.tableViewL.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+                                        
+//                                        if StoreStruct.statusesLocal.count > newestC + 1 {
+//                                            self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+//                                        } else {
+//                                            self.tableViewL.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+//                                        }
                                     }
                                 }
-//                                UIView.setAnimationsEnabled(true)
                             } else {
                                 
                                 if stat.count > 0 {
@@ -5132,34 +5164,38 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                 self.newUpdatesB3.setTitle("\(newestC)  ", for: .normal)
-                                //                            self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
                                 self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
                                 springWithDelay(duration: 0.5, delay: 0, animations: {
                                     self.newUpdatesB3.alpha = 1
                                     self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                    //                                self.newUpdatesB3.transform = CGAffineTransform(translationX: 0, y: 0)
                                 })
-                                self.countcount3 = newestC
+                                self.countcount3 = stat.count
                                 
-//                                UIView.setAnimationsEnabled(false)
                                 if stat.count > 0 {
                                     self.tableViewF.reloadData()
                                 }
                                 self.refreshControl.endRefreshing()
-                                if newestC <= 0 {
+                                if stat.count == 0 {
                                     
-                                } else if StoreStruct.statusesFederated.count > newestC + 1 && (newestC + 1 >= 0) {
+                                } else {
                                     if StoreStruct.statusesFederated.count == 0 {
                                         
                                     } else {
-                                        if StoreStruct.statusesFederated.count > newestC + 1 {
-                                            self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
-                                        } else {
-                                            self.tableViewF.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+                                        var zCount = 0
+                                        var zHeights: CGFloat = 0
+                                        for _ in stat {
+                                            zHeights = CGFloat(zHeights) + CGFloat(self.tableViewF.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+                                            zCount += 1
                                         }
+                                        self.tableViewF.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+                                        
+//                                        if StoreStruct.statusesFederated.count > newestC + 1 {
+//                                            self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+//                                        } else {
+//                                            self.tableViewF.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+//                                        }
                                     }
                                 }
-//                                UIView.setAnimationsEnabled(true)
                                 
                             } else {
                                 
