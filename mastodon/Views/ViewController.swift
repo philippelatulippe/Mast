@@ -953,17 +953,27 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             )
             
             
+            do {
+                StoreStruct.statusesHome = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
+                StoreStruct.statusesLocal = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
+                StoreStruct.statusesFederated = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
+                StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
+                StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+            } catch {
+                print("Couldn't load")
+            }
             
-            if StoreStruct.statusesHome.isEmpty {
-            let request = Timelines.home()
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
-                    StoreStruct.statusesHome = stat
-                    StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
-                }
-            }
-            }
+//            
+//            if StoreStruct.statusesHome.isEmpty {
+//            let request = Timelines.home()
+//            StoreStruct.client.run(request) { (statuses) in
+//                if let stat = (statuses.value) {
+//                    StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+//                    StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
+//                }
+//            }
+//            }
             
             
             let request2 = Accounts.currentUser()

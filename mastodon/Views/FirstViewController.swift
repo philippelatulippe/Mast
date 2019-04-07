@@ -932,6 +932,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.crownScroll3()
         }
         
+        
+        
+        
+        
+        
+        
         refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //self.tableView.addSubview(refreshControl)
         
@@ -986,13 +992,43 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
         
         
+        if StoreStruct.statusesHome.isEmpty {
+            let request = Timelines.home()
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                    StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadData()
+                    self.tableView.endUpdates()
+                }
+            }
+        }
+        
+        
+//        do {
+//            StoreStruct.statusesHome = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
+//            StoreStruct.statusesLocal = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
+//            StoreStruct.statusesFederated = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
+//            StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
+//            StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+            DispatchQueue.main.async {
+                self.tableView.beginUpdates()
+                self.restoreScroll()
+                self.tableView.endUpdates()
+            }
+//        } catch {
+//            print("Couldn't load")
+//        }
+        
+        
+        
         if (traitCollection.forceTouchCapability == .available) {
             registerForPreviewing(with: self, sourceView: self.tableView)
             registerForPreviewing(with: self, sourceView: self.tableViewL)
             registerForPreviewing(with: self, sourceView: self.tableViewF)
         }
         
-        self.restoreScroll()
     }
     
     @objc func activateCrown() {
@@ -1048,7 +1084,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     func restoreScroll() {
         DispatchQueue.main.async {
-//            self.tableView.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowHome1") == nil) {} else {
                 if StoreStruct.statusesHome.count > 0 {
                     self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowHome1") as! CGFloat), animated: false)
@@ -1056,7 +1091,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
         }
         DispatchQueue.main.async {
-//            self.tableViewL.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowLocal1") == nil) {} else {
                 if StoreStruct.statusesLocal.count > 0 {
                     self.tableViewL.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowLocal1") as! CGFloat), animated: false)
@@ -1064,7 +1098,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
         }
         DispatchQueue.main.async {
-//            self.tableViewF.reloadData()
             if (UserDefaults.standard.object(forKey: "savedRowFed1") == nil) {} else {
                 if StoreStruct.statusesFederated.count > 0 {
                     self.tableViewF.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowFed1") as! CGFloat), animated: false)
@@ -1074,16 +1107,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if self.currentIndex == 0 {
-            UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
-        } else if self.currentIndex == 1 {
-            UserDefaults.standard.set(self.tableViewL.contentOffset.y, forKey: "savedRowLocal1")
-        } else {
-            UserDefaults.standard.set(self.tableViewF.contentOffset.y, forKey: "savedRowFed1")
-        }
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if self.currentIndex == 0 {
             UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
         } else if self.currentIndex == 1 {
@@ -1929,6 +1952,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             return
         }
         
+        springWithDelay(duration: 0.5, delay: 0, animations: {
+            self.newUpdatesB1.alpha = 0
+            self.newUpdatesB2.alpha = 0
+            self.newUpdatesB3.alpha = 0
+        })
         
         if toIndex == 0 {
             
@@ -2101,6 +2129,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cellmore", for: indexPath) as! SettingsCell
                     cell.delegate = self
                     cell.backgroundColor = Colours.white3
+                    cell.profileImageView.backgroundColor = Colours.white3
                     cell.configure(status: "Load More", status2: "Tap to fetch more toots...")
                     let bgColorView = UIView()
                     bgColorView.backgroundColor = Colours.white3
@@ -2357,6 +2386,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cellmore1", for: indexPath) as! SettingsCell
                     cell.delegate = self
                     cell.backgroundColor = Colours.white3
+                    cell.profileImageView.backgroundColor = Colours.white3
                     cell.configure(status: "Load More", status2: "Tap to fetch more toots...")
                     let bgColorView = UIView()
                     bgColorView.backgroundColor = Colours.white3
@@ -2602,6 +2632,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cellmore2", for: indexPath) as! SettingsCell
                     cell.delegate = self
                     cell.backgroundColor = Colours.white3
+                    cell.profileImageView.backgroundColor = Colours.white3
                     cell.configure(status: "Load More", status2: "Tap to fetch more toots...")
                     let bgColorView = UIView()
                     bgColorView.backgroundColor = Colours.white3
@@ -4638,14 +4669,17 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                             if stat.count > 0 {
-                                                var zCount = 0
-                                                var zHeights: CGFloat = 0
-                                                for _ in (y.first! + stat) {
-                                                    zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
-                                                    zCount += 1
-                                                }
-                                                self.tableView.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
-//                                                self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+//                                                var zCount = 0
+//                                                var zHeights: CGFloat = 0
+//                                                for _ in (y.first! + stat) {
+////                                                    if zCount == (y.first!.count + stat.count - 1) {} else {
+//                                                        zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+//                                                        zCount += 1
+////                                                    }
+//                                                }
+//                                                zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount + 1, section: 0)).height)
+//                                                self.tableView.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+                                                self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
                                             }
                                             
                                             do {
@@ -4720,14 +4754,17 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                             if stat.count > 0 {
-                                                var zCount = 0
-                                                var zHeights: CGFloat = 0
-                                                for _ in (y.first! + stat) {
-                                                    zHeights = CGFloat(zHeights) + CGFloat(self.tableViewL.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
-                                                    zCount += 1
-                                                }
-                                                self.tableViewL.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
-//                                                self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+//                                                var zCount = 0
+//                                                var zHeights: CGFloat = 0
+//                                                for _ in (y.first! + stat) {
+////                                                    if zCount == (y.first!.count + stat.count - 1) {} else {
+//                                                        zHeights = CGFloat(zHeights) + CGFloat(self.tableViewL.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+//                                                        zCount += 1
+////                                                    }
+//                                                }
+//                                                zHeights = CGFloat(zHeights) + CGFloat(self.tableViewL.rectForRow(at: IndexPath(row: zCount + 1, section: 0)).height)
+//                                                self.tableViewL.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+                                                self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
                                             }
                                             
                                             do {
@@ -4802,14 +4839,17 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                             if stat.count > 0 {
-                                                var zCount = 0
-                                                var zHeights: CGFloat = 0
-                                                for _ in (y.first! + stat) {
-                                                    zHeights = CGFloat(zHeights) + CGFloat(self.tableViewF.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
-                                                    zCount += 1
-                                                }
-                                                self.tableViewF.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
-//                                                self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+//                                                var zCount = 0
+//                                                var zHeights: CGFloat = 0
+//                                                for _ in (y.first! + stat) {
+////                                                    if zCount == (y.first!.count + stat.count - 1) {} else {
+//                                                        zHeights = CGFloat(zHeights) + CGFloat(self.tableViewF.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+//                                                        zCount += 1
+////                                                    }
+//                                                }
+//                                                zHeights = CGFloat(zHeights) + CGFloat(self.tableViewF.rectForRow(at: IndexPath(row: zCount + 1, section: 0)).height)
+//                                                self.tableViewF.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+                                                self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
                                             }
                                             
                                             do {
@@ -4957,14 +4997,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         }
                         
-                        do {
-                            try Disk.save(StoreStruct.statusesHome.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                            try Disk.save(StoreStruct.statusesLocal.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                            try Disk.save(StoreStruct.statusesFederated.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                        } catch {
-                            print("Couldn't save")
-                        }
-                        
                         DispatchQueue.main.async {
                             StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             
@@ -4993,19 +5025,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     if StoreStruct.statusesHome.count == 0 {
                                         
                                     } else {
-                                        var zCount = 0
-                                        var zHeights: CGFloat = 0
-                                        for _ in stat {
-                                            zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
-                                            zCount += 1
-                                        }
-                                        self.tableView.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
-                                        
-//                                        if StoreStruct.statusesHome.count > newestC + 1 {
-//                                            self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
-//                                        } else {
-//                                            self.tableView.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+//                                        var zCount = 0
+//                                        var zHeights: CGFloat = 0
+//                                        for _ in stat {
+//                                            zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+//                                            zCount += 1
 //                                        }
+//                                        self.tableView.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+                                        
+                                        self.tableView.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
                                     }
                                 }
                             } else {
@@ -5049,15 +5077,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                         }
                         
-                        
-                        do {
-                            try Disk.save(StoreStruct.statusesHome.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                            try Disk.save(StoreStruct.statusesLocal.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                            try Disk.save(StoreStruct.statusesFederated.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                        } catch {
-                            print("Couldn't save")
-                        }
-                        
                         DispatchQueue.main.async {
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             
@@ -5085,21 +5104,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     if StoreStruct.statusesLocal.count == 0 {
                                         
                                     } else {
-                                        
-                                        
-                                        var zCount = 0
-                                        var zHeights: CGFloat = 0
-                                        for _ in stat {
-                                            zHeights = CGFloat(zHeights) + CGFloat(self.tableViewL.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
-                                            zCount += 1
-                                        }
-                                        self.tableViewL.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
-                                        
-//                                        if StoreStruct.statusesLocal.count > newestC + 1 {
-//                                            self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
-//                                        } else {
-//                                            self.tableViewL.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+//                                        var zCount = 0
+//                                        var zHeights: CGFloat = 0
+//                                        for _ in stat {
+//                                            zHeights = CGFloat(zHeights) + CGFloat(self.tableViewL.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+//                                            zCount += 1
 //                                        }
+//                                        self.tableViewL.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+                                        
+                                        self.tableViewL.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
                                     }
                                 }
                             } else {
@@ -5145,15 +5158,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                         }
                         
-                        
-                        do {
-                            try Disk.save(StoreStruct.statusesHome.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                            try Disk.save(StoreStruct.statusesLocal.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                            try Disk.save(StoreStruct.statusesFederated.removeDuplicates(), to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                        } catch {
-                            print("Couldn't save")
-                        }
-                        
                         DispatchQueue.main.async {
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             
@@ -5181,19 +5185,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     if StoreStruct.statusesFederated.count == 0 {
                                         
                                     } else {
-                                        var zCount = 0
-                                        var zHeights: CGFloat = 0
-                                        for _ in stat {
-                                            zHeights = CGFloat(zHeights) + CGFloat(self.tableViewF.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
-                                            zCount += 1
-                                        }
-                                        self.tableViewF.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
-                                        
-//                                        if StoreStruct.statusesFederated.count > newestC + 1 {
-//                                            self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
-//                                        } else {
-//                                            self.tableViewF.scrollToRow(at: IndexPath(row: newestC + 1, section: 0), at: .top, animated: false)
+//                                        var zCount = 0
+//                                        var zHeights: CGFloat = 0
+//                                        for _ in stat {
+//                                            zHeights = CGFloat(zHeights) + CGFloat(self.tableViewF.rectForRow(at: IndexPath(row: zCount, section: 0)).height)
+//                                            zCount += 1
 //                                        }
+//                                        self.tableViewF.setContentOffset(CGPoint(x: 0, y: zHeights), animated: false)
+                                        
+                                        self.tableViewF.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
                                     }
                                 }
                                 
