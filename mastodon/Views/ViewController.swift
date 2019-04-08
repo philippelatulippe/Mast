@@ -286,8 +286,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         customStyle.progressTintColor = Colours.grayDark
                         customStyle.backgroundColor = Colours.white
                         self.volumeBar.style = customStyle
-                        //self.volumeBar.start()
-                        //self.volumeBar.showInitial()
                     }
                     StoreStruct.shared.currentInstance.accessToken = (json["access_token"] as? String ?? "")
                     StoreStruct.client.accessToken = StoreStruct.shared.currentInstance.accessToken
@@ -312,9 +310,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let request2 = Accounts.currentUser()
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
-                            StoreStruct.currentUser = stat
-                            Account.addAccountToList(account: stat)
                             DispatchQueue.main.async {
+                                StoreStruct.currentUser = stat
+                                Account.addAccountToList(account: stat)
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                             }
                         }
@@ -355,7 +353,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
             guard error == nil else { print(error);return }
             guard let data = data else { return }
-            guard let newInsatnce = StoreStruct.shared.newInstance else {
+            guard let newInstance = StoreStruct.shared.newInstance else {
                 return
             }
             do {
@@ -364,11 +362,11 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     
                     if let access1 = (json["access_token"] as? String) {
                     
-                    newInsatnce.accessToken = access1
+                    newInstance.accessToken = access1
                     
-                    InstanceData.setCurrentInstance(instance: newInsatnce)
+                    InstanceData.setCurrentInstance(instance: newInstance)
                     var instances = InstanceData.getAllInstances()
-                    instances.append(newInsatnce)
+                    instances.append(newInstance)
                     UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
                     
                     
@@ -386,17 +384,14 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     StoreStruct.shared.newClient.run(request2) { (statuses) in
                         print("THIS IS THE STATUS \(statuses)")
                         if let stat = (statuses.value) {
-                            StoreStruct.currentUser = stat
-                            Account.addAccountToList(account: stat)
                             DispatchQueue.main.async {
+                                StoreStruct.currentUser = stat
+                                Account.addAccountToList(account: stat)
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                             }
                         }
                     }
-                    
-                    
-                    
-                    
+                        
                     // onboarding
                     if (UserDefaults.standard.object(forKey: "onb") == nil) || (UserDefaults.standard.object(forKey: "onb") as! Int == 0) {
                         DispatchQueue.main.async {
@@ -405,12 +400,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         }
                     }
                     
-                    
                     DispatchQueue.main.async {
-                        
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         appDelegate.reloadApplication()
-                        
                     }
                     
                     }

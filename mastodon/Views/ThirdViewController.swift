@@ -523,11 +523,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func goToSettings() {
-        if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {} else {
-            springWithDelay(duration: 0.4, delay: 0, animations: { [weak self] in
-                self?.segmentedControl.alpha = 0
-            })
-        }
         let controller = SettingsViewController()
         self.navigationController?.pushViewController(controller, animated: true)
     }

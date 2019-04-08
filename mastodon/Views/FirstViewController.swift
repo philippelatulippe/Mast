@@ -996,11 +996,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             let request = Timelines.home()
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    StoreStruct.statusesHome = stat + StoreStruct.statusesHome
-                    StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-                    self.tableView.beginUpdates()
-                    self.tableView.reloadData()
-                    self.tableView.endUpdates()
+                    DispatchQueue.main.async {
+                        StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                        StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+//                        self.tableView.beginUpdates()
+                        self.tableView.reloadData()
+//                        self.tableView.endUpdates()
+                    }
                 }
             }
         }
@@ -1013,9 +1015,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
 //            StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
 //            StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
             DispatchQueue.main.async {
-                self.tableView.beginUpdates()
+//                self.tableView.beginUpdates()
                 self.restoreScroll()
-                self.tableView.endUpdates()
+//                self.tableView.endUpdates()
             }
 //        } catch {
 //            print("Couldn't load")
@@ -1143,7 +1145,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
         
         if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
             settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)
@@ -5022,7 +5023,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 if stat.count == 0 {
                                     
                                 } else {
-                                    if StoreStruct.statusesHome.count == 0 {
+                                    if StoreStruct.statusesHome.count == 0 || stat.count == 0 {
                                         
                                     } else {
 //                                        var zCount = 0
@@ -5101,7 +5102,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 if stat.count == 0 {
                                     
                                 } else {
-                                    if StoreStruct.statusesLocal.count == 0 {
+                                    if StoreStruct.statusesLocal.count == 0 || stat.count == 0 {
                                         
                                     } else {
 //                                        var zCount = 0
@@ -5182,7 +5183,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 if stat.count == 0 {
                                     
                                 } else {
-                                    if StoreStruct.statusesFederated.count == 0 {
+                                    if StoreStruct.statusesFederated.count == 0 || stat.count == 0 {
                                         
                                     } else {
 //                                        var zCount = 0
