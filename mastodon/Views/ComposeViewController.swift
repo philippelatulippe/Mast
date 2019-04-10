@@ -98,6 +98,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var filterFromWhichImage = 0
     var isVidText: [String] = []
     var isVidBG: [UIColor] = []
+    var profileDirect = false
     
     @objc func actOnSpecialNotificationAuto() {
         //dothestuff
@@ -1200,6 +1201,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.visibility = .direct
             self.visibilityButton.setImage(UIImage(named: "direct")?.maskWithColor(color: UIColor.white), for: .normal)
         }
+            
+            if self.profileDirect {
+                self.visibility = .direct
+                self.visibilityButton.setImage(UIImage(named: "direct")?.maskWithColor(color: UIColor.white), for: .normal)
+            }
             
         }
         

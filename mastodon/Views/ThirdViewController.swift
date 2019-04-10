@@ -1837,6 +1837,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     print(self.chosenUser.username)
                     self.present(controller, animated: true, completion: nil)
                 }
+                .action(.default("Direct Message".localized), image: UIImage(named: "direct3")) { (action, ind) in
+                    print(action, ind)
+                    
+                    let controller = ComposeViewController()
+                    controller.inReplyText = self.chosenUser.acct
+                    controller.profileDirect = true
+                    self.present(controller, animated: true, completion: nil)
+                }
                 .action(.default(fo), image: UIImage(named: "profile")) { (action, ind) in
                     print(action, ind)
                     
