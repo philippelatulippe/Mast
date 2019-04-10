@@ -17,8 +17,9 @@ import AVKit
 import AVFoundation
 import Sharaku
 import TesseractOCR
+import Speech
 
-class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate {
+class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate, SFSpeechRecognizerDelegate {
     
     let gifCont = SwiftyGiphyViewController()
     var isGifVid = false
@@ -101,6 +102,29 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var isVidBG: [UIColor] = []
     var profileDirect = false
     var textFromIm = false
+    var textVideoURL: NSURL = NSURL(string: "www.google.com")!
+    let recognizer = SFSpeechRecognizer(locale: Locale.current)
+    
+    func transcribeFile(url: URL) {
+        guard let recognizer = self.recognizer else {
+            return
+        }
+        if !recognizer.isAvailable {
+            print("Speech recognition not currently available")
+            return
+        }
+        let request = SFSpeechURLRecognitionRequest(url: url)
+        request.shouldReportPartialResults = true
+        recognizer.recognitionTask(with: request) { [unowned self] (result, error) in
+            guard let result = result else {
+                print("There was an error transcribing that file")
+                return
+            }
+            if result.isFinal {
+                self.textView.text = result.bestTranscription.formattedString
+            }
+        }
+    }
     
     @objc func actOnSpecialNotificationAuto() {
         //dothestuff
@@ -221,6 +245,44 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         controller.editListName = StoreStruct.caption1
                         controller.fromWhich = 0
                         self.present(controller, animated: true, completion: nil)
+                        
+                    }
+                    .action(.default("Compose Toot from Video Audio".localized), image: nil) { (action, ind) in
+                        
+                        
+                        SFSpeechRecognizer.requestAuthorization { authStatus in
+                            OperationQueue.main.addOperation {
+                                switch authStatus {
+                                case .authorized:
+                                    let audioURL = self.textVideoURL
+                                    self.transcribeFile(url: audioURL as URL)
+//                                    print("speechauth")
+//                                    let audioURL = self.textVideoURL
+//                                    let request = SFSpeechURLRecognitionRequest(url: audioURL as URL)
+//                                    request.shouldReportPartialResults = true
+//                                    if (self.recognizer?.isAvailable)! {
+//                                        print("speechauth1")
+//                                        self.recognizer?.recognitionTask(with: request) { result, error in
+//                                            print("speechauth2 \(result)")
+//                                            guard error == nil else { print("Error: \(error!)"); return }
+//                                            guard let result = result else { print("No result!"); return }
+//
+//                                            print(result.bestTranscription.formattedString)
+//                                            self.textView.text = result.bestTranscription.formattedString
+//                                        }
+//                                    } else {
+//                                        print("Device doesn't support speech recognition")
+//                                    }
+                                case .denied:
+                                    print("User denied access to speech recognition")
+                                case .restricted:
+                                    print("Speech recognition restricted on this device")
+                                case .notDetermined:
+                                    print("Speech recognition not yet authorized")
+                                }
+                            }
+                        }
+                        
                         
                     }
                     .action(.default("Remove GIF/Video".localized), image: nil) { (action, ind) in
@@ -1077,6 +1139,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         StoreStruct.totalsHidden = false
         StoreStruct.newPollPost = []
         
+        recognizer?.delegate = self
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.doneDate), name: NSNotification.Name(rawValue: "doneDate"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.actOnSpecialNotificationAuto), name: NSNotification.Name(rawValue: "cpick"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.addedPoll), name: NSNotification.Name(rawValue: "addedPoll"), object: nil)
@@ -1465,6 +1529,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             var videoURL = URL(string: "")
             self.images2[indexPath.row].getURL { (test) in
                 videoURL = test
+                self.textVideoURL = videoURL! as! NSURL
                 do {
                     self.gifVidData = try NSData(contentsOf: videoURL!, options: .mappedIfSafe) as Data
                     DispatchQueue.main.async {
@@ -1576,6 +1641,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 if mediaType == "public.movie" || mediaType == kUTTypeGIF as String {
                    
                     let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as! NSURL
+                    self.textVideoURL = videoURL
                     do {
                         self.isGifVid = true
                         self.gifVidData = try NSData(contentsOf: videoURL as URL, options: .mappedIfSafe) as Data
@@ -1712,6 +1778,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             //isvideocheck
             if assets[0].isVideo {
                 //self.containsGifVid = true
+                self.selectedImage1.isUserInteractionEnabled = true
                 assets[0].fetchOriginalImage(true, completeBlock: { image, info in
                     self.selectedImage1.image = image
                 })
@@ -1719,8 +1786,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 assets[0].fetchAVAsset(nil, completeBlock: { (avAsset, info) in
                     if let avassetURL = avAsset as? AVURLAsset {
                         //self.completeVidURL = avassetURL.url
-                        guard let video1 = try? Data(contentsOf: avassetURL.url) else { return }
                         self.isGifVid = true
+                        self.textVideoURL = avassetURL.url as! NSURL
+                        guard let video1 = try? Data(contentsOf: avassetURL.url) else { return }
                         self.gifVidData = video1
                     }
                 })
