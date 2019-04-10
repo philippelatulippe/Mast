@@ -23,5 +23,6 @@ pod 'SwiftyGiphy'
 pod 'QuickLayout'
 pod 'Sharaku'
 pod 'MessageKit'
+pod 'TesseractOCRiOS'
 
 end

@@ -16,6 +16,7 @@ import SwiftyJSON
 import AVKit
 import AVFoundation
 import Sharaku
+import TesseractOCR
 
 class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate {
     
@@ -99,6 +100,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var isVidText: [String] = []
     var isVidBG: [UIColor] = []
     var profileDirect = false
+    var textFromIm = false
     
     @objc func actOnSpecialNotificationAuto() {
         //dothestuff
@@ -268,6 +270,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.present(controller, animated: true, completion: nil)
                 
             }
+            .action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+                if let tesseract = G8Tesseract(language: "eng+fra") {
+                    tesseract.engineMode = .tesseractCubeCombined
+                    tesseract.pageSegmentationMode = .auto
+                    tesseract.image = self.selectedImage1.image!.g8_blackAndWhite()
+                    tesseract.recognize()
+                    self.textView.text = tesseract.recognizedText
+                }
+            }
             .action(.default("Remove Image".localized), image: nil) { (action, ind) in
                 self.selectedImage1.image = self.selectedImage2.image
                 self.selectedImage2.image = self.selectedImage3.image
@@ -324,6 +335,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.present(controller, animated: true, completion: nil)
                 
             }
+            .action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+                if let tesseract = G8Tesseract(language: "eng+fra") {
+                    tesseract.engineMode = .tesseractCubeCombined
+                    tesseract.pageSegmentationMode = .auto
+                    tesseract.image = self.selectedImage2.image!.g8_blackAndWhite()
+                    tesseract.recognize()
+                    self.textView.text = tesseract.recognizedText
+                }
+            }
             .action(.default("Remove Image".localized), image: nil) { (action, ind) in
                 self.selectedImage2.image = self.selectedImage3.image
                 self.selectedImage3.image = self.selectedImage4.image
@@ -375,6 +395,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.present(controller, animated: true, completion: nil)
                 
             }
+            .action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+                if let tesseract = G8Tesseract(language: "eng+fra") {
+                    tesseract.engineMode = .tesseractCubeCombined
+                    tesseract.pageSegmentationMode = .auto
+                    tesseract.image = self.selectedImage3.image!.g8_blackAndWhite()
+                    tesseract.recognize()
+                    self.textView.text = tesseract.recognizedText
+                }
+            }
             .action(.default("Remove Image".localized), image: nil) { (action, ind) in
                 self.selectedImage3.image = self.selectedImage4.image
                 self.selectedImage4.image = nil
@@ -423,6 +452,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 controller.fromWhich = 3
                 self.present(controller, animated: true, completion: nil)
                 
+            }
+            .action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+                if let tesseract = G8Tesseract(language: "eng+fra") {
+                    tesseract.engineMode = .tesseractCubeCombined
+                    tesseract.pageSegmentationMode = .auto
+                    tesseract.image = self.selectedImage4.image!.g8_blackAndWhite()
+                    tesseract.recognize()
+                    self.textView.text = tesseract.recognizedText
+                }
             }
             .action(.cancel("Dismiss"))
             .action(.default("Remove Image".localized), image: nil) { (action, ind) in
@@ -1566,6 +1604,20 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     
                 } else {
             StoreStruct.photoNew = info[UIImagePickerController.InfoKey.originalImage] as? UIImage ?? UIImage()
+                    
+                    if self.textFromIm {
+                    
+                    if let tesseract = G8Tesseract(language: "eng+fra") {
+                        tesseract.engineMode = .tesseractCubeCombined
+                        tesseract.pageSegmentationMode = .auto
+                        tesseract.image = StoreStruct.photoNew.g8_blackAndWhite()
+                        tesseract.recognize()
+                        self.textView.text = tesseract.recognizedText
+                    }
+                        
+                        self.textFromIm = false
+                    
+                    } else {
             
             if self.selectedImage1.image == nil {
                 self.selectedImage1.image = StoreStruct.photoNew
@@ -1588,6 +1640,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.selectedImage4.contentMode = .scaleAspectFill
                 self.selectedImage4.layer.masksToBounds = true
             }
+                        
+                    }
                 
                 }
             }
@@ -1603,7 +1657,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         //let controller = CameraViewController()
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
             if response {
-                //self.show(controller, sender: self)
                 
                 if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
                     
@@ -1613,6 +1666,28 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.imag.allowsEditing = false
                     
                     self.present(self.imag, animated: true, completion: nil)
+                }
+                
+            } else {
+                
+            }
+        }
+    }
+    
+    func cameraText() {
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                
+                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+                    
+                    self.textFromIm = true
+                    self.imag.delegate = self
+                    self.imag.sourceType = UIImagePickerController.SourceType.camera
+                    self.imag.mediaTypes = [kUTTypeMovie as String, kUTTypeImage as String]
+                    self.imag.allowsEditing = false
+                    
+                    self.present(self.imag, animated: true, completion: nil)
+                    
                 }
                 
             } else {
@@ -2202,6 +2277,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.scheduleTime = date.iso8601()
                     self.isScheduled = true
                 }
+            }
+            .action(.default("Compose Toot from Camera"), image: UIImage(named: "toot")) { (action, ind) in
+                print(action, ind)
+                self.cameraText()
             }
             .action(.default("Drafts"), image: UIImage(named: "list")) { (action, ind) in
                 print(action, ind)

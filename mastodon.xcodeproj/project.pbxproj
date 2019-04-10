@@ -45,6 +45,10 @@
 		530976D22179DBD700640D84 /* BiometricAuthenticationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530976CE2179DBD700640D84 /* BiometricAuthenticationConstants.swift */; };
 		530976D32179DBD700640D84 /* BioMetricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530976D02179DBD700640D84 /* BioMetricAuthenticator.swift */; };
 		530976D42179DBD700640D84 /* AuthenticationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530976D12179DBD700640D84 /* AuthenticationErrors.swift */; };
+		530A2EEA225E08D400526BDC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 530A2EE9225E08D400526BDC /* libc++.tbd */; };
+		530A2EEC225E08E900526BDC /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530A2EEB225E08E900526BDC /* CoreImage.framework */; };
+		530A2EEE225E08EF00526BDC /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530A2EED225E08EF00526BDC /* TesseractOCR.framework */; };
+		530A2EF0225E0C4100526BDC /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 530A2EEF225E0C4000526BDC /* tessdata */; };
 		530F5B3621E267CA00A910B3 /* StepCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F5B3221E267CA00A910B3 /* StepCollectionViewFlowLayout.swift */; };
 		530F5B3721E267CA00A910B3 /* FullDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F5B3321E267CA00A910B3 /* FullDateCollectionViewCell.swift */; };
 		530F5B3821E267CA00A910B3 /* DateTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F5B3421E267CA00A910B3 /* DateTimePicker.swift */; };
@@ -934,6 +938,10 @@
 		530976CE2179DBD700640D84 /* BiometricAuthenticationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricAuthenticationConstants.swift; sourceTree = "<group>"; };
 		530976D02179DBD700640D84 /* BioMetricAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BioMetricAuthenticator.swift; sourceTree = "<group>"; };
 		530976D12179DBD700640D84 /* AuthenticationErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationErrors.swift; sourceTree = "<group>"; };
+		530A2EE9225E08D400526BDC /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		530A2EEB225E08E900526BDC /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		530A2EED225E08EF00526BDC /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		530A2EEF225E0C4000526BDC /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		530F5B3221E267CA00A910B3 /* StepCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		530F5B3321E267CA00A910B3 /* FullDateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullDateCollectionViewCell.swift; sourceTree = "<group>"; };
 		530F5B3421E267CA00A910B3 /* DateTimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimePicker.swift; sourceTree = "<group>"; };
@@ -1763,6 +1771,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				530A2EEE225E08EF00526BDC /* TesseractOCR.framework in Frameworks */,
+				530A2EEC225E08E900526BDC /* CoreImage.framework in Frameworks */,
+				530A2EEA225E08D400526BDC /* libc++.tbd in Frameworks */,
 				532429AE21923130002EEEAA /* StoreKit.framework in Frameworks */,
 				536A4F9C216B60AD00A3D483 /* Intents.framework in Frameworks */,
 				2D83B0540BC7A32FFB4FB91C /* Pods_mastodon.framework in Frameworks */,
@@ -2882,6 +2893,7 @@
 			isa = PBXGroup;
 			children = (
 				531B61C0221960B200DD3845 /* push */,
+				530A2EEF225E0C4000526BDC /* tessdata */,
 				53E826BC2236C32C00153721 /* BisKit */,
 				53659411222EB73300BFF3CD /* CoreCharts */,
 				53E1AE17221ADFE900A6E1E6 /* SLP */,
@@ -3319,6 +3331,9 @@
 		7138629AB3761F8644F6E477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				530A2EED225E08EF00526BDC /* TesseractOCR.framework */,
+				530A2EEB225E08E900526BDC /* CoreImage.framework */,
+				530A2EE9225E08D400526BDC /* libc++.tbd */,
 				532429AD21923130002EEEAA /* StoreKit.framework */,
 				536A4F9B216B60AD00A3D483 /* Intents.framework */,
 				FF27AD0E7990D1A32A4F2E25 /* Pods_mastodon.framework */,
@@ -3741,6 +3756,7 @@
 				5352D0B6215E679400901B60 /* icon6.png in Resources */,
 				530976A72179D8D900640D84 /* icon11@3x.png in Resources */,
 				530976AD2179D8D900640D84 /* icon10@3x.png in Resources */,
+				530A2EF0225E0C4100526BDC /* tessdata in Resources */,
 				530976C72179D8D900640D84 /* icon20.png in Resources */,
 				5352D0A7215E679300901B60 /* icon6@3x.png in Resources */,
 				530976B22179D8D900640D84 /* icon11.png in Resources */,
@@ -3788,6 +3804,7 @@
 				"${BUILT_PRODUCTS_DIR}/StatusAlert/StatusAlert.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGiphy/SwiftyGiphy.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TesseractOCRiOS/TesseractOCR.framework",
 				"${BUILT_PRODUCTS_DIR}/TinyConstraints/TinyConstraints.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -3814,6 +3831,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StatusAlert.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGiphy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TesseractOCR.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TinyConstraints.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5039,6 +5057,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R5WHJ77XXD;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mastodon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -5064,6 +5083,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R5WHJ77XXD;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mastodon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
