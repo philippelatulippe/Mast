@@ -886,9 +886,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     
                                 } else {
                                     
-                                    self.profileStatuses2 = stat
-                                    self.chosenUser = self.profileStatuses2[0].account
                                     DispatchQueue.main.async {
+                                        self.profileStatuses2 = stat
+                                        self.chosenUser = self.profileStatuses2[0].account
                                         
                                         self.ai.alpha = 0
                                         self.ai.removeFromSuperview()
@@ -919,9 +919,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             
                         } else {
                             
-                            self.profileStatuses2 = stat
-                            self.chosenUser = self.profileStatuses2[0].account
                             DispatchQueue.main.async {
+                                self.profileStatuses2 = stat
+                                self.chosenUser = self.profileStatuses2[0].account
                                 
                                 self.ai.alpha = 0
                                 self.ai.removeFromSuperview()
