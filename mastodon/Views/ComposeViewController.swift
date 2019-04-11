@@ -231,13 +231,19 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("View GIF/Video".localized), image: nil) { (action, ind) in
-                        let originImage = self.selectedImage1.image
-                        var images = [SKPhoto]()
-                        let photo = SKPhoto.photoWithImage(self.selectedImage1.image!)
-                        images.append(photo)
-                        let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: sender.view)
-                        browser.initializePageIndex(0)
-                        self.present(browser, animated: true, completion: {})
+                        
+                        let videoURL = self.textVideoURL as URL
+                        if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {
+                            XPlayer.play(videoURL)
+                        } else {
+                            self.player = AVPlayer(url: videoURL)
+                            let playerViewController = AVPlayerViewController()
+                            playerViewController.player = self.player
+                            self.present(playerViewController, animated: true) {
+                                playerViewController.player!.play()
+                            }
+                        }
+                        
                     }
                     .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                         
@@ -256,23 +262,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                 case .authorized:
                                     let audioURL = self.textVideoURL
                                     self.transcribeFile(url: audioURL as URL)
-//                                    print("speechauth")
-//                                    let audioURL = self.textVideoURL
-//                                    let request = SFSpeechURLRecognitionRequest(url: audioURL as URL)
-//                                    request.shouldReportPartialResults = true
-//                                    if (self.recognizer?.isAvailable)! {
-//                                        print("speechauth1")
-//                                        self.recognizer?.recognitionTask(with: request) { result, error in
-//                                            print("speechauth2 \(result)")
-//                                            guard error == nil else { print("Error: \(error!)"); return }
-//                                            guard let result = result else { print("No result!"); return }
-//
-//                                            print(result.bestTranscription.formattedString)
-//                                            self.textView.text = result.bestTranscription.formattedString
-//                                        }
-//                                    } else {
-//                                        print("Device doesn't support speech recognition")
-//                                    }
                                 case .denied:
                                     print("User denied access to speech recognition")
                                 case .restricted:
@@ -1720,7 +1709,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         impact.impactOccurred()
         }
         
-        //let controller = CameraViewController()
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
             if response {
                 
@@ -1745,15 +1733,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             if response {
                 
                 if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-                    
                     self.textFromIm = true
                     self.imag.delegate = self
                     self.imag.sourceType = UIImagePickerController.SourceType.camera
-                    self.imag.mediaTypes = [kUTTypeMovie as String, kUTTypeImage as String]
+                    self.imag.mediaTypes = [kUTTypeImage as String]
                     self.imag.allowsEditing = false
-                    
                     self.present(self.imag, animated: true, completion: nil)
-                    
                 }
                 
             } else {
