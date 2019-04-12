@@ -3870,6 +3870,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.textVideoURL = NSURL(string: self.allDrafts[indexPath.row].textVideoURL ?? "") ?? self.textVideoURL
             self.gifVidData = self.allDrafts[indexPath.row].gifVidData
             
+            self.selectedImage1.isUserInteractionEnabled = true
+            self.selectedImage2.isUserInteractionEnabled = true
+            self.selectedImage3.isUserInteractionEnabled = true
+            self.selectedImage4.isUserInteractionEnabled = true
+            
             let newCount = StoreStruct.maxChars - (textView.text?.count)!
             countLabel.text = "\(newCount)"
             
