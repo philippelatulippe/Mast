@@ -1686,7 +1686,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     self.present(controller, animated: true, completion: nil)
                 } else {
                     // go to settings
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings"), object: self)
+                    if StoreStruct.currentPage == 0 {
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings"), object: self)
+                    } else if StoreStruct.currentPage == 1 {
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings2"), object: self)
+                    } else {
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings3"), object: self)
+                    }
                 }
             } else if indexPath.section == 2 {
                 
