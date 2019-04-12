@@ -18,12 +18,14 @@ import AVFoundation
 import Sharaku
 import TesseractOCR
 import Speech
+import Disk
 
 class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate, SFSpeechRecognizerDelegate {
     
     let gifCont = SwiftyGiphyViewController()
     var isGifVid = false
     var player = AVPlayer()
+    var allDrafts = [Drafts]()
     
     func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem) {
         print(item.fixedHeightStillImage)
@@ -1183,11 +1185,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableView.rowHeight = UITableView.automaticDimension
         self.bgView.addSubview(self.tableView)
         
-        if UserDefaults.standard.object(forKey: "savedDrafts") != nil {
-            StoreStruct.drafts = UserDefaults.standard.object(forKey: "savedDrafts") as! [String]
-            print("dr1")
-            print(StoreStruct.drafts)
+        do {
+            self.allDrafts = try Disk.retrieve("drafts1.json", from: .documents, as: [Drafts].self)
+        } catch {
+            print("err")
         }
+        
         self.tableViewDrafts.register(UITableViewCell.self, forCellReuseIdentifier: "TweetCellDraft")
         self.tableViewDrafts.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60))
         self.tableViewDrafts.alpha = 0
@@ -2504,8 +2507,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             successMessage = "scheduled"
         }
         
-        StoreStruct.drafts.append(self.textView.text!)
-        UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+        let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+        var newdrafts = [Drafts]()
+        newdrafts.append(newDraft)
+        do {
+            try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+        } catch {
+            print("err")
+        }
         
         
         
@@ -2523,8 +2532,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     
                     if statuses.isError && self.scheduleTime != nil {
                         
-                        StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                        UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                        let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                        var newdrafts = [Drafts]()
+                        newdrafts.append(newDraft)
+                        do {
+                            try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                        } catch {
+                            print("err")
+                        }
                         
                         DispatchQueue.main.async {
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2559,8 +2574,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         }
                     } else {
                         
-                        StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                        UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                        let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                        var newdrafts = [Drafts]()
+                        newdrafts.append(newDraft)
+                        do {
+                            try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                        } catch {
+                            print("err")
+                        }
                         
                         DispatchQueue.main.async {
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2634,8 +2655,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             }
                             if statuses.isError && self.scheduleTime != nil {
                                 
-                                StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                                UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                                let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                                var newdrafts = [Drafts]()
+                                newdrafts.append(newDraft)
+                                do {
+                                    try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                                } catch {
+                                    print("err")
+                                }
                                 
                                 DispatchQueue.main.async {
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2670,8 +2697,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                 }
                             } else {
                                 
-                                StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                                UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                                let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                                var newdrafts = [Drafts]()
+                                newdrafts.append(newDraft)
+                                do {
+                                    try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                                } catch {
+                                    print("err")
+                                }
                             
                             DispatchQueue.main.async {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2774,8 +2807,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                     }
                                                     if statuses.isError && self.scheduleTime != nil {
                                                         
-                                                        StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                                                        UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                                                        let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                                                        var newdrafts = [Drafts]()
+                                                        newdrafts.append(newDraft)
+                                                        do {
+                                                            try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                                                        } catch {
+                                                            print("err")
+                                                        }
                                                         
                                                         DispatchQueue.main.async {
                                                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2810,8 +2849,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                         }
                                                     } else {
                                                         
-                                                        StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                                                        UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                                                        let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                                                        var newdrafts = [Drafts]()
+                                                        newdrafts.append(newDraft)
+                                                        do {
+                                                            try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                                                        } catch {
+                                                            print("err")
+                                                        }
                                                         
                                                     DispatchQueue.main.async {
                                                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2902,8 +2947,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                             }
                                             if statuses.isError && self.scheduleTime != nil {
                                                 
-                                                StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                                                UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                                                let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                                                var newdrafts = [Drafts]()
+                                                newdrafts.append(newDraft)
+                                                do {
+                                                    try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                                                } catch {
+                                                    print("err")
+                                                }
                                                 
                                                 DispatchQueue.main.async {
                                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2938,8 +2989,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                 }
                                             } else {
                                                 
-                                                StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                                                UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                                                let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                                                var newdrafts = [Drafts]()
+                                                newdrafts.append(newDraft)
+                                                do {
+                                                    try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                                                } catch {
+                                                    print("err")
+                                                }
                                                 
                                             DispatchQueue.main.async {
                                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3017,8 +3074,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     
                                     if statuses.isError && self.scheduleTime != nil {
                                         
-                                        StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                                        UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                                        let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                                        var newdrafts = [Drafts]()
+                                        newdrafts.append(newDraft)
+                                        do {
+                                            try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                                        } catch {
+                                            print("err")
+                                        }
                                         
                                         DispatchQueue.main.async {
                                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3053,8 +3116,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                         }
                                     } else {
                                         
-                                        StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                                        UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                                        let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                                        var newdrafts = [Drafts]()
+                                        newdrafts.append(newDraft)
+                                        do {
+                                            try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                                        } catch {
+                                            print("err")
+                                        }
                                         
                                     DispatchQueue.main.async {
                                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3116,8 +3185,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             }
                             if statuses.isError && self.scheduleTime != nil {
                                 
-                                StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                                UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                                let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                                var newdrafts = [Drafts]()
+                                newdrafts.append(newDraft)
+                                do {
+                                    try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                                } catch {
+                                    print("err")
+                                }
                                 
                                 DispatchQueue.main.async {
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3152,8 +3227,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                 }
                             } else {
                                 
-                                StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                                UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                                let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                                var newdrafts = [Drafts]()
+                                newdrafts.append(newDraft)
+                                do {
+                                    try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                                } catch {
+                                    print("err")
+                                }
                                 
                             DispatchQueue.main.async {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3202,8 +3283,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     
                     if statuses.isError && self.scheduleTime != nil {
                         
-                        StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                        UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                        let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                        var newdrafts = [Drafts]()
+                        newdrafts.append(newDraft)
+                        do {
+                            try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                        } catch {
+                            print("err")
+                        }
                         
                         DispatchQueue.main.async {
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3238,8 +3325,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         }
                     } else {
                         
-                        StoreStruct.drafts.remove(at: StoreStruct.drafts.count - 1)
-                        UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                        let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                        var newdrafts = [Drafts]()
+                        newdrafts.append(newDraft)
+                        do {
+                            try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                        } catch {
+                            print("err")
+                        }
                         
                     DispatchQueue.main.async {
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3512,8 +3605,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             .action(.default("Save as Draft"), image: nil) { (action, ind) in
                 print(action, ind)
                 
-                StoreStruct.drafts.append(self.textView.text!)
-                UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+                let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+                var newdrafts = [Drafts]()
+                newdrafts.append(newDraft)
+                do {
+                    try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+                } catch {
+                    print("err")
+                }
                 
                 self.textView.resignFirstResponder()
                 
@@ -3576,7 +3675,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 title.text = "Instance Emoticons".localized
             }
         } else {
-            if StoreStruct.drafts.isEmpty {
+            if self.allDrafts.isEmpty {
                 title.text = "No Drafts".localized
             } else {
                 title.text = "All Drafts".localized
@@ -3599,7 +3698,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         } else if tableView == self.tableViewEmoti {
             return StoreStruct.mainResult.count
         } else {
-            return StoreStruct.drafts.count
+            return self.allDrafts.count
         }
     }
     
@@ -3663,11 +3762,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             
             let cell = tableViewDrafts.dequeueReusableCell(withIdentifier: "TweetCellDraft", for: indexPath) 
             
-            if StoreStruct.drafts.isEmpty {
+            if self.allDrafts.isEmpty {
                 cell.textLabel?.text = "No saved drafts"
                 cell.textLabel?.textAlignment = .center
             } else {
-                cell.textLabel?.text = StoreStruct.drafts[indexPath.row]
+                cell.textLabel?.text = self.allDrafts[indexPath.row].text
                 cell.textLabel?.textAlignment = .left
                 
                 let backgroundView = UIView()
@@ -3762,13 +3861,27 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         } else {
             self.tableView.deselectRow(at: indexPath, animated: true)
             
-            self.textView.text = StoreStruct.drafts[indexPath.row]
+            self.textView.text = self.allDrafts[indexPath.row].text
+            self.selectedImage1.image = UIImage(data: self.allDrafts[indexPath.row].image1 ?? Data())
+            self.selectedImage2.image = UIImage(data: self.allDrafts[indexPath.row].image2 ?? Data())
+            self.selectedImage3.image = UIImage(data: self.allDrafts[indexPath.row].image3 ?? Data())
+            self.selectedImage4.image = UIImage(data: self.allDrafts[indexPath.row].image4 ?? Data())
+            self.isGifVid = self.allDrafts[indexPath.row].isGifVid
+            self.textVideoURL = NSURL(string: self.allDrafts[indexPath.row].textVideoURL ?? "") ?? self.textVideoURL
+            self.gifVidData = self.allDrafts[indexPath.row].gifVidData
             
             let newCount = StoreStruct.maxChars - (textView.text?.count)!
             countLabel.text = "\(newCount)"
             
-            StoreStruct.drafts.remove(at: indexPath.row)
-            UserDefaults.standard.set(StoreStruct.drafts, forKey: "savedDrafts")
+            self.allDrafts.remove(at: indexPath.row)
+            let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
+            var newdrafts = [Drafts]()
+            newdrafts.append(newDraft)
+            do {
+                try Disk.save(newdrafts, to: .documents, as: "drafts1.json")
+            } catch {
+                print("err")
+            }
             
             self.textView.becomeFirstResponder()
             self.bringBackDrawer()

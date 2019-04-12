@@ -99,7 +99,7 @@ class StoreStruct {
     static var allListRelID: String = ""
     static var currentList: [Status] = []
     static var currentListTitle: String = ""
-    static var drafts: [String] = []
+//    static var drafts: [Any] = []
     
     static var allLikes: [String] = []
     static var allBoosts: [String] = []
@@ -153,6 +153,17 @@ class StoreStruct {
     
     static var tappedSignInCheck = false
     static var markedReadIDs: [String] = []
+}
+
+struct Drafts: Codable {
+    var text: String
+    var image1: Data?
+    var image2: Data?
+    var image3: Data?
+    var image4: Data?
+    var isGifVid: Bool
+    var textVideoURL: String?
+    var gifVidData: Data?
 }
 
 class TextStyling {

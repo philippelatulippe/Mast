@@ -2200,7 +2200,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         StoreStruct.allListRelID = ""
         StoreStruct.currentList = []
         StoreStruct.currentListTitle = ""
-        StoreStruct.drafts = []
         
         StoreStruct.allLikes = []
         StoreStruct.allBoosts = []
