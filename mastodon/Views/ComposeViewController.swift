@@ -3227,6 +3227,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                 }
                             } else {
                                 
+                            DispatchQueue.main.async {
+                                
                                 let newDraft = Drafts(text: self.textView.text!, image1: self.selectedImage1.image?.pngData(), image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
                                 var newdrafts = [Drafts]()
                                 newdrafts.append(newDraft)
@@ -3236,7 +3238,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     print("err")
                                 }
                                 
-                            DispatchQueue.main.async {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                     let notification = UINotificationFeedbackGenerator()
                                     notification.notificationOccurred(.success)
