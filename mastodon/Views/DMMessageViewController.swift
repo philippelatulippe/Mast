@@ -192,32 +192,32 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
 
                     var images = [SKPhoto]()
                     var coun = 0
-                    for y in self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments {
+                    (self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments).map({
                         if coun == 0 {
-                            let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                            let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = self.allPosts[indexPath?.section ?? 0].reblog?.content.stripHTML() ?? self.allPosts[indexPath?.section ?? 0].content.stripHTML()
                             } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                                photo.caption = y.description ?? ""
+                                photo.caption = $0.description ?? ""
                             } else {
                                 photo.caption = ""
                             }
                             images.append(photo)
                         } else {
-                            let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                            let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                                 photo.caption = self.allPosts[indexPath?.section ?? 0].reblog?.content.stripHTML() ?? self.allPosts[indexPath?.section ?? 0].content.stripHTML()
                             } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                                photo.caption = y.description ?? ""
+                                photo.caption = $0.description ?? ""
                             } else {
                                 photo.caption = ""
                             }
                             images.append(photo)
                         }
                         coun += 1
-                    }
+                    })
 //                let originImage = sender.currentImage
 //                if originImage != nil {
                     let browser = SKPhotoBrowser(photos: images)
