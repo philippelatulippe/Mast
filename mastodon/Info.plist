@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Allow Mast to use speech recognition capabilities to convert video audio to text.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -549,7 +547,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.6.1</string>
+	<string>1.6.3</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -584,6 +582,8 @@
 	<string>Allow Mast to save images to your photo library.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow Mast to access your photo library to display your recent pictures and videos for posting within toots.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Allow Mast to use speech recognition capabilities to convert video audio to text.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>com.shi.Mast.oled</string>

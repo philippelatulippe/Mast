@@ -1696,9 +1696,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 //let request = Lists.list(id: StoreStruct.allLists[indexPath.row - 2].id)
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
-                        for z in stat {
+                        stat.map({
                             
-                            let request1 = Accounts.statuses(id: z.id)
+                            let request1 = Accounts.statuses(id: $0.id)
                             StoreStruct.client.run(request1) { (statuses) in
                                 if let stat = (statuses.value) {
                                     StoreStruct.currentList = StoreStruct.currentList + stat
@@ -1708,7 +1708,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                                 }
                                 
                             }
-                        }
+                        })
                         if StoreStruct.currentPage == 0 {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "goLists"), object: self)
                         } else if StoreStruct.currentPage == 1 {
@@ -2270,21 +2270,19 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let task = session.dataTask(with: request) { (data, response, err) in
             do {
                 let json = try JSONDecoder().decode(tagInstances.self, from: data ?? Data())
-                for x in json.instances {
-                    DispatchQueue.main.async {
-                        var tag = DLTag(text: "\(x.name)")
+                json.instances.map({
+                        var tag = DLTag(text: "\($0.name)")
                         tag.fontSize = 15
                         tag.backgroundColor = Colours.grayLight2.withAlphaComponent(0.3)
                         tag.borderWidth = 0
                         tag.textColor = UIColor.white
                         tag.cornerRadius = 12
                         tag.enabled = true
-                        tag.altText = "\(x.name)"
+                        tag.altText = "\($0.name)"
                         tag.padding = UIEdgeInsets(top: 10, left: 14, bottom: 10, right: 14)
                         self.tagListView.addTag(tag: tag)
                         self.tagListView.singleLine = true
-                    }
-                }
+                })
             } catch {
                 print("err")
             }

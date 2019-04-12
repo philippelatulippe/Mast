@@ -120,23 +120,23 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                     self.allReplies = (stat.descendants)
                     
                     DispatchQueue.main.async {
-                        for z in self.allPrevious + self.mainStatus + self.allReplies {
+                        (self.allPrevious + self.mainStatus + self.allReplies).map({
                             var theType = "0"
-                            if z.account.acct == StoreStruct.currentUser.acct {
+                            if $0.account.acct == StoreStruct.currentUser.acct {
                                 theType = "1"
                             }
-                            let sender = Sender(id: theType, displayName: "\(z.account.displayName)")
-                            let x = MockMessage.init(text: z.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""), sender: sender, messageId: z.id, date: Date())
+                            let sender = Sender(id: theType, displayName: "\($0.account.displayName)")
+                            let x = MockMessage.init(text: $0.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""), sender: sender, messageId: $0.id, date: Date())
                             self.messages.append(x)
-                            self.allPosts.append(z)
+                            self.allPosts.append($0)
                             
-                            if z.mediaAttachments.isEmpty {} else {
-                                let url = URL(string: z.mediaAttachments.first?.previewURL ?? "")
+                            if $0.mediaAttachments.isEmpty {} else {
+                                let url = URL(string: $0.mediaAttachments.first?.previewURL ?? "")
                                 let imageData = try! Data(contentsOf: url!)
                                 let image1 = UIImage(data: imageData)
-                                let y = MockMessage.init(image: image1!, sender: sender, messageId: z.id, date: Date())
+                                let y = MockMessage.init(image: image1!, sender: sender, messageId: $0.id, date: Date())
                                 self.messages.append(y)
-                                self.allPosts.append(z)
+                                self.allPosts.append($0)
                             }
                             
                             self.ai.stopAnimating()
@@ -145,7 +145,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                             
                             self.messagesCollectionView.reloadData()
                             self.messagesCollectionView.scrollToBottom()
-                        }
+                        })
                     }
                 }
             }

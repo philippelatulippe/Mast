@@ -365,11 +365,11 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     }
                     
                     var newString = string
-                    for z2 in StoreStruct.newInstanceTags[indexPath.row].mentions {
-                        if z2.acct.contains(string) {
-                            newString = z2.id
+                    StoreStruct.newInstanceTags[indexPath.row].mentions.map({
+                        if $0.acct.contains(string) {
+                            newString = $0.id
                         }
-                    }
+                    })
                     
                     
                     let controller = ThirdViewController()
@@ -472,11 +472,11 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     }
                     
                     var newString = string
-                    for z2 in StoreStruct.newInstanceTags[indexPath.row].mentions {
-                        if z2.acct.contains(string) {
-                            newString = z2.id
+                    StoreStruct.newInstanceTags[indexPath.row].mentions.map({
+                        if $0.acct.contains(string) {
+                            newString = $0.id
                         }
-                    }
+                    })
                     
                     
                     let controller = ThirdViewController()

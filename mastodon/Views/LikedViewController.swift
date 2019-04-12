@@ -374,11 +374,11 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 
                 var newString = string
-                for z2 in self.currentTags[indexPath.row].mentions {
-                    if z2.acct.contains(string) {
-                        newString = z2.id
+                self.currentTags[indexPath.row].mentions.map({
+                    if $0.acct.contains(string) {
+                        newString = $0.id
                     }
-                }
+                })
                 
                 
                 let controller = ThirdViewController()
@@ -481,11 +481,11 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 
                 var newString = string
-                for z2 in self.currentTags[indexPath.row].mentions {
-                    if z2.acct.contains(string) {
-                        newString = z2.id
+                self.currentTags[indexPath.row].mentions.map({
+                    if $0.acct.contains(string) {
+                        newString = $0.id
                     }
-                }
+                })
                 
                 
                 let controller = ThirdViewController()

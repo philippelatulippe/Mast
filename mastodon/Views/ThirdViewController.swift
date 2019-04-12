@@ -994,9 +994,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 if let stat = (statuses.value) {
                     StoreStruct.allLists = stat
                     DispatchQueue.main.async {
-                        for x in StoreStruct.allLists {
-                            self.zzz[x.title] = x.id
-                        }
+                        StoreStruct.allLists.map({
+                            self.zzz[$0.title] = $0.id
+                        })
                     }
                 }
             }
@@ -1989,10 +1989,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 return
                             }
                     }
-                    for xx in self.zzz {
-                        z1.action(.default(xx.key), image: nil) { (action, ind) in
+                    self.zzz.map({
+                        let aa = $0
+                        z1.action(.default($0.key), image: nil) { (action, ind) in
                             print("test")
-                            let request = Lists.add(accountIDs: [self.chosenUser.id], toList: xx.value)
+                            let request = Lists.add(accountIDs: [self.chosenUser.id], toList: aa.value)
                             StoreStruct.client.run(request) { (statuses) in
                                 DispatchQueue.main.async {
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2011,7 +2012,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 }
                             }
                         }
-                    }
+                    })
                     
                     
                     if self.zzz.count == 0 {
@@ -3088,11 +3089,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     //                    selection.selectionChanged()
                     
                     var newString = string
-                    for z2 in zzz[indexPath.row].mentions {
-                        if z2.acct.contains(string) {
-                            newString = z2.id
+                    zzz[indexPath.row].mentions.map({
+                        if $0.acct.contains(string) {
+                            newString = $0.id
                         }
-                    }
+                    })
                     
                     let controller = ThirdViewController()
                     if string == StoreStruct.currentUser.username {} else {
@@ -3189,11 +3190,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                         
                         var newString = string
-                        for z2 in zzz[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        zzz[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         
                         let controller = ThirdViewController()
@@ -3294,11 +3295,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                         
                         var newString = string
-                        for z2 in zzz[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        zzz[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         
                         let controller = ThirdViewController()
@@ -3400,11 +3401,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                         
                         var newString = string
-                        for z2 in zzz[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        zzz[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         
                         let controller = ThirdViewController()
@@ -3780,32 +3781,32 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCellImage {
             var images = [SKPhoto]()
             var coun = 0
-            for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
+            (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
                 if coun == 0 {
-                    let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.mainImageView.currentImage ?? nil)
+                    let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.mainImageView.currentImage ?? nil)
                     photo.shouldCachePhotoURLImage = true
                     if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                         photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                     } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                        photo.caption = y.description ?? ""
+                        photo.caption = $0.description ?? ""
                     } else {
                         photo.caption = ""
                     }
                     images.append(photo)
                 } else {
-                    let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                    let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                     photo.shouldCachePhotoURLImage = true
                     if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                         photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                     } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                        photo.caption = y.description ?? ""
+                        photo.caption = $0.description ?? ""
                     } else {
                         photo.caption = ""
                     }
                     images.append(photo)
                 }
                 coun += 1
-            }
+            })
             let originImage = sender.currentImage
             if originImage != nil {
                 let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.mainImageView)
@@ -3848,32 +3849,32 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                 var images = [SKPhoto]()
                 var coun = 0
-                for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
+                (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
                     if coun == 0 {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.smallImage1.currentImage ?? nil)
+                        let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage1.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = y.description ?? ""
+                            photo.caption = $0.description ?? ""
                         } else {
                             photo.caption = ""
                         }
                         images.append(photo)
                     } else {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = y.description ?? ""
+                            photo.caption = $0.description ?? ""
                         } else {
                             photo.caption = ""
                         }
                         images.append(photo)
                     }
                     coun += 1
-                }
+                })
                 let originImage = sender.currentImage
                 if originImage != nil {
                     let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.smallImage1)
@@ -3915,32 +3916,32 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                 var images = [SKPhoto]()
                 var coun = 0
-                for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
+                (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
                     if coun == 0 {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.smallImage2.currentImage ?? nil)
+                        let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage2.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = y.description ?? ""
+                            photo.caption = $0.description ?? ""
                         } else {
                             photo.caption = ""
                         }
                         images.append(photo)
                     } else {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = y.description ?? ""
+                            photo.caption = $0.description ?? ""
                         } else {
                             photo.caption = ""
                         }
                         images.append(photo)
                     }
                     coun += 1
-                }
+                })
                 let originImage = sender.currentImage
                 if originImage != nil {
                     let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.smallImage2)
@@ -3983,32 +3984,32 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                 var images = [SKPhoto]()
                 var coun = 0
-                for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
+                (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
                     if coun == 0 {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.smallImage3.currentImage ?? nil)
+                        let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage3.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = y.description ?? ""
+                            photo.caption = $0.description ?? ""
                         } else {
                             photo.caption = ""
                         }
                         images.append(photo)
                     } else {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = y.description ?? ""
+                            photo.caption = $0.description ?? ""
                         } else {
                             photo.caption = ""
                         }
                         images.append(photo)
                     }
                     coun += 1
-                }
+                })
                 let originImage = sender.currentImage
                 if originImage != nil {
                     let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.smallImage3)
@@ -4052,32 +4053,32 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                 var images = [SKPhoto]()
                 var coun = 0
-                for y in sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments {
+                (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
                     if coun == 0 {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: cell.smallImage4.currentImage ?? nil)
+                        let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage4.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = y.description ?? ""
+                            photo.caption = $0.description ?? ""
                         } else {
                             photo.caption = ""
                         }
                         images.append(photo)
                     } else {
-                        let photo = SKPhoto.photoWithImageURL(y.url, holder: nil)
+                        let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
                             photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = y.description ?? ""
+                            photo.caption = $0.description ?? ""
                         } else {
                             photo.caption = ""
                         }
                         images.append(photo)
                     }
                     coun += 1
-                }
+                })
                 let originImage = sender.currentImage
                 if originImage != nil {
                     let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.smallImage4)

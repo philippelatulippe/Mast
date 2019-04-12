@@ -495,11 +495,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                         }
                         
                         var newString = string
-                        for z2 in StoreStruct.statusSearch[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        StoreStruct.statusSearch[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         
                         let controller = ThirdViewController()
@@ -600,11 +600,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                         }
                         
                         var newString = string
-                        for z2 in StoreStruct.statusSearch[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        StoreStruct.statusSearch[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         
                         let controller = ThirdViewController()

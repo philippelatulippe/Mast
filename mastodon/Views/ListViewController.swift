@@ -359,11 +359,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                     
                     var newString = string
-                    for z2 in StoreStruct.currentList[indexPath.row].mentions {
-                        if z2.acct.contains(string) {
-                            newString = z2.id
+                    StoreStruct.currentList[indexPath.row].mentions.map({
+                        if $0.acct.contains(string) {
+                            newString = $0.id
                         }
-                    }
+                    })
                     
                     
                     let controller = ThirdViewController()
@@ -466,11 +466,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                     
                     var newString = string
-                    for z2 in StoreStruct.currentList[indexPath.row].mentions {
-                        if z2.acct.contains(string) {
-                            newString = z2.id
+                    StoreStruct.currentList[indexPath.row].mentions.map({
+                        if $0.acct.contains(string) {
+                            newString = $0.id
                         }
-                    }
+                    })
                     
                     
                     let controller = ThirdViewController()

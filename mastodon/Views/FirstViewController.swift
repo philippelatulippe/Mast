@@ -1343,15 +1343,20 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             if let stat = (statuses.value) {
                 StoreStruct.notifications = stat
                 
-                for x in StoreStruct.notifications {
-                    if x.type == .mention {
-//                        DispatchQueue.main.async {
-                            StoreStruct.notificationsMentions.append(x)
-                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
-//                        }
+//                for x in StoreStruct.notifications {
+//                    if x.type == .mention {
+//                        StoreStruct.notificationsMentions.append(x)
+//                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+//                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+//                    }
+//                }
+                StoreStruct.notifications.map({
+                    if $0.type == .mention {
+                        StoreStruct.notificationsMentions.append($0)
+                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     }
-                }
+                })
                 
             }
         }
@@ -2176,11 +2181,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         var newString = string
-                        for z2 in StoreStruct.statusesHome[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        StoreStruct.statusesHome[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         let controller = ThirdViewController()
                         if newString == StoreStruct.currentUser?.username {} else {
@@ -2288,11 +2293,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         var newString = string
-                        for z2 in StoreStruct.statusesHome[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        StoreStruct.statusesHome[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         
                         let controller = ThirdViewController()
@@ -2432,11 +2437,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         var newString = string
-                        for z2 in StoreStruct.statusesLocal[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        StoreStruct.statusesLocal[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         
                         let controller = ThirdViewController()
@@ -2539,11 +2544,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         var newString = string
-                        for z2 in StoreStruct.statusesLocal[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        StoreStruct.statusesLocal[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         
                         let controller = ThirdViewController()
@@ -2676,11 +2681,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         var newString = string
-                        for z2 in StoreStruct.statusesFederated[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        StoreStruct.statusesFederated[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         
                         let controller = ThirdViewController()
@@ -2783,11 +2788,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         var newString = string
-                        for z2 in StoreStruct.statusesFederated[indexPath.row].mentions {
-                            if z2.acct.contains(string) {
-                                newString = z2.id
+                        StoreStruct.statusesFederated[indexPath.row].mentions.map({
+                            if $0.acct.contains(string) {
+                                newString = $0.id
                             }
-                        }
+                        })
                         
                         
                         let controller = ThirdViewController()
