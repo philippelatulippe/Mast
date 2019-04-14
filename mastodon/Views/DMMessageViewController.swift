@@ -125,7 +125,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                             if $0.account.acct == StoreStruct.currentUser.acct {
                                 theType = "1"
                             }
-                            let sender = Sender(id: theType, displayName: "\($0.account.displayName)")
+                            let sender = Sender(id: theType, displayName: "\($0.account.acct)")
                             let x = MockMessage.init(text: $0.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""), sender: sender, messageId: $0.id, date: Date())
                             self.messages.append(x)
                             self.allPosts.append($0)
@@ -267,9 +267,8 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         let controller = ComposeViewController()
         StoreStruct.spoilerText = self.mainStatus[0].reblog?.spoilerText ?? self.mainStatus[0].spoilerText
         controller.inReply = [self.mainStatus[0]]
-        controller.inReplyText = self.mainStatus[0].account.username
+        controller.inReplyText = self.mainStatus[0].account.acct
         controller.prevTextReply = self.mainStatus[0].content.stripHTML()
-        print(self.mainStatus[0].account.username)
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -293,7 +292,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
     }
     
     func currentSender() -> Sender {
-        return Sender(id: "1", displayName: "\(StoreStruct.currentUser.displayName)")
+        return Sender(id: "1", displayName: "\(StoreStruct.currentUser.acct)")
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {

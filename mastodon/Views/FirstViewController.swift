@@ -4896,8 +4896,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         self.lastThing = stat.first?.id ?? ""
                         
                         StoreStruct.statusesHome = StoreStruct.statusesHome + stat
+                        StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         DispatchQueue.main.async {
-                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             self.tableView.reloadData()
                             
                             do {
@@ -4925,8 +4925,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     if stat.isEmpty || self.lastThing2 == stat.first?.id ?? "" {} else {
                         self.lastThing2 = stat.first?.id ?? ""
                         StoreStruct.statusesLocal = StoreStruct.statusesLocal + stat
+                        StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                         DispatchQueue.main.async {
-                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             self.tableViewL.reloadData()
                             
                             do {
@@ -4953,8 +4953,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     if stat.isEmpty || self.lastThing3 == stat.first?.id ?? "" {} else {
                         self.lastThing3 = stat.first?.id ?? ""
                         StoreStruct.statusesFederated = StoreStruct.statusesFederated + stat
+                        StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                         DispatchQueue.main.async {
-                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             self.tableViewF.reloadData()
                             
                             do {

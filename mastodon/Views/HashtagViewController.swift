@@ -2084,8 +2084,8 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
                     self.lastThing = stat.first?.id ?? ""
-                self.currentTags = self.currentTags + stat
                 DispatchQueue.main.async {
+                    self.currentTags = self.currentTags + stat
                     self.tableView.reloadData()
                 }
                 }

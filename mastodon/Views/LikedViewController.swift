@@ -2100,8 +2100,8 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
                     self.lastThing = stat.first?.id ?? ""
                     
-                self.currentTags = self.currentTags + stat
                 DispatchQueue.main.async {
+                    self.currentTags = self.currentTags + stat
                     self.currentTags = self.currentTags.removeDuplicates()
                     self.tableView.reloadData()
                 }
