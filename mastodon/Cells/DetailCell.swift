@@ -14,7 +14,7 @@ class DetailCell: UITableViewCell {
     
     var profileImageView = UIButton()
     var userName = UILabel()
-    var userTag = UILabel()
+    var userTag = UIButton()
     var date = UILabel()
     var toot = ActiveLabel()
     var faves = UIButton()
@@ -50,13 +50,12 @@ class DetailCell: UITableViewCell {
         profileImageView.layer.masksToBounds = true
         
         userName.numberOfLines = 0
-        userTag.numberOfLines = 0
         toot.numberOfLines = 0
         fromClient.numberOfLines = 0
         faves.titleLabel?.textAlignment = .left
         
         userName.textColor = Colours.black
-        userTag.textColor = Colours.black.withAlphaComponent(0.6)
+        userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
         date.textColor = Colours.black.withAlphaComponent(0.6)
         toot.textColor = Colours.black
         fromClient.textColor = Colours.black.withAlphaComponent(0.6)
@@ -64,7 +63,7 @@ class DetailCell: UITableViewCell {
         faves.setTitleColor(Colours.tabSelected, for: .normal)
         
         userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
-        userTag.font = UIFont.systemFont(ofSize: Colours.fontSize3)
+        userTag.titleLabel?.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         fromClient.font = UIFont.systemFont(ofSize: Colours.fontSize3)
@@ -122,9 +121,9 @@ class DetailCell: UITableViewCell {
         
         
         if (UserDefaults.standard.object(forKey: "mentionToggle") == nil || UserDefaults.standard.object(forKey: "mentionToggle") as! Int == 0) {
-            userTag.text = "@\(status.reblog?.account.acct ?? status.account.acct)"
+            userTag.setTitle("@\(status.reblog?.account.acct ?? status.account.acct)", for: .normal)
         } else {
-            userTag.text = "@\(status.reblog?.account.username ?? status.account.username)"
+            userTag.setTitle("@\(status.reblog?.account.username ?? status.account.username)", for: .normal)
         }
         date.text = status.reblog?.createdAt.toStringWithRelativeTime() ?? status.createdAt.toStringWithRelativeTime()
         if status.reblog?.content.stripHTML() != nil {
@@ -274,7 +273,7 @@ class DetailCell: UITableViewCell {
         }
         
         userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
-        userTag.font = UIFont.systemFont(ofSize: Colours.fontSize3)
+        userTag.titleLabel?.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         fromClient.font = UIFont.systemFont(ofSize: Colours.fontSize3)
