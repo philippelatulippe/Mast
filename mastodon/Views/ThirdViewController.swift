@@ -2425,20 +2425,20 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let vc = GameViewController()
                     self.present(vc, animated: true, completion: nil)
                 }
-                .action(.default(" Log Out".localized), image: UIImage(named: "lout")) { (action, ind) in
-                    print(action, ind)
-                    
-                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-                    switch (deviceIdiom) {
-                    case .phone:
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut"), object: nil)
-                    case .pad:
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "logBackOut"), object: nil)
-                    default:
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut"), object: nil)
-                    }
-                    
-                }
+//                .action(.default(" Log Out".localized), image: UIImage(named: "lout")) { (action, ind) in
+//                    print(action, ind)
+//
+//                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+//                    switch (deviceIdiom) {
+//                    case .phone:
+//                        NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut"), object: nil)
+//                    case .pad:
+//                        NotificationCenter.default.post(name: Notification.Name(rawValue: "logBackOut"), object: nil)
+//                    default:
+//                        NotificationCenter.default.post(name: Notification.Name(rawValue: "signOut"), object: nil)
+//                    }
+//
+//                }
                 .action(.cancel("Dismiss"))
                 .finally { action, index in
                     if action.style == .cancel {

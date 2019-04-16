@@ -104,7 +104,10 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
         cell.bgImage.layer.shadowRadius = 12
         cell.bgImage.layer.shadowOpacity = 0.12
         
-        
+//        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressed))
+//        longPressRecognizer.minimumPressDuration = 0.5
+//        cell.image.tag = indexPath.item
+//        cell.image.addGestureRecognizer(longPressRecognizer)
         
         cell.frame.size.width = 55
         cell.frame.size.height = 55
@@ -134,6 +137,20 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
             
             if curr?.clientID == instances[indexPath.item].clientID {
                 
+                Alertift.actionSheet(title: "Already selected", message: "Pick another account, or add a new one.")
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .show(on: self.window?.rootViewController)
+                
             } else {
                 
                 
@@ -145,9 +162,40 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
                     
                     DispatchQueue.main.async {
                         
-                        InstanceData.setCurrentInstance(instance: instances[indexPath.item])
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        appDelegate.reloadApplication()
+                        Alertift.actionSheet(title: nil, message: nil)
+                            .backgroundColor(Colours.white)
+                            .titleTextColor(Colours.grayDark)
+                            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                            .messageTextAlignment(.left)
+                            .titleTextAlignment(.left)
+                            .action(.default("Switch".localized), image: UIImage(named: "profile")) { (action, ind) in
+                                print(action, ind)
+                                
+                                InstanceData.setCurrentInstance(instance: instances[indexPath.item])
+                                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                appDelegate.reloadApplication()
+                                
+                            }
+                            .action(.default("Remove".localized), image: UIImage(named: "block")) { (action, ind) in
+                                print(action, ind)
+                                
+                                var instance = InstanceData.getAllInstances()
+                                var account = Account.getAccounts()
+                                account.remove(at: indexPath.item)
+                                UserDefaults.standard.set(try? PropertyListEncoder().encode(account), forKey:"allAccounts")
+                                instance.remove(at: indexPath.item)
+                                UserDefaults.standard.set(try? PropertyListEncoder().encode(instance), forKey:"instances")
+                                self.collectionView.reloadData()
+                                
+                            }
+                            .action(.cancel("Dismiss"))
+                            .finally { action, index in
+                                if action.style == .cancel {
+                                    return
+                                }
+                            }
+                            .show(on: self.window?.rootViewController)
+                        
                         
                     }
                 }

@@ -86,6 +86,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     let reachability = Reachability()!
     var keyHeight = 0
     var tagListView = DLTagView()
+    var closeButton = MNGExpandedTouchAreaButton()
     
     func siriLight() {
         UIApplication.shared.statusBarStyle = .default
@@ -988,10 +989,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     StoreStruct.emotiFace = stat
                 }
                 
-                for y in stat {
-                    let attributedString = NSAttributedString(string: "    \(y.shortcode)")
+                stat.map({
+                    let attributedString = NSAttributedString(string: "    \($0.shortcode)")
                     let textAttachment = NSTextAttachment()
-                    textAttachment.loadImageUsingCache(withUrl: y.staticURL.absoluteString)
+                    textAttachment.loadImageUsingCache(withUrl: $0.staticURL.absoluteString)
                     textAttachment.bounds = CGRect(x:0, y: Int(-9), width: Int(30), height: Int(30))
                     let attrStringWithImage = NSAttributedString(attachment: textAttachment)
                     let result = NSMutableAttributedString()
@@ -999,7 +1000,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     result.append(attributedString)
                     
                     StoreStruct.mainResult.append(result)
-                }
+                })
             }
         }
         
@@ -2145,14 +2146,11 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         
         UserDefaults.standard.set(nil, forKey: "accessToken")
         
-        
-        
 //        do {
 //            try Disk.clear(.documents)
 //        } catch {
 //            print("couldn't clear disk")
 //        }
-        
         
         self.textField.text = ""
         
@@ -2222,11 +2220,50 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         }
     }
     
+    @objc func didTouchUpInsideCloseButton(_ sender: AnyObject) {
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let impact = UIImpactFeedbackGenerator()
+            impact.impactOccurred()
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func createLoginView(newInstance:Bool = false) {
         self.newInstance = newInstance
         self.loginBG.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         self.loginBG.backgroundColor = Colours.tabSelected
         self.view.addSubview(self.loginBG)
+        
+        if self.newInstance {
+            var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
+            var offset = 88
+            var closeB = 47
+            var botbot = 20
+            if UIDevice().userInterfaceIdiom == .phone {
+                switch UIScreen.main.nativeBounds.height {
+                case 2688:
+                    offset = 88
+                    closeB = 47
+                    botbot = 40
+                case 2436, 1792:
+                    offset = 88
+                    closeB = 47
+                    botbot = 40
+                default:
+                    offset = 64
+                    closeB = 24
+                    botbot = 20
+                    tabHeight = Int(UITabBarController().tabBar.frame.size.height)
+                }
+            }
+            self.closeButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 20, y: closeB, width: 32, height: 32)))
+            self.closeButton.setImage(UIImage(named: "block")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+            self.closeButton.alpha = 0.3
+            self.closeButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            self.closeButton.adjustsImageWhenHighlighted = false
+            self.closeButton.addTarget(self, action: #selector(didTouchUpInsideCloseButton), for: .touchUpInside)
+            self.view.addSubview(self.closeButton)
+        }
         
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeDown.direction = .down
@@ -2239,7 +2276,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.view.addSubview(self.loginLogo)
         
         self.loginLabel.frame = CGRect(x: 50, y: self.view.bounds.height/2 - 57.5, width: self.view.bounds.width - 80, height: 35)
-        self.loginLabel.text = "Mastodon instance:".localized
+        self.loginLabel.text = "Instance name:".localized
         self.loginLabel.textColor = UIColor.white.withAlphaComponent(0.6)
         self.loginLabel.font = UIFont.systemFont(ofSize: 14)
         self.view.addSubview(self.loginLabel)
@@ -2254,7 +2291,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.textField.autocorrectionType = .no
         self.textField.autocapitalizationType = .none
         self.textField.delegate = self
-        self.textField.attributedPlaceholder = NSAttributedString(string: "mastodon.technology",
+        self.textField.attributedPlaceholder = NSAttributedString(string: "mastodon.social",
                                                                   attributes: [NSAttributedString.Key.foregroundColor: Colours.tabSelected])
         self.view.addSubview(self.textField)
         
@@ -2275,19 +2312,21 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let task = session.dataTask(with: request) { (data, response, err) in
             do {
                 let json = try JSONDecoder().decode(tagInstances.self, from: data ?? Data())
-                json.instances.map({
-                        var tag = DLTag(text: "\($0.name)")
+                for x in json.instances {
+                    DispatchQueue.main.async {
+                        var tag = DLTag(text: "\(x.name)")
                         tag.fontSize = 15
                         tag.backgroundColor = Colours.grayLight2.withAlphaComponent(0.3)
                         tag.borderWidth = 0
                         tag.textColor = UIColor.white
                         tag.cornerRadius = 12
                         tag.enabled = true
-                        tag.altText = "\($0.name)"
+                        tag.altText = "\(x.name)"
                         tag.padding = UIEdgeInsets(top: 10, left: 14, bottom: 10, right: 14)
                         self.tagListView.addTag(tag: tag)
                         self.tagListView.singleLine = true
-                })
+                    }
+                }
             } catch {
                 print("err")
             }
@@ -2403,14 +2442,34 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     if application.value == nil {
                         
                         DispatchQueue.main.async {
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                            statusAlert.title = "Not a valid Instance (may be closed or dead)".localized
-                            statusAlert.contentColor = Colours.grayDark
-                            statusAlert.message = "Please enter an Instance name like mastodon.technology"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                            
+                            
+                            Alertift.actionSheet(title: "Not a valid instance (may be closed or dead)", message: "Please enter an instance name like mastodon.social or mastodon.technology, or use one from the list to get started. You can sign in if you already have an account registered with the instance, or you can choose to sign up with a new account.")
+                                .backgroundColor(Colours.white)
+                                .titleTextColor(Colours.grayDark)
+                                .messageTextColor(Colours.grayDark)
+                                .messageTextAlignment(.left)
+                                .titleTextAlignment(.left)
+                                .action(.default("Find out more".localized), image: UIImage(named: "share")) { (action, ind) in
+                                    print(action, ind)
+                                    let queryURL = URL(string: "https://joinmastodon.org")!
+                                    UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
+                                        if !success {
+                                            self.safariVC = SFSafariViewController(url: queryURL)
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        }
+                                    }
+                                }
+                                .action(.cancel("Dismiss"))
+                                .finally { action, index in
+                                    if action.style == .cancel {
+                                        return
+                                    }
+                                }
+                                .popover(anchorView: self.view)
+                                .show(on: self)
+                            
+                            
                         }
                         
                     } else {
@@ -2450,14 +2509,33 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     if application.value == nil {
                         
                         DispatchQueue.main.async {
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                            statusAlert.title = "Not a valid Instance (may be closed or dead)".localized
-                            statusAlert.contentColor = Colours.grayDark
-                            statusAlert.message = "Please enter an Instance name like mastodon.technology"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                            
+                            
+                            Alertift.actionSheet(title: "Not a valid instance (may be closed or dead)", message: "Please enter an instance name like mastodon.social or mastodon.technology, or use one from the list to get started. You can sign in if you already have an account registered with the instance, or you can choose to sign up with a new account.")
+                                .backgroundColor(Colours.white)
+                                .titleTextColor(Colours.grayDark)
+                                .messageTextColor(Colours.grayDark)
+                                .messageTextAlignment(.left)
+                                .titleTextAlignment(.left)
+                                .action(.default("Find out more".localized), image: UIImage(named: "share")) { (action, ind) in
+                                    print(action, ind)
+                                    let queryURL = URL(string: "https://joinmastodon.org")!
+                                    UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
+                                        if !success {
+                                            self.safariVC = SFSafariViewController(url: queryURL)
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        }
+                                    }
+                                }
+                                .action(.cancel("Dismiss"))
+                                .finally { action, index in
+                                    if action.style == .cancel {
+                                        return
+                                    }
+                                }
+                                .popover(anchorView: self.view)
+                                .show(on: self)
+                            
                         }
                         
                     } else {
@@ -2556,10 +2634,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         }
         
         
-        if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
-            
-            
-            
+//        if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
 //            self.watchSession?.delegate = self
 //            self.watchSession?.activate()
 //            do {
@@ -2568,7 +2643,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
 //            } catch {
 //                print("err")
 //            }
-        }
+//        }
     }
     
     
@@ -2631,7 +2706,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.tableViewLists.reloadData()
         
         //animate
-        self.searcherView.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
+        self.searcherView.transform = CGAffineTransform(scaleX: 0.55, y: 0.55)
         springWithDelay(duration: 0.5, delay: 0, animations: {
             self.searcherView.alpha = 1
             self.searcherView.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -2754,8 +2829,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.searcherView.addSubview(self.tableView)
         
         //animate
-        self.searcherView.transform = CGAffineTransform(scaleX: 0.65, y: 0.65)
-        springWithDelay(duration: 0.5, delay: 0, animations: {
+        self.searcherView.transform = CGAffineTransform(scaleX: 0.35, y: 0.35)
+        springWithDelay(duration: 0.45, delay: 0, animations: {
             self.searcherView.alpha = 1
             self.searcherView.transform = CGAffineTransform(scaleX: 1, y: 1)
         })
@@ -2967,7 +3042,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.searchTextField.text = ""
         self.searchTextField.alpha = 0
         
-        let wid = self.view.bounds.width
         springWithDelay(duration: 0.37, delay: 0, animations: {
             self.searcherView.alpha = 0
         })
@@ -2998,8 +3072,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.searchTextField.text = ""
         self.searchTextField.alpha = 0
         
-        let wid = self.view.bounds.width
-        springWithDelay(duration: 0.37, delay: 0, animations: {
+        springWithDelay(duration: 0.4, delay: 0, animations: {
             self.searcherView.alpha = 0
         })
     }

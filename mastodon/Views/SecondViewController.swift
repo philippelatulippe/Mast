@@ -439,8 +439,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        
-        self.ai.startAnimating()
+        if StoreStruct.notificationsMentions.isEmpty {
+            self.ai.startAnimating()
+        }
         
         
         if (UserDefaults.standard.object(forKey: "biometricsnot") == nil) || (UserDefaults.standard.object(forKey: "biometricsnot") as! Int == 0) {} else {

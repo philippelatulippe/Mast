@@ -23,6 +23,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
     var player = AVPlayer()
     var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
+    var lastUser = ""
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -125,6 +126,8 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                             if $0.account.acct == StoreStruct.currentUser.acct {
                                 theType = "1"
                             }
+                            self.lastUser = $0.account.acct
+                            
                             let sender = Sender(id: theType, displayName: "\($0.account.acct)")
                             let x = MockMessage.init(text: $0.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""), sender: sender, messageId: $0.id, date: Date())
                             self.messages.append(x)
@@ -243,7 +246,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         let sender = Sender(id: "1", displayName: "\(StoreStruct.currentUser.acct)")
         let x = MockMessage.init(text: self.messageInputBar.inputTextView.text.replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""), sender: sender, messageId: "18982", date: Date())
         
-        let request0 = Statuses.create(status: self.messageInputBar.inputTextView.text, replyToID: self.mainStatus[0].inReplyToID, mediaIDs: [], sensitive: self.mainStatus[0].sensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: nil, poll: nil, visibility: .direct)
+        let request0 = Statuses.create(status: "@\(self.lastUser) \(String(describing: self.messageInputBar.inputTextView.text))", replyToID: self.mainStatus[0].inReplyToID, mediaIDs: [], sensitive: self.mainStatus[0].sensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: nil, poll: nil, visibility: .direct)
         StoreStruct.client.run(request0) { (statuses) in
             print(statuses)
             DispatchQueue.main.async {

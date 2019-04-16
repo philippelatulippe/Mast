@@ -3280,13 +3280,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         print(action, ind)
                         
                         
-                        InstanceData.setCurrentInstance(instance: instances[indexPath.row])
                         
                         DispatchQueue.main.async {
                             
+                            InstanceData.setCurrentInstance(instance: instances[indexPath.row])
                             let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             appDelegate.reloadApplication()
-                            
                             
                         }
                         
