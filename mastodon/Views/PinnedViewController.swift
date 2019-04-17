@@ -199,8 +199,8 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .min(id: "", limit: 5000))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    self.currentTags = stat
                     DispatchQueue.main.async {
+                        self.currentTags = stat
                         self.loadLoadLoad()
                     }
                 }
@@ -361,8 +361,8 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let request = Timelines.tag(string)
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
-                        controller.currentTags = stat
                         DispatchQueue.main.async {
+                            controller.currentTags = stat
                             self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
@@ -476,8 +476,8 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let request = Timelines.tag(string)
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
-                        controller.currentTags = stat
                         DispatchQueue.main.async {
+                            controller.currentTags = stat
                             self.navigationController?.pushViewController(controller, animated: true)
                         }
                     }
@@ -539,7 +539,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             
             let indexPath = IndexPath(row: sender.tag, section: 0)
-            let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? MainFeedCellImage else { return }
             var images = [SKPhoto]()
             var coun = 0
             sto[indexPath.row].mediaAttachments.map({
@@ -603,7 +603,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                guard let cell = self.tableView.cellForRow(at: indexPath) as? MainFeedCellImage else { return }
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -665,7 +665,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                guard let cell = self.tableView.cellForRow(at: indexPath) as? MainFeedCellImage else { return }
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -728,7 +728,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                guard let cell = self.tableView.cellForRow(at: indexPath) as? MainFeedCellImage else { return }
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -792,7 +792,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                guard let cell = self.tableView.cellForRow(at: indexPath) as? MainFeedCellImage else { return }
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -851,13 +851,13 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var theTable = self.tableView
         var sto = self.currentTags
         
-        if sto[sender.tag].reblog?.reblogged! ?? sto[sender.tag].reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+        if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
             StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != sto[sender.tag].reblog?.id ?? sto[sender.tag].id }
             let request2 = Statuses.unreblog(id: sto[sender.tag].reblog?.id ?? sto[sender.tag].id)
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
                     if let cell = theTable.cellForRow(at:IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
-                        if sto[sender.tag].reblog?.favourited! ?? sto[sender.tag].favourited! || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                        if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "like")
                         } else {
@@ -868,7 +868,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
-                        if sto[sender.tag].reblog?.favourited! ?? sto[sender.tag].favourited! || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                        if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "like")
                         } else {
@@ -932,13 +932,13 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var theTable = self.tableView
         var sto = self.currentTags
         
-        if sto[sender.tag].reblog?.favourited! ?? sto[sender.tag].favourited! || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+        if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
             StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[sender.tag].reblog?.id ?? sto[sender.tag].id }
             let request2 = Statuses.unfavourite(id: sto[sender.tag].reblog?.id ?? sto[sender.tag].id)
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
-                        if sto[sender.tag].reblog?.reblogged! ?? sto[sender.tag].reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                        if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "boost")
                         } else {
@@ -949,7 +949,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
-                        if sto[sender.tag].reblog?.reblogged! ?? sto[sender.tag].reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                        if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "boost")
                         } else {
@@ -1056,13 +1056,13 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 
                 
-                if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                     StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != sto[indexPath.row].id }
                     let request2 = Statuses.unreblog(id: sto[indexPath.row].id)
                     StoreStruct.client.run(request2) { (statuses) in
                         DispatchQueue.main.async {
                             if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
-                                if sto[indexPath.row].favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
+                                if sto[indexPath.row].favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "like")
                                 } else {
@@ -1071,7 +1071,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 cell.hideSwipe(animated: true)
                             } else {
                                 let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
-                                if sto[indexPath.row].favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
+                                if sto[indexPath.row].favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "like")
                                 } else {
@@ -1141,13 +1141,13 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 
                 
-                if sto[indexPath.row].favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
+                if sto[indexPath.row].favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
                     StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[indexPath.row].id }
                     let request2 = Statuses.unfavourite(id: sto[indexPath.row].id)
                     StoreStruct.client.run(request2) { (statuses) in
                         DispatchQueue.main.async {
                             if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
-                                if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                                if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "boost")
                                 } else {
@@ -1156,7 +1156,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 cell.hideSwipe(animated: true)
                             } else {
                                 let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
-                                if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                                if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "boost")
                                 } else {
@@ -1331,7 +1331,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Pin/Unpin".localized), image: UIImage(named: "pinned")) { (action, ind) in
-                            print(action, ind)
+                             
                             if sto[indexPath.row].pinned ?? false || StoreStruct.allPins.contains(sto[indexPath.row].id) {
                                 StoreStruct.allPins = StoreStruct.allPins.filter { $0 != sto[indexPath.row].id }
                                 let request = Statuses.unpin(id: sto[indexPath.row].id)
@@ -1373,7 +1373,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         .action(.default("Delete and Redraft".localized), image: UIImage(named: "block")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let controller = ComposeViewController()
                             StoreStruct.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
@@ -1383,7 +1383,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                         }
                         .action(.default("Delete".localized), image: UIImage(named: "block")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             self.currentTags = self.currentTags.filter { $0 != self.currentTags[indexPath.row] }
                             self.tableView.deleteRows(at: [indexPath], with: .none)
@@ -1412,7 +1412,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let unreserved = "-._~/?"
                             let allowed = NSMutableCharacterSet.alphanumeric()
@@ -1466,7 +1466,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             task.resume()
                         }
                         .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let controller = ComposeViewController()
                             controller.inReply = []
@@ -1475,7 +1475,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.present(controller, animated: true, completion: nil)
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             
                             
@@ -1486,7 +1486,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if let myWebsite = sto[indexPath.row].url {
                                         let objectsToShare = [myWebsite]
@@ -1506,7 +1506,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     }
                                 }
                                 .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     let bodyText = sto[indexPath.row].content.stripHTML()
                                     if UIDevice.current.userInterfaceIdiom == .pad {
@@ -1525,7 +1525,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     
                                 }
                                 .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     let controller = NewQRViewController()
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
@@ -1579,7 +1579,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if isMuted == false {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -1599,7 +1599,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("muted")
-                                        print(stat)
+                                         
                                     }
                                 }
                             } else {
@@ -1620,14 +1620,14 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("unmuted")
-                                        print(stat)
+                                         
                                     }
                                 }
                             }
                             
                         }
                         .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if isBlocked == false {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -1647,7 +1647,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("blocked")
-                                        print(stat)
+                                         
                                     }
                                 }
                             } else {
@@ -1668,14 +1668,14 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("unblocked")
-                                        print(stat)
+                                         
                                     }
                                 }
                             }
                             
                         }
                         .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             Alertift.actionSheet()
                                 .backgroundColor(Colours.white)
@@ -1684,7 +1684,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Harassment"), image: nil) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
@@ -1704,13 +1704,13 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
-                                            print(stat)
+                                             
                                         }
                                     }
                                     
                                 }
                                 .action(.default("No Content Warning"), image: nil) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
@@ -1730,13 +1730,13 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
-                                            print(stat)
+                                             
                                         }
                                     }
                                     
                                 }
                                 .action(.default("Spam"), image: nil) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
@@ -1756,7 +1756,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
-                                            print(stat)
+                                             
                                         }
                                     }
                                     
@@ -1773,7 +1773,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                         }
                         .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let unreserved = "-._~/?"
                             let allowed = NSMutableCharacterSet.alphanumeric()
@@ -1823,7 +1823,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             task.resume()
                         }
                         .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let controller = ComposeViewController()
                             controller.inReply = []
@@ -1832,7 +1832,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.present(controller, animated: true, completion: nil)
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             
                             
@@ -1843,7 +1843,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if let myWebsite = sto[indexPath.row].url {
                                         let objectsToShare = [myWebsite]
@@ -1863,7 +1863,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     }
                                 }
                                 .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     let bodyText = sto[indexPath.row].content.stripHTML()
                                     if UIDevice.current.userInterfaceIdiom == .pad {
@@ -1882,7 +1882,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     
                                 }
                                 .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     let controller = NewQRViewController()
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"

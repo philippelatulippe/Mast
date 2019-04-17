@@ -117,10 +117,10 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
             let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    DispatchQueue.main.async {
                     self.allPrevious = (stat.ancestors)
                     self.allReplies = (stat.descendants)
                     
-                    DispatchQueue.main.async {
                         (self.allPrevious + self.mainStatus + self.allReplies).map({
                             var theType = "0"
                             if $0.account.acct == StoreStruct.currentUser.acct {
@@ -252,7 +252,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         
         let request0 = Statuses.create(status: "@\(self.lastUser) \(String(describing: self.messageInputBar.inputTextView.text))", replyToID: self.mainStatus[0].inReplyToID, mediaIDs: [], sensitive: self.mainStatus[0].sensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: nil, poll: nil, visibility: .direct)
         StoreStruct.client.run(request0) { (statuses) in
-            print(statuses)
+             
             DispatchQueue.main.async {
                 if let stat = statuses.value {
                     self.allPosts.append(stat)

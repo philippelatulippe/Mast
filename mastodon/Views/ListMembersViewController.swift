@@ -233,7 +233,7 @@ class ListMembersViewController: UIViewController, UITableViewDelegate, UITableV
                 .messageTextAlignment(.left)
                 .titleTextAlignment(.left)
                 .action(.default("Remove".localized), image: UIImage(named: "block")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         let notification = UINotificationFeedbackGenerator()
@@ -265,7 +265,7 @@ class ListMembersViewController: UIViewController, UITableViewDelegate, UITableV
 //
 //                        if let stat = (statuses.value) {
 //                            print("unblocked")
-//                            print(stat)
+//                             
 //                        }
 //                    }
                     

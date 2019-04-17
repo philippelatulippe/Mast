@@ -122,7 +122,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             .messageTextAlignment(.left)
             .titleTextAlignment(.left)
             .action(.default("25 : 75".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(1, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.25
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -130,7 +130,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.default("30 : 70".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(2, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.3
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -138,7 +138,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.default("35 : 65".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(3, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.35
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -146,7 +146,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.default("40 : 60".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(4, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.4
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -154,7 +154,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.default("45 : 55".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(5, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.45
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -162,7 +162,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.default("50 : 50".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(0, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.5
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -170,7 +170,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.default("55 : 45".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(6, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.55
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -178,7 +178,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.default("60 : 40".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(7, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.6
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -186,7 +186,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.default("65 : 35".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(8, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.65
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -194,7 +194,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.default("70 : 30".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(9, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.7
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -202,7 +202,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.splitViewController?.maximumPrimaryColumnWidth = minimumWidth
             }
             .action(.default("75 : 25".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 UserDefaults.standard.set(10, forKey: "splitra")
                 self.splitViewController?.preferredPrimaryColumnWidthFraction = 0.75
                 let minimumWidth = min(self.splitViewController?.view.bounds.width ?? 0, self.splitViewController?.view.bounds.height ?? 0)
@@ -422,7 +422,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Vote for \(StoreStruct.currentPollSelectionTitle)"), image: nil) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if let poll = self.mainStatus[0].reblog?.poll ?? self.mainStatus[0].poll {
                                 let request = Polls.vote(id: poll.id, choices: StoreStruct.currentPollSelection)
@@ -556,9 +556,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    self.allPrevious = (stat.ancestors)
-                    self.allReplies = (stat.descendants)
                     DispatchQueue.main.async {
+                        self.allPrevious = (stat.ancestors)
+                        self.allReplies = (stat.descendants)
                         self.tableView.reloadData()
                         if self.allPrevious.count == 0 {} else {
                             self.detailPrev.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
@@ -814,8 +814,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let request = Timelines.tag(string)
                     StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
-                            controller.currentTags = stat
                             DispatchQueue.main.async {
+                                controller.currentTags = stat
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .phone :
@@ -955,8 +955,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let request = Timelines.tag(string)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                controller.currentTags = stat
                                 DispatchQueue.main.async {
+                                    controller.currentTags = stat
                                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                     switch (deviceIdiom) {
                                     case .phone :
@@ -1102,8 +1102,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let request = Timelines.tag(string)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                controller.currentTags = stat
                                 DispatchQueue.main.async {
+                                    controller.currentTags = stat
                                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                     switch (deviceIdiom) {
                                     case .phone :
@@ -1254,8 +1254,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let request = Timelines.tag(string)
                     StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
-                            controller.currentTags = stat
                             DispatchQueue.main.async {
+                                controller.currentTags = stat
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .phone :
@@ -1398,8 +1398,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let request = Timelines.tag(string)
                     StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
-                            controller.currentTags = stat
                             DispatchQueue.main.async {
+                                controller.currentTags = stat
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .phone :
@@ -1611,8 +1611,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let request = Timelines.tag(string)
                     StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
-                            controller.currentTags = stat
                             DispatchQueue.main.async {
+                                controller.currentTags = stat
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .phone :
@@ -1751,8 +1751,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             let request = Timelines.tag(string)
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    controller.currentTags = stat
                                     DispatchQueue.main.async {
+                                        controller.currentTags = stat
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
                                         case .phone :
@@ -1880,8 +1880,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             let request = Timelines.tag(string)
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    controller.currentTags = stat
                                     DispatchQueue.main.async {
+                                        controller.currentTags = stat
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
                                         case .phone :
@@ -2030,8 +2030,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             let request = Timelines.tag(string)
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    controller.currentTags = stat
                                     DispatchQueue.main.async {
+                                        controller.currentTags = stat
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
                                         case .phone :
@@ -2170,8 +2170,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             let request = Timelines.tag(string)
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    controller.currentTags = stat
                                     DispatchQueue.main.async {
+                                        controller.currentTags = stat
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
                                         case .phone :
@@ -2280,7 +2280,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
-                        if sto[sender.tag].reblog?.reblogged! ?? sto[sender.tag].reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                        if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "boost")
                         } else {
@@ -2430,7 +2430,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var theTable = self.tableView
         var sto = self.allPrevious
         
-        if sto[sender.tag].reblog?.reblogged! ?? sto[sender.tag].reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+        if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
             StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != sto[sender.tag].reblog?.id ?? sto[sender.tag].id }
             let request2 = Statuses.unreblog(id: sto[sender.tag].reblog?.id ?? sto[sender.tag].id)
             StoreStruct.client.run(request2) { (statuses) in
@@ -2447,7 +2447,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
-                        if sto[sender.tag].reblog?.favourited! ?? sto[sender.tag].favourited! || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                        if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "like")
                         } else {
@@ -2515,7 +2515,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
                     if let cell = theTable.cellForRow(at:IndexPath(row: sender.tag, section: 2)) as? MainFeedCell {
-                        if sto[sender.tag].reblog?.favourited! ?? sto[sender.tag].favourited! || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                        if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "like")
                         } else {
@@ -2526,7 +2526,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 2)) as! MainFeedCellImage
-                        if sto[sender.tag].reblog?.favourited! ?? sto[sender.tag].favourited! || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
+                        if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "like")
                         } else {
@@ -2806,7 +2806,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id }
             let request2 = Statuses.unfavourite(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request2) { (statuses) in
-                print(statuses.value)
+                
             }
             
             self.refDetailCount()
@@ -2843,7 +2843,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateLi"), object: nil)
                     }
                 }
-                print(statuses.value)
+                
             }
             
             self.refDetailCount()
@@ -2877,7 +2877,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id }
             let request2 = Statuses.unreblog(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request2) { (statuses) in
-                print(statuses.value)
+                
             }
             
             self.refDetailCount()
@@ -2908,7 +2908,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateRe"), object: nil)
                     }
                 }
-                print(statuses.value)
+                
             }
             
             self.refDetailCount()
@@ -2977,7 +2977,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 .messageTextAlignment(.left)
                 .titleTextAlignment(.left)
                 .action(.default("Pin/Unpin".localized), image: UIImage(named: "pinned")) { (action, ind) in
-                    print(action, ind)
+                     
                     if self.mainStatus[0].pinned ?? false || StoreStruct.allPins.contains(self.mainStatus[0].id) {
                         StoreStruct.allPins = StoreStruct.allPins.filter { $0 != self.mainStatus[0].id }
                         let request = Statuses.unpin(id: self.mainStatus[0].id)
@@ -3019,7 +3019,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                 }
                 .action(.default("Delete and Redraft".localized), image: UIImage(named: "block")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     let controller = ComposeViewController()
                     StoreStruct.spoilerText = self.mainStatus[0].reblog?.spoilerText ?? self.mainStatus[0].spoilerText
@@ -3029,7 +3029,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                 }
                 .action(.default("Delete".localized), image: UIImage(named: "block")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     let request = Statuses.delete(id: self.mainStatus[0].id)
                     StoreStruct.client.run(request) { (statuses) in
@@ -3054,7 +3054,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                 }
                 .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     let unreserved = "-._~/?"
                     let allowed = NSMutableCharacterSet.alphanumeric()
@@ -3108,7 +3108,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     task.resume()
                 }
                 .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     let controller = ComposeViewController()
                     controller.inReply = []
@@ -3117,7 +3117,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.present(controller, animated: true, completion: nil)
                 }
                 .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     
                     
@@ -3128,7 +3128,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if let myWebsite = self.mainStatus[0].url {
                                 let objectsToShare = [myWebsite]
@@ -3140,7 +3140,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let bodyText = self.mainStatus[0].content.stripHTML()
                             let vc = VisualActivityViewController(text: bodyText)
@@ -3151,7 +3151,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                         }
                         .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let controller = NewQRViewController()
                             controller.ur = self.mainStatus[0].url?.absoluteString ?? "https://www.thebluebird.app"
@@ -3202,7 +3202,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 .messageTextAlignment(.left)
                 .titleTextAlignment(.left)
                 .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     if isMuted == false {
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3222,7 +3222,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
                                 print("muted")
-                                print(stat)
+                                 
                             }
                         }
                     } else {
@@ -3243,14 +3243,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
                                 print("unmuted")
-                                print(stat)
+                                 
                             }
                         }
                     }
                     
                 }
                 .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     if isBlocked == false {
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3270,7 +3270,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
                                 print("blocked")
-                                print(stat)
+                                 
                             }
                         }
                     } else {
@@ -3291,14 +3291,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
                                 print("unblocked")
-                                print(stat)
+                                 
                             }
                         }
                     }
                     
                 }
                 .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     
                     Alertift.actionSheet()
@@ -3308,7 +3308,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Harassment"), image: nil) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let notification = UINotificationFeedbackGenerator()
@@ -3328,13 +3328,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
                                     print("reported")
-                                    print(stat)
+                                     
                                 }
                             }
                             
                         }
                         .action(.default("No Content Warning"), image: nil) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let notification = UINotificationFeedbackGenerator()
@@ -3354,13 +3354,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
                                     print("reported")
-                                    print(stat)
+                                     
                                 }
                             }
                             
                         }
                         .action(.default("Spam"), image: nil) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let notification = UINotificationFeedbackGenerator()
@@ -3380,7 +3380,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
                                     print("reported")
-                                    print(stat)
+                                     
                                 }
                             }
                             
@@ -3397,7 +3397,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                 }
                 .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     let unreserved = "-._~/?"
                     let allowed = NSMutableCharacterSet.alphanumeric()
@@ -3447,7 +3447,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     task.resume()
                 }
                 .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     let controller = ComposeViewController()
                     controller.inReply = []
@@ -3456,7 +3456,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.present(controller, animated: true, completion: nil)
                 }
                 .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     
                     
@@ -3467,7 +3467,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if let myWebsite = self.mainStatus[0].reblog?.url ?? self.mainStatus[0].url {
                                 let objectsToShare = [myWebsite]
@@ -3479,7 +3479,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let bodyText = self.mainStatus[0].reblog?.content.stripHTML() ?? self.mainStatus[0].content.stripHTML()
                             let vc = VisualActivityViewController(text: bodyText)
@@ -3490,7 +3490,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                         }
                         .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let controller = NewQRViewController()
                             controller.ur = self.mainStatus[0].url?.absoluteString ?? "https://www.thebluebird.app"
@@ -4666,13 +4666,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 
                 
-                if sto[indexPath.row].favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
+                if sto[indexPath.row].favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
                     StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[indexPath.row].id }
                     let request2 = Statuses.unfavourite(id: sto[indexPath.row].id)
                     StoreStruct.client.run(request2) { (statuses) in
                         DispatchQueue.main.async {
                             if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
-                                if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                                if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "boost")
                                 } else {
@@ -4680,7 +4680,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 }
                                 cell.hideSwipe(animated: true)
                             } else if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCellImage {
-                                if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                                if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "boost")
                                 } else {
@@ -4688,7 +4688,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 }
                                 cell.hideSwipe(animated: true)
                             } else if let cell = tableView.cellForRow(at: indexPath) as? RepliesCell {
-                                if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                                if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "boost")
                                 } else {
@@ -4696,7 +4696,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 }
                                 cell.hideSwipe(animated: true)
                             } else if let cell = tableView.cellForRow(at: indexPath) as? RepliesCellImage {
-                                if sto[indexPath.row].reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
+                                if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "boost")
                                 } else {
@@ -4877,7 +4877,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Pin/Unpin".localized), image: UIImage(named: "pinned")) { (action, ind) in
-                            print(action, ind)
+                             
                             if sto[indexPath.row].pinned ?? false || StoreStruct.allPins.contains(sto[indexPath.row].id) {
                                 StoreStruct.allPins = StoreStruct.allPins.filter { $0 != sto[indexPath.row].id }
                                 let request = Statuses.unpin(id: sto[indexPath.row].id)
@@ -4919,7 +4919,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         .action(.default("Delete and Redraft".localized), image: UIImage(named: "block")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let controller = ComposeViewController()
                             StoreStruct.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
@@ -4929,7 +4929,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                         }
                         .action(.default("Delete".localized), image: UIImage(named: "block")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let request = Statuses.delete(id: sto[indexPath.row].id)
                             StoreStruct.client.run(request) { (statuses) in
@@ -4954,7 +4954,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let controller = ComposeViewController()
                             controller.inReply = []
@@ -4963,7 +4963,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.present(controller, animated: true, completion: nil)
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             
                             
@@ -4974,7 +4974,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if let myWebsite = sto[indexPath.row].url {
                                         let objectsToShare = [myWebsite]
@@ -4986,7 +4986,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     }
                                 }
                                 .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     let bodyText = sto[indexPath.row].content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText)
@@ -4997,7 +4997,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     
                                 }
                                 .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     let controller = NewQRViewController()
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
@@ -5051,7 +5051,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if isMuted == false {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -5071,7 +5071,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("muted")
-                                        print(stat)
+                                         
                                     }
                                 }
                             } else {
@@ -5092,14 +5092,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("unmuted")
-                                        print(stat)
+                                         
                                     }
                                 }
                             }
                             
                         }
                         .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if isBlocked == false {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -5119,7 +5119,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("blocked")
-                                        print(stat)
+                                         
                                     }
                                 }
                             } else {
@@ -5140,14 +5140,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("unblocked")
-                                        print(stat)
+                                         
                                     }
                                 }
                             }
                             
                         }
                         .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             Alertift.actionSheet()
                                 .backgroundColor(Colours.white)
@@ -5156,7 +5156,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Harassment"), image: nil) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
@@ -5176,13 +5176,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
-                                            print(stat)
+                                             
                                         }
                                     }
                                     
                                 }
                                 .action(.default("No Content Warning"), image: nil) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
@@ -5202,13 +5202,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
-                                            print(stat)
+                                             
                                         }
                                     }
                                     
                                 }
                                 .action(.default("Spam"), image: nil) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
@@ -5228,7 +5228,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
-                                            print(stat)
+                                             
                                         }
                                     }
                                     
@@ -5245,7 +5245,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                         }
                         .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let unreserved = "-._~/?"
                             let allowed = NSMutableCharacterSet.alphanumeric()
@@ -5295,7 +5295,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             task.resume()
                         }
                         .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let controller = ComposeViewController()
                             controller.inReply = []
@@ -5304,7 +5304,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.present(controller, animated: true, completion: nil)
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             
                             
@@ -5316,7 +5316,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if let myWebsite = sto[indexPath.row].url {
                                         let objectsToShare = [myWebsite]
@@ -5328,7 +5328,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     }
                                 }
                                 .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     let bodyText = sto[indexPath.row].content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText)
@@ -5339,7 +5339,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     
                                 }
                                 .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     let controller = NewQRViewController()
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
@@ -5466,10 +5466,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let request = Statuses.context(id: self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    self.allReplies = (stat.descendants)
                     DispatchQueue.main.async {
+                        self.allReplies = (stat.descendants)
                         self.tableView.reloadData()
-                        self.refreshControl.endRefreshing()
                     }
                 }
             }

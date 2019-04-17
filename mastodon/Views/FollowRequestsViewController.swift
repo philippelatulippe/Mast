@@ -231,7 +231,7 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
                 .messageTextAlignment(.left)
                 .titleTextAlignment(.left)
                 .action(.default("Accept".localized)) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     let request = FollowRequests.authorize(id: self.currentTags[indexPath.row].id)
                     StoreStruct.client.run(request) { (statuses) in
@@ -258,7 +258,7 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
                     }
                 }
                 .action(.default("Reject".localized)) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     let request = FollowRequests.reject(id: self.currentTags[indexPath.row].id)
                     StoreStruct.client.run(request) { (statuses) in

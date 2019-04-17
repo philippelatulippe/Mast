@@ -279,7 +279,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             guard let data = data else { return }
             do {
                 if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                    print(json)
                     
                     DispatchQueue.main.async {
                         var customStyle = VolumeBarStyle.likeInstagram
@@ -344,7 +343,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     @objc func newInstanceLogged(){
         
-        StoreStruct.tappedSignInCheck = false
         
         var request = URLRequest(url: URL(string: "https://\(StoreStruct.shared.newInstance!.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.shared.newInstance!.authCode)&redirect_uri=\(StoreStruct.shared.newInstance!.redirect)&client_id=\(StoreStruct.shared.newInstance!.clientID)&client_secret=\(StoreStruct.shared.newInstance!.clientSecret)&scope=read%20write%20follow%20push")!)
         request.httpMethod = "POST"
@@ -359,12 +357,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             }
             do {
                 if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                    print(json)
                     
                     if let access1 = (json["access_token"] as? String) {
                     
                     newInstance.accessToken = access1
-                    
                     InstanceData.setCurrentInstance(instance: newInstance)
                     var instances = InstanceData.getAllInstances()
                     instances.append(newInstance)
@@ -383,7 +379,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     
                     let request2 = Accounts.currentUser()
                     StoreStruct.shared.newClient.run(request2) { (statuses) in
-                        print("THIS IS THE STATUS \(statuses)")
                         if let stat = (statuses.value) {
                             DispatchQueue.main.async {
                                 StoreStruct.currentUser = stat
@@ -402,6 +397,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     }
                     
                     DispatchQueue.main.async {
+                        StoreStruct.tappedSignInCheck = false
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         appDelegate.reloadApplication()
                     }
@@ -755,7 +751,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let request0 = Statuses.create(status: StoreStruct.composedTootText, replyToID: nil, mediaIDs: [], sensitive: false, spoilerText: nil, scheduledAt: nil, poll: nil, visibility: .public)
         DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request0) { (statuses) in
-                print(statuses)
+                print("statuses")
             }
         }
     }
@@ -947,26 +943,24 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             
             do {
-                StoreStruct.statusesHome = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
-                StoreStruct.statusesLocal = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
-                StoreStruct.statusesFederated = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
-                StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
-                StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+                let st1 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
+                StoreStruct.statusesHome = StoreStruct.statusesHome + st1
+                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                let st2 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
+                StoreStruct.statusesLocal = StoreStruct.statusesLocal + st2
+                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                let st3 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
+                StoreStruct.statusesFederated = StoreStruct.statusesFederated + st3
+                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                let st4 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
+                StoreStruct.notifications = StoreStruct.notifications + st4
+                StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
+                let st5 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + st5
+                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
             } catch {
                 print("Couldn't load")
             }
-            
-//            
-//            if StoreStruct.statusesHome.isEmpty {
-//            let request = Timelines.home()
-//            StoreStruct.client.run(request) { (statuses) in
-//                if let stat = (statuses.value) {
-//                    StoreStruct.statusesHome = stat + StoreStruct.statusesHome
-//                    StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
-//                }
-//            }
-//            }
             
             
             let request2 = Accounts.currentUser()
@@ -1448,14 +1442,14 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 .messageTextAlignment(.left)
                 .titleTextAlignment(.left)
                 .action(.default("Edit List Name".localized), image: UIImage(named: "list")) { (action, ind) in
-                    print(action, ind)
+                     
                     let controller = NewListViewController()
                     controller.listID = StoreStruct.allLists[indexPath.row].id
                     controller.editListName = StoreStruct.allLists[indexPath.row].title
                     self.present(controller, animated: true, completion: nil)
                 }
                 .action(.default("View List Members".localized), image: UIImage(named: "profile")) { (action, ind) in
-                    print(action, ind)
+                     
                     StoreStruct.allListRelID = StoreStruct.allLists[indexPath.row].id
                     self.dismissOverlayProper()
                     if StoreStruct.currentPage == 0 {
@@ -1467,7 +1461,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     }
                 }
                 .action(.default("Delete List".localized), image: UIImage(named: "block")) { (action, ind) in
-                    print(action, ind)
+                     
                     
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         let notification = UINotificationFeedbackGenerator()
@@ -1526,7 +1520,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Remove".localized), image: UIImage(named: "block")) { (action, ind) in
-                        print(action, ind)
+                         
                         
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                             let notification = UINotificationFeedbackGenerator()
@@ -1587,7 +1581,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Remove".localized), image: UIImage(named: "block")) { (action, ind) in
-                        print(action, ind)
+                         
                         
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                             let notification = UINotificationFeedbackGenerator()
@@ -1733,7 +1727,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     
                 } else {
                     StoreStruct.instanceLocalToAdd = UserDefaults.standard.object(forKey: "instancesLocal") as! [String]
-                    print(StoreStruct.instanceLocalToAdd)
                     StoreStruct.instanceText = StoreStruct.instanceLocalToAdd[indexPath.row]
                 }
                 
@@ -2118,26 +2111,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     
     @objc func signOutNewInstance() {
-        
-        let instances = InstanceData.getAllInstances()
-//        if indexPath.row == instances.count {
-            // launch the sign in
-            let loginController = ViewController()
-            loginController.loadingAdditionalInstance = true
-            loginController.createLoginView(newInstance: true)
-        self.present(loginController, animated: true, completion: nil)
-//            self.navigationController?.pushViewController(loginController, animated: true)
-//        } else {
-//
-//            InstanceData.setCurrentInstance(instance: instances[indexPath.row])
-//
-//            DispatchQueue.main.async {
-//
-//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//                appDelegate.reloadApplication()
-//
-//            }
-//        }
+        let loginController = ViewController()
+        loginController.loadingAdditionalInstance = true
+        loginController.createLoginView(newInstance: true)
+        self.present(loginController, animated: true, completion: {
+            loginController.textField.becomeFirstResponder()
+        })
     }
     
     
@@ -2145,12 +2124,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     @objc func signOut() {
         
         UserDefaults.standard.set(nil, forKey: "accessToken")
-        
-//        do {
-//            try Disk.clear(.documents)
-//        } catch {
-//            print("couldn't clear disk")
-//        }
         
         self.textField.text = ""
         
@@ -2451,7 +2424,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Find out more".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     let queryURL = URL(string: "https://joinmastodon.org")!
                                     UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
                                         if !success {
@@ -2527,7 +2500,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Find out more".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     let queryURL = URL(string: "https://joinmastodon.org")!
                                     UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
                                         if !success {
@@ -2618,8 +2591,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let request0 = Lists.all()
         StoreStruct.client.run(request0) { (statuses) in
             if let stat = (statuses.value) {
-                StoreStruct.allLists = stat
                 DispatchQueue.main.async {
+                    StoreStruct.allLists = stat
                     self.tableViewLists.reloadData()
                 }
             }

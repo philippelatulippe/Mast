@@ -146,11 +146,11 @@ class DetailCellImage: UITableViewCell {
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .phone:
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-15-[episodes]-15-[mainImage(250)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-15-[episodes]-15-[mainImageBG(250)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[mainImage(250)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[mainImageBG(250)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
         case .pad:
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-15-[episodes]-15-[mainImage(500)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-15-[episodes]-15-[mainImageBG(500)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[mainImage(500)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[mainImageBG(500)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
         default:
             print("nothing")
         }

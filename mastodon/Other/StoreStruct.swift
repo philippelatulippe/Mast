@@ -153,6 +153,8 @@ class StoreStruct {
     
     static var tappedSignInCheck = false
     static var markedReadIDs: [String] = []
+    
+    static var newdrafts: [Drafts] = []
 }
 
 struct Drafts: Codable {

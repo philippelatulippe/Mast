@@ -404,7 +404,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         self.loadLoadLoad()
         
-        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
+//        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //self.tableView.addSubview(refreshControl)
         
         tableView.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
@@ -852,8 +852,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             let request = Timelines.tag(string)
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    controller.currentTags = stat
                                     DispatchQueue.main.async {
+                                        controller.currentTags = stat
                                         self.navigationController?.pushViewController(controller, animated: true)
                                     }
                                 }
@@ -953,8 +953,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         let request = Timelines.tag(string)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                controller.currentTags = stat
                                 DispatchQueue.main.async {
+                                    controller.currentTags = stat
                                     self.navigationController?.pushViewController(controller, animated: true)
                                 }
                             }
@@ -1009,13 +1009,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             rrr = 1
         }
         
-        if sto[sender.tag].lastStatus!.reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
+        if sto[sender.tag].lastStatus?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
             StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != sto[sender.tag].lastStatus?.id ?? ""  }
             let request2 = Statuses.unreblog(id: sto[sender.tag].lastStatus?.id ?? "" )
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
-                        if sto[sender.tag].lastStatus!.favourited! || StoreStruct.allLikes.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
+                        if sto[sender.tag].lastStatus?.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "like")
                         } else {
@@ -1071,13 +1071,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             rrr = 1
         }
         
-        if sto[sender.tag].lastStatus!.favourited! || StoreStruct.allLikes.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
+        if sto[sender.tag].lastStatus?.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
             StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[sender.tag].lastStatus?.id ?? "" }
             let request2 = Statuses.unfavourite(id: sto[sender.tag].lastStatus?.id ?? "" )
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
-                        if sto[sender.tag].lastStatus!.reblogged! || StoreStruct.allBoosts.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
+                        if sto[sender.tag].lastStatus?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "boost")
                         } else {
@@ -1169,13 +1169,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     
                     
                     
-                    if sto[indexPath.row].lastStatus!.favourited! || StoreStruct.allLikes.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
+                    if sto[indexPath.row].lastStatus?.favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
                         StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != sto[indexPath.row].lastStatus?.id ?? "" }
                         let request2 = Statuses.unfavourite(id: sto[indexPath.row].lastStatus?.id ?? "" )
                         StoreStruct.client.run(request2) { (statuses) in
                             DispatchQueue.main.async {
                                 if let cell = theTable.cellForRow(at: indexPath) as? DMFeedCell {
-                                    if sto[indexPath.row].lastStatus!.reblogged! || StoreStruct.allBoosts.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
+                                    if sto[indexPath.row].lastStatus?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "boost")
                                     } else {
@@ -1316,7 +1316,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if isMuted == false {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -1336,7 +1336,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("muted")
-                                        print(stat)
+                                         
                                     }
                                 }
                             } else {
@@ -1357,14 +1357,14 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("unmuted")
-                                        print(stat)
+                                         
                                     }
                                 }
                             }
                             
                         }
                         .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             if isBlocked == false {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -1384,7 +1384,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("blocked")
-                                        print(stat)
+                                         
                                     }
                                 }
                             } else {
@@ -1405,14 +1405,14 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
                                         print("unblocked")
-                                        print(stat)
+                                         
                                     }
                                 }
                             }
                             
                         }
                         .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             
                             Alertift.actionSheet()
@@ -1422,7 +1422,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Harassment"), image: nil) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -1442,13 +1442,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
-                                            print(stat)
+                                             
                                         }
                                     }
                                     
                                 }
                                 .action(.default("No Content Warning"), image: nil) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -1468,13 +1468,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
-                                            print(stat)
+                                             
                                         }
                                     }
                                     
                                 }
                                 .action(.default("Spam"), image: nil) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -1494,7 +1494,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
                                             print("reported")
-                                            print(stat)
+                                             
                                         }
                                     }
                                     
@@ -1511,7 +1511,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             
                         }
                         .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let unreserved = "-._~/?"
                             let allowed = NSMutableCharacterSet.alphanumeric()
@@ -1561,7 +1561,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             task.resume()
                         }
                         .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             let controller = ComposeViewController()
                             controller.inReply = []
@@ -1570,7 +1570,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             self.present(controller, animated: true, completion: nil)
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                            print(action, ind)
+                             
                             
                             
                             
@@ -1582,7 +1582,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     if let myWebsite = sto[indexPath.row].lastStatus?.url {
                                         let objectsToShare = [myWebsite]
@@ -1594,7 +1594,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     }
                                 }
                                 .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     let bodyText = sto[indexPath.row].lastStatus?.content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText ?? "")
@@ -1605,7 +1605,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     
                                 }
                                 .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                                    print(action, ind)
+                                     
                                     
                                     let controller = NewQRViewController()
                                     controller.ur = sto[indexPath.row].lastStatus?.url?.absoluteString ?? "https://www.thebluebird.app"
@@ -1722,7 +1722,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         self.tableView.reloadData()
-                        self.refreshControl.endRefreshing()
                     }
                 }
             }

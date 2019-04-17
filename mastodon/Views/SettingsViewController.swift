@@ -164,12 +164,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             .messageTextAlignment(.left)
             .titleTextAlignment(.left)
             .action(.default("Hue Picker Wheel".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 let controller = NewHuePickerViewController()
                 self.present(controller, animated: true, completion: nil)
             }
             .action(.default("Enter Hex Value Manually".localized), image: nil) { (action, ind) in
-                print(action, ind)
+                 
                 let controller = NewHexViewController()
                 self.present(controller, animated: true, completion: nil)
             }
@@ -1271,7 +1271,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Mentions".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         if (UserDefaults.standard.object(forKey: "pnmentions") == nil) || (UserDefaults.standard.object(forKey: "pnmentions") as! Bool == true) {
                             UserDefaults.standard.set(false, forKey: "pnmentions")
                             UIApplication.shared.registerForRemoteNotifications()
@@ -1281,7 +1281,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                     }
                     .action(.default("Likes".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         if (UserDefaults.standard.object(forKey: "pnlikes") == nil) || (UserDefaults.standard.object(forKey: "pnlikes") as! Bool == true) {
                             UserDefaults.standard.set(false, forKey: "pnlikes")
                             UIApplication.shared.registerForRemoteNotifications()
@@ -1291,7 +1291,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                     }
                     .action(.default("Boosts".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         if (UserDefaults.standard.object(forKey: "pnboosts") == nil) || (UserDefaults.standard.object(forKey: "pnboosts") as! Bool == true) {
                             UserDefaults.standard.set(false, forKey: "pnboosts")
                             UIApplication.shared.registerForRemoteNotifications()
@@ -1301,7 +1301,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                     }
                     .action(.default("Follows".localized), image: filledSet4) { (action, ind) in
-                        print(action, ind)
+                         
                         if (UserDefaults.standard.object(forKey: "pnfollows") == nil) || (UserDefaults.standard.object(forKey: "pnfollows") as! Bool == true) {
                             UserDefaults.standard.set(false, forKey: "pnfollows")
                             UIApplication.shared.registerForRemoteNotifications()
@@ -1357,19 +1357,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Public".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "privToot")
                     }
                     .action(.default("Unlisted".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "privToot")
                     }
                     .action(.default("Private".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "privToot")
                     }
                     .action(.default("Direct".localized), image: filledSet4) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(3, forKey: "privToot")
                     }
                     .action(.cancel("Dismiss"))
@@ -1406,11 +1406,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Social".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "keyb")
                     }
                     .action(.default("Default".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "keyb")
                     }
                     .action(.cancel("Dismiss"))
@@ -1484,27 +1484,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Cycle Through Themes".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "longToggle")
                     }
                     .action(.default("Invoke Lists".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "longToggle")
                     }
                     .action(.default("Invoke Search".localized), image: filledSet5) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(4, forKey: "longToggle")
                     }
                     .action(.default("Invoke Toot Composer".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "longToggle")
                     }
                     .action(.default("Rain Confetti".localized), image: filledSet4) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(3, forKey: "longToggle")
                     }
                     .action(.default("Do Nothing".localized), image: filledSet6) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(6, forKey: "longToggle")
                     }
                     .action(.cancel("Dismiss"))
@@ -1546,15 +1546,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Low".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "imqual")
                     }
                     .action(.default("Average".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "imqual")
                     }
                     .action(.default("High".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "imqual")
                     }
                     .action(.cancel("Dismiss"))
@@ -1585,11 +1585,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Retain Scroll Position".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "posset")
                     }
                     .action(.default("Scroll to the Top".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "posset")
                     }
                     .action(.cancel("Dismiss"))
@@ -1620,11 +1620,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Stock Video Player".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "vidgif")
                     }
                     .action(.default("Custom Picture-in-Picture".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "vidgif")
                     }
                     .action(.cancel("Dismiss"))
@@ -1695,27 +1695,27 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Reply Like Boost".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "sworder")
                     }
                     .action(.default("Reply Boost Like".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "sworder")
                     }
                     .action(.default("Boost Reply Like".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "sworder")
                     }
                     .action(.default("Boost Like Reply".localized), image: filledSet4) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(3, forKey: "sworder")
                     }
                     .action(.default("Like Reply Boost".localized), image: filledSet5) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(4, forKey: "sworder")
                     }
                     .action(.default("Like Boost Reply".localized), image: filledSet6) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(5, forKey: "sworder")
                     }
                     .action(.cancel("Dismiss"))
@@ -1746,11 +1746,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("@You".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "mentdef2")
                     }
                     .action(.default("Activity".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "mentdef2")
                     }
                     .action(.cancel("Dismiss"))
@@ -1782,12 +1782,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Swipe Cells to Display Actions".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "tootpl")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("Actions on Toot Cells".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "tootpl")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
@@ -1827,15 +1827,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Hide Sensitive Content".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "shakegest")
                     }
                     .action(.default("Rain Confetti".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "shakegest")
                     }
                     .action(.default("Do Nothing".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "shakegest")
                     }
                     .action(.cancel("Dismiss"))
@@ -1874,17 +1874,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Home".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         StoreStruct.initTimeline = false
                         UserDefaults.standard.set(0, forKey: "inittimeline")
                     }
                     .action(.default("Local".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         StoreStruct.initTimeline = false
                         UserDefaults.standard.set(1, forKey: "inittimeline")
                     }
                     .action(.default("All".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         StoreStruct.initTimeline = false
                         UserDefaults.standard.set(2, forKey: "inittimeline")
                     }
@@ -1917,12 +1917,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("All".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         StoreStruct.initTimeline = false
                         UserDefaults.standard.set(0, forKey: "searchsco")
                     }
                     .action(.default("Local".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         StoreStruct.initTimeline = false
                         UserDefaults.standard.set(1, forKey: "searchsco")
                     }
@@ -1962,15 +1962,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Disabled".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "keyhap")
                     }
                     .action(.default("Mild".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "keyhap")
                     }
                     .action(.default("Wild".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "keyhap")
                     }
                     .action(.cancel("Dismiss"))
@@ -2002,11 +2002,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Retain Scroll".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "lmore1")
                     }
                     .action(.default("Jump Below New Toots".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "lmore1")
                     }
                     .action(.cancel("Dismiss"))
@@ -2045,17 +2045,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Liked".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "likepin")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                     }
                     .action(.default("Pinned".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "likepin")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                     }
                     .action(.default("Edit Profile".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "likepin")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                     }
@@ -2088,11 +2088,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Swipe Attached Images".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "swrece")
                     }
                     .action(.default("Swipe Recent Media".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "swrece")
                     }
                     .action(.cancel("Dismiss"))
@@ -2124,11 +2124,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Chat Style".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "dmchats")
                     }
                     .action(.default("Toot Style".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "dmchats")
                     }
                     .action(.cancel("Dismiss"))
@@ -2160,11 +2160,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("In-app".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "linkdest")
                     }
                     .action(.default("Safari".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "linkdest")
                     }
                     .action(.cancel("Dismiss"))
@@ -2229,23 +2229,23 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Day".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "light"), object: self)
                     }
                     .action(.default("Dusk".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "night"), object: self)
                     }
                     .action(.default("Night".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "night2"), object: self)
                     }
                     .action(.default("Midnight".localized), image: filledSet4) { (action, ind) in
-                        print(action, ind)
+                         
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "black"), object: self)
                     }
                     .action(.default("Midnight Blue".localized), image: filledSet5) { (action, ind) in
-                        print(action, ind)
+                         
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "midblue"), object: self)
                     }
                     .action(.cancel("Dismiss"))
@@ -2351,48 +2351,48 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("System Text Size".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "systemText")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("8 Points".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "systemText")
                         UserDefaults.standard.set(0, forKey: "fontSize")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("9 Points".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "systemText")
                         UserDefaults.standard.set(1, forKey: "fontSize")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("10 Points".localized), image: filledSet4) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "systemText")
                         UserDefaults.standard.set(2, forKey: "fontSize")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("11 Points".localized), image: filledSet5) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "systemText")
                         UserDefaults.standard.set(3, forKey: "fontSize")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("12 Points".localized), image: filledSet6) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "systemText")
                         UserDefaults.standard.set(4, forKey: "fontSize")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("13 Points".localized), image: filledSet7) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "systemText")
                         UserDefaults.standard.set(5, forKey: "fontSize")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("14 Points".localized), image: filledSet8) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "systemText")
                         UserDefaults.standard.set(6, forKey: "fontSize")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
@@ -2436,17 +2436,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Circle".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "proCorner")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: self)
                     }
                     .action(.default("Rounded Square".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "proCorner")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: self)
                     }
                     .action(.default("Square".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "proCorner")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: self)
                     }
@@ -2478,12 +2478,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Rounded Rectangle".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "imCorner")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: self)
                     }
                     .action(.default("Rectangle".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "imCorner")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: self)
                     }
@@ -2523,15 +2523,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("2 Column Grid".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "colgrid")
                     }
                     .action(.default("3 Column Grid".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "colgrid")
                     }
                     .action(.default("4 Column Grid".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "colgrid")
                     }
                     .action(.cancel("Dismiss"))
@@ -2562,12 +2562,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Absolute".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "timerel")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: self)
                     }
                     .action(.default("Relative".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "timerel")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: self)
                     }
@@ -2606,17 +2606,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Light".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "headbg1")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("Regular".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "headbg1")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("Dark".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(3, forKey: "headbg1")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
@@ -2649,12 +2649,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Small".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "segsize")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "changeSeg"), object: self)
                     }
                     .action(.default("Large".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "segsize")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "changeSeg"), object: self)
                     }
@@ -2686,12 +2686,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Static".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "segstyle")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "changeSeg"), object: self)
                     }
                     .action(.default("Liquid".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "segstyle")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "changeSeg"), object: self)
                     }
@@ -2735,17 +2735,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("None".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "bord")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("Mild".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "bord")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
                     .action(.default("Wild".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "bord")
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                     }
@@ -2807,23 +2807,23 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Theme".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "screenshotcol")
                     }
                     .action(.default("Dusk".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "screenshotcol")
                     }
                     .action(.default("Night".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "screenshotcol")
                     }
                     .action(.default("Midnight".localized), image: filledSet4) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(3, forKey: "screenshotcol")
                     }
                     .action(.default("Midnight Blue".localized), image: filledSet5) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(4, forKey: "screenshotcol")
                     }
                     .action(.cancel("Dismiss"))
@@ -2863,15 +2863,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Toot Text".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "captionset")
                     }
                     .action(.default("Image Alt Text".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "captionset")
                     }
                     .action(.default("No Caption".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "captionset")
                     }
                     .action(.cancel("Dismiss"))
@@ -2903,11 +2903,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Hidden".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "progprogprogprog")
                     }
                     .action(.default("Displayed".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "progprogprogprog")
                     }
                     .action(.cancel("Dismiss"))
@@ -2955,19 +2955,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("None".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "dmTog")
                     }
                     .action(.default("Subtle".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "dmTog")
                     }
                     .action(.default("Distinct".localized), image: filledSet3) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(2, forKey: "dmTog")
                     }
                     .action(.default("Theme".localized), image: filledSet4) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(3, forKey: "dmTog")
                     }
                     .action(.cancel("Dismiss"))
@@ -2999,11 +2999,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Theme Hue".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "barhue1")
                     }
                     .action(.default("Subtle".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "barhue1")
                     }
                     .action(.cancel("Dismiss"))
@@ -3035,11 +3035,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Theme Hue".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "acthue1")
                     }
                     .action(.default("Subtle".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "acthue1")
                     }
                     .action(.cancel("Dismiss"))
@@ -3071,11 +3071,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Theme Hue".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "seghue1")
                     }
                     .action(.default("Subtle".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "seghue1")
                     }
                     .action(.cancel("Dismiss"))
@@ -3107,11 +3107,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("List Icon".localized), image: filledSet1) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(0, forKey: "insicon1")
                     }
                     .action(.default("Profile Icon".localized), image: filledSet2) { (action, ind) in
-                        print(action, ind)
+                         
                         UserDefaults.standard.set(1, forKey: "insicon1")
                     }
                     .action(.cancel("Dismiss"))
@@ -3162,7 +3162,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Developer Mastodon".localized)) { (action, ind) in
-                        print(action, ind)
+                         
                         
                         
 //                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3195,7 +3195,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 //                        }
                     }
                     .action(.default("Developer Twitter".localized)) { (action, ind) in
-                        print(action, ind)
+                         
                         let twUrl = URL(string: "twitter://user?screen_name=JPEGuin")!
                         let twUrlWeb = URL(string: "https://www.twitter.com/JPEGuin")!
                         if UIApplication.shared.canOpenURL(twUrl) {
@@ -3216,7 +3216,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                     }
                     .action(.default("Mast Twitter".localized)) { (action, ind) in
-                        print(action, ind)
+                         
                         let twUrl = URL(string: "twitter://user?screen_name=TheMastApp")!
                         let twUrlWeb = URL(string: "https://www.twitter.com/TheMastApp")!
                         if UIApplication.shared.canOpenURL(twUrl) {
@@ -3321,7 +3321,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Switch".localized), image: UIImage(named: "profile")) { (action, ind) in
-                        print(action, ind)
+                         
                         
                         
                         
@@ -3335,7 +3335,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                         
                     }
                     .action(.default("Remove".localized), image: UIImage(named: "block")) { (action, ind) in
-                        print(action, ind)
+                         
                         
                         var instance = InstanceData.getAllInstances()
                         var account = Account.getAccounts()

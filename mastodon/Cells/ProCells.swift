@@ -169,7 +169,7 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
                             .messageTextAlignment(.left)
                             .titleTextAlignment(.left)
                             .action(.default("Switch".localized), image: UIImage(named: "profile")) { (action, ind) in
-                                print(action, ind)
+                                 
                                 
                                 InstanceData.setCurrentInstance(instance: instances[indexPath.item])
                                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -177,7 +177,7 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
                                 
                             }
                             .action(.default("Remove".localized), image: UIImage(named: "block")) { (action, ind) in
-                                print(action, ind)
+                                 
                                 
                                 var instance = InstanceData.getAllInstances()
                                 var account = Account.getAccounts()
