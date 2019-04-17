@@ -2455,8 +2455,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                                     let queryURL = URL(string: "https://joinmastodon.org")!
                                     UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
                                         if !success {
+                                            if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                             self.safariVC = SFSafariViewController(url: queryURL)
                                             self.present(self.safariVC!, animated: true, completion: nil)
+                                            } else {
+                                                UIApplication.shared.open(queryURL)
+                                            }
+                                            
                                         }
                                     }
                                 }
@@ -2487,8 +2492,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                             let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.shared.newInstance!.redirect)&scope=read%20write%20follow%20push&client_id=\(application.clientID)")!
                             UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: queryURL)
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(queryURL)
+                                    }
                                 }
                             }
                         }
@@ -2522,8 +2531,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                                     let queryURL = URL(string: "https://joinmastodon.org")!
                                     UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
                                         if !success {
+                                            if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                             self.safariVC = SFSafariViewController(url: queryURL)
                                             self.present(self.safariVC!, animated: true, completion: nil)
+                                            } else {
+                                                UIApplication.shared.openURL(queryURL)
+                                            }
                                         }
                                     }
                                 }
@@ -2553,8 +2566,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                             let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.shared.currentInstance.redirect)&scope=read%20write%20follow%20push&client_id=\(application.clientID)")!
                             UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: queryURL)
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(queryURL)
+                                    }
                                 }
                             }
                         }

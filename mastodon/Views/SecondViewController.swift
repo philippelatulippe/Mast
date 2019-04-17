@@ -1585,6 +1585,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 let request = Notifications.all(range: .default)
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
+                        DispatchQueue.main.async {
                         StoreStruct.notifications = stat
                         
                         StoreStruct.notificationsMentions = []
@@ -1595,7 +1596,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         })
                         
                         
-                        DispatchQueue.main.async {
                             StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                             StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                             
@@ -1651,7 +1651,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     }
                 }
             } else {
-                self.tableView2.reloadData()
+//                self.tableView2.reloadData()
             }
             
             
@@ -1805,19 +1805,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -1906,19 +1914,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -1993,19 +2009,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             let z = URL(string: String(url.absoluteString.dropFirst()))!
                             UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: z)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(z)
+                                    }
                                 }
                             }
                         } else {
                             UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: url)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(url)
+                                    }
                                 }
                             }
                         }
@@ -2145,19 +2169,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let z = URL(string: String(url.absoluteString.dropFirst()))!
                                     UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                         if !success {
+                                            if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                             self.safariVC = SFSafariViewController(url: z)
                                             self.safariVC?.preferredBarTintColor = Colours.white
                                             self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                             self.present(self.safariVC!, animated: true, completion: nil)
+                                            } else {
+                                                UIApplication.shared.openURL(z)
+                                            }
                                         }
                                     }
                                 } else {
                                     UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                         if !success {
+                                            if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                             self.safariVC = SFSafariViewController(url: url)
                                             self.safariVC?.preferredBarTintColor = Colours.white
                                             self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                             self.present(self.safariVC!, animated: true, completion: nil)
+                                            } else {
+                                                UIApplication.shared.openURL(url)
+                                            }
                                         }
                                     }
                                 }
@@ -2251,19 +2283,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let z = URL(string: String(url.absoluteString.dropFirst()))!
                                     UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                         if !success {
+                                            if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                             self.safariVC = SFSafariViewController(url: z)
                                             self.safariVC?.preferredBarTintColor = Colours.white
                                             self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                             self.present(self.safariVC!, animated: true, completion: nil)
+                                            } else {
+                                                UIApplication.shared.openURL(z)
+                                            }
                                         }
                                     }
                                 } else {
                                     UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                         if !success {
+                                            if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                             self.safariVC = SFSafariViewController(url: url)
                                             self.safariVC?.preferredBarTintColor = Colours.white
                                             self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                             self.present(self.safariVC!, animated: true, completion: nil)
+                                            } else {
+                                                UIApplication.shared.openURL(url)
+                                            }
                                         }
                                     }
                                 }
@@ -2346,19 +2386,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -2474,19 +2522,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -2580,19 +2636,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -2673,19 +2737,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             let z = URL(string: String(url.absoluteString.dropFirst()))!
                             UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: z)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(z)
+                                    }
                                 }
                             }
                         } else {
                             UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: url)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(url)
+                                    }
                                 }
                             }
                         }

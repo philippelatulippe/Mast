@@ -778,19 +778,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
                         UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                             if !success {
+                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                 self.safariVC = SFSafariViewController(url: z)
                                 self.safariVC?.preferredBarTintColor = Colours.white
                                 self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                 self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    UIApplication.shared.openURL(z)
+                                }
                             }
                         }
                     } else {
                         UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                             if !success {
+                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                 self.safariVC = SFSafariViewController(url: url)
                                 self.safariVC?.preferredBarTintColor = Colours.white
                                 self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                 self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    UIApplication.shared.openURL(url)
+                                }
                             }
                         }
                     }
@@ -911,19 +919,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             let z = URL(string: String(url.absoluteString.dropFirst()))!
                             UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: z)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(z)
+                                    }
                                 }
                             }
                         } else {
                             UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: url)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(url)
+                                    }
                                 }
                             }
                         }
@@ -1050,19 +1066,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             let z = URL(string: String(url.absoluteString.dropFirst()))!
                             UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: z)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(z)
+                                    }
                                 }
                             }
                         } else {
                             UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: url)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(url)
+                                    }
                                 }
                             }
                         }
@@ -1193,19 +1217,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
                         UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                             if !success {
+                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                 self.safariVC = SFSafariViewController(url: z)
                                 self.safariVC?.preferredBarTintColor = Colours.white
                                 self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                 self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    UIApplication.shared.openURL(z)
+                                }
                             }
                         }
                     } else {
                         UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                             if !success {
+                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                 self.safariVC = SFSafariViewController(url: url)
                                 self.safariVC?.preferredBarTintColor = Colours.white
                                 self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                 self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    UIApplication.shared.openURL(url)
+                                }
                             }
                         }
                     }
@@ -1330,19 +1362,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
                         UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                             if !success {
+                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                 self.safariVC = SFSafariViewController(url: z)
                                 self.safariVC?.preferredBarTintColor = Colours.white
                                 self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                 self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    UIApplication.shared.openURL(z)
+                                }
                             }
                         }
                     } else {
                         UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                             if !success {
+                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                 self.safariVC = SFSafariViewController(url: url)
                                 self.safariVC?.preferredBarTintColor = Colours.white
                                 self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                 self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    UIApplication.shared.openURL(url)
+                                }
                             }
                         }
                     }
@@ -1535,19 +1575,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
                         UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                             if !success {
+                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                 self.safariVC = SFSafariViewController(url: z)
                                 self.safariVC?.preferredBarTintColor = Colours.white
                                 self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                 self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    UIApplication.shared.openURL(z)
+                                }
                             }
                         }
                     } else {
                         UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                             if !success {
+                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                 self.safariVC = SFSafariViewController(url: url)
                                 self.safariVC?.preferredBarTintColor = Colours.white
                                 self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                 self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    UIApplication.shared.openURL(url)
+                                }
                             }
                         }
                     }
@@ -1667,19 +1715,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -1788,19 +1844,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -1930,19 +1994,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -2062,19 +2134,27 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }

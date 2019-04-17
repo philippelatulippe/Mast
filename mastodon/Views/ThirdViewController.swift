@@ -41,6 +41,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var segmentedControl: SJFluidSegmentedControl!
     var currentIndex = 0
     var isEndorsed = false
+    var isShowingBoosts = true
     private var crownControl: CrownControl!
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
@@ -239,10 +240,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     .action(.default("Visit Link"), image: UIImage(named: "share")) { (action, ind) in
                         print(action, ind)
                         
+                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                         self.safariVC = SFSafariViewController(url: ur)
                         self.safariVC?.preferredBarTintColor = Colours.white
                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                         self.present(self.safariVC!, animated: true, completion: nil)
+                        } else {
+                            UIApplication.shared.openURL(ur)
+                        }
                     }
                     
                     .action(.cancel("Dismiss"))
@@ -1094,6 +1099,12 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 self.isFollowed = false
                             }
                             
+                            if stat[1].showingReblogs {
+                                self.isShowingBoosts = true
+                            } else {
+                                self.isShowingBoosts = false
+                            }
+                            
                         }
                     }
                 }
@@ -1737,7 +1748,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.isFollowing = true
             let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell
             cell.changeFollowStatus(self.isFollowing)
-            let request = Accounts.follow(id: self.chosenUser.id)
+            let request = Accounts.follow(id: self.chosenUser.id, reblogs: true)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     print("followed")
@@ -1805,6 +1816,15 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 blockText = "Unblock"
             } else {
                 blockText = "Block"
+            }
+            var rebText = "Disable Boosts"
+            var rebImage = UIImage(named: "block")
+            if self.isShowingBoosts {
+                rebText = "Disable Boosts"
+                rebImage = UIImage(named: "block")
+            } else {
+                rebText = "Enable Boosts"
+                rebImage = UIImage(named: "boost3")
             }
             
             Alertift.actionSheet(title: nil, message: nil)
@@ -1884,7 +1904,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                         
                         self.isFollowing = true
-                        let request = Accounts.follow(id: self.chosenUser.id)
+                        let request = Accounts.follow(id: self.chosenUser.id, reblogs: true)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
                                 print("followed")
@@ -1970,6 +1990,74 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 
                 
+                .action(.default(rebText), image: rebImage) { (action, ind) in
+                    print(action, ind)
+                    
+                    if self.isFollowing == false {
+                        
+                        Alertift.actionSheet(title: nil, message: "You must be following this user to choose whether to display their boosted toots on the home timeline.")
+                            .backgroundColor(Colours.white)
+                            .titleTextColor(Colours.grayDark)
+                            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                            .messageTextAlignment(.left)
+                            .titleTextAlignment(.left)
+                            .action(.cancel("Dismiss"))
+                            .finally { action, index in
+                                if action.style == .cancel {
+                                    return
+                                }
+                            }
+                            .show(on: self)
+                        
+                    } else {
+                        
+                        if self.isShowingBoosts {
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let notification = UINotificationFeedbackGenerator()
+                                notification.notificationOccurred(.success)
+                            }
+                            let statusAlert = StatusAlert()
+                            statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
+                            statusAlert.title = "Disabled Boosts".localized
+                            statusAlert.contentColor = Colours.grayDark
+                            statusAlert.message = self.chosenUser.displayName
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                statusAlert.show()
+                            }
+                            let request = Accounts.follow(id: self.chosenUser.id, reblogs: false)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    self.isShowingBoosts = false
+                                    print("disabled")
+                                    print(stat)
+                                }
+                            }
+                        } else {
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let notification = UINotificationFeedbackGenerator()
+                                notification.notificationOccurred(.success)
+                            }
+                            let statusAlert = StatusAlert()
+                            statusAlert.image = UIImage(named: "boostlarge")?.maskWithColor(color: Colours.grayDark)
+                            statusAlert.title = "Enabled Boosts".localized
+                            statusAlert.contentColor = Colours.grayDark
+                            statusAlert.message = self.chosenUser.displayName
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                statusAlert.show()
+                            }
+                            let request = Accounts.follow(id: self.chosenUser.id, reblogs: true)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    self.isShowingBoosts = true
+                                    print("enabled")
+                                    print(stat)
+                                }
+                            }
+                        }
+                        
+                    }
+                    
+                }
                 
                 
                 
@@ -2542,19 +2630,27 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -2633,19 +2729,27 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     let z = URL(string: String(url.absoluteString.dropFirst()))!
                                     UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                         if !success {
+                                            if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                             self.safariVC = SFSafariViewController(url: z)
                                             self.safariVC?.preferredBarTintColor = Colours.white
                                             self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                             self.present(self.safariVC!, animated: true, completion: nil)
+                                            } else {
+                                                UIApplication.shared.openURL(z)
+                                            }
                                         }
                                     }
                                 } else {
                                     UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                         if !success {
+                                            if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                             self.safariVC = SFSafariViewController(url: url)
                                             self.safariVC?.preferredBarTintColor = Colours.white
                                             self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                             self.present(self.safariVC!, animated: true, completion: nil)
+                                            } else {
+                                                UIApplication.shared.openURL(url)
+                                            }
                                         }
                                     }
                                 }
@@ -2811,19 +2915,27 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             let z = URL(string: String(url.absoluteString.dropFirst()))!
                             UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: z)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(z)
+                                    }
                                 }
                             }
                         } else {
                             UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: url)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(url)
+                                    }
                                 }
                             }
                         }
@@ -2901,19 +3013,27 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -2990,19 +3110,27 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 let z = URL(string: String(url.absoluteString.dropFirst()))!
                                 UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: z)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
                             } else {
                                 UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                     if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                         self.safariVC = SFSafariViewController(url: url)
                                         self.safariVC?.preferredBarTintColor = Colours.white
                                         self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                         self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
@@ -3114,19 +3242,27 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let z = URL(string: String(url.absoluteString.dropFirst()))!
                         UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                             if !success {
+                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                 self.safariVC = SFSafariViewController(url: z)
                                 self.safariVC?.preferredBarTintColor = Colours.white
                                 self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                 self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    UIApplication.shared.openURL(z)
+                                }
                             }
                         }
                     } else {
                         UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                             if !success {
+                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                 self.safariVC = SFSafariViewController(url: url)
                                 self.safariVC?.preferredBarTintColor = Colours.white
                                 self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                 self.present(self.safariVC!, animated: true, completion: nil)
+                                } else {
+                                    UIApplication.shared.openURL(url)
+                                }
                             }
                         }
                     }
@@ -3216,19 +3352,27 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             let z = URL(string: String(url.absoluteString.dropFirst()))!
                             UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: z)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(z)
+                                    }
                                 }
                             }
                         } else {
                             UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: url)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(url)
+                                    }
                                 }
                             }
                         }
@@ -3321,19 +3465,27 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             let z = URL(string: String(url.absoluteString.dropFirst()))!
                             UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: z)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(z)
+                                    }
                                 }
                             }
                         } else {
                             UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: url)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(url)
+                                    }
                                 }
                             }
                         }
@@ -3427,19 +3579,27 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             let z = URL(string: String(url.absoluteString.dropFirst()))!
                             UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: z)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(z)
+                                    }
                                 }
                             }
                         } else {
                             UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
+                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
                                     self.safariVC = SFSafariViewController(url: url)
                                     self.safariVC?.preferredBarTintColor = Colours.white
                                     self.safariVC?.preferredControlTintColor = Colours.tabSelected
                                     self.present(self.safariVC!, animated: true, completion: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(url)
+                                    }
                                 }
                             }
                         }

@@ -650,6 +650,11 @@ class NotificationCellImage: SwipeTableViewCell {
                 self.smallImage3.alpha = 0
                 self.smallImage4.alpha = 0
             }
+        } else if status.status?.reblog?.mediaAttachments.count ?? status.status?.mediaAttachments.count ?? 0 > 1 {
+            imageCountTag.setTitle("\(status.status?.reblog?.mediaAttachments.count ?? status.status?.mediaAttachments.count ?? 0)", for: .normal)
+            imageCountTag.backgroundColor = Colours.tabSelected
+            imageCountTag.alpha = 1
+            imageCountTag.bringSubviewToFront(self)
         } else {
             imageCountTag.backgroundColor = Colours.clear
             imageCountTag.alpha = 0

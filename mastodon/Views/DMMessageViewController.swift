@@ -165,10 +165,14 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         let indexPath = messagesCollectionView.indexPathForItem(at: pos)
         
         if self.allPosts[indexPath?.section ?? 0].card?.url != nil {
+            if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
             self.safariVC = SFSafariViewController(url: self.allPosts[indexPath?.section ?? 0].card!.url)
             self.safariVC?.preferredBarTintColor = Colours.white
             self.safariVC?.preferredControlTintColor = Colours.tabSelected
             self.present(self.safariVC!, animated: true, completion: nil)
+            } else {
+                UIApplication.shared.openURL(self.allPosts[indexPath?.section ?? 0].card!.url)
+            }
             return
         }
         
