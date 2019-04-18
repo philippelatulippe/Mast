@@ -34,7 +34,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     var blurEffect0 = UIBlurEffect()
     var blurEffectView0 = UIVisualEffectView()
     var hMod: [Notificationt] = []
-    var fMod: [Notificationt] = []
+    var dMod: [Notificationt] = []
     var nsocket: WebSocket!
     var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
@@ -351,9 +351,14 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    @objc func updateDM() {
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateDM), name: NSNotification.Name(rawValue: "updateDM"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers2"), object: nil)
@@ -466,6 +471,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         StoreStruct.historyBool = false
         
+        self.tabBarController?.tabBar.items?[2].badgeValue = nil
         
         if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
             settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)
@@ -513,7 +519,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         } else {
             newSize = offset + 15
         }
-        
         
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
@@ -573,6 +578,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     
     
+
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

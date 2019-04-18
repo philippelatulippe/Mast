@@ -1592,7 +1592,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
             //websocketDidReceiveMessage
             socket.onText = { (text: String) in
-                print("got some text: \(text)")
                 
                 let data0 = text.data(using: .utf8)!
                 do {
@@ -1696,7 +1695,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
             //websocketDidReceiveMessage
             lsocket.onText = { (text: String) in
-                print("got some text: \(text)")
                 
                 let data0 = text.data(using: .utf8)!
                 do {
@@ -1800,7 +1798,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
             //websocketDidReceiveMessage
             fsocket.onText = { (text: String) in
-                print("got some text: \(text)")
                 
                 let data0 = text.data(using: .utf8)!
                 do {

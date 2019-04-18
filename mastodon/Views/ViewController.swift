@@ -14,6 +14,8 @@ import SAConfettiView
 import WatchConnectivity
 import Disk
 import UserNotifications
+import ReactiveSSE
+import ReactiveSwift
 
 class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, WCSessionDelegate, UNUserNotificationCenterDelegate {
     
@@ -87,6 +89,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     var keyHeight = 0
     var tagListView = DLTagView()
     var closeButton = MNGExpandedTouchAreaButton()
+    var dStream = false
+    var dMod: [Notificationt] = []
+    var nsocket: WebSocket!
     
     func siriLight() {
         UIApplication.shared.statusBarStyle = .default
@@ -777,6 +782,65 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.tabBar.items?[1].badgeValue = "1"
     }
     
+    func streamDataDirect() {
+        if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
+            
+            var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
+            sss = sss.replacingOccurrences(of: "http", with: "wss")
+            nsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=user")!)
+            nsocket.onConnect = {
+                print("websocket is connected")
+            }
+            //websocketDidDisconnect
+            nsocket.onDisconnect = { (error: Error?) in
+                print("websocket is disconnected")
+            }
+            //websocketDidReceiveMessage
+            nsocket.onText = { (text: String) in
+                
+                let data0 = text.data(using: .utf8)!
+                do {
+                    let jsonResult = try JSONSerialization.jsonObject(with: data0, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
+                    let re = jsonResult?["payload"]
+                    if jsonResult?["event"] as? String == "notification" {
+                        let te = SSEvent.init(type: "notification", data: re as! String)
+                        let data = te.data.data(using: .utf8)!
+                        guard let model = try? Notificationt.decode(data: data) else {
+                            return
+                        }
+                        
+                        if (model.status?.visibility)! == .direct {
+                            
+                            let request = Timelines.conversations(range: .since(id: StoreStruct.notificationsDirect.first?.id ?? "", limit: 5000))
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    if stat.isEmpty {} else {
+                                        DispatchQueue.main.async {
+                                            self.tabBar.items?[2].badgeValue = "1"
+                                            StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
+                                            StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
+                                            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateDM"), object: nil)
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                } catch {
+                    print("failfail")
+                    return
+                }
+            }
+            //websocketDidReceiveData
+            nsocket.onData = { (data: Data) in
+                print("got some data: \(data.count)")
+            }
+            nsocket.connect()
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colours.white
@@ -885,8 +949,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 self.volumeBar.showInitial()
             }
         }
-        
-        
         
         self.tableView.register(FollowersCell.self, forCellReuseIdentifier: "cellfs")
         self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell00")
@@ -2621,6 +2683,14 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             userDefaults.set(StoreStruct.shared.currentInstance.accessToken ?? "", forKey: "key1")
             userDefaults.set(StoreStruct.shared.currentInstance.returnedText, forKey: "key2")
             userDefaults.synchronize()
+        }
+        
+        
+        
+        if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
+            if self.dStream == false {
+                self.streamDataDirect()
+            }
         }
         
         

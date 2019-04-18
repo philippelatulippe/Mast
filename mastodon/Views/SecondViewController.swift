@@ -1391,7 +1391,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             }
             //websocketDidReceiveMessage
             nsocket.onText = { (text: String) in
-                print("got some text: \(text)")
                 
                 let data0 = text.data(using: .utf8)!
                 do {

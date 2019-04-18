@@ -45,6 +45,8 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         super.viewDidLoad()
         self.view.backgroundColor = Colours.white
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateThread), name: NSNotification.Name(rawValue: "updateDM"), object: nil)
+        
         self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
         
@@ -150,6 +152,49 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                             self.messagesCollectionView.scrollToBottom()
                         })
                     }
+                }
+            }
+        }
+    }
+    
+    @objc func updateThread() {
+        let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                DispatchQueue.main.async {
+                    self.allPrevious = (stat.ancestors)
+                    self.allReplies = (stat.descendants)
+                    
+                    self.messages = []
+                    self.allPosts = []
+                    
+                    (self.allPrevious + self.mainStatus + self.allReplies).map({
+                        var theType = "0"
+                        if $0.account.acct == StoreStruct.currentUser.acct {
+                            theType = "1"
+                        }
+                        self.lastUser = $0.account.acct
+                        
+                        let sender = Sender(id: theType, displayName: "\($0.account.acct)")
+                        let x = MockMessage.init(text: $0.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""), sender: sender, messageId: $0.id, date: Date())
+                        self.messages.append(x)
+                        self.allPosts.append($0)
+                        
+                        if $0.mediaAttachments.isEmpty {} else {
+                            let url = URL(string: $0.mediaAttachments.first?.previewURL ?? "")
+                            let imageData = try! Data(contentsOf: url!)
+                            let image1 = UIImage(data: imageData)
+                            let y = MockMessage.init(image: image1!, sender: sender, messageId: $0.id, date: Date())
+                            self.messages.append(y)
+                            self.allPosts.append($0)
+                        }
+                        
+                        self.ai.stopAnimating()
+                        self.ai.alpha = 0
+                        self.ai.removeFromSuperview()
+                        
+                        self.messagesCollectionView.reloadData()
+                    })
                 }
             }
         }

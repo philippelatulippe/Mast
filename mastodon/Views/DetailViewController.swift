@@ -2726,7 +2726,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func refDetailCount() {
         if self.mainStatus.isEmpty {} else {
-            let request = Statuses.status(id: self.mainStatus[0].id)
+            let request = Statuses.status(id: self.mainStatus.first?.id ?? "")
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     DispatchQueue.main.async {
