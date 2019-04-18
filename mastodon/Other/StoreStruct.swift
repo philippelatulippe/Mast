@@ -67,6 +67,8 @@ class StoreStruct {
     static var emotiSize = 16
     static var emotiFace: [Emoji] = []
     static var mainResult: [NSAttributedString] = []
+    static var mainResult1: [NSAttributedString] = []
+    static var mainResult2: [NSAttributedString] = []
     static var instanceLocalToAdd: [String] = []
     
     static var statusesHome: [Status] = []

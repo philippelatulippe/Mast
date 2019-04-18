@@ -756,7 +756,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let request0 = Statuses.create(status: StoreStruct.composedTootText, replyToID: nil, mediaIDs: [], sensitive: false, spoilerText: nil, scheduledAt: nil, poll: nil, visibility: .public)
         DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request0) { (statuses) in
-                print("statuses")
+                
             }
         }
     }
@@ -1056,6 +1056,21 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     result.append(attributedString)
                     
                     StoreStruct.mainResult.append(result)
+                    
+                    let textAttachment1 = NSTextAttachment()
+                    textAttachment1.loadImageUsingCache(withUrl: $0.staticURL.absoluteString)
+                    textAttachment1.bounds = CGRect(x:0, y: Int(-9), width: Int(30), height: Int(30))
+                    let attrStringWithImage1 = NSAttributedString(attachment: textAttachment1)
+                    let result1 = NSMutableAttributedString()
+                    result1.append(attrStringWithImage1)
+                    
+                    StoreStruct.mainResult1.append(result1)
+                    
+                    let attributedString2 = NSAttributedString(string: "\($0.shortcode)")
+                    let result2 = NSMutableAttributedString()
+                    result2.append(attributedString2)
+                    
+                    StoreStruct.mainResult2.append(result)
                 })
             }
         }
@@ -1702,7 +1717,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
         if tableView == self.tableView {
             self.dismissOverlayProperSearch()
             
@@ -1819,7 +1834,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         
         
         if sender.state == .began {
-            print("long pressed")
             
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
             let selection = UIImpactFeedbackGenerator()
@@ -2207,6 +2221,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         StoreStruct.emotiSize = 16
         StoreStruct.emotiFace = []
         StoreStruct.mainResult = []
+        StoreStruct.mainResult1 = []
+        StoreStruct.mainResult2 = []
         StoreStruct.instanceLocalToAdd = []
         
         StoreStruct.statusesHome = []

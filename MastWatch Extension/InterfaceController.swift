@@ -62,8 +62,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any] = [:]) {
         DispatchQueue.main.async {
-            print("herehere")
-            print(userInfo.first?.key)
             if let xy = userInfo.first?.key {
                 UserDefaults.standard.set(xy, forKey: "key1")
                 if let xy2 = userInfo.first?.value {
@@ -203,7 +201,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     override func interfaceOffsetDidScrollToBottom() {
         
-        print("scrolled to bottom")
         self.indicator?.showWait()
         let request = Timelines.home(range: .max(id: StoreStruct.allStats.last?.id ?? "", limit: nil))
         self.client.run(request) { (statuses) in
@@ -239,8 +236,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     override func interfaceOffsetDidScrollToTop() {
-        
-        print("scrolled to top")
         
         let request = Timelines.home(range: .min(id: StoreStruct.allStats.first?.id ?? "", limit: nil))
         self.client.run(request) { (statuses) in

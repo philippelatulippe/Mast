@@ -1136,7 +1136,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         controller.inReply = [sto[sender.tag].lastStatus!]
         controller.inReplyText = sto[sender.tag].lastStatus!.account.username
         controller.prevTextReply = sto[sender.tag].lastStatus!.content.stripHTML()
-        print(sto[sender.tag].lastStatus!.account.username)
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -1164,7 +1163,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 let impact = UIImpactFeedbackGenerator(style: .medium)
                 
                 let like = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("like")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -1227,7 +1226,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 like.textColor = Colours.tabUnselected
                 
                 let reply = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("reply")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -1236,7 +1235,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     controller.inReply = [sto[indexPath.row].lastStatus!]
                     controller.inReplyText = sto[indexPath.row].lastStatus!.account.username
                     controller.prevTextReply = sto[indexPath.row].lastStatus!.content.stripHTML()
-                    print(sto[indexPath.row].lastStatus!.account.username)
                     self.present(controller, animated: true, completion: nil)
                     
                     
@@ -1273,7 +1271,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 let impact = UIImpactFeedbackGenerator(style: .medium)
                 
                 let more = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("boost")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -1341,7 +1339,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 let request = Accounts.mute(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("muted")
+                                        
                                          
                                     }
                                 }
@@ -1362,7 +1360,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 let request = Accounts.unmute(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("unmuted")
+                                        
                                          
                                     }
                                 }
@@ -1389,7 +1387,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 let request = Accounts.block(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("blocked")
+                                        
                                          
                                     }
                                 }
@@ -1410,7 +1408,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 let request = Accounts.unblock(id: sto[indexPath.row].lastStatus!.account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("unblocked")
+                                        
                                          
                                     }
                                 }
@@ -1447,7 +1445,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     let request = Reports.report(accountID: sto[indexPath.row].lastStatus!.account.id, statusIDs: [sto[indexPath.row].lastStatus?.id ?? ""], reason: "Harassment")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                              
                                         }
                                     }
@@ -1473,7 +1471,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     let request = Reports.report(accountID: sto[indexPath.row].lastStatus!.account.id, statusIDs: [sto[indexPath.row].lastStatus?.id ?? ""], reason: "No Content Warning")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                              
                                         }
                                     }
@@ -1499,7 +1497,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     let request = Reports.report(accountID: sto[indexPath.row].lastStatus!.account.id, statusIDs: [sto[indexPath.row].lastStatus?.id ?? ""], reason: "Spam")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                              
                                         }
                                     }
@@ -1673,7 +1671,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
         self.tableView.deselectRow(at: indexPath, animated: true)
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
@@ -1685,10 +1683,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             let controller = DMMessageViewController()
             controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
             self.navigationController?.pushViewController(controller, animated: true)
-//            let controller = DMMessageViewController()
-//            controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
-//            self.splitViewController?.showDetailViewController(controller, sender: self)
-//            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
         default:
             print("nothing")
         }

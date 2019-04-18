@@ -123,7 +123,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
             
             if self.tableViewL.alpha == 1 && StoreStruct.statusesLocal.count > 0 {
-                print("scrolllocal")
                 if StoreStruct.statusesLocal.count <= 0 {
                     
                 } else {
@@ -131,7 +130,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 }
             } else {
                 if StoreStruct.statusesFederated.count > 0 {
-                    print("scrollfed")
                     if StoreStruct.statusesFederated.count <= 0 {
                         
                     } else {
@@ -1363,7 +1361,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         let request4 = Instances.current()
         StoreStruct.client.run(request4) { (statuses) in
             if let stat = (statuses.value) {
-                print("max chars --")
                 StoreStruct.maxChars = stat.max_toot_chars ?? 500
                 StoreStruct.currentInstanceDetails = [stat]
             }
@@ -1495,20 +1492,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         
         let request0 = Notifications.all(range: .min(id: StoreStruct.notifications.first?.id ?? "", limit: nil))
         //DispatchQueue.global(qos: .userInitiated).async {
-        print("002")
         StoreStruct.client.run(request0) { (statuses) in
-            print("003")
              
             if let stat = (statuses.value) {
-                print("004")
                 StoreStruct.notifications = stat + StoreStruct.notifications
                 
                 let st = stat.reversed()
                 //DispatchQueue.main.async {
                 for x in st {
-                    print("005")
                     if x.type == .mention {
-                        print("006")
                         
                         let content = UNMutableNotificationContent()
                         content.title =  "\(x.account.displayName) mentioned you"
@@ -1522,7 +1514,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         
                     }
                     if x.type == .follow {
-                        print("007")
                         
                         let content = UNMutableNotificationContent()
                         content.title =  "\(x.account.displayName) followed you"
@@ -1536,7 +1527,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         
                     }
                     if x.type == .reblog {
-                        print("008")
                         
                         let content = UNMutableNotificationContent()
                         content.title = "\(x.account.displayName) boosted your toot"
@@ -1550,7 +1540,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         
                     }
                     if x.type == .favourite {
-                        print("009")
                         
                         let content = UNMutableNotificationContent()
                         content.title = "\(x.account.displayName) liked your toot"
@@ -1935,7 +1924,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             selection.selectionChanged()
         }
         
-        print("toindex:- \(toIndex)")
         if fromIndex == toIndex {
             return
         }
@@ -3609,7 +3597,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         controller.inReply = [sto[sender.tag].reblog ?? sto[sender.tag]]
         controller.prevTextReply = sto[sender.tag].reblog?.content.stripHTML() ?? sto[sender.tag].content.stripHTML()
         controller.inReplyText = sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username
-        print(sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username)
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -3648,7 +3635,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             let impact = UIImpactFeedbackGenerator(style: .medium)
             
             let boost = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("boost")
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     impact.impactOccurred()
                 }
@@ -3734,7 +3720,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             boost.textColor = Colours.tabUnselected
             
             let like = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("like")
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     impact.impactOccurred()
                 }
@@ -3830,7 +3815,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             like.textColor = Colours.tabUnselected
             
             let reply = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("reply")
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     impact.impactOccurred()
                 }
@@ -3840,7 +3824,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 controller.inReply = [sto[indexPath.row].reblog ?? sto[indexPath.row]]
                 controller.prevTextReply = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                 controller.inReplyText = sto[indexPath.row].reblog?.account.username ?? sto[indexPath.row].account.username
-                print(sto[indexPath.row].reblog?.account.username ?? sto[indexPath.row].account.username)
                 self.present(controller, animated: true, completion: nil)
                 
                 if let cell = theTable.cellForRow(at: indexPath) as? MainFeedCell {
@@ -3910,7 +3893,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             let impact = UIImpactFeedbackGenerator(style: .medium)
             
             let more = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("boost")
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     impact.impactOccurred()
                 }
@@ -4034,9 +4016,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             let theId = sto[indexPath.row].id
                             let request = Statuses.delete(id: theId)
                             StoreStruct.client.run(request) { (statuses) in
-                                print("deleted")
-                                
-                                
                                 DispatchQueue.main.async {
                                     
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -4061,14 +4040,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             let allowed = NSMutableCharacterSet.alphanumeric()
                             allowed.addCharacters(in: unreserved)
                             let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            print("0001")
-                            print(bodyText)
                             let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
                             let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
                             var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
                             trans = trans!.replacingOccurrences(of: "\n\n", with: "%20")
-                            print("0002")
-                            print(trans)
                             let langStr = Locale.current.languageCode
                             let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
                             guard let requestUrl = URL(string:urlString) else {
@@ -4226,7 +4201,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 let request = Accounts.mute(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("muted")
+                                        
                                     }
                                 }
                             } else {
@@ -4246,7 +4221,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 let request = Accounts.unmute(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("unmuted")
+                                        
                                     }
                                 }
                             }
@@ -4272,7 +4247,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 let request = Accounts.block(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("blocked")
+                                        
                                     }
                                 }
                             } else {
@@ -4292,7 +4267,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 let request = Accounts.unblock(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("unblocked")
+                                        
                                     }
                                 }
                             }
@@ -4327,7 +4302,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Harassment")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                         }
                                     }
                                     
@@ -4352,7 +4327,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "No Content Warning")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                         }
                                     }
                                     
@@ -4377,7 +4352,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Spam")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                         }
                                     }
                                     
@@ -4400,14 +4375,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             let allowed = NSMutableCharacterSet.alphanumeric()
                             allowed.addCharacters(in: unreserved)
                             let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            print("0001")
-                            print(bodyText)
                             let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
                             let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
                             var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
                             trans = trans!.replacingOccurrences(of: "\n\n", with: "%20")
-                            print("0002")
-                            print(trans)
                             let langStr = Locale.current.languageCode
                             let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
                             guard let requestUrl = URL(string:urlString) else {
@@ -4578,7 +4549,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
         self.tableView.deselectRow(at: indexPath, animated: true)
         self.tableViewL.deselectRow(at: indexPath, animated: true)
         self.tableViewF.deselectRow(at: indexPath, animated: true)
@@ -4806,9 +4777,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         if stat.isEmpty {} else {
                             DispatchQueue.main.async {
                             let y = StoreStruct.statusesFederated.split(separator: StoreStruct.gapLastFedStat ?? StoreStruct.statusesFederated.last!)
-                            print("testing")
-                            print(y.first?.count ?? 0)
-                            print(y.last?.count ?? 0)
                             if StoreStruct.statusesFederated.count > y.first!.count + 1 {
                             StoreStruct.statusesFederated.remove(at: y.first!.count + 1)
                             }
@@ -4971,7 +4939,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         DispatchQueue.main.async {
                         
                         var newestC = StoreStruct.statusesHome.count
-                        print("need30 \(StoreStruct.statusesHome.count)")
                         
                         
                         if let st = stat.last {
@@ -4998,7 +4965,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             if newestC < 0 {
                                 newestC = 0
                             }
-                            print("newestC: \(newestC)")
                             
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                 self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
@@ -5125,7 +5091,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 let z = st
                                 z.id = "loadmorehere"
                                 StoreStruct.gapLastFedStat = z
-                                print(StoreStruct.gapLastFedID)
                                 StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
                                 StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             }

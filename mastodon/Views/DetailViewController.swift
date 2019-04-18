@@ -1141,10 +1141,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             
         } else if indexPath.section == 1 {
-            
-            print("testhtml")
-            print(self.mainStatus[0].content)
-            
             // Main status
             
             
@@ -2223,8 +2219,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         controller.inReply = [sto[sender.tag].reblog ?? sto[sender.tag]]
         controller.prevTextReply = sto[sender.tag].reblog?.content.stripHTML() ?? sto[sender.tag].content.stripHTML()
         controller.inReplyText = sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username
-        print(sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username)
-//        self.present(controller, animated: true, completion: nil)
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
@@ -2261,7 +2255,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         controller.inReply = [sto[sender.tag].reblog ?? sto[sender.tag]]
         controller.prevTextReply = sto[sender.tag].reblog?.content.stripHTML() ?? sto[sender.tag].content.stripHTML()
         controller.inReplyText = sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username
-        print(sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username)
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -2719,7 +2712,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         StoreStruct.spoilerText = self.mainStatus[sender.tag].reblog?.spoilerText ?? self.mainStatus[sender.tag].spoilerText
         controller.inReply = [self.mainStatus[sender.tag].reblog ?? self.mainStatus[sender.tag]]
         controller.inReplyText = self.mainStatus[sender.tag].reblog?.account.username ?? self.mainStatus[sender.tag].account.username
-        print(self.mainStatus[sender.tag].reblog?.account.username ?? self.mainStatus[sender.tag].account.username)
         controller.prevTextReply = self.mainStatus[sender.tag].reblog?.content.stripHTML() ?? self.mainStatus[sender.tag].content.stripHTML()
         self.present(controller, animated: true, completion: nil)
     }
@@ -3033,7 +3025,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     let request = Statuses.delete(id: self.mainStatus[0].id)
                     StoreStruct.client.run(request) { (statuses) in
-                        print("deleted")
+                        
                         
                         DispatchQueue.main.async {
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3048,6 +3040,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                                 statusAlert.show()
                             }
+                            self.navigationController?.popViewController(animated: true)
                             //sto.remove(at: indexPath.row)
                             //self.tableView.reloadData()
                         }
@@ -3060,14 +3053,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let allowed = NSMutableCharacterSet.alphanumeric()
                     allowed.addCharacters(in: unreserved)
                     let bodyText = self.mainStatus[0].content.stripHTML()
-                    print("0001")
-                    print(bodyText)
                     let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
                     let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
                     var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
                     trans = trans!.replacingOccurrences(of: "\n\n", with: "%20")
-                    print("0002")
-                    print(trans)
                     let langStr = Locale.current.languageCode
                     let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
                     guard let requestUrl = URL(string:urlString) else {
@@ -3221,7 +3210,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let request = Accounts.mute(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("muted")
+                                
                                  
                             }
                         }
@@ -3242,7 +3231,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let request = Accounts.unmute(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("unmuted")
+                                
                                  
                             }
                         }
@@ -3269,7 +3258,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let request = Accounts.block(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("blocked")
+                                
                                  
                             }
                         }
@@ -3290,7 +3279,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let request = Accounts.unblock(id: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("unblocked")
+                                
                                  
                             }
                         }
@@ -3327,7 +3316,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "Harassment")
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    print("reported")
+                                    
                                      
                                 }
                             }
@@ -3353,7 +3342,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "No Content Warning")
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    print("reported")
+                                    
                                      
                                 }
                             }
@@ -3379,7 +3368,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             let request = Reports.report(accountID: self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id, statusIDs: [self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id], reason: "Spam")
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    print("reported")
+                                    
                                      
                                 }
                             }
@@ -4638,7 +4627,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let impact = UIImpactFeedbackGenerator(style: .medium)
             
             let boost = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("boost")
+                
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     impact.impactOccurred()
                 }
@@ -4659,7 +4648,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             boost.textColor = Colours.tabUnselected
             
             let like = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("like")
+                
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     impact.impactOccurred()
                 }
@@ -4774,7 +4763,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             like.textColor = Colours.tabUnselected
             
             let reply = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("reply")
+                
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     impact.impactOccurred()
                 }
@@ -4784,7 +4773,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 controller.inReply = [sto[indexPath.row]]
                 controller.inReplyText = sto[indexPath.row].account.username
                 controller.prevTextReply = sto[indexPath.row].content.stripHTML()
-                print(sto[indexPath.row].account.username)
                 self.present(controller, animated: true, completion: nil)
                 
                 
@@ -4821,7 +4809,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let impact = UIImpactFeedbackGenerator(style: .medium)
             
             let more = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("boost")
+                
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     impact.impactOccurred()
                 }
@@ -4933,7 +4921,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                             let request = Statuses.delete(id: sto[indexPath.row].id)
                             StoreStruct.client.run(request) { (statuses) in
-                                print("deleted")
+                                
                                 
                                 DispatchQueue.main.async {
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -4948,6 +4936,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
                                         statusAlert.show()
                                     }
+                                    self.navigationController?.popViewController(animated: true)
                                     //sto.remove(at: indexPath.row)
                                     //self.tableView.reloadData()
                                 }
@@ -5070,7 +5059,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let request = Accounts.mute(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("muted")
+                                        
                                          
                                     }
                                 }
@@ -5091,7 +5080,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let request = Accounts.unmute(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("unmuted")
+                                        
                                          
                                     }
                                 }
@@ -5118,7 +5107,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let request = Accounts.block(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("blocked")
+                                        
                                          
                                     }
                                 }
@@ -5139,7 +5128,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let request = Accounts.unblock(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("unblocked")
+                                        
                                          
                                     }
                                 }
@@ -5175,7 +5164,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Harassment")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                              
                                         }
                                     }
@@ -5201,7 +5190,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "No Content Warning")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                              
                                         }
                                     }
@@ -5227,7 +5216,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Spam")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                              
                                         }
                                     }
@@ -5408,7 +5397,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
         self.tableView.deselectRow(at: indexPath, animated: true)
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom

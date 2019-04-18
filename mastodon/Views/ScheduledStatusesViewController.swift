@@ -282,15 +282,7 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
-        
-//        let controller = ThirdViewController()
-//        controller.fromOtherUser = true
-//        controller.userIDtoUse = self.statuses[indexPath.row].id
-//        self.navigationController?.pushViewController(controller, animated: true)
-        
-        
         
         Alertift.actionSheet(title: nil, message: nil)
             .backgroundColor(Colours.white)

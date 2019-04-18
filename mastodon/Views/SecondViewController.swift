@@ -2802,17 +2802,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         var sto = StoreStruct.notifications
         if self.currentIndex == 0 {
             sto = StoreStruct.notifications
-            print("880")
         } else if self.currentIndex == 5 {
         } else if self.currentIndex == 1 {
-            print("8801")
             sto = StoreStruct.notificationsMentions
         }
-        
-        print(sender.tag)
-        print(sto[sender.tag].account.username)
-        print(sto[0].account.username)
-        print("test")
         
         let controller = ThirdViewController()
         if sto[sender.tag].account.username == StoreStruct.currentUser.username {} else {
@@ -3532,7 +3525,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         controller.inReply = [sto[sender.tag].status!]
         controller.inReplyText = sto[sender.tag].account.username
         controller.prevTextReply = sto[sender.tag].status!.content.stripHTML()
-        print(sto[sender.tag].account.username)
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -3574,7 +3566,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 let impact = UIImpactFeedbackGenerator(style: .medium)
                 
                 let like = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("like")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -3658,7 +3650,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 like.textColor = Colours.tabUnselected
                 
                 let reply = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("reply")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -3667,7 +3659,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     controller.inReply = [sto[indexPath.row].status!]
                     controller.inReplyText = sto[indexPath.row].account.username
                     controller.prevTextReply = sto[indexPath.row].status!.content.stripHTML()
-                    print(sto[indexPath.row].account.username)
                     self.present(controller, animated: true, completion: nil)
                     
                     
@@ -3707,7 +3698,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 let impact = UIImpactFeedbackGenerator(style: .medium)
                 
                 let more = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("boost")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -3775,7 +3766,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let request = Accounts.mute(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("muted")
+                                        
                                     }
                                 }
                             } else {
@@ -3795,7 +3786,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let request = Accounts.unmute(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("unmuted")
+                                        
                                         
                                     }
                                 }
@@ -3821,7 +3812,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let request = Accounts.block(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("blocked")
+                                        
                                         
                                     }
                                 }
@@ -3842,7 +3833,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let request = Accounts.unblock(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("unblocked")
+                                        
                                         
                                     }
                                 }
@@ -3877,7 +3868,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "Harassment")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                             
                                         }
                                     }
@@ -3902,7 +3893,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "No Content Warning")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                             
                                         }
                                     }
@@ -3928,7 +3919,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "Spam")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                             
                                         }
                                     }
@@ -4089,7 +4080,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 let impact = UIImpactFeedbackGenerator(style: .medium)
                 
                 let boost = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("boost")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -4172,7 +4163,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 boost.textColor = Colours.tabUnselected
                 
                 let like = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("like")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -4256,7 +4247,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 like.textColor = Colours.tabUnselected
                 
                 let reply = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("reply")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -4265,7 +4256,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     controller.inReply = [sto[indexPath.row].status!]
                     controller.inReplyText = sto[indexPath.row].account.username
                     controller.prevTextReply = sto[indexPath.row].status!.content.stripHTML()
-                    print(sto[indexPath.row].account.username)
                     self.present(controller, animated: true, completion: nil)
                     
                     
@@ -4321,7 +4311,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 let impact = UIImpactFeedbackGenerator(style: .medium)
                 
                 let more = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("boost")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -4389,7 +4379,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let request = Accounts.mute(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("muted")
+                                        
                                         
                                     }
                                 }
@@ -4410,7 +4400,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let request = Accounts.unmute(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("unmuted")
+                                        
                                         
                                     }
                                 }
@@ -4437,7 +4427,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let request = Accounts.block(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("blocked")
+                                        
                                         
                                     }
                                 }
@@ -4458,7 +4448,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 let request = Accounts.unblock(id: sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("unblocked")
+                                        
                                         
                                     }
                                 }
@@ -4495,7 +4485,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "Harassment")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                             
                                         }
                                     }
@@ -4521,7 +4511,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "No Content Warning")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                             
                                         }
                                     }
@@ -4547,7 +4537,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let request = Reports.report(accountID: sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].status?.id ?? ""], reason: "Spam")
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("reported")
+                                            
                                             
                                         }
                                     }
@@ -4751,7 +4741,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
         self.tableView.deselectRow(at: indexPath, animated: true)
         self.tableView2.deselectRow(at: indexPath, animated: true)
         self.tableView3.deselectRow(at: indexPath, animated: true)

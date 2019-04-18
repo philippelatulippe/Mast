@@ -220,7 +220,7 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
         let impact = UIImpactFeedbackGenerator(style: .medium)
         
         let more = SwipeAction(style: .default, title: nil) { action, indexPath in
-            print("boost")
+            
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 impact.impactOccurred()
             }
@@ -323,7 +323,7 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
         self.tableView.deselectRow(at: indexPath, animated: true)
         
         let controller = ThirdViewController()

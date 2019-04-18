@@ -1230,7 +1230,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
         self.tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == 1 {
@@ -3190,7 +3190,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 //                        let request = Accounts.follow(id: "107304")
 //                        StoreStruct.client.run(request) { (statuses) in
 //                            if let _ = (statuses.value) {
-//                                print("followed")
+//                                
 //                            }
 //                        }
                     }

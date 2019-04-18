@@ -478,7 +478,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
         self.tableView.deselectRow(at: indexPath, animated: true)
         
         let controller = ThirdViewController()

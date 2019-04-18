@@ -76,6 +76,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var textFromIm = false
     var textVideoURL: NSURL = NSURL(string: "www.google.com")!
     let recognizer = SFSpeechRecognizer(locale: Locale.current)
+    var emotiLab = UIButton()
+    var currentEmot = ""
     
     func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem) {
         print(item.fixedHeightStillImage)
@@ -909,9 +911,22 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.removeLabel.alpha = 0
         self.bgView.addSubview(self.removeLabel)
         
+        self.emotiLab.frame = CGRect(x:Int(self.view.bounds.width) - 55, y:Int(self.view.bounds.height) - 40 - Int(self.keyHeight) - 55, width: 40, height: 30)
+        self.emotiLab.titleLabel?.textAlignment = .center
+        self.emotiLab.layer.masksToBounds = true
+        self.emotiLab.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        self.emotiLab.setBackgroundColor(Colours.clear, forState: .normal)
+        self.emotiLab.alpha = 1
+        self.emotiLab.addTarget(self, action: #selector(self.didTouchEmoti), for: .touchUpInside)
+        self.view.addSubview(self.emotiLab)
     }
     
-    
+    @objc func didTouchEmoti() {
+        let size = self.textView.text.reversed().firstIndex(of: " ") ?? self.textView.text.count
+        let startWord = self.textView.text.index(self.textView.text.endIndex, offsetBy: -size)
+        let last = self.textView.text[startWord...]
+        self.textView.text = self.textView.text.replacingOccurrences(of: last, with:":\(self.currentEmot):")
+    }
     
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if action == #selector(self.paste(_:)) {
@@ -1063,10 +1078,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc override func paste(_ sender: Any?) {
         let pasteboard = UIPasteboard.general
         if pasteboard.hasImages {
-            
-            print("has image")
-            print(pasteboard.image)
-            
             if self.selectedImage1.image == nil {
                 self.selectedImage1.image = pasteboard.image
                 self.selectedImage1.isUserInteractionEnabled = true
@@ -1621,9 +1632,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.imag.dismiss(animated: true, completion: nil)
         DispatchQueue.main.async {
             self.textView.becomeFirstResponder()
-            
-            print("selected image123 = \(info[UIImagePickerController.InfoKey.mediaType] as? String)")
-            print("selected image1233 = \(info[UIImagePickerController.InfoKey.mediaType] as? PHAssetMediaType)")
             
             if let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String {
             
@@ -2248,8 +2256,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     let albumTitle: String = mediaItem.value(forProperty: MPMediaItemPropertyAlbumTitle) as? String ?? ""
                     let artist: String = mediaItem.value(forProperty: MPMediaItemPropertyArtist) as? String ?? ""
                     
-                    print("\(title) on \(albumTitle) by \(artist)")
-                    
                     if title == "" {
                         self.textView.becomeFirstResponder()
                     } else {
@@ -2327,7 +2333,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.picker.alpha = 1
                 })
                 self.picker.completionHandler = { date in
-                    print(date.iso8601())
                     self.scheduleTime = date.iso8601()
                     self.isScheduled = true
                 }
@@ -2473,7 +2478,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         } else {
             let request = Statuses.delete(id: idToDel)
             StoreStruct.client.run(request) { (statuses) in
-                print("deleted")
+                
             }
         }
         
@@ -2634,12 +2639,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         
         if self.gifVidData != nil || self.isGifVid {
-            print("gifvidnotnil")
-            
             let request = Media.upload(media: .gif(self.gifVidData))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    print(stat.id)
                     mediaIDs.append(stat.id)
                     
                     let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, visibility: self.visibility)
@@ -2751,7 +2753,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             let request = Media.upload(media: .jpeg(imageData))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    print(stat.id)
                     mediaIDs.append(stat.id)
                     let request4 = Media.updateDescription(description: StoreStruct.caption1, id: stat.id)
                     StoreStruct.client.run(request4) { (statuses) in
@@ -2763,7 +2764,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     let request2 = Media.upload(media: .jpeg(imageData2))
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
-                            print(stat.id)
                             mediaIDs.append(stat.id)
                             let request5 = Media.updateDescription(description: StoreStruct.caption2, id: stat.id)
                             StoreStruct.client.run(request5) { (statuses) in
@@ -2775,7 +2775,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             let request3 = Media.upload(media: .jpeg(imageData3))
                             StoreStruct.client.run(request3) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    print(stat.id)
                                     mediaIDs.append(stat.id)
                                     let request6 = Media.updateDescription(description: StoreStruct.caption3, id: stat.id)
                                     StoreStruct.client.run(request6) { (statuses) in
@@ -2787,7 +2786,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     let request4 = Media.upload(media: .jpeg(imageData4))
                                     StoreStruct.client.run(request4) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print(stat.id)
                                             mediaIDs.append(stat.id)
                                             let request7 = Media.updateDescription(description: StoreStruct.caption4, id: stat.id)
                                             StoreStruct.client.run(request7) { (statuses) in
@@ -2903,7 +2901,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             let request = Media.upload(media: .jpeg(imageData))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    print(stat.id)
                     mediaIDs.append(stat.id)
                     let request4 = Media.updateDescription(description: StoreStruct.caption1, id: stat.id)
                     StoreStruct.client.run(request4) { (statuses) in
@@ -2915,7 +2912,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     let request2 = Media.upload(media: .jpeg(imageData2))
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
-                            print(stat.id)
                             mediaIDs.append(stat.id)
                             let request5 = Media.updateDescription(description: StoreStruct.caption2, id: stat.id)
                             StoreStruct.client.run(request5) { (statuses) in
@@ -2927,7 +2923,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             let request3 = Media.upload(media: .jpeg(imageData3))
                             StoreStruct.client.run(request3) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    print(stat.id)
                                     mediaIDs.append(stat.id)
                                     let request6 = Media.updateDescription(description: StoreStruct.caption3, id: stat.id)
                                     StoreStruct.client.run(request6) { (statuses) in
@@ -3041,7 +3036,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             let request = Media.upload(media: .jpeg(imageData))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    print(stat.id)
                     mediaIDs.append(stat.id)
                     
                     let request4 = Media.updateDescription(description: StoreStruct.caption1, id: stat.id)
@@ -3053,7 +3047,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     let request2 = Media.upload(media: .jpeg(imageData2))
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
-                            print(stat.id)
                             mediaIDs.append(stat.id)
                             
                             let request5 = Media.updateDescription(description: StoreStruct.caption2, id: stat.id)
@@ -3165,7 +3158,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             let request = Media.upload(media: .jpeg(imageData))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    print(stat.id)
                     mediaIDs.append(stat.id)
                     
                     let request4 = Media.updateDescription(description: StoreStruct.caption1, id: stat.id)
@@ -3460,8 +3452,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     func textViewDidChange(_ textView: UITextView) {
         
-        
-        
         if (UserDefaults.standard.object(forKey: "keyhap") == nil) || (UserDefaults.standard.object(forKey: "keyhap") as! Int == 0) {
             
         } else if (UserDefaults.standard.object(forKey: "keyhap") as! Int == 1) {
@@ -3471,7 +3461,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             let impact = UIImpactFeedbackGenerator()
             impact.impactOccurred()
         }
-        
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -3515,6 +3504,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         }
         
         
+        self.emotiLab.alpha = 0
+        
         let regex = try! NSRegularExpression(pattern: "\\S+$")
         let textRange = NSRange(location: 0, length: textView.text.count)
         
@@ -3525,8 +3516,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             let range2 = regex2.firstMatch(in: textView.text, range: textRange2)?.range
             let x1 = (String(textView.text[Range(range, in: textView.text) ?? Range(range2 ?? NSRange(location: 0, length: 0), in: textView.text) ?? Range(NSRange(location: 0, length: 0), in: "")!]))
             if x1.first == "@" && x1.count > 1 {
-                print("this is @ \(x1)")
-                
                 // search @ users in compose
                 self.theReg = x1
                 
@@ -3562,7 +3551,18 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.emotiButton.alpha = 0
                     self.tableView.alpha = 1
                 })
+                
             } else {
+                
+                var iCo = 0
+                for i in StoreStruct.mainResult2 {
+                    if x1.lowercased().contains(i.string.lowercased().replacingOccurrences(of: "￼    ", with: "")) {
+                        self.emotiLab.setAttributedTitle(StoreStruct.mainResult1[iCo], for: .normal)
+                        self.currentEmot = i.string.lowercased().replacingOccurrences(of: "￼    ", with: "")
+                        self.emotiLab.alpha = 1
+                    }
+                    iCo += 1
+                }
                 
                 UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: [], animations: {
                 self.bgView.frame = CGRect(x:0, y:Int(self.view.bounds.height) - 50 - Int(self.keyHeight), width:Int(self.view.bounds.width), height:Int(self.keyHeight) + 50)
@@ -3818,7 +3818,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 
                 let cross = SwipeAction(style: .default, title: nil) { action, indexPath in
                     StoreStruct.newdrafts.remove(at: indexPath.row)
-                    self.tableViewDrafts.reloadData()
+//                    self.tableViewDrafts.reloadData()
+                    self.tableViewDrafts.beginUpdates()
+                    self.tableViewDrafts.deleteRows(at: [indexPath], with: .none)
+                    self.tableViewDrafts.endUpdates()
                     
                     do {
                         try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")

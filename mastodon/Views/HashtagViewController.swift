@@ -1083,7 +1083,6 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         controller.inReply = [sto[sender.tag].reblog ?? sto[sender.tag]]
         controller.prevTextReply = sto[sender.tag].reblog?.content.stripHTML() ?? sto[sender.tag].content.stripHTML()
         controller.inReplyText = sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username
-        print(sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username)
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -1111,7 +1110,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
             let impact = UIImpactFeedbackGenerator(style: .medium)
             
             let boost = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("boost")
+                
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 impact.impactOccurred()
                 }
@@ -1196,7 +1195,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
             boost.textColor = Colours.tabUnselected
             
             let like = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("like")
+                
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 impact.impactOccurred()
                 }
@@ -1300,7 +1299,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
             like.textColor = Colours.tabUnselected
             
             let reply = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("reply")
+                
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 impact.impactOccurred()
                 }
@@ -1308,7 +1307,6 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                 StoreStruct.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
                 controller.inReply = [sto[indexPath.row]]
                 controller.inReplyText = sto[indexPath.row].account.username
-                print(sto[indexPath.row].account.username)
                 controller.prevTextReply = sto[indexPath.row].content.stripHTML()
                 self.present(controller, animated: true, completion: nil)
                 
@@ -1379,7 +1377,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
             let impact = UIImpactFeedbackGenerator(style: .medium)
             
             let more = SwipeAction(style: .default, title: nil) { action, indexPath in
-                print("boost")
+                
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 impact.impactOccurred()
                 }
@@ -1496,7 +1494,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             
                             let request = Statuses.delete(id: sto[indexPath.row].id)
                             StoreStruct.client.run(request) { (statuses) in
-                                print("deleted")
+                                
                                 
                                 DispatchQueue.main.async {
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -1523,14 +1521,10 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             let allowed = NSMutableCharacterSet.alphanumeric()
                             allowed.addCharacters(in: unreserved)
                             let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            print("0001")
-                            print(bodyText)
                             let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
                             let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
                             var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
                             trans = trans!.replacingOccurrences(of: "\n\n", with: "%20")
-                            print("0002")
-                            print(trans)
                             let langStr = Locale.current.languageCode
                             let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
                             guard let requestUrl = URL(string:urlString) else {
@@ -1702,7 +1696,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             let request = Accounts.mute(id: sto[indexPath.row].account.id)
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    print("muted")
+                                    
                                      
                                 }
                             }
@@ -1723,7 +1717,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             let request = Accounts.unmute(id: sto[indexPath.row].account.id)
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    print("unmuted")
+                                    
                                      
                                 }
                             }
@@ -1750,7 +1744,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             let request = Accounts.block(id: sto[indexPath.row].account.id)
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    print("blocked")
+                                    
                                      
                                 }
                             }
@@ -1771,7 +1765,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             let request = Accounts.unblock(id: sto[indexPath.row].account.id)
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
-                                    print("unblocked")
+                                    
                                      
                                 }
                             }
@@ -1807,7 +1801,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Harassment")
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("reported")
+                                        
                                          
                                     }
                                 }
@@ -1833,7 +1827,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "No Content Warning")
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("reported")
+                                        
                                          
                                     }
                                 }
@@ -1859,7 +1853,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Spam")
                                 StoreStruct.client.run(request) { (statuses) in
                                     if let stat = (statuses.value) {
-                                        print("reported")
+                                        
                                          
                                     }
                                 }
@@ -2073,7 +2067,6 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
         self.tableView.deselectRow(at: indexPath, animated: true)
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom

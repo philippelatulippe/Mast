@@ -215,8 +215,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func tappedOnTag() {
-        print(StoreStruct.tappedTag)
-        
         if StoreStruct.tappedTag.contains("https") || StoreStruct.tappedTag.contains("http") || StoreStruct.tappedTag.contains("www.") {
             
             var theUR = StoreStruct.tappedTag
@@ -299,9 +297,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func refProf() {
-        
-        print("hhh333")
-        
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -1748,7 +1743,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let request = Accounts.follow(id: self.chosenUser.id, reblogs: true)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    print("followed")
+                    
                      
                 }
             }
@@ -1773,7 +1768,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let request = Accounts.unfollow(id: self.chosenUser.id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    print("unfollowed")
+                    
                      
                 }
             }
@@ -1851,7 +1846,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     let controller = ComposeViewController()
                     controller.inReplyText = self.chosenUser.acct
-                    print(self.chosenUser.username)
                     self.present(controller, animated: true, completion: nil)
                 }
                 .action(.default("Direct Message".localized), image: UIImage(named: "direct3")) { (action, ind) in
@@ -1904,7 +1898,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let request = Accounts.follow(id: self.chosenUser.id, reblogs: true)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("followed")
+                                
                                  
                             }
                         }
@@ -1926,7 +1920,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let request = Accounts.unfollow(id: self.chosenUser.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("unfollowed")
+                                
                                  
                             }
                         }
@@ -2077,7 +2071,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     self.zzz.map({
                         let aa = $0
                         z1.action(.default($0.key), image: nil) { (action, ind) in
-                            print("test")
                             let request = Lists.add(accountIDs: [self.chosenUser.id], toList: aa.value)
                             StoreStruct.client.run(request) { (statuses) in
                                 DispatchQueue.main.async {
@@ -2102,7 +2095,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     if self.zzz.count == 0 {
                         z1.action(.default("Create New List"), image: nil) { (action, ind) in
-                            print("test")
                             let controller = NewListViewController()
                             self.present(controller, animated: true, completion: nil)
                         }
@@ -2134,7 +2126,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let request = Accounts.mute(id: self.chosenUser.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("muted")
+                                
                                  
                             }
                         }
@@ -2155,7 +2147,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let request = Accounts.unmute(id: self.chosenUser.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("unmuted")
+                                
                                  
                             }
                         }
@@ -2181,7 +2173,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let request = Accounts.block(id: self.chosenUser.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("blocked")
+                                
                                  
                             }
                         }
@@ -2202,7 +2194,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let request = Accounts.unblock(id: self.chosenUser.id)
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                print("unblocked")
+                                
                                  
                             }
                         }
@@ -2533,8 +2525,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             if self.chosenUser.locked {
                 z1.action(.default("Follow Requests"), image: UIImage(named: "profile")) { (action, ind) in
-                    //                print("test")
-                    
                     
                     let request = FollowRequests.all()
                     StoreStruct.client.run(request) { (statuses) in
@@ -4448,7 +4438,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         controller.inReply = [sto[sender.tag].reblog ?? sto[sender.tag]]
         controller.prevTextReply = sto[sender.tag].reblog?.content.stripHTML() ?? sto[sender.tag].content.stripHTML()
         controller.inReplyText = sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username
-        print(sto[sender.tag].reblog?.account.username ?? sto[sender.tag].account.username)
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -4473,7 +4462,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let impact = UIImpactFeedbackGenerator(style: .medium)
                 
                 let boost = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("boost")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -4558,7 +4547,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 boost.textColor = Colours.tabUnselected
                 
                 let like = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("like")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -4643,7 +4632,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 like.textColor = Colours.tabUnselected
                 
                 let reply = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("reply")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -4652,7 +4641,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     controller.inReply = [sto[indexPath.row].reblog ?? sto[indexPath.row]]
                     controller.inReplyText = sto[indexPath.row].reblog?.account.username ?? sto[indexPath.row].account.username
                     controller.prevTextReply = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                    print(sto[indexPath.row].reblog?.account.username ?? sto[indexPath.row].account.username)
                     self.present(controller, animated: true, completion: nil)
                     
                     if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
@@ -4702,7 +4690,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let impact = UIImpactFeedbackGenerator(style: .medium)
                 
                 let more = SwipeAction(style: .default, title: nil) { action, indexPath in
-                    print("boost")
+                    
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                         impact.impactOccurred()
                     }
@@ -4823,7 +4811,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 
                                 let request = Statuses.delete(id: sto[indexPath.row].id)
                                 StoreStruct.client.run(request) { (statuses) in
-                                    print("deleted")
+                                    
                                     
                                     DispatchQueue.main.async {
                                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -4850,14 +4838,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 let allowed = NSMutableCharacterSet.alphanumeric()
                                 allowed.addCharacters(in: unreserved)
                                 let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                                print("0001")
-                                print(bodyText)
                                 let unreservedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
                                 let unreservedCharset = NSCharacterSet(charactersIn: unreservedChars)
                                 var trans = bodyText.addingPercentEncoding(withAllowedCharacters: unreservedCharset as CharacterSet)
                                 trans = trans!.replacingOccurrences(of: "\n\n", with: "%20")
-                                print("0002")
-                                print(trans)
                                 let langStr = Locale.current.languageCode
                                 let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=\(langStr ?? "en")&dt=t&q=\(trans!)&ie=UTF-8&oe=UTF-8"
                                 guard let requestUrl = URL(string:urlString) else {
@@ -5033,7 +5017,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     let request = Accounts.mute(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("muted")
+                                            
                                              
                                         }
                                     }
@@ -5054,7 +5038,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     let request = Accounts.unmute(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("unmuted")
+                                            
                                              
                                         }
                                     }
@@ -5081,7 +5065,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     let request = Accounts.block(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("blocked")
+                                            
                                              
                                         }
                                     }
@@ -5102,7 +5086,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     let request = Accounts.unblock(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                     StoreStruct.client.run(request) { (statuses) in
                                         if let stat = (statuses.value) {
-                                            print("unblocked")
+                                            
                                              
                                         }
                                     }
@@ -5138,7 +5122,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Harassment")
                                         StoreStruct.client.run(request) { (statuses) in
                                             if let stat = (statuses.value) {
-                                                print("reported")
+                                                
                                                  
                                             }
                                         }
@@ -5164,7 +5148,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "No Content Warning")
                                         StoreStruct.client.run(request) { (statuses) in
                                             if let stat = (statuses.value) {
-                                                print("reported")
+                                                
                                                  
                                             }
                                         }
@@ -5190,7 +5174,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Spam")
                                         StoreStruct.client.run(request) { (statuses) in
                                             if let stat = (statuses.value) {
-                                                print("reported")
+                                                
                                                  
                                             }
                                         }
@@ -5387,7 +5371,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
         self.tableView.deselectRow(at: indexPath, animated: true)
         
         var zzz = self.profileStatuses

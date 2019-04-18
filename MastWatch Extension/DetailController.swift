@@ -38,7 +38,7 @@ class DetailController: WKInterfaceController {
             }
             let request = Statuses.unfavourite(id: self.allThings[StoreStruct.currentRow].reblog?.id ?? self.allThings[StoreStruct.currentRow].id)
             StoreStruct.client.run(request) { (statuses) in
-                print("unliked")
+                
             }
         } else {
             DispatchQueue.main.async {
@@ -46,7 +46,7 @@ class DetailController: WKInterfaceController {
             }
             let request = Statuses.favourite(id: self.allThings[StoreStruct.currentRow].reblog?.id ?? self.allThings[StoreStruct.currentRow].id)
             StoreStruct.client.run(request) { (statuses) in
-                print("liked")
+                
             }
         }
     }
@@ -58,7 +58,7 @@ class DetailController: WKInterfaceController {
             }
             let request = Statuses.unreblog(id: self.allThings[StoreStruct.currentRow].reblog?.id ?? self.allThings[StoreStruct.currentRow].id)
             StoreStruct.client.run(request) { (statuses) in
-                print("unboosted")
+                
             }
         } else {
             DispatchQueue.main.async {
@@ -66,7 +66,7 @@ class DetailController: WKInterfaceController {
             }
             let request = Statuses.reblog(id: self.allThings[StoreStruct.currentRow].reblog?.id ?? self.allThings[StoreStruct.currentRow].id)
             StoreStruct.client.run(request) { (statuses) in
-                print("boosted")
+                
             }
         }
     }
