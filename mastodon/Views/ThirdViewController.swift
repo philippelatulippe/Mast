@@ -5416,9 +5416,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
-                        DispatchQueue.main.async {
                         self.lastThing = stat.first?.id ?? ""
                         self.profileStatuses = self.profileStatuses + stat
+                        DispatchQueue.main.async {
                             self.profileStatuses = self.profileStatuses.removeDuplicates()
                             self.tableView.reloadData()
                         }
@@ -5439,9 +5439,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
-                        DispatchQueue.main.async {
                         self.lastThing = stat.first?.id ?? ""
                         self.profileStatuses2 = self.profileStatuses2 + stat
+                        DispatchQueue.main.async {
                             self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                             self.tableView.reloadData()
                         }
@@ -5461,9 +5461,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             //        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    DispatchQueue.main.async {
                     self.profileStatuses = stat + self.profileStatuses
-                        
+                    
+                    DispatchQueue.main.async {
                         self.profileStatuses = self.profileStatuses.removeDuplicates()
                         if stat.count > 0 {
                             self.tableView.reloadData()
@@ -5486,9 +5486,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             //            DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    DispatchQueue.main.async {
                     self.profileStatuses2 = stat + self.profileStatuses2
-                        
+                    
+                    DispatchQueue.main.async {
                         self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                         if stat.count > 0 {
                             self.tableView.reloadData()

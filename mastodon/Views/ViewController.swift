@@ -294,7 +294,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     }
                     StoreStruct.shared.currentInstance.accessToken = (json["access_token"] as? String ?? "")
                     StoreStruct.client.accessToken = StoreStruct.shared.currentInstance.accessToken
-                    
                    
                     let currentInstance = InstanceData(clientID: StoreStruct.shared.currentInstance.clientID, clientSecret: StoreStruct.shared.currentInstance.clientSecret, authCode: StoreStruct.shared.currentInstance.authCode, accessToken: StoreStruct.shared.currentInstance.accessToken, returnedText: StoreStruct.shared.currentInstance.returnedText, redirect:StoreStruct.shared.currentInstance.redirect)
                     
@@ -302,6 +301,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     instances.append(currentInstance)
                     UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
                     InstanceData.setCurrentInstance(instance: currentInstance)
+                    
                     let request = Timelines.home()
                     StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
@@ -323,7 +323,38 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         }
                     }
                     
-                    
+                    let request3 = Instances.customEmojis()
+                    StoreStruct.client.run(request3) { (statuses) in
+                        if let stat = (statuses.value) {
+                            DispatchQueue.main.async {
+                                StoreStruct.emotiFace = stat
+                            }
+                            stat.map({
+                                let attributedString = NSAttributedString(string: "    \($0.shortcode)")
+                                let textAttachment = NSTextAttachment()
+                                textAttachment.loadImageUsingCache(withUrl: $0.staticURL.absoluteString)
+                                textAttachment.bounds = CGRect(x:0, y: Int(-9), width: Int(30), height: Int(30))
+                                let attrStringWithImage = NSAttributedString(attachment: textAttachment)
+                                let result = NSMutableAttributedString()
+                                result.append(attrStringWithImage)
+                                result.append(attributedString)
+                                StoreStruct.mainResult.append(result)
+                                
+                                let textAttachment1 = NSTextAttachment()
+                                textAttachment1.loadImageUsingCache(withUrl: $0.staticURL.absoluteString)
+                                textAttachment1.bounds = CGRect(x:0, y: Int(-9), width: Int(30), height: Int(30))
+                                let attrStringWithImage1 = NSAttributedString(attachment: textAttachment1)
+                                let result1 = NSMutableAttributedString()
+                                result1.append(attrStringWithImage1)
+                                StoreStruct.mainResult1.append(result1)
+                                
+                                let attributedString2 = NSAttributedString(string: "\($0.shortcode)")
+                                let result2 = NSMutableAttributedString()
+                                result2.append(attributedString2)
+                                StoreStruct.mainResult2.append(result)
+                            })
+                        }
+                    }
                     
                     
                     // onboarding
@@ -346,7 +377,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     
     
-    @objc func newInstanceLogged(){
+    @objc func newInstanceLogged() {
         
         
         var request = URLRequest(url: URL(string: "https://\(StoreStruct.shared.newInstance!.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.shared.newInstance!.authCode)&redirect_uri=\(StoreStruct.shared.newInstance!.redirect)&client_id=\(StoreStruct.shared.newInstance!.clientID)&client_secret=\(StoreStruct.shared.newInstance!.clientSecret)&scope=read%20write%20follow%20push")!)
@@ -369,8 +400,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     InstanceData.setCurrentInstance(instance: newInstance)
                     var instances = InstanceData.getAllInstances()
                     instances.append(newInstance)
-                    UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
-                    
+                    UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey: "instances")
                     
                     let request = Timelines.home()
                     StoreStruct.shared.newClient.run(request) { (statuses) in
@@ -380,7 +410,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
                         }
                     }
-                    
                     
                     let request2 = Accounts.currentUser()
                     StoreStruct.shared.newClient.run(request2) { (statuses) in
@@ -1044,7 +1073,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 DispatchQueue.main.async {
                     StoreStruct.emotiFace = stat
                 }
-                
                 stat.map({
                     let attributedString = NSAttributedString(string: "    \($0.shortcode)")
                     let textAttachment = NSTextAttachment()
@@ -1054,7 +1082,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let result = NSMutableAttributedString()
                     result.append(attrStringWithImage)
                     result.append(attributedString)
-                    
                     StoreStruct.mainResult.append(result)
                     
                     let textAttachment1 = NSTextAttachment()
@@ -1063,13 +1090,11 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let attrStringWithImage1 = NSAttributedString(attachment: textAttachment1)
                     let result1 = NSMutableAttributedString()
                     result1.append(attrStringWithImage1)
-                    
                     StoreStruct.mainResult1.append(result1)
                     
                     let attributedString2 = NSAttributedString(string: "\($0.shortcode)")
                     let result2 = NSMutableAttributedString()
                     result2.append(attributedString2)
-                    
                     StoreStruct.mainResult2.append(result)
                 })
             }
@@ -1244,7 +1269,27 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             if section == 1 {
                 return 0
             } else {
-                return 34
+                if tableView == self.tableViewLists {
+                    if section == 0 {
+                        return 34
+                    } else if section == 2 {
+                        if StoreStruct.allLists.isEmpty {
+                            return 0
+                        } else {
+                            return 34
+                        }
+                    } else if section == 3 {
+                        if StoreStruct.instanceLocalToAdd.isEmpty {
+                            return 0
+                        } else {
+                            return 34
+                        }
+                    } else {
+                        return 0
+                    }
+                } else {
+                    return 34
+                }
             }
         }
     }
@@ -1502,9 +1547,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         
         guard orientation == .right else { return nil }
         
-        if indexPath.section == 0 {
+        guard indexPath.section > 1 else { return nil }
         
-        guard indexPath.row > 1 else { return nil }
+        if indexPath.section == 2 {
         
         let impact = UIImpactFeedbackGenerator(style: .medium)
         
@@ -2279,7 +2324,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.dismiss(animated: true, completion: nil)
     }
     
-    func createLoginView(newInstance:Bool = false) {
+    func createLoginView(newInstance: Bool = false) {
         self.newInstance = newInstance
         self.loginBG.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         self.loginBG.backgroundColor = Colours.tabSelected
