@@ -2497,6 +2497,28 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     
                 }
+                .action(.default("Tell Me A Joke!".localized), image: UIImage(named: "emoti")) { (action, ind) in
+                    
+                    let urlStr = "https://official-joke-api.appspot.com/jokes/random"
+                    let url: URL = URL(string: urlStr)!
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "GET"
+                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                    request.addValue("application/json", forHTTPHeaderField: "Accept")
+                    let sessionConfig = URLSessionConfiguration.default
+                    let session = URLSession(configuration: sessionConfig)
+                    let task = session.dataTask(with: request) { (data, response, err) in
+                        do {
+                            let json = try JSONDecoder().decode(Joke.self, from: data ?? Data())
+                            self.tellJoke(json)
+                        } catch {
+                            print("err")
+                        }
+                    }
+                    task.resume()
+                    
+                    
+                }
                 .action(.default("Save Yourself!".localized), image: UIImage(named: "game")) { (action, ind) in
                      
                     let vc = GameViewController()
@@ -2555,6 +2577,47 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         
+    }
+    
+    func tellJoke(_ json: Joke) {
+        DispatchQueue.main.async {
+            let z2 = Alertift.actionSheet(title: json.setup, message: json.punchline)
+                .backgroundColor(Colours.white)
+                .titleTextColor(Colours.grayDark)
+                .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                .messageTextAlignment(.left)
+                .titleTextAlignment(.left)
+                .action(.default("Tell Me Another Joke!".localized), image: UIImage(named: "emoti")) { (action, ind) in
+                    
+                    let urlStr = "https://official-joke-api.appspot.com/jokes/random"
+                    let url: URL = URL(string: urlStr)!
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "GET"
+                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                    request.addValue("application/json", forHTTPHeaderField: "Accept")
+                    let sessionConfig = URLSessionConfiguration.default
+                    let session = URLSession(configuration: sessionConfig)
+                    let task = session.dataTask(with: request) { (data, response, err) in
+                        do {
+                            let json = try JSONDecoder().decode(Joke.self, from: data ?? Data())
+                            self.tellJoke(json)
+                        } catch {
+                            print("err")
+                        }
+                    }
+                    task.resume()
+                    
+                    
+                }
+                .action(.cancel("Dismiss"))
+                .finally { action, index in
+                    if action.style == .cancel {
+                        return
+                    }
+            }
+            z2.popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.contentView ?? self.view)
+            z2.show(on: self)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

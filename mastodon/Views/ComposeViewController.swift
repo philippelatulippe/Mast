@@ -2452,6 +2452,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             StoreStruct.caption3 = ""
             StoreStruct.caption4 = ""
             
+            StoreStruct.savedComposeText = ""
+            UserDefaults.standard.set(StoreStruct.savedComposeText, forKey: "composeSaved")
+            StoreStruct.savedInReplyText = ""
+            UserDefaults.standard.set(StoreStruct.savedInReplyText, forKey: "savedInReplyText")
             self.dismiss(animated: true, completion: nil)
         } else {
             showDraft()
@@ -3385,6 +3389,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 StoreStruct.caption3 = ""
                 StoreStruct.caption4 = ""
                 
+                StoreStruct.savedComposeText = ""
+                UserDefaults.standard.set(StoreStruct.savedComposeText, forKey: "composeSaved")
+                StoreStruct.savedInReplyText = ""
+                UserDefaults.standard.set(StoreStruct.savedInReplyText, forKey: "savedInReplyText")
                 self.dismiss(animated: true, completion: nil)
             } else {
                 self.showDraft()
@@ -3622,6 +3630,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 StoreStruct.caption3 = ""
                 StoreStruct.caption4 = ""
                 
+                StoreStruct.savedComposeText = ""
+                UserDefaults.standard.set(StoreStruct.savedComposeText, forKey: "composeSaved")
+                StoreStruct.savedInReplyText = ""
+                UserDefaults.standard.set(StoreStruct.savedInReplyText, forKey: "savedInReplyText")
                 self.dismiss(animated: true, completion: nil)
                 
             }
@@ -3633,6 +3645,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 StoreStruct.caption3 = ""
                 StoreStruct.caption4 = ""
                 
+                StoreStruct.savedComposeText = ""
+                UserDefaults.standard.set(StoreStruct.savedComposeText, forKey: "composeSaved")
+                StoreStruct.savedInReplyText = ""
+                UserDefaults.standard.set(StoreStruct.savedInReplyText, forKey: "savedInReplyText")
                 self.dismiss(animated: true, completion: nil)
             }
             .action(.cancel("Dismiss")) { (action, ind) in

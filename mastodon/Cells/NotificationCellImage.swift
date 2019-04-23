@@ -95,13 +95,13 @@ class NotificationCellImage: SwipeTableViewCell {
         warningB.titleLabel?.font = UIFont.boldSystemFont(ofSize: Colours.fontSize3)
         warningB.titleLabel?.numberOfLines = 0
         warningB.layer.masksToBounds = true
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = warningB.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.isUserInteractionEnabled = false
-        warningB.addSubview(blurEffectView)
-        warningB.sendSubviewToBack(blurEffectView)
+//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = warningB.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        blurEffectView.isUserInteractionEnabled = false
+//        warningB.addSubview(blurEffectView)
+//        warningB.sendSubviewToBack(blurEffectView)
         
         userName.numberOfLines = 0
         toot.numberOfLines = 0
@@ -677,7 +677,7 @@ class NotificationCellImage: SwipeTableViewCell {
         if (UserDefaults.standard.object(forKey: "senseTog") == nil) || (UserDefaults.standard.object(forKey: "senseTog") as! Int == 0) {
             
             if status.status?.reblog?.sensitive ?? false || status.status?.sensitive ?? false {
-                warningB.backgroundColor = Colours.clear
+                warningB.backgroundColor = Colours.tabUnselected
                 
                 let z = status.status?.reblog?.spoilerText ?? status.status?.spoilerText ?? ""
                 var zz = "Sensitive Content"
@@ -685,7 +685,7 @@ class NotificationCellImage: SwipeTableViewCell {
                     zz = z
                 }
                 warningB.setTitle("\(zz)", for: .normal)
-                warningB.setTitleColor(Colours.white, for: .normal)
+                warningB.setTitleColor(Colours.grayDark.withAlphaComponent(0.6), for: .normal)
                 warningB.addTarget(self, action: #selector(self.didTouchWarning), for: .touchUpInside)
                 warningB.alpha = 1
             } else {

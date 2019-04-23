@@ -795,6 +795,7 @@
 		53EBE6B52220030A000D007E /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBE6B42220030A000D007E /* UIImageColors.swift */; };
 		53EBE6BB22283FF9000D007E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBE6BA22283FF9000D007E /* SearchViewController.swift */; };
 		53EBE6BD222E7C4D000D007E /* Polls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBE6BC222E7C4D000D007E /* Polls.swift */; };
+		53F4C060226E1F27002D5BDF /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F4C05F226E1F27002D5BDF /* Joke.swift */; };
 		7806850921CC222F00072C41 /* ProCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7806850821CC222F00072C41 /* ProCells.swift */; };
 		7806850B21CC227100072C41 /* CollectionProCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7806850A21CC227100072C41 /* CollectionProCells.swift */; };
 		A9D80EE721B84B3900020ECE /* AddInstanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D80EE621B84B3900020ECE /* AddInstanceCell.swift */; };
@@ -1726,6 +1727,7 @@
 		53EBE6B42220030A000D007E /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		53EBE6BA22283FF9000D007E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		53EBE6BC222E7C4D000D007E /* Polls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polls.swift; sourceTree = "<group>"; };
+		53F4C05F226E1F27002D5BDF /* Joke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joke.swift; sourceTree = "<group>"; };
 		7806850821CC222F00072C41 /* ProCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProCells.swift; sourceTree = "<group>"; };
 		7806850A21CC227100072C41 /* CollectionProCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionProCells.swift; sourceTree = "<group>"; };
 		78F6FFEAB47575DB49E46173 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3077,6 +3079,7 @@
 				5373CA752152C67F00676F3D /* Empty.swift */,
 				531CCD3622072BC500A56145 /* Filters.swift */,
 				5373CA762152C67F00676F3D /* Instance.swift */,
+				53F4C05F226E1F27002D5BDF /* Joke.swift */,
 				5373CA772152C67F00676F3D /* List.swift */,
 				5373CA782152C67F00676F3D /* LoginSettings.swift */,
 				5373CA792152C67F00676F3D /* Mention.swift */,
@@ -4289,6 +4292,7 @@
 				53E1AE21221ADFEA00A6E1E6 /* NSURLSessionExtension.swift in Sources */,
 				5373CADC2152E29700676F3D /* PlainText.swift in Sources */,
 				5373CAC12152C68000676F3D /* PaginationItem.swift in Sources */,
+				53F4C060226E1F27002D5BDF /* Joke.swift in Sources */,
 				53E1AE22221ADFEA00A6E1E6 /* ResponseExtension.swift in Sources */,
 				5320580E215D287700ED0C36 /* DKCamera.swift in Sources */,
 				535B33D0215CE9A9001A2A7F /* LikedViewController.swift in Sources */,
