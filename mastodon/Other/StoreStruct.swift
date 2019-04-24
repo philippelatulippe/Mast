@@ -157,6 +157,7 @@ class StoreStruct {
     static var markedReadIDs: [String] = []
     
     static var newdrafts: [Drafts] = []
+    static var notTypes: [NotificationType] = []
 }
 
 struct Drafts: Codable {

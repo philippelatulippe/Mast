@@ -838,7 +838,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                             return
                         }
                         
-                        if (model.status?.visibility)! == .direct {
+                        if (model.status?.visibility) ?? Visibility.private == .direct {
                             
                             let request = Timelines.conversations(range: .since(id: StoreStruct.notificationsDirect.first?.id ?? "", limit: 5000))
                             StoreStruct.client.run(request) { (statuses) in

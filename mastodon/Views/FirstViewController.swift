@@ -4676,7 +4676,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                             if stat.count > 0 {
+                                                if newestC < StoreStruct.statusesHome.count {
                                                 self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                                }
                                             }
                                             
                                             do {
@@ -4751,7 +4753,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                             if stat.count > 0 {
+                                                if newestC < StoreStruct.statusesLocal.count {
                                                 self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                                }
                                             }
                                             
                                             do {
@@ -4823,7 +4827,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     } else {
                                         if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
                                             if stat.count > 0 {
+                                                if newestC < StoreStruct.statusesFederated.count {
                                                 self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                                }
                                             }
                                             
                                             do {

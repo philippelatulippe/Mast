@@ -494,6 +494,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
         self.navigationController?.view.addSubview(settingsButton)
         
+        self.refreshCont()
+        
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
         var newoff = 45

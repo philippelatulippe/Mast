@@ -729,6 +729,8 @@
 		53BC45BC215AC8EE0092223F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45BB215AC8EE0092223F /* SettingsCell.swift */; };
 		53BC45C2215AE4F10092223F /* SettingsCellToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */; };
 		53C037B0220A2A6F0047EBC4 /* NewQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */; };
+		53E095632270B4D4008C8762 /* AllMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095622270B4D4008C8762 /* AllMediaViewController.swift */; };
+		53E095652270B7C2008C8762 /* AllImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095642270B7C2008C8762 /* AllImagesCell.swift */; };
 		53E1ADFD221AB82200A6E1E6 /* CrownAttributes+Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE2221AB82100A6E1E6 /* CrownAttributes+Sizes.swift */; };
 		53E1ADFE221AB82200A6E1E6 /* CrownAttributes+ScrollAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE3221AB82100A6E1E6 /* CrownAttributes+ScrollAxis.swift */; };
 		53E1ADFF221AB82200A6E1E6 /* CrownAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE4221AB82100A6E1E6 /* CrownAttributes.swift */; };
@@ -1663,6 +1665,8 @@
 		53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellToggle.swift; sourceTree = "<group>"; };
 		53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQRViewController.swift; sourceTree = "<group>"; };
 		53D14D9322183D330037C865 /* mastodon-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mastodon-Bridging-Header.h"; sourceTree = "<group>"; };
+		53E095622270B4D4008C8762 /* AllMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMediaViewController.swift; sourceTree = "<group>"; };
+		53E095642270B7C2008C8762 /* AllImagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllImagesCell.swift; sourceTree = "<group>"; };
 		53E1ADE2221AB82100A6E1E6 /* CrownAttributes+Sizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+Sizes.swift"; sourceTree = "<group>"; };
 		53E1ADE3221AB82100A6E1E6 /* CrownAttributes+ScrollAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+ScrollAxis.swift"; sourceTree = "<group>"; };
 		53E1ADE4221AB82100A6E1E6 /* CrownAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownAttributes.swift; sourceTree = "<group>"; };
@@ -2951,6 +2955,7 @@
 				5373CB4721565FFB00676F3D /* DetailViewController.swift */,
 				53EBE6BA22283FF9000D007E /* SearchViewController.swift */,
 				5315ECE721FE1A0B00A3F1A9 /* ScheduledStatusesViewController.swift */,
+				53E095622270B4D4008C8762 /* AllMediaViewController.swift */,
 				5373CB492156602900676F3D /* ComposeViewController.swift */,
 				5351B98D2167ADF400002069 /* NewListViewController.swift */,
 				539385852172A782002444FC /* NewProfileViewController.swift */,
@@ -3016,6 +3021,7 @@
 				5352D0C3215E6A3500901B60 /* CollectionAppCell.swift */,
 				5329F3872174D0B900C4A23C /* ColourCells.swift */,
 				5329F3892174D0CB00C4A23C /* CollectionColourCell.swift */,
+				53E095642270B7C2008C8762 /* AllImagesCell.swift */,
 				7806850821CC222F00072C41 /* ProCells.swift */,
 				7806850A21CC227100072C41 /* CollectionProCells.swift */,
 				A9D80EE621B84B3900020ECE /* AddInstanceCell.swift */,
@@ -4210,6 +4216,7 @@
 				53E1AE20221ADFEA00A6E1E6 /* SwiftLinkPreview.swift in Sources */,
 				5373CABA2152C68000676F3D /* Report.swift in Sources */,
 				A9D80EED21B8F27A00020ECE /* InstanceData.swift in Sources */,
+				53E095632270B4D4008C8762 /* AllMediaViewController.swift in Sources */,
 				531B420D224E1AA100D1B132 /* DMFeedCell.swift in Sources */,
 				5315ECE421FE13CB00A3F1A9 /* ScheduledStatus.swift in Sources */,
 				5317C7BD21DA334500746197 /* GraphPointAnimation.swift in Sources */,
@@ -4404,6 +4411,7 @@
 				531E0F93216E2BA2003E8890 /* NVActivityIndicatorAnimationLineScalePulseOut.swift in Sources */,
 				5373CACE2152C68000676F3D /* Login.swift in Sources */,
 				536A4FBE216B73D600A3D483 /* BulletinInterfaceFactory.swift in Sources */,
+				53E095652270B7C2008C8762 /* AllImagesCell.swift in Sources */,
 				531FC04C223AEBD6000A0EC6 /* Youtube.swift in Sources */,
 				5329F3862174B31400C4A23C /* InstanceViewController.swift in Sources */,
 				535B33D2215CF0AD001A2A7F /* MutedViewController.swift in Sources */,

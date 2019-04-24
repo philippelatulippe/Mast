@@ -1223,6 +1223,12 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 return nil
             } else {
                 title.text = "Recent Media".localized
+                let moreB = UIButton()
+                moreB.frame = CGRect(x: self.view.bounds.width - 50, y: 5, width: 40, height: 40)
+                moreB.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.grayDark), for: .normal)
+                moreB.backgroundColor = UIColor.clear
+                moreB.addTarget(self, action: #selector(self.tapMoreImages), for: .touchUpInside)
+                vw.addSubview(moreB)
             }
         } else if section == 2 {
             segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(10), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
@@ -1243,6 +1249,18 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         vw.backgroundColor = Colours.white
         
         return vw
+    }
+    
+    @objc func tapMoreImages() {
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let imp = UIImpactFeedbackGenerator()
+            imp.impactOccurred()
+        }
+        
+        let controller = AllMediaViewController()
+        controller.profileStatusesHasImage = self.profileStatusesHasImage
+        controller.chosenUser = self.chosenUser
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
