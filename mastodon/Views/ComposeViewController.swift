@@ -1234,10 +1234,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             minimumLineSpacing: 5,
             sectionInset: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         )
+        layout0.scrollDirection = .horizontal
+        
         self.collectionView = UICollectionView(frame: CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60)), collectionViewLayout: layout0)
         self.collectionView.backgroundColor = Colours.clear
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.collectionView.showsHorizontalScrollIndicator = false
         self.collectionView.register(AllEmotiCell.self, forCellWithReuseIdentifier: "AllEmotiCell")
         self.bgView.addSubview(self.collectionView)
         self.collectionView.reloadData()
@@ -1482,7 +1485,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             let z = CGFloat(y)/CGFloat(x)
             return CGSize(width: z - 7.5, height: z - 7.5)
         } else {
-            return CGSize(width: 0, height: 0)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                return CGSize(width: 290, height: 250)
+            } else {
+                return CGSize(width: 190, height: 150)
+            }
         }
     }
     
@@ -3490,7 +3497,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         self.tableViewASCII.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60))
         
-        self.collectionView.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60))
+        self.collectionView.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 90))
     }
     
     
@@ -3715,7 +3722,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if tableView == self.tableViewDrafts || tableView == self.tableViewASCII {
+        if tableView == self.tableViewDrafts {
             return 34
         } else {
             return 0
@@ -3729,8 +3736,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         title.frame = CGRect(x: 15, y: 2, width: self.view.bounds.width, height: 24)
         if tableView == self.tableView {
             return nil
-        } else if tableView == self.tableViewASCII {
-            title.text = "ASCII Text Faces".localized
         } else {
             if StoreStruct.newdrafts.isEmpty {
                 title.text = "No Drafts".localized
