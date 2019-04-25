@@ -59,7 +59,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var visibility: Visibility = .public
     var tableView = UITableView()
     var tableViewASCII = UITableView()
-    var tableViewEmoti = UITableView()
     var tableViewDrafts = UITableView()
     var theReg = ""
     let imag = UIImagePickerController()
@@ -78,6 +77,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     let recognizer = SFSpeechRecognizer(locale: Locale.current)
     var emotiLab = UIButton()
     var currentEmot = ""
+    var collectionView: UICollectionView!
     
     func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem) {
         print(item.fixedHeightStillImage)
@@ -1228,20 +1228,19 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableViewASCII.reloadData()
         self.bgView.addSubview(self.tableViewASCII)
         
-        self.tableViewEmoti.register(UITableViewCell.self, forCellReuseIdentifier: "TweetCellEmoti")
-        self.tableViewEmoti.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60))
-        self.tableViewEmoti.alpha = 0
-        self.tableViewEmoti.delegate = self
-        self.tableViewEmoti.dataSource = self
-        self.tableViewEmoti.separatorStyle = .singleLine
-        self.tableViewEmoti.backgroundColor = Colours.clear
-        self.tableViewEmoti.separatorColor = Colours.clear
-        self.tableViewEmoti.layer.masksToBounds = true
-        self.tableViewEmoti.estimatedRowHeight = UITableView.automaticDimension
-        self.tableViewEmoti.rowHeight = UITableView.automaticDimension
-        self.tableViewEmoti.reloadData()
-        self.bgView.addSubview(self.tableViewEmoti)
-        self.tableViewEmoti.reloadData()
+        let layout0 = ColumnFlowLayout(
+            cellsPerRow: 8,
+            minimumInteritemSpacing: 5,
+            minimumLineSpacing: 5,
+            sectionInset: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        )
+        self.collectionView = UICollectionView(frame: CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60)), collectionViewLayout: layout0)
+        self.collectionView.backgroundColor = Colours.clear
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.register(AllEmotiCell.self, forCellWithReuseIdentifier: "AllEmotiCell")
+        self.bgView.addSubview(self.collectionView)
+        self.collectionView.reloadData()
         
         self.textField.frame = CGRect(x: 20, y: 0, width: self.view.bounds.width - 40, height: 50)
         self.textField.backgroundColor = UIColor.clear
@@ -1476,11 +1475,41 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         textView.addGestureRecognizer(swipeDown)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.collectionView {
+            let x = 8
+            let y = self.view.bounds.width
+            let z = CGFloat(y)/CGFloat(x)
+            return CGSize(width: z - 7.5, height: z - 7.5)
+        } else {
+            return CGSize(width: 0, height: 0)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.images.count
+        if collectionView == self.collectionView {
+            return StoreStruct.mainResult1.count
+        } else {
+            return self.images.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == self.collectionView {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AllEmotiCell", for: indexPath) as! AllEmotiCell
+            
+            if StoreStruct.mainResult1.isEmpty {} else {
+                cell.configure()
+                cell.emoti.attributedText = StoreStruct.mainResult1[indexPath.item]
+                cell.emoti.isUserInteractionEnabled = false
+            }
+            
+            cell.backgroundColor = Colours.clear
+            
+            return cell
+            
+        } else {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionProfileCellc", for: indexPath) as! CollectionProfileCell
         if self.images.count > 0 {
         cell.configure()
@@ -1516,6 +1545,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             
             return cell
         }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -1523,6 +1553,21 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             let selection = UISelectionFeedbackGenerator()
             selection.selectionChanged()
         }
+        
+        if collectionView == self.collectionView {
+            if self.textView.text == "" {
+                self.textView.text = ":\(StoreStruct.mainResult2[indexPath.item].string.lowercased().replacingOccurrences(of: "￼    ", with: "")):"
+            } else {
+                if self.textView.text.last == " " {
+                    self.textView.text = "\(self.textView.text ?? ""):\(StoreStruct.mainResult2[indexPath.item].string.lowercased().replacingOccurrences(of: "￼    ", with: "")):"
+                } else {
+                    self.textView.text = "\(self.textView.text ?? "") :\(StoreStruct.mainResult2[indexPath.item].string.lowercased().replacingOccurrences(of: "￼    ", with: "")):"
+                }
+            }
+            
+            self.textView.becomeFirstResponder()
+            self.bringBackDrawer()
+        } else {
         
         if isVidText[indexPath.row] != "" {
             self.isGifVid = true
@@ -1567,6 +1612,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.selectedImage4.layer.masksToBounds = true
         }
         
+        }
     }
     
     
@@ -1970,7 +2016,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.galPickButton.alpha = 1
             self.tableViewDrafts.alpha = 0
             self.tableViewASCII.alpha = 0
-            self.tableViewEmoti.alpha = 0
+            self.collectionView.alpha = 0
         })
         
         
@@ -1995,7 +2041,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.cameraCollectionView.alpha = 0
             self.tableViewDrafts.alpha = 0
             self.tableViewASCII.alpha = 0
-            self.tableViewEmoti.alpha = 0
+            self.collectionView.alpha = 0
         })
         
         
@@ -2059,7 +2105,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.textField.alpha = 1
             self.tableViewDrafts.alpha = 0
             self.tableViewASCII.alpha = 0
-            self.tableViewEmoti.alpha = 0
+            self.collectionView.alpha = 0
         })
     }
     
@@ -2078,7 +2124,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.cameraCollectionView.alpha = 0
             self.tableViewDrafts.alpha = 0
             self.tableViewASCII.alpha = 0
-            self.tableViewEmoti.alpha = 0
+            self.collectionView.alpha = 0
         })
         
         Alertift.actionSheet(title: nil, message: self.prevTextReply)
@@ -2295,7 +2341,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 }
                 
                 springWithDelay(duration: 0.6, delay: 0, animations: {
-                    self.tableViewEmoti.alpha = 1
+                    self.collectionView.alpha = 1
                 })
             }
             .action(.default("Sentiment Analysis"), image: UIImage(named: "emoti2")) { (action, ind) in
@@ -2433,7 +2479,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.textField.alpha = 0
             self.tableViewDrafts.alpha = 0
             self.tableViewASCII.alpha = 0
-            self.tableViewEmoti.alpha = 0
+            self.collectionView.alpha = 0
         })
     }
     
@@ -3444,7 +3490,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         self.tableViewASCII.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60))
         
-        self.tableViewEmoti.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60))
+        self.collectionView.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60))
     }
     
     
@@ -3669,7 +3715,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if tableView == self.tableViewDrafts || tableView == self.tableViewASCII || tableView == self.tableViewEmoti {
+        if tableView == self.tableViewDrafts || tableView == self.tableViewASCII {
             return 34
         } else {
             return 0
@@ -3685,12 +3731,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             return nil
         } else if tableView == self.tableViewASCII {
             title.text = "ASCII Text Faces".localized
-        } else if tableView == self.tableViewEmoti {
-            if StoreStruct.mainResult.isEmpty {
-                title.text = "No Instance Emoticons".localized
-            } else {
-                title.text = "Instance Emoticons".localized
-            }
         } else {
             if StoreStruct.newdrafts.isEmpty {
                 title.text = "No Drafts".localized
@@ -3712,8 +3752,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             return StoreStruct.statusSearchUser.count
         } else if tableView == self.tableViewASCII {
             return StoreStruct.ASCIIFace.count
-        } else if tableView == self.tableViewEmoti {
-            return StoreStruct.mainResult.count
         } else {
             return StoreStruct.newdrafts.count
         }
@@ -3749,26 +3787,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 let backgroundView = UIView()
                 backgroundView.backgroundColor = Colours.clear
                 cell.selectedBackgroundView = backgroundView
-            
-            cell.textLabel?.textColor = UIColor.white
-            cell.textLabel?.numberOfLines = 0
-            cell.backgroundColor = Colours.clear
-            return cell
-            
-        } else if tableView == self.tableViewEmoti {
-            
-            let cell = tableViewEmoti.dequeueReusableCell(withIdentifier: "TweetCellEmoti", for: indexPath) 
-            
-            
-                cell.textLabel?.attributedText = StoreStruct.mainResult[indexPath.row]
-            
-            
-            
-            cell.textLabel?.textAlignment = .left
-            
-            let backgroundView = UIView()
-            backgroundView.backgroundColor = Colours.clear
-            cell.selectedBackgroundView = backgroundView
             
             cell.textLabel?.textColor = UIColor.white
             cell.textLabel?.numberOfLines = 0
@@ -3932,22 +3950,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.textView.text = "\(self.textView.text ?? "")\(StoreStruct.ASCIIFace[indexPath.row])"
                 } else {
                     self.textView.text = "\(self.textView.text ?? "") \(StoreStruct.ASCIIFace[indexPath.row])"
-                }
-            }
-            
-            self.textView.becomeFirstResponder()
-            self.bringBackDrawer()
-            
-        } else if tableView == self.tableViewEmoti {
-            self.tableViewEmoti.deselectRow(at: indexPath, animated: true)
-            
-            if self.textView.text == "" {
-                self.textView.text = ":\(StoreStruct.emotiFace[indexPath.row].shortcode):"
-            } else {
-                if self.textView.text.last == " " {
-                    self.textView.text = "\(self.textView.text ?? ""):\(StoreStruct.emotiFace[indexPath.row].shortcode):"
-                } else {
-                    self.textView.text = "\(self.textView.text ?? "") :\(StoreStruct.emotiFace[indexPath.row].shortcode):"
                 }
             }
             

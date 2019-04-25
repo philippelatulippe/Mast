@@ -731,6 +731,7 @@
 		53C037B0220A2A6F0047EBC4 /* NewQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */; };
 		53E095632270B4D4008C8762 /* AllMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095622270B4D4008C8762 /* AllMediaViewController.swift */; };
 		53E095652270B7C2008C8762 /* AllImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095642270B7C2008C8762 /* AllImagesCell.swift */; };
+		53E095672271AFB8008C8762 /* AllEmotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095662271AFB8008C8762 /* AllEmotiCell.swift */; };
 		53E1ADFD221AB82200A6E1E6 /* CrownAttributes+Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE2221AB82100A6E1E6 /* CrownAttributes+Sizes.swift */; };
 		53E1ADFE221AB82200A6E1E6 /* CrownAttributes+ScrollAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE3221AB82100A6E1E6 /* CrownAttributes+ScrollAxis.swift */; };
 		53E1ADFF221AB82200A6E1E6 /* CrownAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1ADE4221AB82100A6E1E6 /* CrownAttributes.swift */; };
@@ -1667,6 +1668,7 @@
 		53D14D9322183D330037C865 /* mastodon-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mastodon-Bridging-Header.h"; sourceTree = "<group>"; };
 		53E095622270B4D4008C8762 /* AllMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMediaViewController.swift; sourceTree = "<group>"; };
 		53E095642270B7C2008C8762 /* AllImagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllImagesCell.swift; sourceTree = "<group>"; };
+		53E095662271AFB8008C8762 /* AllEmotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEmotiCell.swift; sourceTree = "<group>"; };
 		53E1ADE2221AB82100A6E1E6 /* CrownAttributes+Sizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+Sizes.swift"; sourceTree = "<group>"; };
 		53E1ADE3221AB82100A6E1E6 /* CrownAttributes+ScrollAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CrownAttributes+ScrollAxis.swift"; sourceTree = "<group>"; };
 		53E1ADE4221AB82100A6E1E6 /* CrownAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownAttributes.swift; sourceTree = "<group>"; };
@@ -3022,6 +3024,7 @@
 				5329F3872174D0B900C4A23C /* ColourCells.swift */,
 				5329F3892174D0CB00C4A23C /* CollectionColourCell.swift */,
 				53E095642270B7C2008C8762 /* AllImagesCell.swift */,
+				53E095662271AFB8008C8762 /* AllEmotiCell.swift */,
 				7806850821CC222F00072C41 /* ProCells.swift */,
 				7806850A21CC227100072C41 /* CollectionProCells.swift */,
 				A9D80EE621B84B3900020ECE /* AddInstanceCell.swift */,
@@ -4194,6 +4197,7 @@
 				531CCD682207457400A56145 /* NewFilterViewController.swift in Sources */,
 				5317C7B521DA334500746197 /* LineDrawingLayer.swift in Sources */,
 				53E826E42236C32D00153721 /* ToppingButton.swift in Sources */,
+				53E095672271AFB8008C8762 /* AllEmotiCell.swift in Sources */,
 				A9D80EEF21BB154200020ECE /* AccountExtension.swift in Sources */,
 				5316C895219D94A00003AB97 /* GiphyMultipleGIFResponse.swift in Sources */,
 				5373CAF62152EDB700676F3D /* Swipeable.swift in Sources */,

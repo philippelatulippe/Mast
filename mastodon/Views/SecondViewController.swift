@@ -16,6 +16,7 @@ import ReactiveSSE
 import ReactiveSwift
 import AVKit
 import AVFoundation
+import Disk
 
 class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate {
     
@@ -629,10 +630,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self?.player.play()
         }
         
-        if (UserDefaults.standard.object(forKey: "nottypes") != nil) {
-            StoreStruct.notTypes = (UserDefaults.standard.object(forKey: "nottypes") as! [NotificationType])
+        do {
+            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)nottypes.json", from: .documents, as: [NotificationType].self)
+        } catch {
+            print("Couldn't load")
         }
-        
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -1804,13 +1806,16 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     }
     
     func filterNots() {
-        UserDefaults.standard.set(StoreStruct.notTypes, forKey: "nottypes")
+        do {
+            try Disk.save(StoreStruct.notTypes, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)nottypes.json")
+        } catch {
+            print("Couldn't save")
+        }
         let request = Notifications.all(range: .min(id: StoreStruct.notifications.first?.id ?? "", limit: 5000), typesToExclude: StoreStruct.notTypes)
         DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     StoreStruct.notifications = stat
-                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     DispatchQueue.main.async {
                         StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
                         StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
