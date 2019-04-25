@@ -5060,7 +5060,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         
                         if self.currentIndex == 1 {
                             if newestC <= 0 {} else {
-                                self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                                self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
                             }
                         }
                             
