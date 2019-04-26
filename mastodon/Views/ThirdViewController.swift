@@ -1034,7 +1034,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         
-        if self.fromOtherUser && self.isPeeking == false && self.userIDtoUse != StoreStruct.currentUser.id {
+        if self.fromOtherUser && (self.isPeeking == false) && (self.userIDtoUse != StoreStruct.currentUser.id) {
             
             let request00 = Accounts.allEndorsements()
             StoreStruct.client.run(request00) { (statuses) in

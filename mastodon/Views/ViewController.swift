@@ -812,6 +812,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     
     func streamDataDirect() {
+        if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
         if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
             
             var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
@@ -866,6 +867,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 print("got some data: \(data.count)")
             }
             nsocket.connect()
+        }
         }
     }
     

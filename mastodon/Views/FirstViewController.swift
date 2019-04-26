@@ -1576,6 +1576,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     
     func streamDataHome() {
+        if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
         if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
             self.hStream = true
             
@@ -1676,9 +1677,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
             socket.connect()
         }
+        }
     }
     
     func streamDataLocal() {
+        if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
         if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
             self.lStream = true
             
@@ -1779,9 +1782,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
             lsocket.connect()
         }
+        }
     }
     
     func streamDataFed() {
+        if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
         if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
             self.fStream = true
             
@@ -1890,6 +1895,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 print("got some data: \(data.count)")
             }
             fsocket.connect()
+        }
         }
     }
     
@@ -4998,7 +5004,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 if stat.count == 0 {
                                     
                                 } else {
-                                    if StoreStruct.statusesHome.count == 0 || stat.count == 0 {
+                                    if StoreStruct.statusesHome.count == 0 || stat.count == 0 || StoreStruct.statusesHome.count == stat.count {
                                         
                                     } else {
                                         self.tableView.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
@@ -5075,7 +5081,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 if stat.count == 0 {
                                     
                                 } else {
-                                    if StoreStruct.statusesLocal.count == 0 || stat.count == 0 {
+                                    if StoreStruct.statusesLocal.count == 0 || stat.count == 0 || StoreStruct.statusesLocal.count == stat.count{
                                         
                                     } else {
                                         self.tableViewL.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
@@ -5152,7 +5158,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 if stat.count == 0 {
                                     
                                 } else {
-                                    if StoreStruct.statusesFederated.count == 0 || stat.count == 0 {
+                                    if StoreStruct.statusesFederated.count == 0 || stat.count == 0 || StoreStruct.statusesFederated.count == stat.count{
                                         
                                     } else {
                                         self.tableViewF.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
