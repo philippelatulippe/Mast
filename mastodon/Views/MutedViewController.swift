@@ -297,7 +297,7 @@ class MutedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
             }
             more.backgroundColor = Colours.white
-            more.image = UIImage(named: "more2")
+            more.image = UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected)
             more.transitionDelegate = ScaleTransition.default
             more.textColor = Colours.tabUnselected
             return [more]

@@ -292,10 +292,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 moreButton.layer.cornerRadius = 20
                 moreButton.layer.masksToBounds = true
                 
-                replyButton.setImage(UIImage(named: "reply0"), for: .normal)
-                moreButton.setImage(UIImage(named: "more2"), for: .normal)
-                likeButton.setImage(UIImage(named: "like0"), for: .normal)
-                boostButton.setImage(UIImage(named: "boost0"), for: .normal)
+                replyButton.setImage(UIImage(named: "reply0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+                moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+                likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+                boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
                 
                 replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
                 likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
@@ -556,9 +556,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    self.allPrevious = (stat.ancestors)
+                    self.allReplies = (stat.descendants)
                     DispatchQueue.main.async {
-                        self.allPrevious = (stat.ancestors)
-                        self.allReplies = (stat.descendants)
                         self.tableView.reloadData()
                         if self.allPrevious.count == 0 {} else {
                             self.detailPrev.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
@@ -2774,11 +2774,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             if self.mainStatus[0].visibility == .direct {
                 if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell2 {
-                    ce.likeButton.setImage(UIImage(named: "like0"), for: .normal)
+                    ce.likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
                 }
             } else {
                 if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell {
-                    ce.likeButton.setImage(UIImage(named: "like0"), for: .normal)
+                    ce.likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
                 }
             }
             
@@ -2850,7 +2850,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         if self.mainStatus[0].reblog?.reblogged ?? self.mainStatus[0].reblogged ?? false || StoreStruct.allBoosts.contains(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id) {
             if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell {
-            ce.boostButton.setImage(UIImage(named: "boost0"), for: .normal)
+            ce.boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
             }
             
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -5372,7 +5372,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
             more.backgroundColor = Colours.white
-            more.image = UIImage(named: "more2")
+            more.image = UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected)
             more.transitionDelegate = ScaleTransition.default
             more.textColor = Colours.tabUnselected
             return [more]
@@ -5455,8 +5455,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let request = Statuses.context(id: self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    self.allReplies = (stat.descendants)
                     DispatchQueue.main.async {
-                        self.allReplies = (stat.descendants)
                         self.tableView.reloadData()
                     }
                 }

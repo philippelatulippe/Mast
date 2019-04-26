@@ -234,7 +234,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.ai.startAnimating()
         
         
-        if (UserDefaults.standard.object(forKey: "biometricsnot") == nil) || (UserDefaults.standard.object(forKey: "biometricsnot") as! Int == 0) {} else {
+        if (UserDefaults.standard.object(forKey: "biometricsnotdm") == nil) || (UserDefaults.standard.object(forKey: "biometricsnotdm") as! Int == 0) {} else {
             self.biometricAuthenticationClicked(self)
         }
     }
@@ -1647,7 +1647,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     }
                 }
                 more.backgroundColor = Colours.white
-                more.image = UIImage(named: "more2")
+                more.image = UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected)
                 more.transitionDelegate = ScaleTransition.default
                 more.textColor = Colours.tabUnselected
                 return [more]
