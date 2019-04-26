@@ -291,15 +291,9 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
             .messageTextAlignment(.left)
             .titleTextAlignment(.left)
             .action(.default("Delete".localized), image: UIImage(named: "block")) { (action, ind) in
-                 
                 
                 let request = Statuses.deleteScheduled(id: self.statuses[indexPath.row].id)
                 StoreStruct.client.run(request) { (statuses) in
-                     
-//                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//                        let notification = UINotificationFeedbackGenerator()
-//                        notification.notificationOccurred(.success)
-//                    }
                     let statusAlert = StatusAlert()
                     statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
                     statusAlert.title = "Deleted".localized
@@ -321,6 +315,14 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
                     }
                     
                 }
+                
+            }
+            .action(.default("Delete and Redraft".localized), image: UIImage(named: "block")) { (action, ind) in
+                
+                let controller = ComposeViewController()
+                controller.idToDelSc = self.statuses[indexPath.row].id
+                controller.isScheduled = true
+                self.present(controller, animated: true, completion: nil)
                 
             }
             .action(.cancel("Dismiss"))

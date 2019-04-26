@@ -54,6 +54,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var prevTextReply: String? = nil
     var filledTextFieldText = ""
     var idToDel = ""
+    var idToDelSc = ""
     var mediaIDs: [Media] = []
     var isSensitive = false
     var visibility: Visibility = .public
@@ -2534,6 +2535,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         } else {
             let request = Statuses.delete(id: idToDel)
             StoreStruct.client.run(request) { (statuses) in
+                
+            }
+            
+            let request2 = Statuses.deleteScheduled(id: idToDelSc)
+            StoreStruct.client.run(request2) { (statuses) in
                 
             }
         }
