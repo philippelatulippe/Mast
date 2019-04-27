@@ -1424,13 +1424,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.view.addSubview(self.closeButton)
         
         countLabel.text = "\(StoreStruct.maxChars)"
-        countLabel.textColor = Colours.gray.withAlphaComponent(0.65)
+        countLabel.textColor = Colours.grayDark.withAlphaComponent(0.38)
         countLabel.textAlignment = .center
         self.view.addSubview(countLabel)
         
         tootLabel.setTitle("Toot", for: .normal)
         tootLabel.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
-        tootLabel.setTitleColor(Colours.gray.withAlphaComponent(0.65), for: .normal)
+        tootLabel.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
         tootLabel.contentHorizontalAlignment = .right
         tootLabel.addTarget(self, action: #selector(didTouchUpInsideTootButton), for: .touchUpInside)
         self.view.addSubview(tootLabel)
@@ -2390,7 +2390,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.isScheduled = true
                 }
             }
-            .action(.default("Compose Toot from Camera"), image: UIImage(named: "toot")) { (action, ind) in
+            .action(.default("Compose Toot from Camera"), image: UIImage(named: "camcomp")) { (action, ind) in
                  
                 self.cameraText()
             }
@@ -3556,17 +3556,17 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         } else if Int(countLabel.text!)! < 20 {
             countLabel.textColor = UIColor.orange
         } else {
-            countLabel.textColor = Colours.gray.withAlphaComponent(0.65)
+            countLabel.textColor = Colours.grayDark.withAlphaComponent(0.38)
         }
         
         if (textView.text?.count)! > 0 {
             if newCount < 0 {
-                tootLabel.setTitleColor(Colours.gray.withAlphaComponent(0.65), for: .normal)
+                tootLabel.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
             } else {
                 tootLabel.setTitleColor(Colours.tabSelected, for: .normal)
             }
         } else {
-            tootLabel.setTitleColor(Colours.gray.withAlphaComponent(0.65), for: .normal)
+            tootLabel.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
         }
         
         

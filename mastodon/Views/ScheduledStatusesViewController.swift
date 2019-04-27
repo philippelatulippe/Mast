@@ -175,7 +175,7 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduledCell", for: indexPath) as! ScheduledCell
                 cell.configure(self.statuses[indexPath.row])
                 cell.backgroundColor = Colours.white
-                cell.userName.textColor = Colours.black.withAlphaComponent(0.6)
+                cell.userName.textColor = Colours.grayDark.withAlphaComponent(0.38)
                 cell.toot.textColor = Colours.black
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.white
@@ -185,7 +185,7 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduledCellImage", for: indexPath) as! ScheduledCellImage
                 cell.configure(self.statuses[indexPath.row])
                 cell.backgroundColor = Colours.white
-                cell.userName.textColor = Colours.black.withAlphaComponent(0.6)
+                cell.userName.textColor = Colours.grayDark.withAlphaComponent(0.38)
                 cell.toot.textColor = Colours.black
                 cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
                 cell.mainImageView.tag = indexPath.row

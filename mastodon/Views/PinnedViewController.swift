@@ -287,8 +287,8 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
             cell.backgroundColor = Colours.white
             cell.userName.textColor = Colours.black
-            cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
-            cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+            cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+            cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
             cell.toot.textColor = Colours.black
             cell.toot.handleMentionTap { (string) in
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -400,8 +400,8 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     cell.smallImage4.tag = indexPath.row
             cell.backgroundColor = Colours.white
             cell.userName.textColor = Colours.black
-            cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
-            cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+            cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+            cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
             cell.toot.textColor = Colours.black
             cell.mainImageView.backgroundColor = Colours.white
             cell.mainImageViewBG.backgroundColor = Colours.white

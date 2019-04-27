@@ -30,12 +30,12 @@ class AllImagesCell: UICollectionViewCell {
     public func configure() {
         self.bgImage.backgroundColor = Colours.clear
         self.bgImage.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
-        self.bgImage.layer.cornerRadius = 12
+        self.bgImage.layer.cornerRadius = 10
         contentView.addSubview(bgImage)
         
         self.image.backgroundColor = UIColor.clear
         self.image.frame = CGRect(x: 0, y: 0, width: contentView.frame.size.width, height: contentView.frame.size.height)
-        self.image.layer.cornerRadius = 12
+        self.image.layer.cornerRadius = 10
         contentView.addSubview(image)
         
         imageCountTag.isUserInteractionEnabled = false

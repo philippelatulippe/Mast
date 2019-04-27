@@ -18,10 +18,19 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
     var profileStatusesHasImage: [Status] = []
     var chosenUser: Account!
     var player = AVPlayer()
+    var colCount = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colours.white
+        
+        if (UserDefaults.standard.object(forKey: "medcolgrid") == nil) || (UserDefaults.standard.object(forKey: "medcolgrid") as! Int == 0) {
+            self.colCount = 3
+        } else if (UserDefaults.standard.object(forKey: "medcolgrid") as! Int == 1) {
+            self.colCount = 2
+        } else {
+            self.colCount = 4
+        }
         
         self.fetchMoreImages()
         
@@ -42,7 +51,7 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
         let he = self.view.bounds.height
         
         let layout = ColumnFlowLayout(
-            cellsPerRow: 3,
+            cellsPerRow: self.colCount,
             minimumInteritemSpacing: 5,
             minimumLineSpacing: 5,
             sectionInset: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
@@ -61,7 +70,7 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let x = 3
+        let x = self.colCount
         let y = self.view.bounds.width
         let z = CGFloat(y)/CGFloat(x)
         return CGSize(width: z - 7.5, height: z - 7.5)
@@ -82,8 +91,8 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
             let secureImageUrl = URL(string: z)!
             cell.image.pin_setImage(from: secureImageUrl)
             cell.image.contentMode = .scaleAspectFill
-            cell.layer.cornerRadius = 12
-            cell.image.layer.cornerRadius = 12
+            cell.layer.cornerRadius = 10
+            cell.image.layer.cornerRadius = 10
             cell.image.layer.masksToBounds = true
             
             if self.profileStatusesHasImage[indexPath.item].mediaAttachments[0].type == .video {

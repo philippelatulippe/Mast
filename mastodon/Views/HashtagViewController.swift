@@ -351,8 +351,8 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
             cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
             cell.userName.textColor = Colours.black
-            cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
-            cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+            cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+            cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
             cell.toot.textColor = Colours.black
             cell.toot.handleMentionTap { (string) in
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -464,8 +464,8 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                     cell.smallImage3.tag = indexPath.row
                     cell.smallImage4.tag = indexPath.row
             cell.userName.textColor = Colours.black
-            cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
-            cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+            cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+            cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
             cell.toot.textColor = Colours.black
             cell.mainImageView.backgroundColor = Colours.white
             cell.mainImageViewBG.backgroundColor = Colours.white

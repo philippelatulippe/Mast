@@ -568,13 +568,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         if item.tag == 2 && StoreStruct.currentPage == 1 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTop2"), object: nil)
         }
-        if item.tag == 3 && StoreStruct.currentPage == 2 {
+        if item.tag == 3 && StoreStruct.currentPage == 101010 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTopDM"), object: nil)
+        }
+        if item.tag == 4 && StoreStruct.currentPage == 2 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTop3"), object: nil)
         }
-        if item.tag == 3 {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "setLeft"), object: nil)
-        }
-        if item.tag == 4 {
+        if item.tag == 5 {
             
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let imp = UIImpactFeedbackGenerator()
@@ -1383,7 +1383,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     cell.profileImageView.isUserInteractionEnabled = false
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = UIColor.white
-                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
+                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                     cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                     cell.toot.textColor = UIColor.white
                     let bgColorView = UIView()
@@ -1408,7 +1408,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = UIColor.white
-                        cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
+                        cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                     cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                     cell.toot.textColor = UIColor.white
                     let bgColorView = UIView()
@@ -1430,7 +1430,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                         cell.backgroundColor = Colours.grayDark3
                         cell.userName.textColor = UIColor.white
-                        cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
+                        cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                         cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                         cell.toot.textColor = UIColor.white
                         cell.mainImageView.backgroundColor = Colours.white
@@ -1445,7 +1445,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     cell.profileImageView.tag = indexPath.row
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = UIColor.white
-                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
+                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                     cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                     cell.toot.textColor = UIColor.white
                     let bgColorView = UIView()
@@ -2234,12 +2234,14 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     
     @objc func signOutNewInstance() {
-        let loginController = ViewController()
-        loginController.loadingAdditionalInstance = true
-        loginController.createLoginView(newInstance: true)
-        self.present(loginController, animated: true, completion: {
-            loginController.textField.becomeFirstResponder()
-        })
+        DispatchQueue.main.async {
+            let loginController = ViewController()
+            loginController.loadingAdditionalInstance = true
+            loginController.createLoginView(newInstance: true)
+            self.present(loginController, animated: true, completion: {
+                loginController.textField.becomeFirstResponder()
+            })
+        }
     }
     
     
@@ -3267,7 +3269,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             self.tabDM.navigationBar.backgroundColor = Colours.white
             self.tabDM.navigationBar.barTintColor = Colours.white
             self.tabDM.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            self.tabDM.tabBarItem.tag = 2
+            self.tabDM.tabBarItem.tag = 3
             
             // Create Tab three
             self.tabThree = SAHistoryNavigationViewController(rootViewController: self.thirdView)
@@ -3288,7 +3290,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             self.tabThree.navigationBar.backgroundColor = Colours.white
             self.tabThree.navigationBar.barTintColor = Colours.white
             self.tabThree.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            self.tabThree.tabBarItem.tag = 3
+            self.tabThree.tabBarItem.tag = 4
             
             // Create Tab four
             self.tabFour = SAHistoryNavigationViewController(rootViewController: self.fourthView)
@@ -3309,7 +3311,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             self.tabFour.navigationBar.backgroundColor = Colours.white
             self.tabFour.navigationBar.barTintColor = Colours.white
             self.tabFour.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            self.tabFour.tabBarItem.tag = 4
+            self.tabFour.tabBarItem.tag = 5
             
             let viewControllerList = [self.tabOne, self.tabTwo, self.tabDM, self.tabThree, self.tabFour]
             

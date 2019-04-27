@@ -458,7 +458,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                 cell.profileImageView.isUserInteractionEnabled = false
                 cell.backgroundColor = Colours.clear
                 cell.userName.textColor = UIColor.white
-                cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
+                cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                 cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                 cell.toot.textColor = UIColor.white
                 let bgColorView = UIView()
@@ -484,7 +484,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.backgroundColor = Colours.clear
                     cell.userName.textColor = UIColor.white
-                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
+                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                     cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                     cell.toot.textColor = UIColor.white
                     cell.delegate = self
@@ -595,7 +595,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                     cell.smallImage4.tag = indexPath.row
                     cell.backgroundColor = Colours.clear
                     cell.userName.textColor = UIColor.white
-                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
+                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                     cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                     cell.toot.textColor = UIColor.white
                     cell.mainImageView.backgroundColor = Colours.white
@@ -689,7 +689,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                 cell.profileImageView.tag = indexPath.row
                 cell.backgroundColor = Colours.clear
                 cell.userName.textColor = UIColor.white
-                cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
+                cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                 cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                 cell.toot.textColor = UIColor.white
                 let bgColorView = UIView()

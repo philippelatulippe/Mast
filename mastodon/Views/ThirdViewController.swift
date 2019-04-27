@@ -3276,8 +3276,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 //cell.configure(zzz[indexPath.row])
                 cell.backgroundColor = Colours.white
                 cell.userName.textColor = Colours.black
-                cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
-                cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+                cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                 cell.toot.textColor = Colours.black
                 cell.toot.handleMentionTap { (string) in
                     // mention
@@ -3384,8 +3384,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.backgroundColor = Colours.white
                     cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
-                    cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                     cell.toot.textColor = Colours.black
                     cell.toot.handleMentionTap { (string) in
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3495,8 +3495,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
-                    cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                     cell.toot.textColor = Colours.black
                     cell.mainImageView.backgroundColor = Colours.white
                     cell.mainImageViewBG.backgroundColor = Colours.white
@@ -3609,8 +3609,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.black.withAlphaComponent(0.6), for: .normal)
-                    cell.date.textColor = Colours.black.withAlphaComponent(0.6)
+                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                     cell.toot.textColor = Colours.black
                     cell.mainImageView.backgroundColor = Colours.white
                     cell.mainImageViewBG.backgroundColor = Colours.white
@@ -5499,8 +5499,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
                         self.lastThing = stat.first?.id ?? ""
                         self.profileStatuses = self.profileStatuses + stat
+                        self.profileStatuses = self.profileStatuses.removeDuplicates()
                         DispatchQueue.main.async {
-                            self.profileStatuses = self.profileStatuses.removeDuplicates()
                             self.tableView.reloadData()
                         }
                     }
@@ -5522,8 +5522,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
                         self.lastThing = stat.first?.id ?? ""
                         self.profileStatuses2 = self.profileStatuses2 + stat
+                        self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                         DispatchQueue.main.async {
-                            self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                             self.tableView.reloadData()
                         }
                     }
@@ -5543,9 +5543,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     self.profileStatuses = stat + self.profileStatuses
+                    self.profileStatuses = self.profileStatuses.removeDuplicates()
                     
                     DispatchQueue.main.async {
-                        self.profileStatuses = self.profileStatuses.removeDuplicates()
                         if stat.count > 0 {
                             self.tableView.reloadData()
                         }
@@ -5568,9 +5568,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     self.profileStatuses2 = stat + self.profileStatuses2
+                    self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                     
                     DispatchQueue.main.async {
-                        self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                         if stat.count > 0 {
                             self.tableView.reloadData()
                         }

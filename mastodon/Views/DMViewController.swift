@@ -355,9 +355,25 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.tableView.reloadData()
     }
     
+    @objc func scrollTopDM() {
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(row: 0, section: 0)
+            if StoreStruct.notificationsDirect.count > 0 {
+                if self.tableView.alpha == 1 {
+                    if StoreStruct.notificationsDirect.count <= 0 {
+                        
+                    } else {
+                        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTopDM), name: NSNotification.Name(rawValue: "scrollTopDM"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateDM), name: NSNotification.Name(rawValue: "updateDM"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti2"), object: nil)
@@ -1703,11 +1719,11 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
+                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
+                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     DispatchQueue.main.async {
                         self.ai.stopAnimating()
                         self.ai.alpha = 0
-                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
-                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         self.tableView.reloadData()
                     }
                 }
@@ -1720,9 +1736,9 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
+                    StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
+                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     DispatchQueue.main.async {
-                        StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
-                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         self.tableView.reloadData()
                     }
                 }
