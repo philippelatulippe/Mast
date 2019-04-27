@@ -68,10 +68,14 @@ class SettingsCell: SwipeTableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(status: String, status2: String, image: String = "", imageURL:String?=nil) {
+    func configure(status: String, status2: String, image: String = "", imageURL:String?=nil, setOverlay: Bool? = false) {
         userTag.text = status
         toot.text = status2
-        profileImageView.image = UIImage(named: image)
+        if setOverlay ?? false {
+            profileImageView.image = UIImage(named: image)?.maskWithColor(color: Colours.tabSelected)
+        } else {
+            profileImageView.image = UIImage(named: image)
+        }
         
         if imageURL != nil {
             profileImageView.pin_setImage(from: URL(string:imageURL!))
@@ -84,7 +88,6 @@ class SettingsCell: SwipeTableViewCell {
         userName.textColor = Colours.black
         userTag.textColor = Colours.black.withAlphaComponent(0.8)
         toot.textColor = Colours.black.withAlphaComponent(0.5)
-        
     }
     
     

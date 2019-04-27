@@ -64,7 +64,7 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
         
         if indexPath.item >= InstanceData.getAllInstances().count {
             
-            cell.image.image = UIImage(named: "newac2")
+            cell.image.image = UIImage(named: "newac2")?.maskWithColor(color: Colours.tabSelected)
             cell.image.layer.borderColor = Colours.clear.cgColor
             cell.image.layer.borderWidth = 0
             

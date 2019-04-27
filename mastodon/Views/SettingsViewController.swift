@@ -373,8 +373,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     var bioArrayDesc = ["Add a biometric lock to the app.", "Add a biometric lock to the notifications section.", "Add a biometric lock to the direct messages section."]
     var bioArrayIm = ["biolock1", "biolock2", "biolock3"]
     
-    var aboutArray = ["Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", "Review Mast", "Get in Touch", "URL Schemes"]
-    var aboutArrayDesc = ["Let us tell you a little bit about ourselves.", "If you enjoy using Mast, please consider leaving a review on the App Store.", "Keep in touch, and get progress updates about what we're up to.", "Use these to do specific actions within the app from outside the app."]
+    var aboutArray = ["Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", "Rate Mast \u{2605}\u{2605}\u{2605}\u{2605}\u{2605}", "Get in Touch", "URL Schemes"]
+    var aboutArrayDesc = ["Let me tell you a little bit about myself.", "If you enjoy using Mast, please consider leaving a review on the App Store.", "Keep in touch, and get progress updates about what we're up to.", "Use these to do specific actions within the app from outside the app."]
     var aboutArrayIm = ["setmas", "like", "intouch", "schemes"]
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -1217,7 +1217,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             
             if indexPath.row == z1.count {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
-                cell.configure(status: "Add Account", status2: "Add a new account from any instance.", image: "newac1", imageURL: nil)
+                cell.configure(status: "Add Account", status2: "Add a new account from any instance.", image: "newac2", imageURL: nil, setOverlay: true)
                 cell.backgroundColor = Colours.white
                 cell.userName.textColor = Colours.black
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
@@ -3222,12 +3222,25 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if indexPath.section == 4 {
             if indexPath.row == 0 {
                 // about
-                Alertift.actionSheet(title: "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", message: "A beautiful Mastodon client\nMade with the intention to be reliant\nIt's fast, it's fluid, it's fun\nBut most of all, it's built with love for everyone\n\nDesigned and created by @JPEG@mastodon.technology".localized)
+                Alertift.actionSheet(title: "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", message: "Designed and hand-crafted with \u{2665} by @JPEG@mastodon.technology\n\nI'm an independant 23 year old developer from the UK, creating and crafting Mast in my spare time. It can be daunting manning a project of this magnitude, but I love what I do and Mast is a wonderful place to pour my creativity into. If you like what I do, please consider leaving a tip to encourage great continued support. If you're not a fan of what I do, please get in touch and let me know how I can improve and be better!\n\nHappy tooting :)".localized)
                     .backgroundColor(Colours.white)
                     .titleTextColor(Colours.grayDark)
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
+                    .action(.default("Website".localized)) { (action, ind) in
+                        
+                        let z = URL(string: "https://www.thebluebird.app")!
+                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                            self.safariVC = SFSafariViewController(url: z)
+                            self.safariVC?.preferredBarTintColor = Colours.white
+                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                            self.present(self.safariVC!, animated: true, completion: nil)
+                        } else {
+                            UIApplication.shared.openURL(z)
+                        }
+                        
+                    }
                     .action(.cancel("Dismiss"))
                     .finally { action, index in
                         if action.style == .cancel {
@@ -3292,27 +3305,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                          
                         let twUrl = URL(string: "twitter://user?screen_name=JPEGuin")!
                         let twUrlWeb = URL(string: "https://www.twitter.com/JPEGuin")!
-                        if UIApplication.shared.canOpenURL(twUrl) {
-                            UIApplication.shared.open(twUrl, options: [:], completionHandler: nil)
-                        } else {
-                            UIApplication.shared.open(twUrlWeb, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: twUrlWeb)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(twUrlWeb)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .action(.default("Mast Twitter".localized)) { (action, ind) in
-                         
-                        let twUrl = URL(string: "twitter://user?screen_name=TheMastApp")!
-                        let twUrlWeb = URL(string: "https://www.twitter.com/TheMastApp")!
                         if UIApplication.shared.canOpenURL(twUrl) {
                             UIApplication.shared.open(twUrl, options: [:], completionHandler: nil)
                         } else {

@@ -296,10 +296,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     StoreStruct.client.accessToken = StoreStruct.shared.currentInstance.accessToken
                    
                     let currentInstance = InstanceData(clientID: StoreStruct.shared.currentInstance.clientID, clientSecret: StoreStruct.shared.currentInstance.clientSecret, authCode: StoreStruct.shared.currentInstance.authCode, accessToken: StoreStruct.shared.currentInstance.accessToken, returnedText: StoreStruct.shared.currentInstance.returnedText, redirect:StoreStruct.shared.currentInstance.redirect)
-                    
-                    var instances = InstanceData.getAllInstances()
-                    instances.append(currentInstance)
-                    UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
                     InstanceData.setCurrentInstance(instance: currentInstance)
                     
                     let request = Timelines.home()
@@ -316,6 +312,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
                             DispatchQueue.main.async {
+                                var instances = InstanceData.getAllInstances()
+                                instances.append(currentInstance)
+                                UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
                                 StoreStruct.currentUser = stat
                                 Account.addAccountToList(account: stat)
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
@@ -398,9 +397,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     
                     newInstance.accessToken = access1
                     InstanceData.setCurrentInstance(instance: newInstance)
-                    var instances = InstanceData.getAllInstances()
-                    instances.append(newInstance)
-                    UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey: "instances")
                     
                     let request = Timelines.home()
                     StoreStruct.shared.newClient.run(request) { (statuses) in
@@ -415,6 +411,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     StoreStruct.shared.newClient.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
                             DispatchQueue.main.async {
+                                var instances = InstanceData.getAllInstances()
+                                instances.append(newInstance)
+                                UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey: "instances")
                                 StoreStruct.currentUser = stat
                                 Account.addAccountToList(account: stat)
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
@@ -945,10 +944,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             StoreStruct.instanceLocalToAdd = UserDefaults.standard.object(forKey: "instancesLocal") as! [String]
         }
         
-        if (UserDefaults.standard.object(forKey: "popupset") == nil) {
-            UserDefaults.standard.set(1, forKey: "popupset")
-        }
-        
         
         self.tabBar.barTintColor = Colours.white
         self.tabBar.backgroundColor = Colours.white
@@ -1308,7 +1303,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         } else if section == 3 {
             title.text = "Your Instances"
         }
-        title.textColor = Colours.grayDark2.withAlphaComponent(0.35)
+        title.textColor = UIColor(red: 67/255.0, green: 67/255.0, blue: 75/255.0, alpha: 1.0)
         title.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         vw.addSubview(title)
         vw.backgroundColor = Colours.grayDark3
