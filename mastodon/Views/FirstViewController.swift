@@ -2095,6 +2095,52 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
 //        return UITableView.automaticDimension
 //    }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == self.tableViewL || tableView == self.tableViewF {
+            return 26
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let vw = UIView()
+        vw.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 26)
+        let title = UILabel()
+        title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 26)
+        
+        if tableView == self.tableViewL || tableView == self.tableViewF {
+            title.text = ""
+            let moreB = UIButton()
+            moreB.frame = CGRect(x: self.view.bounds.width - 50, y: -12, width: 40, height: 40)
+            moreB.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.grayDark), for: .normal)
+            moreB.backgroundColor = UIColor.clear
+            moreB.addTarget(self, action: #selector(self.tapMoreActivity), for: .touchUpInside)
+            vw.addSubview(moreB)
+        }
+        title.textColor = Colours.grayDark2
+        title.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        vw.addSubview(title)
+        vw.backgroundColor = Colours.white
+        
+        return vw
+    }
+    
+    @objc func tapMoreActivity() {
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let imp = UIImpactFeedbackGenerator()
+            imp.impactOccurred()
+        }
+        
+        let controller = FeedMediaViewController()
+        if self.currentIndex == 1 {
+            controller.publicTypeLocal = true
+        } else {
+            controller.publicTypeLocal = false
+        }
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == self.tableView {

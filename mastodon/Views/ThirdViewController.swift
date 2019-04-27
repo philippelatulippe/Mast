@@ -349,12 +349,12 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         if self.fromOtherUser == true {
-            let request = Accounts.statuses(id: StoreStruct.currentUser.id)
+            let request = Accounts.statuses(id: self.userIDtoUse)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     if stat.isEmpty {
                         
-                        let request09 = Accounts.account(id: StoreStruct.currentUser.id)
+                        let request09 = Accounts.account(id: self.userIDtoUse)
                         StoreStruct.client.run(request09) { (statuses) in
                             if let stat = (statuses.value) {
                                 DispatchQueue.main.async {

@@ -1,8 +1,8 @@
 //
-//  AllMediaViewController.swift
+//  FeedMediaViewController.swift
 //  mastodon
 //
-//  Created by Shihab Mehboob on 24/04/2019.
+//  Created by Shihab Mehboob on 27/04/2019.
 //  Copyright © 2019 Shihab Mehboob. All rights reserved.
 //
 
@@ -12,12 +12,12 @@ import PINRemoteImage
 import AVKit
 import AVFoundation
 
-class AllMediaViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SKPhotoBrowserDelegate {
+class FeedMediaViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SKPhotoBrowserDelegate {
     
     var collectionView: UICollectionView!
-    var profileStatusesHasImage: [Status] = []
-    var chosenUser: Account!
+    var statusesLocal: [Status] = []
     var player = AVPlayer()
+    var publicTypeLocal = true
     var colCount = 3
     
     override func viewDidLoad() {
@@ -66,7 +66,7 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.profileStatusesHasImage.count
+        return self.statusesLocal.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -79,15 +79,15 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AllImagesCell", for: indexPath) as! AllImagesCell
         
-        if indexPath.item == self.profileStatusesHasImage.count - 7 {
+        if indexPath.item == self.statusesLocal.count - 7 {
             self.fetchMoreImages()
         }
         
-        if self.profileStatusesHasImage.isEmpty {} else {
+        if self.statusesLocal.isEmpty {} else {
             cell.configure()
             cell.image.image = nil
             cell.image.pin_updateWithProgress = true
-            let z = self.profileStatusesHasImage[indexPath.item].mediaAttachments[0].previewURL
+            let z = self.statusesLocal[indexPath.item].mediaAttachments[0].previewURL
             let secureImageUrl = URL(string: z)!
             cell.image.pin_setImage(from: secureImageUrl)
             cell.image.contentMode = .scaleAspectFill
@@ -95,22 +95,22 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
             cell.image.layer.cornerRadius = 10
             cell.image.layer.masksToBounds = true
             
-            if self.profileStatusesHasImage[indexPath.item].mediaAttachments[0].type == .video {
+            if self.statusesLocal[indexPath.item].mediaAttachments[0].type == .video {
                 cell.imageCountTag.setTitle("\u{25b6}", for: .normal)
                 cell.imageCountTag.backgroundColor = Colours.tabSelected
                 cell.imageCountTag.alpha = 1
-            } else if self.profileStatusesHasImage[indexPath.item].mediaAttachments[0].type == .gifv {
+            } else if self.statusesLocal[indexPath.item].mediaAttachments[0].type == .gifv {
                 cell.imageCountTag.setTitle("GIF", for: .normal)
                 cell.imageCountTag.backgroundColor = Colours.tabSelected
                 cell.imageCountTag.alpha = 1
-            } else if self.profileStatusesHasImage[indexPath.item].mediaAttachments.count > 1 { cell.imageCountTag.setTitle("\(self.profileStatusesHasImage[indexPath.item].mediaAttachments.count)", for: .normal)
+            } else if self.statusesLocal[indexPath.item].mediaAttachments.count > 1 { cell.imageCountTag.setTitle("\(self.statusesLocal[indexPath.item].mediaAttachments.count)", for: .normal)
                 cell.imageCountTag.backgroundColor = Colours.tabSelected
                 cell.imageCountTag.alpha = 1
             } else {
                 cell.imageCountTag.alpha = 0
             }
         }
-    
+        
         cell.image.frame.size.width = cell.frame.size.width
         cell.image.frame.size.height = cell.frame.size.height
         cell.backgroundColor = Colours.clear
@@ -124,7 +124,7 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
             selection.selectionChanged()
         }
         
-        var sto = self.profileStatusesHasImage
+        var sto = self.statusesLocal
         StoreStruct.newIDtoGoTo = sto[indexPath.item].id
         StoreStruct.currentImageURL = sto[indexPath.item].reblog?.url ?? sto[indexPath.item].url
         
@@ -187,13 +187,13 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func fetchMoreImages() {
-        let request = Accounts.statuses(id: self.chosenUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: true, excludeReblogs: true, range: .max(id: self.profileStatusesHasImage.last?.id ?? "", limit: 5000))
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                if stat.isEmpty {} else {
+        let request = Timelines.public(local: self.publicTypeLocal, range: .max(id: self.statusesLocal.last?.id ?? "", limit: 5000), mediaOnly: true)
+        DispatchQueue.global(qos: .userInitiated).async {
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
                     DispatchQueue.main.async {
-                        self.profileStatusesHasImage = self.profileStatusesHasImage + stat
-                        self.profileStatusesHasImage = self.profileStatusesHasImage.removeDuplicates()
+                        self.statusesLocal = self.statusesLocal + stat
+                        self.statusesLocal = self.statusesLocal.removeDuplicates()
                         self.collectionView.reloadData()
                     }
                 }
@@ -201,3 +201,4 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
     }
 }
+

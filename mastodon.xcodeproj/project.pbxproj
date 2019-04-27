@@ -150,6 +150,7 @@
 		531B61E22219685D00DD3845 /* Decode85.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531B61C6221960B200DD3845 /* Decode85.swift */; };
 		531BD5FD2178D68400C1509D /* FollowRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531BD5FC2178D68400C1509D /* FollowRequestsViewController.swift */; };
 		531BD60421795D1F00C1509D /* SentimentAnalysisRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531BD60321795D1F00C1509D /* SentimentAnalysisRequest.swift */; };
+		531BEEFB22747152003C5895 /* FeedMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531BEEFA22747152003C5895 /* FeedMediaViewController.swift */; };
 		531CCD3722072BC500A56145 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531CCD3622072BC500A56145 /* Filters.swift */; };
 		531CCD3922072D5600A56145 /* FilterToots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531CCD3822072D5600A56145 /* FilterToots.swift */; };
 		531CCD5422073C3C00A56145 /* NewHuePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531CCD5322073C3C00A56145 /* NewHuePickerViewController.swift */; };
@@ -1046,6 +1047,7 @@
 		531B61DD221961B800DD3845 /* Mast Push.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mast Push.entitlements"; sourceTree = "<group>"; };
 		531BD5FC2178D68400C1509D /* FollowRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRequestsViewController.swift; sourceTree = "<group>"; };
 		531BD60321795D1F00C1509D /* SentimentAnalysisRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentAnalysisRequest.swift; sourceTree = "<group>"; };
+		531BEEFA22747152003C5895 /* FeedMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMediaViewController.swift; sourceTree = "<group>"; };
 		531CCD3622072BC500A56145 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		531CCD3822072D5600A56145 /* FilterToots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterToots.swift; sourceTree = "<group>"; };
 		531CCD5322073C3C00A56145 /* NewHuePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHuePickerViewController.swift; sourceTree = "<group>"; };
@@ -2958,6 +2960,7 @@
 				53EBE6BA22283FF9000D007E /* SearchViewController.swift */,
 				5315ECE721FE1A0B00A3F1A9 /* ScheduledStatusesViewController.swift */,
 				53E095622270B4D4008C8762 /* AllMediaViewController.swift */,
+				531BEEFA22747152003C5895 /* FeedMediaViewController.swift */,
 				5373CB492156602900676F3D /* ComposeViewController.swift */,
 				5351B98D2167ADF400002069 /* NewListViewController.swift */,
 				539385852172A782002444FC /* NewProfileViewController.swift */,
@@ -4166,6 +4169,7 @@
 				53659420222EB73400BFF3CD /* BarChartCore.swift in Sources */,
 				5373CB0A2152EDB800676F3D /* SwipeTransitionLayout.swift in Sources */,
 				5373CB142152FCF300676F3D /* Action.swift in Sources */,
+				531BEEFB22747152003C5895 /* FeedMediaViewController.swift in Sources */,
 				5354BADB216577FD0094C545 /* CRRefreshFooterView.swift in Sources */,
 				531E0FAD216E2BA2003E8890 /* NVActivityIndicatorAnimationBallPulseRise.swift in Sources */,
 				5373CB3921541A0300676F3D /* SKPhotoBrowser.swift in Sources */,
