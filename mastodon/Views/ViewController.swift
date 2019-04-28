@@ -845,7 +845,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                                 if let stat = (statuses.value) {
                                     if stat.isEmpty {} else {
                                         DispatchQueue.main.async {
-                                            self.tabBar.items?[2].badgeValue = "1"
+                                            if (UserDefaults.standard.object(forKey: "badgeMentd") == nil) || (UserDefaults.standard.object(forKey: "badgeMentd") as! Int == 0) {
+                                                self.tabBar.items?[2].badgeValue = "1"
+                                            }
                                             StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
                                             StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                                             NotificationCenter.default.post(name: Notification.Name(rawValue: "updateDM"), object: nil)

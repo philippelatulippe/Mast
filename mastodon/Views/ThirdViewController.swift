@@ -523,7 +523,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func goToSettings() {
-        let controller = SettingsViewController()
+        let controller = MainSettingsViewController()
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -1305,7 +1305,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             impact.impactOccurred()
         }
         
-        let controller = SettingsViewController()
+        let controller = MainSettingsViewController()
         self.navigationController?.pushViewController(controller, animated: true)
     }
     @objc func setTop() {

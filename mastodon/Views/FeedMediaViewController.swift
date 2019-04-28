@@ -12,13 +12,27 @@ import PINRemoteImage
 import AVKit
 import AVFoundation
 
-class FeedMediaViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SKPhotoBrowserDelegate {
+class FeedMediaViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate {
     
     var collectionView: UICollectionView!
     var statusesLocal: [Status] = []
     var player = AVPlayer()
     var publicTypeLocal = true
     var colCount = 3
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = self.collectionView.indexPathForItem(at: location) else { return nil }
+        guard let cell = self.collectionView.cellForItem(at: indexPath) else { return nil }
+        let detailVC = DetailViewController()
+        detailVC.mainStatus.append(self.statusesLocal[indexPath.row])
+        detailVC.isPeeking = true
+        previewingContext.sourceRect = cell.frame
+        return detailVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +77,10 @@ class FeedMediaViewController: UIViewController, UICollectionViewDelegate, UICol
         self.collectionView.register(AllImagesCell.self, forCellWithReuseIdentifier: "AllImagesCell")
         self.view.addSubview(self.collectionView)
         self.collectionView.reloadData()
+        
+        if (traitCollection.forceTouchCapability == .available) {
+            registerForPreviewing(with: self, sourceView: self.collectionView)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

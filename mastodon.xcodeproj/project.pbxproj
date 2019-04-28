@@ -55,6 +55,7 @@
 		530F5B3921E267CA00A910B3 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F5B3521E267CA00A910B3 /* DateCollectionViewCell.swift */; };
 		531046C4215AC3AB00FCD068 /* ProfileHeaderCellOwn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531046C3215AC3AB00FCD068 /* ProfileHeaderCellOwn.swift */; };
 		531096B9216D05E100E767DF /* FedTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531096B8216D05E100E767DF /* FedTimelineController.swift */; };
+		531154F322760C39005C5422 /* GeneralSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531154F222760C39005C5422 /* GeneralSettingsViewController.swift */; };
 		5314E30C216D1502007F9651 /* EMTLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5314E2EB216D1502007F9651 /* EMTLoadingIndicator.swift */; };
 		5314E30D216D1502007F9651 /* EMTTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5314E2EC216D1502007F9651 /* EMTTimer.swift */; };
 		5314E30E216D1502007F9651 /* waitIndicatorGraphic-13@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5314E2EE216D1502007F9651 /* waitIndicatorGraphic-13@2x.png */; };
@@ -719,6 +720,9 @@
 		53865FCF216CFFA40041E686 /* LocalTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCE216CFFA40041E686 /* LocalTimelineController.swift */; };
 		538B2150222BE00A0034977E /* FlickType.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 538B214F222BE0090034977E /* FlickType.storyboard */; };
 		538B2152222BE01A0034977E /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 538B2151222BE0190034977E /* keyboard.png */; };
+		5392DBF92275EF8000D17F5F /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5392DBF82275EF8000D17F5F /* AccountSettingsViewController.swift */; };
+		5392DBFB2275F5E500D17F5F /* LockSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5392DBFA2275F5E500D17F5F /* LockSettingsViewController.swift */; };
+		5392DBFD2275FA3000D17F5F /* NotificationsSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5392DBFC2275FA3000D17F5F /* NotificationsSettingsViewController.swift */; };
 		539385862172A782002444FC /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539385852172A782002444FC /* NewProfileViewController.swift */; };
 		539385882172A9E4002444FC /* NewProfileNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539385872172A9E4002444FC /* NewProfileNoteViewController.swift */; };
 		5393858E21738054002444FC /* HashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393858D21738054002444FC /* HashType.swift */; };
@@ -730,6 +734,8 @@
 		53BC45BC215AC8EE0092223F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45BB215AC8EE0092223F /* SettingsCell.swift */; };
 		53BC45C2215AE4F10092223F /* SettingsCellToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */; };
 		53C037B0220A2A6F0047EBC4 /* NewQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */; };
+		53DE98872275C8BF00077D18 /* MainSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE98862275C8BF00077D18 /* MainSettingsViewController.swift */; };
+		53DE98892275DCC300077D18 /* TipSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE98882275DCC300077D18 /* TipSettingsViewController.swift */; };
 		53E095632270B4D4008C8762 /* AllMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095622270B4D4008C8762 /* AllMediaViewController.swift */; };
 		53E095652270B7C2008C8762 /* AllImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095642270B7C2008C8762 /* AllImagesCell.swift */; };
 		53E095672271AFB8008C8762 /* AllEmotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095662271AFB8008C8762 /* AllEmotiCell.swift */; };
@@ -953,6 +959,7 @@
 		530F5B3521E267CA00A910B3 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		531046C3215AC3AB00FCD068 /* ProfileHeaderCellOwn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCellOwn.swift; sourceTree = "<group>"; };
 		531096B8216D05E100E767DF /* FedTimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FedTimelineController.swift; sourceTree = "<group>"; };
+		531154F222760C39005C5422 /* GeneralSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViewController.swift; sourceTree = "<group>"; };
 		5314E2EB216D1502007F9651 /* EMTLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMTLoadingIndicator.swift; sourceTree = "<group>"; };
 		5314E2EC216D1502007F9651 /* EMTTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EMTTimer.swift; sourceTree = "<group>"; };
 		5314E2EE216D1502007F9651 /* waitIndicatorGraphic-13@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "waitIndicatorGraphic-13@2x.png"; sourceTree = "<group>"; };
@@ -1655,6 +1662,9 @@
 		53865FCE216CFFA40041E686 /* LocalTimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTimelineController.swift; sourceTree = "<group>"; };
 		538B214F222BE0090034977E /* FlickType.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = FlickType.storyboard; path = "FlickTypeKit/App Resources/FlickType.storyboard"; sourceTree = "<group>"; };
 		538B2151222BE0190034977E /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keyboard.png; path = "FlickTypeKit/App Resources/keyboard.png"; sourceTree = "<group>"; };
+		5392DBF82275EF8000D17F5F /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
+		5392DBFA2275F5E500D17F5F /* LockSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockSettingsViewController.swift; sourceTree = "<group>"; };
+		5392DBFC2275FA3000D17F5F /* NotificationsSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsViewController.swift; sourceTree = "<group>"; };
 		539385852172A782002444FC /* NewProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
 		539385872172A9E4002444FC /* NewProfileNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileNoteViewController.swift; sourceTree = "<group>"; };
 		5393858D21738054002444FC /* HashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashType.swift; sourceTree = "<group>"; };
@@ -1668,6 +1678,8 @@
 		53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellToggle.swift; sourceTree = "<group>"; };
 		53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQRViewController.swift; sourceTree = "<group>"; };
 		53D14D9322183D330037C865 /* mastodon-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mastodon-Bridging-Header.h"; sourceTree = "<group>"; };
+		53DE98862275C8BF00077D18 /* MainSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsViewController.swift; sourceTree = "<group>"; };
+		53DE98882275DCC300077D18 /* TipSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipSettingsViewController.swift; sourceTree = "<group>"; };
 		53E095622270B4D4008C8762 /* AllMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMediaViewController.swift; sourceTree = "<group>"; };
 		53E095642270B7C2008C8762 /* AllImagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllImagesCell.swift; sourceTree = "<group>"; };
 		53E095662271AFB8008C8762 /* AllEmotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEmotiCell.swift; sourceTree = "<group>"; };
@@ -2989,6 +3001,12 @@
 				5352D08F215E48DE00901B60 /* ListMembersViewController.swift */,
 				53271355225A167D000DB75D /* GameViewController.swift */,
 				53BC45B9215AC7D30092223F /* SettingsViewController.swift */,
+				53DE98862275C8BF00077D18 /* MainSettingsViewController.swift */,
+				531154F222760C39005C5422 /* GeneralSettingsViewController.swift */,
+				5392DBFC2275FA3000D17F5F /* NotificationsSettingsViewController.swift */,
+				5392DBFA2275F5E500D17F5F /* LockSettingsViewController.swift */,
+				5392DBF82275EF8000D17F5F /* AccountSettingsViewController.swift */,
+				53DE98882275DCC300077D18 /* TipSettingsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4142,6 +4160,7 @@
 				53E1AE0B221AB82200A6E1E6 /* UIView+PositionUtils.swift in Sources */,
 				53205823215D287700ED0C36 /* DKImagePickerController.swift in Sources */,
 				5373CB4C2156686300676F3D /* ActionButtonCell.swift in Sources */,
+				53DE98872275C8BF00077D18 /* MainSettingsViewController.swift in Sources */,
 				5317C7BB21DA334500746197 /* LabelPool.swift in Sources */,
 				5373CAC62152C68000676F3D /* Accounts.swift in Sources */,
 				5373CADA2152E04C00676F3D /* Date.swift in Sources */,
@@ -4246,6 +4265,7 @@
 				5373CAB12152C68000676F3D /* Emoji.swift in Sources */,
 				53E826E52236C32D00153721 /* ToppingLabel.swift in Sources */,
 				536A4FB1216B73D600A3D483 /* BulletinManager.swift in Sources */,
+				5392DBF92275EF8000D17F5F /* AccountSettingsViewController.swift in Sources */,
 				53BC45BA215AC7D30092223F /* SettingsViewController.swift in Sources */,
 				5351D75A21617FC40012960F /* VolumeBarWindow.swift in Sources */,
 				5351D75B21617FC40012960F /* VolumeBarAnimation+Presets.swift in Sources */,
@@ -4282,6 +4302,7 @@
 				536A4FBB216B73D600A3D483 /* BulletinDismissAnimationController.swift in Sources */,
 				5354BAC7216577FD0094C545 /* RamotionBounceLayer.swift in Sources */,
 				5373CAD32152C68000676F3D /* Search.swift in Sources */,
+				5392DBFD2275FA3000D17F5F /* NotificationsSettingsViewController.swift in Sources */,
 				5373CAB22152C68000676F3D /* Empty.swift in Sources */,
 				5373CAC82152C68000676F3D /* Clients.swift in Sources */,
 				531E0F8C216E2BA2003E8890 /* NVActivityIndicatorShape.swift in Sources */,
@@ -4374,6 +4395,7 @@
 				539385882172A9E4002444FC /* NewProfileNoteViewController.swift in Sources */,
 				5354BAD7216577FD0094C545 /* CRRefreshHeaderView.swift in Sources */,
 				5373CAC22152C68000676F3D /* Parameter.swift in Sources */,
+				53DE98892275DCC300077D18 /* TipSettingsViewController.swift in Sources */,
 				5373CAA82152C68000676F3D /* MediaAttachment.swift in Sources */,
 				539385862172A782002444FC /* NewProfileViewController.swift in Sources */,
 				5373CAFD2152EDB800676F3D /* SwipeCollectionViewCell+Accessibility.swift in Sources */,
@@ -4424,6 +4446,7 @@
 				5329F3862174B31400C4A23C /* InstanceViewController.swift in Sources */,
 				535B33D2215CF0AD001A2A7F /* MutedViewController.swift in Sources */,
 				5329F3842174B21F00C4A23C /* NewInstanceViewController.swift in Sources */,
+				531154F322760C39005C5422 /* GeneralSettingsViewController.swift in Sources */,
 				531E0FA8216E2BA2003E8890 /* NVActivityIndicatorAnimationBallPulseSync.swift in Sources */,
 				535B33C7215C31E3001A2A7F /* ActiveLabel.swift in Sources */,
 				5373CB54215688D700676F3D /* RepliesCellImage.swift in Sources */,
@@ -4519,6 +4542,7 @@
 				5373CAD42152C68000676F3D /* Statuses.swift in Sources */,
 				535B33CA215C31E3001A2A7F /* ActiveBuilder.swift in Sources */,
 				5373C9D8215173EE00676F3D /* AppDelegate.swift in Sources */,
+				5392DBFB2275F5E500D17F5F /* LockSettingsViewController.swift in Sources */,
 				530F5B3621E267CA00A910B3 /* StepCollectionViewFlowLayout.swift in Sources */,
 				535B33B0215C0EC6001A2A7F /* XPlayerViewController+State.swift in Sources */,
 				5373CAF92152EDB700676F3D /* SwipeActionButton.swift in Sources */,

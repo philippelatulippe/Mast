@@ -3261,7 +3261,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
             if indexPath.row == 2 {
-                // follow
+                // get in touch
                 Alertift.actionSheet(title: title, message: nil)
                     .backgroundColor(Colours.white)
                     .titleTextColor(Colours.grayDark)
@@ -3269,40 +3269,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
                     .action(.default("Developer Mastodon".localized)) { (action, ind) in
-                         
-                        
-                        
-//                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//                            let notification = UINotificationFeedbackGenerator()
-//                            notification.notificationOccurred(.success)
-//                        }
-//                        let statusAlert = StatusAlert()
-//                        statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
-//                        statusAlert.title = "Followed".localized
-//                        statusAlert.contentColor = Colours.grayDark
-//                        statusAlert.message = "Mastodon Developer"
-//                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-//                        statusAlert.show()
-//                    }
-//
-//                        if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
-//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
-//                        }
-                        
                         let controller = ThirdViewController()
                         controller.fromOtherUser = true
                         controller.userIDtoUse = "107304"
                         self.navigationController?.pushViewController(controller, animated: true)
-                        
-//                        let request = Accounts.follow(id: "107304")
-//                        StoreStruct.client.run(request) { (statuses) in
-//                            if let _ = (statuses.value) {
-//                                
-//                            }
-//                        }
                     }
                     .action(.default("Developer Twitter".localized)) { (action, ind) in
-                         
                         let twUrl = URL(string: "twitter://user?screen_name=JPEGuin")!
                         let twUrlWeb = URL(string: "https://www.twitter.com/JPEGuin")!
                         if UIApplication.shared.canOpenURL(twUrl) {

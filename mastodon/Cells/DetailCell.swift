@@ -126,12 +126,9 @@ class DetailCell: UITableViewCell {
             userTag.setTitle("@\(status.reblog?.account.username ?? status.account.username)", for: .normal)
         }
         date.text = status.reblog?.createdAt.toStringWithRelativeTime() ?? status.createdAt.toStringWithRelativeTime()
+        
+        
         if status.reblog?.content.stripHTML() != nil {
-//            toot.text = "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.username) boosted"
-            
-            
-            
-            
             
             if status.reblog!.emojis.isEmpty {
                 toot.text = "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.acct) boosted"
@@ -151,9 +148,6 @@ class DetailCell: UITableViewCell {
                 self.toot.attributedText = attributedString
                 self.reloadInputViews()
             }
-            
-            
-            
             
             if status.reblog?.account.emojis.isEmpty ?? true {
                 userName.text = status.reblog?.account.displayName.stripHTML()
@@ -177,11 +171,6 @@ class DetailCell: UITableViewCell {
             
             
         } else {
-//            toot.text = status.content.stripHTML()
-            
-            
-            
-            
             
             if status.emojis.isEmpty {
                 toot.text = status.content.stripHTML()
@@ -225,6 +214,7 @@ class DetailCell: UITableViewCell {
             
             
         }
+        
         
         let z = status.reblog?.application?.name ?? status.application?.name ?? ""
         let da = status.createdAt.toString(dateStyle: .medium, timeStyle: .medium)

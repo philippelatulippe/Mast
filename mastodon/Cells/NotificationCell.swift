@@ -271,8 +271,8 @@ class NotificationCell: SwipeTableViewCell {
             } else {
                 toot.textColor = Colours.black.withAlphaComponent(0.3)
                 userName.textColor = Colours.black.withAlphaComponent(0.3)
-                userTag.setTitleColor(Colours.black.withAlphaComponent(0.3), for: .normal)
-                date.textColor = Colours.black.withAlphaComponent(0.3)
+                userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                date.textColor = Colours.grayDark.withAlphaComponent(0.38)
             }
         }
         if status.type == .reblog {
