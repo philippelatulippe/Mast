@@ -18,7 +18,7 @@ import AVKit
 import AVFoundation
 import Disk
 
-class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate {
+class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate, UIGestureRecognizerDelegate {
     
     var newUpdatesB1 = UIButton()
     var newUpdatesB2 = UIButton()
@@ -601,6 +601,36 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         }
     }
     
+    @objc func longAction(sender: UILongPressGestureRecognizer) {
+        if (UserDefaults.standard.object(forKey: "longToggle") == nil) || (UserDefaults.standard.object(forKey: "longToggle") as! Int == 0) {
+            
+        } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 3) {
+            if sender.state == .began {
+                var theTable = self.tableView
+                var sto = StoreStruct.notificationsMentions
+                if self.currentIndex == 1 {
+                    sto = StoreStruct.notificationsMentions
+                    theTable = self.tableView
+                } else if self.currentIndex == 0 {
+                    sto = StoreStruct.notifications
+                    theTable = self.tableView2
+                }
+                let touchPoint = sender.location(in: theTable)
+                if let indexPath = theTable.indexPathForRow(at: touchPoint) {
+                    print("inde - \(indexPath.row) - \(indexPath.section)")
+                    if let myWebsite = sto[indexPath.row].status?.url! {
+                        let objectsToShare = [myWebsite]
+                        let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                        vc.popoverPresentationController?.sourceView = self.view
+                        vc.previewNumberOfLines = 5
+                        vc.previewFont = UIFont.systemFont(ofSize: 14)
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -624,6 +654,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         self.view.backgroundColor = Colours.white
         
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
+        longPress.minimumPressDuration = 0.5
+        longPress.delegate = self
+        self.view.addGestureRecognizer(longPress)
         
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem, queue: .main) { [weak self] _ in
             self?.player.seek(to: CMTime.zero)
@@ -1583,11 +1618,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 let request = Notifications.all(range: .default, typesToExclude: [.favourite, .follow, .reblog])
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
-                        DispatchQueue.main.async {
                         StoreStruct.notificationsMentions = stat
-                        
-                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+                        DispatchQueue.main.async {
                             
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
@@ -1636,7 +1669,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         StoreStruct.notifications = stat
-                        self.tableView2.reloadData()
+                        StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
+                        DispatchQueue.main.async {
+                            self.tableView2.reloadData()
+                        }
                         
                     }
                 }

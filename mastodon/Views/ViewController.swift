@@ -1978,10 +1978,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             }
             
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 3) {
-            
-            if sender.state == .began {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
-            }
+            print("do nothing")
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 6) {
             print("do nothing")
         } else {

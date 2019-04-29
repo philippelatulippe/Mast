@@ -19,7 +19,7 @@ import Disk
 import AVKit
 import AVFoundation
 
-class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, URLSessionDataDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate, UIPencilInteractionDelegate, UIScrollViewDelegate {
+class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, URLSessionDataDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate, UIPencilInteractionDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     var socket: WebSocket!
     var lsocket: WebSocket!
@@ -744,6 +744,38 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
     }
     
+    @objc func longAction(sender: UILongPressGestureRecognizer) {
+        if (UserDefaults.standard.object(forKey: "longToggle") == nil) || (UserDefaults.standard.object(forKey: "longToggle") as! Int == 0) {
+            
+        } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 3) {
+            if sender.state == .began {
+                var theTable = self.tableView
+                var sto = StoreStruct.statusesHome
+                if self.currentIndex == 0 {
+                    sto = StoreStruct.statusesHome
+                    theTable = self.tableView
+                } else if self.currentIndex == 1 {
+                    sto = StoreStruct.statusesLocal
+                    theTable = self.tableViewL
+                } else if self.currentIndex == 2 {
+                    sto = StoreStruct.statusesFederated
+                    theTable = self.tableViewF
+                }
+                let touchPoint = sender.location(in: theTable)
+                if let indexPath = theTable.indexPathForRow(at: touchPoint) {
+                    if let myWebsite = sto[indexPath.row].url {
+                        let objectsToShare = [myWebsite]
+                        let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                        vc.popoverPresentationController?.sourceView = self.view
+                        vc.previewNumberOfLines = 5
+                        vc.previewFont = UIFont.systemFont(ofSize: 14)
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -771,6 +803,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToSettings), name: NSNotification.Name(rawValue: "goToSettings"), object: nil)
         
         self.view.backgroundColor = Colours.white
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
+        longPress.minimumPressDuration = 0.5
+        longPress.delegate = self
+        self.view.addGestureRecognizer(longPress)
         
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem, queue: .main) { [weak self] _ in
             self?.player.seek(to: CMTime.zero)

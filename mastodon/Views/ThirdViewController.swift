@@ -17,7 +17,7 @@ import AVFoundation
 import SJFluidSegmentedControl
 import MessageUI
 
-class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, CrownControlDelegate, MFMailComposeViewControllerDelegate {
+class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, CrownControlDelegate, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate {
     
     var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
@@ -546,6 +546,35 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    @objc func longAction(sender: UILongPressGestureRecognizer) {
+        if (UserDefaults.standard.object(forKey: "longToggle") == nil) || (UserDefaults.standard.object(forKey: "longToggle") as! Int == 0) {
+            
+        } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 3) {
+            if sender.state == .began {
+                var theTable = self.tableView
+                var sto = self.profileStatuses
+                if self.currentIndex == 0 {
+                    sto = self.profileStatuses
+                    theTable = self.tableView
+                } else if self.currentIndex == 1 {
+                    sto = self.profileStatuses2
+                    theTable = self.tableView
+                }
+                let touchPoint = sender.location(in: theTable)
+                if let indexPath = theTable.indexPathForRow(at: touchPoint) {
+                    if let myWebsite = sto[indexPath.row].url {
+                        let objectsToShare = [myWebsite]
+                        let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                        vc.popoverPresentationController?.sourceView = self.view
+                        vc.previewNumberOfLines = 5
+                        vc.previewFont = UIFont.systemFont(ofSize: 14)
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -576,6 +605,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self?.player.play()
         }
         
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
+        longPress.minimumPressDuration = 0.5
+        longPress.delegate = self
+        self.view.addGestureRecognizer(longPress)
         
         UserDefaults.standard.set(1, forKey: "onb")
         splitViewController?.view.backgroundColor = Colours.cellQuote

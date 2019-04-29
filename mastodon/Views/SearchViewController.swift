@@ -14,7 +14,7 @@ import AVFoundation
 import StatusAlert
 import SafariServices
 
-class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate, SwipeTableViewCellDelegate {
+class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate, SwipeTableViewCellDelegate, UIGestureRecognizerDelegate {
     
     var searchTextField = SearchField()
     var segmentedControl: SJFluidSegmentedControl!
@@ -24,10 +24,67 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
     var safariVC: SFSafariViewController?
     var searchIcon = UIImageView()
     
+    @objc func longAction(sender: UILongPressGestureRecognizer) {
+        if (UserDefaults.standard.object(forKey: "longToggle") == nil) || (UserDefaults.standard.object(forKey: "longToggle") as! Int == 0) {
+            
+        } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 3) {
+            if sender.state == .began {
+                var theTable = self.tableView
+                var sto = StoreStruct.statusSearch
+                let touchPoint = sender.location(in: theTable)
+                if self.typeOfSearch == 0 {
+                    sto = StoreStruct.statusSearch
+                    theTable = self.tableView
+                    if let indexPath = theTable.indexPathForRow(at: touchPoint) {
+                        if let myWebsite = sto[indexPath.row].url {
+                            let objectsToShare = [myWebsite]
+                            let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                            vc.popoverPresentationController?.sourceView = self.view
+                            vc.previewNumberOfLines = 5
+                            vc.previewFont = UIFont.systemFont(ofSize: 14)
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    }
+                } else if self.typeOfSearch == 1 {
+                    sto = StoreStruct.statusSearch
+                    theTable = self.tableView
+                    if let indexPath = theTable.indexPathForRow(at: touchPoint) {
+                        if let myWebsite = sto[indexPath.row].url {
+                            let objectsToShare = [myWebsite]
+                            let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                            vc.popoverPresentationController?.sourceView = self.view
+                            vc.previewNumberOfLines = 5
+                            vc.previewFont = UIFont.systemFont(ofSize: 14)
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    }
+                } else if self.typeOfSearch == 2 {
+                    theTable = self.tableView
+                    if let indexPath = theTable.indexPathForRow(at: touchPoint) {
+                        if let myWebsite = URL(string: StoreStruct.statusSearchUser[indexPath.row].url) {
+                            let objectsToShare = [myWebsite]
+                            let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                            vc.popoverPresentationController?.sourceView = self.view
+                            vc.previewNumberOfLines = 5
+                            vc.previewFont = UIFont.systemFont(ofSize: 14)
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = Colours.white
+        
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
+        longPress.minimumPressDuration = 0.5
+        longPress.delegate = self
+        self.view.addGestureRecognizer(longPress)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadLoadLoad), name: NSNotification.Name(rawValue: "load"), object: nil)
         

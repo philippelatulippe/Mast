@@ -15,7 +15,7 @@ import SAConfettiView
 import AVKit
 import AVFoundation
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate, UIGestureRecognizerDelegate {
     
     var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
@@ -154,6 +154,28 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    @objc func longAction(sender: UILongPressGestureRecognizer) {
+        if (UserDefaults.standard.object(forKey: "longToggle") == nil) || (UserDefaults.standard.object(forKey: "longToggle") as! Int == 0) {
+            
+        } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 3) {
+            if sender.state == .began {
+                var theTable = self.tableView
+                var sto = StoreStruct.currentList
+                let touchPoint = sender.location(in: theTable)
+                if let indexPath = theTable.indexPathForRow(at: touchPoint) {
+                    if let myWebsite = sto[indexPath.row].url {
+                        let objectsToShare = [myWebsite]
+                        let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                        vc.popoverPresentationController?.sourceView = self.view
+                        vc.previewNumberOfLines = 5
+                        vc.previewFont = UIFont.systemFont(ofSize: 14)
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -162,6 +184,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         //NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTop1), name: NSNotification.Name(rawValue: "scrollTop1"), object: nil)
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
+        longPress.minimumPressDuration = 0.5
+        longPress.delegate = self
+        self.view.addGestureRecognizer(longPress)
         
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem, queue: .main) { [weak self] _ in
             self?.player.seek(to: CMTime.zero)
