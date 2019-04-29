@@ -34,6 +34,10 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
         show(viewControllerToCommit, sender: self)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colours.white

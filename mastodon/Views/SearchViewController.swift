@@ -75,6 +75,10 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
         }
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

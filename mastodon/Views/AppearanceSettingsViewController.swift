@@ -14,7 +14,7 @@ import StatusAlert
 import SAConfettiView
 import UserNotifications
 
-class MainSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate, UIGestureRecognizerDelegate, UNUserNotificationCenterDelegate {
+class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate, UIGestureRecognizerDelegate, UNUserNotificationCenterDelegate {
     
     var tap: UITapGestureRecognizer!
     var safariVC: SFSafariViewController?
@@ -42,7 +42,7 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Settings"
+        self.title = "Appearance"
         self.removeTabbarItemsText()
         NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
@@ -72,8 +72,8 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
         default:
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
         }
-        self.tableView.register(SettingsCell.self, forCellReuseIdentifier: "cellse")
-        self.tableView.register(SettingsCell2.self, forCellReuseIdentifier: "cellse1")
+        self.tableView.register(AppIconsCells.self, forCellReuseIdentifier: "appcell")
+        self.tableView.register(ColourCells.self, forCellReuseIdentifier: "colcell")
         self.tableView.alpha = 1
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -149,9 +149,9 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
         let title = UILabel()
         title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
         if section == 0 {
-            title.text = "Settings".localized
+            title.text = "App Icon".localized
         } else {
-            title.text = "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")"
+            title.text = "App Hue".localized
         }
         title.textColor = Colours.grayDark.withAlphaComponent(0.38)
         title.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
@@ -161,161 +161,61 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
         return vw
     }
     
-    var generalArray = ["General", "Appearance", "Notifications", "Biometric Lock", "Accounts"]
-    var generalArrayDesc = ["From timelines to toots, and media content to gestures, change how things behave.", "Pick themes and hues, change the app icon, and decide how things look.", "Select which push notifications to subscribe to.", "Add a biometric lock to various sections of the app.", "Add and manage multiple user accounts."]
-    var generalArrayIm = ["setset1", "setnight", "notifs0", "biolock2", "setpro"]
-    
-    var otherArray = ["Rate Mast \u{2605}\u{2605}\u{2605}\u{2605}\u{2605}", "About Mast", "Tip Mast"]
-    var otherArrayDesc = ["If you enjoy using Mast, please consider leaving a review on the App Store.", "Let me tell you a little bit about myself.", "Your generosity is greatly appreciated."]
-    var otherArrayIm = ["like", "setmas", "heart4"]
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 5
+            return 1
         } else {
-            return 3
+            return 1
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        if indexPath.section == 0 {
+            return 130
+        } else if indexPath.section == 1 {
+            return 105
+        } else {
+            return UITableView.automaticDimension
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellse1", for: indexPath) as! SettingsCell2
-            cell.configure(status: self.generalArray[indexPath.row], status2: self.generalArrayDesc[indexPath.row], image: self.generalArrayIm[indexPath.row])
+            let cell = tableView.dequeueReusableCell(withIdentifier: "appcell", for: indexPath) as! AppIconsCells
+            
+            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+            switch (deviceIdiom) {
+            case .phone:
+                cell.configure()
+            case .pad:
+                print("nothing")
+                cell.configure()
+            default:
+                cell.configure()
+            }
+            
             cell.backgroundColor = Colours.white
-            cell.userName.textColor = Colours.black
-            cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
-            cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
             let bgColorView = UIView()
             bgColorView.backgroundColor = Colours.white
             cell.selectedBackgroundView = bgColorView
+            cell.frame.size.width = 60
+            cell.frame.size.height = 60
             return cell
         } else {
-            if indexPath.row == 0 || indexPath.row == 1 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
-                cell.configure(status: self.otherArray[indexPath.row], status2: self.otherArrayDesc[indexPath.row], image: self.otherArrayIm[indexPath.row])
-                cell.backgroundColor = Colours.white
-                cell.userName.textColor = Colours.black
-                cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
-                cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
-                cell.selectedBackgroundView = bgColorView
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellse1", for: indexPath) as! SettingsCell2
-                cell.configure(status: self.otherArray[indexPath.row], status2: self.otherArrayDesc[indexPath.row], image: self.otherArrayIm[indexPath.row])
-                cell.backgroundColor = Colours.white
-                cell.userName.textColor = Colours.black
-                cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
-                cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
-                cell.selectedBackgroundView = bgColorView
-                return cell
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "colcell", for: indexPath) as! ColourCells
+            cell.configure()
+            cell.backgroundColor = Colours.white
+            let bgColorView = UIView()
+            bgColorView.backgroundColor = Colours.white
+            cell.selectedBackgroundView = bgColorView
+            cell.frame.size.width = 60
+            cell.frame.size.height = 60
+            return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 {
-            if indexPath.row == 0 {
-                // general
-                let controller = GeneralSettingsViewController()
-                self.navigationController?.pushViewController(controller, animated: true)
-            } else if indexPath.row == 1 {
-                // appearance
-                let controller = AppearanceSettingsViewController()
-                self.navigationController?.pushViewController(controller, animated: true)
-            } else if indexPath.row == 2 {
-                // notifications
-                let controller = NotificationsSettingsViewController()
-                self.navigationController?.pushViewController(controller, animated: true)
-            } else if indexPath.row == 3 {
-                // biometrics
-                let controller = LockSettingsViewController()
-                self.navigationController?.pushViewController(controller, animated: true)
-            } else {
-                // all accounts
-                let controller = AccountSettingsViewController()
-                self.navigationController?.pushViewController(controller, animated: true)
-            }
-        } else {
-            if indexPath.row == 0 {
-                // rate
-                //                SKStoreReviewController.requestReview()
-                if let reviewURL = URL(string: "itms-apps://itunes.apple.com/us/app/apple-store/1437429129?action=write-review&mt=8"), UIApplication.shared.canOpenURL(reviewURL) {
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(reviewURL, options: [:], completionHandler: nil)
-                    } else {
-                        UIApplication.shared.openURL(reviewURL)
-                    }
-                }
-            } else if indexPath.row == 1 {
-                // about
-                Alertift.actionSheet(title: "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", message: "Designed and hand-crafted with \u{2665} by @JPEG@mastodon.technology\n\nI'm an independant 23 year old developer from the UK, creating and crafting Mast in my spare time. It can be daunting manning a project of this magnitude, but I love what I do and Mast is a wonderful place to pour my creativity into. If you like what I do, please consider leaving a tip to encourage great continued support. If you're not a fan of what I do, please get in touch and let me know how I can improve and be better!\n\nHappy tooting :)".localized)
-                    .backgroundColor(Colours.white)
-                    .titleTextColor(Colours.grayDark)
-                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
-                    .messageTextAlignment(.left)
-                    .titleTextAlignment(.left)
-                    .action(.default("Developer Mastodon".localized)) { (action, ind) in
-                        let controller = ThirdViewController()
-                        controller.fromOtherUser = true
-                        controller.userIDtoUse = "107304"
-                        self.navigationController?.pushViewController(controller, animated: true)
-                    }
-                    .action(.default("Developer Twitter".localized)) { (action, ind) in
-                        let twUrl = URL(string: "twitter://user?screen_name=JPEGuin")!
-                        let twUrlWeb = URL(string: "https://www.twitter.com/JPEGuin")!
-                        if UIApplication.shared.canOpenURL(twUrl) {
-                            UIApplication.shared.open(twUrl, options: [:], completionHandler: nil)
-                        } else {
-                            UIApplication.shared.open(twUrlWeb, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                        self.safariVC = SFSafariViewController(url: twUrlWeb)
-                                        self.safariVC?.preferredBarTintColor = Colours.white
-                                        self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                        self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(twUrlWeb)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .action(.default("Website".localized)) { (action, ind) in
-                        
-                        let z = URL(string: "https://www.thebluebird.app")!
-                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                            self.safariVC = SFSafariViewController(url: z)
-                            self.safariVC?.preferredBarTintColor = Colours.white
-                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                            self.present(self.safariVC!, animated: true, completion: nil)
-                        } else {
-                            UIApplication.shared.openURL(z)
-                        }
-                        
-                    }
-                    .action(.cancel("Dismiss"))
-                    .finally { action, index in
-                        if action.style == .cancel {
-                            return
-                        }
-                    }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
-                    .show(on: self)
-            } else {
-                // tip mast
-                let controller = TipSettingsViewController()
-                self.navigationController?.pushViewController(controller, animated: true)
-            }
-        }
     }
     
     func loadLoadLoad() {

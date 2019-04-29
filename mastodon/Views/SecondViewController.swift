@@ -634,6 +634,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshCont), name: NSNotification.Name(rawValue: "refpush1"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.currentSegIndex), name: NSNotification.Name(rawValue: "setCurrentSegmentIndex"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshgraph), name: NSNotification.Name(rawValue: "refrefref"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid2"), object: nil)

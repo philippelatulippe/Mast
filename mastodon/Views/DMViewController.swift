@@ -373,6 +373,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshCont), name: NSNotification.Name(rawValue: "refpush1"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTopDM), name: NSNotification.Name(rawValue: "scrollTopDM"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateDM), name: NSNotification.Name(rawValue: "updateDM"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid2"), object: nil)

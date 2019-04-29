@@ -41,6 +41,10 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         }
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colours.white

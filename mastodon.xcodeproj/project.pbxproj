@@ -714,6 +714,7 @@
 		5373CB622159553600676F3D /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373CB612159553500676F3D /* FollowersViewController.swift */; };
 		5373CB642159564400676F3D /* FollowersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373CB632159564400676F3D /* FollowersCell.swift */; };
 		537B190C216D0E2900454351 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B190B216D0E2900454351 /* ProfileController.swift */; };
+		537E403A22774E9E009D080E /* AppearanceSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537E403922774E9E009D080E /* AppearanceSettingsViewController.swift */; };
 		53865FC9216CE3B60041E686 /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FC8216CE3B60041E686 /* DetailRow.swift */; };
 		53865FCB216CE5540041E686 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCA216CE5540041E686 /* Date.swift */; };
 		53865FCD216CF3540041E686 /* TootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCC216CF3540041E686 /* TootController.swift */; };
@@ -1656,6 +1657,7 @@
 		5373CB612159553500676F3D /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		5373CB632159564400676F3D /* FollowersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersCell.swift; sourceTree = "<group>"; };
 		537B190B216D0E2900454351 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		537E403922774E9E009D080E /* AppearanceSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsViewController.swift; sourceTree = "<group>"; };
 		53865FC8216CE3B60041E686 /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
 		53865FCA216CE5540041E686 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		53865FCC216CF3540041E686 /* TootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootController.swift; sourceTree = "<group>"; };
@@ -3003,6 +3005,7 @@
 				53BC45B9215AC7D30092223F /* SettingsViewController.swift */,
 				53DE98862275C8BF00077D18 /* MainSettingsViewController.swift */,
 				531154F222760C39005C5422 /* GeneralSettingsViewController.swift */,
+				537E403922774E9E009D080E /* AppearanceSettingsViewController.swift */,
 				5392DBFC2275FA3000D17F5F /* NotificationsSettingsViewController.swift */,
 				5392DBFA2275F5E500D17F5F /* LockSettingsViewController.swift */,
 				5392DBF82275EF8000D17F5F /* AccountSettingsViewController.swift */,
@@ -4198,6 +4201,7 @@
 				531E0F91216E2BA2003E8890 /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift in Sources */,
 				530976D32179DBD700640D84 /* BioMetricAuthenticator.swift in Sources */,
 				536A4FB5216B73D600A3D483 /* PageBulletinItem.swift in Sources */,
+				537E403A22774E9E009D080E /* AppearanceSettingsViewController.swift in Sources */,
 				5373CAA32152C68000676F3D /* String.swift in Sources */,
 				531CCD5422073C3C00A56145 /* NewHuePickerViewController.swift in Sources */,
 				531CCD3922072D5600A56145 /* FilterToots.swift in Sources */,
