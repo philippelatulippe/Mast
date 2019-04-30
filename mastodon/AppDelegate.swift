@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-//        if application.applicationState == .inactive || application.applicationState == .background {
+        if application.applicationState == .inactive || application.applicationState == .background {
             if let userDefaults = UserDefaults(suiteName: "group.com.shi.Mast.wormhole") {
                 if userDefaults.value(forKey: "notidpush") != nil {
                     if let id = userDefaults.value(forKey: "notidpush") as? Int64 {
@@ -76,13 +76,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     userDefaults.set(nil, forKey: "notidpush")
                 }
             }
-//        } else if application.applicationState == .active {
-            if (UserDefaults.standard.object(forKey: "badgeMent") == nil) || (UserDefaults.standard.object(forKey: "badgeMent") as! Int == 0) {
-                if StoreStruct.currentPage != 1 {
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "addBadge"), object: nil)
-                }
+        }
+        
+        if (UserDefaults.standard.object(forKey: "badgeMent") == nil) || (UserDefaults.standard.object(forKey: "badgeMent") as! Int == 0) {
+            if StoreStruct.currentPage != 1 {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "addBadge"), object: nil)
             }
-//        }
+        }
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: "refpush1"), object: nil)
         
