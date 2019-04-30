@@ -66,7 +66,7 @@ class DetailCellImage: UITableViewCell {
         mainImageViewBG.layer.shadowColor = UIColor.black.cgColor
         mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 0)
         mainImageViewBG.layer.shadowRadius = 12
-        mainImageViewBG.layer.shadowOpacity = 0.22
+        mainImageViewBG.layer.shadowOpacity = 0
         mainImageViewBG.layer.masksToBounds = false
 //        if UIDevice.current.userInterfaceIdiom == .pad {
 //            mainImageViewBG.alpha = 0

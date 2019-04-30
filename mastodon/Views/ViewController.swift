@@ -316,7 +316,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
                             StoreStruct.statusesHome = stat
-                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
                         }
                     }
@@ -415,7 +414,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     StoreStruct.shared.newClient.run(request) { (statuses) in
                         if let stat = (statuses.value) {
                             StoreStruct.statusesHome = stat
-                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
                         }
                     }
@@ -2463,9 +2461,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         }
     }
     
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-//        return true
-//    }
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         

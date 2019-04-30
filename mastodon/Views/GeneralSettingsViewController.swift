@@ -225,9 +225,9 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
     var keArrayDesc = ["Choose from a convenient social keyboard that puts the @ and # keys front and centre, or the default keyboard with a return key.", "Set haptic feedback for key presses on the keyboard."]
     var keArrayIm = ["keybse", "keyhap"]
     
-    var geArray = ["Shake Gesture", "Long-Hold Anywhere Action", "Long Swipe Selection"]
-    var geArrayDesc = ["Select whether to hide sensitive content, rain confetti, or do nothing when shaking your device.", "Select what happens when you long-hold anywhere in the app.", "Swipe all the way left or right on a toot to select the action on the edge."]
-    var geArrayIm = ["setshake", "holdse", "swipeact"]
+    var geArray = ["Shake Gesture", "Long-Hold Anywhere Action", "Long Swipe Selection", "Tilt Depth"]
+    var geArrayDesc = ["Select whether to hide sensitive content, rain confetti, or do nothing when shaking your device.", "Select what happens when you long-hold anywhere in the app.", "Swipe all the way left or right on a toot to select the action on the edge.", "Tilt the device to emulate a sense of depth. This may require restarting the app to take effect."]
+    var geArrayIm = ["setshake", "holdse", "swipeact", "holdse"]
     
     var otArray = ["Haptic Feedback", "User Search Scope", "Thumb Scroller", "Links Destination", "Direct Messages View Style", "URL Schemes"]
     var otArrayDesc = ["Get a responsive little vibration when tapping buttons and other on-screen elements.", "Pick whether searching for users is across all of Mastodon or just local.", "Display a circular thumb scroller on timelines, which allows you to rotate the scroller with your thumb to navigate through timelines without lifting a finger. This may require restarting the app to take effect.", "Pick whether to open links in-app, or in Safari.", "Choose whether to open direct messages in the mentions tab in a chat-style view or a toot-style view.", "Use these to do specific actions within the app from outside the app."]
@@ -314,6 +314,15 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             NotificationCenter.default.post(name: Notification.Name(rawValue: "activateCrown"), object: self)
         } else {
             UserDefaults.standard.set(0, forKey: "thumbsc")
+            sender.setOn(false, animated: true)
+        }
+    }
+    @objc func handleToggleDepth(sender: UISwitch) {
+        if sender.isOn {
+            UserDefaults.standard.set(0, forKey: "depthToggle")
+            sender.setOn(true, animated: true)
+        } else {
+            UserDefaults.standard.set(1, forKey: "depthToggle")
             sender.setOn(false, animated: true)
         }
     }
@@ -475,7 +484,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             cell.selectedBackgroundView = bgColorView
             return cell
         } else if indexPath.section == 5 {
-            if indexPath.row == 2 {
+            if indexPath.row == 2 || indexPath.row == 3 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse23456", for: indexPath) as! SettingsCellToggle
                 cell.configure(status: geArray[indexPath.row], status2: geArrayDesc[indexPath.row], image: geArrayIm[indexPath.row])
                 cell.backgroundColor = Colours.white
@@ -492,6 +501,14 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                         cell.switchView.setOn(false, animated: false)
                     }
                     cell.switchView.addTarget(self, action: #selector(self.handleToggleSelectSwipe), for: .touchUpInside)
+                }
+                if indexPath.row == 3 {
+                    if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
+                        cell.switchView.setOn(true, animated: false)
+                    } else {
+                        cell.switchView.setOn(false, animated: false)
+                    }
+                    cell.switchView.addTarget(self, action: #selector(self.handleToggleDepth), for: .touchUpInside)
                 }
                 return cell
             } else {
