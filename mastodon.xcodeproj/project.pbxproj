@@ -715,6 +715,7 @@
 		5373CB642159564400676F3D /* FollowersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373CB632159564400676F3D /* FollowersCell.swift */; };
 		537B190C216D0E2900454351 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537B190B216D0E2900454351 /* ProfileController.swift */; };
 		537E403A22774E9E009D080E /* AppearanceSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537E403922774E9E009D080E /* AppearanceSettingsViewController.swift */; };
+		537E403C22784BF9009D080E /* SchemesSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537E403B22784BF9009D080E /* SchemesSettingsViewController.swift */; };
 		53865FC9216CE3B60041E686 /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FC8216CE3B60041E686 /* DetailRow.swift */; };
 		53865FCB216CE5540041E686 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCA216CE5540041E686 /* Date.swift */; };
 		53865FCD216CF3540041E686 /* TootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCC216CF3540041E686 /* TootController.swift */; };
@@ -1657,6 +1658,7 @@
 		5373CB632159564400676F3D /* FollowersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersCell.swift; sourceTree = "<group>"; };
 		537B190B216D0E2900454351 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		537E403922774E9E009D080E /* AppearanceSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsViewController.swift; sourceTree = "<group>"; };
+		537E403B22784BF9009D080E /* SchemesSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemesSettingsViewController.swift; sourceTree = "<group>"; };
 		53865FC8216CE3B60041E686 /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
 		53865FCA216CE5540041E686 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		53865FCC216CF3540041E686 /* TootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootController.swift; sourceTree = "<group>"; };
@@ -3002,6 +3004,7 @@
 				53271355225A167D000DB75D /* GameViewController.swift */,
 				53DE98862275C8BF00077D18 /* MainSettingsViewController.swift */,
 				531154F222760C39005C5422 /* GeneralSettingsViewController.swift */,
+				537E403B22784BF9009D080E /* SchemesSettingsViewController.swift */,
 				537E403922774E9E009D080E /* AppearanceSettingsViewController.swift */,
 				5392DBFC2275FA3000D17F5F /* NotificationsSettingsViewController.swift */,
 				5392DBFA2275F5E500D17F5F /* LockSettingsViewController.swift */,
@@ -4206,6 +4209,7 @@
 				531CCD662207413C00A56145 /* FiltersCell.swift in Sources */,
 				5373CACC2152C68000676F3D /* Instances.swift in Sources */,
 				5317C7B121DA334500746197 /* BarDrawingLayer.swift in Sources */,
+				537E403C22784BF9009D080E /* SchemesSettingsViewController.swift in Sources */,
 				535B33CB215C31E3001A2A7F /* ActiveType.swift in Sources */,
 				5373CAAF2152C68000676F3D /* ClientApplication.swift in Sources */,
 				53E1AE10221AB82200A6E1E6 /* CrownControl.swift in Sources */,

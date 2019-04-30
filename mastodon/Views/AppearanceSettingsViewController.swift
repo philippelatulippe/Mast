@@ -990,7 +990,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 3))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 3 {
@@ -1026,7 +1026,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 3))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 6 {
@@ -1062,7 +1062,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 3))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 8 {
@@ -1120,7 +1120,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 3))?.contentView ?? self.view)
                     .show(on: self)
             }
         }
@@ -1170,7 +1170,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 1 {
@@ -1218,7 +1218,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 2 {
@@ -1266,7 +1266,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
                     .show(on: self)
             }
         }
@@ -1304,7 +1304,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 5))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 1 {
@@ -1349,7 +1349,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 5))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 2 {
@@ -1394,7 +1394,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 5))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 3 {
@@ -1439,7 +1439,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 5))?.contentView ?? self.view)
                     .show(on: self)
             }
         }
@@ -1477,7 +1477,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 6))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 1 {
@@ -1513,7 +1513,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 6))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 2 {
@@ -1547,7 +1547,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 6))?.contentView ?? self.view)
                     .show(on: self)
             }
         }
@@ -1583,7 +1583,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 7))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 1 {
@@ -1617,7 +1617,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 7))?.contentView ?? self.view)
                     .show(on: self)
             }
         }

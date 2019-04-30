@@ -73,6 +73,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
         }
         self.tableView.register(SettingsCell.self, forCellReuseIdentifier: "cellse")
+        self.tableView.register(SettingsCell2.self, forCellReuseIdentifier: "cellse1")
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse2")
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse23")
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse234")
@@ -528,16 +529,29 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 }
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
-                cell.configure(status: otArray[indexPath.row], status2: otArrayDesc[indexPath.row], image: otArrayIm[indexPath.row])
-                cell.backgroundColor = Colours.white
-                cell.userName.textColor = Colours.black
-                cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
-                cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
-                let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
-                cell.selectedBackgroundView = bgColorView
-                return cell
+                if indexPath.row == 5 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellse1", for: indexPath) as! SettingsCell2
+                    cell.configure(status: otArray[indexPath.row], status2: otArrayDesc[indexPath.row], image: otArrayIm[indexPath.row])
+                    cell.backgroundColor = Colours.white
+                    cell.userName.textColor = Colours.black
+                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                    cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = Colours.white
+                    cell.selectedBackgroundView = bgColorView
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
+                    cell.configure(status: otArray[indexPath.row], status2: otArrayDesc[indexPath.row], image: otArrayIm[indexPath.row])
+                    cell.backgroundColor = Colours.white
+                    cell.userName.textColor = Colours.black
+                    cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                    cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                    let bgColorView = UIView()
+                    bgColorView.backgroundColor = Colours.white
+                    cell.selectedBackgroundView = bgColorView
+                    return cell
+                }
             }
         }
     }
@@ -576,7 +590,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 3 {
@@ -610,7 +624,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 5 {
@@ -658,7 +672,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 6 {
@@ -692,7 +706,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                     .show(on: self)
             }
         }
@@ -950,7 +964,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 1 {
@@ -995,7 +1009,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
                     .show(on: self)
             }
         }
@@ -1042,7 +1056,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 1 {
@@ -1133,7 +1147,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
                     .show(on: self)
             }
         }
@@ -1171,7 +1185,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 6))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 3 {
@@ -1205,7 +1219,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 6))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 4 {
@@ -1239,24 +1253,12 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             return
                         }
                     }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 1))?.contentView ?? self.view)
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 6))?.contentView ?? self.view)
                     .show(on: self)
             }
             if indexPath.row == 5 {
-                Alertift.actionSheet(title: nil, message: "com.shi.mastodon://light : Switch to the light white theme\n\ncom.shi.mastodon://dark : Switch to the dark theme\n\ncom.shi.mastodon://darker : Switch to the darker theme\n\ncom.shi.mastodon://black : Switch to the black OLED theme\n\ncom.shi.mastodon://blue : Switch to the midnight blue theme\n\ncom.shi.mastodon://confetti : Make it rain confetti\n\ncom.shi.mastodon://onboard : Present the onboarding pop-up again\n\ncom.shi.mastodon://home : Switch to the home tab\n\ncom.shi.mastodon://mentions : Switch to the mentions tab\n\ncom.shi.mastodon://direct : Switch to the direct messages tab\n\ncom.shi.mastodon://profile : Switch to the profile tab\n\ncom.shi.mastodon://toot : Present the toot composer screen\n\ncom.shi.mastodon://settings : Present the settings section\n\ncom.shi.mastodon://toot=hello : Post a toot with the text 'hello'\n\ncom.shi.mastodon://id=123 : Go to a toot with the ID 123\n\ncom.shi.mastodon://instance=mastodon.technology : Go to an instance with the url mastodon.technology")
-                    .backgroundColor(Colours.white)
-                    .titleTextColor(Colours.grayDark)
-                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
-                    .messageTextAlignment(.left)
-                    .titleTextAlignment(.left)
-                    .action(.cancel("Dismiss"))
-                    .finally { action, index in
-                        if action.style == .cancel {
-                            return
-                        }
-                    }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
-                    .show(on: self)
+                let controller = SchemesSettingsViewController()
+                self.navigationController?.pushViewController(controller, animated: true)
             }
         }
     }
