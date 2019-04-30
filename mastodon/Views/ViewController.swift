@@ -660,6 +660,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     @objc func stopindi() {
         self.ai.alpha = 0
         self.ai.stopAnimating()
+        StoreStruct.newdrafts.remove(at: StoreStruct.newdrafts.count - 1)
     }
     
     override func didReceiveMemoryWarning() {

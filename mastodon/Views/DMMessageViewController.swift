@@ -133,12 +133,34 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                                 theType = "1"
                             }
                             self.lastUser = $0.account.acct
-
+                            
+                            var theText = NSMutableAttributedString(string: $0.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""))
+                            
+                            if $0.emojis.isEmpty {} else {
+                                let attributedString = theText
+                                $0.emojis.map({
+                                    let textAttachment = NSTextAttachment()
+                                    textAttachment.loadImageUsingCache(withUrl: $0.url.absoluteString)
+                                    textAttachment.bounds = CGRect(x:0, y: Int(-4), width: Int(UIFont.systemFont(ofSize: Colours.fontSize1).lineHeight), height: Int(UIFont.systemFont(ofSize: Colours.fontSize1).lineHeight))
+                                    let attrStringWithImage = NSAttributedString(attachment: textAttachment)
+                                    while attributedString.mutableString.contains(":\($0.shortcode):") {
+                                        let range: NSRange = (attributedString.mutableString as NSString).range(of: ":\($0.shortcode):")
+                                        attributedString.replaceCharacters(in: range, with: attrStringWithImage)
+                                    }
+                                })
+                                theText = attributedString
+                            }
+                            if $0.account.acct == StoreStruct.currentUser.acct {
+                                theText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: Colours.fontSize1)], range: theText.mutableString.range(of: theText.string))
+                            } else {
+                                theText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: Colours.fontSize1)], range: theText.mutableString.range(of: theText.string))
+                            }
+                            
                             let sender = Sender(id: theType, displayName: "\($0.account.acct)")
-                            let x = MockMessage.init(text: $0.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""), sender: sender, messageId: $0.id, date: $0.createdAt)
+                            let x = MockMessage.init(attributedText: theText, sender: sender, messageId: $0.id, date: $0.createdAt)
                             self.messages.append(x)
                             self.allPosts.append($0)
-
+                            
                             if $0.mediaAttachments.isEmpty {} else {
                                 let url = URL(string: $0.mediaAttachments.first?.previewURL ?? "")
                                 let imageData = try! Data(contentsOf: url!)

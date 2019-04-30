@@ -3860,7 +3860,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 }
                 reply.backgroundColor = Colours.white
                 if sto[indexPath.row].status?.visibility == .direct {
-                    reply.image = UIImage(named: "direct2")
+                    reply.image = UIImage(named: "direct23")
                 } else {
                     reply.image = UIImage(named: "reply")
                 }
@@ -4457,7 +4457,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 }
                 reply.backgroundColor = Colours.white
                 if sto[indexPath.row].status?.visibility == .direct {
-                    reply.image = UIImage(named: "direct2")
+                    reply.image = UIImage(named: "direct23")
                 } else {
                     reply.image = UIImage(named: "reply")
                 }

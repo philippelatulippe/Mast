@@ -1263,7 +1263,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 }
                 reply.backgroundColor = Colours.white
                 if sto[indexPath.row].lastStatus?.visibility == .direct {
-                    reply.image = UIImage(named: "direct2")
+                    reply.image = UIImage(named: "direct23")
                 } else {
                     reply.image = UIImage(named: "reply")
                 }

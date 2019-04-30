@@ -304,9 +304,6 @@ class MainFeedCell: SwipeTableViewCell {
         
         if status.reblog?.content.stripHTML() != nil {
             
-            
-            
-            
             if status.reblog!.emojis.isEmpty {
                 toot.text = "\(status.reblog?.content.stripHTML() ?? "")"
             } else {
