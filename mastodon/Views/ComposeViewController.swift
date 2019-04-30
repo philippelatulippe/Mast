@@ -193,7 +193,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                 .messageTextAlignment(.left)
                 .titleTextAlignment(.left)
-                .action(.default("Edit Poll"), image: UIImage(named: "list")) { (action, ind) in
+                .action(.default("Edit Poll"), image: UIImage(named: "pollbubble")) { (action, ind) in
                      
                     let controller = NewPollViewController()
                     self.present(controller, animated: true, completion: nil)
@@ -1122,7 +1122,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.selectedImage1.isUserInteractionEnabled = true
         self.selectedImage1.contentMode = .scaleAspectFit
         self.selectedImage1.layer.masksToBounds = true
-        self.selectedImage1.image = UIImage(named: "list")
+        self.selectedImage1.image = UIImage(named: "pollbubble")
         self.selectedImage2.image = nil
         self.selectedImage3.image = nil
         self.selectedImage4.image = nil
@@ -2309,7 +2309,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 
                 
             }
-            .action(.default(" Add Poll"), image: UIImage(named: "list")) { (action, ind) in
+            .action(.default(" Add Poll"), image: UIImage(named: "pollbubble")) { (action, ind) in
                  
                 
                 let controller = NewPollViewController()

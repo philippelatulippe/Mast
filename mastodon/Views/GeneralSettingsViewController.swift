@@ -215,7 +215,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
     
     var toArray = ["Default Toot Privacy", "Emoticon Suggestions"]
     var toArrayDesc = ["Select a default privacy state for you toots, from public (everyone can see), unlisted (everyone apart from local and federated timelines can see), private (followers and mentioned users can see), and direct (only to the mentioned user).", "Choose whether to allow emoticon suggestions when composing toots."]
-    var toArrayIm = ["biolock2", "setemot"]
+    var toArrayIm = ["biolock3", "setemot"]
     
     var meArray = ["Image Upload Quality", "Recent Media Swipe Type", "Default Video Container", "Link Previews"]
     var meArrayDesc = ["Pick the quality of images uploaded when composing toots. A higher quality image may take longer to upload.", "Pick whether swiping enlarged recent media images scrolls through all attached media in the specified toot and does nothing if there's a single image, or whether it scrolls through all recent media.", "Choose whether to show videos and GIFs in a custom Picture-in-Picture container which can be swiped down to keep the view around, or in the stock media player, where swiping down dismisses the content.", "Choose whether to display link preview cards in toot details for the attached link within the toot."]
@@ -227,11 +227,11 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
     
     var geArray = ["Shake Gesture", "Long-Hold Anywhere Action", "Long Swipe Selection", "Tilt Depth"]
     var geArrayDesc = ["Select whether to hide sensitive content, rain confetti, or do nothing when shaking your device.", "Select what happens when you long-hold anywhere in the app.", "Swipe all the way left or right on a toot to select the action on the edge.", "Tilt the device to emulate a sense of depth. This may require restarting the app to take effect."]
-    var geArrayIm = ["setshake", "holdse", "swipeact", "holdse"]
+    var geArrayIm = ["setshake", "holdse", "swipeact", "tiltin"]
     
     var otArray = ["Haptic Feedback", "User Search Scope", "Thumb Scroller", "Links Destination", "Direct Messages View Style", "URL Schemes"]
     var otArrayDesc = ["Get a responsive little vibration when tapping buttons and other on-screen elements.", "Pick whether searching for users is across all of Mastodon or just local.", "Display a circular thumb scroller on timelines, which allows you to rotate the scroller with your thumb to navigate through timelines without lifting a finger. This may require restarting the app to take effect.", "Pick whether to open links in-app, or in Safari.", "Choose whether to open direct messages in the mentions tab in a chat-style view or a toot-style view.", "Use these to do specific actions within the app from outside the app."]
-    var otArrayIm = ["sethap", "searchscope", "circscroll", "schemes", "direct23", "schemes"]
+    var otArrayIm = ["sethap", "searchscope", "circscroll", "ldest", "direct23", "schemes"]
     
     @objc func handleToggleStream(sender: UISwitch) {
         if sender.isOn {

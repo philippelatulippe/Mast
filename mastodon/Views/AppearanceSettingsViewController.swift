@@ -225,7 +225,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
     
     var meArray = ["Image Corner Radius", "Media Captions", "Media Gallery Columns", "Photos Gallery Columns"]
     var meArrayDesc = ["Rounded or not, your choice.", "Pick whether to display the toot text or the image's alt text in media captions.", "Pick the amount of columns for the media gallery grid.", "Pick the amount of columns for the toot composition photo picker gallery grid."]
-    var meArrayIm = ["setima", "heavyse", "gridse", "gridse"]
+    var meArrayIm = ["setima", "heavyse", "gridse3", "gridse"]
     
     var seArray = ["Segment Size", "Segment Transition Style", "Segment Hue"]
     var seArrayDesc = ["Choose from larger home and notification section segments, or tinier ones.", "Pick between a static transition, or a playful liquid one.", "Select the hue for segments. This may require restarting the app to take effect."]

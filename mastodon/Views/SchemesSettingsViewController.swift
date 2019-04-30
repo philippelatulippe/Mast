@@ -187,7 +187,7 @@ class SchemesSettingsViewController: UIViewController, UITableViewDelegate, UITa
         
         UIPasteboard.general.string = scArray[indexPath.row]
         
-        Alertift.actionSheet(title: "Copied to clipboard", message: scArrayDesc[indexPath.row])
+        Alertift.actionSheet(title: "Copied to clipboard", message: scArray[indexPath.row])
             .backgroundColor(Colours.white)
             .titleTextColor(Colours.grayDark)
             .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
