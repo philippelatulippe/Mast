@@ -257,7 +257,7 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
                 }
             } else if indexPath.row == 1 {
                 // about
-                Alertift.actionSheet(title: "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", message: "Designed and hand-crafted with \u{2665} by @JPEG@mastodon.technology\n\nI'm an independant 23 year old developer from the UK, creating and crafting Mast in my spare time. It can be daunting manning a project of this magnitude, but I love what I do and Mast is a wonderful place to pour my creativity into. If you like what I do, please consider leaving a tip to encourage great continued support. If you're not a fan of what I do, please get in touch and let me know how I can improve and be better!\n\nHappy tooting :)".localized)
+                Alertift.actionSheet(title: "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", message: "Designed and hand-crafted with \u{2665} by @JPEG@mastodon.technology\n\nI'm an independant 23 year old developer from the UK, creating and crafting Mast in my spare time. It can be daunting manning a project of this magnitude, but I love what I do and Mast is a wonderful place to pour my creativity and effort into. If you like what I do, please consider leaving a tip to encourage great continued support. If you have any questions or concerns, please get in touch and let me know how I can improve and be better!\n\nHappy tooting :)".localized)
                     .backgroundColor(Colours.white)
                     .titleTextColor(Colours.grayDark)
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))

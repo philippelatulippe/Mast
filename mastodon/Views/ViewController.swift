@@ -1033,20 +1033,15 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             do {
                 let st1 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
-                StoreStruct.statusesHome = StoreStruct.statusesHome + st1
-                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                StoreStruct.statusesHome = st1
                 let st2 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
-                StoreStruct.statusesLocal = StoreStruct.statusesLocal + st2
-                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                StoreStruct.statusesLocal = st2
                 let st3 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
-                StoreStruct.statusesFederated = StoreStruct.statusesFederated + st3
-                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                StoreStruct.statusesFederated = st3
                 let st4 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
-                StoreStruct.notifications = StoreStruct.notifications + st4
-                StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
+                StoreStruct.notifications = st4
                 let st5 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
-                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + st5
-                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+                StoreStruct.notificationsMentions = st5
             } catch {
                 print("Couldn't load")
             }

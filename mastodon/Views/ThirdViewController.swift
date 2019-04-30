@@ -774,9 +774,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                         
                     } else {
-                        DispatchQueue.main.async {
                         self.profileStatuses = stat
                         self.chosenUser = self.profileStatuses[0].account
+                        DispatchQueue.main.async {
                             
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
@@ -809,9 +809,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     
                                 } else {
                                     
-                                    DispatchQueue.main.async {
                                     self.profileStatuses = stat
                                     self.chosenUser = self.profileStatuses[0].account
+                                    DispatchQueue.main.async {
                                         
                                         self.ai.alpha = 0
                                         self.ai.removeFromSuperview()
@@ -835,16 +835,16 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                         if stat.isEmpty {
                             
+                            self.chosenUser = StoreStruct.currentUser
                             DispatchQueue.main.async {
-                                self.chosenUser = StoreStruct.currentUser
                                 self.tableView.reloadData()
                             }
                             
                         } else {
                             
-                            DispatchQueue.main.async {
                             self.profileStatuses = stat
                             self.chosenUser = self.profileStatuses[0].account
+                            DispatchQueue.main.async {
                                 
                                 self.ai.alpha = 0
                                 self.ai.removeFromSuperview()
@@ -877,17 +877,17 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let request09 = Accounts.account(id: self.userIDtoUse)
                         StoreStruct.client.run(request09) { (statuses) in
                             if let stat = (statuses.value) {
+                                self.chosenUser = stat
                                 DispatchQueue.main.async {
-                                    self.chosenUser = stat
                                     self.tableView.reloadData()
                                 }
                             }
                         }
                         
                     } else {
-                        DispatchQueue.main.async {
                         self.profileStatuses2 = stat
                         self.chosenUser = self.profileStatuses2[0].account
+                        DispatchQueue.main.async {
                             
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
@@ -913,16 +913,16 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 
                                 if stat.isEmpty {
                                     
+                                    self.chosenUser = StoreStruct.currentUser
                                     DispatchQueue.main.async {
-                                        self.chosenUser = StoreStruct.currentUser
                                         self.tableView.reloadData()
                                     }
                                     
                                 } else {
                                     
+                                    self.profileStatuses2 = stat
+                                    self.chosenUser = self.profileStatuses2[0].account
                                     DispatchQueue.main.async {
-                                        self.profileStatuses2 = stat
-                                        self.chosenUser = self.profileStatuses2[0].account
                                         
                                         self.ai.alpha = 0
                                         self.ai.removeFromSuperview()
@@ -946,16 +946,16 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                         if stat.isEmpty {
                             
+                            self.chosenUser = StoreStruct.currentUser
                             DispatchQueue.main.async {
-                                self.chosenUser = StoreStruct.currentUser
                                 self.tableView.reloadData()
                             }
                             
                         } else {
                             
+                            self.profileStatuses2 = stat
+                            self.chosenUser = self.profileStatuses2[0].account
                             DispatchQueue.main.async {
-                                self.profileStatuses2 = stat
-                                self.chosenUser = self.profileStatuses2[0].account
                                 
                                 self.ai.alpha = 0
                                 self.ai.removeFromSuperview()
@@ -983,8 +983,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
                             if stat.isEmpty {} else {
-                                DispatchQueue.main.async {
                                 self.profileStatusesHasImage = self.profileStatusesHasImage + stat
+                                DispatchQueue.main.async {
                                     self.tableView.reloadData()
                                 }
                             }

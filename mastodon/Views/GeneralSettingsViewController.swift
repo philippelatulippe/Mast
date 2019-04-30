@@ -13,6 +13,7 @@ import SafariServices
 import StatusAlert
 import SAConfettiView
 import UserNotifications
+import Disk
 
 class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate, UIGestureRecognizerDelegate, UNUserNotificationCenterDelegate {
     
@@ -74,6 +75,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
         }
         self.tableView.register(SettingsCell.self, forCellReuseIdentifier: "cellse")
         self.tableView.register(SettingsCell2.self, forCellReuseIdentifier: "cellse1")
+        self.tableView.register(SettingsCell3.self, forCellReuseIdentifier: "cellse3")
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse2")
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse23")
         self.tableView.register(SettingsCellToggle.self, forCellReuseIdentifier: "cellse234")
@@ -142,7 +144,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
     // Table stuff
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -166,8 +168,10 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             title.text = "Keyboard"
         } else if section == 5 {
             title.text = "Gestures"
-        } else {
+        } else if section == 6 {
             title.text = "Other"
+        } else {
+            title.text = "Danger Zone"
         }
         title.textColor = Colours.grayDark.withAlphaComponent(0.38)
         title.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
@@ -190,8 +194,10 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             return keArray.count
         } else if section == 5 {
             return geArray.count
-        } else {
+        } else if section == 6 {
             return otArray.count
+        } else {
+            return 1
         }
     }
     
@@ -500,7 +506,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }
-        } else {
+        } else if indexPath.section == 6 {
             if indexPath.row == 0 || indexPath.row == 2 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse234567", for: indexPath) as! SettingsCellToggle
                 cell.configure(status: otArray[indexPath.row], status2: otArrayDesc[indexPath.row], image: otArrayIm[indexPath.row])
@@ -553,6 +559,17 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                     return cell
                 }
             }
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellse3", for: indexPath) as! SettingsCell3
+            cell.configure(status: "Reset App", status2: "Resetting the app will clear all content and data, remove all accounts, and return you to the log-in screen.")
+            cell.backgroundColor = Colours.white
+            cell.userName.textColor = Colours.black
+            cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+            cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+            let bgColorView = UIView()
+            bgColorView.backgroundColor = Colours.white
+            cell.selectedBackgroundView = bgColorView
+            return cell
         }
     }
     
@@ -1261,6 +1278,130 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 self.navigationController?.pushViewController(controller, animated: true)
             }
         }
+        if indexPath.section == 7 {
+            Alertift.actionSheet(title: "Are you sure?", message: "Resetting the app will clear all content and data, remove all accounts, and return you to the log-in screen.")
+                .backgroundColor(Colours.white)
+                .titleTextColor(Colours.grayDark)
+                .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                .messageTextAlignment(.left)
+                .titleTextAlignment(.left)
+                .action(.destructive("Reset App".localized), image: nil) { (action, ind) in
+                    self.clearAll()
+                }
+                .action(.cancel("Dismiss"))
+                .finally { action, index in
+                    if action.style == .cancel {
+                        return
+                    }
+                }
+                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 7))?.contentView ?? self.view)
+                .show(on: self)
+        }
+    }
+    
+    func clearAll() {
+        let appDomain: String? = Bundle.main.bundleIdentifier
+        UserDefaults.standard.removePersistentDomain(forName: appDomain!)
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            if key == "PushNotificationState" || key == "PushNotificationReceiver" {} else {
+                defaults.removeObject(forKey: key)
+            }
+        }
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.synchronize()
+        
+        UserDefaults.standard.set(nil, forKey: "onb")
+        StoreStruct.client = Client(baseURL: "")
+        StoreStruct.shared.currentInstance.redirect = ""
+        StoreStruct.shared.currentInstance.returnedText = ""
+        StoreStruct.shared.currentInstance.clientID = ""
+        StoreStruct.shared.currentInstance.clientSecret = ""
+        StoreStruct.shared.currentInstance.authCode = ""
+        StoreStruct.shared.currentInstance.accessToken = ""
+        StoreStruct.currentPage = 0
+        StoreStruct.playerID = ""
+        StoreStruct.caption1 = ""
+        StoreStruct.caption2 = ""
+        StoreStruct.caption3 = ""
+        StoreStruct.caption4 = ""
+        StoreStruct.emotiSize = 16
+        StoreStruct.emotiFace = []
+        StoreStruct.mainResult = []
+        StoreStruct.instanceLocalToAdd = []
+        StoreStruct.statusesHome = []
+        StoreStruct.statusesLocal = []
+        StoreStruct.statusesFederated = []
+        StoreStruct.notifications = []
+        StoreStruct.notificationsMentions = []
+        StoreStruct.fromOtherUser = false
+        StoreStruct.userIDtoUse = ""
+        StoreStruct.profileStatuses = []
+        StoreStruct.profileStatusesHasImage = []
+        StoreStruct.statusSearch = []
+        StoreStruct.statusSearchUser = []
+        StoreStruct.searchIndex = 0
+        StoreStruct.tappedTag = ""
+        StoreStruct.currentUser = nil
+        StoreStruct.newInstanceTags = []
+        StoreStruct.allLists = []
+        StoreStruct.allListRelID = ""
+        StoreStruct.currentList = []
+        StoreStruct.currentListTitle = ""
+        StoreStruct.allLikes = []
+        StoreStruct.allBoosts = []
+        StoreStruct.allPins = []
+        StoreStruct.photoNew = UIImage()
+        StoreStruct.spoilerText = ""
+        StoreStruct.typeOfSearch = 0
+        StoreStruct.curID = ""
+        StoreStruct.curIDNoti = ""
+        StoreStruct.doOnce = true
+        StoreStruct.isSplit = false
+        StoreStruct.gapLastHomeID = ""
+        StoreStruct.gapLastLocalID = ""
+        StoreStruct.gapLastFedID = ""
+        StoreStruct.gapLastHomeStat = nil
+        StoreStruct.gapLastLocalStat = nil
+        StoreStruct.gapLastFedStat = nil
+        StoreStruct.newIDtoGoTo = ""
+        StoreStruct.maxChars = 500
+        StoreStruct.initTimeline = false
+        StoreStruct.savedComposeText = ""
+        StoreStruct.savedInReplyText = ""
+        StoreStruct.hexCol = UIColor.white
+        StoreStruct.historyBool = false
+        StoreStruct.currentInstanceDetails = []
+        StoreStruct.currentImageURL = URL(string: "www.google.com")
+        StoreStruct.containsPoll = false
+        StoreStruct.pollHeight = 0
+        StoreStruct.currentPollSelection = []
+        StoreStruct.currentPollSelectionTitle = ""
+        StoreStruct.newPollPost = []
+        StoreStruct.currentOptions = []
+        StoreStruct.expiresIn = 86400
+        StoreStruct.allowsMultiple = false
+        StoreStruct.totalsHidden = false
+        StoreStruct.pollPickerDate = Date()
+        StoreStruct.composedTootText = ""
+        StoreStruct.holdOnTempText = ""
+        StoreStruct.tappedSignInCheck = false
+        StoreStruct.markedReadIDs = []
+        StoreStruct.newdrafts = []
+        StoreStruct.notTypes = []
+        
+        do {
+            try Disk.clear(.documents)
+        } catch {
+            print("couldn't clear disk")
+        }
+        
+        let loginController = ViewController()
+        loginController.createLoginView(newInstance: false)
+        self.present(loginController, animated: true, completion: {
+            loginController.textField.becomeFirstResponder()
+        })
     }
     
     func loadLoadLoad() {
