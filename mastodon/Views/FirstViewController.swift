@@ -723,7 +723,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 self.segmentedControl.alpha = 0
             })
         }
-        let controller = SettingsViewController()
+        let controller = MainSettingsViewController()
         self.navigationController?.pushViewController(controller, animated: true)
     }
     

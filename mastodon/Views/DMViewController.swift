@@ -347,7 +347,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     @objc func goToSettings() {
-        let controller = SettingsViewController()
+        let controller = MainSettingsViewController()
         self.navigationController?.pushViewController(controller, animated: true)
     }
     

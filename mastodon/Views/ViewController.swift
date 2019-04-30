@@ -298,16 +298,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let currentInstance = InstanceData(clientID: StoreStruct.shared.currentInstance.clientID, clientSecret: StoreStruct.shared.currentInstance.clientSecret, authCode: StoreStruct.shared.currentInstance.authCode, accessToken: StoreStruct.shared.currentInstance.accessToken, returnedText: StoreStruct.shared.currentInstance.returnedText, redirect:StoreStruct.shared.currentInstance.redirect)
                     InstanceData.setCurrentInstance(instance: currentInstance)
                     
-                    let request = Timelines.home()
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            StoreStruct.statusesHome = stat
-                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
-                        }
-                    }
-                    
-                    
                     let request2 = Accounts.currentUser()
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
@@ -319,6 +309,15 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                                 Account.addAccountToList(account: stat)
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                             }
+                        }
+                    }
+                    
+                    let request = Timelines.home()
+                    StoreStruct.client.run(request) { (statuses) in
+                        if let stat = (statuses.value) {
+                            StoreStruct.statusesHome = stat
+                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
                         }
                     }
                     
@@ -397,6 +396,20 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     
                     newInstance.accessToken = access1
                     InstanceData.setCurrentInstance(instance: newInstance)
+                        
+                        let request2 = Accounts.currentUser()
+                        StoreStruct.shared.newClient.run(request2) { (statuses) in
+                            if let stat = (statuses.value) {
+                                DispatchQueue.main.async {
+                                    var instances = InstanceData.getAllInstances()
+                                    instances.append(newInstance)
+                                    UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey: "instances")
+                                    StoreStruct.currentUser = stat
+                                    Account.addAccountToList(account: stat)
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+                                }
+                            }
+                        }
                     
                     let request = Timelines.home()
                     StoreStruct.shared.newClient.run(request) { (statuses) in
@@ -404,20 +417,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                             StoreStruct.statusesHome = stat
                             StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
-                        }
-                    }
-                    
-                    let request2 = Accounts.currentUser()
-                    StoreStruct.shared.newClient.run(request2) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
-                                var instances = InstanceData.getAllInstances()
-                                instances.append(newInstance)
-                                UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey: "instances")
-                                StoreStruct.currentUser = stat
-                                Account.addAccountToList(account: stat)
-                                NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
-                            }
                         }
                     }
                         
@@ -1056,7 +1055,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             let request2 = Accounts.currentUser()
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
-                    Account.addAccountToList(account: stat)
+                    if Account.getAccounts().contains(stat) {} else {
+                        Account.addAccountToList(account: stat)
+                    }
                     StoreStruct.currentUser = stat
                 }
             }
@@ -2724,7 +2725,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             let request2 = Accounts.currentUser()
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
-                    Account.addAccountToList(account: stat)
+                    if Account.getAccounts().contains(stat) {} else {
+                        Account.addAccountToList(account: stat)
+                    }
                     StoreStruct.currentUser = stat
                 }
             }

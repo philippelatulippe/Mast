@@ -140,7 +140,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
     // Table stuff
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 8
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -162,6 +162,12 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
             title.text = "Timeline".localized
         } else if section == 4 {
             title.text = "Profile".localized
+        } else if section == 5 {
+            title.text = "Media".localized
+        } else if section == 6 {
+            title.text = "Segments".localized
+        } else if section == 7 {
+            title.text = "Other".localized
         } else {
             title.text = "".localized
         }
@@ -184,6 +190,12 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
             return tiArray.count
         } else if section == 4 {
             return prArray.count
+        } else if section == 5 {
+            return meArray.count
+        } else if section == 6 {
+            return seArray.count
+        } else if section == 7 {
+            return otArray.count
         } else {
             return 0
         }
@@ -210,6 +222,18 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
     var prArray = ["Profile Corner Radius", "Profile Header Background", "Profile Display Picture Border", "Profile Display Picture in Toot Composition"]
     var prArrayDesc = ["Circle or square, your choice.", "Change the style of the profile header background.", "Select a size for the border around display pictures.", "Choose whether to display the current account's display picture in the top-left when composing toots."]
     var prArrayIm = ["setpro", "headbgse", "bordset", "compav"]
+    
+    var meArray = ["Image Corner Radius", "Media Captions", "Media Gallery Columns", "Photos Gallery Columns"]
+    var meArrayDesc = ["Rounded or not, your choice.", "Pick whether to display the toot text or the image's alt text in media captions.", "Pick the amount of columns for the media gallery grid.", "Pick the amount of columns for the toot composition photo picker gallery grid."]
+    var meArrayIm = ["setima", "heavyse", "gridse", "gridse"]
+    
+    var seArray = ["Segment Size", "Segment Transition Style", "Segment Hue"]
+    var seArrayDesc = ["Choose from larger home and notification section segments, or tinier ones.", "Pick between a static transition, or a playful liquid one.", "Select the hue for segments. This may require restarting the app to take effect."]
+    var seArrayIm = ["segse", "segse2", "seghue"]
+    
+    var otArray = ["Toot Progress Indicator", "Instances and Lists Icon", "Popup Alerts", "Confetti"]
+    var otArrayDesc = ["Choose whether to show the toot progress indicator or not.", "Select an icon to use for the top-left instances and list section icon.", "Pick whether to display popup alerts for a variety of actions including tooting, liking, and boosting.", "Add some fun to posting toots, following users, boosting toots, and liking toots."]
+    var otArrayIm = ["indic", "barcol10", "popupset", "confett"]
     
     @objc func handleToggleSelectGraph(sender: UISwitch) {
         if sender.isOn {
@@ -278,6 +302,24 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
             sender.setOn(true, animated: true)
         } else {
             UserDefaults.standard.set(0, forKey: "compav")
+            sender.setOn(false, animated: true)
+        }
+    }
+    @objc func handleTogglePopupset(sender: UISwitch) {
+        if sender.isOn {
+            UserDefaults.standard.set(0, forKey: "popupset")
+            sender.setOn(true, animated: true)
+        } else {
+            UserDefaults.standard.set(1, forKey: "popupset")
+            sender.setOn(false, animated: true)
+        }
+    }
+    @objc func handleToggleNotif(sender: UISwitch) {
+        if sender.isOn {
+            UserDefaults.standard.set(0, forKey: "notifToggle")
+            sender.setOn(true, animated: true)
+        } else {
+            UserDefaults.standard.set(1, forKey: "notifToggle")
             sender.setOn(false, animated: true)
         }
     }
@@ -409,6 +451,68 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
                 cell.configure(status: prArray[indexPath.row], status2: prArrayDesc[indexPath.row], image: prArrayIm[indexPath.row])
+                cell.backgroundColor = Colours.white
+                cell.userName.textColor = Colours.black
+                cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                let bgColorView = UIView()
+                bgColorView.backgroundColor = Colours.white
+                cell.selectedBackgroundView = bgColorView
+                return cell
+            }
+        } else if indexPath.section == 5 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
+            cell.configure(status: meArray[indexPath.row], status2: meArrayDesc[indexPath.row], image: meArrayIm[indexPath.row])
+            cell.backgroundColor = Colours.white
+            cell.userName.textColor = Colours.black
+            cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+            cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+            let bgColorView = UIView()
+            bgColorView.backgroundColor = Colours.white
+            cell.selectedBackgroundView = bgColorView
+            return cell
+        } else if indexPath.section == 6 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
+            cell.configure(status: seArray[indexPath.row], status2: seArrayDesc[indexPath.row], image: seArrayIm[indexPath.row])
+            cell.backgroundColor = Colours.white
+            cell.userName.textColor = Colours.black
+            cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+            cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+            let bgColorView = UIView()
+            bgColorView.backgroundColor = Colours.white
+            cell.selectedBackgroundView = bgColorView
+            return cell
+        } else if indexPath.section == 7 {
+            if indexPath.row == 2 || indexPath.row == 3 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellse234", for: indexPath) as! SettingsCellToggle
+                cell.configure(status: otArray[indexPath.row], status2: otArrayDesc[indexPath.row], image: otArrayIm[indexPath.row])
+                cell.backgroundColor = Colours.white
+                cell.userName.textColor = Colours.black
+                cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                let bgColorView = UIView()
+                bgColorView.backgroundColor = Colours.white
+                cell.selectedBackgroundView = bgColorView
+                if indexPath.row == 2 {
+                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
+                        cell.switchView.setOn(true, animated: false)
+                    } else {
+                        cell.switchView.setOn(false, animated: false)
+                    }
+                    cell.switchView.addTarget(self, action: #selector(self.handleTogglePopupset), for: .touchUpInside)
+                }
+                if indexPath.row == 3 {
+                    if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
+                        cell.switchView.setOn(true, animated: false)
+                    } else {
+                        cell.switchView.setOn(false, animated: false)
+                    }
+                    cell.switchView.addTarget(self, action: #selector(self.handleToggleNotif), for: .touchUpInside)
+                }
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellse", for: indexPath) as! SettingsCell
+                cell.configure(status: otArray[indexPath.row], status2: otArrayDesc[indexPath.row], image: otArrayIm[indexPath.row])
                 cell.backgroundColor = Colours.white
                 cell.userName.textColor = Colours.black
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
@@ -1167,13 +1271,355 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
             }
         }
         if indexPath.section == 5 {
-            
+            if indexPath.row == 0 {
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "imCorner") == nil) || (UserDefaults.standard.object(forKey: "imCorner") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "imCorner") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Rounded Rectangle".localized), image: filledSet1) { (action, ind) in
+                        
+                        UserDefaults.standard.set(0, forKey: "imCorner")
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: self)
+                    }
+                    .action(.default("Rectangle".localized), image: filledSet2) { (action, ind) in
+                        
+                        UserDefaults.standard.set(1, forKey: "imCorner")
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: self)
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+            if indexPath.row == 1 {
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                var filledSet3 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "captionset") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "captionset") as! Int == 2) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Toot Text".localized), image: filledSet1) { (action, ind) in
+                        
+                        UserDefaults.standard.set(0, forKey: "captionset")
+                    }
+                    .action(.default("Image Alt Text".localized), image: filledSet2) { (action, ind) in
+                        
+                        UserDefaults.standard.set(1, forKey: "captionset")
+                    }
+                    .action(.default("No Caption".localized), image: filledSet3) { (action, ind) in
+                        
+                        UserDefaults.standard.set(2, forKey: "captionset")
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+            if indexPath.row == 2 {
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                var filledSet3 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "medcolgrid") == nil) || (UserDefaults.standard.object(forKey: "medcolgrid") as! Int == 0) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "medcolgrid") as! Int == 1) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "medcolgrid") as! Int == 2) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("2 Columns".localized), image: filledSet1) { (action, ind) in
+                        
+                        UserDefaults.standard.set(1, forKey: "medcolgrid")
+                    }
+                    .action(.default("3 Columns".localized), image: filledSet2) { (action, ind) in
+                        
+                        UserDefaults.standard.set(0, forKey: "medcolgrid")
+                    }
+                    .action(.default("4 Columns".localized), image: filledSet3) { (action, ind) in
+                        
+                        UserDefaults.standard.set(2, forKey: "medcolgrid")
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+            if indexPath.row == 3 {
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                var filledSet3 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "colgrid") == nil) || (UserDefaults.standard.object(forKey: "colgrid") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "colgrid") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "colgrid") as! Int == 2) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("2 Column Grid".localized), image: filledSet3) { (action, ind) in
+                        
+                        UserDefaults.standard.set(2, forKey: "colgrid")
+                    }
+                    .action(.default("3 Column Grid".localized), image: filledSet2) { (action, ind) in
+                        
+                        UserDefaults.standard.set(1, forKey: "colgrid")
+                    }
+                    .action(.default("4 Column Grid".localized), image: filledSet1) { (action, ind) in
+                        
+                        UserDefaults.standard.set(0, forKey: "colgrid")
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .show(on: self)
+            }
         }
         if indexPath.section == 6 {
-            
+            if indexPath.row == 0 {
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "segsize") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Small".localized), image: filledSet2) { (action, ind) in
+                        
+                        UserDefaults.standard.set(1, forKey: "segsize")
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "changeSeg"), object: self)
+                    }
+                    .action(.default("Large".localized), image: filledSet1) { (action, ind) in
+                        
+                        UserDefaults.standard.set(0, forKey: "segsize")
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "changeSeg"), object: self)
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+            if indexPath.row == 1 {
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "segstyle") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Static".localized), image: filledSet1) { (action, ind) in
+                        
+                        UserDefaults.standard.set(0, forKey: "segstyle")
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "changeSeg"), object: self)
+                    }
+                    .action(.default("Liquid".localized), image: filledSet2) { (action, ind) in
+                        
+                        UserDefaults.standard.set(1, forKey: "segstyle")
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "changeSeg"), object: self)
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+            if indexPath.row == 2 {
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Theme Hue".localized), image: filledSet1) { (action, ind) in
+                        
+                        UserDefaults.standard.set(0, forKey: "seghue1")
+                    }
+                    .action(.default("Subtle".localized), image: filledSet2) { (action, ind) in
+                        
+                        UserDefaults.standard.set(1, forKey: "seghue1")
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .show(on: self)
+            }
         }
         if indexPath.section == 7 {
-            
+            if indexPath.row == 0 {
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "progprogprogprog") == nil) || (UserDefaults.standard.object(forKey: "progprogprogprog") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "progprogprogprog") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Hidden".localized), image: filledSet2) { (action, ind) in
+                        
+                        UserDefaults.standard.set(1, forKey: "progprogprogprog")
+                    }
+                    .action(.default("Displayed".localized), image: filledSet1) { (action, ind) in
+                        
+                        UserDefaults.standard.set(0, forKey: "progprogprogprog")
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+            if indexPath.row == 1 {
+                var filledSet1 = UIImage(named: "unfilledset")
+                var filledSet2 = UIImage(named: "unfilledset")
+                if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
+                    filledSet1 = UIImage(named: "filledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "insicon1") as! Int == 1) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "filledset")
+                }
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("List Icon".localized), image: filledSet1) { (action, ind) in
+                        
+                        UserDefaults.standard.set(0, forKey: "insicon1")
+                    }
+                    .action(.default("Profile Icon".localized), image: filledSet2) { (action, ind) in
+                        
+                        UserDefaults.standard.set(1, forKey: "insicon1")
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 2))?.contentView ?? self.view)
+                    .show(on: self)
+            }
         }
     }
     

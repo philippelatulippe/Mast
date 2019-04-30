@@ -731,7 +731,6 @@
 		5393859D217393A4002444FC /* DLTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393859A217393A3002444FC /* DLTagButton.swift */; };
 		5393859E217393A4002444FC /* DLTagInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393859B217393A3002444FC /* DLTagInfo.swift */; };
 		53ADB308217E4F6C00A7C431 /* NewCaptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADB307217E4F6C00A7C431 /* NewCaptionViewController.swift */; };
-		53BC45BA215AC7D30092223F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45B9215AC7D30092223F /* SettingsViewController.swift */; };
 		53BC45BC215AC8EE0092223F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45BB215AC8EE0092223F /* SettingsCell.swift */; };
 		53BC45C2215AE4F10092223F /* SettingsCellToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */; };
 		53C037B0220A2A6F0047EBC4 /* NewQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */; };
@@ -1675,7 +1674,6 @@
 		5393859A217393A3002444FC /* DLTagButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLTagButton.swift; sourceTree = "<group>"; };
 		5393859B217393A3002444FC /* DLTagInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLTagInfo.swift; sourceTree = "<group>"; };
 		53ADB307217E4F6C00A7C431 /* NewCaptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCaptionViewController.swift; sourceTree = "<group>"; };
-		53BC45B9215AC7D30092223F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		53BC45BB215AC8EE0092223F /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellToggle.swift; sourceTree = "<group>"; };
 		53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQRViewController.swift; sourceTree = "<group>"; };
@@ -3002,7 +3000,6 @@
 				535B339A215C0198001A2A7F /* BoostersViewController.swift */,
 				5352D08F215E48DE00901B60 /* ListMembersViewController.swift */,
 				53271355225A167D000DB75D /* GameViewController.swift */,
-				53BC45B9215AC7D30092223F /* SettingsViewController.swift */,
 				53DE98862275C8BF00077D18 /* MainSettingsViewController.swift */,
 				531154F222760C39005C5422 /* GeneralSettingsViewController.swift */,
 				537E403922774E9E009D080E /* AppearanceSettingsViewController.swift */,
@@ -4270,7 +4267,6 @@
 				53E826E52236C32D00153721 /* ToppingLabel.swift in Sources */,
 				536A4FB1216B73D600A3D483 /* BulletinManager.swift in Sources */,
 				5392DBF92275EF8000D17F5F /* AccountSettingsViewController.swift in Sources */,
-				53BC45BA215AC7D30092223F /* SettingsViewController.swift in Sources */,
 				5351D75A21617FC40012960F /* VolumeBarWindow.swift in Sources */,
 				5351D75B21617FC40012960F /* VolumeBarAnimation+Presets.swift in Sources */,
 				5373CA9B2152C68000676F3D /* Client.swift in Sources */,
