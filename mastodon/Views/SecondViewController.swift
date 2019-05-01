@@ -4943,7 +4943,88 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 return [more]
             }
         } else {
-            return nil
+            
+            if orientation == .left {
+                return nil
+            } else {
+            
+            let impact = UIImpactFeedbackGenerator(style: .medium)
+            
+            let more = SwipeAction(style: .default, title: nil) { action, indexPath in
+                
+                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                    impact.impactOccurred()
+                }
+                
+                let wordsInThis = (sto[indexPath.row].status?.content.stripHTML() ?? "").components(separatedBy: .punctuationCharacters).joined().components(separatedBy: " ").filter{!$0.isEmpty}.count
+                let newSeconds = Double(wordsInThis) * 0.38
+                var newSecondsText = "\(Int(newSeconds)) seconds average reading time"
+                if newSeconds >= 60 {
+                    if Int(newSeconds) % 60 == 0 {
+                        newSecondsText = "\(Int(newSeconds/60)) minutes average reading time"
+                    } else {
+                        newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
+                    }
+                }
+                
+                Alertift.actionSheet(title: nil, message: newSecondsText)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Delete Notification".localized), image: UIImage(named: "block")) { (action, ind) in
+                        
+                        if self.currentIndex == 0 {
+                            StoreStruct.notifications = StoreStruct.notifications.filter { $0 != StoreStruct.notifications[indexPath.row] }
+                            self.tableView2.deleteRows(at: [indexPath], with: .none)
+                        } else if self.currentIndex == 5 {
+                            
+                        } else if self.currentIndex == 1 {
+                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.filter { $0 != StoreStruct.notificationsMentions[indexPath.row] }
+                            self.tableView.deleteRows(at: [indexPath], with: .none)
+                        }
+                        
+                        let request = Notifications.dismiss(id: sto[indexPath.row].id)
+                        StoreStruct.client.run(request) { (statuses) in
+                            DispatchQueue.main.async {
+                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                    let notification = UINotificationFeedbackGenerator()
+                                    notification.notificationOccurred(.success)
+                                }
+                                let statusAlert = StatusAlert()
+                                statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
+                                statusAlert.title = "Deleted".localized
+                                statusAlert.contentColor = Colours.grayDark
+                                statusAlert.message = "Notification"
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    statusAlert.show()
+                                }
+                            }
+                        }
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
+                    .show(on: self)
+                
+                if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
+                    cell.hideSwipe(animated: true)
+                } else {
+                    let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
+                    cell.hideSwipe(animated: true)
+                }
+            }
+            more.backgroundColor = Colours.white
+            more.image = UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected)
+            more.transitionDelegate = ScaleTransition.default
+            more.textColor = Colours.tabUnselected
+            return [more]
+            }
         }
     }
     
