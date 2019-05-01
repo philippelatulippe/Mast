@@ -147,35 +147,6 @@ class ScheduledCellImage: SwipeTableViewCell {
         mainImageViewBG.layer.shadowRadius = 10
         mainImageViewBG.layer.shadowOpacity = 0.5
         mainImageViewBG.layer.masksToBounds = false
-        if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
-            let amount = 15
-            let horizontalEffect = UIInterpolatingMotionEffect(
-                keyPath: "layer.shadowOffset.width",
-                type: .tiltAlongHorizontalAxis)
-            horizontalEffect.minimumRelativeValue = amount
-            horizontalEffect.maximumRelativeValue = -amount
-            let verticalEffect = UIInterpolatingMotionEffect(
-                keyPath: "layer.shadowOffset.height",
-                type: .tiltAlongVerticalAxis)
-            verticalEffect.minimumRelativeValue = amount
-            verticalEffect.maximumRelativeValue = -amount
-            let effectGroup = UIMotionEffectGroup()
-            effectGroup.motionEffects = [horizontalEffect, verticalEffect]
-            self.mainImageViewBG.addMotionEffect(effectGroup)
-            
-            let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
-            horizontal.minimumRelativeValue = -amount
-            horizontal.maximumRelativeValue = amount
-            let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
-            vertical.minimumRelativeValue = -amount
-            vertical.maximumRelativeValue = amount
-            let effectGro = UIMotionEffectGroup()
-            effectGro.motionEffects = [horizontal, vertical]
-            self.mainImageView.addMotionEffect(effectGro)
-            self.mainImageViewBG.addMotionEffect(effectGro)
-        } else {
-            mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 7)
-        }
         
         contentView.addSubview(userName)
         contentView.addSubview(toot)
@@ -414,6 +385,37 @@ class ScheduledCellImage: SwipeTableViewCell {
         imageCountTag.isUserInteractionEnabled = false
         imageCountTag.backgroundColor = Colours.clear
         imageCountTag.alpha = 0
+        
+        if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
+            let amount = 5
+            let horizontalEffect = UIInterpolatingMotionEffect(
+                keyPath: "layer.shadowOffset.width",
+                type: .tiltAlongHorizontalAxis)
+            horizontalEffect.minimumRelativeValue = amount
+            horizontalEffect.maximumRelativeValue = -amount
+            let verticalEffect = UIInterpolatingMotionEffect(
+                keyPath: "layer.shadowOffset.height",
+                type: .tiltAlongVerticalAxis)
+            verticalEffect.minimumRelativeValue = amount
+            verticalEffect.maximumRelativeValue = -amount
+            let effectGroup = UIMotionEffectGroup()
+            effectGroup.motionEffects = [horizontalEffect, verticalEffect]
+            self.mainImageViewBG.addMotionEffect(effectGroup)
+            
+            let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+            horizontal.minimumRelativeValue = -amount
+            horizontal.maximumRelativeValue = amount
+            let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+            vertical.minimumRelativeValue = -amount
+            vertical.maximumRelativeValue = amount
+            let effectGro = UIMotionEffectGroup()
+            effectGro.motionEffects = [horizontal, vertical]
+            self.mainImageView.addMotionEffect(effectGro)
+            self.mainImageViewBG.addMotionEffect(effectGro)
+            //            self.imageCountTag.addMotionEffect(effectGro)
+        } else {
+            mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 7)
+        }
     }
     
 }
