@@ -97,7 +97,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView.dataSource = self
             self.tableView.separatorStyle = .singleLine
             self.tableView.backgroundColor = Colours.white
-            self.tableView.separatorColor = Colours.cellQuote
+            self.tableView.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tableView.layer.masksToBounds = true
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
@@ -110,7 +110,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView2.dataSource = self
             self.tableView2.separatorStyle = .singleLine
             self.tableView2.backgroundColor = Colours.white
-            self.tableView2.separatorColor = Colours.cellQuote
+            self.tableView2.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tableView2.layer.masksToBounds = true
             self.tableView2.estimatedRowHeight = UITableView.automaticDimension
             self.tableView2.rowHeight = UITableView.automaticDimension
@@ -142,7 +142,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView.dataSource = self
             self.tableView.separatorStyle = .singleLine
             self.tableView.backgroundColor = Colours.white
-            self.tableView.separatorColor = Colours.cellQuote
+            self.tableView.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tableView.layer.masksToBounds = true
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
@@ -155,7 +155,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView2.dataSource = self
             self.tableView2.separatorStyle = .singleLine
             self.tableView2.backgroundColor = Colours.white
-            self.tableView2.separatorColor = Colours.cellQuote
+            self.tableView2.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tableView2.layer.masksToBounds = true
             self.tableView2.estimatedRowHeight = UITableView.automaticDimension
             self.tableView2.rowHeight = UITableView.automaticDimension
@@ -213,7 +213,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView.dataSource = self
             self.tableView.separatorStyle = .singleLine
             self.tableView.backgroundColor = Colours.white
-            self.tableView.separatorColor = Colours.cellQuote
+            self.tableView.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tableView.layer.masksToBounds = true
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
@@ -226,7 +226,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView2.dataSource = self
             self.tableView2.separatorStyle = .singleLine
             self.tableView2.backgroundColor = Colours.white
-            self.tableView2.separatorColor = Colours.cellQuote
+            self.tableView2.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tableView2.layer.masksToBounds = true
             self.tableView2.estimatedRowHeight = UITableView.automaticDimension
             self.tableView2.rowHeight = UITableView.automaticDimension
@@ -258,7 +258,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView.dataSource = self
             self.tableView.separatorStyle = .singleLine
             self.tableView.backgroundColor = Colours.white
-            self.tableView.separatorColor = Colours.cellQuote
+            self.tableView.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tableView.layer.masksToBounds = true
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
@@ -271,7 +271,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView2.dataSource = self
             self.tableView2.separatorStyle = .singleLine
             self.tableView2.backgroundColor = Colours.white
-            self.tableView2.separatorColor = Colours.cellQuote
+            self.tableView2.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tableView2.layer.masksToBounds = true
             self.tableView2.estimatedRowHeight = UITableView.automaticDimension
             self.tableView2.rowHeight = UITableView.automaticDimension
@@ -652,7 +652,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
         }
         
         self.tableView.backgroundColor = Colours.white
-        self.tableView.separatorColor = Colours.cellQuote
+        self.tableView.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
         self.tableView.reloadData()
         self.tableView.reloadInputViews()
         //        var customStyle = VolumeBarStyle.likeInstagram

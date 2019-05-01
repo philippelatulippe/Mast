@@ -88,7 +88,7 @@ class DMFeedCell: SwipeTableViewCell {
         date.textColor = Colours.grayDark.withAlphaComponent(0.38)
         toot.textColor = Colours.black
         
-        userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
+        userName.font = UIFont.systemFont(ofSize: Colours.fontSize1, weight: .heavy)
         userTag.titleLabel?.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
@@ -182,21 +182,21 @@ class DMFeedCell: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-28-[readIndi(8)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[date]-5-[episodes]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[artist]-5-[episodes]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-5-[episodes]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[date]-1-[episodes]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[artist]-1-[episodes]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[episodes]-12-|", options: [], metrics: nil, views: viewsDict))
         } else {
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[date]-5-[episodes]-15-[rep1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[artist]-5-[episodes]-15-[rep1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-5-[episodes]-15-[rep1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-5-[episodes]-15-[like1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-5-[episodes]-15-[boost1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-5-[episodes]-15-[more1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[date]-1-[episodes]-15-[rep1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[artist]-1-[episodes]-15-[rep1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[episodes]-15-[rep1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[episodes]-15-[like1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[episodes]-15-[boost1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[episodes]-15-[more1(20)]-12-|", options: [], metrics: nil, views: viewsDict))
             contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[rep1(36)]-24-[like1(40)]-15-[boost1(40)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
         }
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-74-[warning]-17-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-5-[warning]-9-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[warning]-9-|", options: [], metrics: nil, views: viewsDict))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -358,7 +358,7 @@ class DMFeedCell: SwipeTableViewCell {
                 let attachmentString = NSAttributedString(attachment: imageAttachment)
                 let completeText = NSMutableAttributedString(string: "")
                 completeText.append(attachmentString)
-                let textAfterIcon = NSMutableAttributedString(string: " \(theUsernameTag) boosted\n\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
+                let textAfterIcon = NSMutableAttributedString(string: " \(theUsernameTag) boosted\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
                 completeText.append(textAfterIcon)
                 userName.attributedText = completeText
             } else {
@@ -368,7 +368,7 @@ class DMFeedCell: SwipeTableViewCell {
                 let attachmentString = NSAttributedString(attachment: imageAttachment)
                 let completeText = NSMutableAttributedString(string: "")
                 completeText.append(attachmentString)
-                let attributedString = NSMutableAttributedString(string: " \(theUsernameTag) boosted\n\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
+                let attributedString = NSMutableAttributedString(string: " \(theUsernameTag) boosted\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
                 (status.reblog?.account.emojis ?? []).map({
                     let textAttachment = NSTextAttachment()
                     textAttachment.loadImageUsingCache(withUrl: $0.url.absoluteString)
@@ -462,7 +462,7 @@ class DMFeedCell: SwipeTableViewCell {
         }
         profileImageView2.isUserInteractionEnabled = false
         
-        userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
+        userName.font = UIFont.systemFont(ofSize: Colours.fontSize1, weight: .heavy)
         userTag.titleLabel?.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)

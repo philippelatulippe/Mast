@@ -79,7 +79,7 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .singleLine
         self.tableView.backgroundColor = Colours.white
-        self.tableView.separatorColor = Colours.cellQuote
+        self.tableView.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
         self.tableView.layer.masksToBounds = true
         self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
@@ -439,7 +439,7 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
         }
         
         self.tableView.backgroundColor = Colours.white
-        self.tableView.separatorColor = Colours.cellQuote
+        self.tableView.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
         self.tableView.reloadData()
         self.tableView.reloadInputViews()
     }

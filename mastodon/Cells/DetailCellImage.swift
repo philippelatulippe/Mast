@@ -85,7 +85,7 @@ class DetailCellImage: UITableViewCell {
         faves.titleLabel?.textColor = Colours.tabSelected
         faves.setTitleColor(Colours.tabSelected, for: .normal)
         
-        userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
+        userName.font = UIFont.systemFont(ofSize: Colours.fontSize1, weight: .heavy)
         userTag.titleLabel?.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
@@ -146,11 +146,11 @@ class DetailCellImage: UITableViewCell {
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .phone:
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[mainImage(250)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[mainImageBG(250)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-1-[episodes]-15-[mainImage(250)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-1-[episodes]-15-[mainImageBG(250)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
         case .pad:
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[mainImage(500)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-15-[mainImageBG(500)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-1-[episodes]-15-[mainImage(500)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-1-[episodes]-15-[mainImageBG(500)]-10-[faves]-10-[from]-12-|", options: [], metrics: nil, views: viewsDict))
         default:
             print("nothing")
         }
@@ -319,7 +319,7 @@ class DetailCellImage: UITableViewCell {
             profileImageView.layer.cornerRadius = 0
         }
         
-        userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
+        userName.font = UIFont.systemFont(ofSize: Colours.fontSize1, weight: .heavy)
         userTag.titleLabel?.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)

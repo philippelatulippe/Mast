@@ -33,7 +33,7 @@ class PollOptionCellToggle: SwipeTableViewCell {
         userTag.textColor = Colours.black.withAlphaComponent(0.8)
         toot.textColor = Colours.black.withAlphaComponent(0.5)
         
-        userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
+        userName.font = UIFont.systemFont(ofSize: Colours.fontSize1, weight: .heavy)
         userTag.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         
@@ -56,7 +56,7 @@ class PollOptionCellToggle: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[artist]-(>=10)-[switch(40)]-30-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[episodes]-(>=10)-[switch(40)]-30-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-15-[switch(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-5-[episodes]-12-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[artist]-1-[episodes]-12-|", options: [], metrics: nil, views: viewsDict))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,7 +66,7 @@ class PollOptionCellToggle: SwipeTableViewCell {
     func configure(status: String, status2: String) {
         userTag.text = status
         toot.text = status2
-        userName.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
+        userName.font = UIFont.systemFont(ofSize: Colours.fontSize1, weight: .heavy)
         userTag.font = UIFont.boldSystemFont(ofSize: Colours.fontSize1)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         switchView.onTintColor = Colours.tabSelected

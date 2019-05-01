@@ -2209,7 +2209,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
         }
         
         self.tableView.backgroundColor = Colours.white
-        self.tableView.separatorColor = Colours.cellQuote
+        self.tableView.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
         self.tableView.reloadData()
         self.tableView.reloadInputViews()
     }
