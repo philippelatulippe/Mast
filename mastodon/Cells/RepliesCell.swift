@@ -66,6 +66,7 @@ class RepliesCell: SwipeTableViewCell {
         toot.hashtagColor = Colours.tabSelected
         toot.URLColor = Colours.tabSelected
         
+        userTag.setCompressionResistance(LayoutPriority(rawValue: 498), for: .horizontal)
         userName.setCompressionResistance(LayoutPriority(rawValue: 499), for: .horizontal)
         date.setCompressionResistance(LayoutPriority(rawValue: 501), for: .horizontal)
         
@@ -86,13 +87,14 @@ class RepliesCell: SwipeTableViewCell {
             ]
         
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[image(40)]-13-[name]-(>=5)-[more(16)]-4-[date]-20-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[image(40)]-13-[artist]-(>=5)-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[image(40)]-13-[name]-2-[artist]-(>=5)-[more(16)]-4-[date]-20-|", options: [], metrics: nil, views: viewsDict))
+//        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[image(40)]-13-[artist]-(>=5)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[image(40)]-13-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[more(16)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[date]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[artist]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[image(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[artist]-1-[episodes]-18-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[episodes]-18-|", options: [], metrics: nil, views: viewsDict))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,6 +108,9 @@ class RepliesCell: SwipeTableViewCell {
         toot.URLColor = Colours.tabSelected
         
         userName.text = status.reblog?.account.displayName ?? status.account.displayName
+        if userName.text == "" {
+            userName.text = " "
+        }
         if (UserDefaults.standard.object(forKey: "mentionToggle") == nil || UserDefaults.standard.object(forKey: "mentionToggle") as! Int == 0) {
             userTag.setTitle("@\(status.reblog?.account.acct ?? status.account.acct)", for: .normal)
         } else {
@@ -150,6 +155,9 @@ class RepliesCell: SwipeTableViewCell {
             
             if status.reblog?.account.emojis.isEmpty ?? true {
                 userName.text = status.reblog?.account.displayName.stripHTML()
+                if userName.text == "" {
+                    userName.text = " "
+                }
             } else {
                 let attributedString = NSMutableAttributedString(string: status.reblog?.account.displayName.stripHTML() ?? "")
                 (status.reblog?.account.emojis ?? []).map({
@@ -196,6 +204,9 @@ class RepliesCell: SwipeTableViewCell {
             
             if status.account.emojis.isEmpty {
                 userName.text = status.account.displayName.stripHTML()
+                if userName.text == "" {
+                    userName.text = " "
+                }
             } else {
                 let attributedString = NSMutableAttributedString(string: status.account.displayName.stripHTML())
                 status.account.emojis.map({
