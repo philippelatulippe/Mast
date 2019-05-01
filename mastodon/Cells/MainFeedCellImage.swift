@@ -104,6 +104,37 @@ class MainFeedCellImage: SwipeTableViewCell {
         mainImageViewBG.layer.shadowOpacity = 0.5
         mainImageViewBG.layer.masksToBounds = false
         
+        if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
+            let amount = 5
+            let horizontalEffect = UIInterpolatingMotionEffect(
+                keyPath: "layer.shadowOffset.width",
+                type: .tiltAlongHorizontalAxis)
+            horizontalEffect.minimumRelativeValue = amount
+            horizontalEffect.maximumRelativeValue = -amount
+            let verticalEffect = UIInterpolatingMotionEffect(
+                keyPath: "layer.shadowOffset.height",
+                type: .tiltAlongVerticalAxis)
+            verticalEffect.minimumRelativeValue = amount
+            verticalEffect.maximumRelativeValue = -amount
+            let effectGroup = UIMotionEffectGroup()
+            effectGroup.motionEffects = [horizontalEffect, verticalEffect]
+            self.mainImageViewBG.addMotionEffect(effectGroup)
+            
+            let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+            horizontal.minimumRelativeValue = -amount
+            horizontal.maximumRelativeValue = amount
+            let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+            vertical.minimumRelativeValue = -amount
+            vertical.maximumRelativeValue = amount
+            let effectGro = UIMotionEffectGroup()
+            effectGro.motionEffects = [horizontal, vertical]
+            self.mainImageView.addMotionEffect(effectGro)
+            self.mainImageViewBG.addMotionEffect(effectGro)
+            //            self.imageCountTag.addMotionEffect(effectGro)
+        } else {
+            mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 7)
+        }
+        
         userName.numberOfLines = 0
         toot.numberOfLines = 0
         date.textAlignment = .right
@@ -778,37 +809,6 @@ class MainFeedCellImage: SwipeTableViewCell {
             self.mainImageView.pin_updateWithProgress = true
             self.mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
             }
-        }
-        
-        if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
-            let amount = 5
-            let horizontalEffect = UIInterpolatingMotionEffect(
-                keyPath: "layer.shadowOffset.width",
-                type: .tiltAlongHorizontalAxis)
-            horizontalEffect.minimumRelativeValue = amount
-            horizontalEffect.maximumRelativeValue = -amount
-            let verticalEffect = UIInterpolatingMotionEffect(
-                keyPath: "layer.shadowOffset.height",
-                type: .tiltAlongVerticalAxis)
-            verticalEffect.minimumRelativeValue = amount
-            verticalEffect.maximumRelativeValue = -amount
-            let effectGroup = UIMotionEffectGroup()
-            effectGroup.motionEffects = [horizontalEffect, verticalEffect]
-            self.mainImageViewBG.addMotionEffect(effectGroup)
-            
-            let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
-            horizontal.minimumRelativeValue = -amount
-            horizontal.maximumRelativeValue = amount
-            let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
-            vertical.minimumRelativeValue = -amount
-            vertical.maximumRelativeValue = amount
-            let effectGro = UIMotionEffectGroup()
-            effectGro.motionEffects = [horizontal, vertical]
-            self.mainImageView.addMotionEffect(effectGro)
-            self.mainImageViewBG.addMotionEffect(effectGro)
-            //            self.imageCountTag.addMotionEffect(effectGro)
-        } else {
-            mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 7)
         }
     }
     
