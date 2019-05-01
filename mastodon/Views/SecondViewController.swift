@@ -4184,6 +4184,36 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             controller.filledTextFieldText = sto[indexPath.row].status?.content.stripHTML() ?? ""
                             self.present(controller, animated: true, completion: nil)
                         }
+                        .action(.default("Delete Notification".localized), image: UIImage(named: "block")) { (action, ind) in
+                            
+                            if self.currentIndex == 0 {
+                                StoreStruct.notifications = StoreStruct.notifications.filter { $0 != StoreStruct.notifications[indexPath.row] }
+                                self.tableView2.deleteRows(at: [indexPath], with: .none)
+                            } else if self.currentIndex == 5 {
+                                
+                            } else if self.currentIndex == 1 {
+                                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.filter { $0 != StoreStruct.notificationsMentions[indexPath.row] }
+                                self.tableView.deleteRows(at: [indexPath], with: .none)
+                            }
+                            
+                            let request = Notifications.dismiss(id: sto[indexPath.row].id)
+                            StoreStruct.client.run(request) { (statuses) in
+                                DispatchQueue.main.async {
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
+                                    }
+                                    let statusAlert = StatusAlert()
+                                    statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
+                                    statusAlert.title = "Deleted".localized
+                                    statusAlert.contentColor = Colours.grayDark
+                                    statusAlert.message = "Notification"
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        statusAlert.show()
+                                    }
+                                }
+                            }
+                        }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
                              
                             
@@ -4801,6 +4831,36 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             controller.inReplyText = ""
                             controller.filledTextFieldText = sto[indexPath.row].status?.content.stripHTML() ?? ""
                             self.present(controller, animated: true, completion: nil)
+                        }
+                        .action(.default("Delete Notification".localized), image: UIImage(named: "block")) { (action, ind) in
+                            
+                            if self.currentIndex == 0 {
+                                StoreStruct.notifications = StoreStruct.notifications.filter { $0 != StoreStruct.notifications[indexPath.row] }
+                                self.tableView2.deleteRows(at: [indexPath], with: .none)
+                            } else if self.currentIndex == 5 {
+                                
+                            } else if self.currentIndex == 1 {
+                                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.filter { $0 != StoreStruct.notificationsMentions[indexPath.row] }
+                                self.tableView.deleteRows(at: [indexPath], with: .none)
+                            }
+                            
+                            let request = Notifications.dismiss(id: sto[indexPath.row].id)
+                            StoreStruct.client.run(request) { (statuses) in
+                                DispatchQueue.main.async {
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let notification = UINotificationFeedbackGenerator()
+                                        notification.notificationOccurred(.success)
+                                    }
+                                    let statusAlert = StatusAlert()
+                                    statusAlert.image = UIImage(named: "blocklarge")?.maskWithColor(color: Colours.grayDark)
+                                    statusAlert.title = "Deleted".localized
+                                    statusAlert.contentColor = Colours.grayDark
+                                    statusAlert.message = "Notification"
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        statusAlert.show()
+                                    }
+                                }
+                            }
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
                              

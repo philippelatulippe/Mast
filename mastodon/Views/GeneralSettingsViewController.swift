@@ -197,7 +197,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
         } else if section == 6 {
             return otArray.count
         } else {
-            return 1
+            return 2
         }
     }
     
@@ -577,16 +577,29 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 }
             }
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellse3", for: indexPath) as! SettingsCell3
-            cell.configure(status: "Reset App", status2: "Resetting the app will clear all content and data, remove all accounts, and return you to the log-in screen.")
-            cell.backgroundColor = Colours.white
-            cell.userName.textColor = Colours.black
-            cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
-            cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
-            let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
-            cell.selectedBackgroundView = bgColorView
-            return cell
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellse3", for: indexPath) as! SettingsCell3
+                cell.configure(status: "Clear All Notifications", status2: "Clearing all notifications will clear all received notifications and direct messages from the server.")
+                cell.backgroundColor = Colours.white
+                cell.userName.textColor = Colours.black
+                cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                let bgColorView = UIView()
+                bgColorView.backgroundColor = Colours.white
+                cell.selectedBackgroundView = bgColorView
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellse3", for: indexPath) as! SettingsCell3
+                cell.configure(status: "Reset App", status2: "Resetting the app will clear all content and data, remove all accounts, and return you to the log-in screen.")
+                cell.backgroundColor = Colours.white
+                cell.userName.textColor = Colours.black
+                cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
+                cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
+                let bgColorView = UIView()
+                bgColorView.backgroundColor = Colours.white
+                cell.selectedBackgroundView = bgColorView
+                return cell
+            }
         }
     }
     
@@ -1296,23 +1309,58 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             }
         }
         if indexPath.section == 7 {
-            Alertift.actionSheet(title: "Are you sure?", message: "Resetting the app will clear all content and data, remove all accounts, and return you to the log-in screen.")
-                .backgroundColor(Colours.white)
-                .titleTextColor(Colours.grayDark)
-                .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
-                .messageTextAlignment(.left)
-                .titleTextAlignment(.left)
-                .action(.destructive("Reset App".localized), image: nil) { (action, ind) in
-                    self.clearAll()
-                }
-                .action(.cancel("Dismiss"))
-                .finally { action, index in
-                    if action.style == .cancel {
-                        return
+            if indexPath.row == 0 {
+                Alertift.actionSheet(title: "Are you sure?", message: "Clearing all notifications will clear all received notifications and direct messages from the server.")
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.destructive("Clear All Notifications".localized), image: nil) { (action, ind) in
+                        self.clearAllNotifications()
                     }
-                }
-                .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 7))?.contentView ?? self.view)
-                .show(on: self)
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 7))?.contentView ?? self.view)
+                    .show(on: self)
+            } else {
+                Alertift.actionSheet(title: "Are you sure?", message: "Resetting the app will clear all content and data, remove all accounts, and return you to the log-in screen.")
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.destructive("Reset App".localized), image: nil) { (action, ind) in
+                        self.clearAll()
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 7))?.contentView ?? self.view)
+                    .show(on: self)
+            }
+        }
+    }
+    
+    func clearAllNotifications() {
+        let request = Notifications.dismissAll()
+        StoreStruct.client.run(request) { (statuses) in
+            StoreStruct.notifications = []
+            StoreStruct.notificationsMentions = []
+            StoreStruct.notificationsDirect = []
+            do {
+                try Disk.save(StoreStruct.notifications, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)noti.json")
+                try Disk.save(StoreStruct.notificationsMentions, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)ment.json")
+            } catch {
+                print("Couldn't save")
+            }
         }
     }
     

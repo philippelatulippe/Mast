@@ -83,6 +83,7 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.layer.masksToBounds = true
         self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40))
         self.view.addSubview(self.tableView)
         self.loadLoadLoad()
     }
