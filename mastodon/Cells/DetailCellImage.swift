@@ -98,6 +98,9 @@ class DetailCellImage: UITableViewCell {
         toot.hashtagColor = Colours.tabSelected
         toot.URLColor = Colours.tabSelected
         
+        userName.setCompressionResistance(LayoutPriority(rawValue: 499), for: .horizontal)
+        date.setCompressionResistance(LayoutPriority(rawValue: 501), for: .horizontal)
+        
         contentView.addSubview(profileImageView)
         contentView.addSubview(mainImageViewBG)
         contentView.addSubview(mainImageView)
@@ -140,17 +143,17 @@ class DetailCellImage: UITableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[faves]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[mainImage]-0-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[mainImageBG]-0-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-15-[date]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-15-[image(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[date]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[image(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .phone:
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-15-[name]-1-[artist]-1-[episodes]-15-[mainImage(250)]-10-[faves]-10-[from]-15-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-15-[name]-1-[artist]-1-[episodes]-15-[mainImageBG(250)]-10-[faves]-10-[from]-15-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[artist]-1-[episodes]-15-[mainImage(250)]-10-[faves]-10-[from]-18-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[artist]-1-[episodes]-15-[mainImageBG(250)]-10-[faves]-10-[from]-18-|", options: [], metrics: nil, views: viewsDict))
         case .pad:
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-15-[name]-1-[artist]-1-[episodes]-15-[mainImage(500)]-10-[faves]-10-[from]-15-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-15-[name]-1-[artist]-1-[episodes]-15-[mainImageBG(500)]-10-[faves]-10-[from]-15-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[artist]-1-[episodes]-15-[mainImage(500)]-10-[faves]-10-[from]-18-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[artist]-1-[episodes]-15-[mainImageBG(500)]-10-[faves]-10-[from]-18-|", options: [], metrics: nil, views: viewsDict))
         default:
             print("nothing")
         }
