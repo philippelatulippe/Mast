@@ -1049,9 +1049,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             let request2 = Accounts.currentUser()
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
-                    if Account.getAccounts().contains(stat) {} else {
-                        Account.addAccountToList(account: stat)
-                    }
+//                    if Account.getAccounts().contains(stat) {} else {
+//                        Account.addAccountToList(account: stat)
+//                    }
                     StoreStruct.currentUser = stat
                 }
             }
@@ -2719,9 +2719,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             let request2 = Accounts.currentUser()
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
-                    if Account.getAccounts().contains(stat) {} else {
-                        Account.addAccountToList(account: stat)
-                    }
+//                    if Account.getAccounts().contains(stat) {} else {
+//                        Account.addAccountToList(account: stat)
+//                    }
                     StoreStruct.currentUser = stat
                 }
             }
