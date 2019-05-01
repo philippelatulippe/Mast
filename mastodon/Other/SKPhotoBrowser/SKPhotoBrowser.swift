@@ -449,7 +449,19 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
             impact.impactOccurred()
         }
         
-        self.openURL("com.shi.mastodon://id=\(StoreStruct.newIDtoGoTo)")
+        StoreStruct.curID = StoreStruct.newIDtoGoTo
+        if StoreStruct.currentPage == 0 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid"), object: self)
+        } else if StoreStruct.currentPage == 1 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid2"), object: self)
+        } else if StoreStruct.currentPage == 2 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid3"), object: self)
+        } else if StoreStruct.currentPage == 778 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid778"), object: self)
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid779"), object: self)
+        }
+        
         self.determineAndClose()
     }
     

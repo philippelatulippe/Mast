@@ -292,6 +292,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     
     @objc func goToIDNoti() {
+        sleep(2)
         let request = Notifications.notification(id: StoreStruct.curIDNoti)
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {

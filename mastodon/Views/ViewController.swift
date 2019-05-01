@@ -667,7 +667,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         super.didReceiveMemoryWarning()
     }
     
-    func presentIntro() {
+    @objc func presentIntro() {
         DispatchQueue.main.async {
             self.bulletinManager.prepare()
             self.bulletinManager.presentBulletin(above: self, animated: true, completion: nil)
@@ -686,13 +686,17 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.tabBarController?.selectedIndex = 3
     }
     
-    func gotoID() {
+    @objc func gotoID() {
         if StoreStruct.currentPage == 0 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid"), object: self)
         } else if StoreStruct.currentPage == 1 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid2"), object: self)
-        } else {
+        } else if StoreStruct.currentPage == 2 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid3"), object: self)
+        } else if StoreStruct.currentPage == 778 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid778"), object: self)
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid779"), object: self)
         }
     }
     
@@ -878,6 +882,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.restorationIdentifier = "ViewController"
         self.restorationClass = ViewController.self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.presentIntro), name: NSNotification.Name(rawValue: "presentIntro00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.gotoID), name: NSNotification.Name(rawValue: "gotoid00"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.tappedOnTag), name: NSNotification.Name(rawValue: "tappedOnTag"), object: nil)

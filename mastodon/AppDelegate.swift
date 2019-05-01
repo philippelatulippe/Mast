@@ -208,27 +208,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 return true
             } else if url.host == "confetti" {
-                if let viewController = window?.rootViewController as? ViewController {
-                    viewController.siriConfetti()
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
                 return true
             } else if url.host == "onboard" {
-                if let viewController = window?.rootViewController as? ViewController {
-                    viewController.presentIntro()
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "presentIntro00"), object: self)
                 return true
             } else if url.host == "settings" {
-                if let viewController = window?.rootViewController as? ViewController {
-                    viewController.goToSettings()
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings"), object: self)
                 return true
             } else if url.absoluteString.contains("id=") {
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
                 StoreStruct.curID = y[1].description
-                if let viewController = window?.rootViewController as? ViewController {
-                    viewController.gotoID()
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid00"), object: self)
                 return true
             } else if url.absoluteString.contains("toot=") {
                 let x = url.absoluteString
