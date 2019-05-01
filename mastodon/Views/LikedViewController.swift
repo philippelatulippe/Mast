@@ -183,7 +183,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.view.addGestureRecognizer(longPress)
         
         self.view.backgroundColor = Colours.white
-        splitViewController?.view.backgroundColor = Colours.cellQuote
+//        splitViewController?.view.backgroundColor = Colours.cellQuote
         
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem, queue: .main) { [weak self] _ in
             self?.player.seek(to: CMTime.zero)
@@ -192,7 +192,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         //        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         //        UINavigationBar.appearance().backgroundColor = Colours.white
         UINavigationBar.appearance().barTintColor = Colours.black
         UINavigationBar.appearance().tintColor = Colours.black
@@ -228,6 +228,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
+        self.tableView.tableFooterView = UIView()
         //        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //        self.tableView.addSubview(refreshControl)
         
@@ -2297,7 +2298,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.navigationBar.tintColor = Colours.black
         self.navigationController?.navigationBar.barTintColor = Colours.black
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
-        self.splitViewController?.view.backgroundColor = Colours.cellQuote
+//        self.splitViewController?.view.backgroundColor = Colours.cellQuote
         
         //        var customStyle = VolumeBarStyle.likeInstagram
         //        customStyle.trackTintColor = Colours.cellQuote

@@ -613,11 +613,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.view.addGestureRecognizer(longPress)
         
         UserDefaults.standard.set(1, forKey: "onb")
-        splitViewController?.view.backgroundColor = Colours.cellQuote
+//        splitViewController?.view.backgroundColor = Colours.cellQuote
         
         
         //        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         //        UINavigationBar.appearance().backgroundColor = Colours.white
         UINavigationBar.appearance().barTintColor = Colours.black
         UINavigationBar.appearance().tintColor = Colours.black
@@ -689,6 +689,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
+        self.tableView.tableFooterView = UIView()
         
 //        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //self.tableView.addSubview(refreshControl)
@@ -5688,8 +5689,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             UIApplication.shared.statusBarStyle = .lightContent
         }
         
-        self.navigationController?.navigationBar.barTintColor = Colours.grayDark
-        self.navigationController?.navigationBar.tintColor = Colours.grayDark
+//        self.navigationController?.navigationBar.barTintColor = Colours.grayDark
+//        self.navigationController?.navigationBar.tintColor = Colours.grayDark
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.grayDark]
         
         self.view.backgroundColor = Colours.white
@@ -5751,7 +5752,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.navigationBar.tintColor = Colours.black
         self.navigationController?.navigationBar.barTintColor = Colours.black
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
-        self.splitViewController?.view.backgroundColor = Colours.cellQuote
+//        self.splitViewController?.view.backgroundColor = Colours.cellQuote
         
         //        var customStyle = VolumeBarStyle.likeInstagram
         //        customStyle.trackTintColor = Colours.cellQuote

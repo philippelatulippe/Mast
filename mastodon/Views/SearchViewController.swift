@@ -121,6 +121,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
         self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
+        self.tableView.tableFooterView = UIView()
         
         let wid = self.view.bounds.width - 20
         searchTextField.frame = CGRect(x: 10, y: Int(offset + 5), width: Int(wid), height: 40)

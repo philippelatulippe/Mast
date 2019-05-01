@@ -82,6 +82,7 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
+        self.tableView.tableFooterView = UIView()
         
         self.loadLoadLoad()
         

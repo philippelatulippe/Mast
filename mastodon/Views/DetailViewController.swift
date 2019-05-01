@@ -479,11 +479,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         NotificationCenter.default.addObserver(self, selector: #selector(self.tappedPoll), name: NSNotification.Name(rawValue: "tappedPoll"), object: nil)
         
         self.view.backgroundColor = Colours.white
-        splitViewController?.view.backgroundColor = Colours.cellQuote
+//        splitViewController?.view.backgroundColor = Colours.cellQuote
         
         
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+//        UINavigationBar.appearance().shadowImage = UIImage()
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().backgroundColor = Colours.white
         UINavigationBar.appearance().barTintColor = Colours.black
         UINavigationBar.appearance().tintColor = Colours.black
@@ -5596,7 +5596,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.navigationBar.tintColor = Colours.black
         self.navigationController?.navigationBar.barTintColor = Colours.black
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
-        self.splitViewController?.view.backgroundColor = Colours.cellQuote
+//        self.splitViewController?.view.backgroundColor = Colours.cellQuote
         
         //        var customStyle = VolumeBarStyle.likeInstagram
         //        customStyle.trackTintColor = Colours.cellQuote

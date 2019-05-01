@@ -218,6 +218,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
+            self.tableView.tableFooterView = UIView()
             
             self.tableView2.register(FollowersCell.self, forCellReuseIdentifier: "cellf2")
             self.tableView2.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 65)
@@ -232,6 +233,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView2.rowHeight = UITableView.automaticDimension
             self.tableView2.alpha = 0
             self.view.addSubview(self.tableView2)
+            self.tableView2.tableFooterView = UIView()
         } else {
             if UIApplication.shared.isSplitOrSlideOver {
                 segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
@@ -263,6 +265,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
+            self.tableView.tableFooterView = UIView()
             
             self.tableView2.register(FollowersCell.self, forCellReuseIdentifier: "cellf2")
             self.tableView2.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 15)
@@ -277,6 +280,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView2.rowHeight = UITableView.automaticDimension
             self.tableView2.alpha = 0
             self.view.addSubview(self.tableView2)
+            self.tableView2.tableFooterView = UIView()
         }
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom

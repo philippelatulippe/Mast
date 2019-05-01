@@ -234,6 +234,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
+        self.tableView.tableFooterView = UIView()
         
         
         //        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)

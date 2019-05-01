@@ -424,6 +424,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
+        self.tableView.tableFooterView = UIView()
         
         self.loadLoadLoad()
         
@@ -1819,8 +1820,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             UIApplication.shared.statusBarStyle = .lightContent
         }
         
-        self.navigationController?.navigationBar.barTintColor = Colours.grayDark
-        self.navigationController?.navigationBar.tintColor = Colours.grayDark
+//        self.navigationController?.navigationBar.barTintColor = Colours.grayDark
+//        self.navigationController?.navigationBar.tintColor = Colours.grayDark
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.grayDark]
         
         self.view.backgroundColor = Colours.white

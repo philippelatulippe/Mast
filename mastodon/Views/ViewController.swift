@@ -146,7 +146,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         
         self.tabBar.barTintColor = Colours.white
         self.tabBar.backgroundColor = Colours.white
-        self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.15)
+        self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.21)
         self.tabBar.tintColor = Colours.tabSelected
         
         self.firstView.view.backgroundColor = Colours.white
@@ -954,7 +954,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.tabBar.barTintColor = Colours.white
         self.tabBar.backgroundColor = Colours.white
         self.tabBar.isTranslucent = false
-        self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.15)
+        self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.21)
         self.tabBar.tintColor = Colours.tabSelected
         
         statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
@@ -963,8 +963,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        UITabBar.appearance().layer.borderWidth = 0.0
-        UITabBar.appearance().clipsToBounds = true
+        UITabBar.appearance().layer.borderWidth = 1.0
+        UITabBar.appearance().layer.borderColor = Colours.grayDark.withAlphaComponent(0.21).cgColor
+        self.tabBar.layer.borderColor = Colours.grayDark.withAlphaComponent(0.21).cgColor
+        //        UITabBar.appearance().clipsToBounds = false
         
         
         
@@ -1935,7 +1937,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 
                 self.tabBar.barTintColor = Colours.white
                 self.tabBar.backgroundColor = Colours.white
-                self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.15)
+                self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.21)
                 self.tabBar.tintColor = Colours.tabSelected
                 
                 self.firstView.view.backgroundColor = Colours.white
@@ -2017,7 +2019,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 
                 self.tabBar.barTintColor = Colours.white
                 self.tabBar.backgroundColor = Colours.white
-                self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.15)
+                self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.21)
                 self.tabBar.tintColor = Colours.tabSelected
                 
                 self.firstView.view.backgroundColor = Colours.white
@@ -2063,7 +2065,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             self.tabBar.barTintColor = Colours.white
             self.tabBar.backgroundColor = Colours.white
-            self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.15)
+            self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tabBar.tintColor = Colours.tabSelected
             
             self.firstView.view.backgroundColor = Colours.white
@@ -2109,7 +2111,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             self.tabBar.barTintColor = Colours.white
             self.tabBar.backgroundColor = Colours.white
-            self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.15)
+            self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tabBar.tintColor = Colours.tabSelected
             
             self.firstView.view.backgroundColor = Colours.white
@@ -2155,7 +2157,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             self.tabBar.barTintColor = Colours.white
             self.tabBar.backgroundColor = Colours.white
-            self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.15)
+            self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tabBar.tintColor = Colours.tabSelected
             
             self.firstView.view.backgroundColor = Colours.white
@@ -2202,7 +2204,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             self.tabBar.barTintColor = Colours.white
             self.tabBar.backgroundColor = Colours.white
-            self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.15)
+            self.tabBar.unselectedItemTintColor = Colours.grayDark.withAlphaComponent(0.21)
             self.tabBar.tintColor = Colours.tabSelected
             
             self.firstView.view.backgroundColor = Colours.white
@@ -3223,7 +3225,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             self.tabOne.tabBarItem = tabOneBarItem
             self.tabOne.navigationBar.backgroundColor = Colours.white
             self.tabOne.navigationBar.barTintColor = Colours.white
-            self.tabOne.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            self.tabOne.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.tabOne.tabBarItem.tag = 1
             
             // Create Tab two
@@ -3244,7 +3246,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             self.tabTwo.tabBarItem = tabTwoBarItem2
             self.tabTwo.navigationBar.backgroundColor = Colours.white
             self.tabTwo.navigationBar.barTintColor = Colours.white
-            self.tabTwo.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            self.tabTwo.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.tabTwo.tabBarItem.tag = 2
             
             // Create Tab DM
@@ -3265,7 +3267,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             self.tabDM.tabBarItem = tabDMBarItem2
             self.tabDM.navigationBar.backgroundColor = Colours.white
             self.tabDM.navigationBar.barTintColor = Colours.white
-            self.tabDM.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            self.tabDM.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.tabDM.tabBarItem.tag = 3
             
             // Create Tab three
@@ -3286,7 +3288,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             self.tabThree.tabBarItem = tabThreeBarItem
             self.tabThree.navigationBar.backgroundColor = Colours.white
             self.tabThree.navigationBar.barTintColor = Colours.white
-            self.tabThree.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            self.tabThree.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.tabThree.tabBarItem.tag = 4
             
             // Create Tab four
@@ -3307,7 +3309,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             self.tabFour.tabBarItem = tabFourBarItem
             self.tabFour.navigationBar.backgroundColor = Colours.white
             self.tabFour.navigationBar.barTintColor = Colours.white
-            self.tabFour.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            self.tabFour.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.tabFour.tabBarItem.tag = 5
             
             let viewControllerList = [self.tabOne, self.tabTwo, self.tabDM, self.tabThree, self.tabFour]

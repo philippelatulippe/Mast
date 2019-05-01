@@ -683,6 +683,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
+            self.tableView.tableFooterView = UIView()
             
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
@@ -698,6 +699,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.estimatedRowHeight = UITableView.automaticDimension
             self.tableView2.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView2)
+            self.tableView2.tableFooterView = UIView()
         } else {
             if UIApplication.shared.isSplitOrSlideOver {
                 segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(30), width: CGFloat(200), height: CGFloat(40)))
@@ -731,6 +733,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
+            self.tableView.tableFooterView = UIView()
             
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
@@ -746,6 +749,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.estimatedRowHeight = UITableView.automaticDimension
             self.tableView2.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView2)
+            self.tableView2.tableFooterView = UIView()
         }
         
         tableView.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in

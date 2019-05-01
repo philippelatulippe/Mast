@@ -374,8 +374,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window!.rootViewController = splitViewController
             self.window!.makeKeyAndVisible()
             
-            UINavigationBar.appearance().shadowImage = UIImage()
-            UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+//            UINavigationBar.appearance().shadowImage = UIImage()
+//            UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
             UINavigationBar.appearance().backgroundColor = Colours.white
             UINavigationBar.appearance().barTintColor = Colours.black
             UINavigationBar.appearance().tintColor = Colours.black
@@ -579,8 +579,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window!.rootViewController = splitViewController
                 self.window!.makeKeyAndVisible()
                 
-                UINavigationBar.appearance().shadowImage = UIImage()
-                UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+//                UINavigationBar.appearance().shadowImage = UIImage()
+//                UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
                 UINavigationBar.appearance().backgroundColor = Colours.white
                 UINavigationBar.appearance().barTintColor = Colours.black
                 UINavigationBar.appearance().tintColor = Colours.black

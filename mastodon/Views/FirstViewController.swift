@@ -874,6 +874,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
+            self.tableView.tableFooterView = UIView()
             
             self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
             self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
@@ -889,6 +890,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewL.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewL.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewL)
+            self.tableViewL.tableFooterView = UIView()
             
             self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
             self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
@@ -904,6 +906,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewF.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewF.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewF)
+            self.tableViewF.tableFooterView = UIView()
         } else {
             if UIApplication.shared.isSplitOrSlideOver {
                 segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(30), width: CGFloat(200), height: CGFloat(40)))
@@ -937,6 +940,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.estimatedRowHeight = UITableView.automaticDimension
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
+            self.tableView.tableFooterView = UIView()
             
             self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
             self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
@@ -952,6 +956,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewL.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewL.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewL)
+            self.tableViewL.tableFooterView = UIView()
             
             self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
             self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
@@ -967,6 +972,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewF.estimatedRowHeight = UITableView.automaticDimension
             self.tableViewF.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewF)
+            self.tableViewF.tableFooterView = UIView()
         }
         
         if (UserDefaults.standard.object(forKey: "thumbsc") == nil) || (UserDefaults.standard.object(forKey: "thumbsc") as! Int == 0) {} else {
