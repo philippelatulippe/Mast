@@ -378,7 +378,7 @@ class NotificationCellImage: SwipeTableViewCell {
         if status.type == .follow {
             profileImageView.isUserInteractionEnabled = false
             userName.text = "\(status.account.displayName) followed you"
-            typeImage.setImage(UIImage(named: "follow3"), for: .normal)
+            typeImage.setImage(UIImage(named: "follow3")?.maskWithColor(color: UIColor(red: 100/255.0, green: 210/255.0, blue: 110/255.0, alpha: 1.0)), for: .normal)
             //toot.textColor = Colours.black.withAlphaComponent(0.3)
             if (UserDefaults.standard.object(forKey: "subtleToggle") == nil) || (UserDefaults.standard.object(forKey: "subtleToggle") as! Int == 0) {
                 toot.textColor = Colours.black
