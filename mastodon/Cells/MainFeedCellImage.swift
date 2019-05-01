@@ -95,9 +95,9 @@ class MainFeedCellImage: SwipeTableViewCell {
             mainImageView.layer.cornerRadius = 0
         }
         mainImageView.layer.masksToBounds = true
-        mainImageView.backgroundColor = Colours.tabSelected
+        mainImageView.backgroundColor = Colours.clear
         mainImageViewBG.layer.cornerRadius = 10
-        mainImageViewBG.backgroundColor = Colours.tabSelected
+        mainImageViewBG.backgroundColor = Colours.clear
         mainImageViewBG.layer.shadowColor = UIColor.black.cgColor
 //        mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 7)
         mainImageViewBG.layer.shadowRadius = 10
@@ -105,19 +105,31 @@ class MainFeedCellImage: SwipeTableViewCell {
         mainImageViewBG.layer.masksToBounds = false
         
         if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
+            let amount = 15
             let horizontalEffect = UIInterpolatingMotionEffect(
                 keyPath: "layer.shadowOffset.width",
                 type: .tiltAlongHorizontalAxis)
-            horizontalEffect.minimumRelativeValue = 26
-            horizontalEffect.maximumRelativeValue = -26
+            horizontalEffect.minimumRelativeValue = amount
+            horizontalEffect.maximumRelativeValue = -amount
             let verticalEffect = UIInterpolatingMotionEffect(
                 keyPath: "layer.shadowOffset.height",
                 type: .tiltAlongVerticalAxis)
-            verticalEffect.minimumRelativeValue = 26
-            verticalEffect.maximumRelativeValue = -26
+            verticalEffect.minimumRelativeValue = amount
+            verticalEffect.maximumRelativeValue = -amount
             let effectGroup = UIMotionEffectGroup()
             effectGroup.motionEffects = [horizontalEffect, verticalEffect]
             self.mainImageViewBG.addMotionEffect(effectGroup)
+            
+            let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+            horizontal.minimumRelativeValue = -amount
+            horizontal.maximumRelativeValue = amount
+            let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+            vertical.minimumRelativeValue = -amount
+            vertical.maximumRelativeValue = amount
+            let effectGro = UIMotionEffectGroup()
+            effectGro.motionEffects = [horizontal, vertical]
+            self.mainImageView.addMotionEffect(effectGro)
+            self.mainImageViewBG.addMotionEffect(effectGro)
         } else {
             mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 7)
         }

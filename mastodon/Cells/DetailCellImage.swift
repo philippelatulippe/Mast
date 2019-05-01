@@ -32,8 +32,8 @@ class DetailCellImage: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         profileImageView.backgroundColor = Colours.clear
-        mainImageView.backgroundColor = Colours.tabSelected
-        mainImageViewBG.backgroundColor = Colours.tabSelected
+        mainImageView.backgroundColor = Colours.clear
+        mainImageViewBG.backgroundColor = Colours.clear
         
 //        userName.adjustsFontForContentSizeCategory = true
 //        userTag.adjustsFontForContentSizeCategory = true

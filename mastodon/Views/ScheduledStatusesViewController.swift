@@ -189,8 +189,8 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
                 cell.toot.textColor = Colours.black
                 cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
                 cell.mainImageView.tag = indexPath.row
-                cell.mainImageView.backgroundColor = Colours.tabSelected
-                cell.mainImageViewBG.backgroundColor = Colours.tabSelected
+                cell.mainImageView.backgroundColor = Colours.white
+                cell.mainImageViewBG.backgroundColor = Colours.white
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.white
                 cell.selectedBackgroundView = bgColorView

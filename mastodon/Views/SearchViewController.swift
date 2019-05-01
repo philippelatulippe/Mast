@@ -659,8 +659,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                     cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                     cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                     cell.toot.textColor = UIColor.white
-                    cell.mainImageView.backgroundColor = Colours.tabSelected
-                    cell.mainImageViewBG.backgroundColor = Colours.tabSelected
+                    cell.mainImageView.backgroundColor = Colours.white
+                    cell.mainImageViewBG.backgroundColor = Colours.white
                     cell.delegate = self
                     cell.toot.handleMentionTap { (string) in
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {

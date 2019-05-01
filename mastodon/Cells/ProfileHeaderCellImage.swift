@@ -97,19 +97,31 @@ class ProfileHeaderCellImage: UITableViewCell, UICollectionViewDelegate, UIColle
                 cell.bgImage.layer.shadowOpacity = 0.4
                 
                 if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
+                    let amount = 15
                     let horizontalEffect = UIInterpolatingMotionEffect(
                         keyPath: "layer.shadowOffset.width",
                         type: .tiltAlongHorizontalAxis)
-                    horizontalEffect.minimumRelativeValue = 18
-                    horizontalEffect.maximumRelativeValue = -18
+                    horizontalEffect.minimumRelativeValue = amount
+                    horizontalEffect.maximumRelativeValue = -amount
                     let verticalEffect = UIInterpolatingMotionEffect(
                         keyPath: "layer.shadowOffset.height",
                         type: .tiltAlongVerticalAxis)
-                    verticalEffect.minimumRelativeValue = 18
-                    verticalEffect.maximumRelativeValue = -18
+                    verticalEffect.minimumRelativeValue = amount
+                    verticalEffect.maximumRelativeValue = -amount
                     let effectGroup = UIMotionEffectGroup()
                     effectGroup.motionEffects = [horizontalEffect, verticalEffect]
                     cell.bgImage.addMotionEffect(effectGroup)
+                    
+                    let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+                    horizontal.minimumRelativeValue = -amount
+                    horizontal.maximumRelativeValue = amount
+                    let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+                    vertical.minimumRelativeValue = -amount
+                    vertical.maximumRelativeValue = amount
+                    let effectGro = UIMotionEffectGroup()
+                    effectGro.motionEffects = [horizontal, vertical]
+                    cell.image.addMotionEffect(effectGro)
+                    cell.bgImage.addMotionEffect(effectGro)
                 } else {
                     cell.bgImage.layer.shadowOffset = CGSize(width: 0, height: 8)
                 }

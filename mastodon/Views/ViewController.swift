@@ -1431,8 +1431,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                         cell.date.textColor = UIColor.white.withAlphaComponent(0.6)
                         cell.toot.textColor = UIColor.white
-                        cell.mainImageView.backgroundColor = Colours.tabSelected
-                        cell.mainImageViewBG.backgroundColor = Colours.tabSelected
+                        cell.mainImageView.backgroundColor = Colours.white
+                        cell.mainImageViewBG.backgroundColor = Colours.white
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark3
                         cell.selectedBackgroundView = bgColorView
