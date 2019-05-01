@@ -5189,8 +5189,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 
-                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
-                    self.lastThing = stat.first?.id ?? ""
                     StoreStruct.notifications = StoreStruct.notifications + stat
                     StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
                     StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
@@ -5201,15 +5199,12 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
 //                        self.fetchMoreNotifications()
 //                    }
                     
-                }
             }
         }
         let request2 = Notifications.all(range: .max(id: StoreStruct.notificationsMentions.last?.id ?? "", limit: 5000), typesToExclude: [.favourite, .follow, .reblog])
         StoreStruct.client.run(request2) { (statuses) in
             if let stat = (statuses.value) {
                 
-                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
-                    self.lastThing = stat.first?.id ?? ""
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + stat
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
@@ -5220,7 +5215,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
 //                        self.fetchMoreNotifications()
 //                    }
                     
-                }
             }
         }
     }
