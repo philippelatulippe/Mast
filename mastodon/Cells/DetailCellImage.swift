@@ -32,8 +32,8 @@ class DetailCellImage: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         profileImageView.backgroundColor = Colours.clear
-        mainImageView.backgroundColor = Colours.clear
-        mainImageViewBG.backgroundColor = Colours.clear
+        mainImageView.backgroundColor = Colours.tabSelected
+        mainImageViewBG.backgroundColor = Colours.tabSelected
         
 //        userName.adjustsFontForContentSizeCategory = true
 //        userTag.adjustsFontForContentSizeCategory = true
@@ -340,6 +340,8 @@ class DetailCellImage: UITableViewCell {
         imageCountTag.isUserInteractionEnabled = false
         if status.reblog?.mediaAttachments[0].type ?? status.mediaAttachments[0].type == .video {
 //            self.mainImageView.setImage(UIImage(), for: .normal)
+            self.mainImageView.contentMode = .scaleAspectFit
+            self.mainImageView.imageView?.contentMode = .scaleAspectFit
             DispatchQueue.global(qos: .userInitiated).async {
                 self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.mainImageView.pin_updateWithProgress = true
@@ -350,6 +352,8 @@ class DetailCellImage: UITableViewCell {
             imageCountTag.alpha = 1
         } else if status.reblog?.mediaAttachments[0].type ?? status.mediaAttachments[0].type == .gifv {
 //            self.mainImageView.setImage(UIImage(), for: .normal)
+            self.mainImageView.contentMode = .scaleAspectFit
+            self.mainImageView.imageView?.contentMode = .scaleAspectFit
             DispatchQueue.global(qos: .userInitiated).async {
                 self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.mainImageView.pin_updateWithProgress = true

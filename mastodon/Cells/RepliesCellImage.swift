@@ -65,9 +65,9 @@ class RepliesCellImage: SwipeTableViewCell {
             mainImageView.layer.cornerRadius = 0
         }
         mainImageView.layer.masksToBounds = true
-        mainImageView.backgroundColor = Colours.clear
+        mainImageView.backgroundColor = Colours.tabSelected
         mainImageViewBG.layer.cornerRadius = 10
-        mainImageViewBG.backgroundColor = Colours.clear
+        mainImageViewBG.backgroundColor = Colours.tabSelected
         mainImageViewBG.layer.shadowColor = UIColor.black.cgColor
 //        mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 7)
         mainImageViewBG.layer.shadowRadius = 10

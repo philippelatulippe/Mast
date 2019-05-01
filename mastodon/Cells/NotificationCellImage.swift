@@ -78,9 +78,9 @@ class NotificationCellImage: SwipeTableViewCell {
             mainImageView.layer.cornerRadius = 0
         }
         mainImageView.layer.masksToBounds = true
-        mainImageView.backgroundColor = Colours.clear
+        mainImageView.backgroundColor = Colours.tabSelected
         mainImageViewBG.layer.cornerRadius = 10
-        mainImageViewBG.backgroundColor = Colours.clear
+        mainImageViewBG.backgroundColor = Colours.tabSelected
         mainImageViewBG.layer.shadowColor = UIColor.black.cgColor
 //        mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 7)
         mainImageViewBG.layer.shadowRadius = 10
@@ -523,6 +523,8 @@ class NotificationCellImage: SwipeTableViewCell {
         if status.status?.reblog?.mediaAttachments.isEmpty ?? status.status?.mediaAttachments.isEmpty ?? false { return }
         if status.status?.reblog?.mediaAttachments[0].type ?? status.status?.mediaAttachments[0].type == .video {
 //            self.mainImageView.setImage(UIImage(), for: .normal)
+            self.mainImageView.contentMode = .scaleAspectFit
+            self.mainImageView.imageView?.contentMode = .scaleAspectFit
             DispatchQueue.global(qos: .userInitiated).async {
                 self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.mainImageView.pin_updateWithProgress = true
@@ -533,6 +535,8 @@ class NotificationCellImage: SwipeTableViewCell {
             imageCountTag.alpha = 1
         } else if status.status?.reblog?.mediaAttachments[0].type ?? status.status?.mediaAttachments[0].type == .gifv {
 //            self.mainImageView.setImage(UIImage(), for: .normal)
+            self.mainImageView.contentMode = .scaleAspectFit
+            self.mainImageView.imageView?.contentMode = .scaleAspectFit
             DispatchQueue.global(qos: .userInitiated).async {
                 self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
                 self.mainImageView.pin_updateWithProgress = true

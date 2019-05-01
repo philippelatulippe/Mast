@@ -507,8 +507,8 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
             cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
             cell.toot.textColor = Colours.black
-            cell.mainImageView.backgroundColor = Colours.white
-            cell.mainImageViewBG.backgroundColor = Colours.white
+            cell.mainImageView.backgroundColor = Colours.tabSelected
+            cell.mainImageViewBG.backgroundColor = Colours.tabSelected
             cell.toot.handleMentionTap { (string) in
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     let selection = UISelectionFeedbackGenerator()
