@@ -791,12 +791,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     
                         let cell = tableView.dequeueReusableCell(withIdentifier: "cell444", for: indexPath) as! DMFeedCell
                         cell.delegate = self
-                        cell.rep1.tag = indexPath.row
-                        cell.like1.tag = indexPath.row
-                        cell.boost1.tag = indexPath.row
-                        cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-                        cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-                        cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
                     
                     cell.configure2(StoreStruct.notificationsDirect[indexPath.row].unread, id: StoreStruct.notificationsDirect[indexPath.row].id)
                         cell.configure(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
@@ -895,13 +889,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell444", for: indexPath) as! DMFeedCell
                     cell.delegate = self
-                    
-                    cell.rep1.tag = indexPath.row
-                    cell.like1.tag = indexPath.row
-                    cell.boost1.tag = indexPath.row
-                    cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-                    cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-                    cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
                     
                     cell.configure2(StoreStruct.notificationsDirect[indexPath.row].unread, id: StoreStruct.notificationsDirect[indexPath.row].id)
                     cell.configure(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
@@ -1048,8 +1035,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         } else {
                             cell.moreImage.image = nil
                         }
-                        cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
-                        cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -1065,13 +1050,9 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
                         if sto[sender.tag].lastStatus!.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
-                            cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
-                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
-                            cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
-                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
                             cell.moreImage.image = UIImage(named: "boost")
                         }
                         cell.hideSwipe(animated: true)
@@ -1110,8 +1091,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         } else {
                             cell.moreImage.image = nil
                         }
-                        cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
-                        cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -1126,13 +1105,9 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     }
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
                         if sto[sender.tag].lastStatus!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
-                            cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
-                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
-                            cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
-                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
                             cell.moreImage.image = UIImage(named: "like")
                         }
                         cell.hideSwipe(animated: true)
