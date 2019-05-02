@@ -921,7 +921,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         } else if (UserDefaults.standard.object(forKey: "themeaccent") as? Int == 500) {
             if UserDefaults.standard.object(forKey: "hexhex") as? String != nil {
                 let hexText = UserDefaults.standard.object(forKey: "hexhex") as? String ?? "ffffff"
-                StoreStruct.hexCol = UIColor(hexString: hexText) ?? UIColor(red: 107/255.0, green: 122/255.0, blue: 214/255.0, alpha: 1.0)
+                StoreStruct.hexCol = UIColor(hexString: hexText) ?? UIColor(red: 84/255.0, green: 102/255.0, blue: 205/255.0, alpha: 1.0)
                 Colours.tabSelected = StoreStruct.hexCol
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.reloadTint()
@@ -966,10 +966,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         UITabBar.appearance().layer.borderWidth = 1.0
         UITabBar.appearance().layer.borderColor = Colours.grayDark.withAlphaComponent(0.21).cgColor
         self.tabBar.layer.borderColor = Colours.grayDark.withAlphaComponent(0.21).cgColor
-        //        UITabBar.appearance().clipsToBounds = false
-        
-        
-        
         
         if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
             var customStyle = VolumeBarStyle.likeInstagram

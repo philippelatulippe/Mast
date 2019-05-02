@@ -1997,11 +1997,11 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 
-                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
-                DispatchQueue.main.async {
                     self.currentTags = self.currentTags + stat
                     self.currentTags = self.currentTags.removeDuplicates()
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
                 }

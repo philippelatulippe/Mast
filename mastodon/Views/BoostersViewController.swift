@@ -118,9 +118,9 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.view.addSubview(self.tableView2)
         } else {
             if UIApplication.shared.isSplitOrSlideOver {
-                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(30), width: CGFloat(200), height: CGFloat(40)))
             } else {
-                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(newoff), width: CGFloat(240), height: CGFloat(40)))
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(newoff), width: CGFloat(200), height: CGFloat(40)))
             }
             segmentedControl.dataSource = self
             if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
@@ -236,9 +236,9 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView2.tableFooterView = UIView()
         } else {
             if UIApplication.shared.isSplitOrSlideOver {
-                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(30), width: CGFloat(240), height: CGFloat(40)))
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(30), width: CGFloat(200), height: CGFloat(40)))
             } else {
-                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 120), y: CGFloat(newoff), width: CGFloat(240), height: CGFloat(40)))
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(newoff), width: CGFloat(200), height: CGFloat(40)))
             }
             segmentedControl.dataSource = self
             if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
