@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 @objc public protocol SKPhotoBrowserDelegate {
     
@@ -740,6 +741,18 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
                 }
                 .action(.default("Share Image".localized), image: UIImage(named: "share")) { (action, ind) in
                     self.longShare()
+                }
+                .action(.default("Save Image".localized), image: UIImage(named: "share")) { (action, ind) in
+                    let snapshot: UIImage = self.photoAtIndex(self.currentPageIndex).underlyingImage
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.creationRequestForAsset(from: snapshot)
+                    }, completionHandler: { success, error in
+                        if success {
+                            // Saved
+                        } else {
+                            // Save failed
+                        }
+                    })
                 }
                 .action(.cancel("Dismiss"))
                 .finally { action, index in

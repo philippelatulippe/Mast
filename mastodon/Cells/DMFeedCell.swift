@@ -121,8 +121,8 @@ class DMFeedCell: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-43-[image2(26)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[readIndi(8)]-5-[image(40)]-13-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[image(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-32-[image2(26)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-28-[readIndi(8)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-38-[image2(26)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-34-[readIndi(8)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         
             contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[date]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
             contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[artist]-1-[episodes]-18-|", options: [], metrics: nil, views: viewsDict))
@@ -281,7 +281,7 @@ class DMFeedCell: SwipeTableViewCell {
             profileImageView2.pin_updateWithProgress = true
             profileImageView2.pin_setImage(from: URL(string: "\(status.account.avatar)"))
             profileImageView2.layer.masksToBounds = true
-            profileImageView2.layer.borderColor = Colours.clear.cgColor
+            profileImageView2.layer.borderColor = Colours.white.cgColor
             profileImageView2.layer.borderWidth = 2
             profileImageView2.alpha = 1
             if (UserDefaults.standard.object(forKey: "proCorner") == nil || UserDefaults.standard.object(forKey: "proCorner") as! Int == 0) {

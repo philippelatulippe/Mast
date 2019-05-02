@@ -39,11 +39,36 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
         super.didReceiveMemoryWarning()
     }
     
+    @objc func hexNew() {
+        Alertift.actionSheet(title: nil, message: nil)
+            .backgroundColor(Colours.white)
+            .titleTextColor(Colours.grayDark)
+            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+            .messageTextAlignment(.left)
+            .titleTextAlignment(.left)
+            .action(.default("Hue Picker Wheel".localized), image: nil) { (action, ind) in
+                let controller = NewHuePickerViewController()
+                self.present(controller, animated: true, completion: nil)
+            }
+            .action(.default("Enter Hex Value Manually".localized), image: nil) { (action, ind) in
+                let controller = NewHexViewController()
+                self.present(controller, animated: true, completion: nil)
+            }
+            .action(.cancel("Dismiss"))
+            .finally { action, index in
+                if action.style == .cancel {
+                    return
+                }
+            }
+            .show(on: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Appearance"
         self.removeTabbarItemsText()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.hexNew), name: NSNotification.Name(rawValue: "hexnew"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         
