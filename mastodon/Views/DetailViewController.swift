@@ -655,7 +655,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if self.allReplies.isEmpty {
                 return nil
             } else {
-                let repC = self.mainStatus[0].repliesCount
+                let repC = self.allReplies.count
                 if repC == 0 || repC == 1 {
                     title.text = "1 Reply".localized
                 } else {

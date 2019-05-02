@@ -964,8 +964,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UITabBar.appearance().layer.borderWidth = 1.0
-        UITabBar.appearance().layer.borderColor = Colours.grayDark.withAlphaComponent(0.21).cgColor
-        self.tabBar.layer.borderColor = Colours.grayDark.withAlphaComponent(0.21).cgColor
+        UITabBar.appearance().layer.borderColor = Colours.grayDark.cgColor
         
         if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
             var customStyle = VolumeBarStyle.likeInstagram

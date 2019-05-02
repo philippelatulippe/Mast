@@ -34,11 +34,6 @@ class MainFeedCell: SwipeTableViewCell {
         warningB.backgroundColor = Colours.clear
         moreImage.backgroundColor = Colours.clear
         
-//        userName.adjustsFontForContentSizeCategory = true
-//        userTag.titleLabel?.adjustsFontForContentSizeCategory = true
-//        date.adjustsFontForContentSizeCategory = true
-//        toot.adjustsFontForContentSizeCategory = true
-        
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView2.translatesAutoresizingMaskIntoConstraints = false
         warningB.translatesAutoresizingMaskIntoConstraints = false
@@ -70,13 +65,6 @@ class MainFeedCell: SwipeTableViewCell {
         warningB.titleLabel?.font = UIFont.boldSystemFont(ofSize: Colours.fontSize3)
         warningB.titleLabel?.numberOfLines = 0
         warningB.layer.masksToBounds = true
-//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
-//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        blurEffectView.frame = warningB.bounds
-//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        blurEffectView.isUserInteractionEnabled = false
-//        warningB.addSubview(blurEffectView)
-//        warningB.sendSubviewToBack(blurEffectView)
         
         userName.numberOfLines = 0
         toot.numberOfLines = 0
@@ -170,14 +158,14 @@ class MainFeedCell: SwipeTableViewCell {
         
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[name]-2-[artist]-(>=5)-[more(16)]-4-[date]-20-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-40-[image2(26)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-40-[image2(26)]", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[image(40)]-13-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[more(16)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[date]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[artist]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[image(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-38-[image2(26)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-            
+
             if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[episodes]-18-|", options: [], metrics: nil, views: viewsDict))
             } else {
@@ -187,7 +175,7 @@ class MainFeedCell: SwipeTableViewCell {
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[episodes]-15-[more1(20)]-18-|", options: [], metrics: nil, views: viewsDict))
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[rep1(36)]-20-[like1(40)]-15-[boost1(40)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
             }
-        
+
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-71-[warning]-17-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[warning]-16-|", options: [], metrics: nil, views: viewsDict))
     }
