@@ -98,6 +98,21 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         toot.URLColor = UIColor.white.withAlphaComponent(0.7)
         
         
+        if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
+            let amount = 5
+            let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+            horizontal.minimumRelativeValue = -amount
+            horizontal.maximumRelativeValue = amount
+            let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+            vertical.minimumRelativeValue = -amount
+            vertical.maximumRelativeValue = amount
+            let effectGro = UIMotionEffectGroup()
+            effectGro.motionEffects = [horizontal, vertical]
+            self.profileImageView.addMotionEffect(effectGro)
+        } else {
+            
+        }
+        
         contentView.addSubview(headerImageView)
         contentView.addSubview(profileImageView)
         contentView.addSubview(userName)

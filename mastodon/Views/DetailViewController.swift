@@ -574,9 +574,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount, section: 5)).height)
                                 zCount += 1
                             }
-                            if self.allReplies.count != 0 {
-                                zHeights = zHeights + 40
-                            }
+//                            if self.allReplies.count != 0 {
+//                                zHeights = zHeights + 40
+//                            }
                             let footerHe0 = self.tableView.bounds.height - self.tableView.rectForRow(at: IndexPath(row: 0, section: 1)).height - self.tableView.rectForRow(at: IndexPath(row: 0, section: 2)).height
                             var footerHe = footerHe0 - self.tableView.rectForRow(at: IndexPath(row: 0, section: 3)).height - self.tableView.rectForRow(at: IndexPath(row: 0, section: 4)).height - zHeights
                             if footerHe < 0 {
@@ -659,7 +659,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if repC == 0 || repC == 1 {
                     title.text = "1 Reply".localized
                 } else {
-                    title.text = "\(repC) Replies".localized
+                    title.text = "\(self.allReplies.count) Replies".localized
                 }
             }
         }

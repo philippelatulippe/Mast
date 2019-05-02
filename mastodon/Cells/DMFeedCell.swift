@@ -384,7 +384,7 @@ class DMFeedCell: SwipeTableViewCell {
             self.moreImage.image = UIImage(named: "like")
         } else {
             if status.reblog?.poll ?? status.poll != nil {
-                self.moreImage.image = UIImage(named: "list")
+                self.moreImage.image = UIImage(named: "pollbubble")
             } else {
                 
                 if status.reblog?.visibility ?? status.visibility == .direct {

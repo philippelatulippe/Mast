@@ -257,7 +257,7 @@ class RepliesCell: SwipeTableViewCell {
             self.moreImage.image = UIImage(named: "like")
         } else {
             if status.reblog?.poll ?? status.poll != nil {
-                self.moreImage.image = UIImage(named: "list")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+                self.moreImage.image = UIImage(named: "pollbubble")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
             } else {
                 
                 if status.reblog?.visibility ?? status.visibility == .direct {

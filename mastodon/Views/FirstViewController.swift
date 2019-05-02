@@ -4725,10 +4725,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     func fetchGap() {
         
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let impact = UIImpactFeedbackGenerator(style: .medium)
-            impact.impactOccurred()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let impact = UIImpactFeedbackGenerator(style: .medium)
+//            impact.impactOccurred()
+//        }
         
         if self.currentIndex == 0 {
             let request = Timelines.home(range: .max(id: StoreStruct.gapLastHomeID, limit: nil))
