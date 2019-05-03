@@ -88,7 +88,7 @@ class NotificationCellImage: SwipeTableViewCell {
         mainImageViewBG.layer.masksToBounds = false
         
         if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
-            let amount = 8
+            let amount = 10
             let horizontalEffect = UIInterpolatingMotionEffect(
                 keyPath: "layer.shadowOffset.width",
                 type: .tiltAlongHorizontalAxis)
@@ -570,7 +570,7 @@ class NotificationCellImage: SwipeTableViewCell {
             self.mainImageView.imageView?.image = nil
 //            self.mainImageView.imageView?.image = UIImage()
             if status.status?.reblog?.mediaAttachments.count ?? status.status?.mediaAttachments.count == 2 {
-                self.smallImage1.frame = CGRect(x: 0, y: 0, width: (UIScreen.main.bounds.width - 127)/2, height: 200)
+                self.smallImage1.frame = CGRect(x: -2, y: 0, width: (UIScreen.main.bounds.width - 127)/2, height: 200)
                 self.smallImage1.contentMode = .scaleAspectFill
                 self.smallImage1.imageView?.contentMode = .scaleAspectFill
                 self.smallImage1.clipsToBounds = true
@@ -584,7 +584,7 @@ class NotificationCellImage: SwipeTableViewCell {
                 self.smallImage1.alpha = 1
                 self.mainImageView.addSubview(self.smallImage1)
                 
-                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width - 127)/2, y: 0, width: (UIScreen.main.bounds.width - 127)/2, height: 200)
+                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width - 127)/2 + 2, y: 0, width: (UIScreen.main.bounds.width - 127)/2, height: 200)
                 self.smallImage2.contentMode = .scaleAspectFill
                 self.smallImage2.imageView?.contentMode = .scaleAspectFill
                 self.smallImage2.clipsToBounds = true
@@ -598,7 +598,7 @@ class NotificationCellImage: SwipeTableViewCell {
                 self.smallImage2.alpha = 1
                 self.mainImageView.addSubview(self.smallImage2)
             } else if status.status?.reblog?.mediaAttachments.count ?? status.status?.mediaAttachments.count == 3 {
-                self.smallImage1.frame = CGRect(x: 0, y: 0, width: (UIScreen.main.bounds.width - 127)/2, height: 200)
+                self.smallImage1.frame = CGRect(x: -2, y: 0, width: (UIScreen.main.bounds.width - 127)/2, height: 200)
                 self.smallImage1.contentMode = .scaleAspectFill
                 self.smallImage1.imageView?.contentMode = .scaleAspectFill
                 self.smallImage1.clipsToBounds = true
@@ -612,7 +612,7 @@ class NotificationCellImage: SwipeTableViewCell {
                 self.smallImage1.alpha = 1
                 self.mainImageView.addSubview(self.smallImage1)
                 
-                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width - 127)/2, y: 0, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
+                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width - 127)/2 + 2, y: -2, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
                 self.smallImage2.contentMode = .scaleAspectFill
                 self.smallImage2.imageView?.contentMode = .scaleAspectFill
                 self.smallImage2.clipsToBounds = true
@@ -626,7 +626,7 @@ class NotificationCellImage: SwipeTableViewCell {
                 self.smallImage2.alpha = 1
                 self.mainImageView.addSubview(self.smallImage2)
                 
-                self.smallImage3.frame = CGRect(x: (UIScreen.main.bounds.width - 127)/2, y: 80, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
+                self.smallImage3.frame = CGRect(x: (UIScreen.main.bounds.width - 127)/2 + 2, y: 82, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
                 self.smallImage3.contentMode = .scaleAspectFill
                 self.smallImage3.imageView?.contentMode = .scaleAspectFill
                 self.smallImage3.clipsToBounds = true
@@ -640,7 +640,7 @@ class NotificationCellImage: SwipeTableViewCell {
                 self.smallImage3.alpha = 1
                 self.mainImageView.addSubview(self.smallImage3)
             } else if status.status?.reblog?.mediaAttachments.count ?? status.status?.mediaAttachments.count ?? 0 >= 4 {
-                self.smallImage1.frame = CGRect(x: 0, y: 0, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
+                self.smallImage1.frame = CGRect(x: -2, y: -2, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
                 self.smallImage1.contentMode = .scaleAspectFill
                 self.smallImage1.imageView?.contentMode = .scaleAspectFill
                 self.smallImage1.clipsToBounds = true
@@ -654,7 +654,7 @@ class NotificationCellImage: SwipeTableViewCell {
                 self.smallImage1.alpha = 1
                 self.mainImageView.addSubview(self.smallImage1)
                 
-                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width - 127)/2, y: 0, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
+                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width - 127)/2 + 2, y: -2, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
                 self.smallImage2.contentMode = .scaleAspectFill
                 self.smallImage2.imageView?.contentMode = .scaleAspectFill
                 self.smallImage2.clipsToBounds = true
@@ -668,7 +668,7 @@ class NotificationCellImage: SwipeTableViewCell {
                 self.smallImage2.alpha = 1
                 self.mainImageView.addSubview(self.smallImage2)
                 
-                self.smallImage3.frame = CGRect(x: 0, y: 80, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
+                self.smallImage3.frame = CGRect(x: -2, y: 82, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
                 self.smallImage3.contentMode = .scaleAspectFill
                 self.smallImage3.imageView?.contentMode = .scaleAspectFill
                 self.smallImage3.clipsToBounds = true
@@ -682,7 +682,7 @@ class NotificationCellImage: SwipeTableViewCell {
                 self.smallImage3.alpha = 1
                 self.mainImageView.addSubview(self.smallImage3)
                 
-                self.smallImage4.frame = CGRect(x: (UIScreen.main.bounds.width - 127)/2, y: 80, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
+                self.smallImage4.frame = CGRect(x: (UIScreen.main.bounds.width - 127)/2 + 2, y: 82, width: (UIScreen.main.bounds.width - 127)/2, height: 80)
                 self.smallImage4.contentMode = .scaleAspectFill
                 self.smallImage4.imageView?.contentMode = .scaleAspectFill
                 self.smallImage4.clipsToBounds = true

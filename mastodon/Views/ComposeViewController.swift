@@ -1545,7 +1545,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         cell.bgImage.layer.shadowRadius = 12
         cell.bgImage.layer.shadowOpacity = 0.44
             if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
-                let amount = 8
+                let amount = 10
                 let horizontalEffect = UIInterpolatingMotionEffect(
                     keyPath: "layer.shadowOffset.width",
                     type: .tiltAlongHorizontalAxis)

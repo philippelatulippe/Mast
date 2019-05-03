@@ -382,7 +382,7 @@ class DetailCellImage: UITableViewCell {
             
             self.mainImageView.setImage(UIImage(), for: .normal)
             if status.reblog?.mediaAttachments.count ?? status.mediaAttachments.count == 2 {
-                self.smallImage1.frame = CGRect(x: -2, y: 0, width: (UIScreen.main.bounds.width)/2, height: 240)
+                self.smallImage1.frame = CGRect(x: -2, y: 0, width: (UIScreen.main.bounds.width)/2, height: 275)
                 self.smallImage1.contentMode = .scaleAspectFill
                 self.smallImage1.imageView?.contentMode = .scaleAspectFill
                 self.smallImage1.clipsToBounds = true
@@ -396,7 +396,7 @@ class DetailCellImage: UITableViewCell {
                 self.smallImage1.alpha = 1
                 self.mainImageView.addSubview(self.smallImage1)
                 
-                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width)/2 + 2, y: 0, width: (UIScreen.main.bounds.width)/2, height: 240)
+                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width)/2 + 2, y: 0, width: (UIScreen.main.bounds.width)/2, height: 275)
                 self.smallImage2.contentMode = .scaleAspectFill
                 self.smallImage2.imageView?.contentMode = .scaleAspectFill
                 self.smallImage2.clipsToBounds = true
@@ -410,7 +410,7 @@ class DetailCellImage: UITableViewCell {
                 self.smallImage2.alpha = 1
                 self.mainImageView.addSubview(self.smallImage2)
             } else if status.reblog?.mediaAttachments.count ?? status.mediaAttachments.count == 3 {
-                self.smallImage1.frame = CGRect(x: -2, y: 0, width: (UIScreen.main.bounds.width)/2, height: 240)
+                self.smallImage1.frame = CGRect(x: -2, y: 0, width: (UIScreen.main.bounds.width)/2, height: 275)
                 self.smallImage1.contentMode = .scaleAspectFill
                 self.smallImage1.imageView?.contentMode = .scaleAspectFill
                 self.smallImage1.clipsToBounds = true
@@ -424,7 +424,7 @@ class DetailCellImage: UITableViewCell {
                 self.smallImage1.alpha = 1
                 self.mainImageView.addSubview(self.smallImage1)
                 
-                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width)/2 + 2, y: -2, width: (UIScreen.main.bounds.width)/2, height: 120)
+                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width)/2 + 2, y: -2, width: (UIScreen.main.bounds.width)/2, height: 137.5)
                 self.smallImage2.contentMode = .scaleAspectFill
                 self.smallImage2.imageView?.contentMode = .scaleAspectFill
                 self.smallImage2.clipsToBounds = true
@@ -438,7 +438,7 @@ class DetailCellImage: UITableViewCell {
                 self.smallImage2.alpha = 1
                 self.mainImageView.addSubview(self.smallImage2)
                 
-                self.smallImage3.frame = CGRect(x: (UIScreen.main.bounds.width)/2 + 2, y: 122, width: (UIScreen.main.bounds.width)/2, height: 120)
+                self.smallImage3.frame = CGRect(x: (UIScreen.main.bounds.width)/2 + 2, y: 139.5, width: (UIScreen.main.bounds.width)/2, height: 137.5)
                 self.smallImage3.contentMode = .scaleAspectFill
                 self.smallImage3.imageView?.contentMode = .scaleAspectFill
                 self.smallImage3.clipsToBounds = true
@@ -452,7 +452,7 @@ class DetailCellImage: UITableViewCell {
                 self.smallImage3.alpha = 1
                 self.mainImageView.addSubview(self.smallImage3)
             } else if status.reblog?.mediaAttachments.count ?? status.mediaAttachments.count >= 4 {
-                self.smallImage1.frame = CGRect(x: -2, y: -2, width: (UIScreen.main.bounds.width)/2, height: 120)
+                self.smallImage1.frame = CGRect(x: -2, y: -2, width: (UIScreen.main.bounds.width)/2, height: 137.5)
                 self.smallImage1.contentMode = .scaleAspectFill
                 self.smallImage1.imageView?.contentMode = .scaleAspectFill
                 self.smallImage1.clipsToBounds = true
@@ -466,7 +466,7 @@ class DetailCellImage: UITableViewCell {
                 self.smallImage1.alpha = 1
                 self.mainImageView.addSubview(self.smallImage1)
                 
-                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width)/2 + 2, y: -2, width: (UIScreen.main.bounds.width)/2, height: 120)
+                self.smallImage2.frame = CGRect(x: (UIScreen.main.bounds.width)/2 + 2, y: -2, width: (UIScreen.main.bounds.width)/2, height: 137.5)
                 self.smallImage2.contentMode = .scaleAspectFill
                 self.smallImage2.imageView?.contentMode = .scaleAspectFill
                 self.smallImage2.clipsToBounds = true
@@ -480,7 +480,7 @@ class DetailCellImage: UITableViewCell {
                 self.smallImage2.alpha = 1
                 self.mainImageView.addSubview(self.smallImage2)
                 
-                self.smallImage3.frame = CGRect(x: -2, y: 122, width: (UIScreen.main.bounds.width)/2, height: 120)
+                self.smallImage3.frame = CGRect(x: -2, y: 139.5, width: (UIScreen.main.bounds.width)/2, height: 137.5)
                 self.smallImage3.contentMode = .scaleAspectFill
                 self.smallImage3.imageView?.contentMode = .scaleAspectFill
                 self.smallImage3.clipsToBounds = true
@@ -494,7 +494,7 @@ class DetailCellImage: UITableViewCell {
                 self.smallImage3.alpha = 1
                 self.mainImageView.addSubview(self.smallImage3)
                 
-                self.smallImage4.frame = CGRect(x: (UIScreen.main.bounds.width)/2 + 2, y: 122, width: (UIScreen.main.bounds.width)/2, height: 120)
+                self.smallImage4.frame = CGRect(x: (UIScreen.main.bounds.width)/2 + 2, y: 139.5, width: (UIScreen.main.bounds.width)/2, height: 137.5)
                 self.smallImage4.contentMode = .scaleAspectFill
                 self.smallImage4.imageView?.contentMode = .scaleAspectFill
                 self.smallImage4.clipsToBounds = true

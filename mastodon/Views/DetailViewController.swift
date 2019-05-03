@@ -2658,7 +2658,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let controller = BoostersViewController()
                                     controller.statusLiked = stat
                                     controller.statusBoosted = stat0
-                                    controller.profileStatus = self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id ?? ""
+                                    controller.profileStatus = self.mainStatus[0].reblog?.account.id ?? self.mainStatus[0].account.id
                                     
                                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                     switch (deviceIdiom) {

@@ -75,7 +75,7 @@ class RepliesCellImage: SwipeTableViewCell {
         mainImageViewBG.layer.masksToBounds = false
         
         if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
-            let amount = 8
+            let amount = 10
             let horizontalEffect = UIInterpolatingMotionEffect(
                 keyPath: "layer.shadowOffset.width",
                 type: .tiltAlongHorizontalAxis)
