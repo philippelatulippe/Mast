@@ -783,8 +783,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.restorationIdentifier = "FirstViewController"
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.currentSegIndex), name: NSNotification.Name(rawValue: "setCurrentSegmentIndex"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.savedComposePresent), name: NSNotification.Name(rawValue: "savedComposePresent"), object: nil)

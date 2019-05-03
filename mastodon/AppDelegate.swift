@@ -299,8 +299,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
                     } else if StoreStruct.currentPage == 1 {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
-                    } else {
+                    } else if StoreStruct.currentPage == 101010 {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
+                    } else {
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance4"), object: self)
                     }
                 }
                 

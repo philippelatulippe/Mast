@@ -879,9 +879,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         super.viewDidLoad()
         self.view.backgroundColor = Colours.white
         
-        self.restorationIdentifier = "ViewController"
-        self.restorationClass = ViewController.self
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.presentIntro), name: NSNotification.Name(rawValue: "presentIntro00"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.gotoID), name: NSNotification.Name(rawValue: "gotoid00"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -910,9 +907,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         NotificationCenter.default.addObserver(self, selector: #selector(self.signOutNewInstance), name: NSNotification.Name(rawValue: "signOut2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didTouchSearch), name: NSNotification.Name(rawValue: "searchthething"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.addBadge), name: NSNotification.Name(rawValue: "addBadge"), object: nil)
-        
-        
-        
         
         if (UserDefaults.standard.object(forKey: "themeaccent") == nil) || (UserDefaults.standard.object(forKey: "themeaccent") as! Int == 0) {
             Colours.tabSelected = StoreStruct.colArray[0]
@@ -949,7 +943,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         } else {
             StoreStruct.instanceLocalToAdd = UserDefaults.standard.object(forKey: "instancesLocal") as! [String]
         }
-        
         
         self.tabBar.barTintColor = Colours.white
         self.tabBar.backgroundColor = Colours.white
@@ -991,8 +984,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         longPress.delegate = self
         self.view.addGestureRecognizer(longPress)
         
-        
-        
         self.view0pinch.frame = self.view.frame
         self.view1pinch.frame = self.view.frame
         self.screenshotLabel.frame = (CGRect(x: 40, y: 70, width: self.view.bounds.width - 80, height: 50))
@@ -1008,7 +999,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.createTabBar()
         self.setupSiri()
         self.delegate = self
-        
         
         if UserDefaults.standard.object(forKey: "clientID") == nil {} else {
             StoreStruct.shared.currentInstance.clientID = UserDefaults.standard.object(forKey: "clientID") as! String
@@ -1032,34 +1022,20 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 accessToken: StoreStruct.shared.currentInstance.accessToken
             )
             
-            
-            do {
-                let st1 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
-                StoreStruct.statusesHome = st1
-                let st2 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
-                StoreStruct.statusesLocal = st2
-                let st3 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
-                StoreStruct.statusesFederated = st3
-                let st4 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
-                StoreStruct.notifications = st4
-                let st5 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
-                StoreStruct.notificationsMentions = st5
-            } catch {
-                print("Couldn't load")
-            }
-            
-            
-            let request2 = Accounts.currentUser()
-            StoreStruct.client.run(request2) { (statuses) in
-                if let stat = (statuses.value) {
-//                    if Account.getAccounts().contains(stat) {} else {
-//                        Account.addAccountToList(account: stat)
-//                    }
-                    StoreStruct.currentUser = stat
-                }
-            }
-            
-            
+//            do {
+//                let st1 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
+//                StoreStruct.statusesHome = st1
+//                let st2 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
+//                StoreStruct.statusesLocal = st2
+//                let st3 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
+//                StoreStruct.statusesFederated = st3
+//                let st4 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
+//                StoreStruct.notifications = st4
+//                let st5 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+//                StoreStruct.notificationsMentions = st5
+//            } catch {
+//                print("Couldn't load")
+//            }
         }
         
         
@@ -1067,9 +1043,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let request = Instances.customEmojis()
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
-//                DispatchQueue.main.async {
-                    StoreStruct.emotiFace = stat
-//                }
+                StoreStruct.emotiFace = stat
                 stat.map({
                     let attributedString = NSAttributedString(string: "    \($0.shortcode)")
                     let textAttachment = NSTextAttachment()
@@ -1531,8 +1505,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             NotificationCenter.default.post(name: Notification.Name(rawValue: "searchPro"), object: self)
         } else if StoreStruct.currentPage == 1 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "searchPro2"), object: self)
-        } else {
+        } else if StoreStruct.currentPage == 101010 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "searchPro3"), object: self)
+        } else {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "searchPro4"), object: self)
         }
     }
     
@@ -1575,6 +1551,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers"), object: self)
                     } else if StoreStruct.currentPage == 1 {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers2"), object: self)
+                    } else if StoreStruct.currentPage == 101010 {
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers3"), object: self)
                     } else {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers3"), object: self)
                     }
@@ -1769,8 +1747,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser"), object: self)
                 } else if StoreStruct.currentPage == 1 {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser2"), object: self)
-                } else {
+                } else if StoreStruct.currentPage == 101010 {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser3"), object: self)
+                } else {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "searchUser4"), object: self)
                 }
             } else {
                 StoreStruct.searchIndex = indexPath.row
@@ -1778,8 +1758,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "search"), object: self)
                 } else if StoreStruct.currentPage == 1 {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "search2"), object: self)
-                } else {
+                } else if StoreStruct.currentPage == 101010 {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "search3"), object: self)
+                } else {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "search4"), object: self)
                 }
             }
             
@@ -1804,8 +1786,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings"), object: self)
                     } else if StoreStruct.currentPage == 1 {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings2"), object: self)
-                    } else {
+                    } else if StoreStruct.currentPage == 101010 {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings3"), object: self)
+                    } else {
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings4"), object: self)
                     }
                 }
             } else if indexPath.section == 2 {
@@ -1833,8 +1817,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "goLists"), object: self)
                         } else if StoreStruct.currentPage == 1 {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "goLists2"), object: self)
-                        } else {
+                        } else if StoreStruct.currentPage == 101010 {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "goLists3"), object: self)
+                        } else {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goLists4"), object: self)
                         }
                     }
                 }
@@ -1853,8 +1839,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
                 } else if StoreStruct.currentPage == 1 {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
-                } else {
+                } else if StoreStruct.currentPage == 101010 {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
+                } else {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance4"), object: self)
                 }
                 
                 
@@ -2736,10 +2724,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             }
         }
         
-        
-        
-        
-        
         if (UserDefaults.standard.object(forKey: "theme") == nil || UserDefaults.standard.object(forKey: "theme") as! Int == 0) {
             UIApplication.shared.statusBarStyle = .default
         } else if (UserDefaults.standard.object(forKey: "theme") != nil && UserDefaults.standard.object(forKey: "theme") as! Int == 1) {
@@ -2754,14 +2738,11 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             userDefaults.synchronize()
         }
         
-        
-        
         if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
             if self.dStream == false {
                 self.streamDataDirect()
             }
         }
-        
         
 //        if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
 //            self.watchSession?.delegate = self
@@ -2781,8 +2762,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     
     func tList() {
-        
-        
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
             let imp = UIImpactFeedbackGenerator()
             imp.impactOccurred()
@@ -3445,12 +3424,5 @@ extension String {
 extension Date {
     var ticks: UInt64 {
         return UInt64((self.timeIntervalSince1970 + 62_135_596_800) * 10_000_000)
-    }
-}
-
-extension ViewController: UIViewControllerRestoration {
-    static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
-        let vc = ViewController()
-        return vc
     }
 }

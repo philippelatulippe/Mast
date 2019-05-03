@@ -544,8 +544,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if self.mainStatus.isEmpty {} else {
             
-            self.loadLoadLoad()
-            
             let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
@@ -579,6 +577,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         }
+        
+        self.loadLoadLoad()
         
         
         if (traitCollection.forceTouchCapability == .available) {
