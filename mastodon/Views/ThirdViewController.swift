@@ -42,6 +42,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var currentIndex = 0
     var isEndorsed = false
     var isShowingBoosts = true
+    var zzz: [String:String] = [:]
     private var crownControl: CrownControl!
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
@@ -606,44 +607,28 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self?.player.play()
         }
         
-        
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
         longPress.minimumPressDuration = 0.5
         longPress.delegate = self
         self.view.addGestureRecognizer(longPress)
         
         UserDefaults.standard.set(1, forKey: "onb")
-//        splitViewController?.view.backgroundColor = Colours.cellQuote
         
-        
-        //        UINavigationBar.appearance().shadowImage = UIImage()
-//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        //        UINavigationBar.appearance().backgroundColor = Colours.white
         UINavigationBar.appearance().barTintColor = Colours.black
         UINavigationBar.appearance().tintColor = Colours.black
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
         
+        var settingsButton = MNGExpandedTouchAreaButton()
+        settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 36, height: 36)))
+        settingsButton.setImage(UIImage(named: "sett")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+        settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        settingsButton.adjustsImageWhenHighlighted = false
+        settingsButton.addTarget(self, action: #selector(self.setTop1), for: .touchUpInside)
         
-        
-//        if UIApplication.shared.isSplitOrSlideOver || UIDevice.current.userInterfaceIdiom == .phone {
-            var settingsButton = MNGExpandedTouchAreaButton()
-            settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 36, height: 36)))
-            settingsButton.setImage(UIImage(named: "sett")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-            settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-            settingsButton.adjustsImageWhenHighlighted = false
-            settingsButton.addTarget(self, action: #selector(self.setTop1), for: .touchUpInside)
-            
-            if self.fromOtherUser {} else {
-                let done = UIBarButtonItem.init(customView: settingsButton)
-                self.navigationItem.setLeftBarButton(done, animated: false)
-            }
-//        } else {
-//
-//        }
-        
-        
-        
-        
+        if self.fromOtherUser {} else {
+            let done = UIBarButtonItem.init(customView: settingsButton)
+            self.navigationItem.setLeftBarButton(done, animated: false)
+        }
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -669,7 +654,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
         case .pad:
             print("nothing")
-//            self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height))
         default:
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
         }
@@ -691,14 +675,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.view.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
         
-//        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
-        //self.tableView.addSubview(refreshControl)
+        self.setupProfile()
         
         self.ai = NVActivityIndicatorView(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 20), y: CGFloat(offset + 65), width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
         self.loadLoadLoad()
-        
-        
         
         switch (deviceIdiom) {
         case .phone:
@@ -726,12 +707,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 })
             }
         }
-        
-        
-        
-        
-        self.setupProfile()
-        
         
         if (traitCollection.forceTouchCapability == .available) {
             registerForPreviewing(with: self, sourceView: self.tableView)
@@ -758,6 +733,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func setupProfile() {
+        var zzz = false
+        if (UserDefaults.standard.object(forKey: "boostpro3") == nil) || (UserDefaults.standard.object(forKey: "boostpro3") as! Int == 0) {
+            zzz = false
+        } else {
+            zzz = true
+        }
+        
         if self.fromOtherUser == true {
             let request09 = Accounts.account(id: self.userIDtoUse)
             StoreStruct.client.run(request09) { (statuses) in
@@ -782,6 +764,20 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                 }
             }
+            let request8 = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
+            StoreStruct.client.run(request8) { (statuses) in
+                if let stat = (statuses.value) {
+                    if stat.isEmpty {} else {
+                        self.profileStatuses2 = stat
+                        //                        DispatchQueue.main.async {
+                        //                            self.ai.alpha = 0
+                        //                            self.ai.removeFromSuperview()
+                        //                            self.tableView.reloadData()
+                        //                        }
+                        
+                    }
+                }
+            }
         } else {
             if StoreStruct.currentUser == nil {
                 let request2 = Accounts.currentUser()
@@ -797,12 +793,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                if stat.isEmpty {
-                                    self.chosenUser = StoreStruct.currentUser
-                                    DispatchQueue.main.async {
-                                        self.tableView.reloadData()
-                                    }
-                                } else {
+                                if stat.isEmpty {} else {
                                     self.profileStatuses = stat
                                     DispatchQueue.main.async {
                                         self.ai.alpha = 0
@@ -826,12 +817,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
                     StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
-                            if stat.isEmpty {
-                                self.chosenUser = StoreStruct.currentUser
-                                DispatchQueue.main.async {
-                                    self.tableView.reloadData()
-                                }
-                            } else {
+                            if stat.isEmpty {} else {
                                 self.profileStatuses = stat
                                 DispatchQueue.main.async {
                                     self.ai.alpha = 0
@@ -850,67 +836,16 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //                        self.tableView.reloadData()
 //                    }
                 }
-            }
-        }
-        
-        
-        var zzz = false
-        if (UserDefaults.standard.object(forKey: "boostpro3") == nil) || (UserDefaults.standard.object(forKey: "boostpro3") as! Int == 0) {
-            zzz = false
-        } else {
-            zzz = true
-        }
-        
-        if self.fromOtherUser == true {
-            let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
-                    if stat.isEmpty {} else {
-                        self.profileStatuses2 = stat
-//                        DispatchQueue.main.async {
-//                            self.ai.alpha = 0
-//                            self.ai.removeFromSuperview()
-//                            self.tableView.reloadData()
-//                        }
-                        
-                    }
-                }
-            }
-        } else {
-            
-            if StoreStruct.currentUser == nil {
-                let request2 = Accounts.currentUser()
-                StoreStruct.client.run(request2) { (statuses) in
-                    if let stat = (statuses.value) {
-                        StoreStruct.currentUser = stat
-                        self.userIDtoUse = StoreStruct.currentUser.id
-                        let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                if stat.isEmpty {} else {
-                                    self.profileStatuses2 = stat
-//                                    DispatchQueue.main.async {
-//                                        self.ai.alpha = 0
-//                                        self.ai.removeFromSuperview()
-//                                        self.tableView.reloadData()
-//                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                self.userIDtoUse = StoreStruct.currentUser.id
-                let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
-                StoreStruct.client.run(request) { (statuses) in
+                let request8 = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
+                StoreStruct.client.run(request8) { (statuses) in
                     if let stat = (statuses.value) {
                         if stat.isEmpty {} else {
                             self.profileStatuses2 = stat
-//                            DispatchQueue.main.async {
-//                                self.ai.alpha = 0
-//                                self.ai.removeFromSuperview()
-//                                self.tableView.reloadData()
-//                            }
+                            //                            DispatchQueue.main.async {
+                            //                                self.ai.alpha = 0
+                            //                                self.ai.removeFromSuperview()
+                            //                                self.tableView.reloadData()
+                            //                            }
                         }
                     }
                 }
@@ -925,24 +860,21 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
-                    let request2 = Accounts.statuses(id: self.userIDtoUse, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .max(id: stat.last?.id ?? "", limit: 5000))
-                    StoreStruct.client.run(request2) { (statuses) in
-                        if let stat = (statuses.value) {
-                            if stat.isEmpty {} else {
-                                self.profileStatusesHasImage = self.profileStatusesHasImage + stat
-                                DispatchQueue.main.async {
-                                    self.tableView.reloadData()
-                                }
-                            }
-                        }
-                    }
+//                    let request2 = Accounts.statuses(id: self.userIDtoUse, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .max(id: stat.last?.id ?? "", limit: 5000))
+//                    StoreStruct.client.run(request2) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            if stat.isEmpty {} else {
+//                                self.profileStatusesHasImage = self.profileStatusesHasImage + stat
+//                                DispatchQueue.main.async {
+//                                    self.tableView.reloadData()
+//                                }
+//                            }
+//                        }
+//                    }
                 }
             }
         }
-        
     }
-    
-    var zzz: [String:String] = [:]
     
     @objc func search9() {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "searchthething"), object: self)
@@ -951,39 +883,21 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        //        self.navigationController?.navigationBar.tintColor = Colours.tabUnselected
-        //        self.navigationController?.navigationBar.barTintColor = Colours.tabUnselected
         self.navigationController?.navigationItem.backBarButtonItem?.tintColor = Colours.tabUnselected
         
         StoreStruct.currentPage = 2
         
-        if StoreStruct.currentUser == nil {
-            let request2 = Accounts.currentUser()
-            StoreStruct.client.run(request2) { (statuses) in
-                if let stat = (statuses.value) {
-                    StoreStruct.currentUser = stat
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-        }
-        
-        
-//        DispatchQueue.global(qos: .userInitiated).async {
-            let request = Lists.all()
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
+//        if StoreStruct.currentUser == nil {
+//            let request2 = Accounts.currentUser()
+//            StoreStruct.client.run(request2) { (statuses) in
+//                if let stat = (statuses.value) {
+//                    StoreStruct.currentUser = stat
 //                    DispatchQueue.main.async {
-                        StoreStruct.allLists = stat
-                        StoreStruct.allLists.map({
-                            self.zzz[$0.title] = $0.id
-                        })
+//                        self.tableView.reloadData()
 //                    }
-                }
-            }
+//                }
+//            }
 //        }
-        
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
@@ -1015,9 +929,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print("nothing")
         }
         
-        
         if self.fromOtherUser && (self.isPeeking == false) && (self.userIDtoUse != StoreStruct.currentUser.id) {
-            
             let request00 = Accounts.allEndorsements()
             StoreStruct.client.run(request00) { (statuses) in
                 if let stat = (statuses.value) {
@@ -1081,10 +993,19 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             } else {
                                 self.isShowingBoosts = false
                             }
-                            
                         }
                     }
                 }
+            }
+        }
+        
+        let request = Lists.all()
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                StoreStruct.allLists = stat
+                StoreStruct.allLists.map({
+                    self.zzz[$0.title] = $0.id
+                })
             }
         }
     }
@@ -1107,12 +1028,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return 65
         }
     }
-    
-    
-    
-    
-    
-    
     
     
     func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
@@ -2828,95 +2743,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             bgColorView.backgroundColor = Colours.tabSelected
                             cell.selectedBackgroundView = bgColorView
                             return cell
-                            
-                            
-//                        } else {
-//
-//
-//                            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCellOwn2", for: indexPath) as! ProfileHeaderCellOwn2
-//                            cell.configure(self.chosenUser)
-//                            cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
-//                            cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
-//                            cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
-//                            cell.follows.tag = indexPath.row
-//                            cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
-//                            cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
-//                            cell.backgroundColor = Colours.tabSelected
-//
-//                            cell.toot.handleMentionTap { (string) in
-//                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//                                    let selection = UISelectionFeedbackGenerator()
-//                                    selection.selectionChanged()
-//                                }
-//
-//                                let controller = ThirdViewController()
-//                                if string == StoreStruct.currentUser.username {} else {
-//                                    controller.fromOtherUser = true
-//                                }
-//                                let request = Accounts.search(query: string)
-//                                StoreStruct.client.run(request) { (statuses) in
-//                                    if let stat = (statuses.value) {
-//                                        if stat.count > 0 {
-//                                            controller.userIDtoUse = stat[0].id
-//                                            DispatchQueue.main.async {
-//                                                self.navigationController?.pushViewController(controller, animated: true)
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                            cell.toot.handleURLTap { (url) in
-//                                // safari
-//                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//                                    let selection = UISelectionFeedbackGenerator()
-//                                    selection.selectionChanged()
-//                                }
-//
-//                                if url.absoluteString.hasPrefix(".") {
-//                                    let z = URL(string: String(url.absoluteString.dropFirst()))!
-//                                    self.safariVC = SFSafariViewController(url: z)
-//                                    self.safariVC?.preferredBarTintColor = Colours.white
-//                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-//                                    self.present(self.safariVC!, animated: true, completion: nil)
-//                                } else {
-//                                    self.safariVC = SFSafariViewController(url: url)
-//                                    self.safariVC?.preferredBarTintColor = Colours.white
-//                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-//                                    self.present(self.safariVC!, animated: true, completion: nil)
-//                                }
-//                            }
-//                            cell.toot.handleHashtagTap { (string) in
-//                                // hash
-//                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//                                    let selection = UISelectionFeedbackGenerator()
-//                                    selection.selectionChanged()
-//                                }
-//
-//                                let controller = HashtagViewController()
-//                                controller.currentTagTitle = string
-//                                let request = Timelines.tag(string)
-//                                StoreStruct.client.run(request) { (statuses) in
-//                                    if let stat = (statuses.value) {
-//                                        controller.currentTags = stat
-//                                        DispatchQueue.main.async {
-//                                            self.navigationController?.pushViewController(controller, animated: true)
-//                                        }
-//                                    }
-//                                }
-//                            }
-//
-//                            let bgColorView = UIView()
-//                            bgColorView.backgroundColor = Colours.tabSelected
-//                            cell.selectedBackgroundView = bgColorView
-//                            return cell
-//
-//
-//                        }
-//
-                        
-                        
                     }
-                    
                 }
             } else {
                 
@@ -3217,7 +3044,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else if indexPath.section == 1 {
             if self.profileStatusesHasImage.isEmpty {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCellImage", for: indexPath) as! ProfileHeaderCellImage
-                //cell.configure()
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.white
@@ -3240,8 +3066,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             } else {
                 zzz = self.profileStatuses2
             }
-            
-            
             
             if zzz.isEmpty {
                 
@@ -5470,16 +5294,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    var lastThing = ""
     func fetchMoreProfile() {
         
         if self.currentIndex == 0 {
-            
             let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .max(id: self.profileStatuses.last?.id ?? "", limit: 5000))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
-                        self.lastThing = stat.first?.id ?? ""
+                    if stat.isEmpty {} else {
                         self.profileStatuses = self.profileStatuses + stat
                         self.profileStatuses = self.profileStatuses.removeDuplicates()
                         DispatchQueue.main.async {
@@ -5501,8 +5322,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .max(id: self.profileStatuses2.last?.id ?? "", limit: 5000))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
-                        self.lastThing = stat.first?.id ?? ""
+                    if stat.isEmpty {} else {
                         self.profileStatuses2 = self.profileStatuses2 + stat
                         self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                         DispatchQueue.main.async {

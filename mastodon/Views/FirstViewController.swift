@@ -1025,20 +1025,19 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             
         }
         
+        self.restoreScroll()
         
         if StoreStruct.statusesHome.isEmpty {
             let request = Timelines.home()
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                    StoreStruct.statusesHome = stat
                     DispatchQueue.main.async {
-                        StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         self.tableView.reloadData()
                     }
                 }
             }
         }
-        
         
         if (traitCollection.forceTouchCapability == .available) {
             registerForPreviewing(with: self, sourceView: self.tableView)
@@ -1103,7 +1102,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         DispatchQueue.main.async {
             if (UserDefaults.standard.object(forKey: "savedRowHome1") == nil) {} else {
                 if StoreStruct.statusesHome.count > 0 {
-                    print("restorec - \(UserDefaults.standard.object(forKey: "savedRowHome1") as! CGFloat)")
                     self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowHome1") as! CGFloat), animated: false)
                     self.resetCurSeg = true
                 }
@@ -1125,7 +1123,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.currentIndex == 0 {
-            print("restorec1 - \(self.tableView.contentOffset.y)")
             UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
         } else if self.currentIndex == 1 {
             UserDefaults.standard.set(self.tableViewL.contentOffset.y, forKey: "savedRowLocal1")
@@ -1136,7 +1133,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if self.currentIndex == 0 {
-            print("restorec2 - \(self.tableView.contentOffset.y)")
             UserDefaults.standard.set(self.tableView.contentOffset.y, forKey: "savedRowHome1")
         } else if self.currentIndex == 1 {
             UserDefaults.standard.set(self.tableViewL.contentOffset.y, forKey: "savedRowLocal1")
@@ -1170,10 +1166,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
-//        DispatchQueue.main.async {
-            self.restoreScroll()
-//        }
         
         self.resetCurSeg = true
         

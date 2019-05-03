@@ -2707,17 +2707,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         
         super.viewDidAppear(true)
         
-        let request0 = Lists.all()
-        StoreStruct.client.run(request0) { (statuses) in
-            if let stat = (statuses.value) {
-                StoreStruct.allLists = stat
-                DispatchQueue.main.async {
-                    self.tableViewLists.reloadData()
-                }
-            }
-        }
-        
-        
         if StoreStruct.currentUser == nil {
             let request2 = Accounts.currentUser()
             StoreStruct.client.run(request2) { (statuses) in
@@ -2733,6 +2722,16 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         }
                     }
                     
+                }
+            }
+        }
+        
+        let request0 = Lists.all()
+        StoreStruct.client.run(request0) { (statuses) in
+            if let stat = (statuses.value) {
+                StoreStruct.allLists = stat
+                DispatchQueue.main.async {
+                    self.tableViewLists.reloadData()
                 }
             }
         }
