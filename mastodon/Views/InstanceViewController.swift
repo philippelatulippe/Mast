@@ -232,7 +232,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                 selection.selectionChanged()
             }
             self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                 self?.tableView.cr.endHeaderRefresh()
             })
         }
@@ -2001,14 +2001,14 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     self.countcount1 = newestC
                     
 //                    UIView.setAnimationsEnabled(false)
+                        self.tableView.cr.endHeaderRefresh()
                     self.tableView.reloadData()
                     self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
 //                    UIView.setAnimationsEnabled(true)
                         
                     } else {
-                        
+                        self.tableView.cr.endHeaderRefresh()
                         self.tableView.reloadData()
-                        
                     }
                 }
             }

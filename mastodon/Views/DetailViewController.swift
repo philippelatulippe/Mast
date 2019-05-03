@@ -464,9 +464,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-//        self.mainStatus = []
-//        self.allPrevious = []
-//        self.allReplies = []
     }
     
     override func viewDidLoad() {
@@ -479,11 +476,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         NotificationCenter.default.addObserver(self, selector: #selector(self.tappedPoll), name: NSNotification.Name(rawValue: "tappedPoll"), object: nil)
         
         self.view.backgroundColor = Colours.white
-//        splitViewController?.view.backgroundColor = Colours.cellQuote
-        
-        
-//        UINavigationBar.appearance().shadowImage = UIImage()
-//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().backgroundColor = Colours.white
         UINavigationBar.appearance().barTintColor = Colours.black
         UINavigationBar.appearance().tintColor = Colours.black
@@ -574,9 +566,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 zHeights = CGFloat(zHeights) + CGFloat(self.tableView.rectForRow(at: IndexPath(row: zCount, section: 5)).height)
                                 zCount += 1
                             }
-//                            if self.allReplies.count != 0 {
-//                                zHeights = zHeights + 40
-//                            }
                             let footerHe0 = self.tableView.bounds.height - self.tableView.rectForRow(at: IndexPath(row: 0, section: 1)).height - self.tableView.rectForRow(at: IndexPath(row: 0, section: 2)).height
                             var footerHe = footerHe0 - self.tableView.rectForRow(at: IndexPath(row: 0, section: 3)).height - self.tableView.rectForRow(at: IndexPath(row: 0, section: 4)).height - zHeights
                             if footerHe < 0 {
@@ -2657,7 +2646,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let request = Statuses.favouritedBy(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    DispatchQueue.main.async {
                         
                         
                         let request0 = Statuses.rebloggedBy(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
@@ -2697,8 +2685,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         
-                        
-                    }
+                       
                 }
             }
             
@@ -2724,8 +2711,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let request = Statuses.status(id: self.mainStatus.first?.id ?? "")
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    self.mainStatus = [stat]
                     DispatchQueue.main.async {
-                        self.mainStatus = [stat]
                         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DetailCell {
                             cell.configure(stat)
                             UIView.setAnimationsEnabled(false)
@@ -2752,8 +2739,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let request = Statuses.status(id: self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    self.mainStatus = [stat]
                     DispatchQueue.main.async {
-                        self.mainStatus = [stat]
                         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? PollCell {
                             if let poll = stat.poll {
                                 cell.configure(thePoll: poll, theOptions: poll.options)

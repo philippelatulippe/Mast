@@ -758,7 +758,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 selection.selectionChanged()
             }
             self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                 self?.tableView.cr.endHeaderRefresh()
             })
         }
@@ -768,7 +768,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 selection.selectionChanged()
             }
             self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                 self?.tableView2.cr.endHeaderRefresh()
             })
         }
@@ -4711,6 +4711,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     var co = 0
                     DispatchQueue.main.async {
+                        StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                         
                         newestC = StoreStruct.notifications.count - newestC
                         
@@ -4733,6 +4734,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                         
                             if stat.count > 0 {
+                                self.tableView2.cr.endHeaderRefresh()
                                 self.tableView2.reloadData()
                             }
                         
@@ -4744,6 +4746,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                         } else {
                             if stat.count > 0 {
+                                self.tableView2.cr.endHeaderRefresh()
                                 self.tableView2.reloadData()
                             }
                             
@@ -4765,7 +4768,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     var co = 0
                     DispatchQueue.main.async {
-                        
+                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                         
                         newestC2 = StoreStruct.notificationsMentions.count - newestC2
                         
@@ -4783,6 +4786,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             }
                             
                             if stat.count > 0 {
+                                self.tableView.cr.endHeaderRefresh()
                                 self.tableView.reloadData()
                             }
                             
@@ -4794,6 +4798,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                         } else {
                             if stat.count > 0 {
+                                self.tableView.cr.endHeaderRefresh()
                                 self.tableView.reloadData()
                             }
                             

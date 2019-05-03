@@ -203,7 +203,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             activity2.becomeCurrent()
         }
         
-        delay(1.5) {
+        delay(3) {
             let activity21 = NSUserActivity(activityType: "com.shi.Mast.dark2")
             activity21.title = "Switch to extra dark mode".localized
             activity21.userInfo = ["state" : "dark2"]
@@ -218,7 +218,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             activity21.becomeCurrent()
         }
         
-        delay(3) {
+        delay(4.5) {
             let activity3 = NSUserActivity(activityType: "com.shi.Mast.oled")
             activity3.title = "Switch to true black dark mode".localized
             activity3.userInfo = ["state" : "oled"]
@@ -233,7 +233,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             activity3.becomeCurrent()
         }
         
-        delay(4.5) {
+        delay(6) {
             let activity3 = NSUserActivity(activityType: "com.shi.Mast.bluemid")
             activity3.title = "Switch to midnight blue mode".localized
             activity3.userInfo = ["state" : "blue"]
@@ -248,7 +248,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             activity3.becomeCurrent()
         }
         
-        delay(6) {
+        delay(7.5) {
             let activity3 = NSUserActivity(activityType: "com.shi.Mast.confetti")
             activity3.title = "Confetti time".localized
             activity3.userInfo = ["state" : "confetti"]
@@ -301,14 +301,14 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let request2 = Accounts.currentUser()
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
+//                            DispatchQueue.main.async {
                                 var instances = InstanceData.getAllInstances()
                                 instances.append(currentInstance)
                                 UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
                                 StoreStruct.currentUser = stat
                                 Account.addAccountToList(account: stat)
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
-                            }
+//                            }
                         }
                     }
                     
@@ -323,9 +323,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let request3 = Instances.customEmojis()
                     StoreStruct.client.run(request3) { (statuses) in
                         if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
+//                            DispatchQueue.main.async {
                                 StoreStruct.emotiFace = stat
-                            }
+//                            }
                             stat.map({
                                 let attributedString = NSAttributedString(string: "    \($0.shortcode)")
                                 let textAttachment = NSTextAttachment()
@@ -399,14 +399,14 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         let request2 = Accounts.currentUser()
                         StoreStruct.shared.newClient.run(request2) { (statuses) in
                             if let stat = (statuses.value) {
-                                DispatchQueue.main.async {
+//                                DispatchQueue.main.async {
                                     var instances = InstanceData.getAllInstances()
                                     instances.append(newInstance)
                                     UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey: "instances")
                                     StoreStruct.currentUser = stat
                                     Account.addAccountToList(account: stat)
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
-                                }
+//                                }
                             }
                         }
                     
@@ -1067,9 +1067,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let request = Instances.customEmojis()
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     StoreStruct.emotiFace = stat
-                }
+//                }
                 stat.map({
                     let attributedString = NSAttributedString(string: "    \($0.shortcode)")
                     let textAttachment = NSTextAttachment()
@@ -2529,7 +2529,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 )
                 StoreStruct.shared.newClient.run(request) { (application) in
                     
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                     
                     if application.value == nil {
                         
@@ -2594,7 +2594,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                             }
                         }
                     }
-                    }
+//                    }
                 }
             } else {
                 StoreStruct.client = Client(baseURL: "https://\(returnedText)")
@@ -2606,7 +2606,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 )
                 StoreStruct.client.run(request) { (application) in
                     
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                     if application.value == nil {
                         
                         DispatchQueue.main.async {
@@ -2668,7 +2668,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                             }
                         }
                     }
-                    }
+//                    }
                 }
                 }
             }
@@ -2710,8 +2710,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let request0 = Lists.all()
         StoreStruct.client.run(request0) { (statuses) in
             if let stat = (statuses.value) {
+                StoreStruct.allLists = stat
                 DispatchQueue.main.async {
-                    StoreStruct.allLists = stat
                     self.tableViewLists.reloadData()
                 }
             }
@@ -2722,13 +2722,24 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             let request2 = Accounts.currentUser()
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
-//                    if Account.getAccounts().contains(stat) {} else {
-//                        Account.addAccountToList(account: stat)
-//                    }
                     StoreStruct.currentUser = stat
+                    
+                    let request9 = Accounts.statuses(id: stat.id, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
+                    StoreStruct.client.run(request9) { (statuses) in
+                        if let stat = (statuses.value) {
+                            if stat.isEmpty {} else {
+                                StoreStruct.profileStatuses0 = stat
+                            }
+                        }
+                    }
+                    
                 }
             }
         }
+        
+        
+        
+        
         
         if (UserDefaults.standard.object(forKey: "theme") == nil || UserDefaults.standard.object(forKey: "theme") as! Int == 0) {
             UIApplication.shared.statusBarStyle = .default
@@ -2994,8 +3005,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             let request = Timelines.tag(self.newestText)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    StoreStruct.statusSearch = stat
                     DispatchQueue.main.async {
-                        StoreStruct.statusSearch = stat
                         self.tableView.reloadData()
                     }
                 }
@@ -3007,8 +3018,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             let request = Search.search(query: self.newestText)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    StoreStruct.statusSearch = stat.statuses
                     DispatchQueue.main.async {
-                        StoreStruct.statusSearch = stat.statuses
                         self.tableView.reloadData()
                     }
                 }
@@ -3020,8 +3031,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             let request = Accounts.search(query: self.newestText)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    StoreStruct.statusSearchUser = stat
                     DispatchQueue.main.async {
-                        StoreStruct.statusSearchUser = stat
                         self.tableView.reloadData()
                     }
                 }
@@ -3068,8 +3079,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let request = Timelines.tag(theText ?? "")
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
+                StoreStruct.statusSearch = stat
                 DispatchQueue.main.async {
-                    StoreStruct.statusSearch = stat
                     self.tableView.reloadData()
                 }
             }
@@ -3079,8 +3090,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let request = Search.search(query: textField.text ?? "")
                     StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
+                            StoreStruct.statusSearch = stat.statuses
                             DispatchQueue.main.async {
-                                StoreStruct.statusSearch = stat.statuses
                                 self.tableView.reloadData()
                             }
                         }
@@ -3091,8 +3102,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             let request = Accounts.search(query: self.newestText)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    StoreStruct.statusSearchUser = stat
                     DispatchQueue.main.async {
-                        StoreStruct.statusSearchUser = stat
                         self.tableView.reloadData()
                     }
                 }

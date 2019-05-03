@@ -708,7 +708,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     selection.selectionChanged()
                 }
                 self?.refreshCont()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                     self?.tableView.cr.endHeaderRefresh()
                 })
             }
@@ -721,7 +721,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     selection.selectionChanged()
                 }
                 self?.refreshCont()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                     self?.tableView.cr.endHeaderRefresh()
                 })
             }
@@ -758,107 +758,98 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func setupProfile() {
-        
         if self.fromOtherUser == true {
+            let request09 = Accounts.account(id: self.userIDtoUse)
+            StoreStruct.client.run(request09) { (statuses) in
+                if let stat = (statuses.value) {
+                    self.chosenUser = stat
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
             let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    if stat.isEmpty {
-                        
-                        let request09 = Accounts.account(id: self.userIDtoUse)
-                        StoreStruct.client.run(request09) { (statuses) in
-                            if let stat = (statuses.value) {
-                                DispatchQueue.main.async {
-                                    self.chosenUser = stat
-                                    self.tableView.reloadData()
-                                }
-                            }
-                        }
-                        
-                    } else {
+                    if stat.isEmpty {} else {
                         self.profileStatuses = stat
                         self.chosenUser = self.profileStatuses[0].account
                         DispatchQueue.main.async {
-                            
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
                             self.tableView.reloadData()
                         }
-                        
                     }
                 }
             }
         } else {
-            
             if StoreStruct.currentUser == nil {
                 let request2 = Accounts.currentUser()
                 StoreStruct.client.run(request2) { (statuses) in
                     if let stat = (statuses.value) {
                         StoreStruct.currentUser = stat
-                        
-                        
                         self.userIDtoUse = StoreStruct.currentUser.id
+                        self.chosenUser = StoreStruct.currentUser
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                        
                         let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                
                                 if stat.isEmpty {
-                                    
+                                    self.chosenUser = StoreStruct.currentUser
                                     DispatchQueue.main.async {
-                                        self.chosenUser = StoreStruct.currentUser
                                         self.tableView.reloadData()
                                     }
-                                    
                                 } else {
-                                    
                                     self.profileStatuses = stat
-                                    self.chosenUser = self.profileStatuses[0].account
                                     DispatchQueue.main.async {
-                                        
                                         self.ai.alpha = 0
                                         self.ai.removeFromSuperview()
                                         self.tableView.reloadData()
                                     }
-                                    
                                 }
-                                
                             }
                         }
-                        
                     }
                 }
             } else {
-                
-                
+                self.chosenUser = StoreStruct.currentUser
                 self.userIDtoUse = StoreStruct.currentUser.id
-                let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        
-                        if stat.isEmpty {
-                            
-                            self.chosenUser = StoreStruct.currentUser
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                            
-                        } else {
-                            
-                            self.profileStatuses = stat
-                            self.chosenUser = self.profileStatuses[0].account
-                            DispatchQueue.main.async {
-                                
-                                self.ai.alpha = 0
-                                self.ai.removeFromSuperview()
-                                self.tableView.reloadData()
+                self.profileStatuses = StoreStruct.profileStatuses0
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+                if StoreStruct.profileStatuses0.isEmpty {
+                    let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
+                    StoreStruct.client.run(request) { (statuses) in
+                        if let stat = (statuses.value) {
+                            if stat.isEmpty {
+                                self.chosenUser = StoreStruct.currentUser
+                                DispatchQueue.main.async {
+                                    self.tableView.reloadData()
+                                }
+                            } else {
+                                self.profileStatuses = stat
+                                DispatchQueue.main.async {
+                                    self.ai.alpha = 0
+                                    self.ai.removeFromSuperview()
+                                    self.tableView.reloadData()
+                                }
                             }
                             
                         }
-                        
                     }
+                } else {
+//                    self.profileStatuses = StoreStruct.profileStatuses0
+//                    DispatchQueue.main.async {
+//                        self.ai.alpha = 0
+//                        self.ai.removeFromSuperview()
+//                        self.tableView.reloadData()
+//                    }
                 }
-                
-                
             }
         }
         
@@ -874,27 +865,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    if stat.isEmpty {
-                        
-                        let request09 = Accounts.account(id: self.userIDtoUse)
-                        StoreStruct.client.run(request09) { (statuses) in
-                            if let stat = (statuses.value) {
-                                self.chosenUser = stat
-                                DispatchQueue.main.async {
-                                    self.tableView.reloadData()
-                                }
-                            }
-                        }
-                        
-                    } else {
+                    if stat.isEmpty {} else {
                         self.profileStatuses2 = stat
-                        self.chosenUser = self.profileStatuses2[0].account
-                        DispatchQueue.main.async {
-                            
-                            self.ai.alpha = 0
-                            self.ai.removeFromSuperview()
-                            self.tableView.reloadData()
-                        }
+//                        DispatchQueue.main.async {
+//                            self.ai.alpha = 0
+//                            self.ai.removeFromSuperview()
+//                            self.tableView.reloadData()
+//                        }
                         
                     }
                 }
@@ -906,70 +883,37 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 StoreStruct.client.run(request2) { (statuses) in
                     if let stat = (statuses.value) {
                         StoreStruct.currentUser = stat
-                        
-                        
                         self.userIDtoUse = StoreStruct.currentUser.id
                         let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
-                                
-                                if stat.isEmpty {
-                                    
-                                    self.chosenUser = StoreStruct.currentUser
-                                    DispatchQueue.main.async {
-                                        self.tableView.reloadData()
-                                    }
-                                    
-                                } else {
-                                    
+                                if stat.isEmpty {} else {
                                     self.profileStatuses2 = stat
-                                    self.chosenUser = self.profileStatuses2[0].account
-                                    DispatchQueue.main.async {
-                                        
-                                        self.ai.alpha = 0
-                                        self.ai.removeFromSuperview()
-                                        self.tableView.reloadData()
-                                    }
-                                    
+//                                    DispatchQueue.main.async {
+//                                        self.ai.alpha = 0
+//                                        self.ai.removeFromSuperview()
+//                                        self.tableView.reloadData()
+//                                    }
                                 }
-                                
                             }
                         }
-                        
                     }
                 }
             } else {
-                
-                
                 self.userIDtoUse = StoreStruct.currentUser.id
                 let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: "", limit: 5000))
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
-                        
-                        if stat.isEmpty {
-                            
-                            self.chosenUser = StoreStruct.currentUser
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                            
-                        } else {
-                            
+                        if stat.isEmpty {} else {
                             self.profileStatuses2 = stat
-                            self.chosenUser = self.profileStatuses2[0].account
-                            DispatchQueue.main.async {
-                                
-                                self.ai.alpha = 0
-                                self.ai.removeFromSuperview()
-                                self.tableView.reloadData()
-                            }
-                            
+//                            DispatchQueue.main.async {
+//                                self.ai.alpha = 0
+//                                self.ai.removeFromSuperview()
+//                                self.tableView.reloadData()
+//                            }
                         }
-                        
                     }
                 }
-                
-                
             }
         }
         
@@ -977,8 +921,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
-                    DispatchQueue.main.async {
                     self.profileStatusesHasImage = stat
+                    DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
                     let request2 = Accounts.statuses(id: self.userIDtoUse, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .max(id: stat.last?.id ?? "", limit: 5000))
@@ -1018,25 +962,27 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
                     StoreStruct.currentUser = stat
-                    self.tableView.reloadData()
-                }
-            }
-        }
-        
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            let request = Lists.all()
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
                     DispatchQueue.main.async {
-                        StoreStruct.allLists = stat
-                        StoreStruct.allLists.map({
-                            self.zzz[$0.title] = $0.id
-                        })
+                        self.tableView.reloadData()
                     }
                 }
             }
         }
+        
+        
+//        DispatchQueue.global(qos: .userInitiated).async {
+            let request = Lists.all()
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+//                    DispatchQueue.main.async {
+                        StoreStruct.allLists = stat
+                        StoreStruct.allLists.map({
+                            self.zzz[$0.title] = $0.id
+                        })
+//                    }
+                }
+            }
+//        }
         
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
@@ -5583,6 +5529,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     DispatchQueue.main.async {
                         if stat.count > 0 {
+                            self.tableView.cr.endHeaderRefresh()
                             self.tableView.reloadData()
                         }
                     }
@@ -5608,6 +5555,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     DispatchQueue.main.async {
                         if stat.count > 0 {
+                            self.tableView.cr.endHeaderRefresh()
                             self.tableView.reloadData()
                         }
                     }

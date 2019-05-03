@@ -158,6 +158,8 @@ class StoreStruct {
     
     static var newdrafts: [Drafts] = []
     static var notTypes: [NotificationType] = []
+    
+    static var profileStatuses0: [Status] = []
 }
 
 struct Drafts: Codable {

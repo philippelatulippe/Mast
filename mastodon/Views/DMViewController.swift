@@ -437,7 +437,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 selection.selectionChanged()
             }
             self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                 self?.tableView.cr.endHeaderRefresh()
             })
         }
@@ -1717,6 +1717,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     DispatchQueue.main.async {
+                        self.tableView.cr.endHeaderRefresh()
                         self.tableView.reloadData()
                     }
                 }
