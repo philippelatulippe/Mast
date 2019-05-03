@@ -455,8 +455,10 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid"), object: self)
             } else if StoreStruct.currentPage == 1 {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid2"), object: self)
-            } else if StoreStruct.currentPage == 2 {
+            } else if StoreStruct.currentPage == 101010 {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid3"), object: self)
+            } else if StoreStruct.currentPage == 2 {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid4"), object: self)
             } else if StoreStruct.currentPage == 778 {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid778"), object: self)
             } else {

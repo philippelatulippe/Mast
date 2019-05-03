@@ -377,8 +377,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshCont), name: NSNotification.Name(rawValue: "refpush1"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTopDM), name: NSNotification.Name(rawValue: "scrollTopDM"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateDM), name: NSNotification.Name(rawValue: "updateDM"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid2"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti2"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid3"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti3"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers3"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists3"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goInstance), name: NSNotification.Name(rawValue: "goInstance3"), object: nil)
@@ -445,10 +445,9 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
-        self.loadLoadLoad()
         
         if StoreStruct.notificationsDirect.isEmpty {
-            self.fetchMoreNotifications()
+            self.refreshCont()
         } else {
             self.ai.stopAnimating()
             self.ai.alpha = 0
@@ -513,7 +512,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
         self.navigationController?.view.addSubview(settingsButton)
         
-        self.refreshCont()
+//        self.refreshCont()
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -1700,8 +1699,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     DispatchQueue.main.async {
-                        self.ai.stopAnimating()
-                        self.ai.alpha = 0
                         self.tableView.reloadData()
                     }
                 }
@@ -1717,6 +1714,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     DispatchQueue.main.async {
+                        self.ai.stopAnimating()
+                        self.ai.alpha = 0
                         self.tableView.cr.endHeaderRefresh()
                         self.tableView.reloadData()
                     }

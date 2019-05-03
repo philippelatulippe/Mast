@@ -83,7 +83,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -128,7 +128,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -199,7 +199,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -246,7 +246,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide

@@ -511,7 +511,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -575,7 +575,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -851,7 +851,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -917,7 +917,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -1022,8 +1022,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         } else {
             
         }
-        
-        self.restoreScroll()
         
         if StoreStruct.statusesHome.isEmpty {
             let request = Timelines.home()
@@ -1164,6 +1162,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        self.restoreScroll()
         
         self.resetCurSeg = true
         
@@ -5433,7 +5433,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -5475,7 +5475,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide

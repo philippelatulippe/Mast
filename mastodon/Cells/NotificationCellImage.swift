@@ -712,7 +712,7 @@ class NotificationCellImage: SwipeTableViewCell {
             DispatchQueue.global(qos: .userInitiated).async {
             self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
             self.mainImageView.pin_updateWithProgress = true
-            self.mainImageView.pin_setImage(from: URL(string: "\(status.status?.mediaAttachments[0].previewURL ?? "")"))
+            self.mainImageView.pin_setImage(from: URL(string: "\(status.status?.mediaAttachments[0].url ?? "")"))
             }
         }
         

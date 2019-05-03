@@ -310,7 +310,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -359,7 +359,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -617,7 +617,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         self.view.backgroundColor = Colours.white
         
-        
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
         longPress.minimumPressDuration = 0.5
         longPress.delegate = self
@@ -628,11 +627,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self?.player.play()
         }
         
-        do {
-            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)nottypes.json", from: .documents, as: [NotificationType].self)
-        } catch {
-            print("Couldn't load")
-        }
+//        do {
+//            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)nottypes.json", from: .documents, as: [NotificationType].self)
+//        } catch {
+//            print("Couldn't load")
+//        }
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -662,7 +661,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -712,7 +711,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -777,7 +776,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         self.view.addSubview(self.ai)
         self.loadLoadLoad()
         
-        self.fetchMoreNotifications()
+//        self.fetchMoreNotifications()
         
         if StoreStruct.notifications.isEmpty || StoreStruct.notificationsMentions.isEmpty {
             let request = Notifications.all(range: .default, typesToExclude: StoreStruct.notTypes)
@@ -787,49 +786,33 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     DispatchQueue.main.async {
                         self.ai.alpha = 0
                         self.ai.removeFromSuperview()
-                        
                         self.tableView2.reloadData()
-                        
                     }
-                    
                 }
             }
-            
             let request2 = Notifications.all(range: .default, typesToExclude: [.favourite, .follow, .reblog])
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
                     StoreStruct.notificationsMentions = stat
-//                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                     DispatchQueue.main.async {
-                        
                         self.ai.alpha = 0
                         self.ai.removeFromSuperview()
-                        
                         self.tableView.reloadData()
-                        
                     }
-                    
                 }
             }
         } else {
             
-            
-            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + StoreStruct.notifications.filter({ (test) -> Bool in
-                test.type == .mention
-            })
-            
-//            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+//            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + StoreStruct.notifications.filter({ (test) -> Bool in
+//                test.type == .mention
+//            })
+//            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
             DispatchQueue.main.async {
-                
                 self.ai.alpha = 0
                 self.ai.removeFromSuperview()
-                
                 self.tableView.reloadData()
-                
             }
         }
-        
         
         if (traitCollection.forceTouchCapability == .available) {
             registerForPreviewing(with: self, sourceView: self.tableView)
@@ -840,7 +823,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.crownScroll()
             self.crownScroll3()
         }
-        
         
         self.restoreScroll()
     }
@@ -4969,7 +4951,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
@@ -5005,7 +4987,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 segmentedControl.shapeStyle = .liquid
             }
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide

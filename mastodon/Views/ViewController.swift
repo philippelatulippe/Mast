@@ -691,8 +691,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid"), object: self)
         } else if StoreStruct.currentPage == 1 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid2"), object: self)
-        } else if StoreStruct.currentPage == 2 {
+        } else if StoreStruct.currentPage == 101010 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid3"), object: self)
+        } else if StoreStruct.currentPage == 2 {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid4"), object: self)
         } else if StoreStruct.currentPage == 778 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid778"), object: self)
         } else {
@@ -2915,7 +2917,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: 20, y: 60, width: Int(wid - 40), height: Int(40)))
         segmentedControl.dataSource = self
         segmentedControl.shapeStyle = .roundedRect
-        segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+        segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
         segmentedControl.cornerRadius = 12
         segmentedControl.shadowsEnabled = false
         segmentedControl.transitionStyle = .slide

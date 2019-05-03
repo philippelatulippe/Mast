@@ -69,8 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoidnoti"), object: self)
                         } else if StoreStruct.currentPage == 1 {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoidnoti2"), object: self)
-                        } else {
+                        } else if StoreStruct.currentPage == 101010 {
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoidnoti3"), object: self)
+                        } else {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoidnoti4"), object: self)
                         }
                     }
                     userDefaults.set(nil, forKey: "notidpush")
@@ -415,12 +417,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             StoreStruct.statusesHome = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
             StoreStruct.statusesLocal = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
             StoreStruct.statusesFederated = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
-            StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
-            StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
             
             StoreStruct.gapLastHomeStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)homestat.json", from: .documents, as: Status.self)
             StoreStruct.gapLastLocalStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)localstat.json", from: .documents, as: Status.self)
             StoreStruct.gapLastFedStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fedstat.json", from: .documents, as: Status.self)
+            
+            StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
+            StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+            
+            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)nottypes.json", from: .documents, as: [NotificationType].self)
         } catch {
             print("Couldn't load")
         }
@@ -497,7 +502,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     StoreStruct.savedComposeText = x
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "savedComposePresent"), object: nil)
                 }
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "savedComposePresent"), object: nil)
             }
         }
         

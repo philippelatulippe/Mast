@@ -149,7 +149,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
         segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: 20, y: Int(offset + 60), width: Int(wid), height: Int(40)))
         segmentedControl.dataSource = self
         segmentedControl.shapeStyle = .roundedRect
-        segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+        segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
         segmentedControl.cornerRadius = 12
         segmentedControl.shadowsEnabled = false
         segmentedControl.transitionStyle = .slide
@@ -184,7 +184,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
             self.segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: 20, y: Int(offset + 60), width: Int(wid), height: Int(40)))
             segmentedControl.dataSource = self
             segmentedControl.shapeStyle = .roundedRect
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide

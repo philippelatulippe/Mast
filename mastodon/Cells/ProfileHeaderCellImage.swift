@@ -60,7 +60,7 @@ class ProfileHeaderCellImage: UITableViewCell, UICollectionViewDelegate, UIColle
         if self.profileStatusesHasImage.isEmpty {} else {
             cell.configure()
             if self.profileStatusesHasImage[indexPath.item].mediaAttachments.isEmpty {} else {
-            let z = self.profileStatusesHasImage[indexPath.item].mediaAttachments[0].previewURL
+            let z = self.profileStatusesHasImage[indexPath.item].mediaAttachments[0].url
             let secureImageUrl = URL(string: z)!
             cell.image.contentMode = .scaleAspectFill
                 DispatchQueue.global(qos: .userInitiated).async {

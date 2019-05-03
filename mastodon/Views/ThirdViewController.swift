@@ -585,8 +585,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.removeTabbarItemsText()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.currentSegIndex), name: NSNotification.Name(rawValue: "setCurrentSegmentIndex"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid3"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti3"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid4"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToIDNoti), name: NSNotification.Name(rawValue: "gotoidnoti4"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goMembers), name: NSNotification.Name(rawValue: "goMembers4"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists4"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goInstance), name: NSNotification.Name(rawValue: "goInstance4"), object: nil)
@@ -1131,7 +1131,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(20), y: CGFloat(10), width: CGFloat(self.view.bounds.width - 40), height: CGFloat(40)))
             segmentedControl.dataSource = self
             segmentedControl.shapeStyle = .roundedRect
-            segmentedControl.textFont = .systemFont(ofSize: 16, weight: .heavy)
+            segmentedControl.textFont = .systemFont(ofSize: 15, weight: .heavy)
             segmentedControl.cornerRadius = 12
             segmentedControl.shadowsEnabled = false
             segmentedControl.transitionStyle = .slide
