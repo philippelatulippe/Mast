@@ -97,7 +97,7 @@ class ProfileHeaderCellImage: UITableViewCell, UICollectionViewDelegate, UIColle
                 cell.bgImage.layer.shadowOpacity = 0.2
                 
 //                if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
-//                    let amount = 5
+//                    let amount = 8
 //                    let horizontalEffect = UIInterpolatingMotionEffect(
 //                        keyPath: "layer.shadowOffset.width",
 //                        type: .tiltAlongHorizontalAxis)

@@ -182,8 +182,8 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
             cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
             cell.backgroundColor = Colours.white
             cell.userName.textColor = Colours.black
-            cell.userTag.textColor = Colours.black
-            cell.toot.textColor = Colours.black.withAlphaComponent(0.6)
+            cell.userTag.textColor = Colours.grayDark.withAlphaComponent(0.38)
+            cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.74)
             let bgColorView = UIView()
             bgColorView.backgroundColor = Colours.white
             cell.selectedBackgroundView = bgColorView

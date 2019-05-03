@@ -628,11 +628,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else if section == 4 {
             return 0
         } else {
-            if self.allReplies.isEmpty {
-                return 0
-            } else {
-                return 40
-            }
+//            if self.allReplies.isEmpty {
+//                return 0
+//            } else {
+//                return 40
+//            }
+            return 0
         }
     }
     
@@ -652,16 +653,17 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else if section == 4 {
             return nil
         } else if section == 5 {
-            if self.allReplies.isEmpty {
-                return nil
-            } else {
-                let repC = self.allReplies.count
-                if repC == 0 || repC == 1 {
-                    title.text = "1 Reply".localized
-                } else {
-                    title.text = "\(self.allReplies.count) Replies".localized
-                }
-            }
+//            if self.allReplies.isEmpty {
+//                return nil
+//            } else {
+//                let repC = self.allReplies.count
+//                if repC == 0 || repC == 1 {
+//                    title.text = "1 Reply".localized
+//                } else {
+//                    title.text = "\(self.allReplies.count) Replies".localized
+//                }
+//            }
+            return nil
         }
         title.textColor = Colours.grayDark2
         title.font = UIFont.systemFont(ofSize: 20, weight: .heavy)

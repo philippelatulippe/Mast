@@ -1398,7 +1398,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
         if index == 0 {
-            return "@You".localized
+            return "Mentions".localized
         } else {
             return "Activity".localized
         }

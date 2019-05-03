@@ -105,6 +105,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
         self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
+        self.tableView.tableFooterView = UIView()
         
         self.openTimePicker()
     }

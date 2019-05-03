@@ -1402,15 +1402,15 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
-                    .action(.default("2 Columns".localized), image: filledSet1) { (action, ind) in
+                    .action(.default("2 Column Grid".localized), image: filledSet1) { (action, ind) in
                         
                         UserDefaults.standard.set(1, forKey: "medcolgrid")
                     }
-                    .action(.default("3 Columns".localized), image: filledSet2) { (action, ind) in
+                    .action(.default("3 Column Grid".localized), image: filledSet2) { (action, ind) in
                         
                         UserDefaults.standard.set(0, forKey: "medcolgrid")
                     }
-                    .action(.default("4 Columns".localized), image: filledSet3) { (action, ind) in
+                    .action(.default("4 Column Grid".localized), image: filledSet3) { (action, ind) in
                         
                         UserDefaults.standard.set(2, forKey: "medcolgrid")
                     }

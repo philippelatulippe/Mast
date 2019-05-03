@@ -96,7 +96,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
         toot.URLColor = UIColor.white.withAlphaComponent(0.7)
         
         if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
-            let amount = 5
+            let amount = 8
             let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
             horizontal.minimumRelativeValue = -amount
             horizontal.maximumRelativeValue = amount
