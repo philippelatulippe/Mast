@@ -4730,7 +4730,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             let newestC = y.first!.count + stat.count - 1
                             
-//                            DispatchQueue.main.async {
+                            DispatchQueue.main.async {
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                 self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
                                 self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
@@ -4771,7 +4771,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 }
                                 
                             }
-//                            }
+                            }
                             
                         }
                     }
@@ -4807,7 +4807,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             let newestC = y.first!.count + stat.count - 1
     
-//                            DispatchQueue.main.async {
+                            DispatchQueue.main.async {
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                 self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
                                 self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
@@ -4848,7 +4848,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 }
                                 
                             }
-//                            }
+                            }
                         }
                     }
                 }
@@ -4881,7 +4881,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             let newestC = y.first!.count + stat.count - 1
                             
-//                            DispatchQueue.main.async {
+                            DispatchQueue.main.async {
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                 self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
                                 self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
@@ -4922,7 +4922,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 }
                                 
                             }
-//                            }
+                            }
                             
                         }
                     }

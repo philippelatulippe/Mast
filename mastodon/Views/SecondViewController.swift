@@ -1547,7 +1547,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 return 0
             }
         } else {
-            return 0
+            if self.currentIndex == 0 && section == 1 {
+                return 40
+            } else {
+                return 0
+            }
         }
     }
     
@@ -1557,9 +1561,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         let title = UILabel()
         title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
         if section == 0 {
-            title.text = "Recent"
+            title.text = "Activity Graph"
         } else {
-            title.text = "Activity"
+            title.text = "Notifications"
             let moreB = UIButton()
             moreB.frame = CGRect(x: self.view.bounds.width - 50, y: 5, width: 40, height: 40)
             moreB.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.grayDark), for: .normal)
@@ -1585,6 +1589,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         var filledSet2 = UIImage(named: "unfilledset")
         var filledSet3 = UIImage(named: "unfilledset")
         var filledSet4 = UIImage(named: "unfilledset")
+        var filledSet5 = UIImage(named: "unfilledset")
         if (UserDefaults.standard.object(forKey: "nnmentions") == nil) || (UserDefaults.standard.object(forKey: "nnmentions") as! Bool == true) {
             filledSet1 = UIImage(named: "filledset")
         } else {
@@ -1605,6 +1610,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         } else {
             filledSet4 = UIImage(named: "unfilledset")
         }
+        if (UserDefaults.standard.object(forKey: "setGraph") == nil) || (UserDefaults.standard.object(forKey: "setGraph") as! Int == 0) {
+            filledSet5 = UIImage(named: "filledset")
+        } else {
+            filledSet5 = UIImage(named: "unfilledset")
+        }
         
         Alertift.actionSheet(title: title, message: nil)
             .backgroundColor(Colours.white)
@@ -1612,6 +1622,15 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
             .messageTextAlignment(.left)
             .titleTextAlignment(.left)
+            .action(.default("Activity Graph".localized), image: filledSet5) { (action, ind) in
+                if (UserDefaults.standard.object(forKey: "setGraph") == nil) || (UserDefaults.standard.object(forKey: "setGraph") as! Int == 0) {
+                    UserDefaults.standard.set(1, forKey: "setGraph")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refrefref"), object: self)
+                } else {
+                    UserDefaults.standard.set(0, forKey: "setGraph")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refrefref"), object: self)
+                }
+            }
             .action(.default("Mentions".localized), image: filledSet1) { (action, ind) in
                 if (UserDefaults.standard.object(forKey: "nnmentions") == nil) || (UserDefaults.standard.object(forKey: "nnmentions") as! Bool == true) {
                     UserDefaults.standard.set(false, forKey: "nnmentions")
@@ -3761,7 +3780,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 more.textColor = Colours.tabUnselected
                 return [more]
             }
-        } else if StoreStruct.notifications[indexPath.row].type == .mention || self.currentIndex == 1 || self.currentIndex == 5 {
+        } else if (indexPath.section == 1 && StoreStruct.notifications[indexPath.row].type == .mention) || self.currentIndex == 1 || self.currentIndex == 5 {
             if orientation == .left {
                 let impact = UIImpactFeedbackGenerator(style: .medium)
                 
