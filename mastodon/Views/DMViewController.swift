@@ -1696,9 +1696,9 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
-                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
-                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     DispatchQueue.main.async {
+                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
+                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         self.tableView.reloadData()
                     }
                 }
@@ -1711,9 +1711,9 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
-                    StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
-                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                     DispatchQueue.main.async {
+                        StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
+                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         self.ai.stopAnimating()
                         self.ai.alpha = 0
                         self.tableView.cr.endHeaderRefresh()

@@ -1999,9 +1999,9 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
+                DispatchQueue.main.async {
                     self.currentTags = self.currentTags + stat
                     self.currentTags = self.currentTags.removeDuplicates()
-                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
                 }

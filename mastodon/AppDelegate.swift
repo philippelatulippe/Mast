@@ -425,7 +425,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
             StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
             
-            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)nottypes.json", from: .documents, as: [NotificationType].self)
+//            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)nottypes1.json", from: .documents, as: [NotificationType].self)
         } catch {
             print("Couldn't load")
         }

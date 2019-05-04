@@ -627,11 +627,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self?.player.play()
         }
         
-//        do {
-//            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)nottypes.json", from: .documents, as: [NotificationType].self)
-//        } catch {
-//            print("Couldn't load")
-//        }
+        do {
+            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)nottypes1.json", from: .documents, as: [NotificationType].self)
+        } catch {
+            print("Couldn't load")
+        }
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -1686,28 +1686,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     }
     
     func filterNots() {
-        do {
-            try Disk.save(StoreStruct.notTypes, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)nottypes.json")
-        } catch {
-            print("Couldn't save")
-        }
-        let request = Notifications.all(range: .min(id: StoreStruct.notifications.first?.id ?? "", limit: 5000), typesToExclude: StoreStruct.notTypes)
-        DispatchQueue.global(qos: .userInitiated).async {
+        let request = Notifications.all(range: .default, typesToExclude: StoreStruct.notTypes)
+//        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    StoreStruct.notifications = stat
                     DispatchQueue.main.async {
 //                        StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
-                        StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
+                        StoreStruct.notifications = stat
                         
                         if stat.count > 0 {
                             self.tableView2.reloadData()
                         }
                     }
-                    self.fetchMoreNotifications()
+                    do {
+                        try Disk.save(StoreStruct.notTypes, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)nottypes1.json")
+                    } catch {
+                        print("Couldn't save")
+                    }
+//                    self.fetchMoreNotifications()
                 }
             }
-        }
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -4669,10 +4668,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 
-                    StoreStruct.notifications = StoreStruct.notifications + stat
-//                    StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
-                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     DispatchQueue.main.async {
+                        StoreStruct.notifications = StoreStruct.notifications + stat
+                        //                    StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
+                        StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                         self.tableView2.reloadData()
                     }
 //                    if StoreStruct.notifications.isEmpty {
@@ -4685,10 +4684,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         StoreStruct.client.run(request2) { (statuses) in
             if let stat = (statuses.value) {
                 
-                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + stat
-//                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     DispatchQueue.main.async {
+                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + stat
+                        //                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                         self.tableView.reloadData()
                     }
 //                    if StoreStruct.notificationsMentions.isEmpty {
@@ -4707,11 +4706,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 if let stat = (statuses.value) {
                     var newestC = StoreStruct.notifications.count
                     
-                    StoreStruct.notifications = stat + StoreStruct.notifications
-//                    StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
-                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     var co = 0
                     DispatchQueue.main.async {
+                        StoreStruct.notifications = stat + StoreStruct.notifications
+                        //                    StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
                         StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                         
                         newestC = StoreStruct.notifications.count - newestC
@@ -4764,11 +4762,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 if let stat = (statuses.value) {
                     var newestC2 = StoreStruct.notificationsMentions.count
                     
-                    StoreStruct.notificationsMentions = stat + StoreStruct.notificationsMentions
-//                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     var co = 0
                     DispatchQueue.main.async {
+                        StoreStruct.notificationsMentions = stat + StoreStruct.notificationsMentions
+                        //                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                         StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                         
                         newestC2 = StoreStruct.notificationsMentions.count - newestC2

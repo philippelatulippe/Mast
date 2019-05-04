@@ -744,8 +744,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let request09 = Accounts.account(id: self.userIDtoUse)
             StoreStruct.client.run(request09) { (statuses) in
                 if let stat = (statuses.value) {
-                    self.chosenUser = stat
                     DispatchQueue.main.async {
+                        self.chosenUser = stat
                         self.tableView.reloadData()
                     }
                 }
@@ -754,9 +754,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     if stat.isEmpty {} else {
-                        self.profileStatuses = stat
-                        self.chosenUser = self.profileStatuses[0].account
                         DispatchQueue.main.async {
+                            self.profileStatuses = stat
+                            self.chosenUser = self.profileStatuses[0].account
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
                             self.tableView.reloadData()
@@ -783,10 +783,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let request2 = Accounts.currentUser()
                 StoreStruct.client.run(request2) { (statuses) in
                     if let stat = (statuses.value) {
-                        StoreStruct.currentUser = stat
-                        self.userIDtoUse = StoreStruct.currentUser.id
-                        self.chosenUser = StoreStruct.currentUser
                         DispatchQueue.main.async {
+                            StoreStruct.currentUser = stat
+                            self.userIDtoUse = StoreStruct.currentUser.id
+                            self.chosenUser = StoreStruct.currentUser
                             self.tableView.reloadData()
                         }
                         
@@ -794,8 +794,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         StoreStruct.client.run(request) { (statuses) in
                             if let stat = (statuses.value) {
                                 if stat.isEmpty {} else {
-                                    self.profileStatuses = stat
                                     DispatchQueue.main.async {
+                                        self.profileStatuses = stat
                                         self.ai.alpha = 0
                                         self.ai.removeFromSuperview()
                                         self.tableView.reloadData()
@@ -806,10 +806,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                 }
             } else {
-                self.chosenUser = StoreStruct.currentUser
-                self.userIDtoUse = StoreStruct.currentUser.id
-                self.profileStatuses = StoreStruct.profileStatuses0
                 DispatchQueue.main.async {
+                    self.chosenUser = StoreStruct.currentUser
+                    self.userIDtoUse = StoreStruct.currentUser.id
+                    self.profileStatuses = StoreStruct.profileStatuses0
                     self.tableView.reloadData()
                 }
                 
@@ -818,8 +818,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
                             if stat.isEmpty {} else {
-                                self.profileStatuses = stat
                                 DispatchQueue.main.async {
+                                    self.profileStatuses = stat
                                     self.ai.alpha = 0
                                     self.ai.removeFromSuperview()
                                     self.tableView.reloadData()
@@ -856,8 +856,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
-                    self.profileStatusesHasImage = stat
                     DispatchQueue.main.async {
+                        self.profileStatusesHasImage = stat
                         self.tableView.reloadData()
                     }
 //                    let request2 = Accounts.statuses(id: self.userIDtoUse, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .max(id: stat.last?.id ?? "", limit: 5000))
@@ -5301,9 +5301,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     if stat.isEmpty {} else {
-                        self.profileStatuses = self.profileStatuses + stat
-                        self.profileStatuses = self.profileStatuses.removeDuplicates()
                         DispatchQueue.main.async {
+                            self.profileStatuses = self.profileStatuses + stat
+                            self.profileStatuses = self.profileStatuses.removeDuplicates()
                             self.tableView.reloadData()
                         }
                     }
@@ -5323,9 +5323,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     if stat.isEmpty {} else {
-                        self.profileStatuses2 = self.profileStatuses2 + stat
-                        self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                         DispatchQueue.main.async {
+                            self.profileStatuses2 = self.profileStatuses2 + stat
+                            self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                             self.tableView.reloadData()
                         }
                     }
@@ -5344,11 +5344,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             //        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    self.profileStatuses = stat + self.profileStatuses
-                    self.profileStatuses = self.profileStatuses.removeDuplicates()
                     
                     DispatchQueue.main.async {
                         if stat.count > 0 {
+                            self.profileStatuses = stat + self.profileStatuses
+                            self.profileStatuses = self.profileStatuses.removeDuplicates()
                             self.tableView.cr.endHeaderRefresh()
                             self.tableView.reloadData()
                         }
@@ -5370,11 +5370,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             //            DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    self.profileStatuses2 = stat + self.profileStatuses2
-                    self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                     
                     DispatchQueue.main.async {
                         if stat.count > 0 {
+                            self.profileStatuses2 = stat + self.profileStatuses2
+                            self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
                             self.tableView.cr.endHeaderRefresh()
                             self.tableView.reloadData()
                         }

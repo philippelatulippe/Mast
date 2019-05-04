@@ -1963,8 +1963,8 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
             if let stat = (statuses.value) {
                 if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
                     self.lastThing = stat.first?.id ?? ""
-                StoreStruct.newInstanceTags = StoreStruct.newInstanceTags + stat
                 DispatchQueue.main.async {
+                    StoreStruct.newInstanceTags = StoreStruct.newInstanceTags + stat
                     StoreStruct.newInstanceTags = StoreStruct.newInstanceTags.removeDuplicates()
                     self.tableView.reloadData()
                     }}
@@ -1983,8 +1983,8 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
         testClient.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 var newestC = StoreStruct.newInstanceTags.count
-                StoreStruct.newInstanceTags = stat + StoreStruct.newInstanceTags
                 DispatchQueue.main.async {
+                    StoreStruct.newInstanceTags = stat + StoreStruct.newInstanceTags
                     StoreStruct.newInstanceTags = StoreStruct.newInstanceTags.removeDuplicates()
                     
                     newestC = StoreStruct.newInstanceTags.count - newestC

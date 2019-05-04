@@ -547,9 +547,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let request = Statuses.context(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-                    self.allPrevious = (stat.ancestors)
-                    self.allReplies = (stat.descendants)
                     DispatchQueue.main.async {
+                        self.allPrevious = (stat.ancestors)
+                        self.allReplies = (stat.descendants)
                         self.tableView.reloadData()
                         if self.allPrevious.count == 0 {} else {
                             self.detailPrev.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
