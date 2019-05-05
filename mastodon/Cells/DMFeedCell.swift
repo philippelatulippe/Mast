@@ -125,8 +125,8 @@ class DMFeedCell: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-34-[readIndi(8)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         
             contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[date]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[artist]-1-[episodes]-18-|", options: [], metrics: nil, views: viewsDict))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[episodes]-18-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[artist]-1-[episodes]-18-|", options: [], metrics: nil, views: viewsDict))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[name]-1-[episodes]-18-|", options: [], metrics: nil, views: viewsDict))
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-74-[warning]-17-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[warning]-16-|", options: [], metrics: nil, views: viewsDict))

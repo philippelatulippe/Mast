@@ -380,10 +380,10 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
         
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         if toIndex == 0 {
             self.currentIndex = 0
             self.tableView.alpha = 1
@@ -496,10 +496,10 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
     }
     
     @objc func didTouchProfile(sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
     }
     
     var lastThing = ""

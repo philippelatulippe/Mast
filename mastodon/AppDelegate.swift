@@ -185,29 +185,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
             if url.host == "light" {
-                if let viewController = window?.rootViewController as? ViewController {
-                    viewController.siriLight()
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "light00"), object: nil)
                 return true
             } else if url.host == "dark" {
-                if let viewController = window?.rootViewController as? ViewController {
-                    viewController.siriDark()
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "dark00"), object: nil)
                 return true
             } else if url.host == "darker" {
-                if let viewController = window?.rootViewController as? ViewController {
-                    viewController.siriDark2()
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "darker00"), object: nil)
                 return true
             } else if url.host == "black" {
-                if let viewController = window?.rootViewController as? ViewController {
-                    viewController.siriOled()
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "black00"), object: nil)
                 return true
             } else if url.host == "blue" {
-                if let viewController = window?.rootViewController as? ViewController {
-                    viewController.siriBlue()
-                }
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "blue00"), object: nil)
                 return true
             } else if url.host == "confetti" {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
@@ -424,8 +414,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
             StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
-            
-//            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)nottypes1.json", from: .documents, as: [NotificationType].self)
         } catch {
             print("Couldn't load")
         }

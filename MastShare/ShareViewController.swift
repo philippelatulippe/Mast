@@ -295,7 +295,7 @@ class ShareViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func didSelectCancel() {
-        let impact = UIImpactFeedbackGenerator()
+        let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
         textView.resignFirstResponder()
         UIView.animate(withDuration: 0.3,
@@ -317,7 +317,7 @@ class ShareViewController: UIViewController, UITextViewDelegate {
             return
         }
         
-        let impact = UIImpactFeedbackGenerator()
+        let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
         
         var client = Client(baseURL: "")

@@ -76,16 +76,17 @@ class RepliesCellImage: SwipeTableViewCell {
         
         if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
             let amount = 10
+            let amount2 = 15
             let horizontalEffect = UIInterpolatingMotionEffect(
                 keyPath: "layer.shadowOffset.width",
                 type: .tiltAlongHorizontalAxis)
-            horizontalEffect.minimumRelativeValue = amount
-            horizontalEffect.maximumRelativeValue = -amount
+            horizontalEffect.minimumRelativeValue = amount2
+            horizontalEffect.maximumRelativeValue = -amount2
             let verticalEffect = UIInterpolatingMotionEffect(
                 keyPath: "layer.shadowOffset.height",
                 type: .tiltAlongVerticalAxis)
-            verticalEffect.minimumRelativeValue = amount
-            verticalEffect.maximumRelativeValue = -amount
+            verticalEffect.minimumRelativeValue = amount2
+            verticalEffect.maximumRelativeValue = -amount2
             let effectGroup = UIMotionEffectGroup()
             effectGroup.motionEffects = [horizontalEffect, verticalEffect]
             self.mainImageViewBG.addMotionEffect(effectGroup)

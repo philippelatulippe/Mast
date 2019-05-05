@@ -98,7 +98,7 @@ class MainFeedCell: SwipeTableViewCell {
         
         
         rep1.translatesAutoresizingMaskIntoConstraints = false
-        rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.gray), for: .normal)
+        rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         rep1.backgroundColor = Colours.clear
         rep1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
@@ -107,7 +107,7 @@ class MainFeedCell: SwipeTableViewCell {
             self.rep1.alpha = 1
         }
         like1.translatesAutoresizingMaskIntoConstraints = false
-        like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
+        like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         like1.backgroundColor = Colours.clear
         like1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
@@ -116,7 +116,7 @@ class MainFeedCell: SwipeTableViewCell {
             self.like1.alpha = 1
         }
         boost1.translatesAutoresizingMaskIntoConstraints = false
-        boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
+        boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         boost1.backgroundColor = Colours.clear
         boost1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
@@ -125,7 +125,7 @@ class MainFeedCell: SwipeTableViewCell {
             self.boost1.alpha = 1
         }
         more1.translatesAutoresizingMaskIntoConstraints = false
-        more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.gray), for: .normal)
+        more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         more1.backgroundColor = Colours.clear
         more1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
@@ -173,7 +173,7 @@ class MainFeedCell: SwipeTableViewCell {
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[episodes]-15-[like1(20)]-18-|", options: [], metrics: nil, views: viewsDict))
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[episodes]-15-[boost1(20)]-18-|", options: [], metrics: nil, views: viewsDict))
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[episodes]-15-[more1(20)]-18-|", options: [], metrics: nil, views: viewsDict))
-                contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[rep1(36)]-20-[like1(40)]-15-[boost1(40)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
+                contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[rep1(36)]-20-[like1(40)]-11-[boost1(34)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
             }
 
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-71-[warning]-17-|", options: [], metrics: nil, views: viewsDict))
@@ -200,17 +200,17 @@ class MainFeedCell: SwipeTableViewCell {
         boost1.backgroundColor = Colours.clear
         more1.backgroundColor = Colours.clear
         
-        rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.gray), for: .normal)
-        more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.gray), for: .normal)
+        rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
+        more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         if StoreStruct.allBoosts.contains(status.reblog?.id ?? status.id) || status.reblog?.reblogged ?? status.reblogged ?? false {
             boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
         } else {
-            boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
+            boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         }
         if StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) || status.reblog?.favourited ?? status.favourited ?? false {
             like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
         } else {
-            like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
+            like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         }
         
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {} else {
@@ -227,17 +227,17 @@ class MainFeedCell: SwipeTableViewCell {
                 boostc1 = ""
             }
             rep1.setTitle(repc1, for: .normal)
-            rep1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
+            rep1.setTitleColor(Colours.grayDark.withAlphaComponent(0.21), for: .normal)
             rep1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             rep1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
             rep1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
             like1.setTitle(likec1, for: .normal)
-            like1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
+            like1.setTitleColor(Colours.grayDark.withAlphaComponent(0.21), for: .normal)
             like1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             like1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
             like1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
             boost1.setTitle(boostc1, for: .normal)
-            boost1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
+            boost1.setTitleColor(Colours.grayDark.withAlphaComponent(0.21), for: .normal)
             boost1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             boost1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
             boost1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)

@@ -203,10 +203,10 @@ class ListMembersViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @objc func didTouchProfile(sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         let controller = ThirdViewController()
         controller.fromOtherUser = true

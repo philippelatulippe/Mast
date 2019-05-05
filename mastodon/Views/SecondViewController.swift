@@ -774,26 +774,16 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
-        self.loadLoadLoad()
         
+//        self.loadLoadLoad()
 //        self.fetchMoreNotifications()
         
         if StoreStruct.notifications.isEmpty || StoreStruct.notificationsMentions.isEmpty {
-            let request = Notifications.all(range: .default, typesToExclude: StoreStruct.notTypes)
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
-                    StoreStruct.notifications = stat
-                    DispatchQueue.main.async {
-                        self.ai.alpha = 0
-                        self.ai.removeFromSuperview()
-                        self.tableView2.reloadData()
-                    }
-                }
-            }
             let request2 = Notifications.all(range: .default, typesToExclude: [.favourite, .follow, .reblog])
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
                     StoreStruct.notificationsMentions = stat
+                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     DispatchQueue.main.async {
                         self.ai.alpha = 0
                         self.ai.removeFromSuperview()
@@ -801,18 +791,31 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     }
                 }
             }
+            let request = Notifications.all(range: .default, typesToExclude: StoreStruct.notTypes)
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    StoreStruct.notifications = stat
+                    StoreStruct.notifications = StoreStruct.notificationsMentions.removeDuplicates()
+                    DispatchQueue.main.async {
+                        self.ai.alpha = 0
+                        self.ai.removeFromSuperview()
+                        self.tableView2.reloadData()
+                    }
+                }
+            }
         } else {
             
-//            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + StoreStruct.notifications.filter({ (test) -> Bool in
-//                test.type == .mention
-//            })
-//            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+            //            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + StoreStruct.notifications.filter({ (test) -> Bool in
+            //                test.type == .mention
+            //            })
+            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
             DispatchQueue.main.async {
                 self.ai.alpha = 0
                 self.ai.removeFromSuperview()
                 self.tableView.reloadData()
             }
         }
+        
         
         if (traitCollection.forceTouchCapability == .available) {
             registerForPreviewing(with: self, sourceView: self.tableView)
@@ -862,7 +865,6 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
         
         if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
             settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)
@@ -1408,10 +1410,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.ai.alpha = 0
             self.ai.removeFromSuperview()
         }
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         springWithDelay(duration: 0.5, delay: 0, animations: {
             self.newUpdatesB1.alpha = 0
@@ -1444,9 +1446,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 let request = Notifications.all(range: .default, typesToExclude: [.favourite, .follow, .reblog])
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
-                        StoreStruct.notificationsMentions = stat
-//                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                         DispatchQueue.main.async {
+                            StoreStruct.notificationsMentions = stat
+                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                             
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
@@ -1581,7 +1584,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     @objc func tapMoreActivity() {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let imp = UIImpactFeedbackGenerator()
+            let imp = UIImpactFeedbackGenerator(style: .light)
             imp.impactOccurred()
         }
         
@@ -2491,10 +2494,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     
     @objc func didTouchProfile(sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         var sto = StoreStruct.notifications
         if self.currentIndex == 0 {
@@ -2514,10 +2517,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     var player = AVPlayer()
     @objc func tappedImage(_ sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         var theTable = self.tableView
         var sto = StoreStruct.notifications
@@ -2686,10 +2689,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     
     @objc func tappedImageS1(_ sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         var theTable = self.tableView
         var sto = StoreStruct.notifications
@@ -2761,10 +2764,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     }
     
     @objc func tappedImageS2(_ sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         var theTable = self.tableView
         var sto = StoreStruct.notifications
@@ -2837,10 +2840,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     
     @objc func tappedImageS3(_ sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         var theTable = self.tableView
         var sto = StoreStruct.notifications
@@ -2914,10 +2917,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     
     @objc func tappedImageS4(_ sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         var theTable = self.tableView
         var sto = StoreStruct.notifications
@@ -2999,7 +3002,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     @objc func didTouchBoost(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let impact = UIImpactFeedbackGenerator()
+            let impact = UIImpactFeedbackGenerator(style: .light)
             impact.impactOccurred()
         }
         
@@ -3031,7 +3034,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             cell.moreImage.image = nil
                         }
                         cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
-                        cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
+                        cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as! NotificationCellImage
@@ -3042,7 +3045,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             cell.moreImage.image = nil
                         }
                         cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
-                        cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
+                        cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -3059,7 +3062,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? NotificationCell {
                         if sto[sender.tag].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].status?.id ?? "" ) {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
-                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
+                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
@@ -3072,7 +3075,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as! NotificationCellImage
                         if sto[sender.tag].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].status?.id ?? "" ) {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
-                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
+                            cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
@@ -3091,7 +3094,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     @objc func didTouchLike(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let impact = UIImpactFeedbackGenerator()
+            let impact = UIImpactFeedbackGenerator(style: .light)
             impact.impactOccurred()
         }
         
@@ -3123,7 +3126,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             cell.moreImage.image = nil
                         }
                         cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
-                        cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
+                        cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as! NotificationCellImage
@@ -3134,7 +3137,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             cell.moreImage.image = nil
                         }
                         cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) - 1)", for: .normal)
-                        cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
+                        cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                         cell.hideSwipe(animated: true)
                     }
                 }
@@ -3150,7 +3153,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? NotificationCell {
                         if sto[sender.tag].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].status?.id ?? "" ) {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
-                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
+                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
@@ -3163,7 +3166,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as! NotificationCellImage
                         if sto[sender.tag].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].status?.id ?? "" ) {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
-                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
+                            cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
@@ -3182,7 +3185,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     @objc func didTouchReply(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let impact = UIImpactFeedbackGenerator()
+            let impact = UIImpactFeedbackGenerator(style: .light)
             impact.impactOccurred()
         }
         
@@ -4668,10 +4671,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 
+                StoreStruct.notifications = StoreStruct.notifications + stat
+                StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
+                StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     DispatchQueue.main.async {
-                        StoreStruct.notifications = StoreStruct.notifications + stat
-                        //                    StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
-                        StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                         self.tableView2.reloadData()
                     }
 //                    if StoreStruct.notifications.isEmpty {
@@ -4684,10 +4687,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         StoreStruct.client.run(request2) { (statuses) in
             if let stat = (statuses.value) {
                 
+                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + stat
+                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     DispatchQueue.main.async {
-                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + stat
-                        //                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                         self.tableView.reloadData()
                     }
 //                    if StoreStruct.notificationsMentions.isEmpty {
@@ -4706,10 +4709,12 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 if let stat = (statuses.value) {
                     var newestC = StoreStruct.notifications.count
                     
+                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
+                    StoreStruct.notifications = stat + StoreStruct.notifications
+                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     var co = 0
                     DispatchQueue.main.async {
-                        StoreStruct.notifications = stat + StoreStruct.notifications
-                        //                    StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
+                        StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
                         StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                         
                         newestC = StoreStruct.notifications.count - newestC
@@ -4763,9 +4768,11 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     var newestC2 = StoreStruct.notificationsMentions.count
                     
                     var co = 0
+                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+                    StoreStruct.notificationsMentions = stat + StoreStruct.notificationsMentions
+                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     DispatchQueue.main.async {
-                        StoreStruct.notificationsMentions = stat + StoreStruct.notificationsMentions
-                        //                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                         StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                         
                         newestC2 = StoreStruct.notificationsMentions.count - newestC2

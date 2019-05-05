@@ -1546,16 +1546,17 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         cell.bgImage.layer.shadowOpacity = 0.44
             if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
                 let amount = 10
+                let amount2 = 15
                 let horizontalEffect = UIInterpolatingMotionEffect(
                     keyPath: "layer.shadowOffset.width",
                     type: .tiltAlongHorizontalAxis)
-                horizontalEffect.minimumRelativeValue = amount
-                horizontalEffect.maximumRelativeValue = -amount
+                horizontalEffect.minimumRelativeValue = amount2
+                horizontalEffect.maximumRelativeValue = -amount2
                 let verticalEffect = UIInterpolatingMotionEffect(
                     keyPath: "layer.shadowOffset.height",
                     type: .tiltAlongVerticalAxis)
-                verticalEffect.minimumRelativeValue = amount
-                verticalEffect.maximumRelativeValue = -amount
+                verticalEffect.minimumRelativeValue = amount2
+                verticalEffect.maximumRelativeValue = -amount2
                 let effectGroup = UIMotionEffectGroup()
                 effectGroup.motionEffects = [horizontalEffect, verticalEffect]
                 cell.bgImage.addMotionEffect(effectGroup)
@@ -1797,7 +1798,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     @objc func didTouchUpInsideCamPickButton(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
+            let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
         }
         
@@ -1841,7 +1842,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     @objc func didTouchUpInsideGalPickButton(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
+        let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
         }
         
@@ -1985,7 +1986,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     @objc func didTouchUpInsideCameraButton(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
+        let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
         }
         
@@ -2062,7 +2063,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     }
     @objc func didTouchUpInsideVisibilityButton(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
+        let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
         }
         
@@ -2125,7 +2126,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     }
     @objc func didTouchUpInsideWarningButton(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
+        let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
         }
         
@@ -2149,7 +2150,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     @objc func didTouchUpInsideEmotiButton(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
+        let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
         }
         
@@ -2523,7 +2524,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     @objc func didTouchUpInsideCloseButton(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
+            let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
         }
         
@@ -2551,7 +2552,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         if self.textView.text == "" && self.selectedImage1.image == nil { return }
         
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-        let impact = UIImpactFeedbackGenerator()
+        let impact = UIImpactFeedbackGenerator(style: .light)
         impact.impactOccurred()
         }
         
@@ -3525,10 +3526,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     }
     
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let impact = UIImpactFeedbackGenerator()
-            impact.impactOccurred()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let impact = UIImpactFeedbackGenerator(style: .light)
+//            impact.impactOccurred()
+//        }
         if gesture.direction == UISwipeGestureRecognizer.Direction.down {
             if self.textView.text! == "" || self.textView.text! == self.startRepText {
                 self.textView.resignFirstResponder()
@@ -3611,8 +3612,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         if (UserDefaults.standard.object(forKey: "keyhap") == nil) || (UserDefaults.standard.object(forKey: "keyhap") as! Int == 0) {
             
         } else if (UserDefaults.standard.object(forKey: "keyhap") as! Int == 1) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
+            let impact = UIImpactFeedbackGenerator(style: .light)
+            impact.impactOccurred()
         } else if (UserDefaults.standard.object(forKey: "keyhap") as! Int == 2) {
             let impact = UIImpactFeedbackGenerator()
             impact.impactOccurred()

@@ -89,16 +89,17 @@ class NotificationCellImage: SwipeTableViewCell {
         
         if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
             let amount = 10
+            let amount2 = 15
             let horizontalEffect = UIInterpolatingMotionEffect(
                 keyPath: "layer.shadowOffset.width",
                 type: .tiltAlongHorizontalAxis)
-            horizontalEffect.minimumRelativeValue = amount
-            horizontalEffect.maximumRelativeValue = -amount
+            horizontalEffect.minimumRelativeValue = amount2
+            horizontalEffect.maximumRelativeValue = -amount2
             let verticalEffect = UIInterpolatingMotionEffect(
                 keyPath: "layer.shadowOffset.height",
                 type: .tiltAlongVerticalAxis)
-            verticalEffect.minimumRelativeValue = amount
-            verticalEffect.maximumRelativeValue = -amount
+            verticalEffect.minimumRelativeValue = amount2
+            verticalEffect.maximumRelativeValue = -amount2
             let effectGroup = UIMotionEffectGroup()
             effectGroup.motionEffects = [horizontalEffect, verticalEffect]
             self.mainImageViewBG.addMotionEffect(effectGroup)
@@ -181,7 +182,7 @@ class NotificationCellImage: SwipeTableViewCell {
         
         
         rep1.translatesAutoresizingMaskIntoConstraints = false
-        rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.gray), for: .normal)
+        rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         rep1.backgroundColor = Colours.clear
         rep1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
@@ -190,7 +191,7 @@ class NotificationCellImage: SwipeTableViewCell {
             self.rep1.alpha = 1
         }
         like1.translatesAutoresizingMaskIntoConstraints = false
-        like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
+        like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         like1.backgroundColor = Colours.clear
         like1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
@@ -199,7 +200,7 @@ class NotificationCellImage: SwipeTableViewCell {
             self.like1.alpha = 1
         }
         boost1.translatesAutoresizingMaskIntoConstraints = false
-        boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
+        boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         boost1.backgroundColor = Colours.clear
         boost1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
@@ -208,7 +209,7 @@ class NotificationCellImage: SwipeTableViewCell {
             self.boost1.alpha = 1
         }
         more1.translatesAutoresizingMaskIntoConstraints = false
-        more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.gray), for: .normal)
+        more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         more1.backgroundColor = Colours.clear
         more1.layer.masksToBounds = true
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
@@ -264,7 +265,7 @@ class NotificationCellImage: SwipeTableViewCell {
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[episodes]-10-[mainImage(160)]-23-[like1(20)]-18-|", options: [], metrics: nil, views: viewsDict))
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[episodes]-10-[mainImage(160)]-23-[boost1(20)]-18-|", options: [], metrics: nil, views: viewsDict))
                 contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[episodes]-10-[mainImage(160)]-23-[more1(20)]-18-|", options: [], metrics: nil, views: viewsDict))
-                contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-107-[rep1(36)]-20-[like1(40)]-15-[boost1(40)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
+                contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-107-[rep1(36)]-20-[like1(40)]-11-[boost1(34)]-24-[more1(20)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
             }
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[countTag(30)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
@@ -309,17 +310,17 @@ class NotificationCellImage: SwipeTableViewCell {
         boost1.backgroundColor = Colours.clear
         more1.backgroundColor = Colours.clear
         
-        rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.gray), for: .normal)
-        more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.gray), for: .normal)
+        rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
+        more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         if StoreStruct.allBoosts.contains(status.status?.reblog?.id ?? status.status?.id ?? "") || status.status?.reblogged ?? false {
             boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
         } else {
-            boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.gray), for: .normal)
+            boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         }
         if StoreStruct.allLikes.contains(status.status?.reblog?.id ?? status.status?.id ?? "") || status.status?.favourited ?? false {
             like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
         } else {
-            like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.gray), for: .normal)
+            like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         }
         
         if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {} else {
@@ -336,17 +337,17 @@ class NotificationCellImage: SwipeTableViewCell {
                 boostc1 = ""
             }
             rep1.setTitle(repc1, for: .normal)
-            rep1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
+            rep1.setTitleColor(Colours.grayDark.withAlphaComponent(0.21), for: .normal)
             rep1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             rep1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
             rep1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
             like1.setTitle(likec1, for: .normal)
-            like1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
+            like1.setTitleColor(Colours.grayDark.withAlphaComponent(0.21), for: .normal)
             like1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             like1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
             like1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
             boost1.setTitle(boostc1, for: .normal)
-            boost1.setTitleColor(Colours.grayDark.withAlphaComponent(0.4), for: .normal)
+            boost1.setTitleColor(Colours.grayDark.withAlphaComponent(0.21), for: .normal)
             boost1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             boost1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
             boost1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)

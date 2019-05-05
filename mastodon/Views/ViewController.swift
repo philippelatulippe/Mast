@@ -93,6 +93,26 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     var dMod: [Notificationt] = []
     var nsocket: WebSocket!
     
+    @objc func siriLight00() {
+        self.siriLight()
+    }
+    
+    @objc func siriDark00() {
+        self.siriDark()
+    }
+    
+    @objc func siriDark200() {
+        self.siriDark2()
+    }
+    
+    @objc func siriOled00() {
+        self.siriOled()
+    }
+    
+    @objc func siriBlue00() {
+        self.siriBlue()
+    }
+    
     func siriLight() {
         UIApplication.shared.statusBarStyle = .default
         Colours.keyCol = UIKeyboardAppearance.dark
@@ -572,10 +592,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         }
         if item.tag == 5 {
             
-            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                let imp = UIImpactFeedbackGenerator()
-                imp.impactOccurred()
-            }
+//            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//                let imp = UIImpactFeedbackGenerator(style: .light)
+//                imp.impactOccurred()
+//            }
             let controller = ComposeViewController()
             controller.inReply = []
             controller.inReplyText = ""
@@ -881,6 +901,11 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         super.viewDidLoad()
         self.view.backgroundColor = Colours.white
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.siriLight00), name: NSNotification.Name(rawValue: "light00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.siriDark00), name: NSNotification.Name(rawValue: "dark00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.siriDark200), name: NSNotification.Name(rawValue: "darker00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.siriOled00), name: NSNotification.Name(rawValue: "black00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.siriBlue00), name: NSNotification.Name(rawValue: "blue00"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.presentIntro), name: NSNotification.Name(rawValue: "presentIntro00"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.gotoID), name: NSNotification.Name(rawValue: "gotoid00"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -1168,7 +1193,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     if doOnce == true {
                         
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let impact = UIImpactFeedbackGenerator()
+                            let impact = UIImpactFeedbackGenerator(style: .light)
                             impact.impactOccurred()
                         }
                         
@@ -1459,7 +1484,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     return cell
                 } else {
                     let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as! ListCell
-                    cell.userName.text = "Go to App Settings"
+                    cell.userName.text = "Settings"
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = Colours.tabSelected
                     let bgColorView = UIView()
@@ -1495,10 +1520,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     
     @objc func didTouchProfile(sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         self.dismissOverlayProperSearch()
         
@@ -1868,7 +1893,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         if sender.state == .began {
             
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UIImpactFeedbackGenerator()
+            let selection = UIImpactFeedbackGenerator(style: .light)
             selection.impactOccurred()
             }
             
@@ -1955,10 +1980,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 2) {
             
             if sender.state == .began {
-            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                let imp = UIImpactFeedbackGenerator()
-                imp.impactOccurred()
-            }
+//            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//                let imp = UIImpactFeedbackGenerator(style: .light)
+//                imp.impactOccurred()
+//            }
             let controller = ComposeViewController()
             controller.inReply = []
             controller.inReplyText = ""
@@ -2304,7 +2329,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     @objc func didTouchUpInsideCloseButton(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let impact = UIImpactFeedbackGenerator()
+            let impact = UIImpactFeedbackGenerator(style: .light)
             impact.impactOccurred()
         }
         self.dismiss(animated: true, completion: nil)
@@ -2703,15 +2728,34 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 if let stat = (statuses.value) {
                     StoreStruct.currentUser = stat
                     
-                    let request9 = Accounts.statuses(id: stat.id, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
+                    let request9 = Accounts.statuses(id: stat.id, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .default)
                     StoreStruct.client.run(request9) { (statuses) in
                         if let stat = (statuses.value) {
-                            if stat.isEmpty {} else {
-                                StoreStruct.profileStatuses0 = stat
-                            }
+                            StoreStruct.profileStatuses0 = stat
                         }
                     }
                     
+                    let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .default)
+                    StoreStruct.client.run(request) { (statuses) in
+                        if let stat = (statuses.value) {
+                            StoreStruct.profileStatusesHasImage0 = stat
+                        }
+                    }
+                    
+                }
+            }
+        } else {
+            let request9 = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .default)
+            StoreStruct.client.run(request9) { (statuses) in
+                if let stat = (statuses.value) {
+                    StoreStruct.profileStatuses0 = stat
+                }
+            }
+            
+            let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .default)
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    StoreStruct.profileStatusesHasImage0 = stat
                 }
             }
         }
@@ -2765,7 +2809,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     func tList() {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let imp = UIImpactFeedbackGenerator()
+            let imp = UIImpactFeedbackGenerator(style: .light)
             imp.impactOccurred()
         }
         
@@ -2857,7 +2901,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.tableViewLists.alpha = 0
         
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let imp = UIImpactFeedbackGenerator()
+            let imp = UIImpactFeedbackGenerator(style: .light)
             imp.impactOccurred()
         }
         
@@ -3032,7 +3076,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             let selection = UISelectionFeedbackGenerator()
             selection.selectionChanged()
         } else if (UserDefaults.standard.object(forKey: "keyhap") as! Int == 2) {
-            let impact = UIImpactFeedbackGenerator()
+            let impact = UIImpactFeedbackGenerator(style: .light)
             impact.impactOccurred()
         }
         

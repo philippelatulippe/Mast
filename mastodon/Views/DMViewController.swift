@@ -987,10 +987,10 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     
     @objc func didTouchProfile(sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
 
         var sto = StoreStruct.notificationsDirect
 
@@ -1009,7 +1009,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     @objc func didTouchBoost(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let impact = UIImpactFeedbackGenerator()
+            let impact = UIImpactFeedbackGenerator(style: .light)
             impact.impactOccurred()
         }
         
@@ -1065,7 +1065,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     @objc func didTouchLike(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let impact = UIImpactFeedbackGenerator()
+            let impact = UIImpactFeedbackGenerator(style: .light)
             impact.impactOccurred()
         }
         
@@ -1120,7 +1120,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     @objc func didTouchReply(sender: UIButton) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let impact = UIImpactFeedbackGenerator()
+            let impact = UIImpactFeedbackGenerator(style: .light)
             impact.impactOccurred()
         }
         

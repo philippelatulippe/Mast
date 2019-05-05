@@ -726,11 +726,11 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
                 .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                 .messageTextAlignment(.left)
                 .titleTextAlignment(.left)
-                .action(.default("View Toot".localized), image: UIImage(named: "share")) { (action, ind) in
+                .action(.default("View Toot".localized), image: nil) { (action, ind) in
                     self.openURL("com.shi.mastodon://id=\(StoreStruct.newIDtoGoTo)")
                     self.determineAndClose()
                 }
-                .action(.default("Share Toot".localized), image: UIImage(named: "share")) { (action, ind) in
+                .action(.default("Share Toot".localized), image: nil) { (action, ind) in
                     
                     if let myWebsite = StoreStruct.currentImageURL {
                         let objectsToShare = [myWebsite]
@@ -741,16 +741,22 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
                     }
                     
                 }
-                .action(.default("Share Image".localized), image: UIImage(named: "share")) { (action, ind) in
+                .action(.default("Share Image".localized), image: nil) { (action, ind) in
                     self.longShare()
                 }
-                .action(.default("Save Image".localized), image: UIImage(named: "share")) { (action, ind) in
+                .action(.default("Save Image".localized), image: nil) { (action, ind) in
                     let snapshot: UIImage = self.photoAtIndex(self.currentPageIndex).underlyingImage
                     PHPhotoLibrary.shared().performChanges({
                         PHAssetChangeRequest.creationRequestForAsset(from: snapshot)
                     }, completionHandler: { success, error in
                         if success {
                             // Saved
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                DispatchQueue.main.async {
+                                    let generator = UINotificationFeedbackGenerator()
+                                    generator.notificationOccurred(.success)
+                                }
+                            }
                         } else {
                             // Save failed
                         }

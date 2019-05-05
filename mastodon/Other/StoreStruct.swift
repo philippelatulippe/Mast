@@ -160,6 +160,7 @@ class StoreStruct {
     static var notTypes: [NotificationType] = []
     
     static var profileStatuses0: [Status] = []
+    static var profileStatusesHasImage0: [Status] = []
 }
 
 struct Drafts: Codable {

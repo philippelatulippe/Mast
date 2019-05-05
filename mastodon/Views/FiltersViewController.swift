@@ -202,7 +202,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @objc func addTapped() {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UIImpactFeedbackGenerator()
+            let selection = UIImpactFeedbackGenerator(style: .light)
             selection.impactOccurred()
         }
         
