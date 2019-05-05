@@ -2515,9 +2515,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 if self.chosenUser == nil {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCell", for: indexPath) as! ProfileHeaderCell
-                    cell.backgroundColor = Colours.tabSelected
+                    cell.backgroundColor = Colours.white
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.tabSelected
+                    bgColorView.backgroundColor = Colours.white
                     cell.selectedBackgroundView = bgColorView
                     return cell
                 } else {
@@ -2533,7 +2533,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
-                        cell.backgroundColor = Colours.tabSelected
+                        cell.backgroundColor = Colours.white
                         
                         cell.toot.handleMentionTap { (string) in
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2615,7 +2615,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                         
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.tabSelected
+                        bgColorView.backgroundColor = Colours.white
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     } else {
@@ -2632,7 +2632,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             cell.follows.tag = indexPath.row
                             cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                             cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
-                            cell.backgroundColor = Colours.tabSelected
+                            cell.backgroundColor = Colours.white
                             
                             cell.toot.handleMentionTap { (string) in
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2713,7 +2713,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             }
                             
                             let bgColorView = UIView()
-                            bgColorView.backgroundColor = Colours.tabSelected
+                            bgColorView.backgroundColor = Colours.white
                             cell.selectedBackgroundView = bgColorView
                             return cell
                     }
@@ -2730,7 +2730,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.follows.tag = indexPath.row
                     cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                     cell.settings.addTarget(self, action: #selector(self.didTouchToFol), for: .touchUpInside)
-                    cell.backgroundColor = Colours.tabSelected
+                    cell.backgroundColor = Colours.white
                     
                     cell.toot.handleMentionTap { (string) in
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2811,7 +2811,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.tabSelected
+                    bgColorView.backgroundColor = Colours.white
                     cell.selectedBackgroundView = bgColorView
                     return cell
                 } else {
@@ -2828,7 +2828,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.follows.tag = indexPath.row
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                         cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
-                        cell.backgroundColor = Colours.tabSelected
+                        cell.backgroundColor = Colours.white
                         
                         cell.toot.handleMentionTap { (string) in
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -2909,7 +2909,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                         
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.tabSelected
+                        bgColorView.backgroundColor = Colours.white
                         cell.selectedBackgroundView = bgColorView
                         return cell
                         
@@ -2925,7 +2925,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.follows.tag = indexPath.row
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                         cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
-                        cell.backgroundColor = Colours.tabSelected
+                        cell.backgroundColor = Colours.white
                         
                         cell.toot.handleMentionTap { (string) in
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3006,7 +3006,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                         
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.tabSelected
+                        bgColorView.backgroundColor = Colours.white
                         cell.selectedBackgroundView = bgColorView
                         return cell
                         
@@ -3054,10 +3054,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 //cell.configure(zzz[indexPath.row])
                 cell.backgroundColor = Colours.white
-                cell.userName.textColor = Colours.black
-                cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                cell.toot.textColor = Colours.black
+                cell.userName.textColor = Colours.grayDark
+                cell.userTag.setTitleColor(Colours.grayDark, for: .normal)
+                cell.date.textColor = Colours.grayDark
+                cell.toot.textColor = Colours.grayDark
                 cell.toot.handleMentionTap { (string) in
                     // mention
                     //                    let selection = UISelectionFeedbackGenerator()
@@ -3162,10 +3162,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.backgroundColor = Colours.white
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                    cell.toot.textColor = Colours.black
+                    cell.userName.textColor = Colours.grayDark
+                    cell.userTag.setTitleColor(Colours.grayDark, for: .normal)
+                    cell.date.textColor = Colours.grayDark
+                    cell.toot.textColor = Colours.grayDark
                     cell.toot.handleMentionTap { (string) in
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                             let selection = UISelectionFeedbackGenerator()
@@ -3273,10 +3273,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                    cell.toot.textColor = Colours.black
+                    cell.userName.textColor = Colours.grayDark
+                    cell.userTag.setTitleColor(Colours.grayDark, for: .normal)
+                    cell.date.textColor = Colours.grayDark
+                    cell.toot.textColor = Colours.grayDark
                     cell.mainImageView.backgroundColor = Colours.white
                     cell.mainImageViewBG.backgroundColor = Colours.white
                     cell.toot.handleMentionTap { (string) in
@@ -3387,10 +3387,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                    cell.toot.textColor = Colours.black
+                    cell.userName.textColor = Colours.grayDark
+                    cell.userTag.setTitleColor(Colours.grayDark, for: .normal)
+                    cell.date.textColor = Colours.grayDark
+                    cell.toot.textColor = Colours.grayDark
                     cell.mainImageView.backgroundColor = Colours.white
                     cell.mainImageViewBG.backgroundColor = Colours.white
                     cell.toot.handleMentionTap { (string) in
@@ -3631,10 +3631,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func touchProfileImage(_ sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         
         StoreStruct.currentImageURL = URL(string: self.chosenUser.avatar)

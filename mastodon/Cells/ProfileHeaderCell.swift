@@ -25,15 +25,18 @@ class ProfileHeaderCell: SwipeTableViewCell {
     var settings = UIButton()
     var settings2 = UIButton()
     var tagListView = DLTagView()
+    var bgDark = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         profileImageView.backgroundColor = Colours.white
-        headerImageView.backgroundColor = Colours.tabSelected
+        headerImageView.backgroundColor = Colours.white
         more.backgroundColor = UIColor.clear
         settings.backgroundColor = UIColor.clear
         settings2.backgroundColor = UIColor.clear
+        
+        bgDark.isUserInteractionEnabled = false
         
 //        userName.adjustsFontForContentSizeCategory = true
 //        userTag.adjustsFontForContentSizeCategory = true
@@ -51,6 +54,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
         settings.translatesAutoresizingMaskIntoConstraints = false
         settings2.translatesAutoresizingMaskIntoConstraints = false
         tagListView.translatesAutoresizingMaskIntoConstraints = false
+        bgDark.translatesAutoresizingMaskIntoConstraints = false
         
         if (UserDefaults.standard.object(forKey: "proCorner") == nil || UserDefaults.standard.object(forKey: "proCorner") as! Int == 0) {
             profileImageView.layer.cornerRadius = 50
@@ -75,11 +79,11 @@ class ProfileHeaderCell: SwipeTableViewCell {
         userTag.numberOfLines = 0
         toot.numberOfLines = 0
         
-        userName.textColor = UIColor.white
-        userTag.textColor = UIColor.white
-        date.textColor = UIColor.white
-        toot.textColor = UIColor.white
-        follows.titleLabel?.textColor = UIColor.white
+        userName.textColor = Colours.grayDark
+        userTag.textColor = Colours.grayDark
+        date.textColor = Colours.grayDark
+        toot.textColor = Colours.grayDark
+        follows.titleLabel?.textColor = Colours.grayDark
         
         userName.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         userTag.font = UIFont.systemFont(ofSize: 14)
@@ -91,9 +95,9 @@ class ProfileHeaderCell: SwipeTableViewCell {
         follows.titleLabel?.textAlignment = .center
         
         toot.enabledTypes = [.mention, .hashtag, .url]
-        toot.mentionColor = UIColor.white.withAlphaComponent(0.7)
-        toot.hashtagColor = UIColor.white.withAlphaComponent(0.7)
-        toot.URLColor = UIColor.white.withAlphaComponent(0.7)
+        toot.mentionColor = Colours.grayDark.withAlphaComponent(0.7)
+        toot.hashtagColor = Colours.grayDark.withAlphaComponent(0.7)
+        toot.URLColor = Colours.grayDark.withAlphaComponent(0.7)
         
         if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
             let amount = 10
@@ -110,7 +114,10 @@ class ProfileHeaderCell: SwipeTableViewCell {
             
         }
         
+        bgDark.backgroundColor = Colours.white
+        
         contentView.addSubview(headerImageView)
+        contentView.addSubview(bgDark)
         contentView.addSubview(profileImageView)
         contentView.addSubview(userName)
         contentView.addSubview(userTag)
@@ -123,6 +130,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
         contentView.addSubview(follows)
         
         let viewsDict = [
+            "bgDark" : bgDark,
             "header" : headerImageView,
             "image" : profileImageView,
             "name" : userName,
@@ -142,7 +150,11 @@ class ProfileHeaderCell: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[date]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-60-[more(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-65-[settings(30)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-20-[name]-4-[artist]-11-[episodes]-15-[follows]-4-[date]-10-[tagListView(60)]-10-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-40-[name]-4-[artist]-11-[episodes]-15-[follows]-4-[date]-10-[tagListView(60)]-10-|", options: [], metrics: nil, views: viewsDict))
+        
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[header(170)]", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[bgDark]|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-20-[bgDark]-0-|", options: [], metrics: nil, views: viewsDict))
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10)-[settings(80)]-81-[settings2(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-95-[settings2(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
@@ -157,7 +169,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
         date.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         follows.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         headerImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        headerImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+//        headerImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         
     }
     
@@ -167,10 +179,18 @@ class ProfileHeaderCell: SwipeTableViewCell {
     
     func configure(_ status: Account) {
         
-        toot.mentionColor = UIColor.white.withAlphaComponent(0.7)
-        toot.hashtagColor = UIColor.white.withAlphaComponent(0.7)
-        toot.URLColor = UIColor.white.withAlphaComponent(0.7)
-        headerImageView.backgroundColor = Colours.tabSelected
+        bgDark.isUserInteractionEnabled = false
+        
+        bgDark.backgroundColor = Colours.white
+        toot.mentionColor = Colours.grayDark.withAlphaComponent(0.7)
+        toot.hashtagColor = Colours.grayDark.withAlphaComponent(0.7)
+        toot.URLColor = Colours.grayDark.withAlphaComponent(0.7)
+        headerImageView.backgroundColor = Colours.white
+        userName.textColor = Colours.grayDark
+        userTag.textColor = Colours.grayDark
+        date.textColor = Colours.grayDark
+        toot.textColor = Colours.grayDark
+        follows.titleLabel?.textColor = Colours.grayDark
         
         blurEffectView.removeFromSuperview()
         if (UserDefaults.standard.object(forKey: "headbg1") == nil) || (UserDefaults.standard.object(forKey: "headbg1") as! Int == 0) {
@@ -215,7 +235,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
                 } else {
                     var tag = DLTag(text: text.name)
                     tag.fontSize = 15
-                    tag.backgroundColor = Colours.white
+                    tag.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
                     tag.borderWidth = 0
                     tag.textColor = Colours.black
                     tag.cornerRadius = 12
@@ -273,11 +293,11 @@ class ProfileHeaderCell: SwipeTableViewCell {
         
         userName.text = status.displayName
         
-        headerImageView.imageView?.image?.getColors { colors in
-            self.userName.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
-            self.userTag.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
-            self.toot.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
-        }
+//        headerImageView.imageView?.image?.getColors { colors in
+//            self.userName.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
+//            self.userTag.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
+//            self.toot.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
+//        }
         
         if status.emojis.isEmpty {
             userName.text = status.displayName.stripHTML()
@@ -416,15 +436,18 @@ class ProfileHeaderCell2: SwipeTableViewCell {
     var more = UIButton()
     var settings = UIButton()
     var settings2 = UIButton()
+    var bgDark = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         profileImageView.backgroundColor = Colours.white
-        headerImageView.backgroundColor = Colours.tabSelected
+        headerImageView.backgroundColor = Colours.white
         more.backgroundColor = UIColor.clear
         settings.backgroundColor = UIColor.clear
         settings2.backgroundColor = UIColor.clear
+        
+        bgDark.isUserInteractionEnabled = false
         
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         headerImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -436,6 +459,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         more.translatesAutoresizingMaskIntoConstraints = false
         settings.translatesAutoresizingMaskIntoConstraints = false
         settings2.translatesAutoresizingMaskIntoConstraints = false
+        bgDark.translatesAutoresizingMaskIntoConstraints = false
         
         if (UserDefaults.standard.object(forKey: "proCorner") == nil || UserDefaults.standard.object(forKey: "proCorner") as! Int == 0) {
             profileImageView.layer.cornerRadius = 50
@@ -460,11 +484,12 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         userTag.numberOfLines = 0
         toot.numberOfLines = 0
         
-        userName.textColor = UIColor.white
-        userTag.textColor = UIColor.white
-        date.textColor = UIColor.white
-        toot.textColor = UIColor.white
-        follows.titleLabel?.textColor = UIColor.white
+        
+        userName.textColor = Colours.grayDark
+        userTag.textColor = Colours.grayDark
+        date.textColor = Colours.grayDark
+        toot.textColor = Colours.grayDark
+        follows.titleLabel?.textColor = Colours.grayDark
         
         userName.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         userTag.font = UIFont.systemFont(ofSize: 14)
@@ -476,11 +501,14 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         follows.titleLabel?.textAlignment = .center
         
         toot.enabledTypes = [.mention, .hashtag, .url]
-        toot.mentionColor = UIColor.white.withAlphaComponent(0.7)
-        toot.hashtagColor = UIColor.white.withAlphaComponent(0.7)
-        toot.URLColor = UIColor.white.withAlphaComponent(0.7)
+        toot.mentionColor = Colours.grayDark.withAlphaComponent(0.7)
+        toot.hashtagColor = Colours.grayDark.withAlphaComponent(0.7)
+        toot.URLColor = Colours.grayDark.withAlphaComponent(0.7)
+        
+        bgDark.backgroundColor = Colours.white
         
         contentView.addSubview(headerImageView)
+        contentView.addSubview(bgDark)
         contentView.addSubview(profileImageView)
         contentView.addSubview(userName)
         contentView.addSubview(userTag)
@@ -492,6 +520,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         contentView.addSubview(follows)
         
         let viewsDict = [
+            "bgDark" : bgDark,
             "header" : headerImageView,
             "image" : profileImageView,
             "name" : userName,
@@ -511,7 +540,11 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-60-[more(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-65-[settings(30)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-180-[name]-4-[artist]-11-[episodes]-15-[follows]-4-[date]-14-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-200-[name]-4-[artist]-11-[episodes]-15-[follows]-4-[date]-14-|", options: [], metrics: nil, views: viewsDict))
+        
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[header(170)]", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[bgDark]|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-20-[bgDark]-0-|", options: [], metrics: nil, views: viewsDict))
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10)-[settings(80)]-81-[settings2(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-95-[settings2(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
@@ -524,7 +557,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         date.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         follows.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         headerImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        headerImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+//        headerImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         
     }
     
@@ -534,10 +567,19 @@ class ProfileHeaderCell2: SwipeTableViewCell {
     
     func configure(_ status: Account) {
         
-        toot.mentionColor = UIColor.white.withAlphaComponent(0.7)
-        toot.hashtagColor = UIColor.white.withAlphaComponent(0.7)
-        toot.URLColor = UIColor.white.withAlphaComponent(0.7)
-        headerImageView.backgroundColor = Colours.tabSelected
+        bgDark.isUserInteractionEnabled = false
+        
+        toot.mentionColor = Colours.grayDark.withAlphaComponent(0.7)
+        toot.hashtagColor = Colours.grayDark.withAlphaComponent(0.7)
+        toot.URLColor = Colours.grayDark.withAlphaComponent(0.7)
+        headerImageView.backgroundColor = Colours.white
+        
+        bgDark.backgroundColor = Colours.white
+        userName.textColor = Colours.grayDark
+        userTag.textColor = Colours.grayDark
+        date.textColor = Colours.grayDark
+        toot.textColor = Colours.grayDark
+        follows.titleLabel?.textColor = Colours.grayDark
         
         blurEffectView.removeFromSuperview()
         if (UserDefaults.standard.object(forKey: "headbg1") == nil) || (UserDefaults.standard.object(forKey: "headbg1") as! Int == 0) {
@@ -595,11 +637,11 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         
         userName.text = status.displayName
         
-        headerImageView.imageView?.image?.getColors { colors in
-            self.userName.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
-            self.userTag.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
-            self.toot.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
-        }
+//        headerImageView.imageView?.image?.getColors { colors in
+//            self.userName.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
+//            self.userTag.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
+//            self.toot.textColor = self.pickTextColor(bgColor: colors?.background ?? UIColor.white)
+//        }
         
         if status.emojis.isEmpty {
             userName.text = status.displayName.stripHTML()
