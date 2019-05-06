@@ -92,9 +92,14 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         date.font = UIFont.systemFont(ofSize: 12)
         toot.font = UIFont.boldSystemFont(ofSize: 14)
         follows.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
-        toot.textAlignment = .center
-        date.textAlignment = .center
-        follows.titleLabel?.textAlignment = .center
+        
+        
+        userName.textAlignment = .left
+        userTag.textAlignment = .left
+        toot.textAlignment = .left
+        date.textAlignment = .left
+        follows.titleLabel?.textAlignment = .left
+        follows.contentHorizontalAlignment = .left
         
         
         toot.enabledTypes = [.mention, .hashtag, .url]
@@ -152,9 +157,12 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=20)-[settings(40)]-28-[image(100)]-28-[more(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[date]-20-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[name]-20-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[artist]-20-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[follows]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-60-[more(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-60-[settings(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-50-[name]-4-[artist]-11-[episodes]-11-[follows]-4-[date]-10-[tagListView(60)]-10-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-50-[name]-4-[artist]-11-[episodes]-9-[follows]-4-[date]-10-[tagListView(60)]-10-|", options: [], metrics: nil, views: viewsDict))
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[header(170)]", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[bgDark]|", options: [], metrics: nil, views: viewsDict))
@@ -167,11 +175,11 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         
         
         profileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        userName.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        userTag.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        userName.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        userTag.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         toot.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         date.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        follows.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        follows.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         headerImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
 //        headerImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         
@@ -209,8 +217,8 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         toot.URLColor = Colours.grayDark.withAlphaComponent(0.7)
         headerImageView.backgroundColor = Colours.white
         userName.textColor = Colours.grayDark
-        userTag.textColor = Colours.grayDark
-        date.textColor = Colours.grayDark
+        userTag.textColor = Colours.grayDark.withAlphaComponent(0.7)
+        date.textColor = Colours.grayDark.withAlphaComponent(0.7)
         toot.textColor = Colours.grayDark
         follows.titleLabel?.textColor = Colours.grayDark
         
@@ -465,9 +473,13 @@ class ProfileHeaderCellOwn2: SwipeTableViewCell {
         date.font = UIFont.systemFont(ofSize: 12)
         toot.font = UIFont.boldSystemFont(ofSize: 14)
         follows.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
-        toot.textAlignment = .center
-        date.textAlignment = .center
-        follows.titleLabel?.textAlignment = .center
+        
+        userName.textAlignment = .left
+        userTag.textAlignment = .left
+        toot.textAlignment = .left
+        date.textAlignment = .left
+        follows.titleLabel?.textAlignment = .left
+        follows.contentHorizontalAlignment = .left
         
         
         toot.enabledTypes = [.mention, .hashtag, .url]
@@ -508,10 +520,13 @@ class ProfileHeaderCellOwn2: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=20)-[settings(40)]-28-[image(100)]-28-[more(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[date]-20-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[name]-20-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[artist]-20-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[follows]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-60-[more(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-60-[settings(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-210-[name]-4-[artist]-11-[episodes]-11-[follows]-4-[date]-14-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-210-[name]-4-[artist]-11-[episodes]-9-[follows]-4-[date]-14-|", options: [], metrics: nil, views: viewsDict))
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[header(170)]", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[bgDark]|", options: [], metrics: nil, views: viewsDict))
@@ -522,11 +537,11 @@ class ProfileHeaderCellOwn2: SwipeTableViewCell {
         
         
         profileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        userName.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        userTag.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        userName.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        userTag.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         toot.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         date.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        follows.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        follows.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         headerImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
 //        headerImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         
@@ -547,8 +562,8 @@ class ProfileHeaderCellOwn2: SwipeTableViewCell {
         
         bgDark.backgroundColor = Colours.white
         userName.textColor = Colours.grayDark
-        userTag.textColor = Colours.grayDark
-        date.textColor = Colours.grayDark
+        userTag.textColor = Colours.grayDark.withAlphaComponent(0.7)
+        date.textColor = Colours.grayDark.withAlphaComponent(0.7)
         toot.textColor = Colours.grayDark
         follows.titleLabel?.textColor = Colours.grayDark
         
