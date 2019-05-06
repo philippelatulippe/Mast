@@ -66,7 +66,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 DispatchQueue.main.async {
-                    self.currentTags = stat
+                    self.currentTags = self.currentTags + stat
+                    self.currentTags = self.currentTags.removeDuplicates()
                     self.tableView.reloadData()
                 }
             }
@@ -291,13 +292,15 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var lastThing = ""
     func fetchMoreHome() {
-        let request = Blocks.all(range: .max(id: self.currentTags.last?.id ?? "", limit: nil))
+        let request = FilterToots.all(range: .max(id: self.currentTags.last?.id ?? "", limit: nil))
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 
-                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
                     DispatchQueue.main.async {
+                        self.currentTags = self.currentTags + stat
+                        self.currentTags = self.currentTags.removeDuplicates()
                         self.tableView.reloadData()
                     }
                 }

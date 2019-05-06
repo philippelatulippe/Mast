@@ -3668,6 +3668,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 title.text = "No Drafts".localized
             } else {
                 title.text = "\(StoreStruct.newdrafts.count) Drafts".localized
+                let moreB = UIButton()
+                moreB.frame = CGRect(x: self.view.bounds.width - 50, y: -5, width: 36, height: 36)
+                moreB.setImage(UIImage(named: "block")?.maskWithColor(color: UIColor.white), for: .normal)
+                moreB.backgroundColor = UIColor.clear
+                moreB.addTarget(self, action: #selector(self.tapMoreDrafts), for: .touchUpInside)
+                vw.addSubview(moreB)
             }
         }
         title.textColor = UIColor.white
@@ -3678,6 +3684,39 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         return vw
     }
     
+    @objc func tapMoreDrafts() {
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let impact = UIImpactFeedbackGenerator(style: .light)
+            impact.impactOccurred()
+        }
+        
+        Alertift.actionSheet(title: "Clear All Drafts", message: "Clearing all drafts will clear all saved drafts.")
+            .backgroundColor(Colours.white)
+            .titleTextColor(Colours.grayDark)
+            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+            .messageTextAlignment(.left)
+            .titleTextAlignment(.left)
+            .action(.destructive("Clear All Drafts".localized), image: nil) { (action, ind) in
+                StoreStruct.newdrafts = []
+                do {
+                    try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
+                } catch {
+                    print("err")
+                }
+                self.tableViewDrafts.beginUpdates()
+                let indexSet: IndexSet = [0]
+                self.tableViewDrafts.reloadSections(indexSet, with: .automatic)
+                self.tableViewDrafts.endUpdates()
+            }
+            .action(.cancel("Dismiss"))
+            .finally { action, index in
+                if action.style == .cancel {
+                    return
+                }
+            }
+            .popover(anchorView: self.tableViewDrafts.cellForRow(at: IndexPath(row: 0, section: 0))?.contentView ?? self.view)
+            .show(on: self)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
@@ -3785,9 +3824,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 
                 let cross = SwipeAction(style: .default, title: nil) { action, indexPath in
                     StoreStruct.newdrafts.remove(at: indexPath.row)
-//                    self.tableViewDrafts.reloadData()
                     self.tableViewDrafts.beginUpdates()
-                    self.tableViewDrafts.deleteRows(at: [indexPath], with: .none)
+                    let indexSet: IndexSet = [0]
+                    self.tableViewDrafts.reloadSections(indexSet, with: .automatic)
                     self.tableViewDrafts.endUpdates()
                     
                     do {

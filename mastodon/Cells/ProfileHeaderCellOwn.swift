@@ -85,7 +85,7 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         userTag.textColor = Colours.grayDark
         date.textColor = Colours.grayDark
         toot.textColor = Colours.grayDark
-        follows.titleLabel?.textColor = Colours.grayDark
+        follows.titleLabel?.textColor = Colours.tabSelected
         
         userName.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         userTag.font = UIFont.systemFont(ofSize: 14)
@@ -164,7 +164,7 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-60-[settings(40)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-50-[name]-4-[artist]-11-[episodes]-9-[follows]-4-[date]-10-[tagListView(60)]-10-|", options: [], metrics: nil, views: viewsDict))
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[header(170)]", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[header(160)]", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[bgDark]|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-30-[bgDark]-0-|", options: [], metrics: nil, views: viewsDict))
         
@@ -220,7 +220,7 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         userTag.textColor = Colours.grayDark.withAlphaComponent(0.7)
         date.textColor = Colours.grayDark.withAlphaComponent(0.7)
         toot.textColor = Colours.grayDark
-        follows.titleLabel?.textColor = Colours.grayDark
+        follows.titleLabel?.textColor = Colours.tabSelected
         
         blurEffectView.removeFromSuperview()
         if (UserDefaults.standard.object(forKey: "headbg1") == nil) || (UserDefaults.standard.object(forKey: "headbg1") as! Int == 0) {
@@ -467,7 +467,7 @@ class ProfileHeaderCellOwn2: SwipeTableViewCell {
         userTag.textColor = Colours.grayDark
         date.textColor = Colours.grayDark
         toot.textColor = Colours.grayDark
-        follows.titleLabel?.textColor = Colours.grayDark
+        follows.titleLabel?.textColor = Colours.tabSelected
         
         userName.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         userTag.font = UIFont.systemFont(ofSize: 14)
@@ -529,7 +529,7 @@ class ProfileHeaderCellOwn2: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-210-[name]-4-[artist]-11-[episodes]-9-[follows]-4-[date]-14-|", options: [], metrics: nil, views: viewsDict))
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[header(170)]", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[header(160)]", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[bgDark]|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[image(100)]-30-[bgDark]-0-|", options: [], metrics: nil, views: viewsDict))
         
@@ -566,7 +566,7 @@ class ProfileHeaderCellOwn2: SwipeTableViewCell {
         userTag.textColor = Colours.grayDark.withAlphaComponent(0.7)
         date.textColor = Colours.grayDark.withAlphaComponent(0.7)
         toot.textColor = Colours.grayDark
-        follows.titleLabel?.textColor = Colours.grayDark
+        follows.titleLabel?.textColor = Colours.tabSelected
         
         blurEffectView.removeFromSuperview()
         if (UserDefaults.standard.object(forKey: "headbg1") == nil) || (UserDefaults.standard.object(forKey: "headbg1") as! Int == 0) {
