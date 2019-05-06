@@ -25,6 +25,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var currentIndex = 0
     var currentTagTitle = ""
     var currentTags: [Status] = []
+    var newLast: RequestRange = .max(id: "", limit: nil)
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
@@ -252,6 +253,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let request = Favourites.all()
         StoreStruct.client.run(request) { (statuses) in
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 self.currentTags = stat
                 DispatchQueue.main.async {
@@ -2146,15 +2148,16 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var lastThing = ""
     
     func fetchMoreHome() {
-        let request = Favourites.all(range: .max(id: self.currentTags.last?.id ?? "", limit: nil))
+        let request = Favourites.all(range: self.newLast)
         StoreStruct.client.run(request) { (statuses) in
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
                     
                 DispatchQueue.main.async {
                     self.currentTags = self.currentTags + stat
-//                    self.currentTags = self.currentTags.removeDuplicates()
+                    self.currentTags = self.currentTags.removeDuplicates()
                     self.tableView.reloadData()
                 }
                 }

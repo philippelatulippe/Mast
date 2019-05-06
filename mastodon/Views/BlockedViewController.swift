@@ -22,6 +22,7 @@ class BlockedViewController: UIViewController, UITableViewDelegate, UITableViewD
     var currentIndex = 0
     var currentTagTitle = ""
     var currentTags: [Account] = []
+    var newLast: RequestRange = .max(id: "", limit: nil)
     
     @objc func refresh() {
         DispatchQueue.main.async {
@@ -124,6 +125,7 @@ class BlockedViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.view.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
         
+//        self.fetchMoreHome()
         self.loadLoadLoad()
         
         //        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
@@ -206,7 +208,7 @@ class BlockedViewController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         } else {
             
-        if indexPath.row == self.currentTags.count - 6 {
+        if indexPath.row == self.currentTags.count - 1 {
             self.fetchMoreHome()
         }
         
@@ -338,13 +340,16 @@ class BlockedViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var lastThing = ""
     func fetchMoreHome() {
-        let request = Blocks.all(range: .max(id: self.currentTags.last?.id ?? "", limit: nil))
+        let request = Blocks.all(range: self.newLast)
         StoreStruct.client.run(request) { (statuses) in
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 
-                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
                 DispatchQueue.main.async {
+                    self.currentTags = self.currentTags + stat
+                    self.currentTags = self.currentTags.removeDuplicates()
                     self.tableView.reloadData()
                 }
                 }
