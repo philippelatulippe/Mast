@@ -229,7 +229,9 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.frame = headerImageView.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        if (UserDefaults.standard.object(forKey: "blurd") == nil) || (UserDefaults.standard.object(forKey: "blurd") as! Int == 0) {} else {
         headerImageView.addSubview(blurEffectView)
+        }
         let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
         let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
         vibrancyView.translatesAutoresizingMaskIntoConstraints = false
@@ -565,7 +567,9 @@ class ProfileHeaderCellOwn2: SwipeTableViewCell {
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.frame = headerImageView.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        if (UserDefaults.standard.object(forKey: "blurd") == nil) || (UserDefaults.standard.object(forKey: "blurd") as! Int == 0) {} else {
         headerImageView.addSubview(blurEffectView)
+        }
         let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
         let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
         vibrancyView.translatesAutoresizingMaskIntoConstraints = false

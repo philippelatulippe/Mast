@@ -168,8 +168,24 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    func removeTabbarItemsText() {
+        var offset: CGFloat = 6.0
+        if #available(iOS 11.0, *), traitCollection.horizontalSizeClass == .regular {
+            offset = 0.0
+        }
+        if let items = self.tabBarController?.tabBar.items {
+            for item in items {
+                item.title = ""
+                item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0);
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Liked"
+        self.removeTabbarItemsText()
         
         //NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
@@ -237,14 +253,14 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let request = Favourites.all()
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
+                self.currentTags = stat
                 DispatchQueue.main.async {
-                    self.currentTags = stat
                     self.loadLoadLoad()
                 }
             }
         }
         
-        self.loadLoadLoad()
+//        self.loadLoadLoad()
         
         
         if (traitCollection.forceTouchCapability == .available) {
@@ -320,16 +336,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // Table stuff
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            return 40
-        case .pad:
-            return 0
-        default:
-            return 40
-        }
+        return 0
     }
     
     
@@ -371,7 +378,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return cell
         } else {
         
-        if indexPath.row == self.currentTags.count - 14 {
+        if indexPath.row == self.currentTags.count - 1 {
             self.fetchMoreHome()
         }
         if self.currentTags[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
@@ -1468,6 +1475,10 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                     }
                     
+                    if sto[indexPath.row].spoilerText != "" {
+                        newSecondsText = "\(sto[indexPath.row].spoilerText)\n\n\(newSecondsText)"
+                    }
+                    
                     Alertift.actionSheet(title: nil, message: newSecondsText)
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
@@ -1710,6 +1721,10 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         } else {
                             newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
                         }
+                    }
+                    
+                    if sto[indexPath.row].spoilerText != "" {
+                        newSecondsText = "\(sto[indexPath.row].spoilerText)\n\n\(newSecondsText)"
                     }
                     
                     Alertift.actionSheet(title: nil, message: newSecondsText)
@@ -2131,7 +2146,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var lastThing = ""
     
     func fetchMoreHome() {
-        let request = Favourites.all(range: .max(id: self.currentTags.last?.id ?? "", limit: 5000))
+        let request = Favourites.all(range: .max(id: self.currentTags.last?.id ?? "", limit: nil))
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
@@ -2139,7 +2154,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                 DispatchQueue.main.async {
                     self.currentTags = self.currentTags + stat
-                    self.currentTags = self.currentTags.removeDuplicates()
+//                    self.currentTags = self.currentTags.removeDuplicates()
                     self.tableView.reloadData()
                 }
                 }
@@ -2149,7 +2164,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc func refreshCont() {
         
-        let request = Favourites.all(range: .min(id: self.currentTags.first?.id ?? "", limit: 5000))
+        let request = Favourites.all(range: .min(id: self.currentTags.first?.id ?? "", limit: nil))
         DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {

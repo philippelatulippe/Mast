@@ -3417,6 +3417,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                     }
                     
+                    if sto[indexPath.row].status?.spoilerText ?? "-" != "" {
+                        newSecondsText = "\(sto[indexPath.row].status?.spoilerText ?? "")\n\n\(newSecondsText)"
+                    }
+                    
                     Alertift.actionSheet(title: nil, message: newSecondsText)
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
@@ -4060,6 +4064,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                     }
                     
+                    if sto[indexPath.row].status?.spoilerText ?? "-" != "" {
+                        newSecondsText = "\(sto[indexPath.row].status?.spoilerText ?? "")\n\n\(newSecondsText)"
+                    }
+                    
                     Alertift.actionSheet(title: nil, message: newSecondsText)
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
@@ -4453,6 +4461,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     } else {
                         newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
                     }
+                }
+                
+                if sto[indexPath.row].status?.spoilerText ?? "-" != "" {
+                    newSecondsText = "\(sto[indexPath.row].status?.spoilerText ?? "")\n\n\(newSecondsText)"
                 }
                 
                 Alertift.actionSheet(title: nil, message: newSecondsText)

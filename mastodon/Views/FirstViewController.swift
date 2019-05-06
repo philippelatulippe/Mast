@@ -4022,6 +4022,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                     }
                     
+                    if sto[indexPath.row].spoilerText != "" {
+                        newSecondsText = "\(sto[indexPath.row].spoilerText)\n\n\(newSecondsText)"
+                    }
+                    
                     Alertift.actionSheet(title: nil, message: newSecondsText)
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
@@ -4254,6 +4258,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         } else {
                             newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
                         }
+                    }
+                    
+                    if sto[indexPath.row].spoilerText != "" {
+                        newSecondsText = "\(sto[indexPath.row].spoilerText)\n\n\(newSecondsText)"
                     }
                     
                     Alertift.actionSheet(title: nil, message: newSecondsText)

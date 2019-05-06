@@ -1308,6 +1308,10 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         }
                     }
                     
+                    if sto[indexPath.row].lastStatus?.spoilerText ?? "-" != "" {
+                        newSecondsText = "\(sto[indexPath.row].lastStatus?.spoilerText ?? "")\n\n\(newSecondsText)"
+                    }
+                    
                     Alertift.actionSheet(title: nil, message: newSecondsText)
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)

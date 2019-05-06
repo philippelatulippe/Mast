@@ -176,8 +176,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func removeTabbarItemsText() {
+        var offset: CGFloat = 6.0
+        if #available(iOS 11.0, *), traitCollection.horizontalSizeClass == .regular {
+            offset = 0.0
+        }
+        if let items = self.tabBarController?.tabBar.items {
+            for item in items {
+                item.title = ""
+                item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0);
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = StoreStruct.currentListTitle
+        self.removeTabbarItemsText()
         
         //NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
@@ -319,7 +335,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // Table stuff
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -1555,6 +1571,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     }
                     
+                    if sto[indexPath.row].spoilerText != "" {
+                        newSecondsText = "\(sto[indexPath.row].spoilerText)\n\n\(newSecondsText)"
+                    }
+                    
                     Alertift.actionSheet(title: nil, message: newSecondsText)
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
@@ -1795,6 +1815,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                         } else {
                             newSecondsText = "\(Int(newSeconds/60)) minutes and \(Int(newSeconds) % 60) seconds average reading time"
                         }
+                    }
+                    
+                    if sto[indexPath.row].spoilerText != "" {
+                        newSecondsText = "\(sto[indexPath.row].spoilerText)\n\n\(newSecondsText)"
                     }
                     
                     Alertift.actionSheet(title: nil, message: newSecondsText)

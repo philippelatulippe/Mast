@@ -157,6 +157,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
         vw.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40)
         let title = UILabel()
         title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
+        title.textColor = Colours.grayDark.withAlphaComponent(0.38)
         if section == 0 {
             title.text = "Timeline"
         } else if section == 1 {
@@ -173,8 +174,8 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             title.text = "Other"
         } else {
             title.text = "Danger Zone"
+            title.textColor = Colours.red
         }
-        title.textColor = Colours.grayDark.withAlphaComponent(0.38)
         title.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         vw.addSubview(title)
         vw.backgroundColor = Colours.white
