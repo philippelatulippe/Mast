@@ -2633,19 +2633,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     if statuses.isError && self.scheduleTime != nil {
                         
                         DispatchQueue.main.async {
-                            
-                            var seIm: Data? = nil
-                            if self.isPollAdded == false {
-                                seIm = self.selectedImage1.image?.pngData()
-                            }
-                            let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                            
-                            StoreStruct.newdrafts.append(newDraft)
-                            do {
-                                try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                            } catch {
-                                print("err")
-                            }
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let notification = UINotificationFeedbackGenerator()
                                 notification.notificationOccurred(.success)
@@ -2679,19 +2666,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     } else {
                         
                         DispatchQueue.main.async {
-                            
-                            var seIm: Data? = nil
-                            if self.isPollAdded == false {
-                                seIm = self.selectedImage1.image?.pngData()
-                            }
-                            let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                            
-                            StoreStruct.newdrafts.append(newDraft)
-                            do {
-                                try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                            } catch {
-                                print("err")
-                            }
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let notification = UINotificationFeedbackGenerator()
                                 notification.notificationOccurred(.success)
@@ -2762,18 +2736,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                 
                                 
                                 DispatchQueue.main.async {
-                                    var seIm: Data? = nil
-                                    if self.isPollAdded == false {
-                                        seIm = self.selectedImage1.image?.pngData()
-                                    }
-                                    let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                                    
-                                    StoreStruct.newdrafts.append(newDraft)
-                                    do {
-                                        try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                                    } catch {
-                                        print("err")
-                                    }
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -2808,18 +2770,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                 
                             
                             DispatchQueue.main.async {
-                                var seIm: Data? = nil
-                                if self.isPollAdded == false {
-                                    seIm = self.selectedImage1.image?.pngData()
-                                }
-                                let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                                
-                                StoreStruct.newdrafts.append(newDraft)
-                                do {
-                                    try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                                } catch {
-                                    print("err")
-                                }
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                     let notification = UINotificationFeedbackGenerator()
                                     notification.notificationOccurred(.success)
@@ -2918,18 +2868,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                         
                                                         
                                                         DispatchQueue.main.async {
-                                                            var seIm: Data? = nil
-                                                            if self.isPollAdded == false {
-                                                                seIm = self.selectedImage1.image?.pngData()
-                                                            }
-                                                            let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                                                            
-                                                            StoreStruct.newdrafts.append(newDraft)
-                                                            do {
-                                                                try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                                                            } catch {
-                                                                print("err")
-                                                            }
                                                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                                                 let notification = UINotificationFeedbackGenerator()
                                                                 notification.notificationOccurred(.success)
@@ -2964,18 +2902,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                         
                                                         
                                                     DispatchQueue.main.async {
-                                                        var seIm: Data? = nil
-                                                        if self.isPollAdded == false {
-                                                            seIm = self.selectedImage1.image?.pngData()
-                                                        }
-                                                        let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                                                        
-                                                        StoreStruct.newdrafts.append(newDraft)
-                                                        do {
-                                                            try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                                                        } catch {
-                                                            print("err")
-                                                        }
                                                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                                             let notification = UINotificationFeedbackGenerator()
                                                             notification.notificationOccurred(.success)
@@ -3063,18 +2989,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                 
                                                 
                                                 DispatchQueue.main.async {
-                                                    var seIm: Data? = nil
-                                                    if self.isPollAdded == false {
-                                                        seIm = self.selectedImage1.image?.pngData()
-                                                    }
-                                                    let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                                                    
-                                                    StoreStruct.newdrafts.append(newDraft)
-                                                    do {
-                                                        try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                                                    } catch {
-                                                        print("err")
-                                                    }
                                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                                         let notification = UINotificationFeedbackGenerator()
                                                         notification.notificationOccurred(.success)
@@ -3109,18 +3023,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                 
                                                 
                                             DispatchQueue.main.async {
-                                                var seIm: Data? = nil
-                                                if self.isPollAdded == false {
-                                                    seIm = self.selectedImage1.image?.pngData()
-                                                }
-                                                let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                                                
-                                                StoreStruct.newdrafts.append(newDraft)
-                                                do {
-                                                    try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                                                } catch {
-                                                    print("err")
-                                                }
                                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                                     let notification = UINotificationFeedbackGenerator()
                                                     notification.notificationOccurred(.success)
@@ -3196,18 +3098,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                         
                                         
                                         DispatchQueue.main.async {
-                                            var seIm: Data? = nil
-                                            if self.isPollAdded == false {
-                                                seIm = self.selectedImage1.image?.pngData()
-                                            }
-                                            let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                                            
-                                            StoreStruct.newdrafts.append(newDraft)
-                                            do {
-                                                try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                                            } catch {
-                                                print("err")
-                                            }
                                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                                 let notification = UINotificationFeedbackGenerator()
                                                 notification.notificationOccurred(.success)
@@ -3242,18 +3132,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                         
                                         
                                     DispatchQueue.main.async {
-                                        var seIm: Data? = nil
-                                        if self.isPollAdded == false {
-                                            seIm = self.selectedImage1.image?.pngData()
-                                        }
-                                        let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                                        
-                                        StoreStruct.newdrafts.append(newDraft)
-                                        do {
-                                            try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                                        } catch {
-                                            print("err")
-                                        }
                                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                             let notification = UINotificationFeedbackGenerator()
                                             notification.notificationOccurred(.success)
@@ -3314,18 +3192,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                 
                                 
                                 DispatchQueue.main.async {
-                                    var seIm: Data? = nil
-                                    if self.isPollAdded == false {
-                                        seIm = self.selectedImage1.image?.pngData()
-                                    }
-                                    let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                                    
-                                    StoreStruct.newdrafts.append(newDraft)
-                                    do {
-                                        try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                                    } catch {
-                                        print("err")
-                                    }
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -3359,20 +3225,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             } else {
                                 
                             DispatchQueue.main.async {
-                                
-                                var seIm: Data? = nil
-                                if self.isPollAdded == false {
-                                    seIm = self.selectedImage1.image?.pngData()
-                                }
-                                let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                                
-                                StoreStruct.newdrafts.append(newDraft)
-                                do {
-                                    try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                                } catch {
-                                    print("err")
-                                }
-                                
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                     let notification = UINotificationFeedbackGenerator()
                                     notification.notificationOccurred(.success)
@@ -3421,18 +3273,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         
                         
                         DispatchQueue.main.async {
-                            var seIm: Data? = nil
-                            if self.isPollAdded == false {
-                                seIm = self.selectedImage1.image?.pngData()
-                            }
-                            let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                            
-                            StoreStruct.newdrafts.append(newDraft)
-                            do {
-                                try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                            } catch {
-                                print("err")
-                            }
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let notification = UINotificationFeedbackGenerator()
                                 notification.notificationOccurred(.success)
@@ -3466,20 +3306,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     } else {
                         
                     DispatchQueue.main.async {
-                        
-                        var seIm: Data? = nil
-                        if self.isPollAdded == false {
-                            seIm = self.selectedImage1.image?.pngData()
-                        }
-                        let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
-                        
-                        StoreStruct.newdrafts.append(newDraft)
-                        do {
-                            try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
-                        } catch {
-                            print("err")
-                        }
-                        
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                             let notification = UINotificationFeedbackGenerator()
                             notification.notificationOccurred(.success)

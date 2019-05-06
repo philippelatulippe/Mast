@@ -681,6 +681,11 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.ai.alpha = 0
         self.ai.stopAnimating()
         StoreStruct.newdrafts.remove(at: StoreStruct.newdrafts.count - 1)
+        do {
+            try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
+        } catch {
+            print("err")
+        }
     }
     
     override func didReceiveMemoryWarning() {

@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        if application.applicationState == .inactive || application.applicationState == .background {
+        if application.applicationState == .inactive {
             if let userDefaults = UserDefaults(suiteName: "group.com.shi.Mast.wormhole") {
                 if userDefaults.value(forKey: "notidpush") != nil {
                     if let id = userDefaults.value(forKey: "notidpush") as? Int64 {
