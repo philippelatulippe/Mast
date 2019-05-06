@@ -122,7 +122,6 @@ class ProfileHeaderCell: SwipeTableViewCell {
         
         contentView.addSubview(headerImageView)
         contentView.addSubview(bgDark)
-        contentView.addSubview(profileImageView)
         contentView.addSubview(userName)
         contentView.addSubview(userTag)
         contentView.addSubview(date)
@@ -132,6 +131,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
         contentView.addSubview(settings2)
         contentView.addSubview(tagListView)
         contentView.addSubview(follows)
+        contentView.addSubview(profileImageView)
         
         let viewsDict = [
             "bgDark" : bgDark,
@@ -186,6 +186,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
     
     func configure(_ status: Account) {
         
+        profileImageView.layer.zPosition = 1000
         bgDark.isUserInteractionEnabled = false
         
         bgDark.backgroundColor = Colours.white
@@ -522,7 +523,6 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         
         contentView.addSubview(headerImageView)
         contentView.addSubview(bgDark)
-        contentView.addSubview(profileImageView)
         contentView.addSubview(userName)
         contentView.addSubview(userTag)
         contentView.addSubview(date)
@@ -531,6 +531,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         contentView.addSubview(settings)
         contentView.addSubview(settings2)
         contentView.addSubview(follows)
+        contentView.addSubview(profileImageView)
         
         let viewsDict = [
             "bgDark" : bgDark,
@@ -583,6 +584,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
     
     func configure(_ status: Account) {
         
+        profileImageView.layer.zPosition = 1000
         bgDark.isUserInteractionEnabled = false
         
         toot.mentionColor = Colours.grayDark.withAlphaComponent(0.7)

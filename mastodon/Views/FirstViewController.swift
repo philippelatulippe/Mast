@@ -4949,8 +4949,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
                         self.lastThing = stat.first?.id ?? ""
                         
+                        StoreStruct.statusesHome = StoreStruct.statusesHome + stat
                         DispatchQueue.main.async {
-                            StoreStruct.statusesHome = StoreStruct.statusesHome + stat
                             StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             self.tableView.reloadData()
                         }
@@ -4978,8 +4978,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     if stat.isEmpty || self.lastThing2 == stat.first?.id ?? "" {} else {
                         self.lastThing2 = stat.first?.id ?? ""
+                        StoreStruct.statusesLocal = StoreStruct.statusesLocal + stat
                         DispatchQueue.main.async {
-                            StoreStruct.statusesLocal = StoreStruct.statusesLocal + stat
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             self.tableViewL.reloadData()
                         }
@@ -5006,8 +5006,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     if stat.isEmpty || self.lastThing3 == stat.first?.id ?? "" {} else {
                         self.lastThing3 = stat.first?.id ?? ""
+                        StoreStruct.statusesFederated = StoreStruct.statusesFederated + stat
                         DispatchQueue.main.async {
-                            StoreStruct.statusesFederated = StoreStruct.statusesFederated + stat
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             self.tableViewF.reloadData()
                         }
@@ -5036,7 +5036,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         var newestC = StoreStruct.statusesHome.count
                         
                         
-                        DispatchQueue.main.async {
                         if let st = stat.last {
                             if StoreStruct.statusesHome.contains(st) || stat.count < 20 {
                             StoreStruct.statusesHome = stat + StoreStruct.statusesHome
@@ -5055,6 +5054,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         
+                        DispatchQueue.main.async {
+                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                             newestC = StoreStruct.statusesHome.count - newestC - 1
                             if newestC < 0 {
                                 newestC = 0
@@ -5113,7 +5114,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         
                         
                         
-                        DispatchQueue.main.async {
                         if let st = stat.last {
                             if StoreStruct.statusesLocal.contains(st) || stat.count < 20 {
                                 StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
@@ -5132,6 +5132,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         
+                        DispatchQueue.main.async {
+                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             newestC = StoreStruct.statusesLocal.count - newestC - 1
                             if newestC < 0 {
                                 newestC = 0
@@ -5190,7 +5192,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         
                         var newestC = StoreStruct.statusesFederated.count
                         
-                        DispatchQueue.main.async {
                         if let st = stat.last {
                             if StoreStruct.statusesFederated.contains(st) || stat.count < 20 {
                                 StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
@@ -5209,6 +5210,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         
+                        DispatchQueue.main.async {
+                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             newestC = StoreStruct.statusesFederated.count - newestC - 1
                             if newestC < 0 {
                                 newestC = 0

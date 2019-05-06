@@ -827,7 +827,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.crownScroll3()
         }
         
-        self.restoreScroll()
+//        self.restoreScroll()
     }
     
     func crownScroll() {
@@ -4682,9 +4682,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             if let stat = (statuses.value) {
                 
                 StoreStruct.notifications = StoreStruct.notifications + stat
-                StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
-                StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     DispatchQueue.main.async {
+                        StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
+                        StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                         self.tableView2.reloadData()
                     }
 //                    if StoreStruct.notifications.isEmpty {
@@ -4698,9 +4698,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             if let stat = (statuses.value) {
                 
                 StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + stat
-                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     DispatchQueue.main.async {
+                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                         self.tableView.reloadData()
                     }
 //                    if StoreStruct.notificationsMentions.isEmpty {
@@ -4719,9 +4719,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 if let stat = (statuses.value) {
                     var newestC = StoreStruct.notifications.count
                     
-                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     StoreStruct.notifications = stat + StoreStruct.notifications
-                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     var co = 0
                     DispatchQueue.main.async {
                         StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
@@ -4778,9 +4776,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     var newestC2 = StoreStruct.notificationsMentions.count
                     
                     var co = 0
-                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     StoreStruct.notificationsMentions = stat + StoreStruct.notificationsMentions
-                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     DispatchQueue.main.async {
                         StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                         StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()

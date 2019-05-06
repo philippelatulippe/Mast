@@ -44,6 +44,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var isShowingBoosts = true
     var zzz: [String:String] = [:]
     private var crownControl: CrownControl!
+    var buttonCenter = CGPoint.zero
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
@@ -574,6 +575,117 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                 }
             }
+        }
+    }
+    
+    @objc func panProfile(pan: UIPanGestureRecognizer) {
+        if pan.state == .began {
+            if self.fromOtherUser == true {
+                if self.chosenUser.fields.count > 0 {
+                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell
+                    self.buttonCenter = cell.profileImageView.center
+                    springWithDelay(duration: 0.4, delay: 0, animations: {
+                        cell.more.alpha = 0
+                        cell.settings.alpha = 0
+                        cell.settings2.alpha = 0
+                        cell.blurEffectView.alpha = 0
+                    })
+                } else {
+                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell2
+                    self.buttonCenter = cell.profileImageView.center
+                    springWithDelay(duration: 0.4, delay: 0, animations: {
+                        cell.more.alpha = 0
+                        cell.settings.alpha = 0
+                        cell.settings2.alpha = 0
+                        cell.blurEffectView.alpha = 0
+                    })
+                }
+            } else {
+                if self.chosenUser.fields.count > 0 {
+                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCellOwn
+                    self.buttonCenter = cell.profileImageView.center
+                    springWithDelay(duration: 0.4, delay: 0, animations: {
+                        cell.more.alpha = 0
+                        cell.settings.alpha = 0
+                        cell.settings2.alpha = 0
+                        cell.blurEffectView.alpha = 0
+                    })
+                } else {
+                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCellOwn2
+                    self.buttonCenter = cell.profileImageView.center
+                    springWithDelay(duration: 0.4, delay: 0, animations: {
+                        cell.more.alpha = 0
+                        cell.settings.alpha = 0
+                        cell.settings2.alpha = 0
+                        cell.blurEffectView.alpha = 0
+                    })
+                }
+            }
+        } else if pan.state == .ended || pan.state == .failed || pan.state == .cancelled {
+            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: [], animations: {
+                if self.fromOtherUser == true {
+                    if self.chosenUser.fields.count > 0 {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell
+                        cell.profileImageView.center = self.buttonCenter
+                        springWithDelay(duration: 0.4, delay: 0, animations: {
+                            cell.more.alpha = 1
+                            cell.settings.alpha = 1
+                            cell.settings2.alpha = 1
+                            cell.blurEffectView.alpha = 1
+                        })
+                    } else {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell2
+                        cell.profileImageView.center = self.buttonCenter
+                        springWithDelay(duration: 0.4, delay: 0, animations: {
+                            cell.more.alpha = 1
+                            cell.settings.alpha = 1
+                            cell.settings2.alpha = 1
+                            cell.blurEffectView.alpha = 1
+                        })
+                    }
+                } else {
+                    if self.chosenUser.fields.count > 0 {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCellOwn
+                        cell.profileImageView.center = self.buttonCenter
+                        springWithDelay(duration: 0.4, delay: 0, animations: {
+                            cell.more.alpha = 1
+                            cell.settings.alpha = 1
+                            cell.settings2.alpha = 1
+                            cell.blurEffectView.alpha = 1
+                        })
+                    } else {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCellOwn2
+                        cell.profileImageView.center = self.buttonCenter
+                        springWithDelay(duration: 0.4, delay: 0, animations: {
+                            cell.more.alpha = 1
+                            cell.settings.alpha = 1
+                            cell.settings2.alpha = 1
+                            cell.blurEffectView.alpha = 1
+                        })
+                    }
+                }
+            })
+        } else {
+            let location = pan.location(in: self.navigationController?.view ?? self.view)
+            springWithDelay(duration: 0.5, delay: 0, animations: {
+                if self.fromOtherUser == true {
+                    if self.chosenUser.fields.count > 0 {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell
+                        cell.profileImageView.center = CGPoint(x: location.x, y: location.y - 80)
+                    } else {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell2
+                        cell.profileImageView.center = CGPoint(x: location.x, y: location.y - 80)
+                    }
+                } else {
+                    if self.chosenUser.fields.count > 0 {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCellOwn
+                        cell.profileImageView.center = CGPoint(x: location.x, y: location.y - 80)
+                    } else {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCellOwn2
+                        cell.profileImageView.center = CGPoint(x: location.x, y: location.y - 80)
+                    }
+                }
+            })
         }
     }
     
@@ -2530,6 +2642,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.configure(self.chosenUser)
                         cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
                         cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
+                        let pan1 = UIPanGestureRecognizer(target: self, action: #selector(self.panProfile(pan:)))
+                        cell.profileImageView.addGestureRecognizer(pan1)
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
@@ -2628,6 +2742,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             cell.configure(self.chosenUser)
                             cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
                             cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
+                        let pan1 = UIPanGestureRecognizer(target: self, action: #selector(self.panProfile(pan:)))
+                        cell.profileImageView.addGestureRecognizer(pan1)
                             cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                             cell.follows.tag = indexPath.row
                             cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
@@ -2726,6 +2842,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.configure(self.chosenUser)
                     cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
                     cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
+                    let pan1 = UIPanGestureRecognizer(target: self, action: #selector(self.panProfile(pan:)))
+                    cell.profileImageView.addGestureRecognizer(pan1)
                     cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                     cell.follows.tag = indexPath.row
                     cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
@@ -2824,6 +2942,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.configure(self.chosenUser)
                         cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
                         cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
+                        let pan1 = UIPanGestureRecognizer(target: self, action: #selector(self.panProfile(pan:)))
+                        cell.profileImageView.addGestureRecognizer(pan1)
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
@@ -2921,6 +3041,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.configure(self.chosenUser)
                         cell.profileImageView.addTarget(self, action: #selector(self.touchProfileImage(_:)), for: .touchUpInside)
                         cell.headerImageView.addTarget(self, action: #selector(self.touchHeaderImage(_:)), for: .touchUpInside)
+                        let pan1 = UIPanGestureRecognizer(target: self, action: #selector(self.panProfile(pan:)))
+                        cell.profileImageView.addGestureRecognizer(pan1)
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
