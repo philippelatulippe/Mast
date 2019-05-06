@@ -346,9 +346,12 @@ class MutedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var lastThing = ""
     func fetchMoreHome() {
+        if self.newLast == RequestRange.max(id: "0", limit: nil) {
+            return
+        }
         let request = Mutes.all(range: self.newLast)
         StoreStruct.client.run(request) { (statuses) in
-            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "", limit: nil) as! RequestRange
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty {} else {

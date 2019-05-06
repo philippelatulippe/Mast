@@ -142,9 +142,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     }
     
     @objc func load() {
-//        DispatchQueue.main.async {
+        DispatchQueue.main.async {
             self.loadLoadLoad()
-//        }
+        }
     }
     
     @objc func goToIDNoti() {
@@ -1378,10 +1378,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         StoreStruct.client.run(request3) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
-//                    DispatchQueue.main.async {
+                    DispatchQueue.main.async {
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
-//                    }
+                    }
                 }
             }
         }
@@ -2241,9 +2241,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-//                        DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-//                        }
+                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -2362,9 +2362,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-//                        DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-//                        }
+                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -2514,9 +2514,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-//                        DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-//                        }
+                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -2629,9 +2629,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-//                        DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-//                        }
+                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -2774,9 +2774,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-//                        DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-//                        }
+                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -2889,9 +2889,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-//                        DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-//                        }
+                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari

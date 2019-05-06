@@ -415,9 +415,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                         controller.fromOtherUser = true
                     }
                     controller.userIDtoUse = newString
-//                    DispatchQueue.main.async {
+                    DispatchQueue.main.async {
                         self.navigationController?.pushViewController(controller, animated: true)
-//                    }
+                    }
                 }
                 cell.toot.handleURLTap { (url) in
                     // safari
@@ -530,9 +530,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                         controller.fromOtherUser = true
                     }
                     controller.userIDtoUse = newString
-//                    DispatchQueue.main.async {
+                    DispatchQueue.main.async {
                         self.navigationController?.pushViewController(controller, animated: true)
-//                    }
+                    }
                 }
                 cell.toot.handleURLTap { (url) in
                     // safari

@@ -880,7 +880,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         
                                     controller.userIDtoUse = newString
-//                                    DispatchQueue.main.async {
+                                    DispatchQueue.main.async {
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
                                         case .phone :
@@ -900,7 +900,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         default:
                                             print("nothing")
                                         }
-//                                    }
+                                    }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -1027,7 +1027,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             controller.fromOtherUser = true
                         }
                                     controller.userIDtoUse = newString
-//                                    DispatchQueue.main.async {
+                                    DispatchQueue.main.async {
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
                                         case .phone :
@@ -1047,7 +1047,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         default:
                                             print("nothing")
                                         }
-//                                    }
+                                    }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -1172,7 +1172,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         controller.fromOtherUser = true
                     }
                                 controller.userIDtoUse = newString
-//                                DispatchQueue.main.async {
+                                DispatchQueue.main.async {
                                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                     switch (deviceIdiom) {
                                     case .phone :
@@ -1192,7 +1192,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     default:
                                         print("nothing")
                                     }
-//                                }
+                                }
                 }
                 cell.toot.handleURLTap { (url) in
                     // safari
@@ -1317,7 +1317,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         controller.fromOtherUser = true
                     }
                                 controller.userIDtoUse = newString
-//                                DispatchQueue.main.async {
+                                DispatchQueue.main.async {
                                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                     switch (deviceIdiom) {
                                     case .phone :
@@ -1337,7 +1337,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     default:
                                         print("nothing")
                                     }
-//                                }
+                                }
                 }
                 cell.toot.handleURLTap { (url) in
                     // safari
@@ -1670,7 +1670,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 controller.fromOtherUser = true
                             }
                                         controller.userIDtoUse = newString
-//                                        DispatchQueue.main.async {
+                                        DispatchQueue.main.async {
                                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                             switch (deviceIdiom) {
                                             case .phone :
@@ -1690,7 +1690,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             default:
                                                 print("nothing")
                                             }
-//                                        }
+                                        }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -1799,7 +1799,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 controller.fromOtherUser = true
                             }
                                         controller.userIDtoUse = newString
-//                                        DispatchQueue.main.async {
+                                        DispatchQueue.main.async {
                                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                             switch (deviceIdiom) {
                                             case .phone :
@@ -1819,7 +1819,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             default:
                                                 print("nothing")
                                             }
-//                                        }
+                                        }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -1949,7 +1949,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 controller.fromOtherUser = true
                             }
                                         controller.userIDtoUse = newString
-//                                        DispatchQueue.main.async {
+                                        DispatchQueue.main.async {
                                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                             switch (deviceIdiom) {
                                             case .phone :
@@ -1969,7 +1969,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             default:
                                                 print("nothing")
                                             }
-//                                        }
+                                        }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -2089,7 +2089,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 controller.fromOtherUser = true
                             }
                                         controller.userIDtoUse = newString
-//                                        DispatchQueue.main.async {
+                                        DispatchQueue.main.async {
                                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                             switch (deviceIdiom) {
                                             case .phone :
@@ -2109,7 +2109,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                             default:
                                                 print("nothing")
                                             }
-//                                        }
+                                        }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari

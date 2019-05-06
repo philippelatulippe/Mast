@@ -91,6 +91,7 @@ class FollowersCell: SwipeTableViewCell {
         userTag.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         
+        profileImageView.isUserInteractionEnabled = false
         
         if status.emojis.isEmpty {
             userName.text = status.displayName.stripHTML()

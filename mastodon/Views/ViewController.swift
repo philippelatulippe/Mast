@@ -321,14 +321,14 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let request2 = Accounts.currentUser()
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
-//                            DispatchQueue.main.async {
+                            DispatchQueue.main.async {
                                 var instances = InstanceData.getAllInstances()
                                 instances.append(currentInstance)
                                 UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
                                 StoreStruct.currentUser = stat
                                 Account.addAccountToList(account: stat)
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
-//                            }
+                            }
                         }
                     }
                     
@@ -343,9 +343,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     let request3 = Instances.customEmojis()
                     StoreStruct.client.run(request3) { (statuses) in
                         if let stat = (statuses.value) {
-//                            DispatchQueue.main.async {
+                            DispatchQueue.main.async {
                                 StoreStruct.emotiFace = stat
-//                            }
+                            }
                             stat.map({
                                 let attributedString = NSAttributedString(string: "    \($0.shortcode)")
                                 let textAttachment = NSTextAttachment()
@@ -419,14 +419,14 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         let request2 = Accounts.currentUser()
                         StoreStruct.shared.newClient.run(request2) { (statuses) in
                             if let stat = (statuses.value) {
-//                                DispatchQueue.main.async {
+                                DispatchQueue.main.async {
                                     var instances = InstanceData.getAllInstances()
                                     instances.append(newInstance)
                                     UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey: "instances")
                                     StoreStruct.currentUser = stat
                                     Account.addAccountToList(account: stat)
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
-//                                }
+                                }
                             }
                         }
                     

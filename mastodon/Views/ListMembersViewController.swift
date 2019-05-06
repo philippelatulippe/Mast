@@ -22,6 +22,7 @@ class ListMembersViewController: UIViewController, UITableViewDelegate, UITableV
     var currentIndex = 0
     var currentTagTitle = ""
     var currentTags: [Account] = []
+    var newLast: RequestRange = .max(id: "", limit: nil)
     
     @objc func refresh() {
         DispatchQueue.main.async {
@@ -196,7 +197,7 @@ class ListMembersViewController: UIViewController, UITableViewDelegate, UITableV
             return cell
         } else {
             
-        if indexPath.row == self.currentTags.count - 6 {
+        if indexPath.row == self.currentTags.count - 1 {
             self.fetchMoreHome()
         }
         
@@ -335,17 +336,20 @@ class ListMembersViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func fetchMoreHome() {
-//        let request = Blocks.all(range: .max(id: self.currentTags.last?.id ?? "", limit: nil))
-//        StoreStruct.client.run(request) { (statuses) in
-//            if let stat = (statuses.value) {
-//                DispatchQueue.main.async {
-//                    let controller = MutedViewController()
-//                    controller.currentTagTitle = "Muted"
-//                    controller.currentTags = stat
-//                    self.navigationController?.pushViewController(controller, animated: true)
-//                }
-//            }
-//        }
+        if self.newLast == RequestRange.max(id: "0", limit: nil) {
+            return
+        }
+        let request = Lists.accounts(id: StoreStruct.allListRelID, range: self.newLast)
+        StoreStruct.client.run(request) { (statuses) in
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
+            if let stat = (statuses.value) {
+                DispatchQueue.main.async {
+                    self.currentTags = self.currentTags + stat
+                    self.currentTags = self.currentTags.removeDuplicates()
+                    self.tableView.reloadData()
+                }
+            }
+        }
         
     }
     

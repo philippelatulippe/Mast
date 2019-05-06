@@ -423,9 +423,9 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     controller.fromOtherUser = true
                 }
                 controller.userIDtoUse = newString
-//                DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     self.navigationController?.pushViewController(controller, animated: true)
-//                }
+                }
             }
             cell.toot.handleURLTap { (url) in
                 // safari
@@ -538,9 +538,9 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     controller.fromOtherUser = true
                 }
                 controller.userIDtoUse = newString
-//                DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     self.navigationController?.pushViewController(controller, animated: true)
-//                }
+                }
             }
             cell.toot.handleURLTap { (url) in
                 // safari
@@ -2148,9 +2148,12 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var lastThing = ""
     
     func fetchMoreHome() {
+        if self.newLast == RequestRange.max(id: "0", limit: nil) {
+            return
+        }
         let request = Favourites.all(range: self.newLast)
         StoreStruct.client.run(request) { (statuses) in
-            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "", limit: nil) as! RequestRange
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""

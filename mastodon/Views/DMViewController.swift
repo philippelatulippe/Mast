@@ -822,9 +822,9 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 controller.fromOtherUser = true
                             }
                             controller.userIDtoUse = newString
-                            //                            DispatchQueue.main.async {
-                            self.navigationController?.pushViewController(controller, animated: true)
-                            //                            }
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -916,9 +916,9 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-                        //                        DispatchQueue.main.async {
-                        self.navigationController?.pushViewController(controller, animated: true)
-                        //                        }
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
+                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari

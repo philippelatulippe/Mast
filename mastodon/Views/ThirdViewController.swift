@@ -3075,9 +3075,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         controller.fromOtherUser = true
                     }
                     controller.userIDtoUse = newString
-//                                DispatchQueue.main.async {
+                                DispatchQueue.main.async {
                                     self.navigationController?.pushViewController(controller, animated: true)
-//                                }
+                                }
                 }
                 cell.toot.handleURLTap { (url) in
                     // safari
@@ -3185,9 +3185,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             controller.fromOtherUser = true
                         }
                                     controller.userIDtoUse = newString
-//                                    DispatchQueue.main.async {
+                                    DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
-//                                    }
+                                    }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -3298,9 +3298,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-//                        DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
-//                                    }
+                                    }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -3412,9 +3412,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-                        //                        DispatchQueue.main.async {
-                        self.navigationController?.pushViewController(controller, animated: true)
-                        //                                    }
+                        DispatchQueue.main.async {
+                            self.navigationController?.pushViewController(controller, animated: true)
+                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -3507,9 +3507,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     
     @objc func didTouchFollows(sender: UIButton) {
-        print("fol098")
-        
-        
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
             let selection = UIImpactFeedbackGenerator(style: .light)
             selection.impactOccurred()

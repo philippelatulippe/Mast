@@ -1830,9 +1830,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     controller.fromOtherUser = true
                                 }
                                 controller.userIDtoUse = newString
-//                                DispatchQueue.main.async {
+                                DispatchQueue.main.async {
                                     self.navigationController?.pushViewController(controller, animated: true)
-//                                }
+                                }
                             }
                             cell.toot.handleURLTap { (url) in
                                 // safari
@@ -1958,9 +1958,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     controller.fromOtherUser = true
                                 }
                                 controller.userIDtoUse = newString
-//                                DispatchQueue.main.async {
+                                DispatchQueue.main.async {
                                     self.navigationController?.pushViewController(controller, animated: true)
-//                                }
+                                }
                             }
                             cell.toot.handleURLTap { (url) in
                                 // safari
@@ -2075,9 +2075,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 controller.fromOtherUser = true
                             }
                             controller.userIDtoUse = newString
-//                            DispatchQueue.main.async {
+                            DispatchQueue.main.async {
                                 self.navigationController?.pushViewController(controller, animated: true)
-//                            }
+                            }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -2207,9 +2207,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 controller.fromOtherUser = true
                             }
                             controller.userIDtoUse = newString
-//                            DispatchQueue.main.async {
+                            DispatchQueue.main.async {
                                 self.navigationController?.pushViewController(controller, animated: true)
-//                            }
+                            }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -2321,9 +2321,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 controller.fromOtherUser = true
                             }
                             controller.userIDtoUse = newString
-//                            DispatchQueue.main.async {
+                            DispatchQueue.main.async {
                                 self.navigationController?.pushViewController(controller, animated: true)
-//                            }
+                            }
                         }
                         cell.toot.handleURLTap { (url) in
                             // safari
@@ -2422,9 +2422,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             controller.fromOtherUser = true
                         }
                         controller.userIDtoUse = newString
-//                        DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             self.navigationController?.pushViewController(controller, animated: true)
-//                        }
+                        }
                     }
                     cell.toot.handleURLTap { (url) in
                         // safari
@@ -4547,22 +4547,20 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     
     func restoreScroll() {
-        DispatchQueue.main.async {
-//            self.tableView2.reloadData()
-            if (UserDefaults.standard.object(forKey: "savedRowNotif") == nil) {} else {
-                if StoreStruct.notifications.count > 0 {
-                    self.tableView2.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowNotif") as! CGFloat), animated: false)
-                }
-            }
-        }
-        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-            if (UserDefaults.standard.object(forKey: "savedRowMent") == nil) {} else {
-                if StoreStruct.notificationsMentions.count > 0 {
-                    self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowMent") as! CGFloat), animated: false)
-                }
-            }
-        }
+//        DispatchQueue.main.async {
+//            if (UserDefaults.standard.object(forKey: "savedRowNotif") == nil) {} else {
+//                if StoreStruct.notifications.count > 0 {
+//                    self.tableView2.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowNotif") as! CGFloat), animated: false)
+//                }
+//            }
+//        }
+//        DispatchQueue.main.async {
+//            if (UserDefaults.standard.object(forKey: "savedRowMent") == nil) {} else {
+//                if StoreStruct.notificationsMentions.count > 0 {
+//                    self.tableView.setContentOffset(CGPoint(x: 0, y: UserDefaults.standard.object(forKey: "savedRowMent") as! CGFloat), animated: false)
+//                }
+//            }
+//        }
     }
     
     

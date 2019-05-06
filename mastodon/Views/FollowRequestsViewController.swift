@@ -22,6 +22,7 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
     var currentIndex = 0
     var currentTagTitle = ""
     var currentTags: [Account] = []
+    var newLast: RequestRange = .max(id: "", limit: nil)
     
     @objc func refresh() {
         DispatchQueue.main.async {
@@ -195,7 +196,7 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
             return cell
         } else {
             
-            if indexPath.row == self.currentTags.count - 6 {
+            if indexPath.row == self.currentTags.count - 1 {
                 self.fetchMoreHome()
             }
             
@@ -351,14 +352,20 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
     
     var lastThing = ""
     func fetchMoreHome() {
+        if self.newLast == RequestRange.max(id: "0", limit: nil) {
+            return
+        }
         
-        let request = FollowRequests.all(range: .max(id: self.currentTags.last?.id ?? "", limit: nil))
+        let request = FollowRequests.all(range: self.newLast)
         StoreStruct.client.run(request) { (statuses) in
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 
-                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
                 DispatchQueue.main.async {
+                    self.currentTags = self.currentTags + stat
+                    self.currentTags = self.currentTags.removeDuplicates()
                     self.tableView.reloadData()
                     
                 }

@@ -22,6 +22,8 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
     var statusFollowers: [Account] = []
     var doOnce = false
     var doOnce2 = false
+    var newLast: RequestRange = .max(id: "", limit: nil)
+    var newLast2: RequestRange = .max(id: "", limit: nil)
     
     
     @objc func load() {
@@ -415,11 +417,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                 return cell
             } else {
             
-            if indexPath.row == self.statusFollows.count - 6 {
-                self.fetchFollows()
-            }
-            if indexPath.row < 7 && self.doOnce == false {
-                self.doOnce = true
+            if indexPath.row == self.statusFollows.count - 1 {
                 self.fetchFollows()
             }
             
@@ -447,11 +445,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                 return cell
             } else {
             
-            if indexPath.row == self.statusFollowers.count - 6 {
-                self.fetchFollowers()
-            }
-            if indexPath.row < 7 && self.doOnce2 == false {
-                self.doOnce2 = true
+            if indexPath.row == self.statusFollowers.count - 1 {
                 self.fetchFollowers()
             }
             
@@ -495,11 +489,15 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
     
     var lastThing = ""
     func fetchFollows() {
-        let request = Accounts.following(id: self.profileStatus, range: .max(id: self.statusFollows.last?.id ?? "", limit: nil))
+        if self.newLast == RequestRange.max(id: "0", limit: nil) {
+            return
+        }
+        let request = Accounts.following(id: self.profileStatus, range: self.newLast)
         StoreStruct.client.run(request) { (statuses) in
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
-                
-                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                print("latest stat: \(stat)")
+                if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
                 self.statusFollows = self.statusFollows + stat
                     self.statusFollows = self.statusFollows.removeDuplicates()
@@ -513,11 +511,15 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
     
     var lastThing2 = ""
     func fetchFollowers() {
-        let request = Accounts.followers(id: self.profileStatus, range: .max(id: self.statusFollows.last?.id ?? "", limit: nil))
+        if self.newLast2 == RequestRange.max(id: "0", limit: nil) {
+            return
+        }
+        let request = Accounts.followers(id: self.profileStatus, range: self.newLast2)
         StoreStruct.client.run(request) { (statuses) in
+            self.newLast2 = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 
-                if stat.isEmpty || self.lastThing2 == stat.first?.id ?? "" {} else {
+                if stat.isEmpty {} else {
                     self.lastThing2 = stat.first?.id ?? ""
                 self.statusFollows = self.statusFollows + stat
                     self.statusFollows = self.statusFollows.removeDuplicates()
