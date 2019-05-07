@@ -165,6 +165,10 @@ class DetailCellImage: UITableViewCell {
         toot.URLColor = Colours.tabSelected
         
         userName.text = status.reblog?.account.displayName ?? status.account.displayName
+        if userName.text == "" {
+            userName.text = " "
+        }
+        
         if (UserDefaults.standard.object(forKey: "mentionToggle") == nil || UserDefaults.standard.object(forKey: "mentionToggle") as! Int == 0) {
             userTag.setTitle("@\(status.reblog?.account.acct ?? status.account.acct)", for: .normal)
         } else {

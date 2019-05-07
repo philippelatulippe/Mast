@@ -197,7 +197,7 @@ class NotificationCell: SwipeTableViewCell {
     }
     
     override func prepareForReuse() {
-        self.profileImageView.imageView?.image = nil
+//        self.profileImageView.imageView?.image = nil
     }
     
     func configure(_ status: Notificationt) {

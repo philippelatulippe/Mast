@@ -268,15 +268,15 @@ class MainFeedCellImage: SwipeTableViewCell {
     }
     
     override func prepareForReuse() {
-        self.profileImageView.imageView?.image = nil
-        self.profileImageView2.imageView?.image = nil
-        self.mainImageView.imageView?.image = nil
-        self.mainImageView.imageView?.image = UIImage()
-        self.mainImageView.pin_clearImages()
-        self.smallImage1.imageView?.image = nil
-        self.smallImage2.imageView?.image = nil
-        self.smallImage3.imageView?.image = nil
-        self.smallImage4.imageView?.image = nil
+//        self.profileImageView.imageView?.image = nil
+//        self.profileImageView2.imageView?.image = nil
+//        self.mainImageView.imageView?.image = nil
+//        self.mainImageView.imageView?.image = UIImage()
+//        self.mainImageView.pin_clearImages()
+//        self.smallImage1.imageView?.image = nil
+//        self.smallImage2.imageView?.image = nil
+//        self.smallImage3.imageView?.image = nil
+//        self.smallImage4.imageView?.image = nil
     }
     
     func configure(_ status: Status) {

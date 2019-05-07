@@ -4858,10 +4858,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 DispatchQueue.main.async {
                                     UIView.setAnimationsEnabled(false)
 //                                    self.tableView.reloadData()
+                                    let afterContentOffset = self.tableView.contentOffset
                                     let beforeContentSize = self.tableView.contentSize
                                     self.tableView.reloadData()
                                     let afterContentSize = self.tableView.contentSize
-                                    let afterContentOffset = self.tableView.contentOffset
                                     let newContentOffset = CGPoint(x: 0, y: afterContentOffset.y + afterContentSize.height - beforeContentSize.height)
                                     self.tableView.contentOffset = newContentOffset
 //                                    if newestC == 0 {
@@ -4939,10 +4939,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 DispatchQueue.main.async {
                                     UIView.setAnimationsEnabled(false)
 //                                    self.tableViewL.reloadData()
+                                    let afterContentOffset = self.tableViewL.contentOffset
                                     let beforeContentSize = self.tableViewL.contentSize
                                     self.tableViewL.reloadData()
                                     let afterContentSize = self.tableViewL.contentSize
-                                    let afterContentOffset = self.tableViewL.contentOffset
                                     let newContentOffset = CGPoint(x: 0, y: afterContentOffset.y + afterContentSize.height - beforeContentSize.height)
                                     self.tableViewL.contentOffset = newContentOffset
 //                                    if newestC == 0 {
@@ -5017,10 +5017,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 DispatchQueue.main.async {
                                     UIView.setAnimationsEnabled(false)
 //                                    self.tableViewF.reloadData()
+                                    let afterContentOffset = self.tableViewF.contentOffset
                                     let beforeContentSize = self.tableViewF.contentSize
                                     self.tableViewF.reloadData()
                                     let afterContentSize = self.tableViewF.contentSize
-                                    let afterContentOffset = self.tableViewF.contentOffset
                                     let newContentOffset = CGPoint(x: 0, y: afterContentOffset.y + afterContentSize.height - beforeContentSize.height)
                                     self.tableViewF.contentOffset = newContentOffset
 //                                    if newestC == 0 {

@@ -1782,9 +1782,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             impact.impactOccurred()
         }
         
-        
-        
-        
         if self.fromOtherUser {
             if self.isFollowing {
                 self.fo = "Unfollow".localized

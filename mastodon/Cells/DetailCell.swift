@@ -112,7 +112,9 @@ class DetailCell: UITableViewCell {
         toot.URLColor = Colours.tabSelected
         
         userName.text = status.reblog?.account.displayName ?? status.account.displayName
-        
+        if userName.text == "" {
+            userName.text = " "
+        }
         
         
         if (UserDefaults.standard.object(forKey: "mentionToggle") == nil || UserDefaults.standard.object(forKey: "mentionToggle") as! Int == 0) {
@@ -217,7 +219,6 @@ class DetailCell: UITableViewCell {
         } else {
             fromClient.text = "\(da), via \(z)"
         }
-        
         
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
