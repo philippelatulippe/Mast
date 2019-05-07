@@ -54,6 +54,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     private var crownControl2: CrownControl!
     private var crownControl3: CrownControl!
     
+    var cellHeightsDictionary: [IndexPath: CGFloat] = [:]
+    var cellHeightsDictionary2: [IndexPath: CGFloat] = [:]
+    var cellHeightsDictionary3: [IndexPath: CGFloat] = [:]
+    
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         if self.currentIndex == 0 {
             
@@ -1678,17 +1682,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         
                                     }
                                     
-                                    do {
-                                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                                    } catch {
-                                        print("Couldn't save")
-                                    }
-                                    
                                     self.hMod = []
                                 }
                                 
+                            }
+                            
+                            do {
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                            } catch {
+                                print("Couldn't save")
                             }
                         }
                     } catch {
@@ -1782,17 +1784,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         
                                     }
                                     
-                                    do {
-                                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                                    } catch {
-                                        print("Couldn't save")
-                                    }
-                                    
                                     self.lMod = []
                                 }
                                 
+                            }
+                            
+                            do {
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                            } catch {
+                                print("Couldn't save")
                             }
                         }
                     } catch {
@@ -1893,18 +1893,16 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     }
                                     
                                     
-                                    do {
-                                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                                    } catch {
-                                        print("Couldn't save")
-                                    }
-                                    
                                     self.fMod = []
                                 }
                                 
                                 
+                            }
+                            
+                            do {
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                            } catch {
+                                print("Couldn't save")
                             }
                         }
                     } catch {
@@ -2161,6 +2159,33 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             controller.publicTypeLocal = false
         }
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if tableView == self.tableView {
+            self.cellHeightsDictionary[indexPath] = cell.frame.size.height
+        } else if tableView == self.tableViewL {
+            self.cellHeightsDictionary2[indexPath] = cell.frame.size.height
+        } else {
+            self.cellHeightsDictionary3[indexPath] = cell.frame.size.height
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView == self.tableView {
+            if let height =  self.cellHeightsDictionary[indexPath] {
+                return height
+            }
+        } else if tableView == self.tableViewL {
+            if let height =  self.cellHeightsDictionary2[indexPath] {
+                return height
+            }
+        } else {
+            if let height =  self.cellHeightsDictionary3[indexPath] {
+                return height
+            }
+        }
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -4876,6 +4901,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
 //                                        }
 //                                    }
                                     UIView.setAnimationsEnabled(true)
+                                    
                                 }
                                 
                                 do {

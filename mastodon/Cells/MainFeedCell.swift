@@ -185,8 +185,8 @@ class MainFeedCell: SwipeTableViewCell {
     }
     
     override func prepareForReuse() {
-//        self.profileImageView.imageView?.image = nil
-//        self.profileImageView2.imageView?.image = nil
+        self.profileImageView.imageView?.image = nil
+        self.profileImageView2.imageView?.image = nil
     }
     
     func configure(_ status: Status) {

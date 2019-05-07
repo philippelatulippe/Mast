@@ -368,12 +368,24 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                     } else {
                         DispatchQueue.main.async {
-                        self.profileStatuses = stat
-                        self.chosenUser = self.profileStatuses[0].account
+                            self.profileStatuses = stat
+                            self.chosenUser = self.profileStatuses.first?.account ?? nil
                             
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
                             self.tableView.reloadData()
+                            
+                            if self.chosenUser == nil {
+                                let request9 = Accounts.account(id: self.userIDtoUse)
+                                StoreStruct.client.run(request9) { (statuses) in
+                                    if let stat = (statuses.value) {
+                                        DispatchQueue.main.async {
+                                            self.chosenUser = stat
+                                            self.tableView.reloadData()
+                                        }
+                                    }
+                                }
+                            }
                         }
                         
                     }
@@ -403,12 +415,24 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 } else {
                                     
                                     DispatchQueue.main.async {
-                                    self.profileStatuses = stat
-                                    self.chosenUser = self.profileStatuses[0].account
+                                        self.profileStatuses = stat
+                                        self.chosenUser = self.profileStatuses.first?.account ?? nil
                                         
                                         self.ai.alpha = 0
                                         self.ai.removeFromSuperview()
                                         self.tableView.reloadData()
+                                        
+                                        if self.chosenUser == nil {
+                                            let request9 = Accounts.account(id: self.userIDtoUse)
+                                            StoreStruct.client.run(request9) { (statuses) in
+                                                if let stat = (statuses.value) {
+                                                    DispatchQueue.main.async {
+                                                        self.chosenUser = stat
+                                                        self.tableView.reloadData()
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                     
                                 }
@@ -436,12 +460,24 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         } else {
                             
                             DispatchQueue.main.async {
-                            self.profileStatuses = stat
-                            self.chosenUser = self.profileStatuses[0].account
+                                self.profileStatuses = stat
+                                self.chosenUser = self.profileStatuses.first?.account ?? nil
                                 
                                 self.ai.alpha = 0
                                 self.ai.removeFromSuperview()
                                 self.tableView.reloadData()
+                                
+                                if self.chosenUser == nil {
+                                    let request9 = Accounts.account(id: self.userIDtoUse)
+                                    StoreStruct.client.run(request9) { (statuses) in
+                                        if let stat = (statuses.value) {
+                                            DispatchQueue.main.async {
+                                                self.chosenUser = stat
+                                                self.tableView.reloadData()
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             
                         }
@@ -581,8 +617,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func panProfile(pan: UIPanGestureRecognizer) {
         if pan.state == .began {
             if self.fromOtherUser == true {
-                if self.chosenUser.fields.count > 0 {
-                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell
+                if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ProfileHeaderCell {
                     self.buttonCenter = cell.profileImageView.center
                     springWithDelay(duration: 0.4, delay: 0, animations: {
                         cell.more.alpha = 0
@@ -601,8 +636,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     })
                 }
             } else {
-                if self.chosenUser.fields.count > 0 {
-                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCellOwn
+                if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ProfileHeaderCellOwn {
                     self.buttonCenter = cell.profileImageView.center
                     springWithDelay(duration: 0.4, delay: 0, animations: {
                         cell.more.alpha = 0
@@ -624,8 +658,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         } else if pan.state == .ended || pan.state == .failed || pan.state == .cancelled {
             UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: [], animations: {
                 if self.fromOtherUser == true {
-                    if self.chosenUser.fields.count > 0 {
-                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell
+                    if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ProfileHeaderCell {
                         cell.profileImageView.center = self.buttonCenter
                         springWithDelay(duration: 0.4, delay: 0, animations: {
                             cell.more.alpha = 1
@@ -644,8 +677,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         })
                     }
                 } else {
-                    if self.chosenUser.fields.count > 0 {
-                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCellOwn
+                    if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ProfileHeaderCellOwn {
                         cell.profileImageView.center = self.buttonCenter
                         springWithDelay(duration: 0.4, delay: 0, animations: {
                             cell.more.alpha = 1
@@ -669,16 +701,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let location = pan.location(in: self.navigationController?.view ?? self.view)
             springWithDelay(duration: 0.5, delay: 0, animations: {
                 if self.fromOtherUser == true {
-                    if self.chosenUser.fields.count > 0 {
-                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell
+                    if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ProfileHeaderCell {
                         cell.profileImageView.center = CGPoint(x: location.x, y: location.y - 80)
                     } else {
                         let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCell2
                         cell.profileImageView.center = CGPoint(x: location.x, y: location.y - 80)
                     }
                 } else {
-                    if self.chosenUser.fields.count > 0 {
-                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCellOwn
+                    if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ProfileHeaderCellOwn {
                         cell.profileImageView.center = CGPoint(x: location.x, y: location.y - 80)
                     } else {
                         let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ProfileHeaderCellOwn2
@@ -856,15 +886,38 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .default)
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
-//                    if stat.isEmpty {} else {
+                    if stat.isEmpty {
+                        let request9 = Accounts.account(id: self.userIDtoUse)
+                        StoreStruct.client.run(request9) { (statuses) in
+                            if let stat = (statuses.value) {
+                                DispatchQueue.main.async {
+                                    self.chosenUser = stat
+                                    self.ai.alpha = 0
+                                    self.ai.removeFromSuperview()
+                                    self.tableView.reloadData()
+                                }
+                            }
+                        }
+                    } else {
                         DispatchQueue.main.async {
                             self.profileStatuses = stat
-                            self.chosenUser = self.profileStatuses[0].account
+                            self.chosenUser = self.profileStatuses.first?.account ?? nil
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
                             self.tableView.reloadData()
+                            if self.chosenUser == nil {
+                                let request9 = Accounts.account(id: self.userIDtoUse)
+                                StoreStruct.client.run(request9) { (statuses) in
+                                    if let stat = (statuses.value) {
+                                        DispatchQueue.main.async {
+                                            self.chosenUser = stat
+                                            self.tableView.reloadData()
+                                        }
+                                    }
+                                }
+                            }
                         }
-//                    }
+                    }
                 }
             }
             let request8 = Accounts.statuses(id: self.userIDtoUse, mediaOnly: false, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .default)
@@ -1124,7 +1177,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             var amount = ""
             if self.profileStatuses.count > 0 {
-                let c = self.profileStatuses[0].account.statusesCount
+                let c = self.profileStatuses.first?.account.statusesCount ?? 0
                 if self.profileStatuses.count == 1 {
                     amount = "1 Toot"
                 } else {

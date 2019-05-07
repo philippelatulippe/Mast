@@ -137,8 +137,8 @@ class DMFeedCell: SwipeTableViewCell {
     }
     
     override func prepareForReuse() {
-//        self.profileImageView.imageView?.image = nil
-//        self.profileImageView2.imageView?.image = nil
+        self.profileImageView.imageView?.image = nil
+        self.profileImageView2.imageView?.image = nil
     }
     
     func configure2(_ unread: Bool, id: String) {
@@ -217,7 +217,7 @@ class DMFeedCell: SwipeTableViewCell {
             
             
             if status.reblog!.emojis.isEmpty {
-                toot.text = "\(status.reblog?.content.stripHTML() ?? "")".replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: "")
+                toot.text = "\(status.reblog?.content.stripHTML() ?? "")"
             } else {
                 let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")")
                 status.reblog!.emojis.map({
@@ -297,7 +297,7 @@ class DMFeedCell: SwipeTableViewCell {
             
             
             if status.emojis.isEmpty {
-                toot.text = status.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: "")
+                toot.text = status.content.stripHTML()
             } else {
                 let attributedString = NSMutableAttributedString(string: status.content.stripHTML())
                 status.emojis.map({
