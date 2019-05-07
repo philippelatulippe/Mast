@@ -121,7 +121,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //self.ai.startAnimating()
+        self.ai.startAnimating()
     }
     
     
@@ -194,6 +194,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         //NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTop1), name: NSNotification.Name(rawValue: "scrollTop1"), object: nil)
         
+        self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
         longPress.minimumPressDuration = 0.5
         longPress.delegate = self
@@ -249,18 +250,9 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //        self.tableView.addSubview(refreshControl)
         
-        self.currentTags = StoreStruct.tempLiked
+        self.view.addSubview(self.ai)
         
-        let request = Favourites.all()
-        StoreStruct.client.run(request) { (statuses) in
-            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "", limit: nil) as! RequestRange
-            if let stat = (statuses.value) {
-                self.currentTags = stat
-                DispatchQueue.main.async {
-                    self.loadLoadLoad()
-                }
-            }
-        }
+        self.currentTags = StoreStruct.tempLiked
         
 //        self.loadLoadLoad()
         
@@ -272,6 +264,19 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        let request = Favourites.all()
+        StoreStruct.client.run(request) { (statuses) in
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
+            if let stat = (statuses.value) {
+                self.currentTags = stat
+                DispatchQueue.main.async {
+                    self.ai.stopAnimating()
+                    self.ai.alpha = 0
+                    self.tableView.reloadData()
+                }
+            }
+        }
         
 //        self.navigationController?.navigationBar.tintColor = Colours.tabUnselected
 //        self.navigationController?.navigationBar.barTintColor = Colours.tabUnselected
@@ -2171,7 +2176,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func refreshCont() {
         
         let request = Favourites.all(range: .min(id: self.currentTags.first?.id ?? "", limit: nil))
-        DispatchQueue.global(qos: .userInitiated).async {
+//        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     DispatchQueue.main.async {
@@ -2187,7 +2192,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                 }
             }
-        }
+//        }
         
     }
     

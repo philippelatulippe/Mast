@@ -2622,7 +2622,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         if self.isPollAdded {
             let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, poll: StoreStruct.newPollPost, visibility: self.visibility)
-            DispatchQueue.global(qos: .userInitiated).async {
+//            DispatchQueue.global(qos: .userInitiated).async {
                 StoreStruct.client.run(request0) { (statuses) in
                      
                     
@@ -2697,7 +2697,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                         }
                     }
                 }
-            }
+//            }
             DispatchQueue.main.async {
                 if (UserDefaults.standard.object(forKey: "progprogprogprog") == nil || UserDefaults.standard.object(forKey: "progprogprogprog") as! Int == 0) {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "startindi"), object: self)
@@ -2724,7 +2724,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     mediaIDs.append(stat.id)
                     
                     let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, visibility: self.visibility)
-                    DispatchQueue.global(qos: .userInitiated).async {
+//                    DispatchQueue.global(qos: .userInitiated).async {
                         StoreStruct.client.run(request0) { (statuses) in
                              
                             
@@ -2802,7 +2802,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                 
                             }
                         }
-                    }
+//                    }
                 }
             }
             
@@ -2857,7 +2857,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                             
                                             
                                             let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, visibility: self.visibility)
-                                            DispatchQueue.global(qos: .userInitiated).async {
+//                                            DispatchQueue.global(qos: .userInitiated).async {
                                                 StoreStruct.client.run(request0) { (statuses) in
                                                      
                                                     
@@ -2934,7 +2934,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                         
                                                     }
                                                 }
-                                            }
+//                                            }
                                         }
                                     }
                                 }
@@ -2978,7 +2978,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     
                                     
                                     let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, visibility: self.visibility)
-                                    DispatchQueue.global(qos: .userInitiated).async {
+//                                    DispatchQueue.global(qos: .userInitiated).async {
                                         StoreStruct.client.run(request0) { (statuses) in
                                              
                                             
@@ -3055,7 +3055,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                             
                                         }
                                         }
-                                    }
+//                                    }
                                 }
                             }
                         }
@@ -3086,7 +3086,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             }
                             
                             let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, visibility: self.visibility)
-                            DispatchQueue.global(qos: .userInitiated).async {
+//                            DispatchQueue.global(qos: .userInitiated).async {
                                 StoreStruct.client.run(request0) { (statuses) in
                                      
                                     
@@ -3163,7 +3163,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     }
                                     }
                                 }
-                            }
+//                            }
                         }
                     }
                 }
@@ -3181,7 +3181,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     }
                     
                     let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, visibility: self.visibility)
-                    DispatchQueue.global(qos: .userInitiated).async {
+//                    DispatchQueue.global(qos: .userInitiated).async {
                         StoreStruct.client.run(request0) { (statuses) in
                              
                             
@@ -3256,12 +3256,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             }
                             }
                         }
-                    }
+//                    }
                 }
             }
         } else if self.selectedImage1.image == nil {
             let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, poll: StoreStruct.newPollPost, visibility: self.visibility)
-            DispatchQueue.global(qos: .userInitiated).async {
+//            DispatchQueue.global(qos: .userInitiated).async {
                 StoreStruct.client.run(request0) { (statuses) in
                      
                     
@@ -3337,7 +3337,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     }
                     }
                 }
-            }
+//            }
         }
         
         }

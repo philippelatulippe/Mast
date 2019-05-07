@@ -811,11 +811,11 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     func composedToot() {
         let request0 = Statuses.create(status: StoreStruct.composedTootText, replyToID: nil, mediaIDs: [], sensitive: false, spoilerText: nil, scheduledAt: nil, poll: nil, visibility: .public)
-        DispatchQueue.global(qos: .userInitiated).async {
+//        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request0) { (statuses) in
                 
             }
-        }
+//        }
     }
     
     override func encodeRestorableState(with coder: NSCoder) {
@@ -869,18 +869,18 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         
                         if (model.status?.visibility) ?? Visibility.private == .direct {
                             
-                            let request = Timelines.conversations(range: .since(id: StoreStruct.notificationsDirect.first?.id ?? "", limit: 5000))
+                            let request = Timelines.conversations(range: .since(id: StoreStruct.notificationsDirect.first?.id ?? "", limit: nil))
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
                                     if stat.isEmpty {} else {
-                                        DispatchQueue.main.async {
+//                                        DispatchQueue.main.async {
                                             if (UserDefaults.standard.object(forKey: "badgeMentd") == nil) || (UserDefaults.standard.object(forKey: "badgeMentd") as! Int == 0) {
                                                 self.tabBar.items?[2].badgeValue = "1"
                                             }
                                             StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
                                             StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                                             NotificationCenter.default.post(name: Notification.Name(rawValue: "updateDM"), object: nil)
-                                        }
+//                                        }
                                     }
                                 }
                             }

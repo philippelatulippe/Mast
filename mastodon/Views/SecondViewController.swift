@@ -48,6 +48,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     private var crownControl: CrownControl!
     private var crownControl2: CrownControl!
     private var crownControl3: CrownControl!
+    var newLast: RequestRange = .max(id: "", limit: nil)
+    var newLast2: RequestRange = .max(id: "", limit: nil)
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
@@ -778,42 +780,30 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
 //        self.loadLoadLoad()
 //        self.fetchMoreNotifications()
         
-        if StoreStruct.notifications.isEmpty || StoreStruct.notificationsMentions.isEmpty {
-            let request2 = Notifications.all(range: .default, typesToExclude: [.favourite, .follow, .reblog])
-            StoreStruct.client.run(request2) { (statuses) in
-                if let stat = (statuses.value) {
-                    StoreStruct.notificationsMentions = stat
-                    DispatchQueue.main.async {
-                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
-                        self.ai.alpha = 0
-                        self.ai.removeFromSuperview()
-                        self.tableView.reloadData()
-                    }
+        let request2 = Notifications.all(range: self.newLast, typesToExclude: [.favourite, .follow, .reblog])
+        StoreStruct.client.run(request2) { (statuses) in
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
+            if let stat = (statuses.value) {
+                StoreStruct.notificationsMentions = stat
+                DispatchQueue.main.async {
+                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+                    self.ai.alpha = 0
+                    self.ai.removeFromSuperview()
+                    self.tableView.reloadData()
                 }
             }
-            let request = Notifications.all(range: .default, typesToExclude: StoreStruct.notTypes)
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
-                    StoreStruct.notifications = stat
-                    DispatchQueue.main.async {
-                        StoreStruct.notifications = StoreStruct.notificationsMentions.removeDuplicates()
-                        self.ai.alpha = 0
-                        self.ai.removeFromSuperview()
-                        self.tableView2.reloadData()
-                    }
+        }
+        let request = Notifications.all(range: self.newLast2, typesToExclude: StoreStruct.notTypes)
+        StoreStruct.client.run(request) { (statuses) in
+            self.newLast2 = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
+            if let stat = (statuses.value) {
+                StoreStruct.notifications = stat
+                DispatchQueue.main.async {
+                    StoreStruct.notifications = StoreStruct.notificationsMentions.removeDuplicates()
+                    self.ai.alpha = 0
+                    self.ai.removeFromSuperview()
+                    self.tableView2.reloadData()
                 }
-            }
-        } else {
-            
-            //            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + StoreStruct.notifications.filter({ (test) -> Bool in
-            //                test.type == .mention
-            //            })
-            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
-            StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
-            DispatchQueue.main.async {
-                self.ai.alpha = 0
-                self.ai.removeFromSuperview()
-                self.tableView.reloadData()
             }
         }
         
@@ -1061,38 +1051,12 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         if (UserDefaults.standard.object(forKey: "mentdef2") == nil) || (UserDefaults.standard.object(forKey: "mentdef2") as! Int == 0) {
             
         } else {
-            
             self.segmentedControl.currentSegment = 1
             
             self.currentIndex = 0
             self.tableView.alpha = 0
             self.tableView2.alpha = 1
-            
-            if StoreStruct.notifications.isEmpty || StoreStruct.notificationsMentions.isEmpty {
-                let request = Notifications.all(range: .default, typesToExclude: StoreStruct.notTypes)
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        StoreStruct.notifications = stat
-                        DispatchQueue.main.async {
-                            self.tableView2.reloadData()
-                        }
-                        
-                    }
-                }
-                
-                let request2 = Notifications.all(range: .default, typesToExclude: [.favourite, .follow, .reblog])
-                StoreStruct.client.run(request2) { (statuses) in
-                    if let stat = (statuses.value) {
-                        StoreStruct.notificationsMentions = stat
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                        
-                    }
-                }
-            } else {
-                self.tableView2.reloadData()
-            }
+            self.tableView2.reloadData()
         }
     }
     
@@ -4679,14 +4643,18 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     var lastThing = ""
     func fetchMoreNotifications() {
-        let request = Notifications.all(range: .max(id: StoreStruct.notifications.last?.id ?? "", limit: 5000), typesToExclude: StoreStruct.notTypes)
+        if self.newLast2 == RequestRange.max(id: "0", limit: nil) {
+            return
+        }
+        let request = Notifications.all(range: self.newLast2, typesToExclude: StoreStruct.notTypes)
         StoreStruct.client.run(request) { (statuses) in
+            self.newLast2 = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 
                 StoreStruct.notifications = StoreStruct.notifications + stat
                     DispatchQueue.main.async {
-                        StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
-                        StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
+//                        StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
+//                        StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                         self.tableView2.reloadData()
                     }
 //                    if StoreStruct.notifications.isEmpty {
@@ -4695,14 +4663,18 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     
             }
         }
-        let request2 = Notifications.all(range: .max(id: StoreStruct.notificationsMentions.last?.id ?? "", limit: 5000), typesToExclude: [.favourite, .follow, .reblog])
+        if self.newLast == RequestRange.max(id: "0", limit: nil) {
+            return
+        }
+        let request2 = Notifications.all(range: self.newLast, typesToExclude: [.favourite, .follow, .reblog])
         StoreStruct.client.run(request2) { (statuses) in
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 
                 StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + stat
                     DispatchQueue.main.async {
-                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+//                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+//                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                         self.tableView.reloadData()
                     }
 //                    if StoreStruct.notificationsMentions.isEmpty {
@@ -4715,17 +4687,17 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     
     @objc func refreshCont() {
-        let request = Notifications.all(range: .min(id: StoreStruct.notifications.first?.id ?? "", limit: 5000), typesToExclude: StoreStruct.notTypes)
-        DispatchQueue.global(qos: .userInitiated).async {
+        let request = Notifications.all(range: .min(id: StoreStruct.notifications.first?.id ?? "", limit: nil), typesToExclude: StoreStruct.notTypes)
+//        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     var newestC = StoreStruct.notifications.count
                     
                     StoreStruct.notifications = stat + StoreStruct.notifications
+//                    StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
+                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     var co = 0
                     DispatchQueue.main.async {
-                        StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
-                        StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                         
                         newestC = StoreStruct.notifications.count - newestC
                         
@@ -4768,20 +4740,20 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         
                     }
                 }
-            }
+//            }
         }
         
-        let request2 = Notifications.all(range: .min(id: StoreStruct.notificationsMentions.first?.id ?? "", limit: 5000), typesToExclude: [.favourite, .follow, .reblog])
-        DispatchQueue.global(qos: .userInitiated).async {
+        let request2 = Notifications.all(range: .min(id: StoreStruct.notificationsMentions.first?.id ?? "", limit: nil), typesToExclude: [.favourite, .follow, .reblog])
+//        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
                     var newestC2 = StoreStruct.notificationsMentions.count
                     
                     var co = 0
                     StoreStruct.notificationsMentions = stat + StoreStruct.notificationsMentions
+//                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     DispatchQueue.main.async {
-                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                         
                         newestC2 = StoreStruct.notificationsMentions.count - newestC2
                         
@@ -4818,7 +4790,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                         
                     }
-                }
+//                }
             }
         }
     }

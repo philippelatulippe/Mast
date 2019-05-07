@@ -1300,28 +1300,28 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let controller = LikedViewController()
             controller.currentTagTitle = "Liked"
             let request = Favourites.all()
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
-                    DispatchQueue.main.async {
-                        controller.currentTags = stat
+//            StoreStruct.client.run(request) { (statuses) in
+//                if let stat = (statuses.value) {
+//                    DispatchQueue.main.async {
+//                        controller.currentTags = stat
                         self.navigationController?.pushViewController(controller, animated: true)
-                    }
-                }
-            }
+//                    }
+//                }
+//            }
         } else if (UserDefaults.standard.object(forKey: "likepin") as! Int == 1) {
             
             let controller = PinnedViewController()
             controller.currentTagTitle = "Pinned"
             controller.curID = self.chosenUser.id
-            let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .min(id: "", limit: 5000))
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
-                    DispatchQueue.main.async {
-                        controller.currentTags = stat
+//            let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .min(id: "", limit: 5000))
+//            StoreStruct.client.run(request) { (statuses) in
+//                if let stat = (statuses.value) {
+//                    DispatchQueue.main.async {
+//                        controller.currentTags = stat
                         self.navigationController?.pushViewController(controller, animated: true)
-                    }
-                }
-            }
+//                    }
+//                }
+//            }
         } else {
             
             self.editProfileDetails()
@@ -1831,15 +1831,15 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let controller = PinnedViewController()
                     controller.currentTagTitle = "Pinned"
                     controller.curID = self.chosenUser.id
-                    let request = Accounts.statuses(id: self.chosenUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .min(id: "", limit: 5000))
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
-                                controller.currentTags = stat
+//                    let request = Accounts.statuses(id: self.chosenUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .min(id: "", limit: 5000))
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
+//                                controller.currentTags = stat
                                 self.navigationController?.pushViewController(controller, animated: true)
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 .action(.default("Mention".localized), image: UIImage(named: "reply2")) { (action, ind) in
                      
@@ -2290,15 +2290,15 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let controller = PinnedViewController()
                     controller.currentTagTitle = "Pinned"
                     controller.curID = self.chosenUser.id
-                    let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .min(id: "", limit: 5000))
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
-                                controller.currentTags = stat
+//                    let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .min(id: "", limit: 5000))
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
+//                                controller.currentTags = stat
                                 self.navigationController?.pushViewController(controller, animated: true)
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 .action(.default("Liked".localized), image: UIImage(named: "like2")) { (action, ind) in
                      
@@ -2306,44 +2306,44 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let controller = LikedViewController()
                     controller.currentTagTitle = "Liked"
                     let request = Favourites.all()
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
-                                controller.currentTags = stat
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
+//                                controller.currentTags = stat
                                 self.navigationController?.pushViewController(controller, animated: true)
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 .action(.default("Muted".localized), image: UIImage(named: "block")) { (action, ind) in
                      
                     
-                    let request = Mutes.all()
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
+//                    let request = Mutes.all()
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
                                 let controller = MutedViewController()
                                 controller.currentTagTitle = "Muted"
-                                controller.currentTags = stat
+//                                controller.currentTags = stat
                                 self.navigationController?.pushViewController(controller, animated: true)
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 .action(.default("Blocked".localized), image: UIImage(named: "block2")) { (action, ind) in
                      
                     
-                    let request = Blocks.all()
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
+//                    let request = Blocks.all()
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
                                 let controller = BlockedViewController()
                                 controller.currentTagTitle = "Blocked"
-                                controller.currentTags = stat
+//                                controller.currentTags = stat
                                 self.navigationController?.pushViewController(controller, animated: true)
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 .action(.default("Toot Filters".localized), image: UIImage(named: "filters")) { (action, ind) in
                      
@@ -2646,6 +2646,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.profileImageView.addGestureRecognizer(pan1)
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
+                        cell.follows.titleLabel?.textColor = Colours.tabSelected
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                         cell.backgroundColor = Colours.white
                         
@@ -2746,6 +2747,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.profileImageView.addGestureRecognizer(pan1)
                             cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                             cell.follows.tag = indexPath.row
+                        cell.follows.titleLabel?.textColor = Colours.tabSelected
                             cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                             cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
                             cell.backgroundColor = Colours.white
@@ -2846,6 +2848,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.profileImageView.addGestureRecognizer(pan1)
                     cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                     cell.follows.tag = indexPath.row
+                    cell.follows.titleLabel?.textColor = Colours.tabSelected
                     cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                     cell.settings.addTarget(self, action: #selector(self.didTouchToFol), for: .touchUpInside)
                     cell.backgroundColor = Colours.white
@@ -2946,6 +2949,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.profileImageView.addGestureRecognizer(pan1)
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
+                        cell.follows.titleLabel?.textColor = Colours.tabSelected
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                         cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
                         cell.backgroundColor = Colours.white
@@ -3045,6 +3049,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.profileImageView.addGestureRecognizer(pan1)
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
+                        cell.follows.titleLabel?.textColor = Colours.tabSelected
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                         cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
                         cell.backgroundColor = Colours.white
@@ -3634,25 +3639,25 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             selection.impactOccurred()
         }
         
-        let request = Accounts.following(id: self.chosenUser.id)
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                DispatchQueue.main.async {
+//        let request = Accounts.following(id: self.chosenUser.id)
+//        StoreStruct.client.run(request) { (statuses) in
+//            if let stat = (statuses.value) {
+//                DispatchQueue.main.async {
                     let controller = FollowersViewController()
-                    controller.statusFollows = stat
+//                    controller.statusFollows = stat
                     controller.profileStatus = self.chosenUser.id
                     self.navigationController?.pushViewController(controller, animated: true)
-                }
-            }
-        }
+//                }
+//            }
+//        }
         
     }
     
     @objc func touchHeaderImage(_ sender: UIButton) {
-        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-            let selection = UISelectionFeedbackGenerator()
-            selection.selectionChanged()
-        }
+//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//            let selection = UISelectionFeedbackGenerator()
+//            selection.selectionChanged()
+//        }
         
         
         let indexPath = IndexPath(row: 0, section: 0)

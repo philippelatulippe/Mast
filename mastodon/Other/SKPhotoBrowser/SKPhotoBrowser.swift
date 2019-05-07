@@ -720,6 +720,45 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
                 }
             }
             
+            if StoreStruct.currentPage == 2 {
+                
+                Alertift.actionSheet(title: nil, message: nil)
+                    .backgroundColor(Colours.white)
+                    .titleTextColor(Colours.grayDark)
+                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                    .messageTextAlignment(.left)
+                    .titleTextAlignment(.left)
+                    .action(.default("Share Image".localized), image: nil) { (action, ind) in
+                        self.longShare()
+                    }
+                    .action(.default("Save Image".localized), image: nil) { (action, ind) in
+                        let snapshot: UIImage = self.photoAtIndex(self.currentPageIndex).underlyingImage
+                        PHPhotoLibrary.shared().performChanges({
+                            PHAssetChangeRequest.creationRequestForAsset(from: snapshot)
+                        }, completionHandler: { success, error in
+                            if success {
+                                // Saved
+                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                    DispatchQueue.main.async {
+                                        let generator = UINotificationFeedbackGenerator()
+                                        generator.notificationOccurred(.success)
+                                    }
+                                }
+                            } else {
+                                // Save failed
+                            }
+                        })
+                    }
+                    .action(.cancel("Dismiss"))
+                    .finally { action, index in
+                        if action.style == .cancel {
+                            return
+                        }
+                    }
+                    .show(on: self)
+                
+            } else {
+            
             Alertift.actionSheet(title: nil, message: nil)
                 .backgroundColor(Colours.white)
                 .titleTextColor(Colours.grayDark)
@@ -770,6 +809,7 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
                 }
                 .show(on: self)
             
+            }
         }
     }
     

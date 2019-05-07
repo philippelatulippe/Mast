@@ -40,7 +40,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //self.ai.startAnimating()
+        self.ai.startAnimating()
     }
     
     
@@ -146,7 +146,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeSeg), name: NSNotification.Name(rawValue: "changeSeg"), object: nil)
         
-        self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40)
+        self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
         self.view.backgroundColor = Colours.white
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
@@ -257,6 +257,8 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
             }
         }
         
+        self.view.addSubview(self.ai)
+        
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         
@@ -266,6 +268,8 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        self.fetchFollows()
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -502,6 +506,8 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                 self.statusFollows = self.statusFollows + stat
                     self.statusFollows = self.statusFollows.removeDuplicates()
                 DispatchQueue.main.async {
+                    self.ai.stopAnimating()
+                    self.ai.alpha = 0
                     self.tableView.reloadData()
                 }
                 }

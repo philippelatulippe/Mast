@@ -59,7 +59,7 @@ class MutedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //self.ai.startAnimating()
+        self.ai.startAnimating()
     }
     
     
@@ -92,7 +92,7 @@ class MutedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         //NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTop1), name: NSNotification.Name(rawValue: "scrollTop1"), object: nil)
         
-        self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40)
+        self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
         self.view.backgroundColor = Colours.white
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
@@ -125,7 +125,8 @@ class MutedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.view.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
         
-//        self.fetchMoreHome()
+        self.view.addSubview(self.ai)
+        
         self.loadLoadLoad()
         
         //        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
@@ -135,6 +136,7 @@ class MutedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        self.fetchMoreHome()
 //        self.navigationController?.navigationBar.tintColor = Colours.tabUnselected
 //        self.navigationController?.navigationBar.barTintColor = Colours.tabUnselected
         self.navigationController?.navigationItem.backBarButtonItem?.tintColor = Colours.tabUnselected
@@ -356,9 +358,11 @@ class MutedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
-                DispatchQueue.main.async {
                     self.currentTags = self.currentTags + stat
                     self.currentTags = self.currentTags.removeDuplicates()
+                DispatchQueue.main.async {
+                    self.ai.stopAnimating()
+                    self.ai.alpha = 0
                     self.tableView.reloadData()
                 }
                 }

@@ -74,7 +74,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //self.ai.startAnimating()
+        self.ai.startAnimating()
     }
     
     
@@ -147,6 +147,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         //NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTop1), name: NSNotification.Name(rawValue: "scrollTop1"), object: nil)
         
+        self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
         longPress.minimumPressDuration = 0.5
         longPress.delegate = self
@@ -198,6 +199,8 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
         
+        self.view.addSubview(self.ai)
+        
         self.loadLoadLoad()
         
         
@@ -208,6 +211,8 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        self.fetchMoreHome()
         
 //        self.navigationController?.navigationBar.tintColor = Colours.tabUnselected
 //        self.navigationController?.navigationBar.barTintColor = Colours.tabUnselected
@@ -2007,15 +2012,17 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var lastThing = ""
     func fetchMoreHome() {
-        let request = Accounts.statuses(id: self.curID, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, range: .max(id: self.currentTags.last?.id ?? "", limit: 5000))
+        let request = Accounts.statuses(id: self.curID, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, range: .max(id: self.currentTags.last?.id ?? "", limit: nil))
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
-                DispatchQueue.main.async {
                     self.currentTags = self.currentTags + stat
                     self.currentTags = self.currentTags.removeDuplicates()
+                DispatchQueue.main.async {
+                    self.ai.stopAnimating()
+                    self.ai.alpha = 0
                     self.tableView.reloadData()
                 }
                 }

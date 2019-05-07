@@ -4712,7 +4712,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         
         if self.currentIndex == 0 {
             let request = Timelines.home(range: .max(id: StoreStruct.gapLastHomeID, limit: nil))
-            DispatchQueue.global(qos: .userInitiated).async {
+//            DispatchQueue.global(qos: .userInitiated).async {
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         
@@ -4784,11 +4784,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                     }
                 }
-            }
+//            }
         } else if self.currentIndex == 1 {
             
             let request = Timelines.public(local: true, range: .max(id: StoreStruct.gapLastLocalID, limit: nil))
-            DispatchQueue.global(qos: .userInitiated).async {
+//            DispatchQueue.global(qos: .userInitiated).async {
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         
@@ -4860,11 +4860,11 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                     }
                 }
-            }
+//            }
             
         } else {
             let request = Timelines.public(local: false, range: .max(id: StoreStruct.gapLastFedID, limit: nil))
-            DispatchQueue.global(qos: .userInitiated).async {
+//            DispatchQueue.global(qos: .userInitiated).async {
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         
@@ -4935,14 +4935,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                     }
                 }
-            }
+//            }
         }
     }
     
     var lastThing = ""
     func fetchMoreHome() {
         let request = Timelines.home(range: .max(id: StoreStruct.statusesHome.last?.id ?? "", limit: nil))
-        DispatchQueue.global(qos: .userInitiated).async {
+//        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     
@@ -4965,14 +4965,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         
                     }
                 }
-            }
+//            }
         }
     }
     
     var lastThing2 = ""
     func fetchMoreLocal() {
         let request = Timelines.public(local: true, range: .max(id: StoreStruct.statusesLocal.last?.id ?? "", limit: nil))
-        DispatchQueue.global(qos: .userInitiated).async {
+//        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     
@@ -4993,14 +4993,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                     }
                 }
-            }
+//            }
         }
     }
     
     var lastThing3 = ""
     func fetchMoreFederated() {
         let request = Timelines.public(local: false, range: .max(id: StoreStruct.statusesFederated.last?.id ?? "", limit: nil))
-        DispatchQueue.global(qos: .userInitiated).async {
+//        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     
@@ -5021,7 +5021,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                     }
                 }
-            }
+//            }
         }
     }
     
@@ -5029,7 +5029,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         
         if self.currentIndex == 0 {
             let request = Timelines.home(range: .since(id: StoreStruct.statusesHome.first?.id ?? "", limit: 5000))
-            DispatchQueue.global(qos: .userInitiated).async {
+//            DispatchQueue.global(qos: .userInitiated).async {
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         
@@ -5103,10 +5103,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                     }
                 }
-            }
+//            }
         } else if self.currentIndex == 1 {
             let request = Timelines.public(local: true, range: .since(id: StoreStruct.statusesLocal.first?.id ?? "", limit: 5000))
-            DispatchQueue.global(qos: .userInitiated).async {
+//            DispatchQueue.global(qos: .userInitiated).async {
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         
@@ -5183,10 +5183,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                     }
                 }
-            }
+//            }
         } else {
             let request = Timelines.public(local: false, range: .since(id: StoreStruct.statusesFederated.first?.id ?? "", limit: 5000))
-            DispatchQueue.global(qos: .userInitiated).async {
+//            DispatchQueue.global(qos: .userInitiated).async {
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         
@@ -5262,7 +5262,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                     }
                 }
-            }
+//            }
         }
         
         

@@ -22,7 +22,7 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
     var doOnce = false
     var doOnce2 = false
     var newLast: RequestRange = .max(id: "", limit: nil)
-    
+    var newLast2: RequestRange = .max(id: "", limit: nil)
     
     @objc func load() {
         DispatchQueue.main.async {
@@ -216,9 +216,12 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
     
     var lastThing = ""
     func fetchFollows() {
+        if self.newLast == RequestRange.max(id: "0", limit: nil) {
+            return
+        }
         let request = Accounts.following(id: self.profileStatus, range: self.newLast)
         StoreStruct.client.run(request) { (statuses) in
-            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "", limit: nil) as! RequestRange
+            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty {} else {
@@ -235,12 +238,12 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
     
     var lastThing2 = ""
     func fetchFollowers() {
-        if self.newLast == RequestRange.max(id: "0", limit: nil) {
+        if self.newLast2 == RequestRange.max(id: "0", limit: nil) {
             return
         }
-        let request = Accounts.followers(id: self.profileStatus, range: self.newLast)
+        let request = Accounts.followers(id: self.profileStatus, range: self.newLast2)
         StoreStruct.client.run(request) { (statuses) in
-            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
+            self.newLast2 = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty {} else {
