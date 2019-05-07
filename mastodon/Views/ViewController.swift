@@ -191,7 +191,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     func delay(_ delay:Double, closure:@escaping ()->()) {
         let when = DispatchTime.now() + delay
-        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: when, execute: closure)
     }
     
     func setupSiri() {
@@ -2737,13 +2737,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     StoreStruct.client.run(request9) { (statuses) in
                         if let stat = (statuses.value) {
                             StoreStruct.profileStatuses0 = stat
-                        }
-                    }
-                    
-                    let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .default)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            StoreStruct.profileStatusesHasImage0 = stat
+                            
+                            let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .default)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    StoreStruct.profileStatusesHasImage0 = stat
+                                }
+                            }
                         }
                     }
                     
@@ -2754,13 +2754,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             StoreStruct.client.run(request9) { (statuses) in
                 if let stat = (statuses.value) {
                     StoreStruct.profileStatuses0 = stat
-                }
-            }
-            
-            let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .default)
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
-                    StoreStruct.profileStatusesHasImage0 = stat
+                    
+                    let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .default)
+                    StoreStruct.client.run(request) { (statuses) in
+                        if let stat = (statuses.value) {
+                            StoreStruct.profileStatusesHasImage0 = stat
+                        }
+                    }
                 }
             }
         }
