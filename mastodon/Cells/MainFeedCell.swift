@@ -14,7 +14,7 @@ class MainFeedCell: SwipeTableViewCell {
     
     var profileImageView = UIButton()
     var profileImageView2 = UIButton()
-    var warningB = UIButton()
+    var warningB = MultiLineButton()
     var userName = UILabel()
     var userTag = UIButton()
     var date = UILabel()

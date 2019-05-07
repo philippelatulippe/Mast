@@ -22,7 +22,7 @@ class NotificationCellImage: SwipeTableViewCell {
     var mainImageViewBG = UIView()
     var moreImage = UIImageView()
     var imageCountTag = UIButton()
-    var warningB = UIButton()
+    var warningB = MultiLineButton()
     
     var rep1 = UIButton()
     var like1 = UIButton()

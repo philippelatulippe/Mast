@@ -19,7 +19,7 @@ class NotificationCell: SwipeTableViewCell {
     var date = UILabel()
     var toot = ActiveLabel()
     var moreImage = UIImageView()
-    var warningB = UIButton()
+    var warningB = MultiLineButton()
     
     var rep1 = UIButton()
     var like1 = UIButton()
@@ -474,5 +474,34 @@ class NotificationCell: SwipeTableViewCell {
             let selection = UISelectionFeedbackGenerator()
             selection.selectionChanged()
         }
+    }
+}
+
+class MultiLineButton: UIButton {
+    func setup() {
+        self.titleLabel?.numberOfLines = 0
+        self.titleLabel?.lineBreakMode = .byWordWrapping
+        self.setContentHuggingPriority(UILayoutPriority.defaultLow + 5, for: .vertical)
+        self.setContentHuggingPriority(UILayoutPriority.defaultLow + 5, for: .horizontal)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        let size = self.titleLabel!.intrinsicContentSize
+        return CGSize(width: size.width + 10, height: size.height + 10)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel?.preferredMaxLayoutWidth = self.titleLabel!.frame.size.width - 10
     }
 }

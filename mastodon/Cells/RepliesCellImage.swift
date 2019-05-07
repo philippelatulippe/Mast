@@ -26,12 +26,14 @@ class RepliesCellImage: SwipeTableViewCell {
     var smallImage2 = UIButton()
     var smallImage3 = UIButton()
     var smallImage4 = UIButton()
+    var warningB = MultiLineButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         profileImageView.backgroundColor = Colours.clear
         moreImage.backgroundColor = Colours.clear
+        warningB.backgroundColor = Colours.clear
         
 //        userName.adjustsFontForContentSizeCategory = true
 //        userTag.titleLabel?.adjustsFontForContentSizeCategory = true
@@ -46,6 +48,7 @@ class RepliesCellImage: SwipeTableViewCell {
         date.translatesAutoresizingMaskIntoConstraints = false
         toot.translatesAutoresizingMaskIntoConstraints = false
         moreImage.translatesAutoresizingMaskIntoConstraints = false
+        warningB.translatesAutoresizingMaskIntoConstraints = false
         
         if (UserDefaults.standard.object(forKey: "proCorner") == nil || UserDefaults.standard.object(forKey: "proCorner") as! Int == 0) {
             profileImageView.layer.cornerRadius = 20
@@ -109,6 +112,14 @@ class RepliesCellImage: SwipeTableViewCell {
         userName.numberOfLines = 0
         toot.numberOfLines = 0
         
+        warningB.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        warningB.titleLabel?.textAlignment = .center
+        warningB.setTitleColor(Colours.black.withAlphaComponent(0.4), for: .normal)
+        warningB.layer.cornerRadius = 7
+        warningB.titleLabel?.font = UIFont.boldSystemFont(ofSize: Colours.fontSize3)
+        warningB.titleLabel?.numberOfLines = 0
+        warningB.layer.masksToBounds = true
+        
         userName.textColor = Colours.black
         userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
         date.textColor = Colours.grayDark.withAlphaComponent(0.38)
@@ -136,6 +147,7 @@ class RepliesCellImage: SwipeTableViewCell {
         contentView.addSubview(date)
         contentView.addSubview(toot)
         contentView.addSubview(moreImage)
+        contentView.addSubview(warningB)
         
         imageCountTag.backgroundColor = Colours.clear
         imageCountTag.translatesAutoresizingMaskIntoConstraints = false
@@ -158,6 +170,7 @@ class RepliesCellImage: SwipeTableViewCell {
             "episodes" : toot,
             "more" : moreImage,
             "countTag" : imageCountTag,
+            "warning" : warningB,
             ]
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-73-[image(40)]-13-[name]-2-[artist]-(>=5)-[more(16)]-4-[date]-20-|", options: [], metrics: nil, views: viewsDict))
@@ -174,6 +187,9 @@ class RepliesCellImage: SwipeTableViewCell {
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-5-[countTag(30)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-5-[countTag(22)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
+        
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-124-[warning]-17-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[warning]-16-|", options: [], metrics: nil, views: viewsDict))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -185,6 +201,7 @@ class RepliesCellImage: SwipeTableViewCell {
         toot.mentionColor = Colours.tabSelected
         toot.hashtagColor = Colours.tabSelected
         toot.URLColor = Colours.tabSelected
+        warningB.backgroundColor = Colours.clear
         
         userName.text = status.account.displayName
         if userName.text == "" {
@@ -331,6 +348,39 @@ class RepliesCellImage: SwipeTableViewCell {
             imageCountTag.alpha = 0
         }
         
+        if (UserDefaults.standard.object(forKey: "senseTog") == nil) || (UserDefaults.standard.object(forKey: "senseTog") as! Int == 0) {
+            
+            if status.reblog?.sensitive ?? false || status.sensitive ?? false {
+                warningB.backgroundColor = Colours.tabUnselected
+                
+                let z = status.reblog?.spoilerText ?? status.spoilerText
+                var zz = "Sensitive Content"
+                if z == "" {} else {
+                    zz = z
+                }
+                warningB.setTitle("\(zz)", for: .normal)
+                warningB.setTitleColor(Colours.grayDark.withAlphaComponent(0.6), for: .normal)
+                warningB.addTarget(self, action: #selector(self.didTouchWarning), for: .touchUpInside)
+                warningB.alpha = 1
+            } else {
+                warningB.backgroundColor = Colours.clear
+                warningB.alpha = 0
+            }
+            
+        } else {
+            warningB.backgroundColor = Colours.clear
+            warningB.alpha = 0
+        }
+        
+    }
+    
+    @objc func didTouchWarning() {
+        warningB.backgroundColor = Colours.clear
+        warningB.alpha = 0
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let selection = UISelectionFeedbackGenerator()
+            selection.selectionChanged()
+        }
     }
     
 }
