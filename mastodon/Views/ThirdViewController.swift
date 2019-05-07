@@ -2019,8 +2019,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
                                     self.isShowingBoosts = false
-                                    print("disabled")
-                                     
                                 }
                             }
                         } else {
@@ -2040,8 +2038,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             StoreStruct.client.run(request) { (statuses) in
                                 if let stat = (statuses.value) {
                                     self.isShowingBoosts = true
-                                    print("enabled")
-                                     
                                 }
                             }
                         }

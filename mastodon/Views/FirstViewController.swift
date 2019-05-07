@@ -176,20 +176,20 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     }
     
     @objc func search() {
-            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-            switch (deviceIdiom) {
-            case .phone :
-        let controller = DetailViewController()
-        controller.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
-        self.navigationController?.pushViewController(controller, animated: true)
-            case .pad:
-                let controller = DetailViewController()
-                controller.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
-                self.splitViewController?.showDetailViewController(controller, sender: self)
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
-            default:
-                print("nothing")
-            }
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone :
+            let controller = DetailViewController()
+            controller.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
+            self.navigationController?.pushViewController(controller, animated: true)
+        case .pad:
+            let controller = DetailViewController()
+            controller.mainStatus.append(StoreStruct.statusSearch[StoreStruct.searchIndex])
+            self.splitViewController?.showDetailViewController(controller, sender: self)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "splitload"), object: nil)
+        default:
+            print("nothing")
+        }
     }
     
     @objc func searchUser() {
@@ -651,13 +651,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             if (UserDefaults.standard.object(forKey: "shakegest") == nil) || (UserDefaults.standard.object(forKey: "shakegest") as! Int == 0) {
-            if self.currentIndex == 0 {
-                self.tableView.reloadData()
-            } else if self.currentIndex == 1 {
-                self.tableViewL.reloadData()
-            } else {
-                self.tableViewF.reloadData()
-            }
+                if self.currentIndex == 0 {
+                    self.tableView.reloadData()
+                } else if self.currentIndex == 1 {
+                    self.tableViewL.reloadData()
+                } else {
+                    self.tableViewF.reloadData()
+                }
             } else if (UserDefaults.standard.object(forKey: "shakegest") as! Int == 1) {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
             } else {
@@ -785,7 +785,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.currentSegIndex), name: NSNotification.Name(rawValue: "setCurrentSegmentIndex"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.savedComposePresent), name: NSNotification.Name(rawValue: "savedComposePresent"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToID), name: NSNotification.Name(rawValue: "gotoid"), object: nil)
@@ -913,7 +913,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             if UIApplication.shared.isSplitOrSlideOver {
                 segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(30), width: CGFloat(200), height: CGFloat(40)))
             } else {
-            segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(newoff), width: CGFloat(200), height: CGFloat(40)))
+                segmentedControl = SJFluidSegmentedControl(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 100), y: CGFloat(newoff), width: CGFloat(200), height: CGFloat(40)))
             }
             segmentedControl.dataSource = self
             if (UserDefaults.standard.object(forKey: "segstyle") == nil) || (UserDefaults.standard.object(forKey: "segstyle") as! Int == 0) {
@@ -1237,7 +1237,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
             
             if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
-            
+                
                 self.tableView.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
@@ -1255,9 +1255,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 self.tableViewF.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
                 self.tableViewF.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
                 self.tableViewF.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
-        
+                
             } else {
-            
+                
                 self.tableView.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
@@ -1275,7 +1275,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 self.tableViewF.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
                 self.tableViewF.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
                 self.tableViewF.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
-        
+                
             }
             
             
@@ -1528,7 +1528,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         let request0 = Notifications.all(range: .min(id: StoreStruct.notifications.first?.id ?? "", limit: nil))
         //DispatchQueue.global(qos: .userInitiated).async {
         StoreStruct.client.run(request0) { (statuses) in
-             
+            
             if let stat = (statuses.value) {
                 StoreStruct.notifications = stat + StoreStruct.notifications
                 
@@ -1602,331 +1602,328 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     func streamDataHome() {
         if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
-        if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
-            self.hStream = true
-            
-            var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
-            sss = sss.replacingOccurrences(of: "http", with: "wss")
-            socket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=user")!)
-            socket.onConnect = {
-                print("websocket is connected")
-            }
-            //websocketDidDisconnect
-            socket.onDisconnect = { (error: Error?) in
-                print("websocket is disconnected")
-            }
-            //websocketDidReceiveMessage
-            socket.onText = { (text: String) in
+            if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
+                self.hStream = true
                 
-                let data0 = text.data(using: .utf8)!
-                do {
-                    let jsonResult = try JSONSerialization.jsonObject(with: data0, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
-                    let re = jsonResult?["payload"]
-                    let te = SSEvent.init(type: "update", data: re as? String ?? "")
-                    let data = te.data.data(using: .utf8)!
-                    guard let model = try? Status.decode(data: data) else {
-                        return
-                    }
-                    self.hMod.append(model)
-                    if self.currentIndex == 0 {
-                        DispatchQueue.main.async {
-                            //self.tableView.reloadData()
-                            
-                            if self.hMod.count == 1 {
-                                return
-                            }
-                            
-                            if self.tableView.contentOffset.y == 0 {
-                                self.hMod = self.hMod.reversed()
-                                if let st = self.hMod.last {
-                                    if StoreStruct.statusesHome.contains(st) {
-                                        StoreStruct.statusesHome = self.hMod + StoreStruct.statusesHome
-                                        StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
+                sss = sss.replacingOccurrences(of: "http", with: "wss")
+                socket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=user")!)
+                socket.onConnect = {
+                    print("websocket is connected")
+                }
+                //websocketDidDisconnect
+                socket.onDisconnect = { (error: Error?) in
+                    print("websocket is disconnected")
+                }
+                //websocketDidReceiveMessage
+                socket.onText = { (text: String) in
+                    
+                    let data0 = text.data(using: .utf8)!
+                    do {
+                        let jsonResult = try JSONSerialization.jsonObject(with: data0, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
+                        let re = jsonResult?["payload"]
+                        let te = SSEvent.init(type: "update", data: re as? String ?? "")
+                        let data = te.data.data(using: .utf8)!
+                        guard let model = try? Status.decode(data: data) else {
+                            return
+                        }
+                        self.hMod.append(model)
+                        if self.currentIndex == 0 {
+                            DispatchQueue.main.async {
+                                //self.tableView.reloadData()
+                                
+                                if self.hMod.count == 1 {
+                                    return
+                                }
+                                
+                                if self.tableView.contentOffset.y == 0 {
+                                    self.hMod = self.hMod.reversed()
+                                    if let st = self.hMod.last {
+                                        if StoreStruct.statusesHome.contains(st) {
+                                            StoreStruct.statusesHome = self.hMod + StoreStruct.statusesHome
+                                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                                        } else {
+                                            StoreStruct.gapLastHomeID = self.hMod.last?.id ?? ""
+                                            let z = st
+                                            z.id = "loadmorehere"
+                                            StoreStruct.gapLastHomeStat = z
+                                            StoreStruct.statusesHome = self.hMod + StoreStruct.statusesHome
+                                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                                        }
                                     } else {
-                                        StoreStruct.gapLastHomeID = self.hMod.last?.id ?? ""
-                                        let z = st
-                                        z.id = "loadmorehere"
-                                        StoreStruct.gapLastHomeStat = z
                                         StoreStruct.statusesHome = self.hMod + StoreStruct.statusesHome
                                         StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                                     }
-                                } else {
-                                    StoreStruct.statusesHome = self.hMod + StoreStruct.statusesHome
-                                    StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                                    
+                                    if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
+                                        self.newUpdatesB1.setTitle("\(self.hMod.count)  ", for: .normal)
+                                        self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                                        //                                self.newUpdatesB1.transform = CGAffineTransform(translationX: 120, y: 0)
+                                        springWithDelay(duration: 0.5, delay: 0, animations: {
+                                            self.newUpdatesB1.alpha = 1
+                                            self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                            //                                    self.newUpdatesB1.transform = CGAffineTransform(translationX: 0, y: 0)
+                                        })
+                                        self.countcount1 = self.hMod.count
+                                        
+                                        UIView.setAnimationsEnabled(false)
+                                        self.tableView.reloadData()
+                                        //                                    self.refreshControl.endRefreshing()
+                                        self.tableView.scrollToRow(at: IndexPath(row: self.hMod.count - 1, section: 0), at: .top, animated: false)
+                                        UIView.setAnimationsEnabled(true)
+                                    } else {
+                                        
+                                        self.tableView.reloadData()
+                                        //                                    self.refreshControl.endRefreshing()
+                                        
+                                    }
+                                    
+                                    do {
+                                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                    } catch {
+                                        print("Couldn't save")
+                                    }
+                                    
+                                    self.hMod = []
                                 }
                                 
-                                if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                                    self.newUpdatesB1.setTitle("\(self.hMod.count)  ", for: .normal)
-                                    self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                    //                                self.newUpdatesB1.transform = CGAffineTransform(translationX: 120, y: 0)
-                                    springWithDelay(duration: 0.5, delay: 0, animations: {
-                                        self.newUpdatesB1.alpha = 1
-                                        self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                        //                                    self.newUpdatesB1.transform = CGAffineTransform(translationX: 0, y: 0)
-                                    })
-                                    self.countcount1 = self.hMod.count
-                                    
-                                    UIView.setAnimationsEnabled(false)
-                                    self.tableView.reloadData()
-//                                    self.refreshControl.endRefreshing()
-                                    self.tableView.scrollToRow(at: IndexPath(row: self.hMod.count - 1, section: 0), at: .top, animated: false)
-                                    UIView.setAnimationsEnabled(true)
-                                } else {
-                                    
-                                    self.tableView.reloadData()
-//                                    self.refreshControl.endRefreshing()
-                                    
-                                }
-                                
-                                do {
-                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                                } catch {
-                                    print("Couldn't save")
-                                }
-                                
-                                self.hMod = []
                             }
-                            
                         }
+                    } catch {
+                        return
                     }
-                } catch {
-                    print("failfail")
-                    return
                 }
+                //websocketDidReceiveData
+                socket.onData = { (data: Data) in
+                    print("got some data: \(data.count)")
+                }
+                socket.connect()
             }
-            //websocketDidReceiveData
-            socket.onData = { (data: Data) in
-                print("got some data: \(data.count)")
-            }
-            socket.connect()
-        }
         }
     }
     
     func streamDataLocal() {
         if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
-        if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
-            self.lStream = true
-            
-            var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
-            sss = sss.replacingOccurrences(of: "http", with: "wss")
-            lsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=public/local")!)
-            lsocket.onConnect = {
-                print("websocket is connected")
-            }
-            //websocketDidDisconnect
-            lsocket.onDisconnect = { (error: Error?) in
-                print("websocket is disconnected")
-            }
-            //websocketDidReceiveMessage
-            lsocket.onText = { (text: String) in
+            if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
+                self.lStream = true
                 
-                let data0 = text.data(using: .utf8)!
-                do {
-                    let jsonResult = try JSONSerialization.jsonObject(with: data0, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
-                    let re = jsonResult?["payload"]
-                    let te = SSEvent.init(type: "update", data: re as? String ?? "")
-                    let data = te.data.data(using: .utf8)!
-                    guard let model = try? Status.decode(data: data) else {
-                        return
-                    }
-                    self.lMod.append(model)
-                    if self.currentIndex == 1 {
-                        DispatchQueue.main.async {
-                            //self.tableView.reloadData()
-                            
-                            if self.lMod.count == 1 {
-                                return
-                            }
-                            
-                            if self.tableViewL.contentOffset.y == 0 {
-                                self.lMod = self.lMod.reversed()
-                                if let st = self.lMod.last {
-                                    if StoreStruct.statusesLocal.contains(st) {
-                                        StoreStruct.statusesLocal = self.lMod + StoreStruct.statusesLocal
-                                        StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
+                sss = sss.replacingOccurrences(of: "http", with: "wss")
+                lsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=public/local")!)
+                lsocket.onConnect = {
+                    print("websocket is connected")
+                }
+                //websocketDidDisconnect
+                lsocket.onDisconnect = { (error: Error?) in
+                    print("websocket is disconnected")
+                }
+                //websocketDidReceiveMessage
+                lsocket.onText = { (text: String) in
+                    
+                    let data0 = text.data(using: .utf8)!
+                    do {
+                        let jsonResult = try JSONSerialization.jsonObject(with: data0, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
+                        let re = jsonResult?["payload"]
+                        let te = SSEvent.init(type: "update", data: re as? String ?? "")
+                        let data = te.data.data(using: .utf8)!
+                        guard let model = try? Status.decode(data: data) else {
+                            return
+                        }
+                        self.lMod.append(model)
+                        if self.currentIndex == 1 {
+                            DispatchQueue.main.async {
+                                //self.tableView.reloadData()
+                                
+                                if self.lMod.count == 1 {
+                                    return
+                                }
+                                
+                                if self.tableViewL.contentOffset.y == 0 {
+                                    self.lMod = self.lMod.reversed()
+                                    if let st = self.lMod.last {
+                                        if StoreStruct.statusesLocal.contains(st) {
+                                            StoreStruct.statusesLocal = self.lMod + StoreStruct.statusesLocal
+                                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                                        } else {
+                                            StoreStruct.gapLastLocalID = self.lMod.last?.id ?? ""
+                                            let z = st
+                                            z.id = "loadmorehere"
+                                            StoreStruct.gapLastLocalStat = z
+                                            StoreStruct.statusesLocal = self.lMod + StoreStruct.statusesLocal
+                                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                                        }
                                     } else {
-                                        StoreStruct.gapLastLocalID = self.lMod.last?.id ?? ""
-                                        let z = st
-                                        z.id = "loadmorehere"
-                                        StoreStruct.gapLastLocalStat = z
                                         StoreStruct.statusesLocal = self.lMod + StoreStruct.statusesLocal
                                         StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                                     }
-                                } else {
-                                    StoreStruct.statusesLocal = self.lMod + StoreStruct.statusesLocal
-                                    StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                                    
+                                    if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
+                                        self.newUpdatesB2.setTitle("\(self.lMod.count)  ", for: .normal)
+                                        //                                self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
+                                        self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                                        springWithDelay(duration: 0.5, delay: 0, animations: {
+                                            self.newUpdatesB2.alpha = 1
+                                            self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                            //                                    self.newUpdatesB2.transform = CGAffineTransform(translationX: 0, y: 0)
+                                        })
+                                        self.countcount2 = self.lMod.count
+                                        
+                                        UIView.setAnimationsEnabled(false)
+                                        self.tableViewL.reloadData()
+                                        //                                    self.refreshControl.endRefreshing()
+                                        self.tableViewL.scrollToRow(at: IndexPath(row: self.lMod.count - 1, section: 0), at: .top, animated: false)
+                                        UIView.setAnimationsEnabled(true)
+                                    } else {
+                                        
+                                        self.tableViewL.reloadData()
+                                        //                                    self.refreshControl.endRefreshing()
+                                        
+                                    }
+                                    
+                                    do {
+                                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                    } catch {
+                                        print("Couldn't save")
+                                    }
+                                    
+                                    self.lMod = []
                                 }
                                 
-                                if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                                    self.newUpdatesB2.setTitle("\(self.lMod.count)  ", for: .normal)
-                                    //                                self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
-                                    self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                    springWithDelay(duration: 0.5, delay: 0, animations: {
-                                        self.newUpdatesB2.alpha = 1
-                                        self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                        //                                    self.newUpdatesB2.transform = CGAffineTransform(translationX: 0, y: 0)
-                                    })
-                                    self.countcount2 = self.lMod.count
-                                    
-                                    UIView.setAnimationsEnabled(false)
-                                    self.tableViewL.reloadData()
-//                                    self.refreshControl.endRefreshing()
-                                    self.tableViewL.scrollToRow(at: IndexPath(row: self.lMod.count - 1, section: 0), at: .top, animated: false)
-                                    UIView.setAnimationsEnabled(true)
-                                } else {
-                                    
-                                    self.tableViewL.reloadData()
-//                                    self.refreshControl.endRefreshing()
-                                    
-                                }
-                                
-                                do {
-                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                                } catch {
-                                    print("Couldn't save")
-                                }
-                                
-                                self.lMod = []
                             }
-                            
                         }
+                    } catch {
+                        return
                     }
-                } catch {
-                    print("failfail")
-                    return
                 }
+                //websocketDidReceiveData
+                lsocket.onData = { (data: Data) in
+                    print("got some data: \(data.count)")
+                }
+                lsocket.connect()
             }
-            //websocketDidReceiveData
-            lsocket.onData = { (data: Data) in
-                print("got some data: \(data.count)")
-            }
-            lsocket.connect()
-        }
         }
     }
     
     func streamDataFed() {
         if UserDefaults.standard.object(forKey: "accessToken") == nil {} else {
-        if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
-            self.fStream = true
-            
-            var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
-            sss = sss.replacingOccurrences(of: "http", with: "wss")
-            fsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=public")!)
-            fsocket.onConnect = {
-                print("websocket is connected")
-            }
-            //websocketDidDisconnect
-            fsocket.onDisconnect = { (error: Error?) in
-                print("websocket is disconnected")
-            }
-            //websocketDidReceiveMessage
-            fsocket.onText = { (text: String) in
+            if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
+                self.fStream = true
                 
-                let data0 = text.data(using: .utf8)!
-                do {
-                    let jsonResult = try JSONSerialization.jsonObject(with: data0, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
-                    let re = jsonResult?["payload"]
-                    let te = SSEvent.init(type: "update", data: re as? String ?? "")
-                    let data = te.data.data(using: .utf8)!
-                    guard let model = try? Status.decode(data: data) else {
-                        return
-                    }
+                var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
+                sss = sss.replacingOccurrences(of: "http", with: "wss")
+                fsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=public")!)
+                fsocket.onConnect = {
+                    print("websocket is connected")
+                }
+                //websocketDidDisconnect
+                fsocket.onDisconnect = { (error: Error?) in
+                    print("websocket is disconnected")
+                }
+                //websocketDidReceiveMessage
+                fsocket.onText = { (text: String) in
                     
-                    self.fMod.append(model)
-                    
-                    if self.currentIndex == 2 {
+                    let data0 = text.data(using: .utf8)!
+                    do {
+                        let jsonResult = try JSONSerialization.jsonObject(with: data0, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
+                        let re = jsonResult?["payload"]
+                        let te = SSEvent.init(type: "update", data: re as? String ?? "")
+                        let data = te.data.data(using: .utf8)!
+                        guard let model = try? Status.decode(data: data) else {
+                            return
+                        }
                         
+                        self.fMod.append(model)
                         
-                        DispatchQueue.main.async {
+                        if self.currentIndex == 2 {
                             
-                            if self.fMod.count == 1 {
-                                return
-                            }
                             
-                            if self.tableViewF.contentOffset.y == 0 {
-                                self.fMod = self.fMod.reversed()
-                                if let st = self.fMod.last {
-                                    if StoreStruct.statusesFederated.contains(st) {
-                                        StoreStruct.statusesFederated = self.fMod + StoreStruct.statusesFederated
-                                        StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                            DispatchQueue.main.async {
+                                
+                                if self.fMod.count == 1 {
+                                    return
+                                }
+                                
+                                if self.tableViewF.contentOffset.y == 0 {
+                                    self.fMod = self.fMod.reversed()
+                                    if let st = self.fMod.last {
+                                        if StoreStruct.statusesFederated.contains(st) {
+                                            StoreStruct.statusesFederated = self.fMod + StoreStruct.statusesFederated
+                                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                                        } else {
+                                            StoreStruct.gapLastFedID = self.fMod.last?.id ?? ""
+                                            let z = st
+                                            z.id = "loadmorehere"
+                                            StoreStruct.gapLastFedStat = z
+                                            StoreStruct.statusesFederated = self.fMod + StoreStruct.statusesFederated
+                                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                                        }
                                     } else {
-                                        StoreStruct.gapLastFedID = self.fMod.last?.id ?? ""
-                                        let z = st
-                                        z.id = "loadmorehere"
-                                        StoreStruct.gapLastFedStat = z
                                         StoreStruct.statusesFederated = self.fMod + StoreStruct.statusesFederated
                                         StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                                     }
-                                } else {
-                                    StoreStruct.statusesFederated = self.fMod + StoreStruct.statusesFederated
-                                    StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                                    
+                                    
+                                    if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
+                                        
+                                        self.newUpdatesB3.setTitle("\(self.fMod.count)  ", for: .normal)
+                                        //                                            self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
+                                        self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                                        springWithDelay(duration: 0.5, delay: 0, animations: {
+                                            self.newUpdatesB3.alpha = 1
+                                            self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                            //                                                self.newUpdatesB3.transform = CGAffineTransform(translationX: 0, y: 0)
+                                        })
+                                        self.countcount3 = self.fMod.count
+                                        
+                                        UIView.setAnimationsEnabled(false)
+                                        self.tableViewF.reloadData()
+                                        //                                    self.refreshControl.endRefreshing()
+                                        self.tableViewF.scrollToRow(at: IndexPath(row: self.fMod.count - 1, section: 0), at: .top, animated: false)
+                                        UIView.setAnimationsEnabled(true)
+                                        
+                                    } else {
+                                        
+                                        self.tableViewF.reloadData()
+                                        //                                    self.refreshControl.endRefreshing()
+                                        
+                                    }
+                                    
+                                    
+                                    do {
+                                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                    } catch {
+                                        print("Couldn't save")
+                                    }
+                                    
+                                    self.fMod = []
                                 }
                                 
                                 
-                                if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                                    
-                                    self.newUpdatesB3.setTitle("\(self.fMod.count)  ", for: .normal)
-                                    //                                            self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
-                                    self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                    springWithDelay(duration: 0.5, delay: 0, animations: {
-                                        self.newUpdatesB3.alpha = 1
-                                        self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                        //                                                self.newUpdatesB3.transform = CGAffineTransform(translationX: 0, y: 0)
-                                    })
-                                    self.countcount3 = self.fMod.count
-                                    
-                                    UIView.setAnimationsEnabled(false)
-                                    self.tableViewF.reloadData()
-//                                    self.refreshControl.endRefreshing()
-                                    self.tableViewF.scrollToRow(at: IndexPath(row: self.fMod.count - 1, section: 0), at: .top, animated: false)
-                                    UIView.setAnimationsEnabled(true)
-                                    
-                                } else {
-                                    
-                                    self.tableViewF.reloadData()
-//                                    self.refreshControl.endRefreshing()
-                                    
-                                }
-                                
-                                
-                                do {
-                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                                } catch {
-                                    print("Couldn't save")
-                                }
-                                
-                                self.fMod = []
                             }
-                            
-                            
                         }
+                    } catch {
+                        return
                     }
-                } catch {
-                    print("failfail")
-                    return
+                    
                 }
-                
+                //websocketDidReceiveData
+                fsocket.onData = { (data: Data) in
+                    print("got some data: \(data.count)")
+                }
+                fsocket.connect()
             }
-            //websocketDidReceiveData
-            fsocket.onData = { (data: Data) in
-                print("got some data: \(data.count)")
-            }
-            fsocket.connect()
-        }
         }
     }
     
-//    func firstRowHeight() -> CGFloat {
-//        return tableView(tableView, heightForRowAt: IndexPath(row: 0, section: 0))
-//    }
+    //    func firstRowHeight() -> CGFloat {
+    //        return tableView(tableView, heightForRowAt: IndexPath(row: 0, section: 0))
+    //    }
     
     func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
         return 3
@@ -1960,10 +1957,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     //backh2
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
         
-//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//            let selection = UISelectionFeedbackGenerator()
-//            selection.selectionChanged()
-//        }
+        //        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+        //            let selection = UISelectionFeedbackGenerator()
+        //            selection.selectionChanged()
+        //        }
         
         if fromIndex == toIndex {
             return
@@ -1983,18 +1980,18 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 crownControl3.hideCrown()
             }
             
-//            if self.countcount1 == 0 {
-//                self.newUpdatesB1.alpha = 0
-//                self.newUpdatesB2.alpha = 0
-//                self.newUpdatesB3.alpha = 0
-//            } else {
-//                self.newUpdatesB1.alpha = 1
-//                self.newUpdatesB2.alpha = 0
-//                self.newUpdatesB3.alpha = 0
-//            }
+            //            if self.countcount1 == 0 {
+            //                self.newUpdatesB1.alpha = 0
+            //                self.newUpdatesB2.alpha = 0
+            //                self.newUpdatesB3.alpha = 0
+            //            } else {
+            //                self.newUpdatesB1.alpha = 1
+            //                self.newUpdatesB2.alpha = 0
+            //                self.newUpdatesB3.alpha = 0
+            //            }
             
             self.currentIndex = 0
-//            self.tableView.reloadData()
+            //            self.tableView.reloadData()
             self.tableView.alpha = 1
             self.tableViewL.alpha = 0
             self.tableViewF.alpha = 0
@@ -2015,15 +2012,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 crownControl3.hideCrown()
             }
             
-//            if self.countcount2 == 0 {
-//                self.newUpdatesB1.alpha = 0
-//                self.newUpdatesB2.alpha = 0
-//                self.newUpdatesB3.alpha = 0
-//            } else {
-//                self.newUpdatesB1.alpha = 0
-//                self.newUpdatesB2.alpha = 1
-//                self.newUpdatesB3.alpha = 0
-//            }
+            //            if self.countcount2 == 0 {
+            //                self.newUpdatesB1.alpha = 0
+            //                self.newUpdatesB2.alpha = 0
+            //                self.newUpdatesB3.alpha = 0
+            //            } else {
+            //                self.newUpdatesB1.alpha = 0
+            //                self.newUpdatesB2.alpha = 1
+            //                self.newUpdatesB3.alpha = 0
+            //            }
             
             self.currentIndex = 1
             self.tableView.alpha = 0
@@ -2044,7 +2041,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 }
             } else {
                 //bbbhere
-//                self.tableViewL.reloadData()
+                //                self.tableViewL.reloadData()
             }
             
             // stream
@@ -2062,15 +2059,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 crownControl3.showCrown()
             }
             
-//            if self.countcount3 == 0 {
-//                self.newUpdatesB1.alpha = 0
-//                self.newUpdatesB2.alpha = 0
-//                self.newUpdatesB3.alpha = 0
-//            } else {
-//                self.newUpdatesB1.alpha = 0
-//                self.newUpdatesB2.alpha = 0
-//                self.newUpdatesB3.alpha = 1
-//            }
+            //            if self.countcount3 == 0 {
+            //                self.newUpdatesB1.alpha = 0
+            //                self.newUpdatesB2.alpha = 0
+            //                self.newUpdatesB3.alpha = 0
+            //            } else {
+            //                self.newUpdatesB1.alpha = 0
+            //                self.newUpdatesB2.alpha = 0
+            //                self.newUpdatesB3.alpha = 1
+            //            }
             
             self.currentIndex = 2
             self.tableView.alpha = 0
@@ -2091,7 +2088,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 }
             } else {
                 ///bbhere
-//                self.tableViewF.reloadData()
+                //                self.tableViewF.reloadData()
             }
             // stream
             if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
@@ -2116,9 +2113,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
+    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //        return UITableView.automaticDimension
+    //    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if tableView == self.tableViewL || tableView == self.tableViewF {
@@ -2183,7 +2180,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 let _ = StoreStruct.allCurrentFilters.map({
                     if $0.context.contains(Context2.home) {
                         if (StoreStruct.statusesHome[indexPath.row].reblog?.content ?? StoreStruct.statusesHome[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
-                                filtersAr.append(true)
+                            filtersAr.append(true)
                         } else {
                             filtersAr.append(false)
                         }
@@ -2234,238 +2231,238 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     
                 } else {
-                
-                
-                
-                if indexPath.row == StoreStruct.statusesHome.count - 14 {
-                    self.fetchMoreHome()
+                    
+                    
+                    
+                    if indexPath.row == StoreStruct.statusesHome.count - 14 {
+                        self.fetchMoreHome()
+                    }
+                    if StoreStruct.statusesHome[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.statusesHome[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
+                        cell.delegate = self
+                        cell.backgroundColor = Colours.white
+                        
+                        cell.rep1.tag = indexPath.row
+                        cell.like1.tag = indexPath.row
+                        cell.boost1.tag = indexPath.row
+                        cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                        cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                        cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                        
+                        cell.configure(StoreStruct.statusesHome[indexPath.row])
+                        cell.profileImageView.tag = indexPath.row
+                        cell.userTag.tag = indexPath.row
+                        cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userName.textColor = Colours.black
+                        cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                        cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
+                        cell.toot.textColor = Colours.black
+                        cell.toot.handleMentionTap { (string) in
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            var newString = string
+                            StoreStruct.statusesHome[indexPath.row].mentions.map({
+                                if $0.acct.contains(string) {
+                                    newString = $0.id
+                                }
+                            })
+                            
+                            let controller = ThirdViewController()
+                            if newString == StoreStruct.currentUser?.username {} else {
+                                controller.fromOtherUser = true
+                            }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                        }
+                        cell.toot.handleURLTap { (url) in
+                            // safari
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            if url.absoluteString.hasPrefix(".") {
+                                let z = URL(string: String(url.absoluteString.dropFirst()))!
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: z)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
+                                    }
+                                }
+                            } else {
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: url)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        cell.toot.handleHashtagTap { (string) in
+                            // hash
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            let controller = HashtagViewController()
+                            controller.currentTagTitle = string
+                            let request = Timelines.tag(string)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    controller.currentTags = stat
+                                    DispatchQueue.main.async {
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    }
+                                }
+                            }
+                        }
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! MainFeedCellImage
+                        cell.delegate = self
+                        cell.backgroundColor = Colours.white
+                        
+                        cell.rep1.tag = indexPath.row
+                        cell.like1.tag = indexPath.row
+                        cell.boost1.tag = indexPath.row
+                        cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                        cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                        cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                        
+                        cell.configure(StoreStruct.statusesHome[indexPath.row])
+                        cell.profileImageView.tag = indexPath.row
+                        cell.userTag.tag = indexPath.row
+                        cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        
+                        cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
+                        cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
+                        cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
+                        cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
+                        cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
+                        
+                        cell.mainImageView.tag = indexPath.row
+                        cell.smallImage1.tag = indexPath.row
+                        cell.smallImage2.tag = indexPath.row
+                        cell.smallImage3.tag = indexPath.row
+                        cell.smallImage4.tag = indexPath.row
+                        
+                        
+                        
+                        cell.userName.textColor = Colours.black
+                        cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                        cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
+                        cell.toot.textColor = Colours.black
+                        cell.mainImageView.backgroundColor = Colours.white
+                        cell.mainImageViewBG.backgroundColor = Colours.white
+                        
+                        cell.toot.handleMentionTap { (string) in
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            var newString = string
+                            StoreStruct.statusesHome[indexPath.row].mentions.map({
+                                if $0.acct.contains(string) {
+                                    newString = $0.id
+                                }
+                            })
+                            
+                            
+                            let controller = ThirdViewController()
+                            if newString == StoreStruct.currentUser?.username {} else {
+                                controller.fromOtherUser = true
+                            }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                        }
+                        cell.toot.handleURLTap { (url) in
+                            // safari
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            if url.absoluteString.hasPrefix(".") {
+                                let z = URL(string: String(url.absoluteString.dropFirst()))!
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: z)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
+                                    }
+                                }
+                            } else {
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: url)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        cell.toot.handleHashtagTap { (string) in
+                            // hash
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            let controller = HashtagViewController()
+                            controller.currentTagTitle = string
+                            let request = Timelines.tag(string)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    controller.currentTags = stat
+                                    DispatchQueue.main.async {
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    }
+                                }
+                            }
+                        }
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                    }
                 }
-                if StoreStruct.statusesHome[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.statusesHome[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
-                    cell.delegate = self
-                    cell.backgroundColor = Colours.white
-                    
-                    cell.rep1.tag = indexPath.row
-                    cell.like1.tag = indexPath.row
-                    cell.boost1.tag = indexPath.row
-                    cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-                    cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-                    cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
-                    
-                    cell.configure(StoreStruct.statusesHome[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.userTag.tag = indexPath.row
-                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                    cell.toot.textColor = Colours.black
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        var newString = string
-                        StoreStruct.statusesHome[indexPath.row].mentions.map({
-                            if $0.acct.contains(string) {
-                                newString = $0.id
-                            }
-                        })
-                        
-                        let controller = ThirdViewController()
-                        if newString == StoreStruct.currentUser?.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: z)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(z)
-                                    }
-                                }
-                            }
-                        } else {
-                            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: url)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(url)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! MainFeedCellImage
-                    cell.delegate = self
-                    cell.backgroundColor = Colours.white
-                    
-                    cell.rep1.tag = indexPath.row
-                    cell.like1.tag = indexPath.row
-                    cell.boost1.tag = indexPath.row
-                    cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-                    cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-                    cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
-                    
-                    cell.configure(StoreStruct.statusesHome[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.userTag.tag = indexPath.row
-                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    
-                    cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
-                    cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
-                    cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
-                    cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
-                    cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
-                    
-                    cell.mainImageView.tag = indexPath.row
-                    cell.smallImage1.tag = indexPath.row
-                    cell.smallImage2.tag = indexPath.row
-                    cell.smallImage3.tag = indexPath.row
-                    cell.smallImage4.tag = indexPath.row
-                    
-                    
-                    
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                    cell.toot.textColor = Colours.black
-                    cell.mainImageView.backgroundColor = Colours.white
-                    cell.mainImageViewBG.backgroundColor = Colours.white
-                    
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        var newString = string
-                        StoreStruct.statusesHome[indexPath.row].mentions.map({
-                            if $0.acct.contains(string) {
-                                newString = $0.id
-                            }
-                        })
-                        
-                        
-                        let controller = ThirdViewController()
-                        if newString == StoreStruct.currentUser?.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: z)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(z)
-                                    }
-                                }
-                            }
-                        } else {
-                            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: url)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(url)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                }
-            }
-            
+                
             }
             
             
@@ -2541,232 +2538,232 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     
                 } else {
-                
-                
-                
-                
-                if indexPath.row == StoreStruct.statusesLocal.count - 14 {
-                    self.fetchMoreLocal()
-                }
-                if StoreStruct.statusesLocal[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.statusesLocal[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "celll", for: indexPath) as! MainFeedCell
-                    cell.delegate = self
-                    cell.backgroundColor = Colours.white
                     
-                    cell.rep1.tag = indexPath.row
-                    cell.like1.tag = indexPath.row
-                    cell.boost1.tag = indexPath.row
-                    cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-                    cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-                    cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
                     
-                    cell.configure(StoreStruct.statusesLocal[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.userTag.tag = indexPath.row
-                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                    cell.toot.textColor = Colours.black
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        var newString = string
-                        StoreStruct.statusesLocal[indexPath.row].mentions.map({
-                            if $0.acct.contains(string) {
-                                newString = $0.id
-                            }
-                        })
-                        
-                        
-                        let controller = ThirdViewController()
-                        if newString == StoreStruct.currentUser?.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        }
+                    
+                    
+                    if indexPath.row == StoreStruct.statusesLocal.count - 14 {
+                        self.fetchMoreLocal()
                     }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
+                    if StoreStruct.statusesLocal[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.statusesLocal[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "celll", for: indexPath) as! MainFeedCell
+                        cell.delegate = self
+                        cell.backgroundColor = Colours.white
                         
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: z)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(z)
+                        cell.rep1.tag = indexPath.row
+                        cell.like1.tag = indexPath.row
+                        cell.boost1.tag = indexPath.row
+                        cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                        cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                        cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                        
+                        cell.configure(StoreStruct.statusesLocal[indexPath.row])
+                        cell.profileImageView.tag = indexPath.row
+                        cell.userTag.tag = indexPath.row
+                        cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userName.textColor = Colours.black
+                        cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                        cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
+                        cell.toot.textColor = Colours.black
+                        cell.toot.handleMentionTap { (string) in
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            var newString = string
+                            StoreStruct.statusesLocal[indexPath.row].mentions.map({
+                                if $0.acct.contains(string) {
+                                    newString = $0.id
+                                }
+                            })
+                            
+                            
+                            let controller = ThirdViewController()
+                            if newString == StoreStruct.currentUser?.username {} else {
+                                controller.fromOtherUser = true
+                            }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                        }
+                        cell.toot.handleURLTap { (url) in
+                            // safari
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            if url.absoluteString.hasPrefix(".") {
+                                let z = URL(string: String(url.absoluteString.dropFirst()))!
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: z)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
-                            }
-                        } else {
-                            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: url)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(url)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell2l", for: indexPath) as! MainFeedCellImage
-                    cell.delegate = self
-                    cell.backgroundColor = Colours.white
-                    
-                    cell.rep1.tag = indexPath.row
-                    cell.like1.tag = indexPath.row
-                    cell.boost1.tag = indexPath.row
-                    cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-                    cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-                    cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
-                    
-                    cell.configure(StoreStruct.statusesLocal[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.userTag.tag = indexPath.row
-                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
-                    cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
-                    cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
-                    cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
-                    cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
-                    cell.mainImageView.tag = indexPath.row
-                    cell.smallImage1.tag = indexPath.row
-                    cell.smallImage2.tag = indexPath.row
-                    cell.smallImage3.tag = indexPath.row
-                    cell.smallImage4.tag = indexPath.row
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                    cell.toot.textColor = Colours.black
-                    cell.mainImageView.backgroundColor = Colours.white
-                    cell.mainImageViewBG.backgroundColor = Colours.white
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        var newString = string
-                        StoreStruct.statusesLocal[indexPath.row].mentions.map({
-                            if $0.acct.contains(string) {
-                                newString = $0.id
-                            }
-                        })
-                        
-                        
-                        let controller = ThirdViewController()
-                        if newString == StoreStruct.currentUser?.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: z)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(z)
-                                    }
-                                }
-                            }
-                        } else {
-                            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: url)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(url)
+                            } else {
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: url)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
+                        cell.toot.handleHashtagTap { (string) in
+                            // hash
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            let controller = HashtagViewController()
+                            controller.currentTagTitle = string
+                            let request = Timelines.tag(string)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    controller.currentTags = stat
+                                    DispatchQueue.main.async {
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    }
                                 }
                             }
                         }
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell2l", for: indexPath) as! MainFeedCellImage
+                        cell.delegate = self
+                        cell.backgroundColor = Colours.white
+                        
+                        cell.rep1.tag = indexPath.row
+                        cell.like1.tag = indexPath.row
+                        cell.boost1.tag = indexPath.row
+                        cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                        cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                        cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                        
+                        cell.configure(StoreStruct.statusesLocal[indexPath.row])
+                        cell.profileImageView.tag = indexPath.row
+                        cell.userTag.tag = indexPath.row
+                        cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
+                        cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
+                        cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
+                        cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
+                        cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
+                        cell.mainImageView.tag = indexPath.row
+                        cell.smallImage1.tag = indexPath.row
+                        cell.smallImage2.tag = indexPath.row
+                        cell.smallImage3.tag = indexPath.row
+                        cell.smallImage4.tag = indexPath.row
+                        cell.userName.textColor = Colours.black
+                        cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                        cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
+                        cell.toot.textColor = Colours.black
+                        cell.mainImageView.backgroundColor = Colours.white
+                        cell.mainImageViewBG.backgroundColor = Colours.white
+                        cell.toot.handleMentionTap { (string) in
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            var newString = string
+                            StoreStruct.statusesLocal[indexPath.row].mentions.map({
+                                if $0.acct.contains(string) {
+                                    newString = $0.id
+                                }
+                            })
+                            
+                            
+                            let controller = ThirdViewController()
+                            if newString == StoreStruct.currentUser?.username {} else {
+                                controller.fromOtherUser = true
+                            }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                        }
+                        cell.toot.handleURLTap { (url) in
+                            // safari
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            if url.absoluteString.hasPrefix(".") {
+                                let z = URL(string: String(url.absoluteString.dropFirst()))!
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: z)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
+                                    }
+                                }
+                            } else {
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: url)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        cell.toot.handleHashtagTap { (string) in
+                            // hash
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            let controller = HashtagViewController()
+                            controller.currentTagTitle = string
+                            let request = Timelines.tag(string)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    controller.currentTags = stat
+                                    DispatchQueue.main.async {
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    }
+                                }
+                            }
+                        }
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
                     }
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                }
                 }
             }
         } else {
@@ -2839,230 +2836,230 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     
                 } else {
-                
-                
-                if indexPath.row == StoreStruct.statusesFederated.count - 14 {
-                    self.fetchMoreFederated()
-                }
-                if StoreStruct.statusesFederated[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.statusesFederated[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellf", for: indexPath) as! MainFeedCell
-                    cell.delegate = self
-                    cell.backgroundColor = Colours.white
                     
-                    cell.rep1.tag = indexPath.row
-                    cell.like1.tag = indexPath.row
-                    cell.boost1.tag = indexPath.row
-                    cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-                    cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-                    cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
                     
-                    cell.configure(StoreStruct.statusesFederated[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.userTag.tag = indexPath.row
-                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                    cell.toot.textColor = Colours.black
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        var newString = string
-                        StoreStruct.statusesFederated[indexPath.row].mentions.map({
-                            if $0.acct.contains(string) {
-                                newString = $0.id
-                            }
-                        })
-                        
-                        
-                        let controller = ThirdViewController()
-                        if newString == StoreStruct.currentUser?.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        }
+                    if indexPath.row == StoreStruct.statusesFederated.count - 14 {
+                        self.fetchMoreFederated()
                     }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
+                    if StoreStruct.statusesFederated[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.statusesFederated[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cellf", for: indexPath) as! MainFeedCell
+                        cell.delegate = self
+                        cell.backgroundColor = Colours.white
                         
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: z)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(z)
+                        cell.rep1.tag = indexPath.row
+                        cell.like1.tag = indexPath.row
+                        cell.boost1.tag = indexPath.row
+                        cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                        cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                        cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                        
+                        cell.configure(StoreStruct.statusesFederated[indexPath.row])
+                        cell.profileImageView.tag = indexPath.row
+                        cell.userTag.tag = indexPath.row
+                        cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userName.textColor = Colours.black
+                        cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                        cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
+                        cell.toot.textColor = Colours.black
+                        cell.toot.handleMentionTap { (string) in
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            var newString = string
+                            StoreStruct.statusesFederated[indexPath.row].mentions.map({
+                                if $0.acct.contains(string) {
+                                    newString = $0.id
+                                }
+                            })
+                            
+                            
+                            let controller = ThirdViewController()
+                            if newString == StoreStruct.currentUser?.username {} else {
+                                controller.fromOtherUser = true
+                            }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                        }
+                        cell.toot.handleURLTap { (url) in
+                            // safari
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            if url.absoluteString.hasPrefix(".") {
+                                let z = URL(string: String(url.absoluteString.dropFirst()))!
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: z)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
                                     }
                                 }
-                            }
-                        } else {
-                            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: url)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(url)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
-                                }
-                            }
-                        }
-                    }
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell2f", for: indexPath) as! MainFeedCellImage
-                    cell.delegate = self
-                    cell.backgroundColor = Colours.white
-                    
-                    cell.rep1.tag = indexPath.row
-                    cell.like1.tag = indexPath.row
-                    cell.boost1.tag = indexPath.row
-                    cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
-                    cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
-                    cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
-                    
-                    cell.configure(StoreStruct.statusesFederated[indexPath.row])
-                    cell.profileImageView.tag = indexPath.row
-                    cell.userTag.tag = indexPath.row
-                    cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
-                    cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
-                    cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
-                    cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
-                    cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
-                    cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
-                    cell.mainImageView.tag = indexPath.row
-                    cell.smallImage1.tag = indexPath.row
-                    cell.smallImage2.tag = indexPath.row
-                    cell.smallImage3.tag = indexPath.row
-                    cell.smallImage4.tag = indexPath.row
-                    cell.userName.textColor = Colours.black
-                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                    cell.toot.textColor = Colours.black
-                    cell.mainImageView.backgroundColor = Colours.white
-                    cell.mainImageViewBG.backgroundColor = Colours.white
-                    cell.toot.handleMentionTap { (string) in
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        var newString = string
-                        StoreStruct.statusesFederated[indexPath.row].mentions.map({
-                            if $0.acct.contains(string) {
-                                newString = $0.id
-                            }
-                        })
-                        
-                        
-                        let controller = ThirdViewController()
-                        if newString == StoreStruct.currentUser?.username {} else {
-                            controller.fromOtherUser = true
-                        }
-                        controller.userIDtoUse = newString
-                        DispatchQueue.main.async {
-                            self.navigationController?.pushViewController(controller, animated: true)
-                        }
-                    }
-                    cell.toot.handleURLTap { (url) in
-                        // safari
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        if url.absoluteString.hasPrefix(".") {
-                            let z = URL(string: String(url.absoluteString.dropFirst()))!
-                            UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: z)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(z)
-                                    }
-                                }
-                            }
-                        } else {
-                            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
-                                if !success {
-                                    if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-                                    self.safariVC = SFSafariViewController(url: url)
-                                    self.safariVC?.preferredBarTintColor = Colours.white
-                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
-                                    self.present(self.safariVC!, animated: true, completion: nil)
-                                    } else {
-                                        UIApplication.shared.openURL(url)
+                            } else {
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: url)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                    cell.toot.handleHashtagTap { (string) in
-                        // hash
-                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                            let selection = UISelectionFeedbackGenerator()
-                            selection.selectionChanged()
-                        }
-                        
-                        let controller = HashtagViewController()
-                        controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                controller.currentTags = stat
-                                DispatchQueue.main.async {
-                                    self.navigationController?.pushViewController(controller, animated: true)
+                        cell.toot.handleHashtagTap { (string) in
+                            // hash
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            let controller = HashtagViewController()
+                            controller.currentTagTitle = string
+                            let request = Timelines.tag(string)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    controller.currentTags = stat
+                                    DispatchQueue.main.async {
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    }
                                 }
                             }
                         }
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell2f", for: indexPath) as! MainFeedCellImage
+                        cell.delegate = self
+                        cell.backgroundColor = Colours.white
+                        
+                        cell.rep1.tag = indexPath.row
+                        cell.like1.tag = indexPath.row
+                        cell.boost1.tag = indexPath.row
+                        cell.rep1.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
+                        cell.like1.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                        cell.boost1.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                        
+                        cell.configure(StoreStruct.statusesFederated[indexPath.row])
+                        cell.profileImageView.tag = indexPath.row
+                        cell.userTag.tag = indexPath.row
+                        cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                        cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
+                        cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
+                        cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
+                        cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
+                        cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
+                        cell.mainImageView.tag = indexPath.row
+                        cell.smallImage1.tag = indexPath.row
+                        cell.smallImage2.tag = indexPath.row
+                        cell.smallImage3.tag = indexPath.row
+                        cell.smallImage4.tag = indexPath.row
+                        cell.userName.textColor = Colours.black
+                        cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                        cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
+                        cell.toot.textColor = Colours.black
+                        cell.mainImageView.backgroundColor = Colours.white
+                        cell.mainImageViewBG.backgroundColor = Colours.white
+                        cell.toot.handleMentionTap { (string) in
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            var newString = string
+                            StoreStruct.statusesFederated[indexPath.row].mentions.map({
+                                if $0.acct.contains(string) {
+                                    newString = $0.id
+                                }
+                            })
+                            
+                            
+                            let controller = ThirdViewController()
+                            if newString == StoreStruct.currentUser?.username {} else {
+                                controller.fromOtherUser = true
+                            }
+                            controller.userIDtoUse = newString
+                            DispatchQueue.main.async {
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                        }
+                        cell.toot.handleURLTap { (url) in
+                            // safari
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            if url.absoluteString.hasPrefix(".") {
+                                let z = URL(string: String(url.absoluteString.dropFirst()))!
+                                UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: z)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(z)
+                                        }
+                                    }
+                                }
+                            } else {
+                                UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                    if !success {
+                                        if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                            self.safariVC = SFSafariViewController(url: url)
+                                            self.safariVC?.preferredBarTintColor = Colours.white
+                                            self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                            self.present(self.safariVC!, animated: true, completion: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(url)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        cell.toot.handleHashtagTap { (string) in
+                            // hash
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let selection = UISelectionFeedbackGenerator()
+                                selection.selectionChanged()
+                            }
+                            
+                            let controller = HashtagViewController()
+                            controller.currentTagTitle = string
+                            let request = Timelines.tag(string)
+                            StoreStruct.client.run(request) { (statuses) in
+                                if let stat = (statuses.value) {
+                                    controller.currentTags = stat
+                                    DispatchQueue.main.async {
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    }
+                                }
+                            }
+                        }
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
                     }
-                    let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
-                    cell.selectedBackgroundView = bgColorView
-                    return cell
-                }
                 }
             }
             
@@ -3070,10 +3067,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     }
     
     @objc func didTouchProfile(sender: UIButton) {
-//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//            let selection = UISelectionFeedbackGenerator()
-//            selection.selectionChanged()
-//        }
+        //        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+        //            let selection = UISelectionFeedbackGenerator()
+        //            selection.selectionChanged()
+        //        }
         var sto = StoreStruct.statusesHome
         if self.currentIndex == 0 {
             sto = StoreStruct.statusesHome
@@ -3101,10 +3098,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     var player = AVPlayer()
     @objc func tappedImage(_ sender: UIButton) {
-//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//            let selection = UISelectionFeedbackGenerator()
-//            selection.selectionChanged()
-//        }
+        //        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+        //            let selection = UISelectionFeedbackGenerator()
+        //            selection.selectionChanged()
+        //        }
         
         
         var sto = StoreStruct.statusesHome
@@ -3159,16 +3156,16 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                             images.append(photo)
                         } else {
-                        let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
-                        photo.shouldCachePhotoURLImage = true
-                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = $0.description ?? ""
-                        } else {
-                            photo.caption = ""
+                            let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
+                            photo.shouldCachePhotoURLImage = true
+                            if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                                photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                                photo.caption = $0.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
-                        images.append(photo)
+                            images.append(photo)
                         }
                         coun += 1
                     })
@@ -3201,16 +3198,16 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                             images.append(photo)
                         } else {
-                        let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
-                        photo.shouldCachePhotoURLImage = true
-                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = $0.description ?? ""
-                        } else {
-                            photo.caption = ""
+                            let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
+                            photo.shouldCachePhotoURLImage = true
+                            if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                                photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                                photo.caption = $0.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
-                        images.append(photo)
+                            images.append(photo)
                         }
                         coun += 1
                     })
@@ -3243,16 +3240,16 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                             images.append(photo)
                         } else {
-                        let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
-                        photo.shouldCachePhotoURLImage = true
-                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                            photo.caption = $0.description ?? ""
-                        } else {
-                            photo.caption = ""
+                            let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
+                            photo.shouldCachePhotoURLImage = true
+                            if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                                photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                                photo.caption = $0.description ?? ""
+                            } else {
+                                photo.caption = ""
                             }
-                        images.append(photo)
+                            images.append(photo)
                         }
                         coun += 1
                     })
@@ -3277,10 +3274,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     
     @objc func tappedImageS1(_ sender: UIButton) {
-//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//            let selection = UISelectionFeedbackGenerator()
-//            selection.selectionChanged()
-//        }
+        //        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+        //            let selection = UISelectionFeedbackGenerator()
+        //            selection.selectionChanged()
+        //        }
         
         var tab = self.tableView
         var sto = StoreStruct.statusesHome
@@ -3306,45 +3303,45 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 
             } else {
                 
-                    let indexPath = IndexPath(row: sender.tag, section: 0)
+                let indexPath = IndexPath(row: sender.tag, section: 0)
                 guard let cell = tab.cellForRow(at: indexPath) as? MainFeedCellImage else { return }
-                    var images = [SKPhoto]()
-                    var coun = 0
-                    (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
-                        if coun == 0 {
-                            let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage1.currentImage ?? nil)
-                            photo.shouldCachePhotoURLImage = true
-                            if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                                photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                                photo.caption = $0.description ?? ""
-                            } else {
-                                photo.caption = ""
-                            }
-                            images.append(photo)
+                var images = [SKPhoto]()
+                var coun = 0
+                (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
+                    if coun == 0 {
+                        let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage1.currentImage ?? nil)
+                        photo.shouldCachePhotoURLImage = true
+                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                            photo.caption = $0.description ?? ""
                         } else {
-                            let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
-                            photo.shouldCachePhotoURLImage = true
-                            if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                                photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
-                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                                photo.caption = $0.description ?? ""
-                            } else {
-                                photo.caption = ""
-                            }
-                            images.append(photo)
+                            photo.caption = ""
                         }
-                        coun += 1
-                    })
-                    let originImage = sender.currentImage
-                    if originImage != nil {
-                        let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.smallImage1)
-                        browser.displayToolbar = true
-                        browser.displayAction = true
-                        browser.delegate = self
-                        browser.initializePageIndex(0)
-                        present(browser, animated: true, completion: nil)
+                        images.append(photo)
+                    } else {
+                        let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
+                        photo.shouldCachePhotoURLImage = true
+                        if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                        } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                            photo.caption = $0.description ?? ""
+                        } else {
+                            photo.caption = ""
+                        }
+                        images.append(photo)
                     }
+                    coun += 1
+                })
+                let originImage = sender.currentImage
+                if originImage != nil {
+                    let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.smallImage1)
+                    browser.displayToolbar = true
+                    browser.displayAction = true
+                    browser.delegate = self
+                    browser.initializePageIndex(0)
+                    present(browser, animated: true, completion: nil)
+                }
                 
             }
             
@@ -3352,10 +3349,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     }
     
     @objc func tappedImageS2(_ sender: UIButton) {
-//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//            let selection = UISelectionFeedbackGenerator()
-//            selection.selectionChanged()
-//        }
+        //        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+        //            let selection = UISelectionFeedbackGenerator()
+        //            selection.selectionChanged()
+        //        }
         
         var tab = self.tableView
         var sto = StoreStruct.statusesHome
@@ -3428,10 +3425,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     
     @objc func tappedImageS3(_ sender: UIButton) {
-//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//            let selection = UISelectionFeedbackGenerator()
-//            selection.selectionChanged()
-//        }
+        //        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+        //            let selection = UISelectionFeedbackGenerator()
+        //            selection.selectionChanged()
+        //        }
         
         var tab = self.tableView
         var sto = StoreStruct.statusesHome
@@ -3505,10 +3502,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     
     @objc func tappedImageS4(_ sender: UIButton) {
-//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//            let selection = UISelectionFeedbackGenerator()
-//            selection.selectionChanged()
-//        }
+        //        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+        //            let selection = UISelectionFeedbackGenerator()
+        //            selection.selectionChanged()
+        //        }
         
         var tab = self.tableView
         var sto = StoreStruct.statusesHome
@@ -4143,7 +4140,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Pin/Unpin".localized), image: UIImage(named: "pinned")) { (action, ind) in
-                             
+                            
                             if sto[indexPath.row].pinned ?? false || StoreStruct.allPins.contains(sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id) {
                                 StoreStruct.allPins = StoreStruct.allPins.filter { $0 != sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id }
                                 let request = Statuses.unpin(id: sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id)
@@ -4159,8 +4156,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
                                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                            statusAlert.show()
+                                        }
                                     }
                                 }
                             } else {
@@ -4178,14 +4175,14 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
                                         if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                            statusAlert.show()
+                                        }
                                     }
                                 }
                             }
                         }
                         .action(.default("Delete and Redraft".localized), image: UIImage(named: "block")) { (action, ind) in
-                             
+                            
                             
                             let controller = ComposeViewController()
                             StoreStruct.spoilerText = sto[indexPath.row].reblog?.spoilerText ?? sto[indexPath.row].spoilerText
@@ -4195,7 +4192,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                         }
                         .action(.default("Delete".localized), image: UIImage(named: "block")) { (action, ind) in
-                             
+                            
                             
                             if self.currentIndex == 0 {
                                 StoreStruct.statusesHome = StoreStruct.statusesHome.filter { $0 != StoreStruct.statusesHome[indexPath.row] }
@@ -4223,13 +4220,13 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Your Toot"
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                        statusAlert.show()
+                                    }
                                 }
                             }
                         }
                         .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                             
+                            
                             
                             let unreserved = "-._~/?"
                             let allowed = NSMutableCharacterSet.alphanumeric()
@@ -4279,7 +4276,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             task.resume()
                         }
                         .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                             
+                            
                             
                             let controller = ComposeViewController()
                             controller.inReply = []
@@ -4288,7 +4285,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             self.present(controller, animated: true, completion: nil)
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                             
+                            
                             
                             
                             
@@ -4299,7 +4296,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                                     
+                                    
                                     
                                     if let myWebsite = sto[indexPath.row].url {
                                         let objectsToShare = [myWebsite]
@@ -4311,7 +4308,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     }
                                 }
                                 .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                                     
+                                    
                                     
                                     let bodyText = sto[indexPath.row].content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText)
@@ -4322,7 +4319,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     
                                 }
                                 .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                                     
+                                    
                                     
                                     let controller = NewQRViewController()
                                     controller.ur = sto[indexPath.row].reblog?.url?.absoluteString ?? sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
@@ -4330,7 +4327,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     
                                 }
                                 
-                            
+                                
                                 
                                 .action(.cancel("Dismiss"))
                                 .finally { action, index in
@@ -4381,7 +4378,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         .messageTextAlignment(.left)
                         .titleTextAlignment(.left)
                         .action(.default("Mute/Unmute".localized), image: UIImage(named: "block")) { (action, ind) in
-                             
+                            
                             
                             if isMuted == false {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -4394,8 +4391,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                    statusAlert.show()
+                                }
                                 
                                 let request = Accounts.mute(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
@@ -4414,8 +4411,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                    statusAlert.show()
+                                }
                                 
                                 let request = Accounts.unmute(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
@@ -4427,7 +4424,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                         }
                         .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
-                             
+                            
                             
                             if isBlocked == false {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -4440,8 +4437,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                    statusAlert.show()
+                                }
                                 
                                 let request = Accounts.block(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
@@ -4460,8 +4457,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
                                 if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                    statusAlert.show()
+                                }
                                 
                                 let request = Accounts.unblock(id: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id)
                                 StoreStruct.client.run(request) { (statuses) in
@@ -4473,7 +4470,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                         }
                         .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
-                             
+                            
                             
                             Alertift.actionSheet()
                                 .backgroundColor(Colours.white)
@@ -4482,7 +4479,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Harassment"), image: nil) { (action, ind) in
-                                     
+                                    
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -4495,8 +4492,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Harassment"
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                        statusAlert.show()
+                                    }
                                     
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Harassment")
                                     StoreStruct.client.run(request) { (statuses) in
@@ -4507,7 +4504,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     
                                 }
                                 .action(.default("No Content Warning"), image: nil) { (action, ind) in
-                                     
+                                    
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -4520,8 +4517,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "No Content Warning"
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                        statusAlert.show()
+                                    }
                                     
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "No Content Warning")
                                     StoreStruct.client.run(request) { (statuses) in
@@ -4532,7 +4529,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     
                                 }
                                 .action(.default("Spam"), image: nil) { (action, ind) in
-                                     
+                                    
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -4545,8 +4542,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Spam"
                                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
-                        statusAlert.show()
-                    }
+                                        statusAlert.show()
+                                    }
                                     
                                     let request = Reports.report(accountID: sto[indexPath.row].reblog?.account.id ?? sto[indexPath.row].account.id, statusIDs: [sto[indexPath.row].reblog?.id ?? sto[indexPath.row].id], reason: "Spam")
                                     StoreStruct.client.run(request) { (statuses) in
@@ -4568,7 +4565,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                         }
                         .action(.default("Translate".localized), image: UIImage(named: "translate")) { (action, ind) in
-                             
+                            
                             
                             let unreserved = "-._~/?"
                             let allowed = NSMutableCharacterSet.alphanumeric()
@@ -4618,7 +4615,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             task.resume()
                         }
                         .action(.default("Duplicate Toot".localized), image: UIImage(named: "addac1")) { (action, ind) in
-                             
+                            
                             
                             let controller = ComposeViewController()
                             controller.inReply = []
@@ -4627,7 +4624,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             self.present(controller, animated: true, completion: nil)
                         }
                         .action(.default("Share".localized), image: UIImage(named: "share")) { (action, ind) in
-                             
+                            
                             
                             
                             
@@ -4638,7 +4635,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 .messageTextAlignment(.left)
                                 .titleTextAlignment(.left)
                                 .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
-                                     
+                                    
                                     
                                     if let myWebsite = sto[indexPath.row].reblog?.url ?? sto[indexPath.row].url {
                                         let objectsToShare = [myWebsite]
@@ -4650,7 +4647,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     }
                                 }
                                 .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
-                                     
+                                    
                                     
                                     let bodyText = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
                                     let vc = VisualActivityViewController(text: bodyText)
@@ -4661,7 +4658,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     
                                 }
                                 .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
-                                     
+                                    
                                     
                                     let controller = NewQRViewController()
                                     controller.ur = sto[indexPath.row].reblog?.url?.absoluteString ?? sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
@@ -4815,40 +4812,40 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     func fetchGap() {
         
-//        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//            let impact = UIImpactFeedbackGenerator(style: .medium)
-//            impact.impactOccurred()
-//        }
+        //        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+        //            let impact = UIImpactFeedbackGenerator(style: .medium)
+        //            impact.impactOccurred()
+        //        }
         
         if self.currentIndex == 0 {
             let request = Timelines.home(range: .max(id: StoreStruct.gapLastHomeID, limit: nil))
-//            DispatchQueue.global(qos: .userInitiated).async {
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
+            //            DispatchQueue.global(qos: .userInitiated).async {
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    
+                    if stat.isEmpty {} else {
                         
-                        if stat.isEmpty {} else {
-                            
-                            let y = StoreStruct.statusesHome.split(separator: StoreStruct.gapLastHomeStat ?? StoreStruct.statusesHome.last!)
-                            if StoreStruct.statusesHome.count > y.first!.count + 1 {
+                        let y = StoreStruct.statusesHome.split(separator: StoreStruct.gapLastHomeStat ?? StoreStruct.statusesHome.last!)
+                        if StoreStruct.statusesHome.count > y.first!.count + 1 {
                             StoreStruct.statusesHome.remove(at: y.first!.count + 1)
-                            }
-                            
-                            if StoreStruct.statusesHome.contains(stat.last!) {
-                                StoreStruct.statusesHome = y.first! + stat + y.last!
-                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-                            } else {
-                                StoreStruct.gapLastHomeID = stat.last?.id ?? ""
-                                let z = stat.last!
-                                z.id = "loadmorehere"
-                                StoreStruct.gapLastHomeStat = z
-                                StoreStruct.statusesHome = y.first! + stat + y.last!
-                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-                            }
-                            
-                            
-                            let newestC = y.first!.count + stat.count - 1
-                            
-                            DispatchQueue.main.async {
+                        }
+                        
+                        if StoreStruct.statusesHome.contains(stat.last!) {
+                            StoreStruct.statusesHome = y.first! + stat + y.last!
+                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                        } else {
+                            StoreStruct.gapLastHomeID = stat.last?.id ?? ""
+                            let z = stat.last!
+                            z.id = "loadmorehere"
+                            StoreStruct.gapLastHomeStat = z
+                            StoreStruct.statusesHome = y.first! + stat + y.last!
+                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                        }
+                        
+                        
+                        let newestC = y.first!.count + stat.count - 1
+                        
+                        DispatchQueue.main.async {
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                 self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
                                 self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
@@ -4860,27 +4857,31 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 
                                 DispatchQueue.main.async {
                                     UIView.setAnimationsEnabled(false)
+//                                    self.tableView.reloadData()
+                                    let beforeContentSize = self.tableView.contentSize
                                     self.tableView.reloadData()
-                                    if newestC == 0 {
-                                        
-                                    } else {
-                                        if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
-                                            if stat.count > 0 {
-                                                if newestC < StoreStruct.statusesHome.count {
-                                                self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
-                                                }
-                                            }
-                                            
-                                            do {
-                                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                                            } catch {
-                                                print("Couldn't save")
-                                            }
-                                        }
-                                    }
+                                    let afterContentSize = self.tableView.contentSize
+                                    let afterContentOffset = self.tableView.contentOffset
+                                    let newContentOffset = CGPoint(x: 0, y: afterContentOffset.y + afterContentSize.height - beforeContentSize.height)
+                                    self.tableView.contentOffset = newContentOffset
+//                                    if newestC == 0 {
+//
+//                                    } else {
+//                                        if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
+//                                            if stat.count > 0 {
+//                                                if newestC < StoreStruct.statusesHome.count {
+//                                                    self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+//                                                }
+//                                            }
+//                                        }
+//                                    }
                                     UIView.setAnimationsEnabled(true)
+                                }
+                                
+                                do {
+                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                } catch {
+                                    print("Couldn't save")
                                 }
                             } else {
                                 
@@ -4889,43 +4890,43 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 }
                                 
                             }
-                            }
-                            
                         }
+                        
                     }
                 }
-//            }
+            }
+            //            }
         } else if self.currentIndex == 1 {
             
             let request = Timelines.public(local: true, range: .max(id: StoreStruct.gapLastLocalID, limit: nil))
-//            DispatchQueue.global(qos: .userInitiated).async {
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
+            //            DispatchQueue.global(qos: .userInitiated).async {
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    
+                    if stat.isEmpty {} else {
+                        let y = StoreStruct.statusesLocal.split(separator: StoreStruct.gapLastLocalStat ?? StoreStruct.statusesLocal.last!)
+                        print(y)
                         
-                        if stat.isEmpty {} else {
-                            let y = StoreStruct.statusesLocal.split(separator: StoreStruct.gapLastLocalStat ?? StoreStruct.statusesLocal.last!)
-                            print(y)
-                            
-                            if StoreStruct.statusesLocal.count > y.first!.count + 1 {
+                        if StoreStruct.statusesLocal.count > y.first!.count + 1 {
                             StoreStruct.statusesLocal.remove(at: y.first!.count + 1)
-                            }
-                            
-                            if StoreStruct.statusesLocal.contains(stat.last!) {
-                                StoreStruct.statusesLocal = y.first! + stat + y.last!
-                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-                            } else {
-                                StoreStruct.gapLastLocalID = stat.last?.id ?? ""
-                                let z = stat.last!
-                                z.id = "loadmorehere"
-                                StoreStruct.gapLastLocalStat = z
-                                StoreStruct.statusesLocal = y.first! + stat + y.last!
-                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-                            }
-                            
-                            
-                            let newestC = y.first!.count + stat.count - 1
-    
-                            DispatchQueue.main.async {
+                        }
+                        
+                        if StoreStruct.statusesLocal.contains(stat.last!) {
+                            StoreStruct.statusesLocal = y.first! + stat + y.last!
+                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                        } else {
+                            StoreStruct.gapLastLocalID = stat.last?.id ?? ""
+                            let z = stat.last!
+                            z.id = "loadmorehere"
+                            StoreStruct.gapLastLocalStat = z
+                            StoreStruct.statusesLocal = y.first! + stat + y.last!
+                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                        }
+                        
+                        
+                        let newestC = y.first!.count + stat.count - 1
+                        
+                        DispatchQueue.main.async {
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                 self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
                                 self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
@@ -4937,27 +4938,31 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 
                                 DispatchQueue.main.async {
                                     UIView.setAnimationsEnabled(false)
+//                                    self.tableViewL.reloadData()
+                                    let beforeContentSize = self.tableViewL.contentSize
                                     self.tableViewL.reloadData()
-                                    if newestC == 0 {
-                                        
-                                    } else {
-                                        if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
-                                            if stat.count > 0 {
-                                                if newestC < StoreStruct.statusesLocal.count {
-                                                self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
-                                                }
-                                            }
-                                            
-                                            do {
-                                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                                            } catch {
-                                                print("Couldn't save")
-                                            }
-                                        }
-                                    }
+                                    let afterContentSize = self.tableViewL.contentSize
+                                    let afterContentOffset = self.tableViewL.contentOffset
+                                    let newContentOffset = CGPoint(x: 0, y: afterContentOffset.y + afterContentSize.height - beforeContentSize.height)
+                                    self.tableViewL.contentOffset = newContentOffset
+//                                    if newestC == 0 {
+//
+//                                    } else {
+//                                        if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
+//                                            if stat.count > 0 {
+//                                                if newestC < StoreStruct.statusesLocal.count {
+//                                                    self.tableViewL.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+//                                                }
+//                                            }
+//                                        }
+//                                    }
                                     UIView.setAnimationsEnabled(true)
+                                }
+                                
+                                do {
+                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                } catch {
+                                    print("Couldn't save")
                                 }
                             } else {
                                 
@@ -4966,40 +4971,40 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 }
                                 
                             }
-                            }
                         }
                     }
                 }
-//            }
+            }
+            //            }
             
         } else {
             let request = Timelines.public(local: false, range: .max(id: StoreStruct.gapLastFedID, limit: nil))
-//            DispatchQueue.global(qos: .userInitiated).async {
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        
-                        if stat.isEmpty {} else {
-                            let y = StoreStruct.statusesFederated.split(separator: StoreStruct.gapLastFedStat ?? StoreStruct.statusesFederated.last!)
-                            if StoreStruct.statusesFederated.count > y.first!.count + 1 {
+            //            DispatchQueue.global(qos: .userInitiated).async {
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    
+                    if stat.isEmpty {} else {
+                        let y = StoreStruct.statusesFederated.split(separator: StoreStruct.gapLastFedStat ?? StoreStruct.statusesFederated.last!)
+                        if StoreStruct.statusesFederated.count > y.first!.count + 1 {
                             StoreStruct.statusesFederated.remove(at: y.first!.count + 1)
-                            }
-                            
-                            if StoreStruct.statusesFederated.contains(stat.last!) {
-                                StoreStruct.statusesFederated = y.first! + stat + y.last!
-                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-                            } else {
-                                StoreStruct.gapLastFedID = stat.last?.id ?? ""
-                                let z = stat.last!
-                                z.id = "loadmorehere"
-                                StoreStruct.gapLastFedStat = z
-                                StoreStruct.statusesFederated = y.first! + stat + y.last!
-                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-                            }
-                            
-                            
-                            let newestC = y.first!.count + stat.count - 1
-                            
-                            DispatchQueue.main.async {
+                        }
+                        
+                        if StoreStruct.statusesFederated.contains(stat.last!) {
+                            StoreStruct.statusesFederated = y.first! + stat + y.last!
+                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                        } else {
+                            StoreStruct.gapLastFedID = stat.last?.id ?? ""
+                            let z = stat.last!
+                            z.id = "loadmorehere"
+                            StoreStruct.gapLastFedStat = z
+                            StoreStruct.statusesFederated = y.first! + stat + y.last!
+                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                        }
+                        
+                        
+                        let newestC = y.first!.count + stat.count - 1
+                        
+                        DispatchQueue.main.async {
                             if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                 self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
                                 self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
@@ -5011,127 +5016,131 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 
                                 DispatchQueue.main.async {
                                     UIView.setAnimationsEnabled(false)
+//                                    self.tableViewF.reloadData()
+                                    let beforeContentSize = self.tableViewF.contentSize
                                     self.tableViewF.reloadData()
-                                    if newestC == 0 {
-                                        
-                                    } else {
-                                        if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
-                                            if stat.count > 0 {
-                                                if newestC < StoreStruct.statusesFederated.count {
-                                                self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
-                                                }
-                                            }
-                                            
-                                            do {
-                                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                                            } catch {
-                                                print("Couldn't save")
-                                            }
-                                        }
-                                    }
+                                    let afterContentSize = self.tableViewF.contentSize
+                                    let afterContentOffset = self.tableViewF.contentOffset
+                                    let newContentOffset = CGPoint(x: 0, y: afterContentOffset.y + afterContentSize.height - beforeContentSize.height)
+                                    self.tableViewF.contentOffset = newContentOffset
+//                                    if newestC == 0 {
+//
+//                                    } else {
+//                                        if (UserDefaults.standard.object(forKey: "lmore1") == nil) || (UserDefaults.standard.object(forKey: "lmore1") as! Int == 0) {} else {
+//                                            if stat.count > 0 {
+//                                                if newestC < StoreStruct.statusesFederated.count {
+//                                                    self.tableViewF.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+//                                                }
+//                                            }
+//                                        }
+//                                    }
                                     UIView.setAnimationsEnabled(true)
                                 }
+                                
+                                do {
+                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                } catch {
+                                    print("Couldn't save")
+                                }
                             } else {
-                            
+                                
                                 DispatchQueue.main.async {
                                     self.tableViewF.reloadData()
                                 }
                                 
                             }
-                            }
-                            
                         }
+                        
                     }
                 }
-//            }
+            }
+            //            }
         }
     }
     
     var lastThing = ""
     func fetchMoreHome() {
         let request = Timelines.home(range: .max(id: StoreStruct.statusesHome.last?.id ?? "", limit: nil))
-//        DispatchQueue.global(qos: .userInitiated).async {
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
+        //        DispatchQueue.global(qos: .userInitiated).async {
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                
+                if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                    self.lastThing = stat.first?.id ?? ""
                     
-                    if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
-                        self.lastThing = stat.first?.id ?? ""
-                        
-                        StoreStruct.statusesHome = StoreStruct.statusesHome + stat
-                        DispatchQueue.main.async {
-                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-                            self.tableView.reloadData()
-                        }
-                        
-                        do {
-                            try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                            try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                            try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                        } catch {
-                            print("Couldn't save")
-                        }
-                        
+                    StoreStruct.statusesHome = StoreStruct.statusesHome + stat
+                    DispatchQueue.main.async {
+                        StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                        self.tableView.reloadData()
                     }
+                    
+                    do {
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                    } catch {
+                        print("Couldn't save")
+                    }
+                    
                 }
-//            }
+            }
+            //            }
         }
     }
     
     var lastThing2 = ""
     func fetchMoreLocal() {
         let request = Timelines.public(local: true, range: .max(id: StoreStruct.statusesLocal.last?.id ?? "", limit: nil))
-//        DispatchQueue.global(qos: .userInitiated).async {
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
+        //        DispatchQueue.global(qos: .userInitiated).async {
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                
+                if stat.isEmpty || self.lastThing2 == stat.first?.id ?? "" {} else {
+                    self.lastThing2 = stat.first?.id ?? ""
+                    StoreStruct.statusesLocal = StoreStruct.statusesLocal + stat
+                    DispatchQueue.main.async {
+                        StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                        self.tableViewL.reloadData()
+                    }
                     
-                    if stat.isEmpty || self.lastThing2 == stat.first?.id ?? "" {} else {
-                        self.lastThing2 = stat.first?.id ?? ""
-                        StoreStruct.statusesLocal = StoreStruct.statusesLocal + stat
-                        DispatchQueue.main.async {
-                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-                            self.tableViewL.reloadData()
-                        }
-                        
-                        do {
-                            try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                            try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                            try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                        } catch {
-                            print("Couldn't save")
-                        }
+                    do {
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                    } catch {
+                        print("Couldn't save")
                     }
                 }
-//            }
+            }
+            //            }
         }
     }
     
     var lastThing3 = ""
     func fetchMoreFederated() {
         let request = Timelines.public(local: false, range: .max(id: StoreStruct.statusesFederated.last?.id ?? "", limit: nil))
-//        DispatchQueue.global(qos: .userInitiated).async {
-            StoreStruct.client.run(request) { (statuses) in
-                if let stat = (statuses.value) {
+        //        DispatchQueue.global(qos: .userInitiated).async {
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                
+                if stat.isEmpty || self.lastThing3 == stat.first?.id ?? "" {} else {
+                    self.lastThing3 = stat.first?.id ?? ""
+                    StoreStruct.statusesFederated = StoreStruct.statusesFederated + stat
+                    DispatchQueue.main.async {
+                        StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                        self.tableViewF.reloadData()
+                    }
                     
-                    if stat.isEmpty || self.lastThing3 == stat.first?.id ?? "" {} else {
-                        self.lastThing3 = stat.first?.id ?? ""
-                        StoreStruct.statusesFederated = StoreStruct.statusesFederated + stat
-                        DispatchQueue.main.async {
-                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-                            self.tableViewF.reloadData()
-                        }
-                        
-                        do {
-                            try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                            try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                            try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                        } catch {
-                            print("Couldn't save")
-                        }
+                    do {
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                    } catch {
+                        print("Couldn't save")
                     }
                 }
-//            }
+            }
+            //            }
         }
     }
     
@@ -5139,240 +5148,240 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         
         if self.currentIndex == 0 {
             let request = Timelines.home(range: .since(id: StoreStruct.statusesHome.first?.id ?? "", limit: 5000))
-//            DispatchQueue.global(qos: .userInitiated).async {
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        
-                        var newestC = StoreStruct.statusesHome.count
-                        
-                        
-                        if let st = stat.last {
-                            if StoreStruct.statusesHome.contains(st) || stat.count < 20 {
+            //            DispatchQueue.global(qos: .userInitiated).async {
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    
+                    var newestC = StoreStruct.statusesHome.count
+                    
+                    
+                    if let st = stat.last {
+                        if StoreStruct.statusesHome.contains(st) || stat.count < 20 {
                             StoreStruct.statusesHome = stat + StoreStruct.statusesHome
-                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         } else {
                             StoreStruct.gapLastHomeID = stat.last?.id ?? ""
                             let z = st
                             z.id = "loadmorehere"
                             StoreStruct.gapLastHomeStat = z
                             StoreStruct.statusesHome = stat + StoreStruct.statusesHome
-                                StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-                        }
-                        } else {
-                            StoreStruct.statusesHome = stat + StoreStruct.statusesHome
                             StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         }
+                    } else {
+                        StoreStruct.statusesHome = stat + StoreStruct.statusesHome
+                        StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                    }
+                    
+                    
+                    DispatchQueue.main.async {
+                        StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
+                        newestC = StoreStruct.statusesHome.count - newestC - 1
+                        if newestC < 0 {
+                            newestC = 0
+                        }
                         
-                        
-                        DispatchQueue.main.async {
-                            StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
-                            newestC = StoreStruct.statusesHome.count - newestC - 1
-                            if newestC < 0 {
-                                newestC = 0
-                            }
+                        if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
+                            self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
+                            self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                            springWithDelay(duration: 0.5, delay: 0, animations: {
+                                self.newUpdatesB1.alpha = 1
+                                self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                            })
+                            self.countcount1 = stat.count
                             
-                            if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                                self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
-                                self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                springWithDelay(duration: 0.5, delay: 0, animations: {
-                                    self.newUpdatesB1.alpha = 1
-                                    self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                })
-                                self.countcount1 = stat.count
+                            if stat.count > 0 {
+                                self.tableView.cr.endHeaderRefresh()
+                                self.tableView.reloadData()
+                            }
+                            //                                self.refreshControl.endRefreshing()
+                            if stat.count == 0 {
                                 
-                                if stat.count > 0 {
-                                    self.tableView.cr.endHeaderRefresh()
-                                    self.tableView.reloadData()
-                                }
-//                                self.refreshControl.endRefreshing()
-                                if stat.count == 0 {
+                            } else {
+                                if StoreStruct.statusesHome.count == 0 || stat.count == 0 || StoreStruct.statusesHome.count == stat.count {
                                     
                                 } else {
-                                    if StoreStruct.statusesHome.count == 0 || stat.count == 0 || StoreStruct.statusesHome.count == stat.count {
-                                        
-                                    } else {
-                                        self.tableView.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
-                                    }
+                                    self.tableView.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
                                 }
-                            } else {
-                                if stat.count > 0 {
-                                    self.tableView.cr.endHeaderRefresh()
-                                    self.tableView.reloadData()
-                                }
-//                                self.refreshControl.endRefreshing()
-                            }
-                            
-                        }
-                        
-                        do {
-                            try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                            try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                            try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                        } catch {
-                            print("Couldn't save")
-                        }
-                    }
-                }
-//            }
-        } else if self.currentIndex == 1 {
-            let request = Timelines.public(local: true, range: .since(id: StoreStruct.statusesLocal.first?.id ?? "", limit: 5000))
-//            DispatchQueue.global(qos: .userInitiated).async {
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        
-                        var newestC = StoreStruct.statusesLocal.count
-                        
-                        
-                        
-                        if let st = stat.last {
-                            if StoreStruct.statusesLocal.contains(st) || stat.count < 20 {
-                                StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
-                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-                            } else {
-                                StoreStruct.gapLastLocalID = stat.last?.id ?? ""
-                                let z = st
-                                z.id = "loadmorehere"
-                                StoreStruct.gapLastLocalStat = z
-                                StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
-                                StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             }
                         } else {
+                            if stat.count > 0 {
+                                self.tableView.cr.endHeaderRefresh()
+                                self.tableView.reloadData()
+                            }
+                            //                                self.refreshControl.endRefreshing()
+                        }
+                        
+                    }
+                    
+                    do {
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                    } catch {
+                        print("Couldn't save")
+                    }
+                }
+            }
+            //            }
+        } else if self.currentIndex == 1 {
+            let request = Timelines.public(local: true, range: .since(id: StoreStruct.statusesLocal.first?.id ?? "", limit: 5000))
+            //            DispatchQueue.global(qos: .userInitiated).async {
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    
+                    var newestC = StoreStruct.statusesLocal.count
+                    
+                    
+                    
+                    if let st = stat.last {
+                        if StoreStruct.statusesLocal.contains(st) || stat.count < 20 {
+                            StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
+                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                        } else {
+                            StoreStruct.gapLastLocalID = stat.last?.id ?? ""
+                            let z = st
+                            z.id = "loadmorehere"
+                            StoreStruct.gapLastLocalStat = z
                             StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                         }
+                    } else {
+                        StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
+                        StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                    }
+                    
+                    
+                    DispatchQueue.main.async {
+                        StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
+                        newestC = StoreStruct.statusesLocal.count - newestC - 1
+                        if newestC < 0 {
+                            newestC = 0
+                        }
                         
-                        
-                        DispatchQueue.main.async {
-                            StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
-                            newestC = StoreStruct.statusesLocal.count - newestC - 1
-                            if newestC < 0 {
-                                newestC = 0
-                            }
+                        if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
+                            self.newUpdatesB2.setTitle("\(newestC)  ", for: .normal)
+                            self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                            springWithDelay(duration: 0.5, delay: 0, animations: {
+                                self.newUpdatesB2.alpha = 1
+                                self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                            })
+                            self.countcount2 = stat.count
                             
-                            if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                                self.newUpdatesB2.setTitle("\(newestC)  ", for: .normal)
-                                self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                springWithDelay(duration: 0.5, delay: 0, animations: {
-                                    self.newUpdatesB2.alpha = 1
-                                    self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                })
-                                self.countcount2 = stat.count
+                            if stat.count > 0 {
+                                self.tableViewL.cr.endHeaderRefresh()
+                                self.tableViewL.reloadData()
+                            }
+                            //                                self.refreshControl.endRefreshing()
+                            if stat.count == 0 {
                                 
-                                if stat.count > 0 {
-                                    self.tableViewL.cr.endHeaderRefresh()
-                                    self.tableViewL.reloadData()
-                                }
-//                                self.refreshControl.endRefreshing()
-                                if stat.count == 0 {
+                            } else {
+                                if StoreStruct.statusesLocal.count == 0 || stat.count == 0 || StoreStruct.statusesLocal.count == stat.count{
                                     
                                 } else {
-                                    if StoreStruct.statusesLocal.count == 0 || stat.count == 0 || StoreStruct.statusesLocal.count == stat.count{
-                                        
-                                    } else {
-                                        self.tableViewL.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
-                                    }
+                                    self.tableViewL.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
                                 }
-                            } else {
-                                
-                                if stat.count > 0 {
-                                    self.tableViewL.cr.endHeaderRefresh()
-                                    self.tableViewL.reloadData()
-                                }
-//                                self.refreshControl.endRefreshing()
-                                
                             }
+                        } else {
+                            
+                            if stat.count > 0 {
+                                self.tableViewL.cr.endHeaderRefresh()
+                                self.tableViewL.reloadData()
+                            }
+                            //                                self.refreshControl.endRefreshing()
                             
                         }
                         
-                        do {
-                            try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                            try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                            try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                        } catch {
-                            print("Couldn't save")
-                        }
+                    }
+                    
+                    do {
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                    } catch {
+                        print("Couldn't save")
                     }
                 }
-//            }
+            }
+            //            }
         } else {
             let request = Timelines.public(local: false, range: .since(id: StoreStruct.statusesFederated.first?.id ?? "", limit: 5000))
-//            DispatchQueue.global(qos: .userInitiated).async {
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        
-                        var newestC = StoreStruct.statusesFederated.count
-                        
-                        if let st = stat.last {
-                            if StoreStruct.statusesFederated.contains(st) || stat.count < 20 {
-                                StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
-                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-                            } else {
-                                StoreStruct.gapLastFedID = stat.last?.id ?? ""
-                                let z = st
-                                z.id = "loadmorehere"
-                                StoreStruct.gapLastFedStat = z
-                                StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
-                                StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-                            }
+            //            DispatchQueue.global(qos: .userInitiated).async {
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    
+                    var newestC = StoreStruct.statusesFederated.count
+                    
+                    if let st = stat.last {
+                        if StoreStruct.statusesFederated.contains(st) || stat.count < 20 {
+                            StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
+                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                         } else {
+                            StoreStruct.gapLastFedID = stat.last?.id ?? ""
+                            let z = st
+                            z.id = "loadmorehere"
+                            StoreStruct.gapLastFedStat = z
                             StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                         }
+                    } else {
+                        StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
+                        StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                    }
+                    
+                    
+                    DispatchQueue.main.async {
+                        StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
+                        newestC = StoreStruct.statusesFederated.count - newestC - 1
+                        if newestC < 0 {
+                            newestC = 0
+                        }
                         
-                        
-                        DispatchQueue.main.async {
-                            StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
-                            newestC = StoreStruct.statusesFederated.count - newestC - 1
-                            if newestC < 0 {
-                                newestC = 0
-                            }
+                        if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
+                            self.newUpdatesB3.setTitle("\(newestC)  ", for: .normal)
+                            self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                            springWithDelay(duration: 0.5, delay: 0, animations: {
+                                self.newUpdatesB3.alpha = 1
+                                self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                            })
+                            self.countcount3 = stat.count
                             
-                            if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                                self.newUpdatesB3.setTitle("\(newestC)  ", for: .normal)
-                                self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                                springWithDelay(duration: 0.5, delay: 0, animations: {
-                                    self.newUpdatesB3.alpha = 1
-                                    self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                                })
-                                self.countcount3 = stat.count
-                                
-                                if stat.count > 0 {
-                                    self.tableViewF.cr.endHeaderRefresh()
-                                    self.tableViewF.reloadData()
-                                }
-//                                self.refreshControl.endRefreshing()
-                                if stat.count == 0 {
-                                    
-                                } else {
-                                    if StoreStruct.statusesFederated.count == 0 || stat.count == 0 || StoreStruct.statusesFederated.count == stat.count{
-                                        
-                                    } else {
-                                        self.tableViewF.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
-                                    }
-                                }
+                            if stat.count > 0 {
+                                self.tableViewF.cr.endHeaderRefresh()
+                                self.tableViewF.reloadData()
+                            }
+                            //                                self.refreshControl.endRefreshing()
+                            if stat.count == 0 {
                                 
                             } else {
-                                
-                                if stat.count > 0 {
-                                    self.tableViewF.cr.endHeaderRefresh()
-                                    self.tableViewF.reloadData()
+                                if StoreStruct.statusesFederated.count == 0 || stat.count == 0 || StoreStruct.statusesFederated.count == stat.count{
+                                    
+                                } else {
+                                    self.tableViewF.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
                                 }
-//                                self.refreshControl.endRefreshing()
-                                
                             }
+                            
+                        } else {
+                            
+                            if stat.count > 0 {
+                                self.tableViewF.cr.endHeaderRefresh()
+                                self.tableViewF.reloadData()
+                            }
+                            //                                self.refreshControl.endRefreshing()
                             
                         }
                         
-                        do {
-                            try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                            try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                            try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
-                        } catch {
-                            print("Couldn't save")
-                        }
+                    }
+                    
+                    do {
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                    } catch {
+                        print("Couldn't save")
                     }
                 }
-//            }
+            }
+            //            }
         }
         
         
