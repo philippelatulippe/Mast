@@ -510,6 +510,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
         }
         
+        self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
         self.tableView.register(DetailCell.self, forCellReuseIdentifier: "cell7")
         self.tableView.register(DetailCellImage.self, forCellReuseIdentifier: "cell70")
         self.tableView.register(ActionButtonCell.self, forCellReuseIdentifier: "cell10")
@@ -838,6 +839,43 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 return cell
                 
             } else {
+                
+                
+                var filtersAr: [Bool] = []
+                let _ = StoreStruct.allCurrentFilters.map({
+                    if $0.context.contains(Context2.thread) {
+                        if (self.allPrevious[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
+                            filtersAr.append(true)
+                        } else {
+                            filtersAr.append(false)
+                        }
+                    }
+                })
+                for x in filtersAr {
+                    if x == true {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
+                        cell.backgroundColor = Colours.white
+                        cell.userName.text = "Hidden by Filter"
+                        cell.userName.textColor = Colours.grayDark.withAlphaComponent(0.6)
+                        cell.userTag.setTitle("", for: .normal)
+                        cell.date.text = ""
+                        cell.profileImageView.setImage(UIImage(), for: .normal)
+                        cell.profileImageView2.setImage(UIImage(), for: .normal)
+                        cell.moreImage.image = UIImage()
+                        cell.rep1.setImage(UIImage(), for: .normal)
+                        cell.like1.setImage(UIImage(), for: .normal)
+                        cell.boost1.setImage(UIImage(), for: .normal)
+                        cell.more1.setImage(UIImage(), for: .normal)
+                        cell.warningB.backgroundColor = UIColor.clear
+                        cell.warningB.setTitle("", for: .normal)
+                        cell.toot.text = "Manage filters via the Toot Filters section."
+                        cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.21)
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                    }
+                }
                 
                 if self.allPrevious[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
                     
@@ -1629,6 +1667,43 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 return cell
                 
             } else {
+                
+                
+                var filtersAr: [Bool] = []
+                let _ = StoreStruct.allCurrentFilters.map({
+                    if $0.context.contains(Context2.thread) {
+                        if (self.allReplies[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
+                            filtersAr.append(true)
+                        } else {
+                            filtersAr.append(false)
+                        }
+                    }
+                })
+                for x in filtersAr {
+                    if x == true {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
+                        cell.backgroundColor = Colours.white
+                        cell.userName.text = "Hidden by Filter"
+                        cell.userName.textColor = Colours.grayDark.withAlphaComponent(0.6)
+                        cell.userTag.setTitle("", for: .normal)
+                        cell.date.text = ""
+                        cell.profileImageView.setImage(UIImage(), for: .normal)
+                        cell.profileImageView2.setImage(UIImage(), for: .normal)
+                        cell.moreImage.image = UIImage()
+                        cell.rep1.setImage(UIImage(), for: .normal)
+                        cell.like1.setImage(UIImage(), for: .normal)
+                        cell.boost1.setImage(UIImage(), for: .normal)
+                        cell.more1.setImage(UIImage(), for: .normal)
+                        cell.warningB.backgroundColor = UIColor.clear
+                        cell.warningB.setTitle("", for: .normal)
+                        cell.toot.text = "Manage filters via the Toot Filters section."
+                        cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.21)
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                    }
+                }
                 
                 if self.allReplies[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
                     

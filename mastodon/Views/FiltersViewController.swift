@@ -258,7 +258,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             .messageTextAlignment(.left)
             .titleTextAlignment(.left)
             .action(.default("Remove Filter".localized), image: UIImage(named: "block")) { (action, ind) in
-                 
                 
                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                     let notification = UINotificationFeedbackGenerator()
@@ -273,6 +272,11 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                         statusAlert.show()
                     }
                 
+                DispatchQueue.main.async {
+                    self.currentTags.remove(at: indexPath.row)
+                    StoreStruct.allCurrentFilters.remove(at: indexPath.row)
+                    self.tableView.reloadData()
+                }
                 
                 let request = FilterToots.delete(id: self.currentTags[indexPath.row].id)
                 StoreStruct.client.run(request) { (statuses) in

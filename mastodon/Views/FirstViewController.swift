@@ -533,6 +533,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableView)
             
+            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
             self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
             self.tableViewL.register(SettingsCell.self, forCellReuseIdentifier: "cellmore1")
@@ -548,6 +549,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewL.rowHeight = UITableView.automaticDimension
             self.view.addSubview(self.tableViewL)
             
+            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
             self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
             self.tableViewF.register(SettingsCell.self, forCellReuseIdentifier: "cellmore2")
@@ -874,6 +876,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.view.addSubview(self.tableView)
             self.tableView.tableFooterView = UIView()
             
+            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
             self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
             self.tableViewL.register(SettingsCell.self, forCellReuseIdentifier: "cellmore1")
@@ -890,6 +893,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.view.addSubview(self.tableViewL)
             self.tableViewL.tableFooterView = UIView()
             
+            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
             self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
             self.tableViewF.register(SettingsCell.self, forCellReuseIdentifier: "cellmore2")
@@ -940,6 +944,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.view.addSubview(self.tableView)
             self.tableView.tableFooterView = UIView()
             
+            self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
             self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
             self.tableViewL.register(SettingsCell.self, forCellReuseIdentifier: "cellmore1")
@@ -956,6 +961,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.view.addSubview(self.tableViewL)
             self.tableViewL.tableFooterView = UIView()
             
+            self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
             self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
             self.tableViewF.register(SettingsCell.self, forCellReuseIdentifier: "cellmore2")
@@ -2164,10 +2170,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         
         if tableView == self.tableView {
             
-            
-            
-            
-            
             if StoreStruct.statusesHome.count <= 0 || indexPath.row >= StoreStruct.statusesHome.count {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
                 cell.backgroundColor = Colours.white
@@ -2176,6 +2178,42 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
+                
+                var filtersAr: [Bool] = []
+                let _ = StoreStruct.allCurrentFilters.map({
+                    if $0.context.contains(Context2.home) {
+                        if (StoreStruct.statusesHome[indexPath.row].reblog?.content ?? StoreStruct.statusesHome[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
+                                filtersAr.append(true)
+                        } else {
+                            filtersAr.append(false)
+                        }
+                    }
+                })
+                for x in filtersAr {
+                    if x == true {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
+                        cell.backgroundColor = Colours.white
+                        cell.userName.text = "Hidden by Filter"
+                        cell.userName.textColor = Colours.grayDark.withAlphaComponent(0.6)
+                        cell.userTag.setTitle("", for: .normal)
+                        cell.date.text = ""
+                        cell.profileImageView.setImage(UIImage(), for: .normal)
+                        cell.profileImageView2.setImage(UIImage(), for: .normal)
+                        cell.moreImage.image = UIImage()
+                        cell.rep1.setImage(UIImage(), for: .normal)
+                        cell.like1.setImage(UIImage(), for: .normal)
+                        cell.boost1.setImage(UIImage(), for: .normal)
+                        cell.more1.setImage(UIImage(), for: .normal)
+                        cell.warningB.backgroundColor = UIColor.clear
+                        cell.warningB.setTitle("", for: .normal)
+                        cell.toot.text = "Manage filters via the Toot Filters section."
+                        cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.21)
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                    }
+                }
                 
                 if StoreStruct.statusesHome[indexPath.row].id == "loadmorehere" {
                     
@@ -2446,6 +2484,42 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 
                 
                 
+                var filtersAr: [Bool] = []
+                let _ = StoreStruct.allCurrentFilters.map({
+                    if $0.context.contains(Context2.public) {
+                        if (StoreStruct.statusesHome[indexPath.row].reblog?.content ?? StoreStruct.statusesHome[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
+                            filtersAr.append(true)
+                        } else {
+                            filtersAr.append(false)
+                        }
+                    }
+                })
+                for x in filtersAr {
+                    if x == true {
+                        let cell = tableViewL.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
+                        cell.backgroundColor = Colours.white
+                        cell.userName.text = "Hidden by Filter"
+                        cell.userName.textColor = Colours.grayDark.withAlphaComponent(0.6)
+                        cell.userTag.setTitle("", for: .normal)
+                        cell.date.text = ""
+                        cell.profileImageView.setImage(UIImage(), for: .normal)
+                        cell.profileImageView2.setImage(UIImage(), for: .normal)
+                        cell.moreImage.image = UIImage()
+                        cell.rep1.setImage(UIImage(), for: .normal)
+                        cell.like1.setImage(UIImage(), for: .normal)
+                        cell.boost1.setImage(UIImage(), for: .normal)
+                        cell.more1.setImage(UIImage(), for: .normal)
+                        cell.warningB.backgroundColor = UIColor.clear
+                        cell.warningB.setTitle("", for: .normal)
+                        cell.toot.text = "Manage filters via the Toot Filters section."
+                        cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.21)
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                    }
+                }
+                
                 
                 
                 if StoreStruct.statusesLocal[indexPath.row].id == "loadmorehere" {
@@ -2708,6 +2782,42 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             } else {
                 
                 
+                
+                var filtersAr: [Bool] = []
+                let _ = StoreStruct.allCurrentFilters.map({
+                    if $0.context.contains(Context2.public) {
+                        if (StoreStruct.statusesHome[indexPath.row].reblog?.content ?? StoreStruct.statusesHome[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
+                            filtersAr.append(true)
+                        } else {
+                            filtersAr.append(false)
+                        }
+                    }
+                })
+                for x in filtersAr {
+                    if x == true {
+                        let cell = tableViewF.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
+                        cell.backgroundColor = Colours.white
+                        cell.userName.text = "Hidden by Filter"
+                        cell.userName.textColor = Colours.grayDark.withAlphaComponent(0.6)
+                        cell.userTag.setTitle("", for: .normal)
+                        cell.date.text = ""
+                        cell.profileImageView.setImage(UIImage(), for: .normal)
+                        cell.profileImageView2.setImage(UIImage(), for: .normal)
+                        cell.moreImage.image = UIImage()
+                        cell.rep1.setImage(UIImage(), for: .normal)
+                        cell.like1.setImage(UIImage(), for: .normal)
+                        cell.boost1.setImage(UIImage(), for: .normal)
+                        cell.more1.setImage(UIImage(), for: .normal)
+                        cell.warningB.backgroundColor = UIColor.clear
+                        cell.warningB.setTitle("", for: .normal)
+                        cell.toot.text = "Manage filters via the Toot Filters section."
+                        cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.21)
+                        let bgColorView = UIView()
+                        bgColorView.backgroundColor = Colours.white
+                        cell.selectedBackgroundView = bgColorView
+                        return cell
+                    }
+                }
                 
                 
                 if StoreStruct.statusesFederated[indexPath.row].id == "loadmorehere" {
