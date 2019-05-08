@@ -26,6 +26,7 @@ class WOViewController: UIViewController {
 	let panningLength: CGFloat = 400
 	// State
 	var validatingPanning = false
+    var oneTime = true
 	
 	init() {
 		super.init(nibName: nil, bundle: nil)
@@ -163,7 +164,18 @@ extension WOViewController {
 		case .changed:
 			self.updateFrame(rect: insideFrame(objectFrame: targetRect,
                                                superViewSize: UIScreen.main.bounds.size, inset: 0))
+            if locationInWindow.x < 30 || locationInWindow.x > UIScreen.main.bounds.width - 30 || locationInWindow.y < 30 || locationInWindow.y > UIScreen.main.bounds.height - 30 {
+                if self.oneTime {
+                    let imp = UIImpactFeedbackGenerator(style: .light)
+                    imp.impactOccurred()
+                    self.oneTime = false
+                }
+            }
 		case .ended:
+            if locationInWindow.x < 30 || locationInWindow.x > UIScreen.main.bounds.width - 30 || locationInWindow.y < 30 || locationInWindow.y > UIScreen.main.bounds.height - 30 {
+                WOMaintainer.dismiss(completion: nil)
+            }
+            self.oneTime = true
 			let inside = insideFrame(objectFrame: view.frame,
                                      superViewSize: UIScreen.main.bounds.size, inset: 12)
 			let sided = sidedFrame(objectFrame: inside,
