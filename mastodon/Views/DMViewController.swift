@@ -396,7 +396,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToSettings), name: NSNotification.Name(rawValue: "goToSettings3"), object: nil)
         
         self.view.backgroundColor = Colours.white
-        self.title = "Direct Messages"
+        self.title = "Messages"
         self.removeTabbarItemsText()
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)

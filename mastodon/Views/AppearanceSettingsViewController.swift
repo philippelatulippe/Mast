@@ -181,7 +181,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
         if section == 0 {
             title.text = "App Icon".localized
         } else if section == 1 {
-            title.text = "App Icon".localized
+            title.text = "App Hue".localized
         } else if section == 2 {
             title.text = "Theme".localized
         } else if section == 3 {

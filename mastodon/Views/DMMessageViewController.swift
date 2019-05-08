@@ -45,8 +45,25 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         super.didReceiveMemoryWarning()
     }
     
+    func removeTabbarItemsText() {
+        var offset: CGFloat = 6.0
+        if #available(iOS 11.0, *), traitCollection.horizontalSizeClass == .regular {
+            offset = 0.0
+        }
+        if let items = self.tabBarController?.tabBar.items {
+            for item in items {
+                item.title = ""
+                item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0);
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "500"
+        self.removeTabbarItemsText()
+        
         self.view.backgroundColor = Colours.white
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateThread), name: NSNotification.Name(rawValue: "updateDM"), object: nil)
@@ -98,6 +115,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                 $0.addTarget(self, action: #selector(self.didTouchOther), for: .touchUpInside)
             }.onTextViewDidChange { (item, textView) in
                 item.title = "\(500 - textView.text.count)"
+                self.title = "\(500 - textView.text.count)"
                 let isOverLimit = textView.text.count > 500
                 item.messageInputBar?.shouldManageSendButtonEnabledState = !isOverLimit
                 if isOverLimit {
@@ -298,12 +316,17 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                         }
                         coun += 1
                     })
+                
+//                let originImage = images[0].underlyingImage
+//                if originImage != nil {
+//                    let browser = SKPhotoBrowser(originImage: UIImage(), photos: images, animatedFromView: cell)
                     let browser = SKPhotoBrowser(photos: images)
                     browser.displayToolbar = true
                     browser.displayAction = true
                     browser.delegate = self
                     browser.initializePageIndex(0)
                     present(browser, animated: true, completion: nil)
+//                }
 
             }
         

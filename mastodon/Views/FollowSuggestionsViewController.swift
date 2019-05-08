@@ -208,6 +208,22 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
+                    .action(.default("Remove Suggestion".localized), image: UIImage(named: "block")) { (action, ind) in
+                        DispatchQueue.main.async {
+                            self.statusFollows = self.statusFollows.filter { $0 != self.statusFollows[indexPath.row] }
+                            self.tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .none)
+                            
+                            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                let notification = UINotificationFeedbackGenerator()
+                                notification.notificationOccurred(.success)
+                            }
+                        }
+                        
+                        let request = Accounts.deleteFollowSuggestion(id: sto[indexPath.row].id)
+                        StoreStruct.client.run(request) { (statuses) in
+                            print("removed")
+                        }
+                    }
                     .action(.default("Pinned".localized), image: UIImage(named: "pinned")) { (action, ind) in
                         
                         
