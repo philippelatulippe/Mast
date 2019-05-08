@@ -12,8 +12,10 @@ import MessageKit
 import AVKit
 import AVFoundation
 import SafariServices
+import Photos
+import MobileCoreServices
 
-class DMMessageViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate, SKPhotoBrowserDelegate {
+class DMMessageViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate, SKPhotoBrowserDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var messages: [MessageType] = []
     var mainStatus: [Status] = []
@@ -24,6 +26,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
     var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
     var lastUser = ""
+    let imag = UIImagePickerController()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -96,7 +99,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 7, left: 16, bottom: 4, right: 16)
         messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 5, left: 9, bottom: 5, right: 9)
         messageInputBar.setRightStackViewWidthConstant(to: 36, animated: false)
-        messageInputBar.setLeftStackViewWidthConstant(to: 42, animated: false)
+        messageInputBar.setLeftStackViewWidthConstant(to: 85, animated: false)
         messageInputBar.sendButton.imageView?.backgroundColor = UIColor.clear
         messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: false)
@@ -104,26 +107,6 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         messageInputBar.sendButton.title = nil
         messageInputBar.sendButton.imageView?.layer.cornerRadius = 0
         messageInputBar.sendButton.addTarget(self, action: #selector(self.didTouchSend), for: .touchUpInside)
-        
-        let charCountButton = InputBarButtonItem()
-            .configure {
-                $0.title = "500"
-                $0.contentHorizontalAlignment = .left
-                $0.setTitleColor(Colours.gray, for: .normal)
-                $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-                $0.setSize(CGSize(width: 40, height: 35), animated: false)
-                $0.addTarget(self, action: #selector(self.didTouchOther), for: .touchUpInside)
-            }.onTextViewDidChange { (item, textView) in
-                item.title = "\(500 - textView.text.count)"
-                self.title = "\(500 - textView.text.count)"
-                let isOverLimit = textView.text.count > 500
-                item.messageInputBar?.shouldManageSendButtonEnabledState = !isOverLimit
-                if isOverLimit {
-                    item.messageInputBar?.sendButton.isEnabled = false
-                }
-                let color = isOverLimit ? Colours.red : Colours.gray
-                item.setTitleColor(color, for: .normal)
-        }
         messageInputBar.sendButton
             .onEnabled { item in
                 UIView.animate(withDuration: 0.3, animations: {
@@ -134,7 +117,51 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                     self.messageInputBar.sendButton.image = UIImage(named: "direct")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
                 })
         }
-        let bottomItems = [charCountButton]
+        
+//        let charCountButton = InputBarButtonItem()
+//            .configure {
+//                $0.title = "500"
+//                $0.contentHorizontalAlignment = .left
+//                $0.setTitleColor(Colours.gray, for: .normal)
+//                $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+//                $0.setSize(CGSize(width: 40, height: 35), animated: false)
+//                $0.addTarget(self, action: #selector(self.didTouchOther), for: .touchUpInside)
+//            }.onTextViewDidChange { (item, textView) in
+//                item.title = "\(500 - textView.text.count)"
+//                self.title = "\(500 - textView.text.count)"
+//                let isOverLimit = textView.text.count > 500
+//                item.messageInputBar?.shouldManageSendButtonEnabledState = !isOverLimit
+//                if isOverLimit {
+//                    item.messageInputBar?.sendButton.isEnabled = false
+//                }
+//                let color = isOverLimit ? Colours.red : Colours.gray
+//                item.setTitleColor(color, for: .normal)
+//        }
+//        let bottomItems = [charCountButton]
+//        messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
+        
+        var camButton = InputBarButtonItem()
+            .configure {
+                $0.contentHorizontalAlignment = .left
+                $0.setSize(CGSize(width: 40, height: 35), animated: false)
+                $0.addTarget(self, action: #selector(self.didTouchCam), for: .touchUpInside)
+            }.onTextViewDidChange { (item, textView) in
+                self.title = "\(500 - textView.text.count)"
+                let isOverLimit = textView.text.count > 500
+                item.messageInputBar?.shouldManageSendButtonEnabledState = !isOverLimit
+                if isOverLimit {
+                    item.messageInputBar?.sendButton.isEnabled = false
+                }
+            }
+        camButton.image = UIImage(named: "camera")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+        var galButton = InputBarButtonItem()
+            .configure {
+                $0.contentHorizontalAlignment = .left
+                $0.setSize(CGSize(width: 40, height: 35), animated: false)
+                $0.addTarget(self, action: #selector(self.didTouchGal), for: .touchUpInside)
+            }
+        galButton.image = UIImage(named: "frame1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+        let bottomItems = [camButton, galButton]
         messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
         
         if self.mainStatus.isEmpty {} else {
@@ -332,50 +359,6 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         
     }
     
-//    func fetchEverything(_ id: String) {
-//        if self.mainStatus.isEmpty {} else {
-//            let request = Statuses.context(id: id)
-//            StoreStruct.client.run(request) { (statuses) in
-//                if let stat = (statuses.value) {
-//                    DispatchQueue.main.async {
-//                        self.allPosts = stat.ancestors + self.allPosts + stat.descendants
-//                        self.allPosts = self.allPosts.removeDuplicates()
-//                        let _ = self.allPosts.map({self.fetchEverything($0.id)})
-//
-//                        self.allPosts.map({
-//                            var theType = "0"
-//                            if $0.account.acct == StoreStruct.currentUser.acct {
-//                                theType = "1"
-//                            }
-//                            self.lastUser = $0.account.acct
-//
-//                            let sender = Sender(id: theType, displayName: "\($0.account.acct)")
-//                            let x = MockMessage.init(text: $0.content.stripHTML().replace("@\(StoreStruct.currentUser.acct) ", with: "").replace("@\(StoreStruct.currentUser.acct)\n", with: "").replace("@\(StoreStruct.currentUser.acct)", with: ""), sender: sender, messageId: $0.id, date: $0.createdAt)
-//                            self.messages.append(x)
-//                            self.allPosts.append($0)
-//
-//                            if $0.mediaAttachments.isEmpty {} else {
-//                                let url = URL(string: $0.mediaAttachments.first?.previewURL ?? "")
-//                                let imageData = try! Data(contentsOf: url!)
-//                                let image1 = UIImage(data: imageData)
-//                                let y = MockMessage.init(image: image1!, sender: sender, messageId: $0.id, date: $0.createdAt)
-//                                self.messages.append(y)
-//                                self.allPosts.append($0)
-//                            }
-//
-//                            self.ai.stopAnimating()
-//                            self.ai.alpha = 0
-//                            self.ai.removeFromSuperview()
-//
-//                            self.messagesCollectionView.reloadData()
-//                            self.messagesCollectionView.scrollToBottom()
-//                        })
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
     @objc func didTouchSend(sender: UIButton) {
         let impact = UIImpactFeedbackGenerator(style: .medium)
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -402,8 +385,176 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         }
     }
     
+    @objc func didTouchCam(sender: UIButton) {
+        let impact = UIImpactFeedbackGenerator(style: .light)
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            impact.impactOccurred()
+        }
+        
+        DispatchQueue.main.async {
+            AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+                if response {
+                    
+                    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+                        
+                        self.imag.delegate = self
+                        self.imag.sourceType = UIImagePickerController.SourceType.camera
+                        self.imag.mediaTypes = [kUTTypeMovie as String, kUTTypeImage as String]
+                        self.imag.allowsEditing = false
+                        
+                        self.present(self.imag, animated: true, completion: nil)
+                    }
+                    
+                } else {
+                    
+                }
+            }
+        }
+        
+    }
+    
+    @objc func didTouchGal(sender: UIButton) {
+        let impact = UIImpactFeedbackGenerator(style: .light)
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            impact.impactOccurred()
+        }
+        
+//        let pickerController = DKImagePickerController()
+//        pickerController.didSelectAssets = { (assets: [DKAsset]) in
+//            if assets.count == 0 {
+//                return
+//            }
+//
+//            //isvideocheck
+//            if assets[0].isVideo {
+//                //self.containsGifVid = true
+//                self.selectedImage1.isUserInteractionEnabled = true
+//                assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                    self.selectedImage1.image = image
+//                })
+//
+//                assets[0].fetchAVAsset(nil, completeBlock: { (avAsset, info) in
+//                    if let avassetURL = avAsset as? AVURLAsset {
+//                        //self.completeVidURL = avassetURL.url
+//                        self.isGifVid = true
+//                        self.textVideoURL = avassetURL.url as! NSURL
+//                        guard let video1 = try? Data(contentsOf: avassetURL.url) else { return }
+//                        self.gifVidData = video1
+//                    }
+//                })
+//
+//            } else {
+//                //self.containsGifVid = false
+//                if self.selectedImage1.image == nil {
+//                    if assets.count > 0 {
+//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage1.image = image
+//                        })
+//                    }
+//                    if assets.count > 1 {
+//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage1.image = image
+//                        })
+//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage2.image = image
+//                        })
+//                    }
+//                    if assets.count > 2 {
+//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage1.image = image
+//                        })
+//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage2.image = image
+//                        })
+//                        assets[2].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage3.image = image
+//                        })
+//                    }
+//                    if assets.count > 3 {
+//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage1.image = image
+//                        })
+//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage2.image = image
+//                        })
+//                        assets[2].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage3.image = image
+//                        })
+//                        assets[3].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage4.image = image
+//                        })
+//                    }
+//                    self.selectedImage1.isUserInteractionEnabled = true
+//                    self.selectedImage2.isUserInteractionEnabled = true
+//                    self.selectedImage3.isUserInteractionEnabled = true
+//                    self.selectedImage4.isUserInteractionEnabled = true
+//                } else if self.selectedImage2.image == nil {
+//                    if assets.count > 0 {
+//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage2.image = image
+//                        })
+//                    }
+//                    if assets.count > 1 {
+//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage2.image = image
+//                        })
+//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage3.image = image
+//                        })
+//                    }
+//                    if assets.count > 2 {
+//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage2.image = image
+//                        })
+//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage3.image = image
+//                        })
+//                        assets[2].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage4.image = image
+//                        })
+//                    }
+//                    self.selectedImage1.isUserInteractionEnabled = true
+//                    self.selectedImage2.isUserInteractionEnabled = true
+//                    self.selectedImage3.isUserInteractionEnabled = true
+//                    self.selectedImage4.isUserInteractionEnabled = true
+//                } else if self.selectedImage3.image == nil {
+//                    if assets.count > 0 {
+//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage3.image = image
+//                        })
+//                    }
+//                    if assets.count > 1 {
+//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage3.image = image
+//                        })
+//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage4.image = image
+//                        })
+//                    }
+//                    self.selectedImage3.isUserInteractionEnabled = true
+//                } else if self.selectedImage4.image == nil {
+//                    if assets.count > 0 {
+//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+//                            self.selectedImage4.image = image
+//                        })
+//                    }
+//                    self.selectedImage1.isUserInteractionEnabled = true
+//                    self.selectedImage2.isUserInteractionEnabled = true
+//                    self.selectedImage3.isUserInteractionEnabled = true
+//                    self.selectedImage4.isUserInteractionEnabled = true
+//                }
+//            }
+//        }
+//        pickerController.showsCancelButton = true
+//        pickerController.maxSelectableCount = 4
+//        pickerController.allowMultipleTypes = false
+//        pickerController.allowSwipeToSelect = false
+//        pickerController.assetType = .allAssets
+//        self.present(pickerController, animated: true) {}
+    }
+    
     @objc func didTouchOther(sender: UIButton) {
-        let impact = UIImpactFeedbackGenerator(style: .medium)
+        let impact = UIImpactFeedbackGenerator(style: .light)
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
             impact.impactOccurred()
         }

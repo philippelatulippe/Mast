@@ -164,7 +164,7 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
     
     var generalArray = ["General", "Appearance", "Notifications", "Biometric Lock", "Toot Filters", "Accounts"]
     var generalArrayDesc = ["From timelines to toots, and media content to gestures, change how things behave.", "Pick themes and hues, change the app icon, and decide how things look.", "Select which push notifications to subscribe to.", "Add a biometric lock to various sections of the app.", "Add and manage toot filters to decide what you want to see and hide from across the app.", "Add and manage multiple user accounts."]
-    var generalArrayIm = ["setset1", "setnight", "notifs0", "biolock2", "heavyse", "setpro"]
+    var generalArrayIm = ["setset1", "setnight", "notifs0", "biolock2", "filtset0", "setpro"]
     
     var otherArray = ["Rate Mast \u{2605}\u{2605}\u{2605}\u{2605}\u{2605}", "About Mast", "Tip Mast"]
     var otherArrayDesc = ["If you enjoy using Mast, please consider leaving a review on the App Store.", "Let me tell you a little bit about myself.", "Your generosity is greatly appreciated."]
