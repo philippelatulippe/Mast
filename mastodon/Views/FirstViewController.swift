@@ -157,9 +157,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 DispatchQueue.main.async {
-                    let controller = DetailViewController()
-                    controller.mainStatus.append(stat.status!)
-                    self.navigationController?.pushViewController(controller, animated: true)
+                    if let x = stat.status {
+                        let controller = DetailViewController()
+                        controller.mainStatus.append(x)
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    } else {
+                        let controller = ThirdViewController()
+                        controller.userIDtoUse = stat.account.id
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
                 }
             }
         }

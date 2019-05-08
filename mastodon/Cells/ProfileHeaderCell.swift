@@ -379,7 +379,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
                         self.settings.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .heavy)
                         self.settings.backgroundColor = Colours.tabSelected
                         self.settings.layer.borderColor = Colours.white.cgColor
-                        self.settings.layer.borderWidth = 0
+                        self.settings.layer.borderWidth = 2
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -388,7 +388,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
                         self.settings.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .heavy)
                         self.settings.backgroundColor = Colours.white
                         self.settings.layer.borderColor = Colours.white.cgColor
-                        self.settings.layer.borderWidth = 0
+                        self.settings.layer.borderWidth = 2
                     }
                 }
             }
@@ -736,7 +736,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
                         self.settings.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .heavy)
                         self.settings.backgroundColor = Colours.tabSelected
                         self.settings.layer.borderColor = Colours.white.cgColor
-                        self.settings.layer.borderWidth = 0
+                        self.settings.layer.borderWidth = 2
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -745,7 +745,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
                         self.settings.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .heavy)
                         self.settings.backgroundColor = Colours.white
                         self.settings.layer.borderColor = Colours.white.cgColor
-                        self.settings.layer.borderWidth = 0
+                        self.settings.layer.borderWidth = 2
                     }
                 }
             }

@@ -497,16 +497,21 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.didReceiveMemoryWarning()
     }
     
-    
     @objc func goToIDNoti() {
         sleep(2)
         let request = Notifications.notification(id: StoreStruct.curIDNoti)
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 DispatchQueue.main.async {
-                    let controller = DetailViewController()
-                    controller.mainStatus.append(stat.status!)
-                    self.navigationController?.pushViewController(controller, animated: true)
+                    if let x = stat.status {
+                        let controller = DetailViewController()
+                        controller.mainStatus.append(x)
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    } else {
+                        let controller = ThirdViewController()
+                        controller.userIDtoUse = stat.account.id
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
                 }
             }
         }
@@ -2029,6 +2034,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     
                 }
+                .action(.default("Follows/Followers".localized), image: UIImage(named: "profile")) { (action, ind) in
+                    
+                    DispatchQueue.main.async {
+                        let controller = FollowersViewController()
+                        controller.profileStatus = self.chosenUser.id
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
                 
                 
                 .action(.default(rebText), image: rebImage) { (action, ind) in
@@ -2426,6 +2439,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                      
                     DispatchQueue.main.async {
                         let controller = SearchViewController()
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
+                .action(.default("Follows/Followers".localized), image: UIImage(named: "profile")) { (action, ind) in
+                    
+                    DispatchQueue.main.async {
+                        let controller = FollowersViewController()
+                        controller.profileStatus = self.chosenUser.id
                         self.navigationController?.pushViewController(controller, animated: true)
                     }
                 }
@@ -3690,18 +3711,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             selection.impactOccurred()
         }
         
-//        let request = Accounts.following(id: self.chosenUser.id)
-//        StoreStruct.client.run(request) { (statuses) in
-//            if let stat = (statuses.value) {
-//                DispatchQueue.main.async {
-                    let controller = FollowersViewController()
-//                    controller.statusFollows = stat
-                    controller.profileStatus = self.chosenUser.id
-                    self.navigationController?.pushViewController(controller, animated: true)
-//                }
-//            }
-//        }
-        
+        let controller = FollowersViewController()
+        controller.profileStatus = self.chosenUser.id
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func touchHeaderImage(_ sender: UIButton) {
