@@ -72,7 +72,7 @@ class NewListViewController: UIViewController, UITextFieldDelegate {
             tootLabel.setTitle("Update", for: .normal)
         }
         tootLabel.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
-        tootLabel.setTitleColor(Colours.grayLight2, for: .normal)
+        tootLabel.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
         tootLabel.contentHorizontalAlignment = .right
         tootLabel.addTarget(self, action: #selector(didTouchUpInsideTootButton), for: .touchUpInside)
         self.view.addSubview(tootLabel)
@@ -178,7 +178,7 @@ class NewListViewController: UIViewController, UITextFieldDelegate {
         if (textView.text?.count)! > 0 {
             tootLabel.setTitleColor(Colours.tabSelected, for: .normal)
         } else {
-            tootLabel.setTitleColor(Colours.grayLight2, for: .normal)
+            tootLabel.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
         }
     }
     

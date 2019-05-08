@@ -65,8 +65,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let request = FilterToots.all()
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
+                self.currentTags = self.currentTags + stat
                 DispatchQueue.main.async {
-                    self.currentTags = self.currentTags + stat
                     self.currentTags = self.currentTags.removeDuplicates()
                     self.tableView.reloadData()
                 }
@@ -78,8 +78,24 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
+    func removeTabbarItemsText() {
+        var offset: CGFloat = 6.0
+        if #available(iOS 11.0, *), traitCollection.horizontalSizeClass == .regular {
+            offset = 0.0
+        }
+        if let items = self.tabBarController?.tabBar.items {
+            for item in items {
+                item.title = ""
+                item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0);
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Toot Filters"
+        self.removeTabbarItemsText()
         
         //NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
@@ -181,11 +197,12 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         vw.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40)
         let title = UILabel()
         title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
-        if self.currentTags.count == 0 {
-            title.text = "No Toot Filters"
-        } else {
-            title.text = "Toot Filters"
-        }
+//        if self.currentTags.count == 0 {
+//            title.text = "No Toot Filters"
+//        } else {
+//            title.text = "Toot Filters"
+//        }
+        title.text = "Add New"
         title.textColor = Colours.grayDark2
         title.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         vw.addSubview(title)

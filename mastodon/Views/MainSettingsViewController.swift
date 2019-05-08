@@ -162,9 +162,9 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
         return vw
     }
     
-    var generalArray = ["General", "Appearance", "Notifications", "Biometric Lock", "Accounts"]
-    var generalArrayDesc = ["From timelines to toots, and media content to gestures, change how things behave.", "Pick themes and hues, change the app icon, and decide how things look.", "Select which push notifications to subscribe to.", "Add a biometric lock to various sections of the app.", "Add and manage multiple user accounts."]
-    var generalArrayIm = ["setset1", "setnight", "notifs0", "biolock2", "setpro"]
+    var generalArray = ["General", "Appearance", "Notifications", "Biometric Lock", "Toot Filters", "Accounts"]
+    var generalArrayDesc = ["From timelines to toots, and media content to gestures, change how things behave.", "Pick themes and hues, change the app icon, and decide how things look.", "Select which push notifications to subscribe to.", "Add a biometric lock to various sections of the app.", "Add and manage toot filters to decide what you want to see and hide from across the app.", "Add and manage multiple user accounts."]
+    var generalArrayIm = ["setset1", "setnight", "notifs0", "biolock2", "heavyse", "setpro"]
     
     var otherArray = ["Rate Mast \u{2605}\u{2605}\u{2605}\u{2605}\u{2605}", "About Mast", "Tip Mast"]
     var otherArrayDesc = ["If you enjoy using Mast, please consider leaving a review on the App Store.", "Let me tell you a little bit about myself.", "Your generosity is greatly appreciated."]
@@ -172,7 +172,7 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 5
+            return 6
         } else {
             return 3
         }
@@ -239,6 +239,10 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
             } else if indexPath.row == 3 {
                 // biometrics
                 let controller = LockSettingsViewController()
+                self.navigationController?.pushViewController(controller, animated: true)
+            } else if indexPath.row == 4 {
+                // filters
+                let controller = FiltersViewController()
                 self.navigationController?.pushViewController(controller, animated: true)
             } else {
                 // all accounts

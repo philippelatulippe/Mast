@@ -70,7 +70,7 @@ class NewHexViewController: UIViewController, UITextViewDelegate {
         tootLabel.frame = CGRect(x: CGFloat(self.view.bounds.width - 175), y: CGFloat(closeB), width: CGFloat(150), height: CGFloat(36))
         tootLabel.setTitle("Set", for: .normal)
         tootLabel.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
-        tootLabel.setTitleColor(Colours.grayLight2, for: .normal)
+        tootLabel.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
         tootLabel.contentHorizontalAlignment = .right
         tootLabel.addTarget(self, action: #selector(didTouchUpInsideTootButton), for: .touchUpInside)
         self.view.addSubview(tootLabel)
@@ -177,7 +177,7 @@ class NewHexViewController: UIViewController, UITextViewDelegate {
         if (textView.text?.count)! > 0 {
             tootLabel.setTitleColor(Colours.tabSelected, for: .normal)
         } else {
-            tootLabel.setTitleColor(Colours.grayLight2, for: .normal)
+            tootLabel.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
         }
         self.hex = textView.text
     }
