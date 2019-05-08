@@ -5209,10 +5209,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                             self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
                             self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                            springWithDelay(duration: 0.5, delay: 0, animations: {
-                                self.newUpdatesB1.alpha = 1
-                                self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                            })
+                            if newestC != 0 {
+                                springWithDelay(duration: 0.5, delay: 0, animations: {
+                                    self.newUpdatesB1.alpha = 1
+                                    self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                })
+                            }
                             self.countcount1 = stat.count
                             
                             if stat.count > 0 {
@@ -5287,10 +5289,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                             self.newUpdatesB2.setTitle("\(newestC)  ", for: .normal)
                             self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                            springWithDelay(duration: 0.5, delay: 0, animations: {
-                                self.newUpdatesB2.alpha = 1
-                                self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                            })
+                            if newestC != 0 {
+                                springWithDelay(duration: 0.5, delay: 0, animations: {
+                                    self.newUpdatesB2.alpha = 1
+                                    self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                })
+                            }
                             self.countcount2 = stat.count
                             
                             if stat.count > 0 {
@@ -5365,10 +5369,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                             self.newUpdatesB3.setTitle("\(newestC)  ", for: .normal)
                             self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                            springWithDelay(duration: 0.5, delay: 0, animations: {
-                                self.newUpdatesB3.alpha = 1
-                                self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                            })
+                            if newestC != 0 {
+                                springWithDelay(duration: 0.5, delay: 0, animations: {
+                                    self.newUpdatesB3.alpha = 1
+                                    self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                })
+                            }
                             self.countcount3 = stat.count
                             
                             if stat.count > 0 {

@@ -1964,7 +1964,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
         
         let request = Timelines.public(local: true, range: .max(id: StoreStruct.newInstanceTags.last?.id ?? "", limit: 5000))
         let testClient = Client(
-            baseURL: "https://\(StoreStruct.shared.currentInstance.instanceText)",
+            baseURL: "https://\(StoreStruct.instanceText)",
             accessToken: StoreStruct.client.accessToken ?? ""
         )
         testClient.run(request) { (statuses) in
@@ -1982,10 +1982,9 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
     
     @objc func refreshCont() {
         
-        
         let request = Timelines.public(local: true, range: .min(id: StoreStruct.newInstanceTags.first?.id ?? "", limit: 5000))
         let testClient = Client(
-            baseURL: "https://\(StoreStruct.shared.currentInstance.instanceText)",
+            baseURL: "https://\(StoreStruct.instanceText)",
             accessToken: StoreStruct.client.accessToken ?? ""
         )
         testClient.run(request) { (statuses) in

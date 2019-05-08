@@ -601,7 +601,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshCont), name: NSNotification.Name(rawValue: "refnoti0"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshCont), name: NSNotification.Name(rawValue: "refpush1"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.currentSegIndex), name: NSNotification.Name(rawValue: "setCurrentSegmentIndex"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshgraph), name: NSNotification.Name(rawValue: "refrefref"), object: nil)
@@ -887,6 +888,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         self.navigationController?.view.addSubview(settingsButton)
         
         self.tabBarController?.tabBar.items?[1].badgeValue = nil
+        
+        self.refreshCont()
         
         StoreStruct.currentPage = 1
         //        self.tableView.reloadData()
@@ -4773,6 +4776,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         //        DispatchQueue.global(qos: .userInitiated).async {
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
+                if stat == nil { return }
                 var newestC = StoreStruct.notifications.count
                 
                 StoreStruct.notifications = stat + StoreStruct.notifications
@@ -4793,10 +4797,12 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                             self.newUpdatesB2.setTitle("\(newestC)  ", for: .normal)
                             self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                            springWithDelay(duration: 0.5, delay: 0, animations: {
-                                self.newUpdatesB2.alpha = 1
-                                self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                            })
+                            if newestC != 0 {
+                                springWithDelay(duration: 0.5, delay: 0, animations: {
+                                    self.newUpdatesB2.alpha = 1
+                                    self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                })
+                            }
                             self.countcount2 = stat.count
                             
                             
@@ -4830,6 +4836,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         //        DispatchQueue.global(qos: .userInitiated).async {
         StoreStruct.client.run(request2) { (statuses) in
             if let stat = (statuses.value) {
+                if stat == nil { return }
                 var newestC2 = StoreStruct.notificationsMentions.count
                 
                 var co = 0
@@ -4847,10 +4854,12 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         if self.currentIndex == 1 {
                             self.newUpdatesB1.setTitle("\(newestC2)  ", for: .normal)
                             self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
-                            springWithDelay(duration: 0.5, delay: 0, animations: {
-                                self.newUpdatesB1.alpha = 1
-                                self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
-                            })
+                            if newestC2 != 0 {
+                                springWithDelay(duration: 0.5, delay: 0, animations: {
+                                    self.newUpdatesB1.alpha = 1
+                                    self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                })
+                            }
                             self.countcount1 = co
                         }
                         

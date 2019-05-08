@@ -680,7 +680,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     @objc func stopindi() {
         self.ai.alpha = 0
         self.ai.stopAnimating()
-        StoreStruct.newdrafts.remove(at: StoreStruct.newdrafts.count - 1)
+        if StoreStruct.newdrafts.count > 0 {
+            StoreStruct.newdrafts.remove(at: StoreStruct.newdrafts.count - 1)
+        }
         do {
             try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
         } catch {
@@ -837,6 +839,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     @objc func addBadge() {
         self.tabBar.items?[1].badgeValue = "1"
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "refnoti0"), object: nil)
     }
     
     func streamDataDirect() {
