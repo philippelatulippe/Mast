@@ -2675,7 +2675,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCell", for: indexPath) as! ProfileHeaderCell
                     cell.backgroundColor = Colours.white
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                    bgColorView.backgroundColor = Colours.white
                     cell.selectedBackgroundView = bgColorView
                     return cell
                 } else {
@@ -2777,7 +2777,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                         
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                        bgColorView.backgroundColor = Colours.white
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     } else {
@@ -2879,7 +2879,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             }
                             
                             let bgColorView = UIView()
-                            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                            bgColorView.backgroundColor = Colours.white
                             cell.selectedBackgroundView = bgColorView
                             return cell
                     }
@@ -2981,7 +2981,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                    bgColorView.backgroundColor = Colours.white
                     cell.selectedBackgroundView = bgColorView
                     return cell
                 } else {
@@ -3083,7 +3083,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                         
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                        bgColorView.backgroundColor = Colours.white
                         cell.selectedBackgroundView = bgColorView
                         return cell
                         
@@ -3184,7 +3184,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                         
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                        bgColorView.backgroundColor = Colours.white
                         cell.selectedBackgroundView = bgColorView
                         return cell
                         
@@ -3197,7 +3197,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileHeaderCellImage", for: indexPath) as! ProfileHeaderCellImage
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                bgColorView.backgroundColor = Colours.white
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
@@ -3205,7 +3205,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 cell.configure(self.profileStatuses, status2: self.profileStatusesHasImage)
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                bgColorView.backgroundColor = Colours.white
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }

@@ -207,7 +207,7 @@ class LockSettingsViewController: UIViewController, UITableViewDelegate, UITable
         cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
         cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
         let bgColorView = UIView()
-        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+        bgColorView.backgroundColor = Colours.white
         cell.selectedBackgroundView = bgColorView
         if indexPath.row == 0 {
             if (UserDefaults.standard.object(forKey: "biometrics") == nil) || (UserDefaults.standard.object(forKey: "biometrics") as! Int == 0) {

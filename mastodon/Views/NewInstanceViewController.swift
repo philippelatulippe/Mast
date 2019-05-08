@@ -164,75 +164,75 @@ class NewInstanceViewController: UIViewController, UITextFieldDelegate {
         self.textView.text = StoreStruct.tappedTag
         tootLabel.setTitleColor(Colours.tabSelected, for: .normal)
         
-//        print(StoreStruct.tappedTag)
-//        StoreStruct.client = Client(baseURL: "http://\(StoreStruct.tappedTag)")
-//        let request = Clients.register(
-//            clientName: "Mast",
-//            redirectURI: "com.shi.mastodon://success",
-//            scopes: [.read, .write, .follow, .push],
-//            website: "https://twitter.com/jpeguin"
-//        )
-//        StoreStruct.client.run(request) { (application) in
-//
-//            print("the application: \(application)")
-//
-//            if application.value == nil {
-//
-//
-//                var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
-//                var offset = 88
-//                var newoff = 45
-//                if UIDevice().userInterfaceIdiom == .phone {
-//                    switch UIScreen.main.nativeBounds.height {
-//                    case 2688:
-//                        offset = 88
-//                        newoff = 45
-//                    case 2436, 1792:
-//                        offset = 88
-//                        newoff = 45
-//                    default:
-//                        offset = 64
-//                        newoff = 24
-//                        tabHeight = Int(UITabBarController().tabBar.frame.size.height)
-//                    }
-//                }
-//
-//
-//                DispatchQueue.main.async {
-//                    let statusAlert = StatusAlert()
-//                    statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-//                    statusAlert.title = "Not a valid Instance".localized
-//                    statusAlert.contentColor = Colours.grayDark
-//                    statusAlert.message = "Please enter an Instance name like mastodon.technology"
-//                    statusAlert.show(in: self.view, withVerticalPosition: .top(offset: CGFloat(offset + 10)))
-//                }
-//
-//            } else {
-//
-//
-//                DispatchQueue.main.async {
-//                    // go to next view
-//                    StoreStruct.shared.currentInstance.instanceText = self.textView.text ?? ""
-//
-//                    if StoreStruct.instanceLocalToAdd.contains(StoreStruct.shared.currentInstance.instanceText.lowercased()) {} else {
-//                        StoreStruct.instanceLocalToAdd.append(StoreStruct.shared.currentInstance.instanceText.lowercased())
-//                        UserDefaults.standard.set(StoreStruct.instanceLocalToAdd, forKey: "instancesLocal")
-//                    }
-//                    self.textView.resignFirstResponder()
-//                    self.dismiss(animated: true, completion: nil)
-//
-//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadLists"), object: nil)
-//                    if StoreStruct.currentPage == 0 {
-//                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
-//                    } else if StoreStruct.currentPage == 1 {
-//                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
-//                    } else {
-//                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
-//                    }
-//                }
-//
-//            }
-//        }
+        //        print(StoreStruct.tappedTag)
+        //        StoreStruct.client = Client(baseURL: "http://\(StoreStruct.tappedTag)")
+        //        let request = Clients.register(
+        //            clientName: "Mast",
+        //            redirectURI: "com.shi.mastodon://success",
+        //            scopes: [.read, .write, .follow, .push],
+        //            website: "https://twitter.com/jpeguin"
+        //        )
+        //        StoreStruct.client.run(request) { (application) in
+        //
+        //            print("the application: \(application)")
+        //
+        //            if application.value == nil {
+        //
+        //
+        //                var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
+        //                var offset = 88
+        //                var newoff = 45
+        //                if UIDevice().userInterfaceIdiom == .phone {
+        //                    switch UIScreen.main.nativeBounds.height {
+        //                    case 2688:
+        //                        offset = 88
+        //                        newoff = 45
+        //                    case 2436, 1792:
+        //                        offset = 88
+        //                        newoff = 45
+        //                    default:
+        //                        offset = 64
+        //                        newoff = 24
+        //                        tabHeight = Int(UITabBarController().tabBar.frame.size.height)
+        //                    }
+        //                }
+        //
+        //
+        //                DispatchQueue.main.async {
+        //                    let statusAlert = StatusAlert()
+        //                    statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+        //                    statusAlert.title = "Not a valid Instance".localized
+        //                    statusAlert.contentColor = Colours.grayDark
+        //                    statusAlert.message = "Please enter an Instance name like mastodon.technology"
+        //                    statusAlert.show(in: self.view, withVerticalPosition: .top(offset: CGFloat(offset + 10)))
+        //                }
+        //
+        //            } else {
+        //
+        //
+        //                DispatchQueue.main.async {
+        //                    // go to next view
+        //                    StoreStruct.shared.currentInstance.instanceText = self.textView.text ?? ""
+        //
+        //                    if StoreStruct.instanceLocalToAdd.contains(StoreStruct.shared.currentInstance.instanceText.lowercased()) {} else {
+        //                        StoreStruct.instanceLocalToAdd.append(StoreStruct.shared.currentInstance.instanceText.lowercased())
+        //                        UserDefaults.standard.set(StoreStruct.instanceLocalToAdd, forKey: "instancesLocal")
+        //                    }
+        //                    self.textView.resignFirstResponder()
+        //                    self.dismiss(animated: true, completion: nil)
+        //
+        //                    NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadLists"), object: nil)
+        //                    if StoreStruct.currentPage == 0 {
+        //                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
+        //                    } else if StoreStruct.currentPage == 1 {
+        //                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
+        //                    } else {
+        //                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
+        //                    }
+        //                }
+        //
+        //            }
+        //        }
     }
     
     @objc func keyboardWillShow(notification: Notification) {
@@ -328,64 +328,67 @@ class NewInstanceViewController: UIViewController, UITextFieldDelegate {
             
             
             DispatchQueue.main.async {
-            
-            if application.value == nil {
                 
-                
-                var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
-                var offset = 88
-                var newoff = 45
-                if UIDevice().userInterfaceIdiom == .phone {
-                    switch UIScreen.main.nativeBounds.height {
-                    case 2688:
-                        offset = 88
-                        newoff = 45
-                    case 2436, 1792:
-                        offset = 88
-                        newoff = 45
-                    default:
-                        offset = 64
-                        newoff = 24
-                        tabHeight = Int(UITabBarController().tabBar.frame.size.height)
-                    }
-                }
-                
-                
-                DispatchQueue.main.async {
-                    let statusAlert = StatusAlert()
-                    statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                    statusAlert.title = "Not a valid Instance (may be closed or dead)".localized
-                    statusAlert.contentColor = Colours.grayDark
-                    statusAlert.message = "Please enter an Instance name like mastodon.technology"
-                    statusAlert.show(in: self.view, withVerticalPosition: .top(offset: CGFloat(offset + 10)))
-                }
-                
-            } else {
-                
-                
-                DispatchQueue.main.async {
-                // go to next view
-                StoreStruct.shared.currentInstance.instanceText = self.textView.text ?? ""
+                if application.value == nil {
                     
-                    if StoreStruct.instanceLocalToAdd.contains(StoreStruct.shared.currentInstance.instanceText.lowercased()) {} else {
-                        StoreStruct.instanceLocalToAdd.append(StoreStruct.shared.currentInstance.instanceText.lowercased())
-                        UserDefaults.standard.set(StoreStruct.instanceLocalToAdd, forKey: "instancesLocal")
+                    
+                    var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
+                    var offset = 88
+                    var newoff = 45
+                    if UIDevice().userInterfaceIdiom == .phone {
+                        switch UIScreen.main.nativeBounds.height {
+                        case 2688:
+                            offset = 88
+                            newoff = 45
+                        case 2436, 1792:
+                            offset = 88
+                            newoff = 45
+                        default:
+                            offset = 64
+                            newoff = 24
+                            tabHeight = Int(UITabBarController().tabBar.frame.size.height)
+                        }
                     }
-                self.textView.resignFirstResponder()
-                self.dismiss(animated: true, completion: nil)
-                
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadLists"), object: nil)
-                
-                    if StoreStruct.currentPage == 0 {
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
-                    } else if StoreStruct.currentPage == 1 {
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
-                    } else {
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
+                    
+                    
+                    DispatchQueue.main.async {
+                        let statusAlert = StatusAlert()
+                        statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                        statusAlert.title = "Not a valid Instance (may be closed or dead)".localized
+                        statusAlert.contentColor = Colours.grayDark
+                        statusAlert.message = "Please enter an Instance name like mastodon.technology"
+                        statusAlert.show(in: self.view, withVerticalPosition: .top(offset: CGFloat(offset + 10)))
                     }
+                    
+                } else {
+                    
+                    
+                    DispatchQueue.main.async {
+                        // go to next view
+                        StoreStruct.shared.currentInstance.instanceText = self.textView.text ?? ""
+                        StoreStruct.instanceText = self.textView.text ?? ""
+                        
+                        if StoreStruct.instanceLocalToAdd.contains(StoreStruct.shared.currentInstance.instanceText.lowercased()) {} else {
+                            StoreStruct.instanceLocalToAdd.append(StoreStruct.shared.currentInstance.instanceText.lowercased())
+                            UserDefaults.standard.set(StoreStruct.instanceLocalToAdd, forKey: "instancesLocal")
+                        }
+                        self.textView.resignFirstResponder()
+                        self.dismiss(animated: true, completion: nil)
+                        
+                        if StoreStruct.currentPage == 0 {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
+                        } else if StoreStruct.currentPage == 1 {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
+                        } else if StoreStruct.currentPage == 101010 {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
+                        } else {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance4"), object: self)
+                        }
+                        
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadLists"), object: nil)
+                    }
+                    
                 }
-                
-            }
             }
         }
         

@@ -13,8 +13,9 @@ import SafariServices
 import StatusAlert
 import SAConfettiView
 import UserNotifications
+import MessageUI
 
-class AccountSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate, UIGestureRecognizerDelegate, UNUserNotificationCenterDelegate {
+class AccountSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate, UIGestureRecognizerDelegate, UNUserNotificationCenterDelegate, MFMailComposeViewControllerDelegate {
     
     var tap: UITapGestureRecognizer!
     var safariVC: SFSafariViewController?
@@ -24,6 +25,10 @@ class AccountSettingsViewController: UIViewController, UITableViewDelegate, UITa
     var vc: ViewController?
     let z1 = Account.getAccounts()
     let z2 = InstanceData.getAllInstances()
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
     
     @objc func load() {
         DispatchQueue.main.async {
@@ -233,6 +238,42 @@ class AccountSettingsViewController: UIViewController, UITableViewDelegate, UITa
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
+                    .action(.default(" Instance Details".localized), image: UIImage(named: "instats")) { (action, ind) in
+                        
+                        var instImage = UIImage()
+                        if StoreStruct.currentInstanceDetails.first?.thumbnail != nil {
+                            if let url = URL(string: StoreStruct.currentInstanceDetails.first?.thumbnail ?? "https://mastodon.social/") {
+                                let data = try? Data(contentsOf: url)
+                                instImage = UIImage(data: data!) ?? UIImage()
+                            }
+                        }
+                        Alertift.actionSheet(title: "\(StoreStruct.currentInstanceDetails.first?.title.stripHTML() ?? "Instance") (\(StoreStruct.currentInstanceDetails.first?.version ?? "1.0.0"))", message: "\(StoreStruct.currentInstanceDetails.first?.stats.userCount ?? 0) users\n\(StoreStruct.currentInstanceDetails.first?.stats.statusCount ?? 0) statuses\n\(StoreStruct.currentInstanceDetails.first?.stats.domainCount ?? 0) domains\n\n\(StoreStruct.currentInstanceDetails.first?.description.stripHTML() ?? "")")
+                            .image(instImage)
+                            .backgroundColor(Colours.white)
+                            .titleTextColor(Colours.grayDark)
+                            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                            .messageTextAlignment(.left)
+                            .titleTextAlignment(.left)
+                            .action(.default("Instance Admin Contact".localized), image: nil) { (action, ind) in
+                                if MFMailComposeViewController.canSendMail() {
+                                    let mail = MFMailComposeViewController()
+                                    mail.mailComposeDelegate = self
+                                    mail.setToRecipients([StoreStruct.currentInstanceDetails.first?.email ?? "shihab.mehboob@hotmail.com"])
+                                    
+                                    self.present(mail, animated: true)
+                                } else {
+                                    // show failure alert
+                                }
+                            }
+                            .action(.cancel("Dismiss"))
+                            .finally { action, index in
+                                if action.style == .cancel {
+                                    return
+                                }
+                            }
+                            .popover(anchorView: self.view)
+                            .show(on: self)
+                    }
                     .action(.cancel("Dismiss"))
                     .finally { action, index in
                         if action.style == .cancel {

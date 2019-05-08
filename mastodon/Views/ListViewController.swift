@@ -192,8 +192,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = StoreStruct.currentListTitle
-        self.removeTabbarItemsText()
         
         //NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
@@ -255,6 +253,16 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
         
+//        tableView.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
+//            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+//                let selection = UISelectionFeedbackGenerator()
+//                selection.selectionChanged()
+//            }
+//            self?.refreshCont()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+//                self?.tableView.cr.endHeaderRefresh()
+//            })
+//        }
         
         self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40)
         self.view.addSubview(self.ai)
@@ -335,7 +343,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // Table stuff
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
+        return 40
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -372,7 +380,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         } else {
         
-            if indexPath.row == StoreStruct.currentList.count - 10 {
+            if indexPath.row == StoreStruct.currentList.count - 2 {
                 self.fetchMoreHome()
             }
             if StoreStruct.currentList[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.currentList[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
@@ -2250,23 +2258,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        }
     }
     
-    @objc func refreshCont(_ sender: Any) {
-        
-//            let request = Timelines.home(range: .min(id: StoreStruct.currentList.first?.id ?? "", limit: nil))
-//            DispatchQueue.global(qos: .userInitiated).async {
-//                StoreStruct.client.run(request) { (statuses) in
-//                    if let stat = (statuses.value) {
-//                        StoreStruct.currentList = stat + StoreStruct.currentList
-//                        DispatchQueue.main.async {
-//                            self.tableView.reloadData()
-//                            self.refreshControl.endRefreshing()
-//                        }
+    @objc func refreshCont() {
+//        let request = Timelines.home(range: .min(id: StoreStruct.currentList.first?.id ?? "", limit: nil))
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            StoreStruct.client.run(request) { (statuses) in
+//                if let stat = (statuses.value) {
+//                    StoreStruct.currentList = stat + StoreStruct.currentList
+//                    DispatchQueue.main.async {
+//                        self.tableView.reloadData()
+//                        self.refreshControl.endRefreshing()
 //                    }
 //                }
 //            }
-        
-        
-        
+//        }
     }
     
     

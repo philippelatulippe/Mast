@@ -356,7 +356,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
             cell.configure()
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+            bgColorView.backgroundColor = Colours.white
             cell.selectedBackgroundView = bgColorView
             cell.frame.size.width = 60
             cell.frame.size.height = 60
@@ -366,7 +366,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
             cell.configure()
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+            bgColorView.backgroundColor = Colours.white
             cell.selectedBackgroundView = bgColorView
             cell.frame.size.width = 60
             cell.frame.size.height = 60
@@ -391,7 +391,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                bgColorView.backgroundColor = Colours.white
                 cell.selectedBackgroundView = bgColorView
                 if indexPath.row == 1 {
                     if (UserDefaults.standard.object(forKey: "setGraph") == nil) || (UserDefaults.standard.object(forKey: "setGraph") as! Int == 0) {
@@ -463,7 +463,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                bgColorView.backgroundColor = Colours.white
                 cell.selectedBackgroundView = bgColorView
                 if indexPath.row == 3 {
                     if (UserDefaults.standard.object(forKey: "compav") == nil) || (UserDefaults.standard.object(forKey: "compav") as! Int == 0) {
@@ -517,7 +517,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                bgColorView.backgroundColor = Colours.white
                 cell.selectedBackgroundView = bgColorView
                 if indexPath.row == 2 {
                     if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
