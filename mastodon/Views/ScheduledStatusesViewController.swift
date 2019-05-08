@@ -175,7 +175,7 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
             let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduledCell", for: indexPath) as! ScheduledCell
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             return cell
         } else {
@@ -187,7 +187,7 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
                 cell.userName.textColor = Colours.grayDark.withAlphaComponent(0.38)
                 cell.toot.textColor = Colours.black
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
@@ -201,7 +201,7 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
                 cell.mainImageView.backgroundColor = Colours.white
                 cell.mainImageViewBG.backgroundColor = Colours.white
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }

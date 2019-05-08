@@ -339,7 +339,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 if indexPath.row == 0 {
                     if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
@@ -374,7 +374,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }
@@ -387,7 +387,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 if indexPath.row == 0 {
                     if (UserDefaults.standard.object(forKey: "boostpro3") == nil) || (UserDefaults.standard.object(forKey: "boostpro3") as! Int == 0) {
@@ -406,7 +406,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }
@@ -419,7 +419,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 if indexPath.row == 1 {
                     if (UserDefaults.standard.object(forKey: "emotisug") == nil) || (UserDefaults.standard.object(forKey: "emotisug") as! Int == 0) {
@@ -438,7 +438,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }
@@ -451,7 +451,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 if indexPath.row == 3 {
                     if (UserDefaults.standard.object(forKey: "linkcards") == nil) || (UserDefaults.standard.object(forKey: "linkcards") as! Int == 0) {
@@ -470,7 +470,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }
@@ -482,7 +482,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
             cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             return cell
         } else if indexPath.section == 5 {
@@ -494,7 +494,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 if indexPath.row == 2 {
                     if (UserDefaults.standard.object(forKey: "selectSwipe") == nil) || (UserDefaults.standard.object(forKey: "selectSwipe") as! Int == 0) {
@@ -521,7 +521,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }
@@ -534,7 +534,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 if indexPath.row == 0 {
                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -562,7 +562,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                     cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                     cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
+                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                     cell.selectedBackgroundView = bgColorView
                     return cell
                 } else {
@@ -573,7 +573,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                     cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                     cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
+                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                     cell.selectedBackgroundView = bgColorView
                     return cell
                 }
@@ -587,7 +587,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else if indexPath.row == 1 {
@@ -598,7 +598,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
@@ -609,7 +609,7 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
                 cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }

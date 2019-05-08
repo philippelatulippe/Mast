@@ -300,7 +300,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             return cell
         } else {
@@ -408,7 +408,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             return cell
         } else {
@@ -523,7 +523,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             return cell
         }

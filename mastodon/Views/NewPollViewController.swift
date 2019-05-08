@@ -276,7 +276,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
             cell.configure(StoreStruct.currentOptions[indexPath.row], count: "Option \(indexPath.row + 1)")
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             return cell
         } else if indexPath.section == 1 {
@@ -291,7 +291,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
             cell.configure(dText, count: "This poll will expire on:")
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             return cell
         } else {
@@ -302,7 +302,7 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
             cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
             cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             cell.switchView.setOn(false, animated: false)
             if indexPath.row == 0 {

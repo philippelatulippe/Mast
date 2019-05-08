@@ -250,7 +250,7 @@ class NotificationsSettingsViewController: UIViewController, UITableViewDelegate
             cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
             cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             if indexPath.row == 0 {
                 if (UserDefaults.standard.object(forKey: "pnmentions") == nil) || (UserDefaults.standard.object(forKey: "pnmentions") as! Bool == true) {
@@ -290,7 +290,7 @@ class NotificationsSettingsViewController: UIViewController, UITableViewDelegate
             cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
             cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             if indexPath.row == 0 {
                 if (UserDefaults.standard.object(forKey: "badgeMent") == nil) || (UserDefaults.standard.object(forKey: "badgeMent") as! Bool == true) {

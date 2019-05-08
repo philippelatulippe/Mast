@@ -834,7 +834,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                 }
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
                 
@@ -871,7 +871,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.toot.text = "Manage filters via the Toot Filters section."
                         cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.21)
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     }
@@ -1012,7 +1012,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                     }
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
+                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                     cell.selectedBackgroundView = bgColorView
                     return cell
                 } else {
@@ -1159,7 +1159,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                     }
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
+                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                     cell.selectedBackgroundView = bgColorView
                     return cell
                 }
@@ -1306,7 +1306,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                 }
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
@@ -1449,7 +1449,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                 }
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }
@@ -1469,7 +1469,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             return cell
             
@@ -1481,7 +1481,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             return cell
             
@@ -1507,7 +1507,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.boostButton.alpha = 0
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
                 
@@ -1527,7 +1527,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     cell.moreButton.tag = indexPath.row
                     cell.backgroundColor = Colours.white
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
+                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                     cell.selectedBackgroundView = bgColorView
                     return cell
                     
@@ -1546,7 +1546,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.moreButton.tag = indexPath.row
                         cell.backgroundColor = Colours.white
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                         
@@ -1565,7 +1565,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.moreButton.tag = indexPath.row
                         cell.backgroundColor = Colours.white
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                         
@@ -1662,7 +1662,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                 }
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
                 
@@ -1699,7 +1699,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.toot.text = "Manage filters via the Toot Filters section."
                         cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.21)
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     }
@@ -1839,7 +1839,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     } else {
@@ -1968,7 +1968,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                         
@@ -2118,7 +2118,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     } else {
@@ -2258,7 +2258,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     }

@@ -2196,7 +2196,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainFeedCell
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
@@ -2231,7 +2231,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         cell.toot.text = "Manage filters via the Toot Filters section."
                         cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.21)
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     }
@@ -2249,7 +2249,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     cell.profileImageView.backgroundColor = Colours.white3
                     cell.configure(status: "Load More", status2: "Tap to fetch more toots...")
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white3
+                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                     cell.selectedBackgroundView = bgColorView
                     return cell
                     
@@ -2361,7 +2361,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     } else {
@@ -2482,7 +2482,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     }
@@ -2499,7 +2499,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "celll", for: indexPath) as! MainFeedCell
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
@@ -2536,7 +2536,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         cell.toot.text = "Manage filters via the Toot Filters section."
                         cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.21)
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     }
@@ -2556,7 +2556,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     cell.profileImageView.backgroundColor = Colours.white3
                     cell.configure(status: "Load More", status2: "Tap to fetch more toots...")
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white3
+                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                     cell.selectedBackgroundView = bgColorView
                     return cell
                     
@@ -2670,7 +2670,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     } else {
@@ -2785,7 +2785,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     }
@@ -2798,7 +2798,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellf", for: indexPath) as! MainFeedCell
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
@@ -2835,7 +2835,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         cell.toot.text = "Manage filters via the Toot Filters section."
                         cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.21)
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     }
@@ -2854,7 +2854,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     cell.profileImageView.backgroundColor = Colours.white3
                     cell.configure(status: "Load More", status2: "Tap to fetch more toots...")
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white3
+                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                     cell.selectedBackgroundView = bgColorView
                     return cell
                     
@@ -2966,7 +2966,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     } else {
@@ -3081,7 +3081,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     }

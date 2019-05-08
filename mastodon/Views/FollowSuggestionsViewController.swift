@@ -159,7 +159,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellf", for: indexPath) as! FollowersCell
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
@@ -181,7 +181,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                 cell.userTag.textColor = Colours.grayDark.withAlphaComponent(0.38)
                 cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.74)
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             }

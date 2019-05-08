@@ -178,7 +178,7 @@ class SchemesSettingsViewController: UIViewController, UITableViewDelegate, UITa
         cell.userTag.textColor = Colours.black.withAlphaComponent(0.8)
         cell.toot.textColor = Colours.black.withAlphaComponent(0.5)
         let bgColorView = UIView()
-        bgColorView.backgroundColor = Colours.white
+        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
         cell.selectedBackgroundView = bgColorView
         return cell
     }

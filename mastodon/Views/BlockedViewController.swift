@@ -205,7 +205,7 @@ class BlockedViewController: UIViewController, UITableViewDelegate, UITableViewD
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellf", for: indexPath) as! MainFeedCell
             cell.backgroundColor = Colours.white
             let bgColorView = UIView()
-            bgColorView.backgroundColor = Colours.white
+            bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView
             return cell
         } else {
@@ -224,7 +224,7 @@ class BlockedViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.userTag.textColor = Colours.black
         cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.38)
         let bgColorView = UIView()
-        bgColorView.backgroundColor = Colours.white
+        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
         cell.selectedBackgroundView = bgColorView
         return cell
         

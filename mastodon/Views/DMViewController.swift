@@ -777,7 +777,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell444", for: indexPath) as! DMFeedCell
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
-                bgColorView.backgroundColor = Colours.white
+                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                 cell.selectedBackgroundView = bgColorView
                 return cell
             } else {
@@ -880,7 +880,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             }
                         }
                         let bgColorView = UIView()
-                        bgColorView.backgroundColor = Colours.white
+                        bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                         cell.selectedBackgroundView = bgColorView
                         return cell
                     
@@ -974,7 +974,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         }
                     }
                     let bgColorView = UIView()
-                    bgColorView.backgroundColor = Colours.white
+                    bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                     cell.selectedBackgroundView = bgColorView
                     return cell
                     
