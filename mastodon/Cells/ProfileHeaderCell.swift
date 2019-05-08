@@ -199,6 +199,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
         date.textColor = Colours.grayDark.withAlphaComponent(0.7)
         toot.textColor = Colours.grayDark
         follows.titleLabel?.textColor = Colours.tabSelected
+        follows.setTitleColor(Colours.tabSelected, for: .normal)
         
         blurEffectView.removeFromSuperview()
         if (UserDefaults.standard.object(forKey: "headbg1") == nil) || (UserDefaults.standard.object(forKey: "headbg1") as! Int == 0) {
@@ -598,6 +599,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         date.textColor = Colours.grayDark.withAlphaComponent(0.7)
         toot.textColor = Colours.grayDark
         follows.titleLabel?.textColor = Colours.tabSelected
+        follows.setTitleColor(Colours.tabSelected, for: .normal)
         
         blurEffectView.removeFromSuperview()
         if (UserDefaults.standard.object(forKey: "headbg1") == nil) || (UserDefaults.standard.object(forKey: "headbg1") as! Int == 0) {

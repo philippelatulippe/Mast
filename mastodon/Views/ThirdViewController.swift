@@ -2693,6 +2693,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
                         cell.follows.titleLabel?.textColor = Colours.tabSelected
+                        cell.follows.setTitleColor(Colours.tabSelected, for: .normal)
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                         cell.backgroundColor = Colours.white
                         
@@ -2794,6 +2795,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                             cell.follows.tag = indexPath.row
                         cell.follows.titleLabel?.textColor = Colours.tabSelected
+                        cell.follows.setTitleColor(Colours.tabSelected, for: .normal)
                             cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                             cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
                             cell.backgroundColor = Colours.white
@@ -2895,6 +2897,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                     cell.follows.tag = indexPath.row
                     cell.follows.titleLabel?.textColor = Colours.tabSelected
+                    cell.follows.setTitleColor(Colours.tabSelected, for: .normal)
                     cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                     cell.settings.addTarget(self, action: #selector(self.didTouchToFol), for: .touchUpInside)
                     cell.backgroundColor = Colours.white
@@ -2996,6 +2999,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
                         cell.follows.titleLabel?.textColor = Colours.tabSelected
+                        cell.follows.setTitleColor(Colours.tabSelected, for: .normal)
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                         cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
                         cell.backgroundColor = Colours.white
@@ -3096,6 +3100,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.follows.addTarget(self, action: #selector(self.didTouchFollows), for: .touchUpInside)
                         cell.follows.tag = indexPath.row
                         cell.follows.titleLabel?.textColor = Colours.tabSelected
+                        cell.follows.setTitleColor(Colours.tabSelected, for: .normal)
                         cell.more.addTarget(self, action: #selector(self.moreTop), for: .touchUpInside)
                         cell.settings.addTarget(self, action: #selector(self.setTop), for: .touchUpInside)
                         cell.backgroundColor = Colours.white
