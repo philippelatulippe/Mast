@@ -794,32 +794,32 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         //        self.loadLoadLoad()
         //        self.fetchMoreNotifications()
         
-        let request2 = Notifications.all(range: self.newLast, typesToExclude: [.favourite, .follow, .reblog])
-        StoreStruct.client.run(request2) { (statuses) in
-            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
-            if let stat = (statuses.value) {
-                StoreStruct.notificationsMentions = stat
-                DispatchQueue.main.async {
-                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
-                    self.ai.alpha = 0
-                    self.ai.removeFromSuperview()
-                    self.tableView.reloadData()
-                }
-            }
-        }
-        let request = Notifications.all(range: self.newLast2, typesToExclude: StoreStruct.notTypes)
-        StoreStruct.client.run(request) { (statuses) in
-            self.newLast2 = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
-            if let stat = (statuses.value) {
-                StoreStruct.notifications = stat
-                DispatchQueue.main.async {
-                    StoreStruct.notifications = StoreStruct.notificationsMentions.removeDuplicates()
-                    self.ai.alpha = 0
-                    self.ai.removeFromSuperview()
-                    self.tableView2.reloadData()
-                }
-            }
-        }
+//        let request2 = Notifications.all(range: self.newLast, typesToExclude: [.favourite, .follow, .reblog])
+//        StoreStruct.client.run(request2) { (statuses) in
+//            self.newLast = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
+//            if let stat = (statuses.value) {
+//                StoreStruct.notificationsMentions = stat
+//                DispatchQueue.main.async {
+//                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+//                    self.ai.alpha = 0
+//                    self.ai.removeFromSuperview()
+//                    self.tableView.reloadData()
+//                }
+//            }
+//        }
+//        let request = Notifications.all(range: self.newLast2, typesToExclude: StoreStruct.notTypes)
+//        StoreStruct.client.run(request) { (statuses) in
+//            self.newLast2 = statuses.pagination?.next ?? RequestRange.max(id: "0", limit: nil) as! RequestRange
+//            if let stat = (statuses.value) {
+//                StoreStruct.notifications = stat
+//                DispatchQueue.main.async {
+//                    StoreStruct.notifications = StoreStruct.notificationsMentions.removeDuplicates()
+//                    self.ai.alpha = 0
+//                    self.ai.removeFromSuperview()
+//                    self.tableView2.reloadData()
+//                }
+//            }
+//        }
         
         
         if (traitCollection.forceTouchCapability == .available) {
@@ -894,7 +894,34 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         self.tabBarController?.tabBar.items?[1].badgeValue = nil
         
-        self.refreshCont()
+        self.fetchMoreNotifications()
+        
+//
+//        let request25 = Notifications.all(typesToExclude: [.favourite, .follow, .reblog])
+//        StoreStruct.client.run(request25) { (statuses) in
+//            if let stat = (statuses.value) {
+//
+//                StoreStruct.notificationsMentions = stat
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//
+//                let request5 = Notifications.all(typesToExclude: StoreStruct.notTypes)
+//                StoreStruct.client.run(request5) { (statuses) in
+//                    if let stat = (statuses.value) {
+//
+//                        StoreStruct.notifications = stat
+//                        DispatchQueue.main.async {
+//                            self.tableView2.reloadData()
+//                        }
+//
+//                    }
+//                }
+//            }
+//        }
+        
+        
+        
         
         StoreStruct.currentPage = 1
         //        self.tableView.reloadData()

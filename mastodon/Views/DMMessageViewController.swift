@@ -168,8 +168,9 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                             var theType = "0"
                             if $0.account.acct == StoreStruct.currentUser.acct {
                                 theType = "1"
+                            } else {
+                                self.lastUser = $0.account.acct
                             }
-                            self.lastUser = $0.account.acct
                             
                             var theText = NSMutableAttributedString(string: $0.content.stripHTML())
                             
