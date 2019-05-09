@@ -347,17 +347,14 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                 coun += 1
             })
             
-            //                let originImage = images[0].underlyingImage
-            //                if originImage != nil {
-            //                    let browser = SKPhotoBrowser(originImage: UIImage(), photos: images, animatedFromView: cell)
-            let browser = SKPhotoBrowser(photos: images)
-            browser.displayToolbar = true
-            browser.displayAction = true
-            browser.delegate = self
-            browser.initializePageIndex(0)
-            present(browser, animated: true, completion: nil)
-            //                }
-            
+                let ce = cell as! MediaMessageCell
+                let browser = SKPhotoBrowser(originImage: ce.imageView.image ?? UIImage(), photos: images, animatedFromView: ce.imageView)
+                browser.displayToolbar = true
+                browser.displayAction = true
+                browser.delegate = self
+                browser.initializePageIndex(0)
+                present(browser, animated: true, completion: nil)
+        
         }
         
     }
