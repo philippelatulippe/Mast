@@ -110,18 +110,18 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         messageInputBar.sendButton.imageView?.backgroundColor = UIColor.clear
         messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: false)
-        messageInputBar.sendButton.image = UIImage(named: "direct")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+        messageInputBar.sendButton.image = UIImage(named: "sendm")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
         messageInputBar.sendButton.title = nil
         messageInputBar.sendButton.imageView?.layer.cornerRadius = 0
         messageInputBar.sendButton.addTarget(self, action: #selector(self.didTouchSend), for: .touchUpInside)
         messageInputBar.sendButton
             .onEnabled { item in
                 UIView.animate(withDuration: 0.3, animations: {
-                    self.messageInputBar.sendButton.image = UIImage(named: "direct")?.maskWithColor(color: Colours.tabSelected)
+                    self.messageInputBar.sendButton.image = UIImage(named: "sendm")?.maskWithColor(color: Colours.tabSelected)
                 })
             }.onDisabled { item in
                 UIView.animate(withDuration: 0.3, animations: {
-                    self.messageInputBar.sendButton.image = UIImage(named: "direct")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+                    self.messageInputBar.sendButton.image = UIImage(named: "sendm")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
                 })
         }
         
