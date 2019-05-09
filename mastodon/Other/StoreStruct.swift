@@ -101,6 +101,7 @@ class StoreStruct {
     static var allListRelID: String = ""
     static var currentList: [Status] = []
     static var currentListTitle: String = ""
+    static var currentListIID: String = ""
 //    static var drafts: [Any] = []
     
     static var allLikes: [String] = []

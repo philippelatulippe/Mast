@@ -253,16 +253,16 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
         
-//        tableView.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
-//            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//                let selection = UISelectionFeedbackGenerator()
-//                selection.selectionChanged()
-//            }
-//            self?.refreshCont()
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-//                self?.tableView.cr.endHeaderRefresh()
-//            })
-//        }
+        tableView.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
+            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                let selection = UISelectionFeedbackGenerator()
+                selection.selectionChanged()
+            }
+            self?.refreshCont()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                self?.tableView.cr.endHeaderRefresh()
+            })
+        }
         
         self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40)
         self.view.addSubview(self.ai)
@@ -380,7 +380,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         } else {
         
-            if indexPath.row == StoreStruct.currentList.count - 2 {
+            if indexPath.row == StoreStruct.currentList.count - 14 {
                 self.fetchMoreHome()
             }
             if StoreStruct.currentList[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.currentList[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
@@ -2245,32 +2245,49 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func fetchMoreHome() {
-//        let request = Timelines.home(range: .max(id: StoreStruct.currentList.last?.id ?? "", limit: nil))
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            StoreStruct.client.run(request) { (statuses) in
-//                if let stat = (statuses.value) {
-//                    StoreStruct.currentList = StoreStruct.currentList + stat
-//                    DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-//                    }
-//                }
-//            }
-//        }
+        let request = Lists.accounts(id: StoreStruct.currentListIID)
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                stat.map({
+                    let request1 = Accounts.statuses(id: $0.id, range: .max(id: StoreStruct.currentList.last?.id ?? "", limit: nil))
+                    StoreStruct.client.run(request1) { (statuses) in
+                        if let stat = (statuses.value) {
+                            StoreStruct.currentList = StoreStruct.currentList + stat
+                            StoreStruct.currentList = StoreStruct.currentList.sorted(by: { $0.createdAt > $1.createdAt })
+                            
+                            DispatchQueue.main.async {
+                                StoreStruct.currentList = StoreStruct.currentList.removeDuplicates()
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                })
+            }
+        }
     }
     
     @objc func refreshCont() {
-//        let request = Timelines.home(range: .min(id: StoreStruct.currentList.first?.id ?? "", limit: nil))
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            StoreStruct.client.run(request) { (statuses) in
-//                if let stat = (statuses.value) {
-//                    StoreStruct.currentList = stat + StoreStruct.currentList
-//                    DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-//                        self.refreshControl.endRefreshing()
-//                    }
-//                }
-//            }
-//        }
+        let request = Lists.accounts(id: StoreStruct.currentListIID)
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                stat.map({
+                    let request1 = Accounts.statuses(id: $0.id, range: .since(id: StoreStruct.currentList.first?.id ?? "", limit: nil))
+                    StoreStruct.client.run(request1) { (statuses) in
+                        if let stat = (statuses.value) {
+                            if stat != nil {
+                                StoreStruct.currentList = stat + StoreStruct.currentList
+                                StoreStruct.currentList = StoreStruct.currentList.sorted(by: { $0.createdAt > $1.createdAt })
+                                
+                                DispatchQueue.main.async {
+                                    StoreStruct.currentList = StoreStruct.currentList.removeDuplicates()
+                                    self.tableView.reloadData()
+                                }
+                            }
+                        }
+                    }
+                })
+            }
+        }
     }
     
     

@@ -1832,20 +1832,18 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 // go to list
                 StoreStruct.currentList = []
                 let request = Lists.accounts(id: StoreStruct.allLists[indexPath.row].id)
-                //let request = Lists.list(id: StoreStruct.allLists[indexPath.row - 2].id)
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         stat.map({
-                            
                             let request1 = Accounts.statuses(id: $0.id)
                             StoreStruct.client.run(request1) { (statuses) in
                                 if let stat = (statuses.value) {
                                     StoreStruct.currentList = StoreStruct.currentList + stat
                                     StoreStruct.currentList = StoreStruct.currentList.sorted(by: { $0.createdAt > $1.createdAt })
                                     StoreStruct.currentListTitle = StoreStruct.allLists[indexPath.row].title
+                                    StoreStruct.currentListIID = StoreStruct.allLists[indexPath.row].id
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
                                 }
-                                
                             }
                         })
                         if StoreStruct.currentPage == 0 {
