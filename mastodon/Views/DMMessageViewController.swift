@@ -104,7 +104,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 7, left: 16, bottom: 4, right: 16)
         messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 5, left: 9, bottom: 5, right: 9)
         messageInputBar.setRightStackViewWidthConstant(to: 36, animated: false)
-        messageInputBar.setLeftStackViewWidthConstant(to: 85, animated: false)
+        messageInputBar.setLeftStackViewWidthConstant(to: 119, animated: false)
         messageInputBar.sendButton.imageView?.backgroundColor = UIColor.clear
         messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         messageInputBar.sendButton.setSize(CGSize(width: 36, height: 36), animated: false)
@@ -123,28 +123,13 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                 })
         }
         
-        //        let charCountButton = InputBarButtonItem()
-        //            .configure {
-        //                $0.title = "500"
-        //                $0.contentHorizontalAlignment = .left
-        //                $0.setTitleColor(Colours.gray, for: .normal)
-        //                $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        //                $0.setSize(CGSize(width: 40, height: 35), animated: false)
-        //                $0.addTarget(self, action: #selector(self.didTouchOther), for: .touchUpInside)
-        //            }.onTextViewDidChange { (item, textView) in
-        //                item.title = "\(500 - textView.text.count)"
-        //                self.title = "\(500 - textView.text.count)"
-        //                let isOverLimit = textView.text.count > 500
-        //                item.messageInputBar?.shouldManageSendButtonEnabledState = !isOverLimit
-        //                if isOverLimit {
-        //                    item.messageInputBar?.sendButton.isEnabled = false
-        //                }
-        //                let color = isOverLimit ? Colours.red : Colours.gray
-        //                item.setTitleColor(color, for: .normal)
-        //        }
-        //        let bottomItems = [charCountButton]
-        //        messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
-        
+        var allButton = InputBarButtonItem()
+            .configure {
+                $0.contentHorizontalAlignment = .left
+                $0.setSize(CGSize(width: 40, height: 35), animated: false)
+                $0.addTarget(self, action: #selector(self.didTouchOther), for: .touchUpInside)
+            }
+        allButton.image = UIImage(named: "toot")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
         var camButton = InputBarButtonItem()
             .configure {
                 $0.contentHorizontalAlignment = .left
@@ -166,7 +151,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                 $0.addTarget(self, action: #selector(self.didTouchGal), for: .touchUpInside)
         }
         galButton.image = UIImage(named: "frame1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
-        let bottomItems = [camButton, galButton]
+        let bottomItems = [allButton, camButton, galButton]
         messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
         
         if self.mainStatus.isEmpty {} else {
