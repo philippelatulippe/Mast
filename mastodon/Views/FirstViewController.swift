@@ -2288,7 +2288,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         cell.userName.textColor = Colours.black
                         cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                         cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                        cell.toot.textColor = Colours.black
+//                        cell.toot.textColor = Colours.black
                         cell.toot.handleMentionTap { (string) in
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let selection = UISelectionFeedbackGenerator()
@@ -2405,7 +2405,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         cell.userName.textColor = Colours.black
                         cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                         cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                        cell.toot.textColor = Colours.black
+//                        cell.toot.textColor = Colours.black
                         cell.mainImageView.backgroundColor = Colours.white
                         cell.mainImageViewBG.backgroundColor = Colours.white
                         
@@ -2596,7 +2596,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         cell.userName.textColor = Colours.black
                         cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                         cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                        cell.toot.textColor = Colours.black
+//                        cell.toot.textColor = Colours.black
                         cell.toot.handleMentionTap { (string) in
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let selection = UISelectionFeedbackGenerator()
@@ -2709,7 +2709,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         cell.userName.textColor = Colours.black
                         cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                         cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                        cell.toot.textColor = Colours.black
+//                        cell.toot.textColor = Colours.black
                         cell.mainImageView.backgroundColor = Colours.white
                         cell.mainImageViewBG.backgroundColor = Colours.white
                         cell.toot.handleMentionTap { (string) in
@@ -2892,7 +2892,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         cell.userName.textColor = Colours.black
                         cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                         cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                        cell.toot.textColor = Colours.black
+//                        cell.toot.textColor = Colours.black
                         cell.toot.handleMentionTap { (string) in
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let selection = UISelectionFeedbackGenerator()
@@ -3005,7 +3005,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         cell.userName.textColor = Colours.black
                         cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                         cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-                        cell.toot.textColor = Colours.black
+//                        cell.toot.textColor = Colours.black
                         cell.mainImageView.backgroundColor = Colours.white
                         cell.mainImageViewBG.backgroundColor = Colours.white
                         cell.toot.handleMentionTap { (string) in

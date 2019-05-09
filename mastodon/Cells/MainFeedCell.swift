@@ -299,10 +299,30 @@ class MainFeedCell: SwipeTableViewCell {
         
         if status.reblog?.content.stripHTML() != nil {
             
-            if status.reblog!.emojis.isEmpty {
-                toot.text = "\(status.reblog?.content.stripHTML() ?? "")"
+            var theUsernameTag = status.account.displayName
+            if (UserDefaults.standard.object(forKey: "boostusern") == nil) || (UserDefaults.standard.object(forKey: "boostusern") as! Int == 0) {
+                
             } else {
-                let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")")
+                theUsernameTag = "@\(status.account.acct)"
+            }
+            
+            if status.reblog!.emojis.isEmpty {
+//                toot.text = "\(status.reblog?.content.stripHTML() ?? "")"
+                
+                let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")\n\n")
+                let imageAttachment = NSTextAttachment()
+                imageAttachment.image = UIImage(named:"boost2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+                imageAttachment.bounds = CGRect(x: 0, y: -3, width: Int(self.toot.font.lineHeight - 5), height: Int(self.toot.font.lineHeight))
+                let attachmentString2 = NSAttributedString(attachment: imageAttachment)
+                let completeText2 = NSMutableAttributedString(string: "")
+                completeText2.append(attachmentString2)
+                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag) boosted", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
+                completeText2.append(textAfterIcon2)
+                attributedString.append(completeText2)
+                self.toot.attributedText = attributedString
+                self.reloadInputViews()
+            } else {
+                let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")\n\n", attributes: [NSAttributedString.Key.foregroundColor: Colours.black])
                 status.reblog!.emojis.map({
                     let textAttachment = NSTextAttachment()
                     textAttachment.loadImageUsingCache(withUrl: $0.url.absoluteString)
@@ -313,35 +333,29 @@ class MainFeedCell: SwipeTableViewCell {
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                     }
                 })
+                
+                let imageAttachment = NSTextAttachment()
+                imageAttachment.image = UIImage(named:"boost2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+                imageAttachment.bounds = CGRect(x: 0, y: -3, width: Int(self.toot.font.lineHeight - 5), height: Int(self.toot.font.lineHeight))
+                let attachmentString2 = NSAttributedString(attachment: imageAttachment)
+                let completeText2 = NSMutableAttributedString(string: "")
+                completeText2.append(attachmentString2)
+                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag) boosted", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
+                completeText2.append(textAfterIcon2)
+                attributedString.append(completeText2)
+                
                 self.toot.attributedText = attributedString
                 self.reloadInputViews()
             }
             
-            var theUsernameTag = status.account.displayName
-            if (UserDefaults.standard.object(forKey: "boostusern") == nil) || (UserDefaults.standard.object(forKey: "boostusern") as! Int == 0) {
-                
-            } else {
-                theUsernameTag = "@\(status.account.acct)"
-            }
-            
             if status.reblog?.account.emojis.isEmpty ?? true {
-                let imageAttachment = NSTextAttachment()
-                imageAttachment.image = UIImage(named:"boost")
-                imageAttachment.bounds = CGRect(x: 0, y: -3, width: Int(self.userName.font.lineHeight), height: Int(self.userName.font.lineHeight))
-                let attachmentString = NSAttributedString(attachment: imageAttachment)
                 let completeText = NSMutableAttributedString(string: "")
-                completeText.append(attachmentString)
-                let textAfterIcon = NSMutableAttributedString(string: " \(theUsernameTag) boosted\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
+                let textAfterIcon = NSMutableAttributedString(string: "\(status.reblog?.account.displayName.stripHTML() ?? "")")
                 completeText.append(textAfterIcon)
                 userName.attributedText = completeText
             } else {
-                let imageAttachment = NSTextAttachment()
-                imageAttachment.image = UIImage(named:"boost")
-                imageAttachment.bounds = CGRect(x: 0, y: -3, width: Int(self.userName.font.lineHeight), height: Int(self.userName.font.lineHeight))
-                let attachmentString = NSAttributedString(attachment: imageAttachment)
                 let completeText = NSMutableAttributedString(string: "")
-                completeText.append(attachmentString)
-                let attributedString = NSMutableAttributedString(string: " \(theUsernameTag) boosted\n\(status.reblog?.account.displayName.stripHTML() ?? "")")
+                let attributedString = NSMutableAttributedString(string: "\(status.reblog?.account.displayName.stripHTML() ?? "")")
                 (status.reblog?.account.emojis ?? []).map({
                     let textAttachment = NSTextAttachment()
                     textAttachment.loadImageUsingCache(withUrl: $0.url.absoluteString)
