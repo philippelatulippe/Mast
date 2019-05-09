@@ -164,6 +164,8 @@ class StoreStruct {
     static var profileStatusesHasImage0: [Status] = []
     
     static var allCurrentFilters: [Filters] = []
+    
+    static var medType = 0
 }
 
 struct Drafts: Codable {

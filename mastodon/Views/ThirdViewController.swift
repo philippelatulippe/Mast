@@ -137,10 +137,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let request2 = Accounts.currentUser()
         StoreStruct.client.run(request2) { (statuses) in
             if let stat = (statuses.value) {
-                DispatchQueue.main.async {
                 StoreStruct.currentUser = stat
                 self.chosenUser = stat
-                
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }
@@ -1402,6 +1401,16 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             isItGoingToLockText = "Locked Account"
         }
         
+        
+        var compression: CGFloat = 1
+        if (UserDefaults.standard.object(forKey: "imqual") == nil) || (UserDefaults.standard.object(forKey: "imqual") as! Int == 0) {
+            compression = 1
+        } else if UserDefaults.standard.object(forKey: "imqual") as! Int == 1 {
+            compression = 0.78
+        } else {
+            compression = 0.5
+        }
+        
         Alertift.actionSheet()
             .backgroundColor(Colours.white)
             .titleTextColor(Colours.grayDark)
@@ -1409,7 +1418,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             .messageTextAlignment(.left)
             .titleTextAlignment(.left)
         .action(.default("Edit Display Picture"), image: nil) { (action, ind) in
-             
+            
+            StoreStruct.medType = 1
             
             let pickerController = DKImagePickerController()
             pickerController.didSelectAssets = { (assets: [DKAsset]) in
@@ -1418,13 +1428,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 if assets.count > 0 {
                     assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-                        let imageData = (image ?? UIImage()).pngData()
-                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: .png(imageData), header: nil)
+                        let imageData = (image ?? UIImage()).jpegData(compressionQuality: compression)
+                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: .jpeg(imageData), header: nil)
                         StoreStruct.client.run(request) { (statuses) in
                              
                             if let stat = (statuses.value) {
                                 DispatchQueue.main.async {
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+//                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                    self.updateProfileHere()
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -1451,9 +1462,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.present(pickerController, animated: true) {}
             }
             
-            
             .action(.default("Edit Header"), image: nil) { (action, ind) in
-                 
+                
+                StoreStruct.medType = 2
                 
                 let pickerController = DKImagePickerController()
                 pickerController.didSelectAssets = { (assets: [DKAsset]) in
@@ -1462,13 +1473,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     if assets.count > 0 {
                         assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-                            let imageData = (image ?? UIImage()).pngData()
-                            let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: .png(imageData))
+                            let imageData = (image ?? UIImage()).jpegData(compressionQuality: compression)
+                            let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: .jpeg(imageData))
                             StoreStruct.client.run(request) { (statuses) in
-                                 
+                                
                                 if let stat = (statuses.value) {
                                     DispatchQueue.main.async {
-                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+//                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                        self.updateProfileHere()
                                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                             let notification = UINotificationFeedbackGenerator()
                                             notification.notificationOccurred(.success)
@@ -1595,7 +1607,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             if let stat = (statuses.value) {
                                 
                                 DispatchQueue.main.async {
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+//                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                    self.updateProfileHere()
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -1629,7 +1642,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             if let stat = (statuses.value) {
                                 
                                 DispatchQueue.main.async {
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+//                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                    self.updateProfileHere()
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -1663,7 +1677,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             if let stat = (statuses.value) {
                                 
                                 DispatchQueue.main.async {
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+//                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                    self.updateProfileHere()
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -1697,7 +1712,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             if let stat = (statuses.value) {
                                 
                                 DispatchQueue.main.async {
-                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+//                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                                    self.updateProfileHere()
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let notification = UINotificationFeedbackGenerator()
                                         notification.notificationOccurred(.success)
@@ -1731,7 +1747,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
                         DispatchQueue.main.async {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
+                            self.updateProfileHere()
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let notification = UINotificationFeedbackGenerator()
                                 notification.notificationOccurred(.success)

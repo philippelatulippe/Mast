@@ -30,11 +30,27 @@ extension MediaAttachment {
     }
 
     var fileName: String {
-        switch self {
-        case .jpeg: return "file.jpg"
-        case .gif: return "file.gif"
-        case .png: return "file.png"
-        case .other(_, let fileExtension, _): return "file.\(fileExtension)"
+        if StoreStruct.medType == 0 {
+            switch self {
+            case .jpeg: return "file.jpeg"
+            case .gif: return "file.gif"
+            case .png: return "file.png"
+            case .other(_, let fileExtension, _): return "file.\(fileExtension)"
+            }
+        } else if StoreStruct.medType == 1 {
+            switch self {
+            case .jpeg: return "avatar.jpeg"
+            case .gif: return "avatar.gif"
+            case .png: return "avatar.png"
+            case .other(_, let fileExtension, _): return "avatar.\(fileExtension)"
+            }
+        } else {
+            switch self {
+            case .jpeg: return "header.jpeg"
+            case .gif: return "header.gif"
+            case .png: return "header.png"
+            case .other(_, let fileExtension, _): return "header.\(fileExtension)"
+            }
         }
     }
 

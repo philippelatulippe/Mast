@@ -76,6 +76,8 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateThread), name: NSNotification.Name(rawValue: "updateDM"), object: nil)
         
+        StoreStruct.medType = 0
+        
         self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
         

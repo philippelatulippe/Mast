@@ -808,6 +808,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         StoreStruct.currentPage = 587
         textView.becomeFirstResponder()
         
+        StoreStruct.medType = 0
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
