@@ -1185,7 +1185,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.userTag.tag = indexPath.row
                 cell.userTag.addTarget(self, action: #selector(self.didTouchProfileM), for: .touchUpInside)
                 cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                cell.toot.textColor = Colours.black
+//                cell.toot.textColor = Colours.black
                 cell.fromClient.textColor = Colours.grayDark.withAlphaComponent(0.38)
                 cell.faves.titleLabel?.textColor = Colours.tabSelected
                 cell.faves.setTitleColor(Colours.tabSelected, for: .normal)
@@ -1329,7 +1329,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.userTag.tag = indexPath.row
                 cell.userTag.addTarget(self, action: #selector(self.didTouchProfileM), for: .touchUpInside)
                 cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
-                cell.toot.textColor = Colours.black
+//                cell.toot.textColor = Colours.black
                 cell.fromClient.textColor = Colours.grayDark.withAlphaComponent(0.38)
                 cell.faves.titleLabel?.textColor = Colours.tabSelected
                 cell.faves.setTitleColor(Colours.tabSelected, for: .normal)

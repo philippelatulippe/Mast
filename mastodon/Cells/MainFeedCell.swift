@@ -307,8 +307,6 @@ class MainFeedCell: SwipeTableViewCell {
             }
             
             if status.reblog!.emojis.isEmpty {
-//                toot.text = "\(status.reblog?.content.stripHTML() ?? "")"
-                
                 let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")\n\n")
                 let imageAttachment = NSTextAttachment()
                 imageAttachment.image = UIImage(named:"boost2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))

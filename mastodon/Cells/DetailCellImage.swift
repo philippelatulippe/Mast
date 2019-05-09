@@ -175,15 +175,29 @@ class DetailCellImage: UITableViewCell {
             userTag.setTitle("@\(status.reblog?.account.username ?? status.account.username)", for: .normal)
         }
         if status.reblog?.content.stripHTML() != nil {
-//            toot.text = "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.username) boosted"
             
-            
-            
+            var theUsernameTag = status.account.displayName
+            if (UserDefaults.standard.object(forKey: "boostusern") == nil) || (UserDefaults.standard.object(forKey: "boostusern") as! Int == 0) {
+                
+            } else {
+                theUsernameTag = "@\(status.account.acct)"
+            }
             
             if status.reblog!.emojis.isEmpty {
-                toot.text = "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.acct) boosted"
+                let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")\n\n")
+                let imageAttachment = NSTextAttachment()
+                imageAttachment.image = UIImage(named:"boost2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+                imageAttachment.bounds = CGRect(x: 0, y: -3, width: Int(self.toot.font.lineHeight - 5), height: Int(self.toot.font.lineHeight))
+                let attachmentString2 = NSAttributedString(attachment: imageAttachment)
+                let completeText2 = NSMutableAttributedString(string: "")
+                completeText2.append(attachmentString2)
+                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag) boosted", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
+                completeText2.append(textAfterIcon2)
+                attributedString.append(completeText2)
+                self.toot.attributedText = attributedString
+                self.reloadInputViews()
             } else {
-                let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")\n\n\u{21bb} @\(status.account.acct) boosted")
+                let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")\n\n", attributes: [NSAttributedString.Key.foregroundColor: Colours.black])
                 status.reblog!.emojis.map({
                     let textAttachment = NSTextAttachment()
                     textAttachment.loadImageUsingCache(withUrl: $0.url.absoluteString)
@@ -192,9 +206,19 @@ class DetailCellImage: UITableViewCell {
                     while attributedString.mutableString.contains(":\($0.shortcode):") {
                         let range: NSRange = (attributedString.mutableString as NSString).range(of: ":\($0.shortcode):")
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
-                        
                     }
                 })
+                
+                let imageAttachment = NSTextAttachment()
+                imageAttachment.image = UIImage(named:"boost2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+                imageAttachment.bounds = CGRect(x: 0, y: -3, width: Int(self.toot.font.lineHeight - 5), height: Int(self.toot.font.lineHeight))
+                let attachmentString2 = NSAttributedString(attachment: imageAttachment)
+                let completeText2 = NSMutableAttributedString(string: "")
+                completeText2.append(attachmentString2)
+                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag) boosted", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
+                completeText2.append(textAfterIcon2)
+                attributedString.append(completeText2)
+                
                 self.toot.attributedText = attributedString
                 self.reloadInputViews()
             }
