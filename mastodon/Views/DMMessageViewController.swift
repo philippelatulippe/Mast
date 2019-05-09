@@ -61,6 +61,11 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         }
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(true)
+//        messageInputBar.inputTextView.becomeFirstResponder()
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -118,27 +123,27 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                 })
         }
         
-//        let charCountButton = InputBarButtonItem()
-//            .configure {
-//                $0.title = "500"
-//                $0.contentHorizontalAlignment = .left
-//                $0.setTitleColor(Colours.gray, for: .normal)
-//                $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//                $0.setSize(CGSize(width: 40, height: 35), animated: false)
-//                $0.addTarget(self, action: #selector(self.didTouchOther), for: .touchUpInside)
-//            }.onTextViewDidChange { (item, textView) in
-//                item.title = "\(500 - textView.text.count)"
-//                self.title = "\(500 - textView.text.count)"
-//                let isOverLimit = textView.text.count > 500
-//                item.messageInputBar?.shouldManageSendButtonEnabledState = !isOverLimit
-//                if isOverLimit {
-//                    item.messageInputBar?.sendButton.isEnabled = false
-//                }
-//                let color = isOverLimit ? Colours.red : Colours.gray
-//                item.setTitleColor(color, for: .normal)
-//        }
-//        let bottomItems = [charCountButton]
-//        messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
+        //        let charCountButton = InputBarButtonItem()
+        //            .configure {
+        //                $0.title = "500"
+        //                $0.contentHorizontalAlignment = .left
+        //                $0.setTitleColor(Colours.gray, for: .normal)
+        //                $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        //                $0.setSize(CGSize(width: 40, height: 35), animated: false)
+        //                $0.addTarget(self, action: #selector(self.didTouchOther), for: .touchUpInside)
+        //            }.onTextViewDidChange { (item, textView) in
+        //                item.title = "\(500 - textView.text.count)"
+        //                self.title = "\(500 - textView.text.count)"
+        //                let isOverLimit = textView.text.count > 500
+        //                item.messageInputBar?.shouldManageSendButtonEnabledState = !isOverLimit
+        //                if isOverLimit {
+        //                    item.messageInputBar?.sendButton.isEnabled = false
+        //                }
+        //                let color = isOverLimit ? Colours.red : Colours.gray
+        //                item.setTitleColor(color, for: .normal)
+        //        }
+        //        let bottomItems = [charCountButton]
+        //        messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
         
         var camButton = InputBarButtonItem()
             .configure {
@@ -152,14 +157,14 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                 if isOverLimit {
                     item.messageInputBar?.sendButton.isEnabled = false
                 }
-            }
+        }
         camButton.image = UIImage(named: "camera")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
         var galButton = InputBarButtonItem()
             .configure {
                 $0.contentHorizontalAlignment = .left
                 $0.setSize(CGSize(width: 40, height: 35), animated: false)
                 $0.addTarget(self, action: #selector(self.didTouchGal), for: .touchUpInside)
-            }
+        }
         galButton.image = UIImage(named: "frame1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
         let bottomItems = [camButton, galButton]
         messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
@@ -169,9 +174,9 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     DispatchQueue.main.async {
-                    self.allPrevious = (stat.ancestors)
-                    self.allReplies = (stat.descendants)
-
+                        self.allPrevious = (stat.ancestors)
+                        self.allReplies = (stat.descendants)
+                        
                         (self.allPrevious + self.mainStatus + self.allReplies).map({
                             var theType = "0"
                             if $0.account.acct == StoreStruct.currentUser.acct {
@@ -214,11 +219,11 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                                 self.messages.append(y)
                                 self.allPosts.append($0)
                             }
-
+                            
                             self.ai.stopAnimating()
                             self.ai.alpha = 0
                             self.ai.removeFromSuperview()
-
+                            
                             self.messagesCollectionView.reloadData()
                             self.messagesCollectionView.scrollToBottom()
                         })
@@ -227,8 +232,6 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
             }
         }
         
-//        self.allPosts = self.mainStatus
-//        self.fetchEverything(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
     }
     
     @objc func updateThread() {
@@ -284,10 +287,10 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         
         if self.allPosts[indexPath?.section ?? 0].card?.url != nil {
             if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
-            self.safariVC = SFSafariViewController(url: self.allPosts[indexPath?.section ?? 0].card!.url)
-            self.safariVC?.preferredBarTintColor = Colours.white
-            self.safariVC?.preferredControlTintColor = Colours.tabSelected
-            self.present(self.safariVC!, animated: true, completion: nil)
+                self.safariVC = SFSafariViewController(url: self.allPosts[indexPath?.section ?? 0].card!.url)
+                self.safariVC?.preferredBarTintColor = Colours.white
+                self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                self.present(self.safariVC!, animated: true, completion: nil)
             } else {
                 UIApplication.shared.openURL(self.allPosts[indexPath?.section ?? 0].card!.url)
             }
@@ -297,65 +300,65 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         guard self.allPosts[indexPath?.section ?? 0].mediaAttachments.count > 0 else { return }
         
         StoreStruct.currentImageURL = self.allPosts[indexPath?.section ?? 0].reblog?.url ?? self.allPosts[indexPath?.section ?? 0].url
-
-
-            if self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].type ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].type == .video || self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].type ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].type == .gifv {
-
-                let videoURL = URL(string: self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].url ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].url)!
-                if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {
-                    XPlayer.play(videoURL)
-                } else {
-                    self.player = AVPlayer(url: videoURL)
-                    let playerViewController = AVPlayerViewController()
-                    playerViewController.player = self.player
-                    self.present(playerViewController, animated: true) {
-                        playerViewController.player!.play()
-                    }
-                }
-
+        
+        
+        if self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].type ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].type == .video || self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].type ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].type == .gifv {
+            
+            let videoURL = URL(string: self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].url ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].url)!
+            if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {
+                XPlayer.play(videoURL)
             } else {
-
-                    var images = [SKPhoto]()
-                    var coun = 0
-                    (self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments).map({
-                        if coun == 0 {
-                            let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
-                            photo.shouldCachePhotoURLImage = true
-                            if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                                photo.caption = self.allPosts[indexPath?.section ?? 0].reblog?.content.stripHTML() ?? self.allPosts[indexPath?.section ?? 0].content.stripHTML()
-                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                                photo.caption = $0.description ?? ""
-                            } else {
-                                photo.caption = ""
-                            }
-                            images.append(photo)
-                        } else {
-                            let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
-                            photo.shouldCachePhotoURLImage = true
-                            if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                                photo.caption = self.allPosts[indexPath?.section ?? 0].reblog?.content.stripHTML() ?? self.allPosts[indexPath?.section ?? 0].content.stripHTML()
-                            } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
-                                photo.caption = $0.description ?? ""
-                            } else {
-                                photo.caption = ""
-                            }
-                            images.append(photo)
-                        }
-                        coun += 1
-                    })
-                
-//                let originImage = images[0].underlyingImage
-//                if originImage != nil {
-//                    let browser = SKPhotoBrowser(originImage: UIImage(), photos: images, animatedFromView: cell)
-                    let browser = SKPhotoBrowser(photos: images)
-                    browser.displayToolbar = true
-                    browser.displayAction = true
-                    browser.delegate = self
-                    browser.initializePageIndex(0)
-                    present(browser, animated: true, completion: nil)
-//                }
-
+                self.player = AVPlayer(url: videoURL)
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = self.player
+                self.present(playerViewController, animated: true) {
+                    playerViewController.player!.play()
+                }
             }
+            
+        } else {
+            
+            var images = [SKPhoto]()
+            var coun = 0
+            (self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments).map({
+                if coun == 0 {
+                    let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
+                    photo.shouldCachePhotoURLImage = true
+                    if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                        photo.caption = self.allPosts[indexPath?.section ?? 0].reblog?.content.stripHTML() ?? self.allPosts[indexPath?.section ?? 0].content.stripHTML()
+                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                        photo.caption = $0.description ?? ""
+                    } else {
+                        photo.caption = ""
+                    }
+                    images.append(photo)
+                } else {
+                    let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
+                    photo.shouldCachePhotoURLImage = true
+                    if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
+                        photo.caption = self.allPosts[indexPath?.section ?? 0].reblog?.content.stripHTML() ?? self.allPosts[indexPath?.section ?? 0].content.stripHTML()
+                    } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
+                        photo.caption = $0.description ?? ""
+                    } else {
+                        photo.caption = ""
+                    }
+                    images.append(photo)
+                }
+                coun += 1
+            })
+            
+            //                let originImage = images[0].underlyingImage
+            //                if originImage != nil {
+            //                    let browser = SKPhotoBrowser(originImage: UIImage(), photos: images, animatedFromView: cell)
+            let browser = SKPhotoBrowser(photos: images)
+            browser.displayToolbar = true
+            browser.displayAction = true
+            browser.delegate = self
+            browser.initializePageIndex(0)
+            present(browser, animated: true, completion: nil)
+            //                }
+            
+        }
         
     }
     
@@ -385,18 +388,139 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         }
     }
     
+    private func thumbnailForVideoAtURL(url: NSURL) -> UIImage? {
+        let asset = AVAsset(url: url as URL)
+        let assetImageGenerator = AVAssetImageGenerator(asset: asset)
+        
+        var time = asset.duration
+        time.value = min(time.value, 2)
+        
+        do {
+            let imageRef = try assetImageGenerator.copyCGImage(at: time, actualTime: nil)
+            return UIImage(cgImage: imageRef)
+        } catch {
+            print("error")
+            return nil
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var mediaIDs: [String] = []
+        var compression: CGFloat = 1
+        if (UserDefaults.standard.object(forKey: "imqual") == nil) || (UserDefaults.standard.object(forKey: "imqual") as! Int == 0) {
+            compression = 1
+        } else if UserDefaults.standard.object(forKey: "imqual") as! Int == 1 {
+            compression = 0.78
+        } else {
+            compression = 0.5
+        }
+        self.imag.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            if let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String {
+                
+                if mediaType == "public.movie" || mediaType == kUTTypeGIF as String {
+                    
+                    let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as! NSURL
+                    do {
+                        let yy = try NSData(contentsOf: videoURL as URL, options: .mappedIfSafe) as Data
+                        let image = self.thumbnailForVideoAtURL(url: videoURL)
+                        
+                        let request = Media.upload(media: .gif(yy))
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                mediaIDs.append(stat.id)
+                                let request7 = Media.updateDescription(description: "", id: stat.id)
+                                StoreStruct.client.run(request7) { (statuses) in
+                                    
+                                }
+                                
+                                let sender = Sender(id: "1", displayName: "\(StoreStruct.currentUser.acct)")
+                                let x = MockMessage.init(image: image ?? UIImage(), sender: sender, messageId: "18982", date: Date())
+                                
+                                let request0 = Statuses.create(status: "@\(self.lastUser)", replyToID: self.mainStatus[0].id, mediaIDs: mediaIDs, sensitive: self.mainStatus[0].sensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: nil, poll: nil, visibility: .direct)
+                                StoreStruct.client.run(request0) { (statuses) in
+                                    
+                                    DispatchQueue.main.async {
+                                        if let stat = statuses.value {
+                                            self.allPosts.append(stat)
+                                            self.messages.append(x)
+                                            self.messagesCollectionView.reloadData()
+                                            self.messagesCollectionView.scrollToBottom()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        
+                    } catch {
+                        print("err")
+                        
+                        Alertift.actionSheet(title: "Couldn't add GIF or video", message: "Please try again, or try adding a different GIF or video to the message.")
+                            .backgroundColor(Colours.white)
+                            .titleTextColor(Colours.grayDark)
+                            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                            .messageTextAlignment(.left)
+                            .titleTextAlignment(.left)
+                            .action(.cancel("Dismiss"))
+                            .finally { action, index in
+                                if action.style == .cancel {
+                                    return
+                                }
+                            }
+                            .popover(anchorView: self.view)
+                            .show(on: self)
+                    }
+                    
+                } else {
+                    
+                    StoreStruct.photoNew = info[UIImagePickerController.InfoKey.originalImage] as? UIImage ?? UIImage()
+                    
+                    let imageData = (StoreStruct.photoNew).jpegData(compressionQuality: compression)
+                    let request = Media.upload(media: .jpeg(imageData))
+                    StoreStruct.client.run(request) { (statuses) in
+                        if let stat = (statuses.value) {
+                            mediaIDs.append(stat.id)
+                            let request7 = Media.updateDescription(description: "", id: stat.id)
+                            StoreStruct.client.run(request7) { (statuses) in
+                                
+                            }
+                            
+                            let sender = Sender(id: "1", displayName: "\(StoreStruct.currentUser.acct)")
+                            let x = MockMessage.init(image: StoreStruct.photoNew, sender: sender, messageId: "18982", date: Date())
+                            
+                            let request0 = Statuses.create(status: "@\(self.lastUser)", replyToID: self.mainStatus[0].id, mediaIDs: mediaIDs, sensitive: self.mainStatus[0].sensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: nil, poll: nil, visibility: .direct)
+                            StoreStruct.client.run(request0) { (statuses) in
+                                
+                                DispatchQueue.main.async {
+                                    if let stat = statuses.value {
+                                        self.allPosts.append(stat)
+                                        self.messages.append(x)
+                                        self.messagesCollectionView.reloadData()
+                                        self.messagesCollectionView.scrollToBottom()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
     @objc func didTouchCam(sender: UIButton) {
         let impact = UIImpactFeedbackGenerator(style: .light)
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
             impact.impactOccurred()
         }
         
-        DispatchQueue.main.async {
-            AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
-                if response {
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                
+                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
                     
-                    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-                        
+                    DispatchQueue.main.async {
                         self.imag.delegate = self
                         self.imag.sourceType = UIImagePickerController.SourceType.camera
                         self.imag.mediaTypes = [kUTTypeMovie as String, kUTTypeImage as String]
@@ -404,10 +528,10 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                         
                         self.present(self.imag, animated: true, completion: nil)
                     }
-                    
-                } else {
-                    
                 }
+                
+            } else {
+                
             }
         }
         
@@ -419,138 +543,109 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
             impact.impactOccurred()
         }
         
-//        let pickerController = DKImagePickerController()
-//        pickerController.didSelectAssets = { (assets: [DKAsset]) in
-//            if assets.count == 0 {
-//                return
-//            }
-//
-//            //isvideocheck
-//            if assets[0].isVideo {
-//                //self.containsGifVid = true
-//                self.selectedImage1.isUserInteractionEnabled = true
-//                assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                    self.selectedImage1.image = image
-//                })
-//
-//                assets[0].fetchAVAsset(nil, completeBlock: { (avAsset, info) in
-//                    if let avassetURL = avAsset as? AVURLAsset {
-//                        //self.completeVidURL = avassetURL.url
-//                        self.isGifVid = true
-//                        self.textVideoURL = avassetURL.url as! NSURL
-//                        guard let video1 = try? Data(contentsOf: avassetURL.url) else { return }
-//                        self.gifVidData = video1
-//                    }
-//                })
-//
-//            } else {
-//                //self.containsGifVid = false
-//                if self.selectedImage1.image == nil {
-//                    if assets.count > 0 {
-//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage1.image = image
-//                        })
-//                    }
-//                    if assets.count > 1 {
-//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage1.image = image
-//                        })
-//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage2.image = image
-//                        })
-//                    }
-//                    if assets.count > 2 {
-//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage1.image = image
-//                        })
-//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage2.image = image
-//                        })
-//                        assets[2].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage3.image = image
-//                        })
-//                    }
-//                    if assets.count > 3 {
-//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage1.image = image
-//                        })
-//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage2.image = image
-//                        })
-//                        assets[2].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage3.image = image
-//                        })
-//                        assets[3].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage4.image = image
-//                        })
-//                    }
-//                    self.selectedImage1.isUserInteractionEnabled = true
-//                    self.selectedImage2.isUserInteractionEnabled = true
-//                    self.selectedImage3.isUserInteractionEnabled = true
-//                    self.selectedImage4.isUserInteractionEnabled = true
-//                } else if self.selectedImage2.image == nil {
-//                    if assets.count > 0 {
-//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage2.image = image
-//                        })
-//                    }
-//                    if assets.count > 1 {
-//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage2.image = image
-//                        })
-//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage3.image = image
-//                        })
-//                    }
-//                    if assets.count > 2 {
-//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage2.image = image
-//                        })
-//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage3.image = image
-//                        })
-//                        assets[2].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage4.image = image
-//                        })
-//                    }
-//                    self.selectedImage1.isUserInteractionEnabled = true
-//                    self.selectedImage2.isUserInteractionEnabled = true
-//                    self.selectedImage3.isUserInteractionEnabled = true
-//                    self.selectedImage4.isUserInteractionEnabled = true
-//                } else if self.selectedImage3.image == nil {
-//                    if assets.count > 0 {
-//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage3.image = image
-//                        })
-//                    }
-//                    if assets.count > 1 {
-//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage3.image = image
-//                        })
-//                        assets[1].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage4.image = image
-//                        })
-//                    }
-//                    self.selectedImage3.isUserInteractionEnabled = true
-//                } else if self.selectedImage4.image == nil {
-//                    if assets.count > 0 {
-//                        assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-//                            self.selectedImage4.image = image
-//                        })
-//                    }
-//                    self.selectedImage1.isUserInteractionEnabled = true
-//                    self.selectedImage2.isUserInteractionEnabled = true
-//                    self.selectedImage3.isUserInteractionEnabled = true
-//                    self.selectedImage4.isUserInteractionEnabled = true
-//                }
-//            }
-//        }
-//        pickerController.showsCancelButton = true
-//        pickerController.maxSelectableCount = 4
-//        pickerController.allowMultipleTypes = false
-//        pickerController.allowSwipeToSelect = false
-//        pickerController.assetType = .allAssets
-//        self.present(pickerController, animated: true) {}
+        var mediaIDs: [String] = []
+        var compression: CGFloat = 1
+        if (UserDefaults.standard.object(forKey: "imqual") == nil) || (UserDefaults.standard.object(forKey: "imqual") as! Int == 0) {
+            compression = 1
+        } else if UserDefaults.standard.object(forKey: "imqual") as! Int == 1 {
+            compression = 0.78
+        } else {
+            compression = 0.5
+        }
+        
+        let pickerController = DKImagePickerController()
+        pickerController.didSelectAssets = { (assets: [DKAsset]) in
+            if assets.count == 0 {
+                return
+            }
+            
+            var imageDa = UIImage()
+            
+            if assets[0].isVideo {
+                assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+                    imageDa = image ?? UIImage()
+                })
+                
+                assets[0].fetchAVAsset(nil, completeBlock: { (avAsset, info) in
+                    if let avassetURL = avAsset as? AVURLAsset {
+                        let _ = avassetURL.url
+                        guard let yy = try? Data(contentsOf: avassetURL.url) else { return }
+                        
+                        let request = Media.upload(media: .gif(yy))
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                mediaIDs.append(stat.id)
+                                let request7 = Media.updateDescription(description: "", id: stat.id)
+                                StoreStruct.client.run(request7) { (statuses) in
+                                    
+                                }
+                                
+                                let sender = Sender(id: "1", displayName: "\(StoreStruct.currentUser.acct)")
+                                let x = MockMessage.init(image: imageDa, sender: sender, messageId: "18982", date: Date())
+                                
+                                let request0 = Statuses.create(status: "@\(self.lastUser)", replyToID: self.mainStatus[0].id, mediaIDs: mediaIDs, sensitive: self.mainStatus[0].sensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: nil, poll: nil, visibility: .direct)
+                                StoreStruct.client.run(request0) { (statuses) in
+                                    
+                                    DispatchQueue.main.async {
+                                        if let stat = statuses.value {
+                                            self.allPosts.append(stat)
+                                            self.messages.append(x)
+                                            self.messagesCollectionView.reloadData()
+                                            self.messagesCollectionView.scrollToBottom()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        
+                    }
+                })
+                
+            } else {
+                
+                if assets.count > 0 {
+                    assets[0].fetchOriginalImage(true, completeBlock: { image, info in
+                        
+                        let imageData = (image ?? UIImage()).jpegData(compressionQuality: compression)
+                        let request = Media.upload(media: .jpeg(imageData))
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                mediaIDs.append(stat.id)
+                                let request7 = Media.updateDescription(description: "", id: stat.id)
+                                StoreStruct.client.run(request7) { (statuses) in
+                                    
+                                }
+                                
+                                let sender = Sender(id: "1", displayName: "\(StoreStruct.currentUser.acct)")
+                                let x = MockMessage.init(image: image ?? UIImage(), sender: sender, messageId: "18982", date: Date())
+                                
+                                let request0 = Statuses.create(status: "@\(self.lastUser)", replyToID: self.mainStatus[0].id, mediaIDs: mediaIDs, sensitive: self.mainStatus[0].sensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: nil, poll: nil, visibility: .direct)
+                                StoreStruct.client.run(request0) { (statuses) in
+                                    
+                                    DispatchQueue.main.async {
+                                        if let stat = statuses.value {
+                                            self.allPosts.append(stat)
+                                            self.messages.append(x)
+                                            self.messagesCollectionView.reloadData()
+                                            self.messagesCollectionView.scrollToBottom()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                    })
+                }
+                
+            }
+        }
+        pickerController.showsCancelButton = true
+        pickerController.maxSelectableCount = 1
+        pickerController.allowMultipleTypes = false
+        pickerController.allowSwipeToSelect = false
+        pickerController.assetType = .allAssets
+        self.present(pickerController, animated: true) {}
     }
     
     @objc func didTouchOther(sender: UIButton) {

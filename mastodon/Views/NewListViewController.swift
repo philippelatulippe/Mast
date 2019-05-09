@@ -83,7 +83,7 @@ class NewListViewController: UIViewController, UITextFieldDelegate {
         } else {
             titleV.text = "Edit List Title".localized
         }
-        titleV.textColor = Colours.grayDark2
+        titleV.textColor = Colours.grayDark.withAlphaComponent(0.38)
         titleV.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         self.view.addSubview(titleV)
         

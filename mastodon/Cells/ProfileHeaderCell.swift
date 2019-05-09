@@ -128,10 +128,10 @@ class ProfileHeaderCell: SwipeTableViewCell {
         contentView.addSubview(toot)
         contentView.addSubview(more)
         contentView.addSubview(settings)
-        contentView.addSubview(settings2)
         contentView.addSubview(tagListView)
         contentView.addSubview(follows)
         contentView.addSubview(profileImageView)
+        contentView.addSubview(settings2)
         
         let viewsDict = [
             "bgDark" : bgDark,
@@ -530,9 +530,9 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         contentView.addSubview(toot)
         contentView.addSubview(more)
         contentView.addSubview(settings)
-        contentView.addSubview(settings2)
         contentView.addSubview(follows)
         contentView.addSubview(profileImageView)
+        contentView.addSubview(settings2)
         
         let viewsDict = [
             "bgDark" : bgDark,

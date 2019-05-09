@@ -2442,7 +2442,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         self.navigationController?.pushViewController(controller, animated: true)
                     }
                 }
-                .action(.default("Follows/Followers".localized), image: UIImage(named: "profile")) { (action, ind) in
+                .action(.default(" Follows/Followers".localized), image: UIImage(named: "profile")) { (action, ind) in
                     
                     DispatchQueue.main.async {
                         let controller = FollowersViewController()
@@ -3254,8 +3254,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 //cell.configure(zzz[indexPath.row])
                 cell.backgroundColor = Colours.white
                 cell.userName.textColor = Colours.grayDark
-                cell.userTag.setTitleColor(Colours.grayDark, for: .normal)
-                cell.date.textColor = Colours.grayDark
+                cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                 cell.toot.textColor = Colours.grayDark
                 cell.toot.handleMentionTap { (string) in
                     // mention
@@ -3362,8 +3362,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.backgroundColor = Colours.white
                     cell.userName.textColor = Colours.grayDark
-                    cell.userTag.setTitleColor(Colours.grayDark, for: .normal)
-                    cell.date.textColor = Colours.grayDark
+                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                     cell.toot.textColor = Colours.grayDark
                     cell.toot.handleMentionTap { (string) in
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -3473,8 +3473,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userName.textColor = Colours.grayDark
-                    cell.userTag.setTitleColor(Colours.grayDark, for: .normal)
-                    cell.date.textColor = Colours.grayDark
+                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                     cell.toot.textColor = Colours.grayDark
                     cell.mainImageView.backgroundColor = Colours.white
                     cell.mainImageViewBG.backgroundColor = Colours.white
@@ -3587,8 +3587,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userName.textColor = Colours.grayDark
-                    cell.userTag.setTitleColor(Colours.grayDark, for: .normal)
-                    cell.date.textColor = Colours.grayDark
+                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                     cell.toot.textColor = Colours.grayDark
                     cell.mainImageView.backgroundColor = Colours.white
                     cell.mainImageViewBG.backgroundColor = Colours.white
