@@ -316,52 +316,60 @@ class NewInstanceViewController: UIViewController, UITextFieldDelegate {
             impact.impactOccurred()
         }
         
+//        StoreStruct.client = Client(baseURL: "https://\(self.textView.text!)")
+//        let request = Clients.register(
+//            clientName: "Mast",
+//            redirectURI: "com.shi.mastodon://success",
+//            scopes: [.read, .write, .follow, .push],
+//            website: "https://twitter.com/jpeguin"
+//        )
         
-        StoreStruct.client = Client(baseURL: "https://\(self.textView.text!)")
-        let request = Clients.register(
-            clientName: "Mast",
-            redirectURI: "com.shi.mastodon://success",
-            scopes: [.read, .write, .follow, .push],
-            website: "https://twitter.com/jpeguin"
-        )
-        StoreStruct.client.run(request) { (application) in
-            
-            
-            DispatchQueue.main.async {
-                
-                if application.value == nil {
-                    
-                    
-                    var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
-                    var offset = 88
-                    var newoff = 45
-                    if UIDevice().userInterfaceIdiom == .phone {
-                        switch UIScreen.main.nativeBounds.height {
-                        case 2688:
-                            offset = 88
-                            newoff = 45
-                        case 2436, 1792:
-                            offset = 88
-                            newoff = 45
-                        default:
-                            offset = 64
-                            newoff = 24
-                            tabHeight = Int(UITabBarController().tabBar.frame.size.height)
-                        }
-                    }
-                    
-                    
-                    DispatchQueue.main.async {
-                        let statusAlert = StatusAlert()
-                        statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
-                        statusAlert.title = "Not a valid Instance (may be closed or dead)".localized
-                        statusAlert.contentColor = Colours.grayDark
-                        statusAlert.message = "Please enter an Instance name like mastodon.technology"
-                        statusAlert.show(in: self.view, withVerticalPosition: .top(offset: CGFloat(offset + 10)))
-                    }
-                    
-                } else {
-                    
+        
+//        let testClient = Client(
+//            baseURL: "https://\(self.textView.text!)",
+//            accessToken: StoreStruct.shared.currentInstance.accessToken
+//        )
+//
+//        let request = Timelines.public(local: true, range: .max(id: self.textView.text ?? "", limit: nil))
+//
+//        testClient.run(request) { (application) in
+//
+//
+//            DispatchQueue.main.async {
+//
+//                if application.value == nil {
+//
+//
+//                    var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
+//                    var offset = 88
+//                    var newoff = 45
+//                    if UIDevice().userInterfaceIdiom == .phone {
+//                        switch UIScreen.main.nativeBounds.height {
+//                        case 2688:
+//                            offset = 88
+//                            newoff = 45
+//                        case 2436, 1792:
+//                            offset = 88
+//                            newoff = 45
+//                        default:
+//                            offset = 64
+//                            newoff = 24
+//                            tabHeight = Int(UITabBarController().tabBar.frame.size.height)
+//                        }
+//                    }
+//
+//
+//                    DispatchQueue.main.async {
+//                        let statusAlert = StatusAlert()
+//                        statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+//                        statusAlert.title = "Not a valid Instance (may be closed or dead)".localized
+//                        statusAlert.contentColor = Colours.grayDark
+//                        statusAlert.message = "Please enter an Instance name like mastodon.technology"
+//                        statusAlert.show(in: self.view, withVerticalPosition: .top(offset: CGFloat(offset + 10)))
+//                    }
+//
+//                } else {
+        
                     
                     DispatchQueue.main.async {
                         // go to next view
@@ -388,9 +396,9 @@ class NewInstanceViewController: UIViewController, UITextFieldDelegate {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadLists"), object: nil)
                     }
                     
-                }
-            }
-        }
+//                }
+//            }
+//        }
         
         
         
