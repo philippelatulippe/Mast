@@ -175,40 +175,40 @@ class NotificationsSettingsViewController: UIViewController, UITableViewDelegate
     
     @objc func handleToggle1(sender: UISwitch) {
         if sender.isOn {
-            UserDefaults.standard.set(0, forKey: "pnmentions")
+            UserDefaults.standard.set(true, forKey: "pnmentions")
             sender.setOn(true, animated: true)
         } else {
-            UserDefaults.standard.set(1, forKey: "pnmentions")
+            UserDefaults.standard.set(false, forKey: "pnmentions")
             sender.setOn(false, animated: true)
         }
     }
     
     @objc func handleToggle2(sender: UISwitch) {
         if sender.isOn {
-            UserDefaults.standard.set(0, forKey: "pnlikes")
+            UserDefaults.standard.set(true, forKey: "pnlikes")
             sender.setOn(true, animated: true)
         } else {
-            UserDefaults.standard.set(1, forKey: "pnlikes")
+            UserDefaults.standard.set(false, forKey: "pnlikes")
             sender.setOn(false, animated: true)
         }
     }
     
     @objc func handleToggle3(sender: UISwitch) {
         if sender.isOn {
-            UserDefaults.standard.set(0, forKey: "pnboosts")
+            UserDefaults.standard.set(true, forKey: "pnboosts")
             sender.setOn(true, animated: true)
         } else {
-            UserDefaults.standard.set(1, forKey: "pnboosts")
+            UserDefaults.standard.set(false, forKey: "pnboosts")
             sender.setOn(false, animated: true)
         }
     }
     
     @objc func handleToggle4(sender: UISwitch) {
         if sender.isOn {
-            UserDefaults.standard.set(0, forKey: "pnfollows")
+            UserDefaults.standard.set(true, forKey: "pnfollows")
             sender.setOn(true, animated: true)
         } else {
-            UserDefaults.standard.set(1, forKey: "pnfollows")
+            UserDefaults.standard.set(false, forKey: "pnfollows")
             sender.setOn(false, animated: true)
         }
     }
@@ -293,14 +293,14 @@ class NotificationsSettingsViewController: UIViewController, UITableViewDelegate
             bgColorView.backgroundColor = Colours.white
             cell.selectedBackgroundView = bgColorView
             if indexPath.row == 0 {
-                if (UserDefaults.standard.object(forKey: "badgeMent") == nil) || (UserDefaults.standard.object(forKey: "badgeMent") as! Bool == true) {
+                if (UserDefaults.standard.object(forKey: "badgeMent") == nil) || (UserDefaults.standard.object(forKey: "badgeMent") as! Int == 0) {
                     cell.switchView.setOn(true, animated: false)
                 } else {
                     cell.switchView.setOn(false, animated: false)
                 }
                 cell.switchView.addTarget(self, action: #selector(self.handleToggleBadgeMent), for: .touchUpInside)
             } else {
-                if (UserDefaults.standard.object(forKey: "badgeMentd") == nil) || (UserDefaults.standard.object(forKey: "badgeMentd") as! Bool == true) {
+                if (UserDefaults.standard.object(forKey: "badgeMentd") == nil) || (UserDefaults.standard.object(forKey: "badgeMentd") as! Int == 0) {
                     cell.switchView.setOn(true, animated: false)
                 } else {
                     cell.switchView.setOn(false, animated: false)

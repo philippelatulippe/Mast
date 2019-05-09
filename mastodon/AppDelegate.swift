@@ -266,17 +266,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func tempGotoInstance(_ text: String) {
-        StoreStruct.client = Client(baseURL: "https://\(text)")
-        let request = Clients.register(
-            clientName: "Mast",
-            redirectURI: "com.shi.mastodon://success",
-            scopes: [.read, .write, .follow, .push],
-            website: "https://twitter.com/jpeguin"
-        )
-        StoreStruct.client.run(request) { (application) in
-            
-            if application.value == nil {} else {
-                
+//        StoreStruct.client = Client(baseURL: "https://\(text)")
+//        let request = Clients.register(
+//            clientName: "Mast",
+//            redirectURI: "com.shi.mastodon://success",
+//            scopes: [.read, .write, .follow, .push],
+//            website: "https://twitter.com/jpeguin"
+//        )
+//        StoreStruct.client.run(request) { (application) in
+//
+//            if application.value == nil {} else {
+        
                 DispatchQueue.main.async {
                     // go to next view
                     StoreStruct.shared.currentInstance.instanceText = text
@@ -298,8 +298,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
                 
-            }
-        }
+//            }
+//        }
     }
     
     
