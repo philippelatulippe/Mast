@@ -440,7 +440,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         statusAlert.title = "Voted"
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = StoreStruct.currentPollSelectionTitle
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                     }
@@ -530,6 +530,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.separatorStyle = .singleLine
         self.tableView.backgroundColor = Colours.white
         self.tableView.separatorColor = Colours.grayDark.withAlphaComponent(0.21)
+        self.tableView.separatorInset = UIEdgeInsets.zero
         self.tableView.layer.masksToBounds = true
         self.tableView.estimatedRowHeight = UITableView.automaticDimension
         self.tableView.rowHeight = UITableView.automaticDimension
@@ -2855,7 +2856,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             statusAlert.title = "Unliked".localized
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
-            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                 statusAlert.show()
             }
             
@@ -2886,7 +2887,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             statusAlert.title = "Liked".localized
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
-            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                 statusAlert.show()
             }
             
@@ -2926,7 +2927,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             statusAlert.title = "Unboosted".localized
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
-            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                 statusAlert.show()
             }
             
@@ -2951,7 +2952,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             statusAlert.title = "Boosted".localized
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = "Toot"
-            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                 statusAlert.show()
             }
             
@@ -3052,7 +3053,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 statusAlert.title = "Unpinned".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "This Toot"
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                             }
@@ -3071,7 +3072,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 statusAlert.title = "Pinned".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "This Toot"
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                             }
@@ -3105,7 +3106,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             statusAlert.title = "Deleted".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Your Toot"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                             self.navigationController?.popViewController(animated: true)
@@ -3275,7 +3276,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         statusAlert.title = "Muted".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                             statusAlert.show()
                         }
                         
@@ -3296,7 +3297,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         statusAlert.title = "Unmuted".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                             statusAlert.show()
                         }
                         
@@ -3323,7 +3324,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         statusAlert.title = "Blocked".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                             statusAlert.show()
                         }
                         
@@ -3344,7 +3345,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         statusAlert.title = "Unblocked".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.mainStatus[0].reblog?.account.displayName ?? self.mainStatus[0].account.displayName
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                             statusAlert.show()
                         }
                         
@@ -3381,7 +3382,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             statusAlert.title = "Reported".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Harassment"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                             
@@ -3407,7 +3408,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             statusAlert.title = "Reported".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "No Content Warning"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                             
@@ -3433,7 +3434,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             statusAlert.title = "Reported".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Spam"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                             
@@ -4954,7 +4955,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         statusAlert.title = "Unpinned".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                     }
@@ -4973,7 +4974,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         statusAlert.title = "Pinned".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                     }
@@ -5007,7 +5008,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     statusAlert.title = "Deleted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Your Toot"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     self.navigationController?.popViewController(animated: true)
@@ -5130,7 +5131,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 statusAlert.title = "Muted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -5151,7 +5152,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 statusAlert.title = "Unmuted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -5178,7 +5179,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 statusAlert.title = "Blocked".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -5199,7 +5200,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 statusAlert.title = "Unblocked".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -5235,7 +5236,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Harassment"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -5261,7 +5262,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "No Content Warning"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -5287,7 +5288,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Spam"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -5614,6 +5615,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
         self.view.backgroundColor = Colours.white
         

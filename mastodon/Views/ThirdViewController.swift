@@ -1445,7 +1445,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.title = "Updated Display Picture".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = StoreStruct.currentUser.displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                 }
@@ -1490,7 +1490,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         statusAlert.title = "Updated Header".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = StoreStruct.currentUser.displayName
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                     }
@@ -1762,7 +1762,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             statusAlert.title = isItGoingToLockText.localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = StoreStruct.currentUser.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                         }
@@ -1794,7 +1794,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 statusAlert.title = "Follow Request Sent".localized
                 statusAlert.contentColor = Colours.grayDark
                 statusAlert.message = self.chosenUser.displayName
-                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                     statusAlert.show()
                 }
             } else {
@@ -1803,7 +1803,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 statusAlert.title = "Followed".localized
                 statusAlert.contentColor = Colours.grayDark
                 statusAlert.message = self.chosenUser.displayName
-                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                     statusAlert.show()
                 }
             }
@@ -1833,7 +1833,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             statusAlert.title = "Unfollowed".localized
             statusAlert.contentColor = Colours.grayDark
             statusAlert.message = self.chosenUser.displayName
-            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                 statusAlert.show()
             }
             
@@ -1859,35 +1859,35 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if self.fromOtherUser {
             if self.isFollowing {
-                self.fo = "Unfollow".localized
+                self.fo = " Unfollow".localized
             } else {
-                self.fo = "Follow".localized
+                self.fo = " Follow".localized
             }
-            var endoTitle = "Endorse"
+            var endoTitle = " Endorse"
             if self.isEndorsed {
-                endoTitle = "Remove Endorsement"
+                endoTitle = " Remove Endorsement"
             } else {
-                endoTitle = "Endorse"
+                endoTitle = " Endorse"
             }
-            var muteTitle = "Mute"
+            var muteTitle = " Mute"
             if self.isMuted {
-                muteTitle = "Unmute"
+                muteTitle = " Unmute"
             } else {
-                muteTitle = "Mute"
+                muteTitle = " Mute"
             }
-            var blockText = "Block"
+            var blockText = " Block"
             if self.isBlocked {
-                blockText = "Unblock"
+                blockText = " Unblock"
             } else {
-                blockText = "Block"
+                blockText = " Block"
             }
-            var rebText = "Disable Boosts"
+            var rebText = " Disable Boosts"
             var rebImage = UIImage(named: "block")
             if self.isShowingBoosts {
-                rebText = "Disable Boosts"
+                rebText = " Disable Boosts"
                 rebImage = UIImage(named: "block")
             } else {
-                rebText = "Enable Boosts"
+                rebText = " Enable Boosts"
                 rebImage = UIImage(named: "boost3")
             }
             
@@ -1897,7 +1897,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                 .messageTextAlignment(.left)
                 .titleTextAlignment(.left)
-                .action(.default("Pinned".localized), image: UIImage(named: "pinned")) { (action, ind) in
+                .action(.default(" Pinned".localized), image: UIImage(named: "pinned")) { (action, ind) in
                      
                     
                     let controller = PinnedViewController()
@@ -1913,14 +1913,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //                        }
 //                    }
                 }
-                .action(.default("Mention".localized), image: UIImage(named: "reply2")) { (action, ind) in
+                .action(.default(" Mention".localized), image: UIImage(named: "reply2")) { (action, ind) in
                      
                     
                     let controller = ComposeViewController()
                     controller.inReplyText = self.chosenUser.acct
                     self.present(controller, animated: true, completion: nil)
                 }
-                .action(.default("Direct Message".localized), image: UIImage(named: "direct3")) { (action, ind) in
+                .action(.default("Direct Message".localized), image: UIImage(named: "sendm")) { (action, ind) in
                      
                     
                     let controller = ComposeViewController()
@@ -1945,7 +1945,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             statusAlert.title = "Follow Request Sent".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = self.chosenUser.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                         } else {
@@ -1954,7 +1954,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             statusAlert.title = "Followed".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = self.chosenUser.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                         }
@@ -1984,7 +1984,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         statusAlert.title = "Unfollowed".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.chosenUser.displayName
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                             statusAlert.show()
                         }
                         
@@ -2018,7 +2018,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.title = "Removed Endorsement".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = self.chosenUser.displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -2040,7 +2040,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.title = "Endorsed".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = self.chosenUser.displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -2051,7 +2051,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     
                 }
-                .action(.default("Follows/Followers".localized), image: UIImage(named: "profile")) { (action, ind) in
+                .action(.default(" Follows/Followers".localized), image: UIImage(named: "profile")) { (action, ind) in
                     
                     DispatchQueue.main.async {
                         let controller = FollowersViewController()
@@ -2092,7 +2092,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             statusAlert.title = "Disabled Boosts".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = self.chosenUser.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                             let request = Accounts.follow(id: self.chosenUser.id, reblogs: false)
@@ -2111,7 +2111,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             statusAlert.title = "Enabled Boosts".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = self.chosenUser.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                             let request = Accounts.follow(id: self.chosenUser.id, reblogs: true)
@@ -2128,7 +2128,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 
                 
-                .action(.default("Add to a List".localized), image: UIImage(named: "list")) { (action, ind) in
+                .action(.default(" Add to a List".localized), image: UIImage(named: "list")) { (action, ind) in
                      
                     
                     
@@ -2159,7 +2159,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.title = "Added".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = self.chosenUser.displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -2195,7 +2195,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         statusAlert.title = "Muted".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.chosenUser.displayName
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                             statusAlert.show()
                         }
                         
@@ -2216,7 +2216,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         statusAlert.title = "Unmuted".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.chosenUser.displayName
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                             statusAlert.show()
                         }
                         
@@ -2242,7 +2242,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         statusAlert.title = "Blocked".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.chosenUser.displayName
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                             statusAlert.show()
                         }
                         
@@ -2263,7 +2263,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         statusAlert.title = "Unblocked".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.chosenUser.displayName
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                             statusAlert.show()
                         }
                         
@@ -2277,7 +2277,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     
                 }
-                .action(.default("Share Profile".localized), image: UIImage(named: "share")) { (action, ind) in
+                .action(.default(" Share Profile".localized), image: UIImage(named: "share")) { (action, ind) in
                      
                     
                     
@@ -4829,7 +4829,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                             statusAlert.title = "Unpinned".localized
                                             statusAlert.contentColor = Colours.grayDark
                                             statusAlert.message = "This Toot"
-                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                                 statusAlert.show()
                                             }
                                         }
@@ -4848,7 +4848,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                             statusAlert.title = "Pinned".localized
                                             statusAlert.contentColor = Colours.grayDark
                                             statusAlert.message = "This Toot"
-                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                                 statusAlert.show()
                                             }
                                         }
@@ -4891,7 +4891,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         statusAlert.title = "Deleted".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "Your Toot"
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                         //sto.remove(at: indexPath.row)
@@ -5082,7 +5082,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.title = "Muted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -5103,7 +5103,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.title = "Unmuted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -5130,7 +5130,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.title = "Blocked".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -5151,7 +5151,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     statusAlert.title = "Unblocked".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -5187,7 +5187,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         statusAlert.title = "Reported".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "Harassment"
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                         
@@ -5213,7 +5213,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         statusAlert.title = "Reported".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "No Content Warning"
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                         
@@ -5239,7 +5239,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         statusAlert.title = "Reported".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "Spam"
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                         
@@ -5641,6 +5641,12 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
 //        self.navigationController?.navigationBar.barTintColor = Colours.grayDark
 //        self.navigationController?.navigationBar.tintColor = Colours.grayDark

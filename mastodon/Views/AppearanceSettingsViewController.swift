@@ -1048,7 +1048,7 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                 var filledSet4 = UIImage(named: "unfilledset")
                 var filledSet5 = UIImage(named: "unfilledset")
                 var filledSet6 = UIImage(named: "unfilledset")
-                if (UserDefaults.standard.object(forKey: "sworder") == nil) || (UserDefaults.standard.object(forKey: "sworder") as! Int == 0) {
+                if (UserDefaults.standard.object(forKey: "sworder") as! Int == 0) {
                     filledSet1 = UIImage(named: "filledset")
                     filledSet2 = UIImage(named: "unfilledset")
                     filledSet3 = UIImage(named: "unfilledset")
@@ -1098,13 +1098,13 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                     .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                     .messageTextAlignment(.left)
                     .titleTextAlignment(.left)
-                    .action(.default("Reply Like Boost".localized), image: filledSet1) { (action, ind) in
-                        
-                        UserDefaults.standard.set(0, forKey: "sworder")
-                    }
                     .action(.default("Reply Boost Like".localized), image: filledSet2) { (action, ind) in
                         
                         UserDefaults.standard.set(1, forKey: "sworder")
+                    }
+                    .action(.default("Reply Like Boost".localized), image: filledSet1) { (action, ind) in
+                        
+                        UserDefaults.standard.set(0, forKey: "sworder")
                     }
                     .action(.default("Boost Reply Like".localized), image: filledSet3) { (action, ind) in
                         
@@ -1867,6 +1867,12 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
         self.view.backgroundColor = Colours.white
         

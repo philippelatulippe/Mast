@@ -973,6 +973,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             UserDefaults.standard.set(1, forKey: "segsize")
         }
         
+        if (UserDefaults.standard.object(forKey: "sworder") == nil) {
+            UserDefaults.standard.set(1, forKey: "sworder")
+        }
+        
         if (UserDefaults.standard.object(forKey: "instancesLocal") == nil) {
             
         } else {
@@ -1605,7 +1609,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     statusAlert.title = "Deleted".localized
                     statusAlert.contentColor = Colours.grayDark
                     statusAlert.message = StoreStruct.allLists[indexPath.row].title
-                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                     
@@ -1664,7 +1668,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         statusAlert.title = "Removed".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = StoreStruct.allLists[indexPath.row].title
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                             statusAlert.show()
                         }
                         
@@ -1725,7 +1729,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         statusAlert.title = "Removed".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = StoreStruct.instanceLocalToAdd[indexPath.row]
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                         

@@ -1496,7 +1496,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                         statusAlert.title = "Unpinned".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                     }
@@ -1515,7 +1515,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                         statusAlert.title = "Pinned".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                     }
@@ -1554,7 +1554,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                     statusAlert.title = "Deleted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Your Toot"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                     //sto.remove(at: indexPath.row)
@@ -1741,7 +1741,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             statusAlert.title = "Muted".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                             
@@ -1762,7 +1762,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             statusAlert.title = "Unmuted".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                             
@@ -1789,7 +1789,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             statusAlert.title = "Blocked".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                             
@@ -1810,7 +1810,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                             statusAlert.title = "Unblocked".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                             
@@ -1846,7 +1846,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 statusAlert.title = "Reported".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "Harassment"
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 
@@ -1872,7 +1872,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 statusAlert.title = "Reported".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "No Content Warning"
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 
@@ -1898,7 +1898,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 statusAlert.title = "Reported".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "Spam"
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 
@@ -2243,6 +2243,12 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
         self.view.backgroundColor = Colours.white
         

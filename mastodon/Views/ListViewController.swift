@@ -1605,7 +1605,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         statusAlert.title = "Unpinned".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                     }
@@ -1624,7 +1624,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                                         statusAlert.title = "Pinned".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = "This Toot"
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                     }
@@ -1663,7 +1663,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                                     statusAlert.title = "Deleted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Your Toot"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                     //sto.remove(at: indexPath.row)
@@ -1848,7 +1848,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                             statusAlert.title = "Muted".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                             
@@ -1869,7 +1869,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                             statusAlert.title = "Unmuted".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                             
@@ -1896,7 +1896,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                             statusAlert.title = "Blocked".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                             
@@ -1917,7 +1917,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                             statusAlert.title = "Unblocked".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = sto[indexPath.row].reblog?.account.displayName ?? sto[indexPath.row].account.displayName
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                             
@@ -1953,7 +1953,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 statusAlert.title = "Reported".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "Harassment"
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 
@@ -1979,7 +1979,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 statusAlert.title = "Reported".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "No Content Warning"
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 
@@ -2005,7 +2005,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 statusAlert.title = "Reported".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "Spam"
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 
@@ -2359,6 +2359,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
         self.view.backgroundColor = Colours.white
         

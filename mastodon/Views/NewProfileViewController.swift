@@ -206,7 +206,7 @@ class NewProfileViewController: UIViewController, UITextViewDelegate {
                         statusAlert.title = "Updated Name".localized
                         statusAlert.contentColor = Colours.grayDark
                         statusAlert.message = self.textView.text
-                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                     }

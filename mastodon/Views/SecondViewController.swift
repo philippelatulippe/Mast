@@ -3523,7 +3523,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 statusAlert.title = "Muted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -3543,7 +3543,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 statusAlert.title = "Unmuted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -3569,7 +3569,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 statusAlert.title = "Blocked".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -3590,7 +3590,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 statusAlert.title = "Unblocked".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -3625,7 +3625,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Harassment"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -3650,7 +3650,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "No Content Warning"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -3676,7 +3676,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Spam"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -3783,7 +3783,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     statusAlert.title = "Deleted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Notification"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                 }
@@ -4170,7 +4170,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 statusAlert.title = "Muted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -4191,7 +4191,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 statusAlert.title = "Unmuted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -4218,7 +4218,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 statusAlert.title = "Blocked".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -4239,7 +4239,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 statusAlert.title = "Unblocked".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -4276,7 +4276,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Harassment"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -4302,7 +4302,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "No Content Warning"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -4328,7 +4328,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Spam"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -4435,7 +4435,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     statusAlert.title = "Deleted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Notification"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                 }
@@ -4580,7 +4580,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     statusAlert.title = "Deleted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Notification"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                 }
@@ -4771,7 +4771,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 StoreStruct.notifications = StoreStruct.notifications + stat
                 DispatchQueue.main.async {
                     //                        StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
-                    //                        StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
+                    StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     self.tableView2.reloadData()
                 }
                 //                    if StoreStruct.notifications.isEmpty {
@@ -4791,7 +4791,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + stat
                 DispatchQueue.main.async {
                     //                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                    //                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     self.tableView.reloadData()
                 }
                 //                    if StoreStruct.notificationsMentions.isEmpty {
@@ -4990,6 +4990,12 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
         self.view.backgroundColor = Colours.white
         

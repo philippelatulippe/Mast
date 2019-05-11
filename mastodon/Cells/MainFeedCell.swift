@@ -199,6 +199,7 @@ class MainFeedCell: SwipeTableViewCell {
         like1.backgroundColor = Colours.clear
         boost1.backgroundColor = Colours.clear
         more1.backgroundColor = Colours.clear
+        toot.textColor = Colours.black
         
         rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
@@ -314,7 +315,7 @@ class MainFeedCell: SwipeTableViewCell {
                 let attachmentString2 = NSAttributedString(attachment: imageAttachment)
                 let completeText2 = NSMutableAttributedString(string: "")
                 completeText2.append(attachmentString2)
-                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag) boosted", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
+                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag)", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
                 completeText2.append(textAfterIcon2)
                 attributedString.append(completeText2)
                 self.toot.attributedText = attributedString
@@ -338,7 +339,7 @@ class MainFeedCell: SwipeTableViewCell {
                 let attachmentString2 = NSAttributedString(attachment: imageAttachment)
                 let completeText2 = NSMutableAttributedString(string: "")
                 completeText2.append(attachmentString2)
-                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag) boosted", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
+                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag)", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
                 completeText2.append(textAfterIcon2)
                 attributedString.append(completeText2)
                 

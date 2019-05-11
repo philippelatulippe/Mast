@@ -265,7 +265,7 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
                                 statusAlert.title = "Accepted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = self.currentTags[indexPath.row].displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 
@@ -292,7 +292,7 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
                                 statusAlert.title = "Rejected".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = self.currentTags[indexPath.row].displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 
@@ -444,6 +444,12 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
         self.view.backgroundColor = Colours.white
         

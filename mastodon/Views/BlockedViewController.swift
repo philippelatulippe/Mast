@@ -274,7 +274,7 @@ class BlockedViewController: UIViewController, UITableViewDelegate, UITableViewD
                     statusAlert.title = "Unblocked".localized
                     statusAlert.contentColor = Colours.grayDark
                     statusAlert.message = sto[indexPath.row].displayName
-                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                     
@@ -434,6 +434,12 @@ class BlockedViewController: UIViewController, UITableViewDelegate, UITableViewD
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
         self.view.backgroundColor = Colours.white
         

@@ -191,7 +191,7 @@ class DetailCellImage: UITableViewCell {
                 let attachmentString2 = NSAttributedString(attachment: imageAttachment)
                 let completeText2 = NSMutableAttributedString(string: "")
                 completeText2.append(attachmentString2)
-                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag) boosted", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
+                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag)", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
                 completeText2.append(textAfterIcon2)
                 attributedString.append(completeText2)
                 self.toot.attributedText = attributedString
@@ -215,7 +215,7 @@ class DetailCellImage: UITableViewCell {
                 let attachmentString2 = NSAttributedString(attachment: imageAttachment)
                 let completeText2 = NSMutableAttributedString(string: "")
                 completeText2.append(attachmentString2)
-                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag) boosted", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
+                let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag)", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
                 completeText2.append(textAfterIcon2)
                 attributedString.append(completeText2)
                 

@@ -1336,7 +1336,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.title = "Muted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -1357,7 +1357,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.title = "Unmuted".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -1384,7 +1384,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.title = "Blocked".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -1405,7 +1405,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 statusAlert.title = "Unblocked".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = sto[indexPath.row].lastStatus!.account.displayName
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                     statusAlert.show()
                                 }
                                 
@@ -1442,7 +1442,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Harassment"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -1468,7 +1468,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "No Content Warning"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -1494,7 +1494,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                     statusAlert.title = "Reported".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Spam"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -1803,6 +1803,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
 //        self.navigationController?.navigationBar.barTintColor = Colours.grayDark
 //        self.navigationController?.navigationBar.tintColor = Colours.grayDark

@@ -101,19 +101,19 @@ class ActionButtonCell: UITableViewCell {
         
         
         
-        let verticalFormat = "V:|-20-[reply(40)]-20-|"
+        let verticalFormat = "V:|-10-[reply(40)]-10-|"
         let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(verticalConstraints)
         
-        let verticalFormat2 = "V:|-20-[like(40)]-20-|"
+        let verticalFormat2 = "V:|-10-[like(40)]-10-|"
         let verticalConstraints2 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat2, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(verticalConstraints2)
         
-        let verticalFormat3 = "V:|-20-[boost(40)]-20-|"
+        let verticalFormat3 = "V:|-10-[boost(40)]-10-|"
         let verticalConstraints3 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat3, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(verticalConstraints3)
         
-        let verticalFormat4 = "V:|-20-[more(40)]-20-|"
+        let verticalFormat4 = "V:|-10-[more(40)]-10-|"
         let verticalConstraints4 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat4, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(verticalConstraints4)
         
@@ -128,19 +128,19 @@ class ActionButtonCell: UITableViewCell {
     }
     
     func configure(mainStatus: Status) {
-        replyButton.setImage(UIImage(named: "reply0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
-        moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+        replyButton.setImage(UIImage(named: "reply0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+        moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         
         if mainStatus.reblog?.favourited ?? mainStatus.favourited ?? false || StoreStruct.allLikes.contains(mainStatus.reblog?.id ?? mainStatus.id) {
             likeButton.setImage(UIImage(named: "like"), for: .normal)
         } else {
-            likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+            likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         }
         
         if mainStatus.reblog?.reblogged ?? mainStatus.reblogged ?? false || StoreStruct.allBoosts.contains(mainStatus.reblog?.id ?? mainStatus.id) {
             boostButton.setImage(UIImage(named: "boost"), for: .normal)
         } else {
-            boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+            boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         }
     }
     
@@ -205,15 +205,15 @@ class ActionButtonCell2: UITableViewCell {
         let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(horizontalConstraints)
         
-        let verticalFormat = "V:|-20-[reply(40)]-20-|"
+        let verticalFormat = "V:|-10-[reply(40)]-10-|"
         let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(verticalConstraints)
         
-        let verticalFormat2 = "V:|-20-[like(40)]-20-|"
+        let verticalFormat2 = "V:|-10-[like(40)]-10-|"
         let verticalConstraints2 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat2, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(verticalConstraints2)
         
-        let verticalFormat4 = "V:|-20-[more(40)]-20-|"
+        let verticalFormat4 = "V:|-10-[more(40)]-10-|"
         let verticalConstraints4 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat4, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(verticalConstraints4)
         
@@ -228,13 +228,13 @@ class ActionButtonCell2: UITableViewCell {
     }
     
     func configure(mainStatus: Status) {
-        replyButton.setImage(UIImage(named: "direct2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
-        moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+        replyButton.setImage(UIImage(named: "direct2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+        moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         
         if mainStatus.reblog?.favourited ?? mainStatus.favourited ?? false || StoreStruct.allLikes.contains(mainStatus.reblog?.id ?? mainStatus.id) {
             likeButton.setImage(UIImage(named: "like"), for: .normal)
         } else {
-            likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+            likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         }
     }
     

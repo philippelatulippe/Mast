@@ -16,7 +16,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
     var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var segmentedControl: SJFluidSegmentedControl!
     var tableView = UITableView()
-    var currentIndex = 0
+    var currentIndex = 1
     var profileStatus = ""
     var statusFollows: [Account] = []
     var statusFollowers: [Account] = []
@@ -356,8 +356,8 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
             let selection = UISelectionFeedbackGenerator()
             selection.selectionChanged()
         }
-        if index == 0 {
-            return "Follows".localized
+        if index == 1 {
+            return "Following".localized
         } else {
             return "Followers".localized
         }
@@ -380,13 +380,13 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
-        if toIndex == 0 {
+        if toIndex == 1 {
             self.currentIndex = 0
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-        if toIndex == 1 {
+        if toIndex == 0 {
             self.currentIndex = 1
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -536,7 +536,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                                     statusAlert.title = "Unfollowed".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -558,7 +558,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                                         statusAlert.title = "Follow Request Sent".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = sto[indexPath.row].displayName
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                     } else {
@@ -567,7 +567,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                                         statusAlert.title = "Followed".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = sto[indexPath.row].displayName
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                     }
@@ -610,7 +610,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                                                 statusAlert.title = "Endorsed".localized
                                                 statusAlert.contentColor = Colours.grayDark
                                                 statusAlert.message = sto[indexPath.row].displayName
-                                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                                     statusAlert.show()
                                                 }
                                             }
@@ -630,7 +630,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                                                 statusAlert.title = "Removed Endorsement".localized
                                                 statusAlert.contentColor = Colours.grayDark
                                                 statusAlert.message = sto[indexPath.row].displayName
-                                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                                     statusAlert.show()
                                                 }
                                             }
@@ -678,7 +678,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                                                     statusAlert.title = "Added".localized
                                                     statusAlert.contentColor = Colours.grayDark
                                                     statusAlert.message = sto[indexPath.row].displayName
-                                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                                         statusAlert.show()
                                                     }
                                                     
@@ -718,7 +718,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                                     statusAlert.title = "Muted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -739,7 +739,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                                     statusAlert.title = "Unmuted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -771,7 +771,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                                     statusAlert.title = "Blocked".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -792,7 +792,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                                     statusAlert.title = "Unblocked".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -1030,6 +1030,12 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
         self.view.backgroundColor = Colours.white
         

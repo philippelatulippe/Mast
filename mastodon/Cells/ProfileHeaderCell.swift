@@ -342,7 +342,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
         numberFormatter2.numberStyle = NumberFormatter.Style.decimal
         let formattedNumber2 = numberFormatter2.string(from: NSNumber(value: status.followersCount))
         
-        follows.setTitle("\(formattedNumber ?? "0") follows     \(formattedNumber2 ?? "0") followers", for: .normal)
+        follows.setTitle("\(formattedNumber2 ?? "0") followers     \(formattedNumber ?? "0") following", for: .normal)
         
         more.setImage(UIImage(named: "more4"), for: .normal)
         
@@ -697,7 +697,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         numberFormatter2.numberStyle = NumberFormatter.Style.decimal
         let formattedNumber2 = numberFormatter2.string(from: NSNumber(value: status.followersCount))
         
-        follows.setTitle("\(formattedNumber ?? "0") follows     \(formattedNumber2 ?? "0") followers", for: .normal)
+        follows.setTitle("\(formattedNumber2 ?? "0") followers     \(formattedNumber ?? "0") following", for: .normal)
         
         more.setImage(UIImage(named: "more4"), for: .normal)
         

@@ -169,6 +169,8 @@ class NewPollViewController: UIViewController, UITextFieldDelegate, UITableViewD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        self.textField.becomeFirstResponder()
+        
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:

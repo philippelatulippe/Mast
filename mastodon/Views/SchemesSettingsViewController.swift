@@ -275,6 +275,12 @@ class SchemesSettingsViewController: UIViewController, UITableViewDelegate, UITa
             UIApplication.shared.statusBarStyle = .lightContent
         }
         
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
+        
         self.view.backgroundColor = Colours.white
         
         if (UserDefaults.standard.object(forKey: "systemText") == nil) || (UserDefaults.standard.object(forKey: "systemText") as! Int == 0) {

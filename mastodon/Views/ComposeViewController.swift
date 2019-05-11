@@ -2644,7 +2644,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             statusAlert.title = "Toot Toot!".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Successfully \(successMessage)"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                             
@@ -2660,7 +2660,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             statusAlert.title = "Could not Toot".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Saved to drafts"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                         }
@@ -2677,7 +2677,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             statusAlert.title = "Toot Toot!".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Successfully \(successMessage)"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                 statusAlert.show()
                             }
                             
@@ -2747,7 +2747,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     statusAlert.title = "Toot Toot!".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Successfully \(successMessage)"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                     
@@ -2763,7 +2763,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     statusAlert.title = "Could not Toot".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Saved to drafts"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 }
@@ -2781,7 +2781,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                 statusAlert.title = "Toot Toot!".localized
                                 statusAlert.contentColor = Colours.grayDark
                                 statusAlert.message = "Successfully \(successMessage)"
-                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 
@@ -2879,7 +2879,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                             statusAlert.title = "Toot Toot!".localized
                                                             statusAlert.contentColor = Colours.grayDark
                                                             statusAlert.message = "Successfully \(successMessage)"
-                                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                                             
@@ -2895,7 +2895,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                             statusAlert.title = "Could not Toot".localized
                                                             statusAlert.contentColor = Colours.grayDark
                                                             statusAlert.message = "Saved to drafts"
-                                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                                         }
@@ -2913,7 +2913,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                         statusAlert.title = "Toot Toot!".localized
                                                         statusAlert.contentColor = Colours.grayDark
                                                         statusAlert.message = "Successfully \(successMessage)"
-                                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                                         
@@ -3000,7 +3000,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                     statusAlert.title = "Toot Toot!".localized
                                                     statusAlert.contentColor = Colours.grayDark
                                                     statusAlert.message = "Successfully \(successMessage)"
-                                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                                     
@@ -3016,7 +3016,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                                     statusAlert.title = "Could not Toot".localized
                                                     statusAlert.contentColor = Colours.grayDark
                                                     statusAlert.message = "Saved to drafts"
-                                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                                 }
@@ -3034,7 +3034,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                             statusAlert.title = "Toot Toot!".localized
                                             statusAlert.contentColor = Colours.grayDark
                                             statusAlert.message = "Successfully \(successMessage)"
-                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                                 
@@ -3109,7 +3109,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                             statusAlert.title = "Toot Toot!".localized
                                             statusAlert.contentColor = Colours.grayDark
                                             statusAlert.message = "Successfully \(successMessage)"
-                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                             
@@ -3125,7 +3125,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                             statusAlert.title = "Could not Toot".localized
                                             statusAlert.contentColor = Colours.grayDark
                                             statusAlert.message = "Saved to drafts"
-                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                         }
@@ -3143,7 +3143,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     statusAlert.title = "Toot Toot!".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Successfully \(successMessage)"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                         
@@ -3203,7 +3203,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     statusAlert.title = "Toot Toot!".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Successfully \(successMessage)"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                     
@@ -3219,7 +3219,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                                     statusAlert.title = "Could not Toot".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = "Saved to drafts"
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 }
@@ -3236,7 +3236,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             statusAlert.title = "Toot Toot!".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Successfully \(successMessage)"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                                 
@@ -3284,7 +3284,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             statusAlert.title = "Toot Toot!".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Successfully \(successMessage)"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                             
@@ -3300,7 +3300,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                             statusAlert.title = "Could not Toot".localized
                             statusAlert.contentColor = Colours.grayDark
                             statusAlert.message = "Saved to drafts"
-                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                            if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                         }
@@ -3317,7 +3317,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     statusAlert.title = "Toot Toot!".localized
                     statusAlert.contentColor = Colours.grayDark
                     statusAlert.message = "Successfully \(successMessage)"
-                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                         statusAlert.show()
                     }
                         

@@ -271,7 +271,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                                     statusAlert.title = "Unfollowed".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -293,7 +293,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                                         statusAlert.title = "Follow Request Sent".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = sto[indexPath.row].displayName
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                     } else {
@@ -302,7 +302,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                                         statusAlert.title = "Followed".localized
                                         statusAlert.contentColor = Colours.grayDark
                                         statusAlert.message = sto[indexPath.row].displayName
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                             statusAlert.show()
                                         }
                                     }
@@ -345,7 +345,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                                                 statusAlert.title = "Endorsed".localized
                                                 statusAlert.contentColor = Colours.grayDark
                                                 statusAlert.message = sto[indexPath.row].displayName
-                                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                                     statusAlert.show()
                                                 }
                                             }
@@ -365,7 +365,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                                                 statusAlert.title = "Removed Endorsement".localized
                                                 statusAlert.contentColor = Colours.grayDark
                                                 statusAlert.message = sto[indexPath.row].displayName
-                                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                                     statusAlert.show()
                                                 }
                                             }
@@ -413,7 +413,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                                                     statusAlert.title = "Added".localized
                                                     statusAlert.contentColor = Colours.grayDark
                                                     statusAlert.message = sto[indexPath.row].displayName
-                                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                                         statusAlert.show()
                                                     }
                                                     
@@ -453,7 +453,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                                     statusAlert.title = "Muted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -474,7 +474,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                                     statusAlert.title = "Unmuted".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -506,7 +506,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                                     statusAlert.title = "Blocked".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -527,7 +527,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                                     statusAlert.title = "Unblocked".localized
                                     statusAlert.contentColor = Colours.grayDark
                                     statusAlert.message = sto[indexPath.row].displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {} else {
+                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
                                         statusAlert.show()
                                     }
                                     
@@ -749,6 +749,12 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
             Colours.black = UIColor.white
             UIApplication.shared.statusBarStyle = .lightContent
         }
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.45)
+        topBorder.backgroundColor = Colours.tabUnselected.cgColor
+        self.tabBarController?.tabBar.layer.addSublayer(topBorder)
+        
         
         self.view.backgroundColor = Colours.white
         
