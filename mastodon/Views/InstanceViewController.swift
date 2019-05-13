@@ -1965,7 +1965,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
         let request = Timelines.public(local: true, range: .max(id: StoreStruct.newInstanceTags.last?.id ?? "", limit: 5000))
         let testClient = Client(
             baseURL: "https://\(StoreStruct.instanceText)",
-            accessToken: StoreStruct.shared.currentInstance.accessToken ?? ""
+            accessToken: StoreStruct.currentInstance.accessToken ?? ""
         )
         testClient.run(request) { (statuses) in
             if let stat = (statuses.value) {
@@ -1985,7 +1985,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
         let request = Timelines.public(local: true, range: .min(id: StoreStruct.newInstanceTags.first?.id ?? "", limit: 5000))
         let testClient = Client(
             baseURL: "https://\(StoreStruct.instanceText)",
-            accessToken: StoreStruct.shared.currentInstance.accessToken ?? ""
+            accessToken: StoreStruct.currentInstance.accessToken ?? ""
         )
         testClient.run(request) { (statuses) in
             if let stat = (statuses.value) {

@@ -291,6 +291,7 @@ class AccountSettingsViewController: UIViewController, UITableViewDelegate, UITa
                     .action(.default("Switch".localized), image: UIImage(named: "profile")) { (action, ind) in
                         DispatchQueue.main.async {
                             
+                            StoreStruct.switchedNow = true
                             InstanceData.setCurrentInstance(instance: instances[indexPath.row])
                             let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             appDelegate.reloadApplication()

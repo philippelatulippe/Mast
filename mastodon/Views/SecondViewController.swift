@@ -207,7 +207,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         let request = Timelines.public(local: true, range: .max(id: StoreStruct.newInstanceTags.last?.id ?? "", limit: 5000))
         let testClient = Client(
             baseURL: "https://\(StoreStruct.instanceText)",
-            accessToken: StoreStruct.shared.currentInstance.accessToken ?? ""
+            accessToken: StoreStruct.currentInstance.accessToken ?? ""
         )
         testClient.run(request) { (statuses) in
             if let stat = (statuses.value) {
@@ -640,7 +640,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         }
         
         do {
-            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)nottypes1.json", from: .documents, as: [NotificationType].self)
+            StoreStruct.notTypes = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)nottypes1.json", from: .documents, as: [NotificationType].self)
         } catch {
             print("Couldn't load")
         }
@@ -1254,7 +1254,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             
             var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
             sss = sss.replacingOccurrences(of: "http", with: "wss")
-            nsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=user")!)
+            nsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.currentInstance.accessToken)&stream=user")!)
             nsocket.onConnect = {
                 print("websocket is connected")
             }
@@ -1710,7 +1710,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     }
                 }
                 do {
-                    try Disk.save(StoreStruct.notTypes, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)nottypes1.json")
+                    try Disk.save(StoreStruct.notTypes, to: .documents, as: "\(StoreStruct.currentInstance.clientID)nottypes1.json")
                 } catch {
                     print("Couldn't save")
                 }

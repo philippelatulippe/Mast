@@ -183,12 +183,34 @@ class DMFeedCell: SwipeTableViewCell {
         toot.hashtagColor = Colours.tabSelected
         toot.URLColor = Colours.tabSelected
         
-        userName.text = status.reblog?.account.displayName ?? status.account.displayName
-        
         if (UserDefaults.standard.object(forKey: "mentionToggle") == nil || UserDefaults.standard.object(forKey: "mentionToggle") as! Int == 0) {
             userTag.setTitle("@\(status.reblog?.account.acct ?? status.account.acct)", for: .normal)
         } else {
             userTag.setTitle("@\(status.reblog?.account.username ?? status.account.username)", for: .normal)
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
+            self.profileImageView.pin_updateWithProgress = true
+            self.profileImageView.pin_setImage(from: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"))
+        }
+        
+        userName.text = status.reblog?.account.displayName ?? status.account.displayName
+        if userName.text == StoreStruct.currentUser.displayName {
+            let request = Accounts.account(id: status.inReplyToAccountID ?? "")
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    DispatchQueue.main.async {
+                        self.userName.text = stat.displayName
+                        if (UserDefaults.standard.object(forKey: "mentionToggle") == nil || UserDefaults.standard.object(forKey: "mentionToggle") as! Int == 0) {
+                            self.userTag.setTitle("@\(stat.acct)", for: .normal)
+                        } else {
+                            self.userTag.setTitle("@\(stat.username)", for: .normal)
+                        }
+                        self.profileImageView.pin_setImage(from: URL(string: "\(stat.avatar)"))
+                    }
+                }
+            }
         }
         
         
@@ -357,11 +379,6 @@ class DMFeedCell: SwipeTableViewCell {
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-            self.profileImageView.pin_updateWithProgress = true
-            self.profileImageView.pin_setImage(from: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"))
-        }
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 0.2

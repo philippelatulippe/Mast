@@ -212,10 +212,10 @@ class NewInstanceViewController: UIViewController, UITextFieldDelegate {
         //
         //                DispatchQueue.main.async {
         //                    // go to next view
-        //                    StoreStruct.shared.currentInstance.instanceText = self.textView.text ?? ""
+        //                    StoreStruct.currentInstance.instanceText = self.textView.text ?? ""
         //
-        //                    if StoreStruct.instanceLocalToAdd.contains(StoreStruct.shared.currentInstance.instanceText.lowercased()) {} else {
-        //                        StoreStruct.instanceLocalToAdd.append(StoreStruct.shared.currentInstance.instanceText.lowercased())
+        //                    if StoreStruct.instanceLocalToAdd.contains(StoreStruct.currentInstance.instanceText.lowercased()) {} else {
+        //                        StoreStruct.instanceLocalToAdd.append(StoreStruct.currentInstance.instanceText.lowercased())
         //                        UserDefaults.standard.set(StoreStruct.instanceLocalToAdd, forKey: "instancesLocal")
         //                    }
         //                    self.textView.resignFirstResponder()
@@ -327,7 +327,7 @@ class NewInstanceViewController: UIViewController, UITextFieldDelegate {
         
 //        let testClient = Client(
 //            baseURL: "https://\(self.textView.text!)",
-//            accessToken: StoreStruct.shared.currentInstance.accessToken
+//            accessToken: StoreStruct.currentInstance.accessToken
 //        )
 //
 //        let request = Timelines.public(local: true, range: .max(id: self.textView.text ?? "", limit: nil))
@@ -373,11 +373,11 @@ class NewInstanceViewController: UIViewController, UITextFieldDelegate {
                     
                     DispatchQueue.main.async {
                         // go to next view
-                        StoreStruct.shared.currentInstance.instanceText = self.textView.text ?? ""
+                        StoreStruct.currentInstance.instanceText = self.textView.text ?? ""
                         StoreStruct.instanceText = self.textView.text ?? ""
                         
-                        if StoreStruct.instanceLocalToAdd.contains(StoreStruct.shared.currentInstance.instanceText.lowercased()) {} else {
-                            StoreStruct.instanceLocalToAdd.append(StoreStruct.shared.currentInstance.instanceText.lowercased())
+                        if StoreStruct.instanceLocalToAdd.contains(StoreStruct.currentInstance.instanceText.lowercased()) {} else {
+                            StoreStruct.instanceLocalToAdd.append(StoreStruct.currentInstance.instanceText.lowercased())
                             UserDefaults.standard.set(StoreStruct.instanceLocalToAdd, forKey: "instancesLocal")
                         }
                         self.textView.resignFirstResponder()

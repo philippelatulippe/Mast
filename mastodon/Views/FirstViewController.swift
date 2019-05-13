@@ -220,7 +220,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         let request = Timelines.public(local: true, range: .max(id: StoreStruct.newInstanceTags.last?.id ?? "", limit: nil))
         let testClient = Client(
             baseURL: "https://\(StoreStruct.instanceText)",
-            accessToken: StoreStruct.shared.currentInstance.accessToken
+            accessToken: StoreStruct.currentInstance.accessToken
         )
         testClient.run(request) { (statuses) in
             if let stat = (statuses.value) {
@@ -1372,7 +1372,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         
         StoreStruct.currentPage = 0
         
-        let applicationContext = [StoreStruct.client.accessToken ?? "": StoreStruct.shared.currentInstance.returnedText]
+        let applicationContext = [StoreStruct.client.accessToken ?? "": StoreStruct.currentInstance.returnedText]
         WatchSessionManager.sharedManager.transferUserInfo(userInfo: applicationContext as [String: AnyObject])
         
         let request = Notifications.all(range: .default)
@@ -1617,7 +1617,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 
                 var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
                 sss = sss.replacingOccurrences(of: "http", with: "wss")
-                socket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=user")!)
+                socket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.currentInstance.accessToken)&stream=user")!)
                 socket.onConnect = {
                     print("websocket is connected")
                 }
@@ -1694,7 +1694,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                             
                             do {
-                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
                             } catch {
                                 print("Couldn't save")
                             }
@@ -1719,7 +1719,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 
                 var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
                 sss = sss.replacingOccurrences(of: "http", with: "wss")
-                lsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=public/local")!)
+                lsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.currentInstance.accessToken)&stream=public/local")!)
                 lsocket.onConnect = {
                     print("websocket is connected")
                 }
@@ -1796,7 +1796,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                             
                             do {
-                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
                             } catch {
                                 print("Couldn't save")
                             }
@@ -1821,7 +1821,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 
                 var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
                 sss = sss.replacingOccurrences(of: "http", with: "wss")
-                fsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=public")!)
+                fsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/public?access_token=\(StoreStruct.currentInstance.accessToken)&stream=public")!)
                 fsocket.onConnect = {
                     print("websocket is connected")
                 }
@@ -1906,7 +1906,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                             
                             do {
-                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
                             } catch {
                                 print("Couldn't save")
                             }
@@ -4911,7 +4911,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 }
                                 
                                 do {
-                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
+                                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
                                 } catch {
                                     print("Couldn't save")
                                 }
@@ -4992,7 +4992,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 }
                                 
                                 do {
-                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
+                                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
                                 } catch {
                                     print("Couldn't save")
                                 }
@@ -5070,7 +5070,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 }
                                 
                                 do {
-                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
                                 } catch {
                                     print("Couldn't save")
                                 }
@@ -5107,9 +5107,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     }
                     
                     do {
-                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
                     } catch {
                         print("Couldn't save")
                     }
@@ -5136,9 +5136,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     }
                     
                     do {
-                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
                     } catch {
                         print("Couldn't save")
                     }
@@ -5164,9 +5164,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     }
                     
                     do {
-                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
                     } catch {
                         print("Couldn't save")
                     }
@@ -5248,9 +5248,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     }
                     
                     do {
-                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
                     } catch {
                         print("Couldn't save")
                     }
@@ -5330,9 +5330,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     }
                     
                     do {
-                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
                     } catch {
                         print("Couldn't save")
                     }
@@ -5411,9 +5411,9 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     }
                     
                     do {
-                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                        try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
+                        try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
+                        try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
                     } catch {
                         print("Couldn't save")
                     }

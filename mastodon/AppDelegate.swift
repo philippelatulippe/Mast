@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
     var blurEffectViewMain = UIView()
     
-    var storeStruct = StoreStruct.shared
     var blurEffect0 = UIBlurEffect()
     var blurEffectView0 = UIVisualEffectView()
     
@@ -106,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let token = tokenParts.joined()
         print("Device Token: \(token)")
         
-        guard StoreStruct.shared.currentInstance.returnedText != "" else {
+        guard StoreStruct.currentInstance.returnedText != "" else {
             return
         }
         var state: PushNotificationState!
@@ -121,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
         
         //create the url with URL
-        let url = URL(string: "https://\(StoreStruct.shared.currentInstance.returnedText)/api/v1/push/subscription")! //change the url
+        let url = URL(string: "https://\(StoreStruct.currentInstance.returnedText)/api/v1/push/subscription")! //change the url
         
         //create the session object
         let session = URLSession.shared
@@ -138,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         catch {
             print(error.localizedDescription)
         }
-        request.setValue("Bearer \(StoreStruct.shared.currentInstance.accessToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(StoreStruct.currentInstance.accessToken)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
@@ -244,7 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Response ==> \(url.absoluteString)")
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
-                StoreStruct.shared.newInstance!.authCode = y.last?.description ?? ""
+                StoreStruct.newInstance!.authCode = y.last?.description ?? ""
                 if StoreStruct.tappedSignInCheck == false {
                     StoreStruct.tappedSignInCheck = true
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "newInstancelogged"), object: nil)
@@ -254,7 +253,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Response ==> \(url.absoluteString)")
                 let x = url.absoluteString
                 let y = x.split(separator: "=")
-                StoreStruct.shared.currentInstance.authCode = y.last?.description ?? ""
+                StoreStruct.currentInstance.authCode = y.last?.description ?? ""
                 if StoreStruct.tappedSignInCheck == false {
                     StoreStruct.tappedSignInCheck = true
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
@@ -279,10 +278,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
                 DispatchQueue.main.async {
                     // go to next view
-                    StoreStruct.shared.currentInstance.instanceText = text
+                    StoreStruct.currentInstance.instanceText = text
                     
-                    if StoreStruct.instanceLocalToAdd.contains(StoreStruct.shared.currentInstance.instanceText.lowercased()) {} else {
-                        StoreStruct.instanceLocalToAdd.append(StoreStruct.shared.currentInstance.instanceText.lowercased())
+                    if StoreStruct.instanceLocalToAdd.contains(StoreStruct.currentInstance.instanceText.lowercased()) {} else {
+                        StoreStruct.instanceLocalToAdd.append(StoreStruct.currentInstance.instanceText.lowercased())
                         UserDefaults.standard.set(StoreStruct.instanceLocalToAdd, forKey: "instancesLocal")
                     }
                     
@@ -391,29 +390,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         if StoreStruct.currentUser != nil {
-            if (UserDefaults.standard.object(forKey: "\(StoreStruct.shared.currentInstance.clientID)homeid") == nil) {} else {
-                StoreStruct.gapLastHomeID = UserDefaults.standard.object(forKey: "\(StoreStruct.shared.currentInstance.clientID)homeid") as! String
+            if (UserDefaults.standard.object(forKey: "\(StoreStruct.currentInstance.clientID)homeid") == nil) {} else {
+                StoreStruct.gapLastHomeID = UserDefaults.standard.object(forKey: "\(StoreStruct.currentInstance.clientID)homeid") as! String
             }
-            if (UserDefaults.standard.object(forKey: "\(StoreStruct.shared.currentInstance.clientID)localid") == nil) {} else {
-                StoreStruct.gapLastLocalID = UserDefaults.standard.object(forKey: "\(StoreStruct.shared.currentInstance.clientID)localid") as! String
+            if (UserDefaults.standard.object(forKey: "\(StoreStruct.currentInstance.clientID)localid") == nil) {} else {
+                StoreStruct.gapLastLocalID = UserDefaults.standard.object(forKey: "\(StoreStruct.currentInstance.clientID)localid") as! String
             }
-            if (UserDefaults.standard.object(forKey: "\(StoreStruct.shared.currentInstance.clientID)fedid") == nil) {} else {
-                StoreStruct.gapLastFedID = UserDefaults.standard.object(forKey: "\(StoreStruct.shared.currentInstance.clientID)fedid") as! String
+            if (UserDefaults.standard.object(forKey: "\(StoreStruct.currentInstance.clientID)fedid") == nil) {} else {
+                StoreStruct.gapLastFedID = UserDefaults.standard.object(forKey: "\(StoreStruct.currentInstance.clientID)fedid") as! String
             }
         }
         
         do {
-            StoreStruct.currentUser = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)use.json", from: .documents, as: Account.self)
-            StoreStruct.statusesHome = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
-            StoreStruct.statusesLocal = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
-            StoreStruct.statusesFederated = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
+            StoreStruct.currentUser = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)use.json", from: .documents, as: Account.self)
+            StoreStruct.statusesHome = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
+            StoreStruct.statusesLocal = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
+            StoreStruct.statusesFederated = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
             
-            StoreStruct.gapLastHomeStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)homestat.json", from: .documents, as: Status.self)
-            StoreStruct.gapLastLocalStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)localstat.json", from: .documents, as: Status.self)
-            StoreStruct.gapLastFedStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fedstat.json", from: .documents, as: Status.self)
+            StoreStruct.gapLastHomeStat = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)homestat.json", from: .documents, as: Status.self)
+            StoreStruct.gapLastLocalStat = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)localstat.json", from: .documents, as: Status.self)
+            StoreStruct.gapLastFedStat = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)fedstat.json", from: .documents, as: Status.self)
             
-            StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
-            StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+            StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
+            StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
         } catch {
             print("Couldn't load")
         }
@@ -443,24 +442,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         if StoreStruct.currentUser != nil {
-            UserDefaults.standard.set(StoreStruct.gapLastHomeID, forKey: "\(StoreStruct.shared.currentInstance.clientID)homeid")
-            UserDefaults.standard.set(StoreStruct.gapLastLocalID, forKey: "\(StoreStruct.shared.currentInstance.clientID)localid")
-            UserDefaults.standard.set(StoreStruct.gapLastFedID, forKey: "\(StoreStruct.shared.currentInstance.clientID)fedid")
+            UserDefaults.standard.set(StoreStruct.gapLastHomeID, forKey: "\(StoreStruct.currentInstance.clientID)homeid")
+            UserDefaults.standard.set(StoreStruct.gapLastLocalID, forKey: "\(StoreStruct.currentInstance.clientID)localid")
+            UserDefaults.standard.set(StoreStruct.gapLastFedID, forKey: "\(StoreStruct.currentInstance.clientID)fedid")
             
             UserDefaults.standard.set(StoreStruct.currentUser.username, forKey: "userN")
             do {
-                try Disk.save(StoreStruct.currentUser, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)use.json")
+                try Disk.save(StoreStruct.currentUser, to: .documents, as: "\(StoreStruct.currentInstance.clientID)use.json")
                 
-                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)home.json")
-                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)local.json")
-                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fed.json")
+                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
+                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
+                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
                 
-                try Disk.save(StoreStruct.notifications, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)noti.json")
-                try Disk.save(StoreStruct.notificationsMentions, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)ment.json")
+                try Disk.save(StoreStruct.notifications, to: .documents, as: "\(StoreStruct.currentInstance.clientID)noti.json")
+                try Disk.save(StoreStruct.notificationsMentions, to: .documents, as: "\(StoreStruct.currentInstance.clientID)ment.json")
                 
-                try Disk.save(StoreStruct.gapLastHomeStat, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)homestat.json")
-                try Disk.save(StoreStruct.gapLastLocalStat, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)localstat.json")
-                try Disk.save(StoreStruct.gapLastFedStat, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)fedstat.json")
+                try Disk.save(StoreStruct.gapLastHomeStat, to: .documents, as: "\(StoreStruct.currentInstance.clientID)homestat.json")
+                try Disk.save(StoreStruct.gapLastLocalStat, to: .documents, as: "\(StoreStruct.currentInstance.clientID)localstat.json")
+                try Disk.save(StoreStruct.gapLastFedStat, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fedstat.json")
             } catch {
                 print("Couldn't save")
             }
@@ -631,16 +630,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func reloadApplication() {
         do {
-            StoreStruct.currentUser = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)use.json", from: .documents, as: Account.self)
-            StoreStruct.statusesHome = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
-            StoreStruct.statusesLocal = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
-            StoreStruct.statusesFederated = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
-            StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
-            StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+            StoreStruct.currentUser = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)use.json", from: .documents, as: Account.self)
+            StoreStruct.statusesHome = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
+            StoreStruct.statusesLocal = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
+            StoreStruct.statusesFederated = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
+            StoreStruct.notifications = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
+            StoreStruct.notificationsMentions = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
             
-            StoreStruct.gapLastHomeStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)homestat.json", from: .documents, as: Status.self)
-            StoreStruct.gapLastLocalStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)localstat.json", from: .documents, as: Status.self)
-            StoreStruct.gapLastFedStat = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fedstat.json", from: .documents, as: Status.self)
+            StoreStruct.gapLastHomeStat = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)homestat.json", from: .documents, as: Status.self)
+            StoreStruct.gapLastLocalStat = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)localstat.json", from: .documents, as: Status.self)
+            StoreStruct.gapLastFedStat = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)fedstat.json", from: .documents, as: Status.self)
         } catch {
             print("Couldn't load")
         }

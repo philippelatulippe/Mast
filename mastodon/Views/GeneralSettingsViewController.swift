@@ -1396,8 +1396,8 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             StoreStruct.notificationsMentions = []
             StoreStruct.notificationsDirect = []
             do {
-                try Disk.save(StoreStruct.notifications, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)noti.json")
-                try Disk.save(StoreStruct.notificationsMentions, to: .documents, as: "\(StoreStruct.shared.currentInstance.clientID)ment.json")
+                try Disk.save(StoreStruct.notifications, to: .documents, as: "\(StoreStruct.currentInstance.clientID)noti.json")
+                try Disk.save(StoreStruct.notificationsMentions, to: .documents, as: "\(StoreStruct.currentInstance.clientID)ment.json")
             } catch {
                 print("Couldn't save")
             }
@@ -1415,16 +1415,12 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             }
         }
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.set(nil, forKey: "onb")
         UserDefaults.standard.synchronize()
         
-        UserDefaults.standard.set(nil, forKey: "onb")
         StoreStruct.client = Client(baseURL: "")
-        StoreStruct.shared.currentInstance.redirect = ""
-        StoreStruct.shared.currentInstance.returnedText = ""
-        StoreStruct.shared.currentInstance.clientID = ""
-        StoreStruct.shared.currentInstance.clientSecret = ""
-        StoreStruct.shared.currentInstance.authCode = ""
-        StoreStruct.shared.currentInstance.accessToken = ""
+        StoreStruct.newClient = Client(baseURL: "")
+        StoreStruct.currentInstance = InstanceData()
         StoreStruct.currentPage = 0
         StoreStruct.playerID = ""
         StoreStruct.caption1 = ""
@@ -1495,6 +1491,10 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
         StoreStruct.markedReadIDs = []
         StoreStruct.newdrafts = []
         StoreStruct.notTypes = []
+        StoreStruct.notifications = []
+        StoreStruct.notificationsMentions = []
+        StoreStruct.notificationsDirect = []
+        StoreStruct.switchedNow = true
         
         do {
             try Disk.clear(.documents)

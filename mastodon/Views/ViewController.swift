@@ -294,7 +294,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.textField.removeFromSuperview()
         self.safariVC?.dismiss(animated: true, completion: nil)
         
-        var request = URLRequest(url: URL(string: "https://\(StoreStruct.shared.currentInstance.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.shared.currentInstance.authCode)&redirect_uri=\(StoreStruct.shared.currentInstance.redirect)&client_id=\(StoreStruct.shared.currentInstance.clientID)&client_secret=\(StoreStruct.shared.currentInstance.clientSecret)&scope=read%20write%20follow%20push")!)
+        var request = URLRequest(url: URL(string: "https://\(StoreStruct.currentInstance.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.currentInstance.authCode)&redirect_uri=\(StoreStruct.currentInstance.redirect)&client_id=\(StoreStruct.currentInstance.clientID)&client_secret=\(StoreStruct.currentInstance.clientSecret)&scope=read%20write%20follow%20push")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -312,10 +312,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         customStyle.backgroundColor = Colours.white
                         self.volumeBar.style = customStyle
                     }
-                    StoreStruct.shared.currentInstance.accessToken = (json["access_token"] as? String ?? "")
-                    StoreStruct.client.accessToken = StoreStruct.shared.currentInstance.accessToken
+                    StoreStruct.currentInstance.accessToken = (json["access_token"] as? String ?? "")
+                    StoreStruct.client.accessToken = StoreStruct.currentInstance.accessToken
                    
-                    let currentInstance = InstanceData(clientID: StoreStruct.shared.currentInstance.clientID, clientSecret: StoreStruct.shared.currentInstance.clientSecret, authCode: StoreStruct.shared.currentInstance.authCode, accessToken: StoreStruct.shared.currentInstance.accessToken, returnedText: StoreStruct.shared.currentInstance.returnedText, redirect:StoreStruct.shared.currentInstance.redirect)
+                    let currentInstance = InstanceData(clientID: StoreStruct.currentInstance.clientID, clientSecret: StoreStruct.currentInstance.clientSecret, authCode: StoreStruct.currentInstance.authCode, accessToken: StoreStruct.currentInstance.accessToken, returnedText: StoreStruct.currentInstance.returnedText, redirect:StoreStruct.currentInstance.redirect)
                     InstanceData.setCurrentInstance(instance: currentInstance)
                     
                     let request2 = Accounts.currentUser()
@@ -396,8 +396,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     @objc func newInstanceLogged() {
         
-        
-        var request = URLRequest(url: URL(string: "https://\(StoreStruct.shared.newInstance!.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.shared.newInstance!.authCode)&redirect_uri=\(StoreStruct.shared.newInstance!.redirect)&client_id=\(StoreStruct.shared.newInstance!.clientID)&client_secret=\(StoreStruct.shared.newInstance!.clientSecret)&scope=read%20write%20follow%20push")!)
+        var request = URLRequest(url: URL(string: "https://\(StoreStruct.newInstance!.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.newInstance!.authCode)&redirect_uri=\(StoreStruct.newInstance!.redirect)&client_id=\(StoreStruct.newInstance!.clientID)&client_secret=\(StoreStruct.newInstance!.clientSecret)&scope=read%20write%20follow%20push")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -405,7 +404,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
             guard error == nil else { print(error);return }
             guard let data = data else { return }
-            guard let newInstance = StoreStruct.shared.newInstance else {
+            guard let newInstance = StoreStruct.newInstance else {
                 return
             }
             do {
@@ -413,11 +412,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     
                     if let access1 = (json["access_token"] as? String) {
                     
+                        StoreStruct.client = StoreStruct.newClient
                     newInstance.accessToken = access1
                     InstanceData.setCurrentInstance(instance: newInstance)
                         
                         let request2 = Accounts.currentUser()
-                        StoreStruct.shared.newClient.run(request2) { (statuses) in
+                        StoreStruct.client.run(request2) { (statuses) in
                             if let stat = (statuses.value) {
                                 DispatchQueue.main.async {
                                     var instances = InstanceData.getAllInstances()
@@ -431,7 +431,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         }
                     
                     let request = Timelines.home()
-                    StoreStruct.shared.newClient.run(request) { (statuses) in
+                    StoreStruct.client.run(request) { (statuses) in
                         if let stat = (statuses.value) {
                             StoreStruct.statusesHome = stat
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
@@ -848,7 +848,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
             sss = sss.replacingOccurrences(of: "http", with: "wss")
-            nsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.shared.currentInstance.accessToken)&stream=user")!)
+            nsocket = WebSocket(url: URL(string: "\(sss)/api/v1/streaming/user?access_token=\(StoreStruct.currentInstance.accessToken)&stream=user")!)
             nsocket.onConnect = {
                 print("websocket is connected")
             }
@@ -1040,37 +1040,37 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.delegate = self
         
         if UserDefaults.standard.object(forKey: "clientID") == nil {} else {
-            StoreStruct.shared.currentInstance.clientID = UserDefaults.standard.object(forKey: "clientID") as! String
+            StoreStruct.currentInstance.clientID = UserDefaults.standard.object(forKey: "clientID") as! String
         }
         if UserDefaults.standard.object(forKey: "clientSecret") == nil {} else {
-            StoreStruct.shared.currentInstance.clientSecret = UserDefaults.standard.object(forKey: "clientSecret") as! String
+            StoreStruct.currentInstance.clientSecret = UserDefaults.standard.object(forKey: "clientSecret") as! String
         }
         if UserDefaults.standard.object(forKey: "authCode") == nil {} else {
-            StoreStruct.shared.currentInstance.authCode = UserDefaults.standard.object(forKey: "authCode") as! String
+            StoreStruct.currentInstance.authCode = UserDefaults.standard.object(forKey: "authCode") as! String
         }
         if UserDefaults.standard.object(forKey: "returnedText") == nil {} else {
-            StoreStruct.shared.currentInstance.returnedText = UserDefaults.standard.object(forKey: "returnedText") as! String
+            StoreStruct.currentInstance.returnedText = UserDefaults.standard.object(forKey: "returnedText") as! String
         }
         if UserDefaults.standard.object(forKey: "accessToken") == nil {
             self.createLoginView()
         } else {
             
-            StoreStruct.shared.currentInstance.accessToken = UserDefaults.standard.object(forKey: "accessToken") as! String
+            StoreStruct.currentInstance.accessToken = UserDefaults.standard.object(forKey: "accessToken") as! String
             StoreStruct.client = Client(
-                baseURL: "https://\(StoreStruct.shared.currentInstance.returnedText)",
-                accessToken: StoreStruct.shared.currentInstance.accessToken
+                baseURL: "https://\(StoreStruct.currentInstance.returnedText)",
+                accessToken: StoreStruct.currentInstance.accessToken
             )
             
 //            do {
-//                let st1 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
+//                let st1 = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
 //                StoreStruct.statusesHome = st1
-//                let st2 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
+//                let st2 = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
 //                StoreStruct.statusesLocal = st2
-//                let st3 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
+//                let st3 = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
 //                StoreStruct.statusesFederated = st3
-//                let st4 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
+//                let st4 = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
 //                StoreStruct.notifications = st4
-//                let st5 = try Disk.retrieve("\(StoreStruct.shared.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
+//                let st5 = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
 //                StoreStruct.notificationsMentions = st5
 //            } catch {
 //                print("Couldn't load")
@@ -2270,12 +2270,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.textField.text = ""
         
         StoreStruct.client = Client(baseURL: "")
-        StoreStruct.shared.currentInstance.redirect = ""
-        StoreStruct.shared.currentInstance.returnedText = ""
-        StoreStruct.shared.currentInstance.clientID = ""
-        StoreStruct.shared.currentInstance.clientSecret = ""
-        StoreStruct.shared.currentInstance.authCode = ""
-        StoreStruct.shared.currentInstance.accessToken = ""
+        StoreStruct.currentInstance.redirect = ""
+        StoreStruct.currentInstance.returnedText = ""
+        StoreStruct.currentInstance.clientID = ""
+        StoreStruct.currentInstance.clientSecret = ""
+        StoreStruct.currentInstance.authCode = ""
+        StoreStruct.currentInstance.accessToken = ""
         StoreStruct.currentPage = 0
         StoreStruct.playerID = ""
         
@@ -2544,15 +2544,15 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             // Send off returnedText to client
             if self.newInstance {
                 
-                StoreStruct.shared.newInstance = InstanceData()
-                StoreStruct.shared.newClient = Client(baseURL: "https://\(returnedText)")
+                StoreStruct.newInstance = InstanceData()
+                StoreStruct.newClient = Client(baseURL: "https://\(returnedText)")
                 let request = Clients.register(
                     clientName: "Mast",
                     redirectURI: "com.shi.mastodon://addNewInstance",
                     scopes: [.read, .write, .follow, .push],
                     website: "https://twitter.com/jpeguin"
                 )
-                StoreStruct.shared.newClient.run(request) { (application) in
+                StoreStruct.newClient.run(request) { (application) in
                     
 //                    DispatchQueue.main.async {
                     
@@ -2600,13 +2600,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         
                         let application = application.value!
                         
-                        StoreStruct.shared.newInstance?.clientID = application.clientID
-                        StoreStruct.shared.newInstance?.clientSecret = application.clientSecret
-                        StoreStruct.shared.newInstance?.returnedText = returnedText
+                        StoreStruct.newInstance?.clientID = application.clientID
+                        StoreStruct.newInstance?.clientSecret = application.clientSecret
+                        StoreStruct.newInstance?.returnedText = returnedText
                         
                         DispatchQueue.main.async {
-                            StoreStruct.shared.newInstance?.redirect = "com.shi.mastodon://addNewInstance".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-                            let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.shared.newInstance!.redirect)&scope=read%20write%20follow%20push&client_id=\(application.clientID)")!
+                            StoreStruct.newInstance?.redirect = "com.shi.mastodon://addNewInstance".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+                            let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.newInstance!.redirect)&scope=read%20write%20follow%20push&client_id=\(application.clientID)")!
                             UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
                                     if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
@@ -2671,16 +2671,16 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     } else {
                         let application = application.value!
                         
-                        StoreStruct.shared.currentInstance.clientID = application.clientID
-                        StoreStruct.shared.currentInstance.clientSecret = application.clientSecret
-                        StoreStruct.shared.currentInstance.returnedText = returnedText
+                        StoreStruct.currentInstance.clientID = application.clientID
+                        StoreStruct.currentInstance.clientSecret = application.clientSecret
+                        StoreStruct.currentInstance.returnedText = returnedText
                         
                         DispatchQueue.main.async {
                             
                             self.tagListView.alpha = 0
                             
-                            StoreStruct.shared.currentInstance.redirect = "com.shi.mastodon://success".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-                            let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.shared.currentInstance.redirect)&scope=read%20write%20follow%20push&client_id=\(application.clientID)")!
+                            StoreStruct.currentInstance.redirect = "com.shi.mastodon://success".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+                            let queryURL = URL(string: "https://\(returnedText)/oauth/authorize?response_type=code&redirect_uri=\(StoreStruct.currentInstance.redirect)&scope=read%20write%20follow%20push&client_id=\(application.clientID)")!
                             UIApplication.shared.open(queryURL, options: [.universalLinksOnly: true]) { (success) in
                                 if !success {
                                     if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
@@ -2729,10 +2729,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         super.viewDidAppear(true)
         
-        if StoreStruct.currentUser == nil {
+//        if StoreStruct.currentUser == nil {
             let request2 = Accounts.currentUser()
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
@@ -2754,21 +2753,21 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     
                 }
             }
-        } else {
-            let request9 = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .default)
-            StoreStruct.client.run(request9) { (statuses) in
-                if let stat = (statuses.value) {
-                    StoreStruct.profileStatuses0 = stat
-                    
-                    let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .default)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            StoreStruct.profileStatusesHasImage0 = stat
-                        }
-                    }
-                }
-            }
-        }
+//        } else {
+//            let request9 = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: false, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .default)
+//            StoreStruct.client.run(request9) { (statuses) in
+//                if let stat = (statuses.value) {
+//                    StoreStruct.profileStatuses0 = stat
+//
+//                    let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: nil, excludeReblogs: true, range: .default)
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            StoreStruct.profileStatusesHasImage0 = stat
+//                        }
+//                    }
+//                }
+//            }
+//        }
         
         let request0 = Lists.all()
         StoreStruct.client.run(request0) { (statuses) in
@@ -2796,8 +2795,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         }
         
         if let userDefaults = UserDefaults(suiteName: "group.com.shi.Mast.wormhole") {
-            userDefaults.set(StoreStruct.shared.currentInstance.accessToken ?? "", forKey: "key1")
-            userDefaults.set(StoreStruct.shared.currentInstance.returnedText, forKey: "key2")
+            userDefaults.set(StoreStruct.currentInstance.accessToken ?? "", forKey: "key1")
+            userDefaults.set(StoreStruct.currentInstance.returnedText, forKey: "key2")
             userDefaults.synchronize()
         }
         

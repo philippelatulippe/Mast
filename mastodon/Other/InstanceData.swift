@@ -57,14 +57,14 @@ class InstanceData: Codable {
         UserDefaults.standard.set(instance.accessToken, forKey: "accessToken")
         UserDefaults.standard.set(instance.returnedText, forKey: "returnedText")
         
-        StoreStruct.shared.newClient = Client(baseURL: "")
-        StoreStruct.shared.newInstance = nil
+        StoreStruct.newClient = Client(baseURL: "")
+        StoreStruct.newInstance = nil
         StoreStruct.statusesHome = []
         StoreStruct.statusesLocal = []
         StoreStruct.statusesFederated = []
         StoreStruct.notifications = []
         StoreStruct.notificationsMentions = []
-        StoreStruct.shared.currentInstance = instance
+        StoreStruct.currentInstance = instance
     }
     
     static func clearInstances() {

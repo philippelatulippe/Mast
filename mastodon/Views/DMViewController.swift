@@ -115,7 +115,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let request = Timelines.public(local: true, range: .max(id: StoreStruct.newInstanceTags.last?.id ?? "", limit: 5000))
         let testClient = Client(
             baseURL: "https://\(StoreStruct.instanceText)",
-            accessToken: StoreStruct.shared.currentInstance.accessToken ?? ""
+            accessToken: StoreStruct.currentInstance.accessToken ?? ""
         )
         testClient.run(request) { (statuses) in
             if let stat = (statuses.value) {
@@ -433,9 +433,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         self.loadLoadLoad()
         
-//        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
-        //self.tableView.addSubview(refreshControl)
-        
         tableView.cr.addHeadRefresh(animator: NormalHeaderAnimator()) { [weak self] in
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                 let selection = UISelectionFeedbackGenerator()
@@ -450,6 +447,11 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         self.ai = NVActivityIndicatorView(frame: CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
+        
+        if StoreStruct.switchedNow {
+            StoreStruct.notificationsDirect = []
+            StoreStruct.switchedNow = false
+        }
         
         if StoreStruct.notificationsDirect.isEmpty {
             self.refreshCont()

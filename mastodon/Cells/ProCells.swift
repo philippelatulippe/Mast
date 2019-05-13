@@ -165,7 +165,7 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
                             .titleTextAlignment(.left)
                             .action(.default("Switch".localized), image: UIImage(named: "profile")) { (action, ind) in
                                  
-                                
+                                StoreStruct.switchedNow = true
                                 InstanceData.setCurrentInstance(instance: instances[indexPath.item])
                                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                 appDelegate.reloadApplication()

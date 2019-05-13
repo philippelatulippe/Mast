@@ -186,7 +186,8 @@ class ProfileHeaderCell: SwipeTableViewCell {
     
     func configure(_ status: Account) {
         
-        profileImageView.layer.zPosition = 1000
+        profileImageView.layer.zPosition = 999
+        settings2.layer.zPosition = 1000
         bgDark.isUserInteractionEnabled = false
         
         bgDark.backgroundColor = Colours.white
@@ -585,7 +586,8 @@ class ProfileHeaderCell2: SwipeTableViewCell {
     
     func configure(_ status: Account) {
         
-        profileImageView.layer.zPosition = 1000
+        profileImageView.layer.zPosition = 999
+        settings2.layer.zPosition = 1000
         bgDark.isUserInteractionEnabled = false
         
         toot.mentionColor = Colours.grayDark.withAlphaComponent(0.7)
