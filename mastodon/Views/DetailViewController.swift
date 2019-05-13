@@ -570,8 +570,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     DispatchQueue.main.async {
                         self.allPrevious = (stat.ancestors)
                         self.allReplies = (stat.descendants)
-                        UIView.setAnimationsEnabled(false)
-                        self.tableView.beginUpdates()
                         self.tableView.reloadData()
                         if self.allPrevious.count == 0 {} else {
                             self.detailPrev.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
@@ -595,8 +593,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.tableView.tableFooterView = customViewFooter
                             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: false)
                         }
-                        self.tableView.endUpdates()
-                        UIView.setAnimationsEnabled(true)
                     }
                 }
             }
