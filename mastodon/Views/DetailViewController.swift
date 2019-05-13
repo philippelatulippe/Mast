@@ -1506,6 +1506,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.replyButton.alpha = 0
                 cell.likeButton.alpha = 0
                 cell.boostButton.alpha = 0
+                cell.shareButton.alpha = 0
+                cell.moreButton.alpha = 0
                 cell.backgroundColor = Colours.white
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.white
@@ -1513,8 +1515,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 return cell
                 
             default:
-                
-                
                 
                 if self.mainStatus.isEmpty {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell10", for: indexPath) as! ActionButtonCell
@@ -1536,21 +1536,21 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     if self.mainStatus[0].visibility == .direct {
                         
-                        
                         let cell = tableView.dequeueReusableCell(withIdentifier: "cell109", for: indexPath) as! ActionButtonCell2
                         cell.configure(mainStatus: self.mainStatus[0])
                         cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
                         cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
+                        cell.shareButton.addTarget(self, action: #selector(self.didTouchSha), for: .touchUpInside)
                         cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
                         cell.replyButton.tag = indexPath.row
                         cell.likeButton.tag = indexPath.row
+                        cell.shareButton.tag = indexPath.row
                         cell.moreButton.tag = indexPath.row
                         cell.backgroundColor = Colours.white
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.white
                         cell.selectedBackgroundView = bgColorView
                         return cell
-                        
                         
                     } else {
                         
@@ -1559,10 +1559,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         cell.replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
                         cell.likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
                         cell.boostButton.addTarget(self, action: #selector(self.didTouchBoost), for: .touchUpInside)
+                        cell.shareButton.addTarget(self, action: #selector(self.didTouchSha), for: .touchUpInside)
                         cell.moreButton.addTarget(self, action: #selector(self.didTouchMore), for: .touchUpInside)
                         cell.replyButton.tag = indexPath.row
                         cell.likeButton.tag = indexPath.row
                         cell.boostButton.tag = indexPath.row
+                        cell.shareButton.tag = indexPath.row
                         cell.moreButton.tag = indexPath.row
                         cell.backgroundColor = Colours.white
                         let bgColorView = UIView()
@@ -2971,6 +2973,63 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.refDetailCount()
         }
         
+    }
+    
+    @objc func didTouchSha(sender: UIButton) {
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let impact = UIImpactFeedbackGenerator(style: .light)
+            impact.impactOccurred()
+        }
+        
+        if self.mainStatus.isEmpty {
+            return
+        }
+        
+        Alertift.actionSheet()
+            .backgroundColor(Colours.white)
+            .titleTextColor(Colours.grayDark)
+            .messageTextColor(Colours.grayDark)
+            .messageTextAlignment(.left)
+            .titleTextAlignment(.left)
+            .action(.default("Share Link".localized), image: UIImage(named: "share")) { (action, ind) in
+                
+                
+                if let myWebsite = self.mainStatus[0].url {
+                    let objectsToShare = [myWebsite]
+                    let vc = VisualActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                    vc.popoverPresentationController?.sourceView = self.view
+                    vc.previewNumberOfLines = 5
+                    vc.previewFont = UIFont.systemFont(ofSize: 14)
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }
+            .action(.default("Share Text".localized), image: UIImage(named: "share")) { (action, ind) in
+                
+                
+                let bodyText = self.mainStatus[0].content.stripHTML()
+                let vc = VisualActivityViewController(text: bodyText)
+                vc.popoverPresentationController?.sourceView = self.view
+                vc.previewNumberOfLines = 5
+                vc.previewFont = UIFont.systemFont(ofSize: 14)
+                self.present(vc, animated: true, completion: nil)
+                
+            }
+            .action(.default("Share QR Code".localized), image: UIImage(named: "share")) { (action, ind) in
+                
+                
+                let controller = NewQRViewController()
+                controller.ur = self.mainStatus[0].url?.absoluteString ?? "https://www.thebluebird.app"
+                self.present(controller, animated: true, completion: nil)
+                
+            }
+            .action(.cancel("Dismiss"))
+            .finally { action, index in
+                if action.style == .cancel {
+                    return
+                }
+            }
+            .popover(anchorView: self.moreButton ?? self.view)
+            .show(on: self)
     }
     
     @objc func didTouchMore(sender: UIButton) {

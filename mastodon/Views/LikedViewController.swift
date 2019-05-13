@@ -2175,7 +2175,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc func refreshCont() {
         
-        let request = Favourites.all(range: .min(id: self.currentTags.first?.id ?? "", limit: nil))
+        let request = Favourites.all(range: .since(id: self.currentTags.first?.id ?? "", limit: nil))
 //        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {

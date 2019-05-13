@@ -315,7 +315,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
-        let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: true, excludeReblogs: true, range: .min(id: "", limit: 5000))
+        let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: true, pinnedOnly: nil, excludeReplies: true, excludeReblogs: true, range: .since(id: "", limit: 5000))
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {
@@ -5525,7 +5525,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if self.currentIndex == 0 {
             
-            let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .min(id: self.profileStatuses.first?.id ?? "", limit: 5000))
+            let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: true, excludeReblogs: true, range: .since(id: self.profileStatuses.first?.id ?? "", limit: 5000))
             //        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
@@ -5551,7 +5551,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 zzz = true
             }
             
-            let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .min(id: self.profileStatuses2.first?.id ?? "", limit: 5000))
+            let request = Accounts.statuses(id: self.userIDtoUse, mediaOnly: nil, pinnedOnly: false, excludeReplies: false, excludeReblogs: zzz, range: .since(id: self.profileStatuses2.first?.id ?? "", limit: 5000))
             //            DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {

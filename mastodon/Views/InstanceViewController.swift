@@ -1982,7 +1982,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
     
     @objc func refreshCont() {
         
-        let request = Timelines.public(local: true, range: .min(id: StoreStruct.newInstanceTags.first?.id ?? "", limit: 5000))
+        let request = Timelines.public(local: true, range: .since(id: StoreStruct.newInstanceTags.first?.id ?? "", limit: 5000))
         let testClient = Client(
             baseURL: "https://\(StoreStruct.instanceText)",
             accessToken: StoreStruct.currentInstance.accessToken ?? ""

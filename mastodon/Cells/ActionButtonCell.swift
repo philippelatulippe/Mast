@@ -16,6 +16,7 @@ class ActionButtonCell: UITableViewCell {
     var replyButton = UIButton()
     var likeButton = UIButton()
     var boostButton = UIButton()
+    var shareButton = UIButton()
     var moreButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -27,11 +28,13 @@ class ActionButtonCell: UITableViewCell {
         replyButton.backgroundColor = Colours.white
         likeButton.backgroundColor = Colours.white
         boostButton.backgroundColor = Colours.white
+        shareButton.backgroundColor = Colours.white
         moreButton.backgroundColor = Colours.white
         
         replyButton.translatesAutoresizingMaskIntoConstraints = false
         likeButton.translatesAutoresizingMaskIntoConstraints = false
         boostButton.translatesAutoresizingMaskIntoConstraints = false
+        shareButton.translatesAutoresizingMaskIntoConstraints = false
         moreButton.translatesAutoresizingMaskIntoConstraints = false
         
         replyButton.layer.cornerRadius = 20
@@ -40,15 +43,18 @@ class ActionButtonCell: UITableViewCell {
         likeButton.layer.masksToBounds = true
         boostButton.layer.cornerRadius = 20
         boostButton.layer.masksToBounds = true
+        shareButton.layer.cornerRadius = 20
+        shareButton.layer.masksToBounds = true
         moreButton.layer.cornerRadius = 20
         moreButton.layer.masksToBounds = true
         
         containerView.addSubview(replyButton)
         containerView.addSubview(likeButton)
         containerView.addSubview(boostButton)
+        containerView.addSubview(shareButton)
         containerView.addSubview(moreButton)
         
-        let horizontalSpacing = 25
+        let horizontalSpacing = 20
         let cornerMargin = 30
         
         let viewsDict = [
@@ -56,6 +62,7 @@ class ActionButtonCell: UITableViewCell {
             "reply" : replyButton,
             "like" : likeButton,
             "boost" : boostButton,
+            "share" : shareButton,
             "more" : moreButton,
             ]
         
@@ -73,27 +80,27 @@ class ActionButtonCell: UITableViewCell {
         
         
         if (UserDefaults.standard.object(forKey: "sworder") == nil) || (UserDefaults.standard.object(forKey: "sworder") as! Int == 0) {
-            let horizontalFormat = "H:|-(==cornerMargin)-[reply(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalFormat = "H:|-(==cornerMargin)-[reply(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[share(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
             let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
             contentView.addConstraints(horizontalConstraints)
         } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 1) {
-            let horizontalFormat = "H:|-(==cornerMargin)-[reply(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalFormat = "H:|-(==cornerMargin)-[reply(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[share(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
             let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
             contentView.addConstraints(horizontalConstraints)
         } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 2) {
-            let horizontalFormat = "H:|-(==cornerMargin)-[boost(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalFormat = "H:|-(==cornerMargin)-[boost(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[share(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
             let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
             contentView.addConstraints(horizontalConstraints)
         } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 3) {
-            let horizontalFormat = "H:|-(==cornerMargin)-[boost(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalFormat = "H:|-(==cornerMargin)-[boost(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[share(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
             let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
             contentView.addConstraints(horizontalConstraints)
         } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 4) {
-            let horizontalFormat = "H:|-(==cornerMargin)-[like(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalFormat = "H:|-(==cornerMargin)-[like(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[share(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
             let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
             contentView.addConstraints(horizontalConstraints)
         } else {
-            let horizontalFormat = "H:|-(==cornerMargin)-[like(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+            let horizontalFormat = "H:|-(==cornerMargin)-[like(40)]-horizontalSpacing-[boost(40)]-horizontalSpacing-[reply(40)]-horizontalSpacing-[share(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
             let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
             contentView.addConstraints(horizontalConstraints)
         }
@@ -113,6 +120,10 @@ class ActionButtonCell: UITableViewCell {
         let verticalConstraints3 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat3, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(verticalConstraints3)
         
+        let verticalFormat34 = "V:|-10-[share(40)]-10-|"
+        let verticalConstraints34 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat34, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
+        contentView.addConstraints(verticalConstraints34)
+        
         let verticalFormat4 = "V:|-10-[more(40)]-10-|"
         let verticalConstraints4 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat4, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(verticalConstraints4)
@@ -129,6 +140,7 @@ class ActionButtonCell: UITableViewCell {
     
     func configure(mainStatus: Status) {
         replyButton.setImage(UIImage(named: "reply0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+        shareButton.setImage(UIImage(named: "detailprev-1")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         
         if mainStatus.reblog?.favourited ?? mainStatus.favourited ?? false || StoreStruct.allLikes.contains(mainStatus.reblog?.id ?? mainStatus.id) {
@@ -152,6 +164,7 @@ class ActionButtonCell2: UITableViewCell {
     let containerView = UIView(frame: CGRect.zero)
     var replyButton = UIButton()
     var likeButton = UIButton()
+    var shareButton = UIButton()
     var moreButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -162,30 +175,36 @@ class ActionButtonCell2: UITableViewCell {
         
         replyButton.backgroundColor = Colours.white
         likeButton.backgroundColor = Colours.white
+        shareButton.backgroundColor = Colours.white
         moreButton.backgroundColor = Colours.white
         
         replyButton.translatesAutoresizingMaskIntoConstraints = false
         likeButton.translatesAutoresizingMaskIntoConstraints = false
+        shareButton.translatesAutoresizingMaskIntoConstraints = false
         moreButton.translatesAutoresizingMaskIntoConstraints = false
         
         replyButton.layer.cornerRadius = 20
         replyButton.layer.masksToBounds = true
         likeButton.layer.cornerRadius = 20
         likeButton.layer.masksToBounds = true
+        shareButton.layer.cornerRadius = 20
+        shareButton.layer.masksToBounds = true
         moreButton.layer.cornerRadius = 20
         moreButton.layer.masksToBounds = true
         
         containerView.addSubview(replyButton)
         containerView.addSubview(likeButton)
+        containerView.addSubview(shareButton)
         containerView.addSubview(moreButton)
         
-        let horizontalSpacing = 25
+        let horizontalSpacing = 20
         let cornerMargin = 30
         
         let viewsDict = [
             "container" : containerView,
             "reply" : replyButton,
             "like" : likeButton,
+            "share" : shareButton,
             "more" : moreButton,
             ]
         
@@ -201,7 +220,7 @@ class ActionButtonCell2: UITableViewCell {
         contentView.addConstraint(horizontalCenter)
         
         
-        let horizontalFormat = "H:|-(==cornerMargin)-[reply(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
+        let horizontalFormat = "H:|-(==cornerMargin)-[reply(40)]-horizontalSpacing-[like(40)]-horizontalSpacing-[share(40)]-horizontalSpacing-[more(40)]-(==cornerMargin)-|"
         let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalFormat, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(horizontalConstraints)
         
@@ -212,6 +231,10 @@ class ActionButtonCell2: UITableViewCell {
         let verticalFormat2 = "V:|-10-[like(40)]-10-|"
         let verticalConstraints2 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat2, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
         contentView.addConstraints(verticalConstraints2)
+        
+        let verticalFormat34 = "V:|-10-[share(40)]-10-|"
+        let verticalConstraints34 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat34, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
+        contentView.addConstraints(verticalConstraints34)
         
         let verticalFormat4 = "V:|-10-[more(40)]-10-|"
         let verticalConstraints4 = NSLayoutConstraint.constraints(withVisualFormat: verticalFormat4, options: .alignAllCenterY, metrics: metrics, views: viewsDict)
@@ -229,6 +252,7 @@ class ActionButtonCell2: UITableViewCell {
     
     func configure(mainStatus: Status) {
         replyButton.setImage(UIImage(named: "direct2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+        shareButton.setImage(UIImage(named: "detailprev-1")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         
         if mainStatus.reblog?.favourited ?? mainStatus.favourited ?? false || StoreStruct.allLikes.contains(mainStatus.reblog?.id ?? mainStatus.id) {

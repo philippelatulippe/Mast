@@ -245,7 +245,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
             
-            let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .min(id: "", limit: 5000))
+            let request = Accounts.statuses(id: StoreStruct.currentUser.id, mediaOnly: nil, pinnedOnly: true, excludeReplies: nil, excludeReblogs: false, range: .since(id: "", limit: 5000))
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     DispatchQueue.main.async {

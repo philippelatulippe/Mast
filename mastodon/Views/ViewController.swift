@@ -312,18 +312,19 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         customStyle.backgroundColor = Colours.white
                         self.volumeBar.style = customStyle
                     }
+                    
                     StoreStruct.currentInstance.accessToken = (json["access_token"] as? String ?? "")
-                    StoreStruct.client.accessToken = StoreStruct.currentInstance.accessToken
+                    StoreStruct.client.accessToken = (json["access_token"] as? String ?? "")
                    
-                    let currentInstance = InstanceData(clientID: StoreStruct.currentInstance.clientID, clientSecret: StoreStruct.currentInstance.clientSecret, authCode: StoreStruct.currentInstance.authCode, accessToken: StoreStruct.currentInstance.accessToken, returnedText: StoreStruct.currentInstance.returnedText, redirect:StoreStruct.currentInstance.redirect)
-                    InstanceData.setCurrentInstance(instance: currentInstance)
+//                    let currentInstance = InstanceData(clientID: StoreStruct.currentInstance.clientID, clientSecret: StoreStruct.currentInstance.clientSecret, authCode: StoreStruct.currentInstance.authCode, accessToken: StoreStruct.currentInstance.accessToken, returnedText: StoreStruct.currentInstance.returnedText, redirect:StoreStruct.currentInstance.redirect)
+                    InstanceData.setCurrentInstance(instance: StoreStruct.currentInstance)
                     
                     let request2 = Accounts.currentUser()
                     StoreStruct.client.run(request2) { (statuses) in
                         if let stat = (statuses.value) {
                             DispatchQueue.main.async {
                                 var instances = InstanceData.getAllInstances()
-                                instances.append(currentInstance)
+                                instances.append(StoreStruct.currentInstance)
                                 UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
                                 StoreStruct.currentUser = stat
                                 Account.addAccountToList(account: stat)
@@ -412,7 +413,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     
                     if let access1 = (json["access_token"] as? String) {
                     
-                        StoreStruct.client = StoreStruct.newClient
+                    StoreStruct.client = StoreStruct.newClient
                     newInstance.accessToken = access1
                     InstanceData.setCurrentInstance(instance: newInstance)
                         

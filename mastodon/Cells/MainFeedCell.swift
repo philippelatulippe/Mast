@@ -311,7 +311,7 @@ class MainFeedCell: SwipeTableViewCell {
                 let attributedString = NSMutableAttributedString(string: "\(status.reblog?.content.stripHTML() ?? "")\n\n")
                 let imageAttachment = NSTextAttachment()
                 imageAttachment.image = UIImage(named:"boost2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
-                imageAttachment.bounds = CGRect(x: 0, y: -3, width: Int(self.toot.font.lineHeight - 5), height: Int(self.toot.font.lineHeight))
+                imageAttachment.bounds = CGRect(x: 0, y: -2, width: Int(self.toot.font.lineHeight - 5), height: Int(self.toot.font.lineHeight))
                 let attachmentString2 = NSAttributedString(attachment: imageAttachment)
                 let completeText2 = NSMutableAttributedString(string: "")
                 completeText2.append(attachmentString2)
@@ -335,7 +335,7 @@ class MainFeedCell: SwipeTableViewCell {
                 
                 let imageAttachment = NSTextAttachment()
                 imageAttachment.image = UIImage(named:"boost2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
-                imageAttachment.bounds = CGRect(x: 0, y: -3, width: Int(self.toot.font.lineHeight - 5), height: Int(self.toot.font.lineHeight))
+                imageAttachment.bounds = CGRect(x: 0, y: -2, width: Int(self.toot.font.lineHeight - 5), height: Int(self.toot.font.lineHeight))
                 let attachmentString2 = NSAttributedString(attachment: imageAttachment)
                 let completeText2 = NSMutableAttributedString(string: "")
                 completeText2.append(attachmentString2)

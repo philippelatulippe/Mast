@@ -1420,7 +1420,10 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
         
         StoreStruct.client = Client(baseURL: "")
         StoreStruct.newClient = Client(baseURL: "")
+        StoreStruct.newInstance = nil
         StoreStruct.currentInstance = InstanceData()
+        StoreStruct.newInstance = InstanceData()
+        InstanceData.clearInstances()
         StoreStruct.currentPage = 0
         StoreStruct.playerID = ""
         StoreStruct.caption1 = ""
@@ -1502,11 +1505,8 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             print("couldn't clear disk")
         }
         
-        let loginController = ViewController()
-        loginController.createLoginView(newInstance: false)
-        self.present(loginController, animated: true, completion: {
-            loginController.textField.becomeFirstResponder()
-        })
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.resetApp()
     }
     
     func loadLoadLoad() {

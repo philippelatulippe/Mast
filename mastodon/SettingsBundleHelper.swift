@@ -36,7 +36,10 @@ class SettingsBundleHelper {
             
             StoreStruct.client = Client(baseURL: "")
             StoreStruct.newClient = Client(baseURL: "")
+            StoreStruct.newInstance = nil
             StoreStruct.currentInstance = InstanceData()
+            StoreStruct.newInstance = InstanceData()
+            InstanceData.clearInstances()
             StoreStruct.currentPage = 0
             StoreStruct.playerID = ""
             StoreStruct.caption1 = ""
@@ -117,6 +120,9 @@ class SettingsBundleHelper {
             } catch {
                 print("couldn't clear disk")
             }
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.resetApp()
         }
     }
     

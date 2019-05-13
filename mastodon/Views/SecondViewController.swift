@@ -894,42 +894,12 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         self.tabBarController?.tabBar.items?[1].badgeValue = nil
         
-        self.fetchMoreNotifications()
-        
-//
-//        let request25 = Notifications.all(typesToExclude: [.favourite, .follow, .reblog])
-//        StoreStruct.client.run(request25) { (statuses) in
-//            if let stat = (statuses.value) {
-//
-//                StoreStruct.notificationsMentions = stat
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//
-//                let request5 = Notifications.all(typesToExclude: StoreStruct.notTypes)
-//                StoreStruct.client.run(request5) { (statuses) in
-//                    if let stat = (statuses.value) {
-//
-//                        StoreStruct.notifications = stat
-//                        DispatchQueue.main.async {
-//                            self.tableView2.reloadData()
-//                        }
-//
-//                    }
-//                }
-//            }
-//        }
-        
-        
-        
-        
         StoreStruct.currentPage = 1
-        //        self.tableView.reloadData()
-        //        self.tableView2.reloadData()
+        
+        self.fetchMoreNotifications()
         
         springWithDelay(duration: 0.4, delay: 0, animations: {
             self.segmentedControl.alpha = 1
-            //            self.tableView.alpha = 1
         })
         
         if StoreStruct.historyBool {
@@ -956,15 +926,12 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             }
         }
         
-        //bh4
         var newSize = offset + 65
         if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
             newSize = offset + 65
         } else {
             newSize = offset + 15
         }
-        
-        
         
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
@@ -1449,27 +1416,27 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             
             
             self.tableView.reloadData()
-            if StoreStruct.notificationsMentions.isEmpty {
-                let request = Notifications.all(range: .default, typesToExclude: [.favourite, .follow, .reblog])
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        StoreStruct.notificationsMentions = stat + StoreStruct.notificationsMentions
-                        DispatchQueue.main.async {
-                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
-                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
-                            
-                            self.ai.alpha = 0
-                            self.ai.removeFromSuperview()
-                            
-                            self.tableView.reloadData()
-                            
-                        }
-                        
-                    }
-                }
-            } else {
-                
-            }
+//            if StoreStruct.notificationsMentions.isEmpty {
+//                let request = Notifications.all(range: .default, typesToExclude: [.favourite, .follow, .reblog])
+//                StoreStruct.client.run(request) { (statuses) in
+//                    if let stat = (statuses.value) {
+//                        StoreStruct.notificationsMentions = stat + StoreStruct.notificationsMentions
+//                        DispatchQueue.main.async {
+//                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
+//                            StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+//
+//                            self.ai.alpha = 0
+//                            self.ai.removeFromSuperview()
+//
+//                            self.tableView.reloadData()
+//
+//                        }
+//
+//                    }
+//                }
+//            } else {
+//
+//            }
             
             
         }
@@ -4804,17 +4771,16 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     
     @objc func refreshCont() {
-        let request = Notifications.all(range: .min(id: StoreStruct.notifications.first?.id ?? "", limit: nil), typesToExclude: StoreStruct.notTypes)
+        let request = Notifications.all(range: .since(id: StoreStruct.notifications.first?.id ?? "", limit: nil), typesToExclude: StoreStruct.notTypes)
         //        DispatchQueue.global(qos: .userInitiated).async {
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
-                if stat == nil { return }
+//                if stat == nil { return }
                 var newestC = StoreStruct.notifications.count
                 
                 StoreStruct.notifications = stat + StoreStruct.notifications
-                //                    StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
                 StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
-                var co = 0
+                
                 DispatchQueue.main.async {
                     StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     
@@ -4864,17 +4830,16 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             //            }
         }
         
-        let request2 = Notifications.all(range: .min(id: StoreStruct.notificationsMentions.first?.id ?? "", limit: nil), typesToExclude: [.favourite, .follow, .reblog])
+        let request2 = Notifications.all(range: .since(id: StoreStruct.notificationsMentions.first?.id ?? "", limit: nil), typesToExclude: [.favourite, .follow, .reblog])
         //        DispatchQueue.global(qos: .userInitiated).async {
         StoreStruct.client.run(request2) { (statuses) in
             if let stat = (statuses.value) {
-                if stat == nil { return }
+//                if stat == nil { return }
                 var newestC2 = StoreStruct.notificationsMentions.count
                 
-                var co = 0
                 StoreStruct.notificationsMentions = stat + StoreStruct.notificationsMentions
-                //                    StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                 StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+                
                 DispatchQueue.main.async {
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     
@@ -4892,7 +4857,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
                                 })
                             }
-                            self.countcount1 = co
+                            self.countcount1 = stat.count
                         }
                         
                         if stat.count > 0 {
