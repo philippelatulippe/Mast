@@ -121,7 +121,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //self.ai.startAnimating()
+        self.ai.startAnimating()
     }
     
     
@@ -201,6 +201,8 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         //NotificationCenter.default.addObserver(self, selector: #selector(self.scrollTop1), name: NSNotification.Name(rawValue: "scrollTop1"), object: nil)
         
+        self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
+        
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
         longPress.minimumPressDuration = 0.5
         longPress.delegate = self
@@ -252,6 +254,7 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.view.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
         
+        self.view.addSubview(self.ai)
         
         //        refreshControl.addTarget(self, action: #selector(refreshCont), for: .valueChanged)
         //        self.tableView.addSubview(refreshControl)
@@ -291,6 +294,17 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         StoreStruct.currentPage = 90
         
+        let request = Timelines.tag(self.currentTagTitle, local: false)
+        StoreStruct.client.run(request) { (statuses) in
+            if let stat = (statuses.value) {
+                self.currentTags = stat
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.ai.alpha = 0
+                    self.ai.stopAnimating()
+                }
+            }
+        }
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
@@ -466,15 +480,15 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 let controller = HashtagViewController()
                 controller.currentTagTitle = string
-                let request = Timelines.tag(string)
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        DispatchQueue.main.async {
-                            controller.currentTags = stat
+//                let request = Timelines.tag(string)
+//                StoreStruct.client.run(request) { (statuses) in
+//                    if let stat = (statuses.value) {
+//                        DispatchQueue.main.async {
+//                            controller.currentTags = stat
                             self.navigationController?.pushViewController(controller, animated: true)
-                        }
-                    }
-                }
+//                        }
+//                    }
+//                }
             }
             let bgColorView = UIView()
             bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -581,15 +595,15 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 let controller = HashtagViewController()
                 controller.currentTagTitle = string
-                let request = Timelines.tag(string)
-                StoreStruct.client.run(request) { (statuses) in
-                    if let stat = (statuses.value) {
-                        DispatchQueue.main.async {
-                            controller.currentTags = stat
+//                let request = Timelines.tag(string)
+//                StoreStruct.client.run(request) { (statuses) in
+//                    if let stat = (statuses.value) {
+//                        DispatchQueue.main.async {
+//                            controller.currentTags = stat
                             self.navigationController?.pushViewController(controller, animated: true)
-                        }
-                    }
-                }
+//                        }
+//                    }
+//                }
             }
             let bgColorView = UIView()
             bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -2137,19 +2151,18 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    var lastThing = ""
     func fetchMoreHome() {
         let request = Timelines.tag(self.currentTagTitle, local: false, range: .max(id: self.currentTags.last?.id ?? "", limit: 5000))
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
-                
                 if stat.isEmpty {} else {
-                    self.lastThing = stat.first?.id ?? ""
-                DispatchQueue.main.async {
                     self.currentTags = self.currentTags + stat
-                    self.currentTags = self.currentTags.removeDuplicates()
-                    self.tableView.reloadData()
-                }
+                    DispatchQueue.main.async {
+                        self.currentTags = self.currentTags.removeDuplicates()
+                        self.tableView.reloadData()
+                        self.ai.alpha = 0
+                        self.ai.stopAnimating()
+                    }
                 }
             }
         }

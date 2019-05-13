@@ -454,15 +454,15 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     
                     let controller = HashtagViewController()
                     controller.currentTagTitle = string
-                    let request = Timelines.tag(string)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
-                                controller.currentTags = stat
+//                    let request = Timelines.tag(string)
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
+//                                controller.currentTags = stat
                                 self.navigationController?.pushViewController(controller, animated: true)
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -569,15 +569,15 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     
                     let controller = HashtagViewController()
                     controller.currentTagTitle = string
-                    let request = Timelines.tag(string)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
-                                controller.currentTags = stat
+//                    let request = Timelines.tag(string)
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
+//                                controller.currentTags = stat
                                 self.navigationController?.pushViewController(controller, animated: true)
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)

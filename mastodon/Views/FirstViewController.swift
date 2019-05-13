@@ -2356,15 +2356,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    controller.currentTags = stat
-                                    DispatchQueue.main.async {
+//                            let request = Timelines.tag(string)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    controller.currentTags = stat
+//                                    DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+//                                    }
+//                                }
+//                            }
                         }
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -2477,15 +2477,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    controller.currentTags = stat
-                                    DispatchQueue.main.async {
+//                            let request = Timelines.tag(string)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    controller.currentTags = stat
+//                                    DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+//                                    }
+//                                }
+//                            }
                         }
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -2665,15 +2665,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    controller.currentTags = stat
-                                    DispatchQueue.main.async {
+//                            let request = Timelines.tag(string)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    controller.currentTags = stat
+//                                    DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+//                                    }
+//                                }
+//                            }
                         }
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -2780,15 +2780,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    controller.currentTags = stat
-                                    DispatchQueue.main.async {
+//                            let request = Timelines.tag(string)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    controller.currentTags = stat
+//                                    DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+//                                    }
+//                                }
+//                            }
                         }
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -2961,15 +2961,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    controller.currentTags = stat
-                                    DispatchQueue.main.async {
+//                            let request = Timelines.tag(string)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    controller.currentTags = stat
+//                                    DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+//                                    }
+//                                }
+//                            }
                         }
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -3076,15 +3076,15 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    controller.currentTags = stat
-                                    DispatchQueue.main.async {
+//                            let request = Timelines.tag(string)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    controller.currentTags = stat
+//                                    DispatchQueue.main.async {
                                         self.navigationController?.pushViewController(controller, animated: true)
-                                    }
-                                }
-                            }
+//                                    }
+//                                }
+//                            }
                         }
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)

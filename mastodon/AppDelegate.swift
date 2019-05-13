@@ -105,6 +105,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let viewController = ViewController()
             window.rootViewController = viewController
             window.makeKeyAndVisible()
+            UINavigationBar.appearance().shadowImage = UIImage()
+            UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+            UINavigationBar.appearance().backgroundColor = Colours.white
+            UINavigationBar.appearance().barTintColor = Colours.black
+            UINavigationBar.appearance().tintColor = Colours.black
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
         }
     }
     

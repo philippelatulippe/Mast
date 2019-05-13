@@ -806,11 +806,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     let controller = HashtagViewController()
                     controller.currentTagTitle = string
-                    let request = Timelines.tag(string)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
-                                controller.currentTags = stat
+//                    let request = Timelines.tag(string)
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
+//                                controller.currentTags = stat
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .phone :
@@ -830,9 +830,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 default:
                                     print("nothing")
                                 }
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -984,11 +984,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         let controller = HashtagViewController()
                         controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                DispatchQueue.main.async {
-                                    controller.currentTags = stat
+//                        let request = Timelines.tag(string)
+//                        StoreStruct.client.run(request) { (statuses) in
+//                            if let stat = (statuses.value) {
+//                                DispatchQueue.main.async {
+//                                    controller.currentTags = stat
                                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                     switch (deviceIdiom) {
                                     case .phone :
@@ -1008,9 +1008,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     default:
                                         print("nothing")
                                     }
-                                }
-                            }
-                        }
+//                                }
+//                            }
+//                        }
                     }
                     let bgColorView = UIView()
                     bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -1131,11 +1131,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         let controller = HashtagViewController()
                         controller.currentTagTitle = string
-                        let request = Timelines.tag(string)
-                        StoreStruct.client.run(request) { (statuses) in
-                            if let stat = (statuses.value) {
-                                DispatchQueue.main.async {
-                                    controller.currentTags = stat
+//                        let request = Timelines.tag(string)
+//                        StoreStruct.client.run(request) { (statuses) in
+//                            if let stat = (statuses.value) {
+//                                DispatchQueue.main.async {
+//                                    controller.currentTags = stat
                                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                     switch (deviceIdiom) {
                                     case .phone :
@@ -1155,9 +1155,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     default:
                                         print("nothing")
                                     }
-                                }
-                            }
-                        }
+//                                }
+//                            }
+//                        }
                     }
                     let bgColorView = UIView()
                     bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -1278,11 +1278,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     let controller = HashtagViewController()
                     controller.currentTagTitle = string
-                    let request = Timelines.tag(string)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
-                                controller.currentTags = stat
+//                    let request = Timelines.tag(string)
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
+//                                controller.currentTags = stat
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .phone :
@@ -1302,9 +1302,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 default:
                                     print("nothing")
                                 }
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.white
@@ -1421,11 +1421,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     let controller = HashtagViewController()
                     controller.currentTagTitle = string
-                    let request = Timelines.tag(string)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
-                                controller.currentTags = stat
+//                    let request = Timelines.tag(string)
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
+//                                controller.currentTags = stat
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .phone :
@@ -1445,9 +1445,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 default:
                                     print("nothing")
                                 }
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.white
@@ -1636,11 +1636,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     let controller = HashtagViewController()
                     controller.currentTagTitle = string
-                    let request = Timelines.tag(string)
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            DispatchQueue.main.async {
-                                controller.currentTags = stat
+//                    let request = Timelines.tag(string)
+//                    StoreStruct.client.run(request) { (statuses) in
+//                        if let stat = (statuses.value) {
+//                            DispatchQueue.main.async {
+//                                controller.currentTags = stat
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .phone :
@@ -1660,9 +1660,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 default:
                                     print("nothing")
                                 }
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 }
                 let bgColorView = UIView()
                 bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -1813,11 +1813,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    DispatchQueue.main.async {
-                                        controller.currentTags = stat
+//                            let request = Timelines.tag(string)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    DispatchQueue.main.async {
+//                                        controller.currentTags = stat
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
                                         case .phone :
@@ -1837,9 +1837,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         default:
                                             print("nothing")
                                         }
-                                    }
-                                }
-                            }
+//                                    }
+//                                }
+//                            }
                         }
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -1942,11 +1942,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    DispatchQueue.main.async {
-                                        controller.currentTags = stat
+//                            let request = Timelines.tag(string)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    DispatchQueue.main.async {
+//                                        controller.currentTags = stat
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
                                         case .phone :
@@ -1966,9 +1966,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         default:
                                             print("nothing")
                                         }
-                                    }
-                                }
-                            }
+//                                    }
+//                                }
+//                            }
                         }
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -2092,11 +2092,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    DispatchQueue.main.async {
-                                        controller.currentTags = stat
+//                            let request = Timelines.tag(string)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    DispatchQueue.main.async {
+//                                        controller.currentTags = stat
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
                                         case .phone :
@@ -2116,9 +2116,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         default:
                                             print("nothing")
                                         }
-                                    }
-                                }
-                            }
+//                                    }
+//                                }
+//                            }
                         }
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
@@ -2232,11 +2232,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             let controller = HashtagViewController()
                             controller.currentTagTitle = string
-                            let request = Timelines.tag(string)
-                            StoreStruct.client.run(request) { (statuses) in
-                                if let stat = (statuses.value) {
-                                    DispatchQueue.main.async {
-                                        controller.currentTags = stat
+//                            let request = Timelines.tag(string)
+//                            StoreStruct.client.run(request) { (statuses) in
+//                                if let stat = (statuses.value) {
+//                                    DispatchQueue.main.async {
+//                                        controller.currentTags = stat
                                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                         switch (deviceIdiom) {
                                         case .phone :
@@ -2256,9 +2256,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                         default:
                                             print("nothing")
                                         }
-                                    }
-                                }
-                            }
+//                                    }
+//                                }
+//                            }
                         }
                         let bgColorView = UIView()
                         bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)

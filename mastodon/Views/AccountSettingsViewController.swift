@@ -293,6 +293,10 @@ class AccountSettingsViewController: UIViewController, UITableViewDelegate, UITa
                             
                             StoreStruct.switchedNow = true
                             InstanceData.setCurrentInstance(instance: instances[indexPath.row])
+                            StoreStruct.client = Client(
+                                baseURL: "https://\(instances[indexPath.item].returnedText)",
+                                accessToken: instances[indexPath.item].accessToken
+                            )
                             let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             appDelegate.reloadApplication()
                             

@@ -167,6 +167,10 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
                                  
                                 StoreStruct.switchedNow = true
                                 InstanceData.setCurrentInstance(instance: instances[indexPath.item])
+                                StoreStruct.client = Client(
+                                    baseURL: "https://\(instances[indexPath.item].returnedText)",
+                                    accessToken: instances[indexPath.item].accessToken
+                                )
                                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                 appDelegate.reloadApplication()
                                 
