@@ -172,7 +172,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
                 return cell
             } else {
                 
-                if indexPath.row == self.statusFollows.count - 6 {
+                if indexPath.row == self.statusFollows.count - 1 {
 //                    self.fetchFollows()
                 }
                 if indexPath.row < 7 && self.doOnce == false {
@@ -652,9 +652,9 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                    self.lastThing = stat.first?.id ?? ""
+                    self.statusFollows = self.statusFollows + stat
                     DispatchQueue.main.async {
-                        self.lastThing = stat.first?.id ?? ""
-                        self.statusFollows = self.statusFollows + stat
                         self.tableView.reloadData()
                     }
                 }
@@ -669,9 +669,9 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty || self.lastThing2 == stat.first?.id ?? "" {} else {
+                    self.lastThing2 = stat.first?.id ?? ""
+                    self.statusFollows = self.statusFollows + stat
                     DispatchQueue.main.async {
-                        self.lastThing2 = stat.first?.id ?? ""
-                        self.statusFollows = self.statusFollows + stat
                         self.tableView.reloadData()
                     }
                 }

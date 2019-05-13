@@ -363,8 +363,8 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
                 
                 if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
-                DispatchQueue.main.async {
                     self.currentTags = self.currentTags + stat
+                DispatchQueue.main.async {
                     self.currentTags = self.currentTags.removeDuplicates()
                     self.tableView.reloadData()
                     

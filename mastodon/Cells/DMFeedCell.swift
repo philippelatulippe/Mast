@@ -189,11 +189,8 @@ class DMFeedCell: SwipeTableViewCell {
             userTag.setTitle("@\(status.reblog?.account.username ?? status.account.username)", for: .normal)
         }
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-            self.profileImageView.pin_updateWithProgress = true
-            self.profileImageView.pin_setImage(from: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"))
-        }
+        self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
+        self.profileImageView.pin_updateWithProgress = true
         
         userName.text = status.reblog?.account.displayName ?? status.account.displayName
         if userName.text == StoreStruct.currentUser.displayName {
@@ -208,9 +205,12 @@ class DMFeedCell: SwipeTableViewCell {
                             self.userTag.setTitle("@\(stat.username)", for: .normal)
                         }
                         self.profileImageView.pin_setImage(from: URL(string: "\(stat.avatar)"))
+                        self.reloadInputViews()
                     }
                 }
             }
+        } else {
+            self.profileImageView.pin_setImage(from: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"))
         }
         
         

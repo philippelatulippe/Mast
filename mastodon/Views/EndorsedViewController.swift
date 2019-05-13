@@ -642,9 +642,9 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty {} else {
+                    self.lastThing = stat.first?.id ?? ""
+                    self.statusFollows = self.statusFollows + stat
                     DispatchQueue.main.async {
-                        self.lastThing = stat.first?.id ?? ""
-                        self.statusFollows = self.statusFollows + stat
                         self.statusFollows = self.statusFollows.removeDuplicates()
                         self.tableView.reloadData()
                     }
@@ -664,9 +664,9 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
             if let stat = (statuses.value) {
                 
                 if stat.isEmpty {} else {
+                    self.lastThing2 = stat.first?.id ?? ""
+                    self.statusFollows = self.statusFollows + stat
                     DispatchQueue.main.async {
-                        self.lastThing2 = stat.first?.id ?? ""
-                        self.statusFollows = self.statusFollows + stat
                         self.statusFollows = self.statusFollows.removeDuplicates()
                         self.tableView.reloadData()
                     }

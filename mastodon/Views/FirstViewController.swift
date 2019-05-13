@@ -531,7 +531,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
             self.tableView.register(SettingsCell.self, forCellReuseIdentifier: "cellmore")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 60)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -547,7 +547,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
             self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
             self.tableViewL.register(SettingsCell.self, forCellReuseIdentifier: "cellmore1")
-            self.tableViewL.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
+            self.tableViewL.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 60)
             self.tableViewL.alpha = 0
             self.tableViewL.delegate = self
             self.tableViewL.dataSource = self
@@ -563,7 +563,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
             self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
             self.tableViewF.register(SettingsCell.self, forCellReuseIdentifier: "cellmore2")
-            self.tableViewF.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
+            self.tableViewF.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 60)
             self.tableViewF.alpha = 0
             self.tableViewF.delegate = self
             self.tableViewF.dataSource = self
@@ -597,7 +597,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
             self.tableView.register(SettingsCell.self, forCellReuseIdentifier: "cellmore")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -612,7 +612,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
             self.tableViewL.register(SettingsCell.self, forCellReuseIdentifier: "cellmore1")
-            self.tableViewL.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
+            self.tableViewL.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5)
             self.tableViewL.alpha = 0
             self.tableViewL.delegate = self
             self.tableViewL.dataSource = self
@@ -627,7 +627,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
             self.tableViewF.register(SettingsCell.self, forCellReuseIdentifier: "cellmore2")
-            self.tableViewF.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
+            self.tableViewF.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5)
             self.tableViewF.alpha = 0
             self.tableViewF.delegate = self
             self.tableViewF.dataSource = self
@@ -941,7 +941,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
             self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
             self.tableView.register(SettingsCell.self, forCellReuseIdentifier: "cellmore")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0 - tabHeight)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5 - tabHeight)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -958,7 +958,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewL.register(MainFeedCell.self, forCellReuseIdentifier: "celll")
             self.tableViewL.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2l")
             self.tableViewL.register(SettingsCell.self, forCellReuseIdentifier: "cellmore1")
-            self.tableViewL.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
+            self.tableViewL.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
             self.tableViewL.alpha = 0
             self.tableViewL.delegate = self
             self.tableViewL.dataSource = self
@@ -975,7 +975,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             self.tableViewF.register(MainFeedCell.self, forCellReuseIdentifier: "cellf")
             self.tableViewF.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2f")
             self.tableViewF.register(SettingsCell.self, forCellReuseIdentifier: "cellmore2")
-            self.tableViewF.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
+            self.tableViewF.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
             self.tableViewF.alpha = 0
             self.tableViewF.delegate = self
             self.tableViewF.dataSource = self

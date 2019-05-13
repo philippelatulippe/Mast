@@ -319,8 +319,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
+                    self.currentTags = self.currentTags + stat
                     DispatchQueue.main.async {
-                        self.currentTags = self.currentTags + stat
                         self.currentTags = self.currentTags.removeDuplicates()
                         self.tableView.reloadData()
                     }

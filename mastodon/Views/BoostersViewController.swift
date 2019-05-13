@@ -136,7 +136,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.navigationController?.view.addSubview(segmentedControl)
             
             self.tableView.register(FollowersCell.self, forCellReuseIdentifier: "cellf")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 15)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -149,7 +149,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.view.addSubview(self.tableView)
             
             self.tableView2.register(FollowersCell.self, forCellReuseIdentifier: "cellf2")
-            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 15)
+            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
             self.tableView2.alpha = 1
             self.tableView2.delegate = self
             self.tableView2.dataSource = self
@@ -254,7 +254,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.navigationController?.view.addSubview(segmentedControl)
             
             self.tableView.register(FollowersCell.self, forCellReuseIdentifier: "cellf")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 15)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -268,7 +268,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
             self.tableView.tableFooterView = UIView()
             
             self.tableView2.register(FollowersCell.self, forCellReuseIdentifier: "cellf2")
-            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 15)
+            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
             self.tableView2.alpha = 1
             self.tableView2.delegate = self
             self.tableView2.dataSource = self
@@ -356,9 +356,9 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
         if index == 0 {
-            return "\(statusLiked.count) Likes".localized
+            return "Likes".localized
         } else {
-            return "\(statusBoosted.count) Boosts".localized
+            return "Boosts".localized
         }
     }
     
@@ -430,7 +430,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
                 return cell
             } else {
                 
-                if indexPath.row == self.statusLiked.count - 6 {
+                if indexPath.row == self.statusLiked.count - 1 {
                     self.fetchFollows()
                 }
                 
@@ -461,7 +461,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
                 return cell
             } else {
                 
-                if indexPath.row == self.statusBoosted.count - 6 {
+                if indexPath.row == self.statusBoosted.count - 1 {
                     self.fetchFollowers()
                 }
                 
@@ -906,7 +906,11 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.tableView.deselectRow(at: indexPath, animated: true)
+        if self.currentIndex == 0 {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            self.tableView2.deselectRow(at: indexPath, animated: true)
+        }
         
         let controller = ThirdViewController()
         controller.fromOtherUser = true
@@ -931,9 +935,9 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty || self.lastThing == stat.first?.id ?? "" {} else {
+                    self.lastThing = stat.first?.id ?? ""
+                    self.statusLiked = self.statusLiked + stat
                     DispatchQueue.main.async {
-                        self.lastThing = stat.first?.id ?? ""
-                        self.statusLiked = self.statusLiked + stat
                         self.statusLiked = self.statusLiked.removeDuplicates()
                         self.tableView.reloadData()
                     }
@@ -948,9 +952,9 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty || self.lastThing2 == stat.first?.id ?? "" {} else {
+                    self.lastThing2 = stat.first?.id ?? ""
+                    self.statusBoosted = self.statusBoosted + stat
                     DispatchQueue.main.async {
-                        self.lastThing2 = stat.first?.id ?? ""
-                        self.statusBoosted = self.statusBoosted + stat
                         self.statusBoosted = self.statusBoosted.removeDuplicates()
                         self.tableView2.reloadData()
                     }

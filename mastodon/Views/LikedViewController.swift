@@ -2162,9 +2162,9 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
                     self.lastThing = stat.first?.id ?? ""
+                    self.currentTags = self.currentTags + stat
                     
                 DispatchQueue.main.async {
-                    self.currentTags = self.currentTags + stat
                     self.currentTags = self.currentTags.removeDuplicates()
                     self.tableView.reloadData()
                 }
@@ -2179,9 +2179,9 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        DispatchQueue.global(qos: .userInitiated).async {
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
+                    var newestC = self.currentTags.count
+                    self.currentTags = stat + self.currentTags
                     DispatchQueue.main.async {
-                        var newestC = self.currentTags.count
-                        self.currentTags = stat + self.currentTags
                         
                         self.currentTags = self.currentTags.removeDuplicates()
                         newestC = self.currentTags.count - newestC

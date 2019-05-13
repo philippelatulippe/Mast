@@ -210,7 +210,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         tableView.removeFromSuperview()
             self.tableView.register(DMFeedCell.self, forCellReuseIdentifier: "cell444")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -418,7 +418,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         self.tableView.register(DMFeedCell.self, forCellReuseIdentifier: "cell444")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0 - tabHeight)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5 - tabHeight)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -789,7 +789,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 return cell
             } else {
                 
-                if indexPath.row == StoreStruct.notificationsDirect.count - 7 {
+                if indexPath.row == StoreStruct.notificationsDirect.count - 1 {
                     self.fetchMoreNotifications()
                 }
                 
@@ -1707,8 +1707,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
+                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
                     DispatchQueue.main.async {
-                        StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         self.tableView.reloadData()
                     }
@@ -1722,8 +1722,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
+                    StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
                     DispatchQueue.main.async {
-                        StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         self.ai.stopAnimating()
                         self.ai.alpha = 0

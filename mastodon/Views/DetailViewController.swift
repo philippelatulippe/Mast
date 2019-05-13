@@ -466,8 +466,24 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidDisappear(true)
     }
     
+    func removeTabbarItemsText() {
+        var offset: CGFloat = 6.0
+        if #available(iOS 11.0, *), traitCollection.horizontalSizeClass == .regular {
+            offset = 0.0
+        }
+        if let items = self.tabBarController?.tabBar.items {
+            for item in items {
+                item.title = ""
+                item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0);
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Toot"
+        self.removeTabbarItemsText()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
@@ -538,7 +554,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.tableFooterView = UIView()
         
         self.detailPrev.frame = CGRect(x: Int(self.view.bounds.width) - 55, y: Int(offset + 15), width: 36, height: 36)
-        self.detailPrev.setImage(UIImage(named: "detailprev-1")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+        self.detailPrev.setImage(UIImage(named: "detailprev-1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         self.detailPrev.backgroundColor = UIColor.clear
         self.detailPrev.alpha = 0
         self.detailPrev.addTarget(self, action: #selector(self.didTouchDetailPrev), for: .touchUpInside)
@@ -554,6 +570,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     DispatchQueue.main.async {
                         self.allPrevious = (stat.ancestors)
                         self.allReplies = (stat.descendants)
+                        UIView.setAnimationsEnabled(false)
+                        self.tableView.beginUpdates()
                         self.tableView.reloadData()
                         if self.allPrevious.count == 0 {} else {
                             self.detailPrev.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
@@ -577,6 +595,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.tableView.tableFooterView = customViewFooter
                             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: false)
                         }
+                        self.tableView.endUpdates()
+                        UIView.setAnimationsEnabled(true)
                     }
                 }
             }
@@ -2794,14 +2814,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             cell.configure(stat)
                             UIView.setAnimationsEnabled(false)
                             self.tableView.beginUpdates()
-                            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
+                            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
                             self.tableView.endUpdates()
                             UIView.setAnimationsEnabled(true)
                         } else if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DetailCellImage {
                             cell.configure(stat)
                             UIView.setAnimationsEnabled(false)
                             self.tableView.beginUpdates()
-                            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
+                            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
                             self.tableView.endUpdates()
                             UIView.setAnimationsEnabled(true)
                         }
@@ -2822,7 +2842,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if let poll = stat.poll {
                                 cell.configure(thePoll: poll, theOptions: poll.options)
                                 self.tableView.beginUpdates()
-                                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
+                                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .fade)
                                 self.tableView.endUpdates()
                             }
                         }

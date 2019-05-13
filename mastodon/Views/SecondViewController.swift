@@ -374,7 +374,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView.register(GraphCell.self, forCellReuseIdentifier: "cellG")
             self.tableView.register(NotificationCell.self, forCellReuseIdentifier: "cell3")
             self.tableView.register(NotificationCellImage.self, forCellReuseIdentifier: "cell4")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -390,7 +390,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
             self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
-            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0)
+            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
             self.tableView2.dataSource = self
@@ -736,7 +736,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView.register(GraphCell.self, forCellReuseIdentifier: "cellG")
             self.tableView.register(NotificationCell.self, forCellReuseIdentifier: "cell3")
             self.tableView.register(NotificationCellImage.self, forCellReuseIdentifier: "cell4")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0 - tabHeight)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5 - tabHeight)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -753,7 +753,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
             self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
-            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 0 - tabHeight)
+            self.tableView2.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5 - tabHeight)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
             self.tableView2.dataSource = self
@@ -896,7 +896,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         StoreStruct.currentPage = 1
         
-        self.fetchMoreNotifications()
+        if StoreStruct.notificationsMentions.isEmpty || StoreStruct.notifications.isEmpty {
+            self.fetchMoreNotifications()
+        }
         
         springWithDelay(duration: 0.4, delay: 0, animations: {
             self.segmentedControl.alpha = 1
@@ -1740,7 +1742,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 } else {
                     
                     
-                    if indexPath.row == StoreStruct.notifications.count - 14 {
+                    if indexPath.row == StoreStruct.notifications.count - 1 {
                         self.fetchMoreNotifications()
                     }
                     
@@ -2172,7 +2174,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             } else {
                 
                 
-                if indexPath.row == StoreStruct.notificationsMentions.count - 14 {
+                if indexPath.row == StoreStruct.notificationsMentions.count - 1 {
                     self.fetchMoreNotifications()
                 }
                 

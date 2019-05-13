@@ -3355,7 +3355,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
             } else {
                 
-                if indexPath.row == zzz.count - 14 {
+                if indexPath.row == zzz.count - 1 {
                     self.fetchMoreProfile()
                 }
                 

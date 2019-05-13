@@ -131,7 +131,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                 $0.setSize(CGSize(width: 40, height: 35), animated: false)
                 $0.addTarget(self, action: #selector(self.didTouchOther), for: .touchUpInside)
             }
-        allButton.image = UIImage(named: "toot")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+        allButton.image = UIImage(named: "toot")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21))
         var camButton = InputBarButtonItem()
             .configure {
                 $0.contentHorizontalAlignment = .left
@@ -145,14 +145,14 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
                     item.messageInputBar?.sendButton.isEnabled = false
                 }
         }
-        camButton.image = UIImage(named: "camera")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+        camButton.image = UIImage(named: "camera")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21))
         var galButton = InputBarButtonItem()
             .configure {
                 $0.contentHorizontalAlignment = .left
                 $0.setSize(CGSize(width: 40, height: 35), animated: false)
                 $0.addTarget(self, action: #selector(self.didTouchGal), for: .touchUpInside)
         }
-        galButton.image = UIImage(named: "frame1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+        galButton.image = UIImage(named: "frame1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21))
         let bottomItems = [allButton, camButton, galButton]
         messageInputBar.setStackViewItems(bottomItems, forStack: .left, animated: false)
         

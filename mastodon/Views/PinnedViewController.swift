@@ -305,7 +305,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         } else {
             
-        if indexPath.row == self.currentTags.count - 14 {
+        if indexPath.row == self.currentTags.count - 1 {
             self.fetchMoreHome()
         }
         if self.currentTags[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {

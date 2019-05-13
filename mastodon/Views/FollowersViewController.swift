@@ -125,7 +125,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
             self.navigationController?.view.addSubview(segmentedControl)
             
             self.tableView.register(FollowersCell.self, forCellReuseIdentifier: "cellf")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 15)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -244,7 +244,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                 if (UserDefaults.standard.object(forKey: "segsize") == nil) || (UserDefaults.standard.object(forKey: "segsize") as! Int == 0) {
                     self.tableView.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 65)
                 } else {
-                    self.tableView.frame = CGRect(x: 0, y: Int(offset + 10), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 15)
+                    self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
                 }
             case .pad:
                 self.tableView.translatesAutoresizingMaskIntoConstraints = false

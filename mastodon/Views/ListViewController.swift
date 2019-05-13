@@ -380,7 +380,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         } else {
         
-            if indexPath.row == StoreStruct.currentList.count - 14 {
+            if indexPath.row == StoreStruct.currentList.count - 1 {
                 self.fetchMoreHome()
             }
             if StoreStruct.currentList[indexPath.row].reblog?.mediaAttachments.isEmpty ?? StoreStruct.currentList[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
