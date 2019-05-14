@@ -209,7 +209,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
         self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell2")
-        self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
+        self.tableView.frame = CGRect(x: 0, y: Int(offset + 0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 0)
         self.tableView.alpha = 1
         self.tableView.delegate = self
         self.tableView.dataSource = self

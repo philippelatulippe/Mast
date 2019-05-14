@@ -31,7 +31,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         profileImageView.backgroundColor = Colours.white
-        headerImageView.backgroundColor = Colours.white
+        headerImageView.backgroundColor = Colours.tabUnselected
         more.backgroundColor = UIColor.clear
         settings.backgroundColor = UIColor.clear
         settings2.backgroundColor = UIColor.clear
@@ -194,7 +194,7 @@ class ProfileHeaderCell: SwipeTableViewCell {
         toot.mentionColor = Colours.grayDark.withAlphaComponent(0.7)
         toot.hashtagColor = Colours.grayDark.withAlphaComponent(0.7)
         toot.URLColor = Colours.grayDark.withAlphaComponent(0.7)
-        headerImageView.backgroundColor = Colours.white
+        headerImageView.backgroundColor = Colours.tabUnselected
         userName.textColor = Colours.grayDark
         userTag.textColor = Colours.grayDark.withAlphaComponent(0.7)
         date.textColor = Colours.grayDark.withAlphaComponent(0.7)
@@ -454,7 +454,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         profileImageView.backgroundColor = Colours.white
-        headerImageView.backgroundColor = Colours.white
+        headerImageView.backgroundColor = Colours.tabUnselected
         more.backgroundColor = UIColor.clear
         settings.backgroundColor = UIColor.clear
         settings2.backgroundColor = UIColor.clear
@@ -593,7 +593,7 @@ class ProfileHeaderCell2: SwipeTableViewCell {
         toot.mentionColor = Colours.grayDark.withAlphaComponent(0.7)
         toot.hashtagColor = Colours.grayDark.withAlphaComponent(0.7)
         toot.URLColor = Colours.grayDark.withAlphaComponent(0.7)
-        headerImageView.backgroundColor = Colours.white
+        headerImageView.backgroundColor = Colours.tabUnselected
         
         bgDark.backgroundColor = Colours.white
         userName.textColor = Colours.grayDark

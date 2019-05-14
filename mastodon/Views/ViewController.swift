@@ -490,7 +490,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let page = PageBulletinItem(title: "Notifications")
         page.image = UIImage(named: "notib")
         page.shouldCompactDescriptionText = true
-        page.descriptionText = "Mast can send you realtime push notifications for toots you're mentioned in, boosted toots, liked toots, as well as for new followers."
+        page.descriptionText = "Mast can send you push notifications for toots you're mentioned in, boosted and liked toots, as well as for new followers."
         page.actionButtonTitle = "Subscribe"
         page.alternativeButtonTitle = "No thanks"
         page.nextItem = makeSiriPage()
@@ -531,7 +531,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let page = PageBulletinItem(title: "Theme it Your Way")
         page.image = UIImage(named: "themeb")
         page.shouldCompactDescriptionText = true
-        page.descriptionText = "You can change the theme via the app's settings section, or long-hold anywhere in the app to cycle through them (this action can be changed).\n\nYou can also use Siri to do the same (Settings > Siri & Search > All Shortcuts)."
+        page.descriptionText = "You can change the theme (and a variety of settings) via the app's settings section, or long-hold anywhere in the app to cycle through them.\n\nYou can also use Siri to do the same (Settings > Siri & Search > All Shortcuts)."
         page.actionButtonTitle = "Got it!"
         page.nextItem = makeDonePage()
         
@@ -684,10 +684,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         if StoreStruct.newdrafts.count > 0 {
             StoreStruct.newdrafts.remove(at: StoreStruct.newdrafts.count - 1)
         }
+        DispatchQueue.global(qos: .userInitiated).async {
         do {
             try Disk.save(StoreStruct.newdrafts, to: .documents, as: "drafts1.json")
         } catch {
             print("err")
+        }
         }
     }
     
@@ -839,7 +841,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     
     @objc func addBadge() {
-        self.tabBar.items?[1].badgeValue = "1"
+        self.tabBar.items?[1].badgeValue = "\(StoreStruct.badgeCount += 1)"
+        self.tabBar.items?[1].badgeColor = Colours.tabSelected
         NotificationCenter.default.post(name: Notification.Name(rawValue: "refnoti0"), object: nil)
     }
     
@@ -879,7 +882,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                                     if stat.isEmpty {} else {
 //                                        DispatchQueue.main.async {
                                             if (UserDefaults.standard.object(forKey: "badgeMentd") == nil) || (UserDefaults.standard.object(forKey: "badgeMentd") as! Int == 0) {
-                                                self.tabBar.items?[2].badgeValue = "1"
+                                                self.tabBar.items?[2].badgeValue = "\(StoreStruct.badgeCount2 += 1)"
+                                                self.tabBar.items?[2].badgeColor = Colours.tabSelected
                                             }
                                             StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
                                             StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
@@ -1479,7 +1483,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             } else if indexPath.section == 1 {
                 if indexPath.row == 0 {
                     let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as! ListCell
-                    cell.userName.text = "View Other Instance's Timeline"
+                    cell.userName.text = "View Other Instance's Timelines"
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = Colours.tabSelected
                     let bgColorView = UIView()
@@ -2796,7 +2800,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         }
         
         if let userDefaults = UserDefaults(suiteName: "group.com.shi.Mast.wormhole") {
-            userDefaults.set(StoreStruct.currentInstance.accessToken ?? "", forKey: "key1")
+            userDefaults.set(StoreStruct.currentInstance.accessToken, forKey: "key1")
             userDefaults.set(StoreStruct.currentInstance.returnedText, forKey: "key2")
             userDefaults.synchronize()
         }

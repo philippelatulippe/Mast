@@ -461,6 +461,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(StoreStruct.gapLastFedID, forKey: "\(StoreStruct.currentInstance.clientID)fedid")
             
             UserDefaults.standard.set(StoreStruct.currentUser.username, forKey: "userN")
+            DispatchQueue.global(qos: .userInitiated).async {
             do {
                 try Disk.save(StoreStruct.currentUser, to: .documents, as: "\(StoreStruct.currentInstance.clientID)use.json")
                 
@@ -476,6 +477,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try Disk.save(StoreStruct.gapLastFedStat, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fedstat.json")
             } catch {
                 print("Couldn't save")
+            }
             }
         }
         

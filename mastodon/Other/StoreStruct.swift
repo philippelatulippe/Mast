@@ -167,6 +167,8 @@ class StoreStruct {
     
     static var medType = 0
     static var switchedNow = false
+    static var badgeCount = 0
+    static var badgeCount2 = 0
 }
 
 struct Drafts: Codable {

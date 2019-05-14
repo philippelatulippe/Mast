@@ -4910,10 +4910,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     
                                 }
                                 
+                                DispatchQueue.global(qos: .userInitiated).async {
                                 do {
                                     try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
                                 } catch {
                                     print("Couldn't save")
+                                }
                                 }
                             } else {
                                 
@@ -4991,10 +4993,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     UIView.setAnimationsEnabled(true)
                                 }
                                 
+                                DispatchQueue.global(qos: .userInitiated).async {
                                 do {
                                     try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
                                 } catch {
                                     print("Couldn't save")
+                                }
                                 }
                             } else {
                                 
@@ -5069,10 +5073,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     UIView.setAnimationsEnabled(true)
                                 }
                                 
+                                DispatchQueue.global(qos: .userInitiated).async {
                                 do {
                                     try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
                                 } catch {
                                     print("Couldn't save")
+                                }
                                 }
                             } else {
                                 

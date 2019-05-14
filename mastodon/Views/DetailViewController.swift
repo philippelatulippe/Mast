@@ -482,7 +482,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Toot"
+//        self.title = "Toot"
+        let repC = self.mainStatus.first?.repliesCount ?? 0
+        if repC == 1 {
+            self.title = "1 Reply"
+        } else {
+            self.title = "\(repC) Replies"
+        }
+        
         self.removeTabbarItemsText()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.search), name: NSNotification.Name(rawValue: "search"), object: nil)
@@ -519,11 +526,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .phone:
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 0)
         case .pad:
             self.tableView.frame = CGRect(x: 0, y: Int(0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height))
         default:
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 0)
         }
         
         self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell")
@@ -5242,7 +5249,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             
                         }
                         .action(.default("Block/Unblock".localized), image: UIImage(named: "block2")) { (action, ind) in
-                             
                             
                             if isBlocked == false {
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {

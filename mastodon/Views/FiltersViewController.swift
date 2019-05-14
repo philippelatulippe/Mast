@@ -124,7 +124,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         
         self.tableView.register(FiltersCell.self, forCellReuseIdentifier: "FiltersCell")
-        self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 5)
+        self.tableView.frame = CGRect(x: 0, y: Int(offset + 0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 0)
         self.tableView.alpha = 1
         self.tableView.delegate = self
         self.tableView.dataSource = self

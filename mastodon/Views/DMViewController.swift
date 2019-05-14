@@ -210,7 +210,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         tableView.removeFromSuperview()
             self.tableView.register(DMFeedCell.self, forCellReuseIdentifier: "cell444")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset + 5)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 0)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -418,7 +418,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         self.tableView.register(DMFeedCell.self, forCellReuseIdentifier: "cell444")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5 - tabHeight)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 0 - tabHeight)
             self.tableView.alpha = 1
             self.tableView.delegate = self
             self.tableView.dataSource = self
@@ -496,6 +496,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         StoreStruct.historyBool = false
         
+        StoreStruct.badgeCount2 = 0
         self.tabBarController?.tabBar.items?[2].badgeValue = nil
         
         if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {

@@ -659,8 +659,11 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
                 
 //                DispatchQueue.main.async {
-//                    self.mainImageView.setImage(UIImage.gifImageWithURL("\(status.reblog?.mediaAttachments[0].url ?? status.mediaAttachments[0].url)"), for: .normal)
+//                    self.animatedImageView.frame = self.mainImageView.frame
+//                    self.mainImageView.addSubview(self.animatedImageView)
+//                    self.animatedImageView.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[0].url ?? status.mediaAttachments[0].url)"))
 //                }
+                
             }
             imageCountTag.setTitle("GIF", for: .normal)
             imageCountTag.backgroundColor = Colours.tabSelected

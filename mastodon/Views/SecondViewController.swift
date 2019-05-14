@@ -892,6 +892,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
         self.navigationController?.view.addSubview(settingsButton)
         
+        StoreStruct.badgeCount = 0
         self.tabBarController?.tabBar.items?[1].badgeValue = nil
         
         StoreStruct.currentPage = 1
