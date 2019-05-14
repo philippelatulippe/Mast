@@ -16,8 +16,9 @@ import AVKit
 import AVFoundation
 import SJFluidSegmentedControl
 import MessageUI
+import CropViewController
 
-class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, CrownControlDelegate, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate {
+class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, CrownControlDelegate, MFMailComposeViewControllerDelegate, UIGestureRecognizerDelegate, CropViewControllerDelegate {
     
     var ai = NVActivityIndicatorView(frame: CGRect(x:0,y:0,width:0,height:0), type: .ballRotateChase, color: Colours.tabSelected)
     var safariVC: SFSafariViewController?
@@ -45,6 +46,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var zzz: [String:String] = [:]
     private var crownControl: CrownControl!
     var buttonCenter = CGPoint.zero
+    var inArea = 0
+    var cropViewController = CropViewController(image: UIImage())
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
@@ -720,6 +723,72 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                 }
             })
+        }
+    }
+    
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        
+        self.cropViewController.dismiss(animated: true, completion: nil)
+        
+        var compression: CGFloat = 1
+        if (UserDefaults.standard.object(forKey: "imqual") == nil) || (UserDefaults.standard.object(forKey: "imqual") as! Int == 0) {
+            compression = 1
+        } else if UserDefaults.standard.object(forKey: "imqual") as! Int == 1 {
+            compression = 0.78
+        } else {
+            compression = 0.5
+        }
+        
+        if self.inArea == 0 {
+            
+            let imageData = image.jpegData(compressionQuality: compression)
+            let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: .jpeg(imageData), header: nil)
+            StoreStruct.client.run(request) { (statuses) in
+                
+                if let stat = (statuses.value) {
+                    DispatchQueue.main.async {
+                        self.updateProfileHere()
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let notification = UINotificationFeedbackGenerator()
+                            notification.notificationOccurred(.success)
+                        }
+                        let statusAlert = StatusAlert()
+                        statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
+                        statusAlert.title = "Updated Display Picture".localized
+                        statusAlert.contentColor = Colours.grayDark
+                        statusAlert.message = StoreStruct.currentUser.displayName
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
+                            statusAlert.show()
+                        }
+                    }
+                }
+            }
+            
+        } else {
+            
+            let imageData = image.jpegData(compressionQuality: compression)
+            let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: .jpeg(imageData))
+            StoreStruct.client.run(request) { (statuses) in
+                
+                if let stat = (statuses.value) {
+                    DispatchQueue.main.async {
+                        self.updateProfileHere()
+                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                            let notification = UINotificationFeedbackGenerator()
+                            notification.notificationOccurred(.success)
+                        }
+                        let statusAlert = StatusAlert()
+                        statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
+                        statusAlert.title = "Updated Header".localized
+                        statusAlert.contentColor = Colours.grayDark
+                        statusAlert.message = StoreStruct.currentUser.displayName
+                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
+                            statusAlert.show()
+                        }
+                    }
+                }
+            }
+            
         }
     }
     
@@ -1417,9 +1486,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             .messageTextColor(Colours.grayDark)
             .messageTextAlignment(.left)
             .titleTextAlignment(.left)
-        .action(.default("Edit Display Picture"), image: nil) { (action, ind) in
+        .action(.default("Edit Avatar"), image: nil) { (action, ind) in
             
             StoreStruct.medType = 1
+            self.inArea = 0
             
             let pickerController = DKImagePickerController()
             pickerController.didSelectAssets = { (assets: [DKAsset]) in
@@ -1428,30 +1498,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 if assets.count > 0 {
                     assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-                        let imageData = (image ?? UIImage()).jpegData(compressionQuality: compression)
-                        let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: .jpeg(imageData), header: nil)
-                        StoreStruct.client.run(request) { (statuses) in
-                             
-                            if let stat = (statuses.value) {
-                                DispatchQueue.main.async {
-//                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
-                                    self.updateProfileHere()
-                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                        let notification = UINotificationFeedbackGenerator()
-                                        notification.notificationOccurred(.success)
-                                    }
-                                    let statusAlert = StatusAlert()
-                                    statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
-                                    statusAlert.title = "Updated Display Picture".localized
-                                    statusAlert.contentColor = Colours.grayDark
-                                    statusAlert.message = StoreStruct.currentUser.displayName
-                                    if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
-                                        statusAlert.show()
-                                    }
-                                }
-                            }
-                        }
-                        
+                        self.cropViewController = CropViewController(image: image ?? UIImage())
+                        self.cropViewController.delegate = self
+                        self.cropViewController.aspectRatioPreset = .presetSquare
+                        self.cropViewController.aspectRatioLockEnabled = true
+                        self.cropViewController.resetAspectRatioEnabled = false
+                        self.cropViewController.aspectRatioPickerButtonHidden = true
+                        self.cropViewController.title = "Resize Avatar"
+                        self.present(self.cropViewController, animated: true, completion: nil)
                     })
                 }
             }
@@ -1465,6 +1519,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             .action(.default("Edit Header"), image: nil) { (action, ind) in
                 
                 StoreStruct.medType = 2
+                self.inArea = 1
                 
                 let pickerController = DKImagePickerController()
                 pickerController.didSelectAssets = { (assets: [DKAsset]) in
@@ -1473,30 +1528,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     if assets.count > 0 {
                         assets[0].fetchOriginalImage(true, completeBlock: { image, info in
-                            let imageData = (image ?? UIImage()).jpegData(compressionQuality: compression)
-                            let request = Accounts.updateCurrentUser(displayName: nil, note: nil, avatar: nil, header: .jpeg(imageData))
-                            StoreStruct.client.run(request) { (statuses) in
-                                
-                                if let stat = (statuses.value) {
-                                    DispatchQueue.main.async {
-//                                        NotificationCenter.default.post(name: Notification.Name(rawValue: "updateProfileHere"), object: nil)
-                                        self.updateProfileHere()
-                                        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-                                            let notification = UINotificationFeedbackGenerator()
-                                            notification.notificationOccurred(.success)
-                                        }
-                                        let statusAlert = StatusAlert()
-                                        statusAlert.image = UIImage(named: "profilelarge")?.maskWithColor(color: Colours.grayDark)
-                                        statusAlert.title = "Updated Header".localized
-                                        statusAlert.contentColor = Colours.grayDark
-                                        statusAlert.message = StoreStruct.currentUser.displayName
-                                        if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
-                                            statusAlert.show()
-                                        }
-                                    }
-                                }
-                            }
-                            
+                            self.cropViewController = CropViewController(image: image ?? UIImage())
+                            self.cropViewController.delegate = self
+                            self.cropViewController.aspectRatioPreset = .preset3x1
+                            self.cropViewController.aspectRatioLockEnabled = true
+                            self.cropViewController.resetAspectRatioEnabled = false
+                            self.cropViewController.aspectRatioPickerButtonHidden = true
+                            self.cropViewController.title = "Resize Header"
+                            self.present(self.cropViewController, animated: true, completion: nil)
                         })
                     }
                 }
