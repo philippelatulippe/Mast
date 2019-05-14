@@ -306,10 +306,23 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        if self.currentIndex == 0 {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        } else if self.currentIndex == 1 {
+            if let indexPath = tableViewL.indexPathForSelectedRow {
+                self.tableViewL.deselectRow(at: indexPath, animated: true)
+            }
+        } else {
+            if let indexPath = tableViewF.indexPathForSelectedRow {
+                self.tableViewF.deselectRow(at: indexPath, animated: true)
+            }
+        }
+        
         if StoreStruct.statusesHome.isEmpty {
             self.ai.startAnimating()
         }
-        
     }
     
     
@@ -4782,7 +4795,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         case .phone :
             let controller = DetailViewController()
             if self.currentIndex == 0 {
-                self.tableView.deselectRow(at: indexPath, animated: true)
+//                self.tableView.deselectRow(at: indexPath, animated: true)
                 if StoreStruct.statusesHome[indexPath.row].id == "loadmorehere" {
                     self.fetchGap()
                 } else {
@@ -4790,7 +4803,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
             } else if self.currentIndex == 1 {
-                self.tableViewL.deselectRow(at: indexPath, animated: true)
+//                self.tableViewL.deselectRow(at: indexPath, animated: true)
                 if StoreStruct.statusesLocal[indexPath.row].id == "loadmorehere" {
                     self.fetchGap()
                 } else {
@@ -4798,7 +4811,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
             } else {
-                self.tableViewF.deselectRow(at: indexPath, animated: true)
+//                self.tableViewF.deselectRow(at: indexPath, animated: true)
                 if StoreStruct.statusesFederated[indexPath.row].id == "loadmorehere" {
                     self.fetchGap()
                 } else {

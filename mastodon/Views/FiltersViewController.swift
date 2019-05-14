@@ -58,7 +58,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //self.ai.startAnimating()
+        if let indexPath = tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
     @objc func refreshfilter() {
@@ -266,7 +268,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.tableView.deselectRow(at: indexPath, animated: true)
+//        self.tableView.deselectRow(at: indexPath, animated: true)
         
         Alertift.actionSheet(title: nil, message: nil)
             .backgroundColor(Colours.white)

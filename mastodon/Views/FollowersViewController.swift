@@ -40,6 +40,10 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        if let indexPath = tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
         self.ai.startAnimating()
     }
     
@@ -895,7 +899,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.tableView.deselectRow(at: indexPath, animated: true)
+//        self.tableView.deselectRow(at: indexPath, animated: true)
         
         let controller = ThirdViewController()
         controller.fromOtherUser = true

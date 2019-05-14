@@ -38,7 +38,15 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //self.ai.startAnimating()
+        if self.currentIndex == 0 {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        } else {
+            if let indexPath = tableView2.indexPathForSelectedRow {
+                self.tableView2.deselectRow(at: indexPath, animated: true)
+            }
+        }
     }
     
     
@@ -906,11 +914,11 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if self.currentIndex == 0 {
-            self.tableView.deselectRow(at: indexPath, animated: true)
-        } else {
-            self.tableView2.deselectRow(at: indexPath, animated: true)
-        }
+//        if self.currentIndex == 0 {
+//            self.tableView.deselectRow(at: indexPath, animated: true)
+//        } else {
+//            self.tableView2.deselectRow(at: indexPath, animated: true)
+//        }
         
         let controller = ThirdViewController()
         controller.fromOtherUser = true

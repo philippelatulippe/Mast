@@ -411,10 +411,19 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        if self.currentIndex == 0 {
+            if let indexPath = tableView2.indexPathForSelectedRow {
+                self.tableView2.deselectRow(at: indexPath, animated: true)
+            }
+        } else {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+        
         if StoreStruct.notificationsMentions.isEmpty {
             self.ai.startAnimating()
         }
-        
         
         if (UserDefaults.standard.object(forKey: "biometricsnot") == nil) || (UserDefaults.standard.object(forKey: "biometricsnot") as! Int == 0) {} else {
             self.biometricAuthenticationClicked(self)
@@ -4620,8 +4629,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.tableView.deselectRow(at: indexPath, animated: true)
-        self.tableView2.deselectRow(at: indexPath, animated: true)
+//        self.tableView.deselectRow(at: indexPath, animated: true)
+//        self.tableView2.deselectRow(at: indexPath, animated: true)
         
         if self.currentIndex == 0 {
             UserDefaults.standard.set(self.tableView2.contentOffset.y, forKey: "savedRowNotif")

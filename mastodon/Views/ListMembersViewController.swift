@@ -59,7 +59,9 @@ class ListMembersViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //self.ai.startAnimating()
+        if let indexPath = tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
     
@@ -327,7 +329,7 @@ class ListMembersViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.tableView.deselectRow(at: indexPath, animated: true)
+//        self.tableView.deselectRow(at: indexPath, animated: true)
         
         let controller = ThirdViewController()
         controller.fromOtherUser = true

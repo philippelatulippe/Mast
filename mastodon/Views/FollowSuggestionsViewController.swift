@@ -37,7 +37,9 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //self.ai.startAnimating()
+        if let indexPath = tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
     
@@ -630,7 +632,7 @@ class FollowSuggestionsViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.tableView.deselectRow(at: indexPath, animated: true)
+//        self.tableView.deselectRow(at: indexPath, animated: true)
         
         let controller = ThirdViewController()
         controller.fromOtherUser = true

@@ -19,8 +19,9 @@ import Sharaku
 import TesseractOCR
 import Speech
 import Disk
+import CropViewController
 
-class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate, SFSpeechRecognizerDelegate, SwipeTableViewCellDelegate {
+class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate, SFSpeechRecognizerDelegate, SwipeTableViewCellDelegate, CropViewControllerDelegate {
     
     let gifCont = SwiftyGiphyViewController()
     var isGifVid = false
@@ -79,6 +80,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var emotiLab = UIButton()
     var currentEmot = ""
     var collectionView: UICollectionView!
+    var inArea = 0
+    var cropViewController = CropViewController(image: UIImage())
     
     func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem) {
         print(item.fixedHeightStillImage)
@@ -308,6 +311,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 browser.initializePageIndex(0)
                 self.present(browser, animated: true, completion: {})
             }
+            .action(.default("Resize Image".localized), image: nil) { (action, ind) in
+                self.inArea = 0
+                let imageView = self.selectedImage1
+                let frame: CGRect = self.view.convert(imageView.frame, to: self.view)
+                self.cropViewController = CropViewController(image: imageView.image!)
+                self.cropViewController.delegate = self
+                self.cropViewController.title = "Resize Image"
+                self.cropViewController.presentAnimatedFrom(self, fromView: imageView, fromFrame: frame, setup: nil, completion: nil)
+            }
             .action(.default("Filter Image".localized), image: nil) { (action, ind) in
                 self.filterFromWhichImage = 0
                 let imageToBeFiltered = self.selectedImage1.image!
@@ -373,6 +385,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.present(browser, animated: true, completion: {})
                 
             }
+            .action(.default("Resize Image".localized), image: nil) { (action, ind) in
+                self.inArea = 1
+                let imageView = self.selectedImage2
+                let frame: CGRect = self.view.convert(imageView.frame, to: self.view)
+                self.cropViewController = CropViewController(image: imageView.image!)
+                self.cropViewController.delegate = self
+                self.cropViewController.title = "Resize Image"
+                self.cropViewController.presentAnimatedFrom(self, fromView: imageView, fromFrame: frame, setup: nil, completion: nil)
+            }
             .action(.default("Filter Image".localized), image: nil) { (action, ind) in
                 self.filterFromWhichImage = 1
                 let imageToBeFiltered = self.selectedImage2.image!
@@ -433,6 +454,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         browser.initializePageIndex(0)
         self.present(browser, animated: true, completion: {})
             }
+            .action(.default("Resize Image".localized), image: nil) { (action, ind) in
+                self.inArea = 2
+                let imageView = self.selectedImage3
+                let frame: CGRect = self.view.convert(imageView.frame, to: self.view)
+                self.cropViewController = CropViewController(image: imageView.image!)
+                self.cropViewController.delegate = self
+                self.cropViewController.title = "Resize Image"
+                self.cropViewController.presentAnimatedFrom(self, fromView: imageView, fromFrame: frame, setup: nil, completion: nil)
+            }
             .action(.default("Filter Image".localized), image: nil) { (action, ind) in
                 self.filterFromWhichImage = 2
                 let imageToBeFiltered = self.selectedImage3.image!
@@ -490,6 +520,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: sender.view)
         browser.initializePageIndex(0)
         self.present(browser, animated: true, completion: {})
+            }
+            .action(.default("Resize Image".localized), image: nil) { (action, ind) in
+                self.inArea = 3
+                let imageView = self.selectedImage4
+                let frame: CGRect = self.view.convert(imageView.frame, to: self.view)
+                self.cropViewController = CropViewController(image: imageView.image!)
+                self.cropViewController.delegate = self
+                self.cropViewController.title = "Resize Image"
+                self.cropViewController.presentAnimatedFrom(self, fromView: imageView, fromFrame: frame, setup: nil, completion: nil)
             }
             .action(.default("Filter Image".localized), image: nil) { (action, ind) in
                 self.filterFromWhichImage = 3
@@ -1127,6 +1166,36 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.selectedImage2.image = nil
         self.selectedImage3.image = nil
         self.selectedImage4.image = nil
+    }
+    
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let impact = UIImpactFeedbackGenerator(style: .light)
+            impact.impactOccurred()
+        }
+        
+        if self.inArea == 0 {
+            let imageView = self.selectedImage1
+            let frame: CGRect = self.view.convert(imageView.frame, to: self.view)
+            self.selectedImage1.image = image
+            self.cropViewController.dismissAnimatedFrom(self, toView: imageView, toFrame: frame, setup: nil, completion: nil)
+        } else if self.inArea == 1 {
+            let imageView = self.selectedImage2
+            let frame: CGRect = self.view.convert(imageView.frame, to: self.view)
+            self.selectedImage2.image = image
+            self.cropViewController.dismissAnimatedFrom(self, toView: imageView, toFrame: frame, setup: nil, completion: nil)
+        } else if self.inArea == 2 {
+            let imageView = self.selectedImage3
+            let frame: CGRect = self.view.convert(imageView.frame, to: self.view)
+            self.selectedImage3.image = image
+            self.cropViewController.dismissAnimatedFrom(self, toView: imageView, toFrame: frame, setup: nil, completion: nil)
+        } else {
+            let imageView = self.selectedImage4
+            let frame: CGRect = self.view.convert(imageView.frame, to: self.view)
+            self.selectedImage4.image = image
+            self.cropViewController.dismissAnimatedFrom(self, toView: imageView, toFrame: frame, setup: nil, completion: nil)
+        }
     }
     
     override func viewDidLoad() {
@@ -1800,7 +1869,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc func didTouchUpInsideCamPickButton(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
             let impact = UIImpactFeedbackGenerator(style: .light)
-        impact.impactOccurred()
+            impact.impactOccurred()
         }
         
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
