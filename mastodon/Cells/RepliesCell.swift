@@ -266,6 +266,7 @@ class RepliesCell: SwipeTableViewCell {
             profileImageView.layer.cornerRadius = 0
         }
         
+        self.moreImage.contentMode = .scaleAspectFit
         if (status.reblog?.favourited ?? status.favourited ?? false) && (status.reblog?.reblogged ?? status.reblogged ?? false) {
             self.moreImage.image = UIImage(named: "fifty")
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {

@@ -841,7 +841,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     
     @objc func addBadge() {
-        self.tabBar.items?[1].badgeValue = "\(StoreStruct.badgeCount += 1)"
+        StoreStruct.badgeCount = StoreStruct.badgeCount + 1
+        self.tabBar.items?[1].badgeValue = "\(StoreStruct.badgeCount)" ?? "1"
         self.tabBar.items?[1].badgeColor = Colours.tabSelected
         NotificationCenter.default.post(name: Notification.Name(rawValue: "refnoti0"), object: nil)
     }
@@ -882,7 +883,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                                     if stat.isEmpty {} else {
 //                                        DispatchQueue.main.async {
                                             if (UserDefaults.standard.object(forKey: "badgeMentd") == nil) || (UserDefaults.standard.object(forKey: "badgeMentd") as! Int == 0) {
-                                                self.tabBar.items?[2].badgeValue = "\(StoreStruct.badgeCount2 += 1)"
+                                                StoreStruct.badgeCount2 = StoreStruct.badgeCount2 + 1
+                                                self.tabBar.items?[2].badgeValue = "\(StoreStruct.badgeCount2)" ?? "1"
                                                 self.tabBar.items?[2].badgeColor = Colours.tabSelected
                                             }
                                             StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect

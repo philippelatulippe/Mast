@@ -487,7 +487,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         
 //        self.title = "Toot"
-        let repC = self.mainStatus.first?.repliesCount ?? 0
+        let repC = self.mainStatus.first?.reblog?.repliesCount ?? self.mainStatus.first?.repliesCount ?? 0
         if repC == 1 {
             self.title = "1 Reply"
         } else {

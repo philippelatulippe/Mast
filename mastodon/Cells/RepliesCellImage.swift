@@ -304,6 +304,7 @@ class RepliesCellImage: SwipeTableViewCell {
         }
         //mainImageView.layer.borderWidth = 0.2
         
+        self.moreImage.contentMode = .scaleAspectFit
         if (status.reblog?.favourited ?? status.favourited ?? false) && (status.reblog?.reblogged ?? status.reblogged ?? false) {
             self.moreImage.image = UIImage(named: "fifty")
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {
