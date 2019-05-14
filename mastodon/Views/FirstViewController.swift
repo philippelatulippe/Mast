@@ -1407,10 +1407,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         StoreStruct.client.run(request3) { (statuses) in
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect + stat
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
-                    }
+//                    }
                 }
             }
         }
@@ -2048,8 +2048,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 let request = Timelines.public(local: true, range: .default)
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
+                        StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
                         DispatchQueue.main.async {
-                            StoreStruct.statusesLocal = stat + StoreStruct.statusesLocal
                             StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                             self.tableViewL.reloadData()
                             
@@ -2095,8 +2095,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 let request = Timelines.public(local: false, range: .default)
                 StoreStruct.client.run(request) { (statuses) in
                     if let stat = (statuses.value) {
+                        StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
                         DispatchQueue.main.async {
-                            StoreStruct.statusesFederated = stat + StoreStruct.statusesFederated
                             StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                             self.tableViewF.reloadData()
                             
