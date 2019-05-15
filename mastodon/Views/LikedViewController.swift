@@ -121,9 +121,9 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        if let indexPath = tableView.indexPathForSelectedRow {
-            self.tableView.deselectRow(at: indexPath, animated: true)
-        }
+//        if let indexPath = tableView.indexPathForSelectedRow {
+//            self.tableView.deselectRow(at: indexPath, animated: true)
+//        }
         
         self.ai.startAnimating()
     }
@@ -268,6 +268,23 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+            let request = Statuses.status(id: self.currentTags[indexPath.row].reblog?.id ?? self.currentTags[indexPath.row].id)
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    DispatchQueue.main.async {
+                        if let cell = self.tableView.cellForRow(at: indexPath) as? MainFeedCell {
+                            cell.configure(stat)
+                        }
+                        if let cell2 = self.tableView.cellForRow(at: indexPath) as? MainFeedCellImage {
+                            cell2.configure(stat)
+                        }
+                    }
+                }
+            }
+        }
         
         let request = Favourites.all()
         StoreStruct.client.run(request) { (statuses) in

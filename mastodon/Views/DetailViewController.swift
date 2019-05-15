@@ -292,10 +292,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 moreButton.layer.cornerRadius = 20
                 moreButton.layer.masksToBounds = true
                 
-                replyButton.setImage(UIImage(named: "reply0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
-                moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
-                likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
-                boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+                replyButton.setImage(UIImage(named: "reply0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+                moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+                likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
+                boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
                 
                 replyButton.addTarget(self, action: #selector(self.didTouchReply), for: .touchUpInside)
                 likeButton.addTarget(self, action: #selector(self.didTouchLike), for: .touchUpInside)
@@ -564,7 +564,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
         
-        self.detailPrev.frame = CGRect(x: Int(self.view.bounds.width) - 55, y: Int(offset + 15), width: 36, height: 36)
+        self.detailPrev.frame = CGRect(x: Int(self.view.bounds.width) - 50, y: Int(offset + 15), width: 30, height: 30)
         self.detailPrev.setImage(UIImage(named: "detailprev-1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         self.detailPrev.backgroundColor = UIColor.clear
         self.detailPrev.alpha = 0
@@ -617,6 +617,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc func didTouchDetailPrev() {
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let impact = UIImpactFeedbackGenerator(style: .light)
+            impact.impactOccurred()
+        }
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         UIView.animate(withDuration: 0.18, delay: 0, options: .curveEaseOut, animations: {
             self.detailPrev.alpha = 0
@@ -2819,18 +2823,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     DispatchQueue.main.async {
                         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DetailCell {
                             cell.configure(stat)
-                            UIView.setAnimationsEnabled(false)
-                            self.tableView.beginUpdates()
-                            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
-                            self.tableView.endUpdates()
-                            UIView.setAnimationsEnabled(true)
+//                            UIView.setAnimationsEnabled(false)
+//                            self.tableView.beginUpdates()
+//                            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
+//                            self.tableView.endUpdates()
+//                            UIView.setAnimationsEnabled(true)
                         } else if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DetailCellImage {
                             cell.configure(stat)
-                            UIView.setAnimationsEnabled(false)
-                            self.tableView.beginUpdates()
-                            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
-                            self.tableView.endUpdates()
-                            UIView.setAnimationsEnabled(true)
+//                            UIView.setAnimationsEnabled(false)
+//                            self.tableView.beginUpdates()
+//                            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
+//                            self.tableView.endUpdates()
+//                            UIView.setAnimationsEnabled(true)
                         }
                     }
                 }
@@ -2868,11 +2872,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             if self.mainStatus[0].visibility == .direct {
                 if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell2 {
-                    ce.likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+                    ce.likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
                 }
             } else {
                 if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell {
-                    ce.likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+                    ce.likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
                 }
             }
             
@@ -2944,7 +2948,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         if self.mainStatus[0].reblog?.reblogged ?? self.mainStatus[0].reblogged ?? false || StoreStruct.allBoosts.contains(self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id) {
             if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell {
-            ce.boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.15)), for: .normal)
+            ce.boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
             }
             
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {

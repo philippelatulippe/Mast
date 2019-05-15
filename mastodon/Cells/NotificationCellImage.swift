@@ -528,13 +528,20 @@ class NotificationCellImage: SwipeTableViewCell {
         
         if (status.status?.favourited ?? false) && (status.status?.reblogged ?? false) {
             self.moreImage.image = UIImage(named: "fifty")
+            StoreStruct.allLikes.append(status.status?.id ?? "")
+            StoreStruct.allBoosts.append(status.status?.id ?? "")
         } else if status.status?.reblogged ?? false {
             self.moreImage.image = UIImage(named: "boost")
+            StoreStruct.allBoosts.append(status.status?.id ?? "")
         } else if (status.status?.favourited ?? false) || StoreStruct.allLikes.contains(status.id) {
             self.moreImage.image = UIImage(named: "like")
+            StoreStruct.allLikes.append(status.status?.id ?? "")
         } else {
             self.moreImage.image = nil
         }
+        
+        StoreStruct.allLikes = StoreStruct.allLikes.removeDuplicates()
+        StoreStruct.allBoosts = StoreStruct.allBoosts.removeDuplicates()
         
         
         self.smallImage1.alpha = 0

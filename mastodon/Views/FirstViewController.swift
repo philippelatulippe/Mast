@@ -306,19 +306,19 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        if self.currentIndex == 0 {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                self.tableView.deselectRow(at: indexPath, animated: true)
-            }
-        } else if self.currentIndex == 1 {
-            if let indexPath = tableViewL.indexPathForSelectedRow {
-                self.tableViewL.deselectRow(at: indexPath, animated: true)
-            }
-        } else {
-            if let indexPath = tableViewF.indexPathForSelectedRow {
-                self.tableViewF.deselectRow(at: indexPath, animated: true)
-            }
-        }
+//        if self.currentIndex == 0 {
+//            if let indexPath = tableView.indexPathForSelectedRow {
+//                self.tableView.deselectRow(at: indexPath, animated: true)
+//            }
+//        } else if self.currentIndex == 1 {
+//            if let indexPath = tableViewL.indexPathForSelectedRow {
+//                self.tableViewL.deselectRow(at: indexPath, animated: true)
+//            }
+//        } else {
+//            if let indexPath = tableViewF.indexPathForSelectedRow {
+//                self.tableViewF.deselectRow(at: indexPath, animated: true)
+//            }
+//        }
         
         if StoreStruct.statusesHome.isEmpty {
             self.ai.startAnimating()
@@ -1191,6 +1191,59 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        if self.currentIndex == 0 {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                self.tableView.deselectRow(at: indexPath, animated: true)
+                let request = Statuses.status(id: StoreStruct.statusesHome[indexPath.row].reblog?.id ?? StoreStruct.statusesHome[indexPath.row].id)
+                StoreStruct.client.run(request) { (statuses) in
+                    if let stat = (statuses.value) {
+                        DispatchQueue.main.async {
+                            if let cell = self.tableView.cellForRow(at: indexPath) as? MainFeedCell {
+                                cell.configure(stat)
+                            }
+                            if let cell2 = self.tableView.cellForRow(at: indexPath) as? MainFeedCellImage {
+                                cell2.configure(stat)
+                            }
+                        }
+                    }
+                }
+            }
+        } else if self.currentIndex == 1 {
+            if let indexPath = tableViewL.indexPathForSelectedRow {
+                self.tableViewL.deselectRow(at: indexPath, animated: true)
+                let request = Statuses.status(id: StoreStruct.statusesLocal[indexPath.row].reblog?.id ?? StoreStruct.statusesLocal[indexPath.row].id)
+                StoreStruct.client.run(request) { (statuses) in
+                    if let stat = (statuses.value) {
+                        DispatchQueue.main.async {
+                            if let cell = self.tableViewL.cellForRow(at: indexPath) as? MainFeedCell {
+                                cell.configure(stat)
+                            }
+                            if let cell2 = self.tableViewL.cellForRow(at: indexPath) as? MainFeedCellImage {
+                                cell2.configure(stat)
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            if let indexPath = tableViewF.indexPathForSelectedRow {
+                self.tableViewF.deselectRow(at: indexPath, animated: true)
+                let request = Statuses.status(id: StoreStruct.statusesFederated[indexPath.row].reblog?.id ?? StoreStruct.statusesFederated[indexPath.row].id)
+                StoreStruct.client.run(request) { (statuses) in
+                    if let stat = (statuses.value) {
+                        DispatchQueue.main.async {
+                            if let cell = self.tableViewF.cellForRow(at: indexPath) as? MainFeedCell {
+                                cell.configure(stat)
+                            }
+                            if let cell2 = self.tableViewF.cellForRow(at: indexPath) as? MainFeedCellImage {
+                                cell2.configure(stat)
+                            }
+                        }
+                    }
+                }
+            }
+        }
         
         self.restoreScroll()
         

@@ -477,10 +477,14 @@ class MainFeedCell: SwipeTableViewCell {
         self.moreImage.contentMode = .scaleAspectFit
         if (status.reblog?.favourited ?? status.favourited ?? false) && (status.reblog?.reblogged ?? status.reblogged ?? false) {
             self.moreImage.image = UIImage(named: "fifty")
+            StoreStruct.allLikes.append(status.id)
+            StoreStruct.allBoosts.append(status.id)
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {
             self.moreImage.image = UIImage(named: "boost")
+            StoreStruct.allBoosts.append(status.id)
         } else if (status.reblog?.favourited ?? status.favourited ?? false) || StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) {
             self.moreImage.image = UIImage(named: "like")
+            StoreStruct.allLikes.append(status.id)
         } else {
             if status.reblog?.poll ?? status.poll != nil {
                 self.moreImage.image = UIImage(named: "pollbubble")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
@@ -498,6 +502,9 @@ class MainFeedCell: SwipeTableViewCell {
                 
             }
         }
+        
+        StoreStruct.allLikes = StoreStruct.allLikes.removeDuplicates()
+        StoreStruct.allBoosts = StoreStruct.allBoosts.removeDuplicates()
         
         
         if (UserDefaults.standard.object(forKey: "senseTog") == nil) || (UserDefaults.standard.object(forKey: "senseTog") as! Int == 0) {

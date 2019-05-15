@@ -411,15 +411,15 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        if self.currentIndex == 0 {
-            if let indexPath = tableView2.indexPathForSelectedRow {
-                self.tableView2.deselectRow(at: indexPath, animated: true)
-            }
-        } else {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                self.tableView.deselectRow(at: indexPath, animated: true)
-            }
-        }
+//        if self.currentIndex == 0 {
+//            if let indexPath = tableView2.indexPathForSelectedRow {
+//                self.tableView2.deselectRow(at: indexPath, animated: true)
+//            }
+//        } else {
+//            if let indexPath = tableView.indexPathForSelectedRow {
+//                self.tableView.deselectRow(at: indexPath, animated: true)
+//            }
+//        }
         
         if StoreStruct.notificationsMentions.isEmpty {
             self.ai.startAnimating()
@@ -879,6 +879,42 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        if self.currentIndex == 0 {
+            if let indexPath = tableView2.indexPathForSelectedRow {
+                self.tableView2.deselectRow(at: indexPath, animated: true)
+                let request = Notifications.notification(id: StoreStruct.notifications[indexPath.row].id)
+                StoreStruct.client.run(request) { (statuses) in
+                    if let stat = (statuses.value) {
+                        DispatchQueue.main.async {
+                            if let cell = self.tableView2.cellForRow(at: indexPath) as? NotificationCell {
+                                cell.configure(stat)
+                            }
+                            if let cell2 = self.tableView2.cellForRow(at: indexPath) as? NotificationCellImage {
+                                cell2.configure(stat)
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                self.tableView.deselectRow(at: indexPath, animated: true)
+                let request = Notifications.notification(id: StoreStruct.notificationsMentions[indexPath.row].id)
+                StoreStruct.client.run(request) { (statuses) in
+                    if let stat = (statuses.value) {
+                        DispatchQueue.main.async {
+                            if let cell = self.tableView.cellForRow(at: indexPath) as? NotificationCell {
+                                cell.configure(stat)
+                            }
+                            if let cell2 = self.tableView.cellForRow(at: indexPath) as? NotificationCellImage {
+                                cell2.configure(stat)
+                            }
+                        }
+                    }
+                }
+            }
+        }
         
         if (UserDefaults.standard.object(forKey: "insicon1") == nil) || (UserDefaults.standard.object(forKey: "insicon1") as! Int == 0) {
             settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 32, height: 32)
