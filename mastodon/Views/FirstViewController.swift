@@ -405,7 +405,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             self.newUpdatesB1.alpha = 0
                             self.newUpdatesB2.alpha = 0
                             self.newUpdatesB3.alpha = 0
-                            self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                            self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
                             //                            self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
                         })
                         self.countcount2 = 0
@@ -420,7 +420,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.newUpdatesB1.alpha = 0
                                 self.newUpdatesB2.alpha = 0
                                 self.newUpdatesB3.alpha = 0
-                                self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                                self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
                                 //                                self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
                             })
                             self.countcount2 = 0
@@ -437,7 +437,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         self.newUpdatesB1.alpha = 0
                         self.newUpdatesB2.alpha = 0
                         self.newUpdatesB3.alpha = 0
-                        self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                        self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
                         //                        self.newUpdatesB2.transform = CGAffineTransform(translationX: 120, y: 0)
                     })
                     self.countcount2 = 0
@@ -460,7 +460,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             self.newUpdatesB1.alpha = 0
                             self.newUpdatesB2.alpha = 0
                             self.newUpdatesB3.alpha = 0
-                            self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                            self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
                             //                        self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
                         })
                         self.countcount3 = 0
@@ -475,7 +475,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                 self.newUpdatesB1.alpha = 0
                                 self.newUpdatesB2.alpha = 0
                                 self.newUpdatesB3.alpha = 0
-                                self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                                self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
                                 //                            self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
                             })
                             self.countcount3 = 0
@@ -492,7 +492,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         self.newUpdatesB1.alpha = 0
                         self.newUpdatesB2.alpha = 0
                         self.newUpdatesB3.alpha = 0
-                        self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                        self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
                         //                    self.newUpdatesB3.transform = CGAffineTransform(translationX: 120, y: 0)
                     })
                     self.countcount3 = 0
@@ -1399,7 +1399,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
         self.navigationController?.view.addSubview(settingsButton)
         
-        self.newUpdatesB1.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
+        self.newUpdatesB1.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize + 15), width: CGFloat(56), height: CGFloat(30))
         self.newUpdatesB1.backgroundColor = Colours.grayLight19
         self.newUpdatesB1.layer.cornerRadius = 10
         self.newUpdatesB1.setTitleColor(UIColor.white, for: .normal)
@@ -1407,7 +1407,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         self.newUpdatesB1.alpha = 0
         self.view.addSubview(self.newUpdatesB1)
         
-        self.newUpdatesB2.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
+        self.newUpdatesB2.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize + 15), width: CGFloat(56), height: CGFloat(30))
         self.newUpdatesB2.backgroundColor = Colours.grayLight19
         self.newUpdatesB2.layer.cornerRadius = 10
         self.newUpdatesB2.setTitleColor(UIColor.white, for: .normal)
@@ -1415,7 +1415,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         self.newUpdatesB2.alpha = 0
         self.view.addSubview(self.newUpdatesB2)
         
-        self.newUpdatesB3.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
+        self.newUpdatesB3.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize + 15), width: CGFloat(56), height: CGFloat(30))
         self.newUpdatesB3.backgroundColor = Colours.grayLight19
         self.newUpdatesB3.layer.cornerRadius = 10
         self.newUpdatesB3.setTitleColor(UIColor.white, for: .normal)
@@ -3219,7 +3219,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             
             if sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .gifv {
                 
-                let videoURL = URL(string: sto[sender.tag].reblog?.mediaAttachments[0].url ?? sto[sender.tag].mediaAttachments[0].url)!
+                if let videoURL = URL(string: sto[sender.tag].reblog?.mediaAttachments[0].url ?? sto[sender.tag].mediaAttachments[0].url) {
                 if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {
                     XPlayer.play(videoURL)
                 } else {
@@ -3229,6 +3229,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     self.present(playerViewController, animated: true) {
                         playerViewController.player!.play()
                     }
+                }
                 }
                 
             } else {
@@ -5365,12 +5366,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                            self.newUpdatesB2.setTitle("\(newestC)  ", for: .normal)
-                            self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                            self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
+                            self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
                             if newestC != 0 {
                                 springWithDelay(duration: 0.5, delay: 0, animations: {
-                                    self.newUpdatesB2.alpha = 1
-                                    self.newUpdatesB2.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                    self.newUpdatesB1.alpha = 1
+                                    self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
                                 })
                             }
                             self.countcount2 = stat.count
@@ -5445,12 +5446,12 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         }
                         
                         if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
-                            self.newUpdatesB3.setTitle("\(newestC)  ", for: .normal)
-                            self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width + 78)
+                            self.newUpdatesB1.setTitle("\(newestC)  ", for: .normal)
+                            self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width + 78)
                             if newestC != 0 {
                                 springWithDelay(duration: 0.5, delay: 0, animations: {
-                                    self.newUpdatesB3.alpha = 1
-                                    self.newUpdatesB3.frame.origin.x = CGFloat(self.view.bounds.width - 42)
+                                    self.newUpdatesB1.alpha = 1
+                                    self.newUpdatesB1.frame.origin.x = CGFloat(self.view.bounds.width - 42)
                                 })
                             }
                             self.countcount3 = stat.count

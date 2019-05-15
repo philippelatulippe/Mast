@@ -1018,6 +1018,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             }
         }
         
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cc")
         self.tableView.register(FollowersCell.self, forCellReuseIdentifier: "cellfs")
         self.tableView.register(MainFeedCell.self, forCellReuseIdentifier: "cell00")
         self.tableView.register(MainFeedCellImage.self, forCellReuseIdentifier: "cell002")
@@ -1380,7 +1381,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             
             if self.typeOfSearch == 2 {
                 if StoreStruct.statusSearchUser.count > 0 {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellfs", for: indexPath) as! FollowersCell
+                    if let cell = tableView.dequeueReusableCell(withIdentifier: "cellfs", for: indexPath) as? FollowersCell {
                     cell.configure(StoreStruct.statusSearchUser[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
                     cell.profileImageView.isUserInteractionEnabled = false
@@ -1392,8 +1393,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     bgColorView.backgroundColor = Colours.grayDark3
                     cell.selectedBackgroundView = bgColorView
                     return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                        return cell
+                    }
                 } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as! MainFeedCell
+                    if let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as? MainFeedCell {
                     cell.profileImageView.tag = indexPath.row
                     cell.profileImageView.isUserInteractionEnabled = false
                     cell.backgroundColor = Colours.grayDark3
@@ -1405,12 +1410,16 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     bgColorView.backgroundColor = Colours.grayDark3
                     cell.selectedBackgroundView = bgColorView
                     return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                        return cell
+                    }
                 }
             } else {
                 
                 if StoreStruct.statusSearch.count > 0 {
                     if StoreStruct.statusSearch[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as! MainFeedCell
+                        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as? MainFeedCell {
                     cell.configure(StoreStruct.statusSearch[indexPath.row])
                     cell.warningB.backgroundColor = Colours.grayDark3
                     cell.moreImage.backgroundColor = Colours.grayDark3
@@ -1430,9 +1439,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     bgColorView.backgroundColor = Colours.grayDark3
                     cell.selectedBackgroundView = bgColorView
                     return cell
+                        } else {
+                            let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                            return cell
+                        }
             } else {
-                        //bhere7
-                        let cell = tableView.dequeueReusableCell(withIdentifier: "cell002", for: indexPath) as! MainFeedCellImage
+                        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell002", for: indexPath) as? MainFeedCellImage {
                         cell.configure(StoreStruct.statusSearch[indexPath.row])
                         cell.warningB.backgroundColor = Colours.grayDark3
                         cell.moreImage.backgroundColor = Colours.grayDark3
@@ -1454,9 +1466,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         bgColorView.backgroundColor = Colours.grayDark3
                         cell.selectedBackgroundView = bgColorView
                         return cell
+                        } else {
+                            let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                            return cell
+                        }
                     }
                 } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as! MainFeedCell
+                    if let cell = tableView.dequeueReusableCell(withIdentifier: "cell00", for: indexPath) as? MainFeedCell {
                     cell.profileImageView.tag = indexPath.row
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = UIColor.white
@@ -1467,12 +1483,16 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     bgColorView.backgroundColor = Colours.grayDark3
                     cell.selectedBackgroundView = bgColorView
                     return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                        return cell
+                    }
                 }
             }
         } else {
             if indexPath.section == 0 {
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "colcell2", for: indexPath) as! ProCells
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "colcell2", for: indexPath) as? ProCells {
                 cell.configure()
                 cell.backgroundColor = Colours.grayDark3
                 let bgColorView = UIView()
@@ -1481,10 +1501,14 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 cell.frame.size.width = 60
                 cell.frame.size.height = 80
                 return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                    return cell
+                }
                 
             } else if indexPath.section == 1 {
                 if indexPath.row == 0 {
-                    let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as! ListCell
+                    if let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as? ListCell {
                     cell.userName.text = "View Other Instance's Timelines"
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = Colours.tabSelected
@@ -1492,8 +1516,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     bgColorView.backgroundColor = Colours.grayDark3
                     cell.selectedBackgroundView = bgColorView
                     return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                        return cell
+                    }
                 } else if indexPath.row == 1 {
-                    let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as! ListCell
+                    if let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as? ListCell {
                     cell.userName.text = "Create New List +"
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = Colours.tabSelected
@@ -1501,8 +1529,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     bgColorView.backgroundColor = Colours.grayDark3
                     cell.selectedBackgroundView = bgColorView
                     return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                        return cell
+                    }
                 } else {
-                    let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as! ListCell
+                    if let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as? ListCell {
                     cell.userName.text = "Settings"
                     cell.backgroundColor = Colours.grayDark3
                     cell.userName.textColor = Colours.tabSelected
@@ -1510,9 +1542,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     bgColorView.backgroundColor = Colours.grayDark3
                     cell.selectedBackgroundView = bgColorView
                     return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                        return cell
+                    }
                 }
             } else if indexPath.section == 2 {
-                let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as! ListCell
+                if let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l", for: indexPath) as? ListCell {
                 cell.delegate = self
                 cell.configure(StoreStruct.allLists[indexPath.row])
                 cell.backgroundColor = Colours.grayDark3
@@ -1521,9 +1557,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 bgColorView.backgroundColor = Colours.grayDark3
                 cell.selectedBackgroundView = bgColorView
                 return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                    return cell
+                }
             } else {
                 
-                let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l2", for: indexPath) as! ListCell2
+                if let cell = tableViewLists.dequeueReusableCell(withIdentifier: "cell002l2", for: indexPath) as? ListCell2 {
                 cell.delegate = self
                 cell.configure(StoreStruct.instanceLocalToAdd[indexPath.row])
                 cell.backgroundColor = Colours.grayDark3
@@ -1532,7 +1572,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 bgColorView.backgroundColor = Colours.grayDark3
                 cell.selectedBackgroundView = bgColorView
                 return cell
-                
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cc", for: indexPath)
+                    return cell
+                }
             }
         }
     }

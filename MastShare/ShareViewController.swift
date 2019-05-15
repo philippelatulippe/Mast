@@ -138,7 +138,7 @@ class ShareViewController: UIViewController, UITextViewDelegate {
                            animations: {
                             self.viewBG.frame = CGRect(x: 0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
                             self.bgView.frame = CGRect(x: 0, y: Int(UIScreen.main.bounds.size.height), width: Int(UIScreen.main.bounds.size.width), height: Int(self.keyHeight) + 50)
-                            self.extensionContext?.cancelRequest(withError: NSError())
+                            self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
             }, completion: nil)
         }
     }
@@ -307,7 +307,7 @@ class ShareViewController: UIViewController, UITextViewDelegate {
                         self.viewBG.frame = CGRect(x: 0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
                         self.bgView.frame = CGRect(x: 0, y: Int(UIScreen.main.bounds.size.height), width: Int(UIScreen.main.bounds.size.width), height: Int(self.keyHeight) + 50)
         }, completion: { test in
-            self.extensionContext?.cancelRequest(withError: NSError())
+            self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
         })
     }
     
@@ -367,7 +367,7 @@ class ShareViewController: UIViewController, UITextViewDelegate {
                                     DispatchQueue.global(qos: .background).async {
                                         client.run(request0) { (statuses) in
                                             print("posted")
-                                            self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+                                            self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
                                         }
                                     }
                                 }
@@ -386,7 +386,7 @@ class ShareViewController: UIViewController, UITextViewDelegate {
                                         DispatchQueue.global(qos: .background).async {
                                             client.run(request0) { (statuses) in
                                                 print("posted")
-                                                self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+                                                self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
                                             }
                                         }
                                     }
@@ -396,7 +396,7 @@ class ShareViewController: UIViewController, UITextViewDelegate {
                                     if let shareURL = url as? NSURL {
                                         let request0 = Statuses.create(status: "\(theText)\n\n\(shareURL)", replyToID: nil, mediaIDs: [], sensitive: isSensitive, spoilerText: spoilers, visibility: self.currentVisibility)
                                         client.run(request0) { (statuses) in
-                                            self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+                                            self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
                                         }
                                     }
                                     
@@ -411,7 +411,7 @@ class ShareViewController: UIViewController, UITextViewDelegate {
                             let request0 = Statuses.create(status: "\(theText)\n\n\(shareURL)", replyToID: nil, mediaIDs: [], sensitive: isSensitive, spoilerText: spoilers, visibility: self.currentVisibility)
                             client.run(request0) { (statuses) in
                                 print("06")
-                                self.extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+                                self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
                             }
                         }
                         

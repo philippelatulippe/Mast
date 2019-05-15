@@ -36,23 +36,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == "com.shi.Mast.confetti" {
-            let viewController = window?.rootViewController as! ViewController
-            viewController.siriConfetti()
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
         } else if userActivity.activityType == "com.shi.Mast.light" {
-            let viewController = window?.rootViewController as! ViewController
-            viewController.siriLight()
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "light00"), object: nil)
         } else if userActivity.activityType == "com.shi.Mast.dark" {
-            let viewController = window?.rootViewController as! ViewController
-            viewController.siriDark()
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "dark00"), object: nil)
         } else if userActivity.activityType == "com.shi.Mast.dark2" {
-            let viewController = window?.rootViewController as! ViewController
-            viewController.siriDark2()
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "darker00"), object: nil)
         } else if userActivity.activityType == "com.shi.Mast.bluemid" {
-            let viewController = window?.rootViewController as! ViewController
-            viewController.siriBlue()
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "blue00"), object: nil)
         } else {
-            let viewController = window?.rootViewController as! ViewController
-            viewController.siriOled()
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "black00"), object: nil)
         }
         return true
     }
@@ -130,8 +124,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PushNotificationReceiver.setState(state: state)
         
         // change following when pushing to App Store or for local dev
-//        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
-        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
+        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
+//        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
         
         //create the url with URL
         let url = URL(string: "https://\(StoreStruct.currentInstance.returnedText)/api/v1/push/subscription")! //change the url
@@ -380,9 +374,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             self.window!.rootViewController = splitViewController
             self.window!.makeKeyAndVisible()
-            
-//            UINavigationBar.appearance().shadowImage = UIImage()
-//            UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        
             UINavigationBar.appearance().backgroundColor = Colours.white
             UINavigationBar.appearance().barTintColor = Colours.black
             UINavigationBar.appearance().tintColor = Colours.black
@@ -391,17 +383,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SwiftyGiphyAPI.shared.apiKey = SwiftyGiphyAPI.publicBetaKey
         
-        
         WatchSessionManager.sharedManager.startSession()
-        
         
         let BarButtonItemAppearance = UIBarButtonItem.appearance()
         BarButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: Colours.grayLight2], for: .normal)
         BarButtonItemAppearance.tintColor = Colours.grayLight2
         
-        
         window?.tintColor = Colours.tabSelected
-        
         
         if StoreStruct.currentUser != nil {
             if (UserDefaults.standard.object(forKey: "\(StoreStruct.currentInstance.clientID)homeid") == nil) {} else {

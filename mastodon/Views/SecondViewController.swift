@@ -1076,7 +1076,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         
         
-        self.newUpdatesB1.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
+        self.newUpdatesB1.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize + 15), width: CGFloat(56), height: CGFloat(30))
         self.newUpdatesB1.backgroundColor = Colours.grayLight19
         self.newUpdatesB1.layer.cornerRadius = 10
         self.newUpdatesB1.setTitleColor(UIColor.white, for: .normal)
@@ -1084,7 +1084,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         self.newUpdatesB1.alpha = 0
         self.view.addSubview(self.newUpdatesB1)
         
-        self.newUpdatesB2.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
+        self.newUpdatesB2.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize + 15), width: CGFloat(56), height: CGFloat(30))
         self.newUpdatesB2.backgroundColor = Colours.grayLight19
         self.newUpdatesB2.layer.cornerRadius = 10
         self.newUpdatesB2.setTitleColor(UIColor.white, for: .normal)
@@ -1092,7 +1092,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         self.newUpdatesB2.alpha = 0
         self.view.addSubview(self.newUpdatesB2)
         
-        self.newUpdatesB3.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize), width: CGFloat(56), height: CGFloat(30))
+        self.newUpdatesB3.frame = CGRect(x: CGFloat(self.view.bounds.width - 42), y: CGFloat(newSize + 15), width: CGFloat(56), height: CGFloat(30))
         self.newUpdatesB3.backgroundColor = Colours.grayLight19
         self.newUpdatesB3.layer.cornerRadius = 10
         self.newUpdatesB3.setTitleColor(UIColor.white, for: .normal)
@@ -2597,10 +2597,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         //            selection.selectionChanged()
         //        }
         
-        var sto = StoreStruct.notifications
+        var sto = StoreStruct.notificationsMentions
         if self.currentIndex == 0 {
             sto = StoreStruct.notifications
-        } else if self.currentIndex == 5 {
         } else if self.currentIndex == 1 {
             sto = StoreStruct.notificationsMentions
         }
@@ -2637,7 +2636,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
             
-            let videoURL = URL(string: sto[sender.tag].status!.mediaAttachments[0].url)!
+            if let videoURL = URL(string: sto[sender.tag].status!.mediaAttachments[0].url) {
             if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {
                 XPlayer.play(videoURL)
             } else {
@@ -2648,7 +2647,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     playerViewController.player!.play()
                 }
             }
-            
+            }
             
         } else {
             
@@ -4862,7 +4861,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         
                         if self.currentIndex == 1 {
                             if newestC <= 0 {} else {
-                                self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+//                                self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
                             }
                         }
                         
@@ -4917,7 +4916,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         
                         if self.currentIndex == 1 {
                             if newestC2 <= 0 {} else {
-                                self.tableView.scrollToRow(at: IndexPath(row: newestC2, section: 0), at: .top, animated: false)
+//                                self.tableView.scrollToRow(at: IndexPath(row: newestC2, section: 0), at: .top, animated: false)
                             }
                         }
                         

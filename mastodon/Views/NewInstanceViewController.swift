@@ -93,6 +93,7 @@ class NewInstanceViewController: UIViewController, UITextFieldDelegate {
         textView.frame = CGRect(x:20, y: offset + 45, width:Int(self.view.bounds.width - 40), height:Int(50))
         textView.font = UIFont.systemFont(ofSize: Colours.fontSize1 + 2)
         textView.tintColor = Colours.tabSelected
+        textView.autocorrectionType = .no
         textView.delegate = self
         textView.becomeFirstResponder()
         if (UserDefaults.standard.object(forKey: "keyb") == nil) || (UserDefaults.standard.object(forKey: "keyb") as! Int == 0) {

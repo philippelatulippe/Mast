@@ -87,8 +87,24 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
         }
     }
     
+    func removeTabbarItemsText() {
+        var offset: CGFloat = 6.0
+        if #available(iOS 11.0, *), traitCollection.horizontalSizeClass == .regular {
+            offset = 0.0
+        }
+        if let items = self.tabBarController?.tabBar.items {
+            for item in items {
+                item.title = ""
+                item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0);
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Search"
+        self.removeTabbarItemsText()
         
         self.view.backgroundColor = Colours.white
         
@@ -118,7 +134,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
             }
         }
         
-        self.tableView.frame = CGRect(x: 0, y: Int(offset + 110), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 115)
+        self.tableView.frame = CGRect(x: 0, y: Int(offset + 110), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 110)
         self.tableView.alpha = 1
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -170,6 +186,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        self.searchTextField.becomeFirstResponder()
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88

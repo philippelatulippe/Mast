@@ -1240,7 +1240,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
         }
         
-        
         bgView.frame = CGRect(x:0, y:Int(self.view.bounds.height) - 40 - Int(self.keyHeight), width:Int(self.view.bounds.width), height:Int(self.keyHeight) + 40)
         if (UserDefaults.standard.object(forKey: "barhue1") == nil) || (UserDefaults.standard.object(forKey: "barhue1") as! Int == 0) {
             bgView.backgroundColor = Colours.tabSelected
@@ -1249,7 +1248,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         }
         self.view.addSubview(bgView)
         
-        
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let imp = UIImpactFeedbackGenerator(style: .light)
+            imp.impactOccurred()
+        }
         
         self.tableView.register(FollowersCell.self, forCellReuseIdentifier: "cellfolfol")
         self.tableView.frame = CGRect(x: 0, y: 0, width: Int(self.view.bounds.width), height: Int(180))

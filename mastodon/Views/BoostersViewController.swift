@@ -180,6 +180,10 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
         
         self.ai.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2, width: 40, height: 40)
         self.view.backgroundColor = Colours.white
+        UINavigationBar.appearance().backgroundColor = Colours.white
+        UINavigationBar.appearance().barTintColor = Colours.black
+        UINavigationBar.appearance().tintColor = Colours.black
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
         
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88

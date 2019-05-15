@@ -111,11 +111,6 @@ class DetailCell: UITableViewCell {
         toot.hashtagColor = Colours.tabSelected
         toot.URLColor = Colours.tabSelected
         
-        userName.text = status.reblog?.account.displayName ?? status.account.displayName
-        if userName.text == "" {
-            userName.text = " "
-        }
-        
         
         if (UserDefaults.standard.object(forKey: "mentionToggle") == nil || UserDefaults.standard.object(forKey: "mentionToggle") as! Int == 0) {
             userTag.setTitle("@\(status.reblog?.account.acct ?? status.account.acct)", for: .normal)
@@ -291,6 +286,11 @@ class DetailCell: UITableViewCell {
         fromClient.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         faves.titleLabel?.font = UIFont.boldSystemFont(ofSize: Colours.fontSize3)
         
+        
+        userName.text = status.reblog?.account.displayName ?? status.account.displayName
+        if userName.text == "" {
+            userName.text = " "
+        }
         
     }
     

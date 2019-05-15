@@ -230,7 +230,6 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 // general
@@ -261,6 +260,7 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
             if indexPath.row == 0 {
                 // rate
                 //                SKStoreReviewController.requestReview()
+                self.tableView.deselectRow(at: indexPath, animated: true)
                 if let reviewURL = URL(string: "itms-apps://itunes.apple.com/us/app/apple-store/1437429129?action=write-review&mt=8"), UIApplication.shared.canOpenURL(reviewURL) {
                     if #available(iOS 10.0, *) {
                         UIApplication.shared.open(reviewURL, options: [:], completionHandler: nil)
@@ -270,6 +270,7 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
                 }
             } else if indexPath.row == 1 {
                 // about
+                self.tableView.deselectRow(at: indexPath, animated: true)
                 Alertift.actionSheet(title: "Mast \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "")", message: "Designed and hand-crafted with \u{2665} by @JPEG@mastodon.technology\n\nI'm an independant 23 year old developer from the UK, creating and crafting Mast in my spare time. It can be daunting manning a project of this magnitude, but I love what I do and Mast is a wonderful place to pour my creativity and effort into. If you like what I do, please consider leaving a tip to encourage great continued support. If you have any questions or concerns, please get in touch and let me know how I can improve and be better!\n\nHappy tooting :)".localized)
                     .backgroundColor(Colours.white)
                     .titleTextColor(Colours.grayDark)

@@ -164,11 +164,6 @@ class DetailCellImage: UITableViewCell {
         toot.hashtagColor = Colours.tabSelected
         toot.URLColor = Colours.tabSelected
         
-        userName.text = status.reblog?.account.displayName ?? status.account.displayName
-        if userName.text == "" {
-            userName.text = " "
-        }
-        
         if (UserDefaults.standard.object(forKey: "mentionToggle") == nil || UserDefaults.standard.object(forKey: "mentionToggle") as! Int == 0) {
             userTag.setTitle("@\(status.reblog?.account.acct ?? status.account.acct)", for: .normal)
         } else {
@@ -541,6 +536,11 @@ class DetailCellImage: UITableViewCell {
             self.mainImageView.pin_updateWithProgress = true
             self.mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments.first?.url ?? status.mediaAttachments.first?.url ?? "")"))
             }
+        }
+        
+        userName.text = status.reblog?.account.displayName ?? status.account.displayName
+        if userName.text == "" {
+            userName.text = " "
         }
         
     }

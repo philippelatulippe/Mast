@@ -2850,18 +2850,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     DispatchQueue.main.async {
                         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DetailCell {
                             cell.configure(stat)
-//                            UIView.setAnimationsEnabled(false)
-//                            self.tableView.beginUpdates()
-//                            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
-//                            self.tableView.endUpdates()
-//                            UIView.setAnimationsEnabled(true)
                         } else if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? DetailCellImage {
                             cell.configure(stat)
-//                            UIView.setAnimationsEnabled(false)
-//                            self.tableView.beginUpdates()
-//                            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .fade)
-//                            self.tableView.endUpdates()
-//                            UIView.setAnimationsEnabled(true)
                         }
                     }
                 }
@@ -2871,7 +2861,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func refDetailCountPoll() {
         if self.mainStatus.isEmpty {} else {
-            let request = Statuses.status(id: self.mainStatus[0].id)
+            let request = Statuses.status(id: self.mainStatus.first?.id ?? "")
             StoreStruct.client.run(request) { (statuses) in
                 if let stat = (statuses.value) {
                     self.mainStatus = [stat]
@@ -2879,9 +2869,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? PollCell {
                             if let poll = stat.poll {
                                 cell.configure(thePoll: poll, theOptions: poll.options)
-//                                self.tableView.beginUpdates()
-//                                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .fade)
-//                                self.tableView.endUpdates()
                             }
                         }
                     }

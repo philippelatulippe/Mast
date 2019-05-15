@@ -4043,7 +4043,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].reblog?.mediaAttachments[0].type ?? sto[sender.tag].mediaAttachments[0].type == .gifv {
             
-            let videoURL = URL(string: sto[sender.tag].reblog?.mediaAttachments[0].url ?? sto[sender.tag].mediaAttachments[0].url)!
+            if let videoURL = URL(string: sto[sender.tag].reblog?.mediaAttachments[0].url ?? sto[sender.tag].mediaAttachments[0].url) {
             if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {
                 XPlayer.play(videoURL)
             } else {
@@ -4053,6 +4053,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.present(playerViewController, animated: true) {
                     playerViewController.player!.play()
                 }
+            }
             }
             
             
