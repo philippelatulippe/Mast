@@ -222,6 +222,33 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        if let indexPath = tableView.indexPathForSelectedRow {
+            var sto = self.allReplies
+            if indexPath.section == 0 {
+                sto = self.allPrevious
+            }
+            self.tableView.deselectRow(at: indexPath, animated: true)
+            let request = Statuses.status(id: sto[indexPath.row].id)
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    DispatchQueue.main.async {
+                        if let cell = self.tableView.cellForRow(at: indexPath) as? MainFeedCell {
+                            cell.configure0(stat)
+                        }
+                        if let cell2 = self.tableView.cellForRow(at: indexPath) as? MainFeedCellImage {
+                            cell2.configure0(stat)
+                        }
+                        if let cell3 = self.tableView.cellForRow(at: indexPath) as? RepliesCell {
+                            cell3.configure0(stat)
+                        }
+                        if let cell4 = self.tableView.cellForRow(at: indexPath) as? RepliesCellImage {
+                            cell4.configure0(stat)
+                        }
+                    }
+                }
+            }
+        }
+        
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
         var offset = 88
         var newoff = 45
@@ -349,9 +376,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        if let indexPath = tableView.indexPathForSelectedRow {
-            self.tableView.deselectRow(at: indexPath, animated: true)
-        }
+//        if let indexPath = tableView.indexPathForSelectedRow {
+//            self.tableView.deselectRow(at: indexPath, animated: true)
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -2896,10 +2923,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             StoreStruct.allLikes = StoreStruct.allLikes.filter { $0 != self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id }
             let request2 = Statuses.unfavourite(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request2) { (statuses) in
-                
+                DispatchQueue.main.async {
+                    self.refDetailCount()
+                }
             }
             
-            self.refDetailCount()
         } else {
             if self.mainStatus[0].visibility == .direct {
                 if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell2 {
@@ -2929,14 +2957,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             StoreStruct.client.run(request2) { (statuses) in
                 DispatchQueue.main.async {
+                    self.refDetailCount()
                     if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateLi"), object: nil)
                     }
                 }
                 
             }
-            
-            self.refDetailCount()
         }
         
     }
@@ -2967,10 +2994,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             StoreStruct.allBoosts = StoreStruct.allBoosts.filter { $0 != self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id }
             let request2 = Statuses.unreblog(id: self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id)
             StoreStruct.client.run(request2) { (statuses) in
-                
+                DispatchQueue.main.async {
+                    self.refDetailCount()
+                }
             }
-            
-            self.refDetailCount()
         } else {
             if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell {
             ce.boostButton.setImage(UIImage(named: "boost"), for: .normal)
@@ -2994,14 +3021,13 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             StoreStruct.client.run(request2) { (statuses) in
                 
                 DispatchQueue.main.async {
+                    self.refDetailCount()
                     if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreateRe"), object: nil)
                     }
                 }
                 
             }
-            
-            self.refDetailCount()
         }
         
     }

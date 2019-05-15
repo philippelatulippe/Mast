@@ -782,7 +782,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 selection.selectionChanged()
             }
             self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self?.tableView.cr.endHeaderRefresh()
             })
         }
@@ -792,7 +792,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 selection.selectionChanged()
             }
             self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self?.tableView2.cr.endHeaderRefresh()
             })
         }
@@ -888,10 +888,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     if let stat = (statuses.value) {
                         DispatchQueue.main.async {
                             if let cell = self.tableView2.cellForRow(at: indexPath) as? NotificationCell {
-                                cell.configure(stat)
+                                cell.configure0(stat)
                             }
                             if let cell2 = self.tableView2.cellForRow(at: indexPath) as? NotificationCellImage {
-                                cell2.configure(stat)
+                                cell2.configure0(stat)
                             }
                         }
                     }
@@ -905,10 +905,10 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     if let stat = (statuses.value) {
                         DispatchQueue.main.async {
                             if let cell = self.tableView.cellForRow(at: indexPath) as? NotificationCell {
-                                cell.configure(stat)
+                                cell.configure0(stat)
                             }
                             if let cell2 = self.tableView.cellForRow(at: indexPath) as? NotificationCellImage {
-                                cell2.configure(stat)
+                                cell2.configure0(stat)
                             }
                         }
                     }

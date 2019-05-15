@@ -753,6 +753,55 @@ class NotificationCellImage: SwipeTableViewCell {
         
     }
     
+    func configure0(_ status: Notificationt) {
+        if (status.status?.favourited ?? false) && (status.status?.reblogged ?? false) {
+            self.moreImage.image = UIImage(named: "fifty")
+            StoreStruct.allLikes.append(status.status?.id ?? "")
+            StoreStruct.allBoosts.append(status.status?.id ?? "")
+        } else if status.status?.reblogged ?? false {
+            self.moreImage.image = UIImage(named: "boost")
+            StoreStruct.allBoosts.append(status.status?.id ?? "")
+        } else if (status.status?.favourited ?? false) || StoreStruct.allLikes.contains(status.id) {
+            self.moreImage.image = UIImage(named: "like")
+            StoreStruct.allLikes.append(status.status?.id ?? "")
+        } else {
+            self.moreImage.image = nil
+        }
+        
+        StoreStruct.allLikes = StoreStruct.allLikes.removeDuplicates()
+        StoreStruct.allBoosts = StoreStruct.allBoosts.removeDuplicates()
+        
+        if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {} else {
+            var repc1 = "\(status.status?.reblog?.repliesCount ?? status.status?.repliesCount ?? 0)"
+            if repc1 == "0" {
+                repc1 = ""
+            }
+            var likec1 = "\(status.status?.reblog?.favouritesCount ?? status.status?.favouritesCount ?? 0)"
+            if likec1 == "0" {
+                likec1 = ""
+            }
+            var boostc1 = "\(status.status?.reblog?.reblogsCount ?? status.status?.reblogsCount ?? 0)"
+            if boostc1 == "0" {
+                boostc1 = ""
+            }
+            rep1.setTitle(repc1, for: .normal)
+            rep1.setTitleColor(Colours.grayDark.withAlphaComponent(0.21), for: .normal)
+            rep1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            rep1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+            rep1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+            like1.setTitle(likec1, for: .normal)
+            like1.setTitleColor(Colours.grayDark.withAlphaComponent(0.21), for: .normal)
+            like1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            like1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+            like1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+            boost1.setTitle(boostc1, for: .normal)
+            boost1.setTitleColor(Colours.grayDark.withAlphaComponent(0.21), for: .normal)
+            boost1.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            boost1.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+            boost1.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        }
+    }
+    
     @objc func didTouchWarning() {
         warningB.backgroundColor = Colours.clear
         warningB.alpha = 0

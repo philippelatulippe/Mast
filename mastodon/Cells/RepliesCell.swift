@@ -317,6 +317,33 @@ class RepliesCell: SwipeTableViewCell {
         
     }
     
+    func configure0(_ status: Status) {
+        self.moreImage.contentMode = .scaleAspectFit
+        if (status.reblog?.favourited ?? status.favourited ?? false) && (status.reblog?.reblogged ?? status.reblogged ?? false) {
+            self.moreImage.image = UIImage(named: "fifty")
+        } else if status.reblog?.reblogged ?? status.reblogged ?? false {
+            self.moreImage.image = UIImage(named: "boost")
+        } else if (status.reblog?.favourited ?? status.favourited ?? false) || StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) {
+            self.moreImage.image = UIImage(named: "like")
+        } else {
+            if status.reblog?.poll ?? status.poll != nil {
+                self.moreImage.image = UIImage(named: "pollbubble")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+            } else {
+                
+                if status.reblog?.visibility ?? status.visibility == .direct {
+                    self.moreImage.image = UIImage(named: "direct")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+                } else if status.reblog?.visibility ?? status.visibility == .unlisted {
+                    self.moreImage.image = UIImage(named: "unlisted")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+                } else if status.reblog?.visibility ?? status.visibility == .private {
+                    self.moreImage.image = UIImage(named: "private")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.38))
+                } else {
+                    self.moreImage.image = nil
+                }
+                
+            }
+        }
+    }
+    
     @objc func didTouchWarning() {
         warningB.backgroundColor = Colours.clear
         warningB.alpha = 0

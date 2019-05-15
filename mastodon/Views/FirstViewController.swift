@@ -1015,7 +1015,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 selection.selectionChanged()
             }
             self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self?.tableView.cr.endHeaderRefresh()
             })
         }
@@ -1026,7 +1026,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 
             }
             self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self?.tableViewL.cr.endHeaderRefresh()
             })
         }
@@ -1036,7 +1036,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 selection.selectionChanged()
             }
             self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self?.tableViewF.cr.endHeaderRefresh()
             })
         }
@@ -1200,10 +1200,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     if let stat = (statuses.value) {
                         DispatchQueue.main.async {
                             if let cell = self.tableView.cellForRow(at: indexPath) as? MainFeedCell {
-                                cell.configure(stat)
+                                cell.configure0(stat)
                             }
                             if let cell2 = self.tableView.cellForRow(at: indexPath) as? MainFeedCellImage {
-                                cell2.configure(stat)
+                                cell2.configure0(stat)
                             }
                         }
                     }
@@ -1217,10 +1217,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     if let stat = (statuses.value) {
                         DispatchQueue.main.async {
                             if let cell = self.tableViewL.cellForRow(at: indexPath) as? MainFeedCell {
-                                cell.configure(stat)
+                                cell.configure0(stat)
                             }
                             if let cell2 = self.tableViewL.cellForRow(at: indexPath) as? MainFeedCellImage {
-                                cell2.configure(stat)
+                                cell2.configure0(stat)
                             }
                         }
                     }
@@ -1234,10 +1234,10 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     if let stat = (statuses.value) {
                         DispatchQueue.main.async {
                             if let cell = self.tableViewF.cellForRow(at: indexPath) as? MainFeedCell {
-                                cell.configure(stat)
+                                cell.configure0(stat)
                             }
                             if let cell2 = self.tableViewF.cellForRow(at: indexPath) as? MainFeedCellImage {
-                                cell2.configure(stat)
+                                cell2.configure0(stat)
                             }
                         }
                     }

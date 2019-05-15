@@ -443,7 +443,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 selection.selectionChanged()
             }
             self?.refreshCont()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self?.tableView.cr.endHeaderRefresh()
             })
         }

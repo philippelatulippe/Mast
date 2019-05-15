@@ -299,10 +299,10 @@ class HashtagViewController: UIViewController, UITableViewDelegate, UITableViewD
                 if let stat = (statuses.value) {
                     DispatchQueue.main.async {
                         if let cell = self.tableView.cellForRow(at: indexPath) as? MainFeedCell {
-                            cell.configure(stat)
+                            cell.configure0(stat)
                         }
                         if let cell2 = self.tableView.cellForRow(at: indexPath) as? MainFeedCellImage {
-                            cell2.configure(stat)
+                            cell2.configure0(stat)
                         }
                     }
                 }
