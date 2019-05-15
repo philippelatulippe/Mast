@@ -2852,9 +2852,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? PollCell {
                             if let poll = stat.poll {
                                 cell.configure(thePoll: poll, theOptions: poll.options)
-                                self.tableView.beginUpdates()
-                                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .fade)
-                                self.tableView.endUpdates()
+//                                self.tableView.beginUpdates()
+//                                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .fade)
+//                                self.tableView.endUpdates()
                             }
                         }
                     }

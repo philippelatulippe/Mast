@@ -1702,7 +1702,10 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         StoreStruct.client.run(request2) { (statuses) in
             DispatchQueue.main.async {
                 StoreStruct.markedReadIDs.append(StoreStruct.notificationsDirect[indexPath.row].id)
-                self.tableView.reloadRows(at: [indexPath], with: .none)
+//                self.tableView.reloadRows(at: [indexPath], with: .none)
+                if let cell = self.tableView.cellForRow(at: indexPath) as? DMFeedCell {
+                    cell.configure2(false, id: StoreStruct.notificationsDirect[indexPath.row].id)
+                }
             }
         }
     }
