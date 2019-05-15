@@ -1731,6 +1731,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             if let stat = (statuses.value) {
                 if stat.isEmpty {} else {
                     StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
+                    StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { ($0.lastStatus?.createdAt ?? Date()) > ($1.lastStatus?.createdAt ?? Date()) })
                     DispatchQueue.main.async {
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         self.ai.stopAnimating()

@@ -369,7 +369,11 @@ class ProfileHeaderCell: SwipeTableViewCell {
                 
                 if stat[1].followedBy {
                     DispatchQueue.main.async {
-                        self.userTag.text = "\(self.userTag.text ?? "") • Follows you"
+                        if self.userTag.text!.contains("Follows you") {
+                            
+                        } else {
+                            self.userTag.text = "\(self.userTag.text ?? "") • Follows you"
+                        }
                     }
                 }
                 
@@ -725,7 +729,9 @@ class ProfileHeaderCell2: SwipeTableViewCell {
                 
                 if stat[1].followedBy {
                     DispatchQueue.main.async {
-                        if self.userTag.text?.contains("Follows you") ?? false {} else {
+                        if self.userTag.text!.contains("Follows you") {
+                            
+                        } else {
                             self.userTag.text = "\(self.userTag.text ?? "") • Follows you"
                         }
                     }

@@ -4827,6 +4827,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 var newestC = StoreStruct.notifications.count
                 
                 StoreStruct.notifications = stat + StoreStruct.notifications
+                StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
                 StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                 
                 DispatchQueue.main.async {
@@ -4886,6 +4887,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 var newestC2 = StoreStruct.notificationsMentions.count
                 
                 StoreStruct.notificationsMentions = stat + StoreStruct.notificationsMentions
+                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                 StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                 
                 DispatchQueue.main.async {
