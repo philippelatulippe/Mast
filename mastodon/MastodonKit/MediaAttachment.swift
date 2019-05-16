@@ -39,17 +39,17 @@ extension MediaAttachment {
             }
         } else if StoreStruct.medType == 1 {
             switch self {
-            case .jpeg: return "avatar.jpeg"
-            case .gif: return "avatar.gif"
-            case .png: return "avatar.png"
-            case .other(_, let fileExtension, _): return "avatar.\(fileExtension)"
+            case .jpeg: return "\(StoreStruct.avaFile).jpeg"
+            case .gif: return "\(StoreStruct.avaFile).gif"
+            case .png: return "\(StoreStruct.avaFile).png"
+            case .other(_, let fileExtension, _): return "\(StoreStruct.avaFile).\(fileExtension)"
             }
         } else {
             switch self {
-            case .jpeg: return "header.jpeg"
-            case .gif: return "header.gif"
-            case .png: return "header.png"
-            case .other(_, let fileExtension, _): return "header.\(fileExtension)"
+            case .jpeg: return "\(StoreStruct.heaFile).jpeg"
+            case .gif: return "\(StoreStruct.heaFile).gif"
+            case .png: return "\(StoreStruct.heaFile).png"
+            case .other(_, let fileExtension, _): return "\(StoreStruct.heaFile).\(fileExtension)"
             }
         }
     }

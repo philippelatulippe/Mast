@@ -191,7 +191,7 @@ class NewHexViewController: UIViewController, UITextViewDelegate {
             impact.impactOccurred()
         }
         
-        StoreStruct.hexCol = UIColor(hexString: self.hex.replacingOccurrences(of: "#", with: "")) ?? UIColor(red: 84/255.0, green: 102/255.0, blue: 205/255.0, alpha: 1.0)
+        StoreStruct.hexCol = UIColor(hexString: self.hex.replacingOccurrences(of: "#", with: "")) ?? UIColor(red: 84/250, green: 133/250, blue: 234/250, alpha: 1.0)
         Colours.tabSelected = StoreStruct.hexCol
         UIApplication.shared.keyWindow?.tintColor = Colours.tabSelected
         NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)

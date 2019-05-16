@@ -957,7 +957,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         } else if (UserDefaults.standard.object(forKey: "themeaccent") as? Int == 500) {
             if UserDefaults.standard.object(forKey: "hexhex") as? String != nil {
                 let hexText = UserDefaults.standard.object(forKey: "hexhex") as? String ?? "ffffff"
-                StoreStruct.hexCol = UIColor(hexString: hexText) ?? UIColor(red: 84/255.0, green: 102/255.0, blue: 205/255.0, alpha: 1.0)
+                StoreStruct.hexCol = UIColor(hexString: hexText) ?? UIColor(red: 84/250, green: 133/250, blue: 234/250, alpha: 1.0)
                 Colours.tabSelected = StoreStruct.hexCol
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.reloadTint()

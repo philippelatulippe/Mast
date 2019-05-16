@@ -39,9 +39,6 @@ class WOViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// UI
-        //view.layer.cornerRadius = 15
-        //view.clipsToBounds = true
-        
 		view.layer.shadowOpacity = 0.4
 		view.layer.shadowOffset = CGSize(width: 0, height: 5)
         view.layer.shadowRadius = 15
@@ -252,6 +249,8 @@ extension WOViewController {
 		self.trailingConstraint.constant = -(UIScreen.main.bounds.width - rect.size.width - rect.origin.x)
 		self.topConstraint.constant = rect.origin.y
 		self.bottomConstraint.constant = -(UIScreen.main.bounds.height - rect.size.height - rect.origin.y)
+        self.view.layer.cornerRadius = 16
+        self.view.layer.masksToBounds = true
 	}
 }
 

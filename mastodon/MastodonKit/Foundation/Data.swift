@@ -23,14 +23,14 @@ extension Data {
             append("--MastodonKitBoundary--\r\n")
         } else if StoreStruct.medType == 1 {
             append("--MastodonKitBoundary\r\n")
-            append("Content-Disposition: form-data; name=\"avatar\"; filename=\"avatar.jpeg\"\r\n")
+            append("Content-Disposition: form-data; name=\"avatar\"; filename=\"\(StoreStruct.avaFile).jpeg\"\r\n")
             append("Content-Type: image/jpeg\r\n\r\n")
             append(mediaData)
             append("\r\n")
             append("--MastodonKitBoundary--\r\n")
         } else {
             append("--MastodonKitBoundary\r\n")
-            append("Content-Disposition: form-data; name=\"header\"; filename=\"header.jpeg\"\r\n")
+            append("Content-Disposition: form-data; name=\"header\"; filename=\"\(StoreStruct.heaFile).jpeg\"\r\n")
             append("Content-Type: image/jpeg\r\n\r\n")
             append(mediaData)
             append("\r\n")

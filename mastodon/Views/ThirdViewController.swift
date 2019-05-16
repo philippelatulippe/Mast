@@ -1492,6 +1492,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func editProfileDetails() {
         
+        StoreStruct.avaFile = "\(StoreStruct.avaFile)\(Int.random(in: 10...5000000))"
+        StoreStruct.heaFile = "\(StoreStruct.heaFile)\(Int.random(in: 10...5000000))"
+        
         let isItLocked = StoreStruct.currentUser.locked
         var lockText = "Lock Account"
         var isItGoingToLock = false

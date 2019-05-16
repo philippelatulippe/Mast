@@ -74,7 +74,7 @@ class RepliesCellImage: SwipeTableViewCell {
         mainImageViewBG.layer.shadowColor = UIColor.black.cgColor
 //        mainImageViewBG.layer.shadowOffset = CGSize(width: 0, height: 7)
         mainImageViewBG.layer.shadowRadius = 10
-        mainImageViewBG.layer.shadowOpacity = 0.5
+        mainImageViewBG.layer.shadowOpacity = 0.38
         mainImageViewBG.layer.masksToBounds = false
         
         if (UserDefaults.standard.object(forKey: "depthToggle") == nil) || (UserDefaults.standard.object(forKey: "depthToggle") as! Int == 0) {
