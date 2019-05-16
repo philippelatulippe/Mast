@@ -85,7 +85,7 @@ class FollowRequestsViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Follow Requests"
+        self.title = "Requests"
         self.removeTabbarItemsText()
         
         //NotificationCenter.default.addObserver(self, selector: #selector(self.goLists), name: NSNotification.Name(rawValue: "goLists"), object: nil)

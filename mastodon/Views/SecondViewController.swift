@@ -1018,13 +1018,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 self.tableView.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
                 
                 self.tableView2.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
                 
             }
@@ -1413,16 +1413,20 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
         if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
             return [Colours.tabSelected, Colours.tabSelected]
-        } else {
+        } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
             return [Colours.grayLight2, Colours.grayLight2]
+        } else {
+            return [Colours.clear, Colours.clear]
         }
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
         if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
             return [Colours.tabSelected, Colours.tabSelected]
-        } else {
+        } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
             return [Colours.grayLight2, Colours.grayLight2]
+        } else {
+            return [Colours.clear, Colours.clear]
         }
     }
     
@@ -4783,8 +4787,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             if let stat = (statuses.value) {
                 
                 StoreStruct.notifications = StoreStruct.notifications + stat
+                StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
                 DispatchQueue.main.async {
-                    //                        StoreStruct.notifications = StoreStruct.notifications.sorted(by: { $0.createdAt > $1.createdAt })
                     StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     self.tableView2.reloadData()
                 }
@@ -4803,8 +4807,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             if let stat = (statuses.value) {
                 
                 StoreStruct.notificationsMentions = StoreStruct.notificationsMentions + stat
+                StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                 DispatchQueue.main.async {
-                    //                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.sorted(by: { $0.createdAt > $1.createdAt })
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     self.tableView.reloadData()
                 }
@@ -4830,6 +4834,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                 
                 DispatchQueue.main.async {
+                    self.tableView.cr.endHeaderRefresh()
                     StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
                     
                     newestC = StoreStruct.notifications.count - newestC
@@ -4855,7 +4860,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                         
                         if stat.count > 0 {
-                            self.tableView2.cr.endHeaderRefresh()
+//                            self.tableView2.cr.endHeaderRefresh()
                             self.tableView2.reloadData()
                         }
                         
@@ -4867,7 +4872,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         
                     } else {
                         if stat.count > 0 {
-                            self.tableView2.cr.endHeaderRefresh()
+//                            self.tableView2.cr.endHeaderRefresh()
                             self.tableView2.reloadData()
                         }
                         
@@ -4890,6 +4895,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                 
                 DispatchQueue.main.async {
+                    self.tableView.cr.endHeaderRefresh()
                     StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
                     
                     newestC2 = StoreStruct.notificationsMentions.count - newestC2
@@ -4910,7 +4916,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                         
                         if stat.count > 0 {
-                            self.tableView.cr.endHeaderRefresh()
+//                            self.tableView.cr.endHeaderRefresh()
                             self.tableView.reloadData()
                         }
                         
@@ -4922,7 +4928,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         
                     } else {
                         if stat.count > 0 {
-                            self.tableView.cr.endHeaderRefresh()
+//                            self.tableView.cr.endHeaderRefresh()
                             self.tableView.reloadData()
                         }
                         
@@ -5148,13 +5154,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 self.tableView.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
                 
                 self.tableView2.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
             default:
                 print("nothing")

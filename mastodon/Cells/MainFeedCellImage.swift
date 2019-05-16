@@ -405,10 +405,10 @@ class MainFeedCellImage: SwipeTableViewCell {
                 let attachmentString2 = NSAttributedString(attachment: imageAttachment)
                 let completeText2 = NSMutableAttributedString(string: "")
                 completeText2.append(attachmentString2)
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag)", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
                 completeText2.append(textAfterIcon2)
                 attributedString.append(completeText2)
-                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 self.toot.attributedText = attributedString
                 self.reloadInputViews()
             } else {
@@ -430,10 +430,10 @@ class MainFeedCellImage: SwipeTableViewCell {
                 let attachmentString2 = NSAttributedString(attachment: imageAttachment)
                 let completeText2 = NSMutableAttributedString(string: "")
                 completeText2.append(attachmentString2)
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag)", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
                 completeText2.append(textAfterIcon2)
                 attributedString.append(completeText2)
-                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 
                 self.toot.attributedText = attributedString
                 self.reloadInputViews()

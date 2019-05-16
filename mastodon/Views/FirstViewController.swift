@@ -125,7 +125,6 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     }
                 }
             }
-            
             if self.tableViewL.alpha == 1 && StoreStruct.statusesLocal.count > 0 {
                 if StoreStruct.statusesLocal.count <= 0 {
                     
@@ -1337,19 +1336,19 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 self.tableView.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
                 
                 self.tableViewL.translatesAutoresizingMaskIntoConstraints = false
                 self.tableViewL.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableViewL.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableViewL.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableViewL.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableViewL.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
                 
                 self.tableViewF.translatesAutoresizingMaskIntoConstraints = false
                 self.tableViewF.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableViewF.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableViewF.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableViewF.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableViewF.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
                 
             }
@@ -2012,19 +2011,23 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
         if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
             return [Colours.tabSelected, Colours.tabSelected]
-        } else {
+        } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
             return [Colours.grayLight2, Colours.grayLight2]
+        } else {
+            return [Colours.clear, Colours.clear]
         }
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
         if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
             return [Colours.tabSelected, Colours.tabSelected]
-        } else {
+        } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
             return [Colours.grayLight2, Colours.grayLight2]
+        } else {
+            return [Colours.clear, Colours.clear]
         }
     }
-    //backh2
+    
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
         
         //        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -5279,6 +5282,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     
                     DispatchQueue.main.async {
+                        self.tableView.cr.endHeaderRefresh()
                         StoreStruct.statusesHome = StoreStruct.statusesHome.removeDuplicates()
                         newestC = StoreStruct.statusesHome.count - newestC - 1
                         if newestC < 0 {
@@ -5297,7 +5301,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             self.countcount1 = stat.count
                             
                             if stat.count > 0 {
-                                self.tableView.cr.endHeaderRefresh()
+//                                self.tableView.cr.endHeaderRefresh()
                                 self.tableView.reloadData()
                             }
                             //                                self.refreshControl.endRefreshing()
@@ -5312,7 +5316,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                         } else {
                             if stat.count > 0 {
-                                self.tableView.cr.endHeaderRefresh()
+//                                self.tableView.cr.endHeaderRefresh()
                                 self.tableView.reloadData()
                             }
                             //                                self.refreshControl.endRefreshing()
@@ -5359,6 +5363,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     
                     DispatchQueue.main.async {
+                        self.tableView.cr.endHeaderRefresh()
                         StoreStruct.statusesLocal = StoreStruct.statusesLocal.removeDuplicates()
                         newestC = StoreStruct.statusesLocal.count - newestC - 1
                         if newestC < 0 {
@@ -5377,7 +5382,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             self.countcount2 = stat.count
                             
                             if stat.count > 0 {
-                                self.tableViewL.cr.endHeaderRefresh()
+//                                self.tableViewL.cr.endHeaderRefresh()
                                 self.tableViewL.reloadData()
                             }
                             //                                self.refreshControl.endRefreshing()
@@ -5393,7 +5398,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         } else {
                             
                             if stat.count > 0 {
-                                self.tableViewL.cr.endHeaderRefresh()
+//                                self.tableViewL.cr.endHeaderRefresh()
                                 self.tableViewL.reloadData()
                             }
                             //                                self.refreshControl.endRefreshing()
@@ -5439,6 +5444,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     
                     
                     DispatchQueue.main.async {
+                        self.tableView.cr.endHeaderRefresh()
                         StoreStruct.statusesFederated = StoreStruct.statusesFederated.removeDuplicates()
                         newestC = StoreStruct.statusesFederated.count - newestC - 1
                         if newestC < 0 {
@@ -5457,7 +5463,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             self.countcount3 = stat.count
                             
                             if stat.count > 0 {
-                                self.tableViewF.cr.endHeaderRefresh()
+//                                self.tableViewF.cr.endHeaderRefresh()
                                 self.tableViewF.reloadData()
                             }
                             //                                self.refreshControl.endRefreshing()
@@ -5474,7 +5480,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                         } else {
                             
                             if stat.count > 0 {
-                                self.tableViewF.cr.endHeaderRefresh()
+//                                self.tableViewF.cr.endHeaderRefresh()
                                 self.tableViewF.reloadData()
                             }
                             //                                self.refreshControl.endRefreshing()
@@ -5732,19 +5738,19 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 self.tableView.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
                 
                 self.tableViewL.translatesAutoresizingMaskIntoConstraints = false
                 self.tableViewL.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableViewL.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableViewL.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableViewL.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableViewL.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
                 
                 self.tableViewF.translatesAutoresizingMaskIntoConstraints = false
                 self.tableViewF.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableViewF.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableViewF.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableViewF.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableViewF.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
             default:
                 print("nothing")

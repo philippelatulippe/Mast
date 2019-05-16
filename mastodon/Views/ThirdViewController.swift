@@ -900,7 +900,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.setupProfile()
         
-        self.ai = NVActivityIndicatorView(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 20), y: CGFloat(offset + 65), width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
+        self.ai = NVActivityIndicatorView(frame: CGRect(x: CGFloat(self.view.bounds.width/2 - 20), y: CGFloat(offset + 60), width: 40, height: 40), type: .ballRotateChase, color: Colours.tabSelected)
         self.view.addSubview(self.ai)
         self.loadLoadLoad()
         
@@ -1305,16 +1305,20 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
         if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
             return [Colours.tabSelected, Colours.tabSelected]
-        } else {
+        } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
             return [Colours.grayLight2, Colours.grayLight2]
+        } else {
+            return [Colours.clear, Colours.clear]
         }
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
         if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
             return [Colours.tabSelected, Colours.tabSelected]
-        } else {
+        } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
             return [Colours.grayLight2, Colours.grayLight2]
+        } else {
+            return [Colours.clear, Colours.clear]
         }
     }
     
@@ -5602,10 +5606,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 if let stat = (statuses.value) {
                     
                     DispatchQueue.main.async {
+                        self.tableView.cr.endHeaderRefresh()
                         if stat.count > 0 {
                             self.profileStatuses = stat + self.profileStatuses
                             self.profileStatuses = self.profileStatuses.removeDuplicates()
-                            self.tableView.cr.endHeaderRefresh()
+//                            self.tableView.cr.endHeaderRefresh()
                             self.tableView.reloadData()
                         }
                     }
@@ -5628,10 +5633,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 if let stat = (statuses.value) {
                     
                     DispatchQueue.main.async {
+                        self.tableView.cr.endHeaderRefresh()
                         if stat.count > 0 {
                             self.profileStatuses2 = stat + self.profileStatuses2
                             self.profileStatuses2 = self.profileStatuses2.removeDuplicates()
-                            self.tableView.cr.endHeaderRefresh()
+//                            self.tableView.cr.endHeaderRefresh()
                             self.tableView.reloadData()
                         }
                     }

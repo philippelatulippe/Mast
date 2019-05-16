@@ -2027,6 +2027,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                 var newestC = StoreStruct.newInstanceTags.count
                 StoreStruct.newInstanceTags = stat + StoreStruct.newInstanceTags
                 DispatchQueue.main.async {
+                    self.tableView.cr.endHeaderRefresh()
                     StoreStruct.newInstanceTags = StoreStruct.newInstanceTags.removeDuplicates()
                     
                     newestC = StoreStruct.newInstanceTags.count - newestC
@@ -2043,13 +2044,13 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     self.countcount1 = newestC
                     
 //                    UIView.setAnimationsEnabled(false)
-                        self.tableView.cr.endHeaderRefresh()
+//                        self.tableView.cr.endHeaderRefresh()
                     self.tableView.reloadData()
                     self.tableView.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
 //                    UIView.setAnimationsEnabled(true)
                         
                     } else {
-                        self.tableView.cr.endHeaderRefresh()
+//                        self.tableView.cr.endHeaderRefresh()
                         self.tableView.reloadData()
                     }
                 }

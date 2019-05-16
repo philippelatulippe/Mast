@@ -2301,6 +2301,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 StoreStruct.currentList = StoreStruct.currentList.sorted(by: { $0.createdAt > $1.createdAt })
                                 
                                 DispatchQueue.main.async {
+                                    self.tableView.cr.endHeaderRefresh()
                                     StoreStruct.currentList = StoreStruct.currentList.removeDuplicates()
                                     self.tableView.reloadData()
                                 }

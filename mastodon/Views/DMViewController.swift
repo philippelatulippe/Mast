@@ -1733,10 +1733,10 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     StoreStruct.notificationsDirect = stat + StoreStruct.notificationsDirect
                     StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.sorted(by: { ($0.lastStatus?.createdAt ?? Date()) > ($1.lastStatus?.createdAt ?? Date()) })
                     DispatchQueue.main.async {
+                        self.tableView.cr.endHeaderRefresh()
                         StoreStruct.notificationsDirect = StoreStruct.notificationsDirect.removeDuplicates()
                         self.ai.stopAnimating()
                         self.ai.alpha = 0
-                        self.tableView.cr.endHeaderRefresh()
                         self.tableView.reloadData()
                     }
                 }

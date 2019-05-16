@@ -2203,6 +2203,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     var newestC = self.currentTags.count
                     self.currentTags = stat + self.currentTags
                     DispatchQueue.main.async {
+                        self.tableView.cr.endHeaderRefresh()
                         
                         self.currentTags = self.currentTags.removeDuplicates()
                         newestC = self.currentTags.count - newestC

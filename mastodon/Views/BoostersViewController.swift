@@ -377,16 +377,20 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
         if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
             return [Colours.tabSelected, Colours.tabSelected]
-        } else {
+        } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
             return [Colours.grayLight2, Colours.grayLight2]
+        } else {
+            return [Colours.clear, Colours.clear]
         }
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
         if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
             return [Colours.tabSelected, Colours.tabSelected]
-        } else {
+        } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
             return [Colours.grayLight2, Colours.grayLight2]
+        } else {
+            return [Colours.clear, Colours.clear]
         }
     }
     

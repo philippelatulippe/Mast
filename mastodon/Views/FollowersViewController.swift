@@ -254,7 +254,7 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
                 self.tableView.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
                 self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
             default:
                 print("nothing")
@@ -370,16 +370,20 @@ class FollowersViewController: UIViewController, SJFluidSegmentedControlDataSour
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
         if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
             return [Colours.tabSelected, Colours.tabSelected]
-        } else {
+        } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
             return [Colours.grayLight2, Colours.grayLight2]
+        } else {
+            return [Colours.clear, Colours.clear]
         }
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
         if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
             return [Colours.tabSelected, Colours.tabSelected]
-        } else {
+        } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
             return [Colours.grayLight2, Colours.grayLight2]
+        } else {
+            return [Colours.clear, Colours.clear]
         }
     }
     

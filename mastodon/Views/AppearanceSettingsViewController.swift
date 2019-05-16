@@ -1693,12 +1693,19 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
             if indexPath.row == 2 {
                 var filledSet1 = UIImage(named: "unfilledset")
                 var filledSet2 = UIImage(named: "unfilledset")
+                var filledSet3 = UIImage(named: "unfilledset")
                 if (UserDefaults.standard.object(forKey: "seghue1") == nil) || (UserDefaults.standard.object(forKey: "seghue1") as! Int == 0) {
                     filledSet1 = UIImage(named: "filledset")
                     filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "unfilledset")
                 } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 1) {
                     filledSet1 = UIImage(named: "unfilledset")
                     filledSet2 = UIImage(named: "filledset")
+                    filledSet3 = UIImage(named: "unfilledset")
+                } else if (UserDefaults.standard.object(forKey: "seghue1") as! Int == 2) {
+                    filledSet1 = UIImage(named: "unfilledset")
+                    filledSet2 = UIImage(named: "unfilledset")
+                    filledSet3 = UIImage(named: "filledset")
                 }
                 
                 Alertift.actionSheet(title: nil, message: nil)
@@ -1714,6 +1721,10 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
                     .action(.default("Subtle".localized), image: filledSet2) { (action, ind) in
                         
                         UserDefaults.standard.set(1, forKey: "seghue1")
+                    }
+                    .action(.default("None".localized), image: filledSet3) { (action, ind) in
+                        
+                        UserDefaults.standard.set(2, forKey: "seghue1")
                     }
                     .action(.cancel("Dismiss"))
                     .finally { action, index in
