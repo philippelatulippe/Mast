@@ -144,13 +144,13 @@ class ActionButtonCell: UITableViewCell {
         moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         
         if mainStatus.reblog?.favourited ?? mainStatus.favourited ?? false || StoreStruct.allLikes.contains(mainStatus.reblog?.id ?? mainStatus.id) {
-            likeButton.setImage(UIImage(named: "like"), for: .normal)
+            likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.orange), for: .normal)
         } else {
             likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         }
         
         if mainStatus.reblog?.reblogged ?? mainStatus.reblogged ?? false || StoreStruct.allBoosts.contains(mainStatus.reblog?.id ?? mainStatus.id) {
-            boostButton.setImage(UIImage(named: "boost"), for: .normal)
+            boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.green), for: .normal)
         } else {
             boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         }
@@ -256,7 +256,7 @@ class ActionButtonCell2: UITableViewCell {
         moreButton.setImage(UIImage(named: "more2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         
         if mainStatus.reblog?.favourited ?? mainStatus.favourited ?? false || StoreStruct.allLikes.contains(mainStatus.reblog?.id ?? mainStatus.id) {
-            likeButton.setImage(UIImage(named: "like"), for: .normal)
+            likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.orange), for: .normal)
         } else {
             likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         }

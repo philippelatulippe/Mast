@@ -213,6 +213,7 @@ class DetailCellImage: UITableViewCell {
                 let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag)", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
                 completeText2.append(textAfterIcon2)
                 attributedString.append(completeText2)
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 
                 self.toot.attributedText = attributedString
                 self.reloadInputViews()
@@ -235,6 +236,7 @@ class DetailCellImage: UITableViewCell {
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                     }
                 })
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 self.userName.attributedText = attributedString
                 self.reloadInputViews()
             }
@@ -262,6 +264,7 @@ class DetailCellImage: UITableViewCell {
                         
                     }
                 })
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 self.toot.attributedText = attributedString
                 self.reloadInputViews()
             }
@@ -282,6 +285,7 @@ class DetailCellImage: UITableViewCell {
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                     }
                 })
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 self.userName.attributedText = attributedString
                 self.reloadInputViews()
             }
@@ -538,7 +542,7 @@ class DetailCellImage: UITableViewCell {
             }
         }
         
-        userName.text = status.reblog?.account.displayName ?? status.account.displayName
+//        userName.text = status.reblog?.account.displayName ?? status.account.displayName
         if userName.text == "" {
             userName.text = " "
         }

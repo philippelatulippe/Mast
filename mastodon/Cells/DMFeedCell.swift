@@ -396,9 +396,9 @@ class DMFeedCell: SwipeTableViewCell {
         if (status.reblog?.favourited ?? status.favourited ?? false) && (status.reblog?.reblogged ?? status.reblogged ?? false) {
             self.moreImage.image = UIImage(named: "fifty")
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {
-            self.moreImage.image = UIImage(named: "boost")
+            self.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
         } else if (status.reblog?.favourited ?? status.favourited ?? false) || StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) {
-            self.moreImage.image = UIImage(named: "like")
+            self.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
         } else {
             if status.reblog?.poll ?? status.poll != nil {
                 self.moreImage.image = UIImage(named: "pollbubble")

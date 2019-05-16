@@ -1042,7 +1042,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
                         if sto[sender.tag].lastStatus?.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -1064,7 +1064,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
                         cell.hideSwipe(animated: true)
                     }
@@ -1098,7 +1098,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
                         if sto[sender.tag].lastStatus?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -1119,7 +1119,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             cell.moreImage.image = nil
                             cell.moreImage.image = UIImage(named: "fifty")
                         } else {
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
                         cell.hideSwipe(animated: true)
                     }
@@ -1189,7 +1189,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 if let cell = theTable.cellForRow(at: indexPath) as? DMFeedCell {
                                     if sto[indexPath.row].lastStatus?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "boost")
+                                        cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                     } else {
                                         cell.moreImage.image = nil
                                     }
@@ -1210,7 +1210,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
                                     } else {
-                                        cell.moreImage.image = UIImage(named: "like")
+                                        cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     }
                                     cell.hideSwipe(animated: true)
                                 }
@@ -1228,7 +1228,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     }
                 }
                 like.backgroundColor = Colours.white
-                like.image = UIImage(named: "like")
+                like.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                 like.transitionDelegate = ScaleTransition.default
                 like.textColor = Colours.tabUnselected
                 
@@ -1251,9 +1251,9 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 }
                 reply.backgroundColor = Colours.white
                 if sto[indexPath.row].lastStatus?.visibility == .direct {
-                    reply.image = UIImage(named: "direct23")
+                    reply.image = UIImage(named: "direct2")?.maskWithColor(color: Colours.lightBlue)
                 } else {
-                    reply.image = UIImage(named: "reply")
+                    reply.image = UIImage(named: "reply0")?.maskWithColor(color: Colours.lightBlue)
                 }
                 reply.transitionDelegate = ScaleTransition.default
                 reply.textColor = Colours.tabUnselected

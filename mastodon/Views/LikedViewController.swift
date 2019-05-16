@@ -1001,7 +1001,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     if let cell = theTable.cellForRow(at:IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
                         if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -1012,7 +1012,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
                         if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -1041,7 +1041,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
                         cell.hideSwipe(animated: true)
                     } else {
@@ -1054,7 +1054,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
                         cell.hideSwipe(animated: true)
                     }
@@ -1082,7 +1082,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
                         if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -1093,7 +1093,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
                         if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -1121,7 +1121,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
                         cell.hideSwipe(animated: true)
                     } else {
@@ -1134,7 +1134,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
                         cell.hideSwipe(animated: true)
                     }
@@ -1204,7 +1204,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
                                 if sto[indexPath.row].favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "like")
+                                    cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                 } else {
                                     cell.moreImage.image = nil
                                 }
@@ -1213,7 +1213,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                                 if sto[indexPath.row].favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "like")
+                                    cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                 } else {
                                     cell.moreImage.image = nil
                                 }
@@ -1235,7 +1235,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "fifty")
                                 } else {
-                                    cell.moreImage.image = UIImage(named: "boost")
+                                    cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                 }
                                 cell.hideSwipe(animated: true)
                             } else {
@@ -1244,7 +1244,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "fifty")
                                 } else {
-                                    cell.moreImage.image = UIImage(named: "boost")
+                                    cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                 }
                                 cell.hideSwipe(animated: true)
                             }
@@ -1266,7 +1266,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
             }
             boost.backgroundColor = Colours.white
-            boost.image = UIImage(named: "boost")
+            boost.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
             boost.transitionDelegate = ScaleTransition.default
             boost.textColor = Colours.tabUnselected
             
@@ -1289,7 +1289,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
                                 if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "boost")
+                                    cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                 } else {
                                     cell.moreImage.image = nil
                                 }
@@ -1298,7 +1298,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                                 if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "boost")
+                                    cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                 } else {
                                     cell.moreImage.image = nil
                                 }
@@ -1319,7 +1319,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "fifty")
                                 } else {
-                                    cell.moreImage.image = UIImage(named: "like")
+                                    cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                 }
                                 cell.hideSwipe(animated: true)
                             } else {
@@ -1328,7 +1328,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "fifty")
                                 } else {
-                                    cell.moreImage.image = UIImage(named: "like")
+                                    cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                 }
                                 cell.hideSwipe(animated: true)
                             }
@@ -1370,7 +1370,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
             
-            like.image = UIImage(named: "like")
+            like.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
             like.transitionDelegate = ScaleTransition.default
             like.textColor = Colours.tabUnselected
             
@@ -1419,7 +1419,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
             reply.textColor = Colours.tabUnselected
             
             if sto[indexPath.row].reblog?.visibility ?? sto[indexPath.row].visibility == .direct {
-                reply.image = UIImage(named: "direct2")
+                reply.image = UIImage(named: "direct2")?.maskWithColor(color: Colours.lightBlue)
                 if (UserDefaults.standard.object(forKey: "sworder") == nil) || (UserDefaults.standard.object(forKey: "sworder") as! Int == 0) {
                     return [reply, like]
                 } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 1) {
@@ -1434,7 +1434,7 @@ class LikedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     return [like, reply]
                 }
             } else {
-                reply.image = UIImage(named: "reply")
+                reply.image = UIImage(named: "reply0")?.maskWithColor(color: Colours.lightBlue)
                 if (UserDefaults.standard.object(forKey: "sworder") == nil) || (UserDefaults.standard.object(forKey: "sworder") as! Int == 0) {
                     return [reply, like, boost]
                 } else if (UserDefaults.standard.object(forKey: "sworder") as! Int == 1) {

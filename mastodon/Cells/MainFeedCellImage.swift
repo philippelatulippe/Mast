@@ -408,6 +408,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag)", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
                 completeText2.append(textAfterIcon2)
                 attributedString.append(completeText2)
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 self.toot.attributedText = attributedString
                 self.reloadInputViews()
             } else {
@@ -432,6 +433,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 let textAfterIcon2 = NSMutableAttributedString(string: " \(theUsernameTag)", attributes: [NSAttributedString.Key.foregroundColor: Colours.grayDark.withAlphaComponent(0.38)])
                 completeText2.append(textAfterIcon2)
                 attributedString.append(completeText2)
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 
                 self.toot.attributedText = attributedString
                 self.reloadInputViews()
@@ -455,6 +457,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                     }
                 })
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 completeText.append(attributedString)
                 self.userName.attributedText = completeText
                 self.reloadInputViews()
@@ -496,6 +499,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                     }
                 })
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 self.toot.attributedText = attributedString
                 self.reloadInputViews()
             }
@@ -519,6 +523,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                         attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                     }
                 })
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
                 self.userName.attributedText = attributedString
                 self.reloadInputViews()
             }
@@ -583,10 +588,10 @@ class MainFeedCellImage: SwipeTableViewCell {
             StoreStruct.allLikes.append(status.id)
             StoreStruct.allBoosts.append(status.id)
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {
-            self.moreImage.image = UIImage(named: "boost")
+            self.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
             StoreStruct.allBoosts.append(status.id)
         } else if (status.reblog?.favourited ?? status.favourited ?? false) || StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) {
-            self.moreImage.image = UIImage(named: "like")
+            self.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
             StoreStruct.allLikes.append(status.id)
         } else {
             if status.reblog?.poll ?? status.poll != nil {
@@ -677,6 +682,7 @@ class MainFeedCellImage: SwipeTableViewCell {
             imageCountTag.alpha = 1
         } else if status.reblog?.mediaAttachments.count ?? status.mediaAttachments.count > 1 && (UIApplication.shared.isSplitOrSlideOver || UIDevice.current.userInterfaceIdiom == .phone) {
             self.mainImageView.imageView?.image = nil
+            self.mainImageView.setImage(nil, for: .normal)
 //            self.mainImageView.imageView?.image = UIImage()
             if status.reblog?.mediaAttachments.count ?? status.mediaAttachments.count == 2 {
                 self.smallImage1.frame = CGRect(x: -2, y: 0, width: (UIScreen.main.bounds.width - 93)/2, height: 200)
@@ -833,10 +839,10 @@ class MainFeedCellImage: SwipeTableViewCell {
             StoreStruct.allLikes.append(status.id)
             StoreStruct.allBoosts.append(status.id)
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {
-            self.moreImage.image = UIImage(named: "boost")
+            self.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
             StoreStruct.allBoosts.append(status.id)
         } else if (status.reblog?.favourited ?? status.favourited ?? false) || StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) {
-            self.moreImage.image = UIImage(named: "like")
+            self.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
             StoreStruct.allLikes.append(status.id)
         } else {
             if status.reblog?.poll ?? status.poll != nil {

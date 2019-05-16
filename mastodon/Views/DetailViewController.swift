@@ -2402,7 +2402,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
                         if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -2413,7 +2413,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
                         if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -2441,7 +2441,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
                         cell.hideSwipe(animated: true)
                     } else {
@@ -2454,7 +2454,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
                         cell.hideSwipe(animated: true)
                     }
@@ -2480,7 +2480,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 2)) as? MainFeedCell {
                         if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -2491,7 +2491,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 2)) as! MainFeedCellImage
                         if sto[sender.tag].reblog?.reblogged ?? sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -2519,7 +2519,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
                         cell.hideSwipe(animated: true)
                     } else {
@@ -2532,7 +2532,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
                         cell.hideSwipe(animated: true)
                     }
@@ -2558,7 +2558,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if let cell = theTable.cellForRow(at:IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
                         if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -2569,7 +2569,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
                         if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -2598,7 +2598,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
                         cell.hideSwipe(animated: true)
                     } else {
@@ -2611,7 +2611,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
                         cell.hideSwipe(animated: true)
                     }
@@ -2637,7 +2637,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if let cell = theTable.cellForRow(at:IndexPath(row: sender.tag, section: 2)) as? MainFeedCell {
                         if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -2648,7 +2648,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 2)) as! MainFeedCellImage
                         if sto[sender.tag].reblog?.favourited ?? sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].reblog?.id ?? sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -2677,7 +2677,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
                         cell.hideSwipe(animated: true)
                     } else {
@@ -2690,7 +2690,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
                         cell.hideSwipe(animated: true)
                     }
@@ -2918,11 +2918,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             if self.mainStatus[0].visibility == .direct {
                 if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell2 {
-                ce.likeButton.setImage(UIImage(named: "like"), for: .normal)
+                ce.likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.orange), for: .normal)
                 }
             } else {
                 if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell {
-                ce.likeButton.setImage(UIImage(named: "like"), for: .normal)
+                ce.likeButton.setImage(UIImage(named: "like0")?.maskWithColor(color: Colours.orange), for: .normal)
                 }
             }
             
@@ -2987,7 +2987,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         } else {
             if let ce = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as? ActionButtonCell {
-            ce.boostButton.setImage(UIImage(named: "boost"), for: .normal)
+            ce.boostButton.setImage(UIImage(named: "boost0")?.maskWithColor(color: Colours.green), for: .normal)
             }
             
             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -4817,7 +4817,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
             boost.backgroundColor = Colours.white
-            boost.image = UIImage(named: "boost")
+            boost.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
             boost.transitionDelegate = ScaleTransition.default
             boost.textColor = Colours.tabUnselected
             
@@ -4837,7 +4837,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
                                 if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "boost")
+                                    cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                 } else {
                                     cell.moreImage.image = nil
                                 }
@@ -4845,7 +4845,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             } else if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCellImage {
                                 if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "boost")
+                                    cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                 } else {
                                     cell.moreImage.image = nil
                                 }
@@ -4853,7 +4853,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             } else if let cell = tableView.cellForRow(at: indexPath) as? RepliesCell {
                                 if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "boost")
+                                    cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                 } else {
                                     cell.moreImage.image = nil
                                 }
@@ -4861,7 +4861,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             } else if let cell = tableView.cellForRow(at: indexPath) as? RepliesCellImage {
                                 if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "boost")
+                                    cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                 } else {
                                     cell.moreImage.image = nil
                                 }
@@ -4882,7 +4882,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "fifty")
                                 } else {
-                                    cell.moreImage.image = UIImage(named: "like")
+                                    cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                 }
                                 cell.hideSwipe(animated: true)
                             } else if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCellImage {
@@ -4890,7 +4890,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "fifty")
                                 } else {
-                                    cell.moreImage.image = UIImage(named: "like")
+                                    cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                 }
                                 cell.hideSwipe(animated: true)
                             } else if let cell = tableView.cellForRow(at: indexPath) as? RepliesCell {
@@ -4898,7 +4898,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "fifty")
                                 } else {
-                                    cell.moreImage.image = UIImage(named: "like")
+                                    cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                 }
                                 cell.hideSwipe(animated: true)
                             } else if let cell = tableView.cellForRow(at: indexPath) as? RepliesCellImage {
@@ -4906,7 +4906,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     cell.moreImage.image = nil
                                     cell.moreImage.image = UIImage(named: "fifty")
                                 } else {
-                                    cell.moreImage.image = UIImage(named: "like")
+                                    cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                 }
                                 cell.hideSwipe(animated: true)
                             }
@@ -4932,7 +4932,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
             like.backgroundColor = Colours.white
-            like.image = UIImage(named: "like")
+            like.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
             like.transitionDelegate = ScaleTransition.default
             like.textColor = Colours.tabUnselected
             
@@ -4962,7 +4962,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
             reply.backgroundColor = Colours.white
-            reply.image = UIImage(named: "reply")
+            reply.image = UIImage(named: "reply0")?.maskWithColor(color: Colours.lightBlue)
             reply.transitionDelegate = ScaleTransition.default
             reply.textColor = Colours.tabUnselected
             

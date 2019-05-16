@@ -3126,7 +3126,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? NotificationCell {
                         if sto[sender.tag].status?.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].status?.id ?? "" ) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -3137,7 +3137,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as! NotificationCellImage
                         if sto[sender.tag].status?.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].status?.id ?? "" ) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -3165,7 +3165,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
                         cell.hideSwipe(animated: true)
                     } else {
@@ -3178,7 +3178,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
                         cell.hideSwipe(animated: true)
                     }
@@ -3218,7 +3218,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? NotificationCell {
                         if sto[sender.tag].status?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].status?.id ?? "" ) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -3229,7 +3229,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as! NotificationCellImage
                         if sto[sender.tag].status?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].status?.id ?? "" ) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "boost")
+                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         } else {
                             cell.moreImage.image = nil
                         }
@@ -3256,7 +3256,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
                         cell.hideSwipe(animated: true)
                     } else {
@@ -3269,7 +3269,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
-                            cell.moreImage.image = UIImage(named: "like")
+                            cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
                         cell.hideSwipe(animated: true)
                     }
@@ -3359,7 +3359,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 if let cell = theTable.cellForRow(at: indexPath) as? MainFeedCell {
                                     if sto[indexPath.row].status?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "boost")
+                                        cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                     } else {
                                         cell.moreImage.image = nil
                                     }
@@ -3368,7 +3368,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let cell = theTable.cellForRow(at: indexPath) as! MainFeedCellImage
                                     if sto[indexPath.row].status?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "boost")
+                                        cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                     } else {
                                         cell.moreImage.image = nil
                                     }
@@ -3389,7 +3389,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
                                     } else {
-                                        cell.moreImage.image = UIImage(named: "like")
+                                        cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     }
                                     cell.hideSwipe(animated: true)
                                 } else {
@@ -3398,7 +3398,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
                                     } else {
-                                        cell.moreImage.image = UIImage(named: "like")
+                                        cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     }
                                     cell.hideSwipe(animated: true)
                                 }
@@ -3419,7 +3419,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     }
                 }
                 like.backgroundColor = Colours.white
-                like.image = UIImage(named: "like")
+                like.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                 like.transitionDelegate = ScaleTransition.default
                 like.textColor = Colours.tabUnselected
                 
@@ -3445,9 +3445,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 }
                 reply.backgroundColor = Colours.white
                 if sto[indexPath.row].status?.visibility == .direct {
-                    reply.image = UIImage(named: "direct23")
+                    reply.image = UIImage(named: "direct2")?.maskWithColor(color: Colours.lightBlue)
                 } else {
-                    reply.image = UIImage(named: "reply")
+                    reply.image = UIImage(named: "reply0")?.maskWithColor(color: Colours.lightBlue)
                 }
                 reply.transitionDelegate = ScaleTransition.default
                 reply.textColor = Colours.tabUnselected
@@ -3902,7 +3902,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
                                     if sto[indexPath.row].status?.favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "like")
+                                        cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     } else {
                                         cell.moreImage.image = nil
                                     }
@@ -3911,7 +3911,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
                                     if sto[indexPath.row].status?.favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "like")
+                                        cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     } else {
                                         cell.moreImage.image = nil
                                     }
@@ -3933,7 +3933,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
                                     } else {
-                                        cell.moreImage.image = UIImage(named: "boost")
+                                        cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                     }
                                     cell.hideSwipe(animated: true)
                                 } else {
@@ -3942,7 +3942,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                             cell.moreImage.image = nil
                                             cell.moreImage.image = UIImage(named: "fifty")
                                         } else {
-                                            cell.moreImage.image = UIImage(named: "boost")
+                                            cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                         }
                                         cell.hideSwipe(animated: true)
                                     }
@@ -3966,7 +3966,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     }
                 }
                 boost.backgroundColor = Colours.white
-                boost.image = UIImage(named: "boost")
+                boost.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                 boost.transitionDelegate = ScaleTransition.default
                 boost.textColor = Colours.tabUnselected
                 
@@ -3990,7 +3990,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
                                     if sto[indexPath.row].status?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "boost")
+                                        cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                     } else {
                                         cell.moreImage.image = nil
                                     }
@@ -3999,7 +3999,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
                                     if sto[indexPath.row].status?.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "boost")
+                                        cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                     } else {
                                         cell.moreImage.image = nil
                                     }
@@ -4020,7 +4020,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
                                     } else {
-                                        cell.moreImage.image = UIImage(named: "like")
+                                        cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     }
                                     cell.hideSwipe(animated: true)
                                 } else {
@@ -4029,7 +4029,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         cell.moreImage.image = nil
                                         cell.moreImage.image = UIImage(named: "fifty")
                                     } else {
-                                        cell.moreImage.image = UIImage(named: "like")
+                                        cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     }
                                     cell.hideSwipe(animated: true)
                                 }
@@ -4050,7 +4050,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     }
                 }
                 like.backgroundColor = Colours.white
-                like.image = UIImage(named: "like")
+                like.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                 like.transitionDelegate = ScaleTransition.default
                 like.textColor = Colours.tabUnselected
                 
@@ -4076,9 +4076,9 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 }
                 reply.backgroundColor = Colours.white
                 if sto[indexPath.row].status?.visibility == .direct {
-                    reply.image = UIImage(named: "direct23")
+                    reply.image = UIImage(named: "direct2")?.maskWithColor(color: Colours.lightBlue)
                 } else {
-                    reply.image = UIImage(named: "reply")
+                    reply.image = UIImage(named: "reply0")?.maskWithColor(color: Colours.lightBlue)
                 }
                 reply.transitionDelegate = ScaleTransition.default
                 reply.textColor = Colours.tabUnselected

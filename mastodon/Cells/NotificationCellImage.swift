@@ -400,7 +400,7 @@ class NotificationCellImage: SwipeTableViewCell {
             date.textColor = Colours.grayDark.withAlphaComponent(0.38)
             userName.text = "\(status.account.displayName) mentioned you"
             if status.status?.visibility == .direct {
-                typeImage.setImage(UIImage(named: "direct")?.maskWithColor(color: Colours.purple), for: .normal)
+                typeImage.setImage(UIImage(named: "direct")?.maskWithColor(color: Colours.lightBlue), for: .normal)
             } else if status.status?.visibility == .unlisted {
                 typeImage.setImage(UIImage(named: "rep4"), for: .normal)
             } else if status.status?.visibility == .private {
@@ -412,7 +412,7 @@ class NotificationCellImage: SwipeTableViewCell {
         if status.type == .follow {
             profileImageView.isUserInteractionEnabled = false
             userName.text = "\(status.account.displayName) followed you"
-            typeImage.setImage(UIImage(named: "follow3")?.maskWithColor(color: UIColor(red: 100/255.0, green: 210/255.0, blue: 110/255.0, alpha: 1.0)), for: .normal)
+            typeImage.setImage(UIImage(named: "follow3")?.maskWithColor(color: Colours.redBright), for: .normal)
             //toot.textColor = Colours.black.withAlphaComponent(0.3)
             if (UserDefaults.standard.object(forKey: "subtleToggle") == nil) || (UserDefaults.standard.object(forKey: "subtleToggle") as! Int == 0) {
                 toot.textColor = Colours.black
@@ -460,6 +460,7 @@ class NotificationCellImage: SwipeTableViewCell {
                     attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                 }
             })
+            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
             self.toot.attributedText = attributedString
             self.reloadInputViews()
         }
@@ -484,6 +485,7 @@ class NotificationCellImage: SwipeTableViewCell {
                     attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                 }
             })
+            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
             self.userName.attributedText = attributedString
             self.reloadInputViews()
         }
@@ -531,10 +533,10 @@ class NotificationCellImage: SwipeTableViewCell {
             StoreStruct.allLikes.append(status.status?.id ?? "")
             StoreStruct.allBoosts.append(status.status?.id ?? "")
         } else if status.status?.reblogged ?? false {
-            self.moreImage.image = UIImage(named: "boost")
+            self.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
             StoreStruct.allBoosts.append(status.status?.id ?? "")
         } else if (status.status?.favourited ?? false) || StoreStruct.allLikes.contains(status.id) {
-            self.moreImage.image = UIImage(named: "like")
+            self.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
             StoreStruct.allLikes.append(status.status?.id ?? "")
         } else {
             self.moreImage.image = nil
@@ -576,6 +578,7 @@ class NotificationCellImage: SwipeTableViewCell {
             imageCountTag.alpha = 1
         } else if status.status?.reblog?.mediaAttachments.count ?? status.status?.mediaAttachments.count ?? 0 > 1 && (UIApplication.shared.isSplitOrSlideOver || UIDevice.current.userInterfaceIdiom == .phone) {
             self.mainImageView.imageView?.image = nil
+            self.mainImageView.setImage(nil, for: .normal)
 //            self.mainImageView.imageView?.image = UIImage()
             if status.status?.reblog?.mediaAttachments.count ?? status.status?.mediaAttachments.count == 2 {
                 self.smallImage1.frame = CGRect(x: -2, y: 0, width: (UIScreen.main.bounds.width - 127)/2, height: 200)
@@ -759,10 +762,10 @@ class NotificationCellImage: SwipeTableViewCell {
             StoreStruct.allLikes.append(status.status?.id ?? "")
             StoreStruct.allBoosts.append(status.status?.id ?? "")
         } else if status.status?.reblogged ?? false {
-            self.moreImage.image = UIImage(named: "boost")
+            self.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
             StoreStruct.allBoosts.append(status.status?.id ?? "")
         } else if (status.status?.favourited ?? false) || StoreStruct.allLikes.contains(status.id) {
-            self.moreImage.image = UIImage(named: "like")
+            self.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
             StoreStruct.allLikes.append(status.status?.id ?? "")
         } else {
             self.moreImage.image = nil

@@ -309,7 +309,7 @@ class NotificationCell: SwipeTableViewCell {
             userName.text = "\(status.account.displayName) mentioned you"
             if status.status?.visibility == .direct {
                 self.boost1.alpha = 0
-                typeImage.setImage(UIImage(named: "direct")?.maskWithColor(color: Colours.purple), for: .normal)
+                typeImage.setImage(UIImage(named: "direct")?.maskWithColor(color: Colours.lightBlue), for: .normal)
             } else if status.status?.visibility == .unlisted {
                 typeImage.setImage(UIImage(named: "rep4"), for: .normal)
             } else if status.status?.visibility == .private {
@@ -325,7 +325,7 @@ class NotificationCell: SwipeTableViewCell {
             more1.alpha = 0
             profileImageView.isUserInteractionEnabled = false
             userName.text = "\(status.account.displayName) followed you"
-            typeImage.setImage(UIImage(named: "follow3")?.maskWithColor(color: UIColor(red: 100/255.0, green: 210/255.0, blue: 110/255.0, alpha: 1.0)), for: .normal)
+            typeImage.setImage(UIImage(named: "follow3")?.maskWithColor(color: Colours.redBright), for: .normal)
             if (UserDefaults.standard.object(forKey: "subtleToggle") == nil) || (UserDefaults.standard.object(forKey: "subtleToggle") as! Int == 0) {
                 toot.textColor = Colours.black
                 userName.textColor = Colours.black
@@ -372,6 +372,7 @@ class NotificationCell: SwipeTableViewCell {
                     attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                 }
             })
+            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
             self.toot.attributedText = attributedString
             self.reloadInputViews()
         }
@@ -394,6 +395,7 @@ class NotificationCell: SwipeTableViewCell {
                     attributedString.replaceCharacters(in: range, with: attrStringWithImage)
                 }
             })
+            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: Colours.black, range: NSMakeRange(0, attributedString.length))
             self.userName.attributedText = attributedString
             self.reloadInputViews()
         }
@@ -430,10 +432,10 @@ class NotificationCell: SwipeTableViewCell {
             StoreStruct.allLikes.append(status.status?.id ?? "")
             StoreStruct.allBoosts.append(status.status?.id ?? "")
         } else if status.status?.reblogged ?? false {
-            self.moreImage.image = UIImage(named: "boost")
+            self.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
             StoreStruct.allBoosts.append(status.status?.id ?? "")
         } else if (status.status?.favourited ?? false) || StoreStruct.allLikes.contains(status.id) {
-            self.moreImage.image = UIImage(named: "like")
+            self.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
             StoreStruct.allLikes.append(status.status?.id ?? "")
         } else {
             self.moreImage.image = nil
@@ -475,10 +477,10 @@ class NotificationCell: SwipeTableViewCell {
             StoreStruct.allLikes.append(status.status?.id ?? "")
             StoreStruct.allBoosts.append(status.status?.id ?? "")
         } else if status.status?.reblogged ?? false {
-            self.moreImage.image = UIImage(named: "boost")
+            self.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
             StoreStruct.allBoosts.append(status.status?.id ?? "")
         } else if (status.status?.favourited ?? false) || StoreStruct.allLikes.contains(status.id) {
-            self.moreImage.image = UIImage(named: "like")
+            self.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
             StoreStruct.allLikes.append(status.status?.id ?? "")
         } else {
             self.moreImage.image = nil
