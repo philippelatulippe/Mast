@@ -1764,6 +1764,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if self.allReplies[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell80", for: indexPath) as! RepliesCell
+                    cell.preservesSuperviewLayoutMargins = false
                     cell.delegate = self
                     cell.configure(self.allReplies[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
@@ -1977,8 +1978,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             // save latest inReplyToID
                             self.latestInRepID = self.allReplies[indexPath.row].inReplyToID ?? ""
                             
-                            self.replyDepth = self.replyDepth + 20
-                            cell.frame.origin.x = CGFloat(self.replyDepth)
+                            self.replyDepth = self.replyDepth + 30
+                            cell.layoutMargins = .zero
+                            cell.contentView.layoutMargins.left = CGFloat(self.replyDepth)
+                            cell.separatorInset.left = CGFloat(self.replyDepth)
+                            cell.configure2(self.replyDepth)
                             
                         } else {
                             // could be on same level as previous one, or level behind/previous to the left
@@ -1986,12 +1990,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             if self.allReplies[indexPath.row].inReplyToID == self.latestInRepID {
                                 // same level as previous
                                 
-                                cell.frame.origin.x = CGFloat(self.replyDepth)
+                                cell.layoutMargins = .zero
+                                cell.contentView.layoutMargins.left = CGFloat(self.replyDepth)
+                                cell.separatorInset.left = CGFloat(self.replyDepth)
+                                cell.configure2(self.replyDepth)
                             } else {
                                 // one level behind/previous to the left
                                 
-                                self.replyDepth = self.replyDepth - 20
-                                cell.frame.origin.x = CGFloat(self.replyDepth)
+                                self.replyDepth = self.replyDepth - 0
+                                cell.layoutMargins = .zero
+                                cell.contentView.layoutMargins.left = CGFloat(self.replyDepth)
+                                cell.separatorInset.left = CGFloat(self.replyDepth)
+                                cell.configure2(self.replyDepth)
                             }
                         }
                     }
@@ -2000,6 +2010,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 } else {
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell90", for: indexPath) as! RepliesCellImage
+                    cell.preservesSuperviewLayoutMargins = false
                     cell.delegate = self
                     cell.configure(self.allReplies[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
@@ -2213,20 +2224,29 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             // save latest inReplyToID
                             self.latestInRepID = self.allReplies[indexPath.row].inReplyToID ?? ""
                             
-                            self.replyDepth = self.replyDepth + 20
-                            cell.frame.origin.x = CGFloat(self.replyDepth)
+                            self.replyDepth = self.replyDepth + 30
+                            cell.layoutMargins = .zero
+                            cell.contentView.layoutMargins.left = CGFloat(self.replyDepth)
+                            cell.separatorInset.left = CGFloat(self.replyDepth)
+                            cell.configure2(self.replyDepth)
                         } else {
                             // could be on same level as previous one, or level behind/previous to the left
                             // check if saved inReplyToID is the same
                             if self.allReplies[indexPath.row].inReplyToID == self.latestInRepID {
                                 // same level as previous
                                 
-                                cell.frame.origin.x = CGFloat(self.replyDepth)
+                                cell.layoutMargins = .zero
+                                cell.contentView.layoutMargins.left = CGFloat(self.replyDepth)
+                                cell.separatorInset.left = CGFloat(self.replyDepth)
+                                cell.configure2(self.replyDepth)
                             } else {
                                 // one level behind/previous to the left
                                 
-                                self.replyDepth = self.replyDepth - 20
-                                cell.frame.origin.x = CGFloat(self.replyDepth)
+                                self.replyDepth = self.replyDepth - 0
+                                cell.layoutMargins = .zero
+                                cell.contentView.layoutMargins.left = CGFloat(self.replyDepth)
+                                cell.separatorInset.left = CGFloat(self.replyDepth)
+                                cell.configure2(self.replyDepth)
                             }
                         }
                     }

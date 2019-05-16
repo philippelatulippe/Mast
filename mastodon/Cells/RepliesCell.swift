@@ -126,6 +126,11 @@ class RepliesCell: SwipeTableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure2(_ replyDepth: Int) {
+        self.bounds.origin.x = CGFloat(replyDepth)
+        self.layoutSubviews()
+    }
+    
     func configure(_ status: Status) {
         
         toot.mentionColor = Colours.tabSelected
