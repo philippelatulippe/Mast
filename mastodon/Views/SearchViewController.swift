@@ -403,7 +403,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
                         if sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
@@ -412,7 +412,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
                         if sto[sender.tag].favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
@@ -471,7 +471,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? MainFeedCell {
                         if sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
@@ -480,7 +480,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                         let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! MainFeedCellImage
                         if sto[sender.tag].reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].id) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
@@ -1188,7 +1188,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                             if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
                                 if sto[indexPath.row].favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "fifty")
+                                    cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                 } else {
                                     cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                 }
@@ -1197,7 +1197,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                                 let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                                 if sto[indexPath.row].favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "fifty")
+                                    cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                 } else {
                                     cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                 }
@@ -1272,7 +1272,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                             if let cell = tableView.cellForRow(at: indexPath) as? MainFeedCell {
                                 if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "fifty")
+                                    cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                 } else {
                                     cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                 }
@@ -1281,7 +1281,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                                 let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
                                 if sto[indexPath.row].reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].id) {
                                     cell.moreImage.image = nil
-                                    cell.moreImage.image = UIImage(named: "fifty")
+                                    cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                 } else {
                                     cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                 }
@@ -1812,7 +1812,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                             }
                             
                         }
-                        .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
+                        .action(.default("Report".localized), image: UIImage(named: "flagrep")) { (action, ind) in
                              
                             
                             

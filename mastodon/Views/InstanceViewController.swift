@@ -368,7 +368,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
         let vw = UIView()
         vw.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40)
         let title = UILabel()
-        title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
+        title.frame = CGRect(x: 10, y: 8, width: self.view.bounds.width, height: 30)
         title.text = StoreStruct.instanceText.lowercased()
         title.textColor = Colours.grayDark2
         title.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
@@ -1013,7 +1013,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
@@ -1026,7 +1026,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
@@ -1093,7 +1093,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
@@ -1106,7 +1106,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
@@ -1622,7 +1622,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                             }
                             
                         }
-                        .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
+                        .action(.default("Report".localized), image: UIImage(named: "flagrep")) { (action, ind) in
                              
                             
                             

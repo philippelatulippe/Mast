@@ -759,7 +759,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let vw = UIView()
         vw.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40)
         let title = UILabel()
-        title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
+        title.frame = CGRect(x: 10, y: 8, width: self.view.bounds.width, height: 30)
         if section == 0 {
             title.text = "Recent"
         } else {
@@ -1062,7 +1062,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
                         if sto[sender.tag].lastStatus!.favourited ?? false || StoreStruct.allLikes.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                         }
@@ -1117,7 +1117,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                     if let cell = theTable.cellForRow(at: IndexPath(row: sender.tag, section: rrr)) as? DMFeedCell {
                         if sto[sender.tag].lastStatus!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[sender.tag].lastStatus?.id ?? "" ) {
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                         }
@@ -1208,7 +1208,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                 if let cell = theTable.cellForRow(at: indexPath) as? DMFeedCell {
                                     if sto[indexPath.row].lastStatus!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].lastStatus?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "fifty")
+                                        cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                     } else {
                                         cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     }
@@ -1426,7 +1426,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             }
                             
                         }
-                        .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
+                        .action(.default("Report".localized), image: UIImage(named: "flagrep")) { (action, ind) in
                              
                             
                             

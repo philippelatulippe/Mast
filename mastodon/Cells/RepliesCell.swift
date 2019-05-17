@@ -358,7 +358,7 @@ class RepliesCell: SwipeTableViewCell {
         
         self.moreImage.contentMode = .scaleAspectFit
         if (status.reblog?.favourited ?? status.favourited ?? false) && (status.reblog?.reblogged ?? status.reblogged ?? false) {
-            self.moreImage.image = UIImage(named: "fifty")
+            self.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {
             self.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
         } else if (status.reblog?.favourited ?? status.favourited ?? false) || StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) {
@@ -410,7 +410,7 @@ class RepliesCell: SwipeTableViewCell {
     func configure0(_ status: Status) {
         self.moreImage.contentMode = .scaleAspectFit
         if (status.reblog?.favourited ?? status.favourited ?? false) && (status.reblog?.reblogged ?? status.reblogged ?? false) {
-            self.moreImage.image = UIImage(named: "fifty")
+            self.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {
             self.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
         } else if (status.reblog?.favourited ?? status.favourited ?? false) || StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) {

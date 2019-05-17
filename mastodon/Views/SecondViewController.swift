@@ -1589,7 +1589,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         let vw = UIView()
         vw.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40)
         let title = UILabel()
-        title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
+        title.frame = CGRect(x: 10, y: 8, width: self.view.bounds.width, height: 30)
         if section == 0 {
             title.text = "Activity Graph"
         } else {
@@ -3165,7 +3165,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
@@ -3178,7 +3178,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.boost1.setTitle("\((Int(cell.boost1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.boost1.setImage(UIImage(named: "boost3")?.maskWithColor(color: Colours.green), for: .normal)
@@ -3256,7 +3256,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
@@ -3269,7 +3269,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
                             cell.moreImage.image = nil
-                            cell.moreImage.image = UIImage(named: "fifty")
+                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                         } else {
                             cell.like1.setTitle("\((Int(cell.like1.titleLabel?.text ?? "0") ?? 1) + 1)", for: .normal)
                             cell.like1.setImage(UIImage(named: "like3")?.maskWithColor(color: Colours.orange), for: .normal)
@@ -3391,7 +3391,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 if let cell = theTable.cellForRow(at: indexPath) as? MainFeedCell {
                                     if sto[indexPath.row].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "fifty")
+                                        cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                     } else {
                                         cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     }
@@ -3400,7 +3400,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let cell = theTable.cellForRow(at: indexPath) as! MainFeedCellImage
                                     if sto[indexPath.row].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "fifty")
+                                        cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                     } else {
                                         cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     }
@@ -3622,7 +3622,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             }
                             
                         }
-                        .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
+                        .action(.default("Report".localized), image: UIImage(named: "flagrep")) { (action, ind) in
                             
                             
                             Alertift.actionSheet()
@@ -3935,7 +3935,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
                                     if sto[indexPath.row].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "fifty")
+                                        cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                     } else {
                                         cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                     }
@@ -3944,7 +3944,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     if let cell = theTable.cellForRow(at: indexPath) as? NotificationCellImage {
                                         if sto[indexPath.row].status!.favourited ?? false || StoreStruct.allLikes.contains(sto[indexPath.row].status?.id ?? "" ) {
                                             cell.moreImage.image = nil
-                                            cell.moreImage.image = UIImage(named: "fifty")
+                                            cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                         } else {
                                             cell.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
                                         }
@@ -4022,7 +4022,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
                                     if sto[indexPath.row].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "fifty")
+                                        cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                     } else {
                                         cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     }
@@ -4031,7 +4031,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage
                                     if sto[indexPath.row].status!.reblogged ?? false || StoreStruct.allBoosts.contains(sto[indexPath.row].status?.id ?? "" ) {
                                         cell.moreImage.image = nil
-                                        cell.moreImage.image = UIImage(named: "fifty")
+                                        cell.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
                                     } else {
                                         cell.moreImage.image = UIImage(named: "like0")?.maskWithColor(color: Colours.orange)
                                     }
@@ -4271,7 +4271,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             }
                             
                         }
-                        .action(.default("Report".localized), image: UIImage(named: "report")) { (action, ind) in
+                        .action(.default("Report".localized), image: UIImage(named: "flagrep")) { (action, ind) in
                             
                             
                             

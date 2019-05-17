@@ -117,7 +117,7 @@ class DMFeedCell: SwipeTableViewCell {
         ]
         
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[readIndi(8)]-5-[image(40)]-13-[name]-5-[artist]-(>=5)-[date]-20-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[readIndi(8)]-5-[image(40)]-13-[name]-5-[artist]-(>=5)-[date]-10-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-43-[image2(26)]-(>=20)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[readIndi(8)]-5-[image(40)]-13-[episodes]-20-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[image(40)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
@@ -394,7 +394,7 @@ class DMFeedCell: SwipeTableViewCell {
         
         self.moreImage.contentMode = .scaleAspectFit
         if (status.reblog?.favourited ?? status.favourited ?? false) && (status.reblog?.reblogged ?? status.reblogged ?? false) {
-            self.moreImage.image = UIImage(named: "fifty")
+            self.moreImage.image = UIImage(named: "fifty")?.maskWithColor(color: Colours.lightBlue)
         } else if status.reblog?.reblogged ?? status.reblogged ?? false {
             self.moreImage.image = UIImage(named: "boost0")?.maskWithColor(color: Colours.green)
         } else if (status.reblog?.favourited ?? status.favourited ?? false) || StoreStruct.allLikes.contains(status.reblog?.id ?? status.id) {

@@ -1316,7 +1316,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         let vw = UIView()
         vw.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 34)
         let title = UILabel()
-        title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 26)
+        title.frame = CGRect(x: 10, y: 8, width: self.view.bounds.width, height: 26)
         if section == 0 {
             title.text = "Your Accounts"
         } else if section == 2 {

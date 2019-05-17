@@ -148,7 +148,7 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
         let vw = UIView()
         vw.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40)
         let title = UILabel()
-        title.frame = CGRect(x: 20, y: 8, width: self.view.bounds.width, height: 30)
+        title.frame = CGRect(x: 10, y: 8, width: self.view.bounds.width, height: 30)
         if self.statusFollows.count == 0 {
             title.text = "No Endorsed Accounts"
         } else {
