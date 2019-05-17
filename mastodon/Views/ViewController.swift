@@ -3170,26 +3170,26 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.newestText = textField.text ?? ""
         if self.typeOfSearch == 0 {
             let theText = textField.text?.replacingOccurrences(of: "#", with: "")
-        let request = Timelines.tag(theText ?? "")
-        StoreStruct.client.run(request) { (statuses) in
-            if let stat = (statuses.value) {
-                StoreStruct.statusSearch = stat
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+            let request = Timelines.tag(theText ?? "")
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    StoreStruct.statusSearch = stat
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }
-        }
         if self.typeOfSearch == 1 {
-                    let request = Search.search(query: textField.text ?? "")
-                    StoreStruct.client.run(request) { (statuses) in
-                        if let stat = (statuses.value) {
-                            StoreStruct.statusSearch = stat.statuses
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        }
+            let request = Search.search(query: textField.text ?? "")
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    StoreStruct.statusSearch = stat.statuses
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                     }
+                }
+            }
         }
         if self.typeOfSearch == 2 {
             

@@ -40,15 +40,15 @@ class RepliesCellImage: SwipeTableViewCell {
         moreImage.backgroundColor = Colours.clear
         warningB.backgroundColor = Colours.clear
         
-        indi.backgroundColor = Colours.tabUnselected
+        indi.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
         indi.layer.cornerRadius = 2
-        indi2.backgroundColor = Colours.tabUnselected
+        indi2.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
         indi2.layer.cornerRadius = 2
-        indi3.backgroundColor = Colours.tabUnselected
+        indi3.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
         indi3.layer.cornerRadius = 2
-        indi4.backgroundColor = Colours.tabUnselected
+        indi4.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
         indi4.layer.cornerRadius = 2
-        indi5.backgroundColor = Colours.tabUnselected
+        indi5.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
         indi5.layer.cornerRadius = 2
         
 //        userName.adjustsFontForContentSizeCategory = true
@@ -239,28 +239,28 @@ class RepliesCellImage: SwipeTableViewCell {
         let depth = replyDepth/30
         if depth == 0 {
             self.indi.backgroundColor = Colours.tabSelected
-            self.indi2.backgroundColor = Colours.tabUnselected
-            self.indi3.backgroundColor = Colours.tabUnselected
-            self.indi4.backgroundColor = Colours.tabUnselected
-            self.indi5.backgroundColor = Colours.tabUnselected
+            self.indi2.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
+            self.indi3.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
+            self.indi4.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
+            self.indi5.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
         } else if depth == 1 {
             self.indi.backgroundColor = Colours.tabSelected
             self.indi2.backgroundColor = Colours.tabSelected
-            self.indi3.backgroundColor = Colours.tabUnselected
-            self.indi4.backgroundColor = Colours.tabUnselected
-            self.indi5.backgroundColor = Colours.tabUnselected
+            self.indi3.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
+            self.indi4.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
+            self.indi5.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
         } else if depth == 2 {
             self.indi.backgroundColor = Colours.tabSelected
             self.indi2.backgroundColor = Colours.tabSelected
             self.indi3.backgroundColor = Colours.tabSelected
-            self.indi4.backgroundColor = Colours.tabUnselected
-            self.indi5.backgroundColor = Colours.tabUnselected
+            self.indi4.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
+            self.indi5.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
         } else if depth == 3 {
             self.indi.backgroundColor = Colours.tabSelected
             self.indi2.backgroundColor = Colours.tabSelected
             self.indi3.backgroundColor = Colours.tabSelected
             self.indi4.backgroundColor = Colours.tabSelected
-            self.indi5.backgroundColor = Colours.tabUnselected
+            self.indi5.backgroundColor = Colours.grayDark.withAlphaComponent(0.21)
         } else {
             self.indi.backgroundColor = Colours.tabSelected
             self.indi2.backgroundColor = Colours.tabSelected

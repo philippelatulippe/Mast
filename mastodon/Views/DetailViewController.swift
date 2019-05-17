@@ -1891,6 +1891,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         
                         self.replyDepth = 0
                         cell.configure2(self.replyDepth)
+                        cell.tag = 0
                         
                     } else {
                         // check previous reply's state
@@ -1978,27 +1979,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         if self.allReplies[indexPath.row].inReplyToID == self.allReplies[indexPath.row - 1].id {
                             // shift the cell one depth in (it's a reply of the one above)
-                            // save latest inReplyToID
-                            self.latestInRepID = self.allReplies[indexPath.row].inReplyToID ?? ""
-                            
-                            self.replyDepth = self.replyDepth + 30
-                            cell.separatorInset.left = CGFloat(self.replyDepth)
-                            cell.configure2(self.replyDepth)
-                            
+                            if cell.tag > 0 {} else {
+                                self.replyDepth = self.replyDepth + 30
+                                cell.configure2(self.replyDepth)
+                                cell.tag = self.replyDepth
+                            }
+                        } else if self.allReplies[indexPath.row].inReplyToID == self.allReplies[indexPath.row - 1].inReplyToID ?? "" {
+                            // same level as previous
+                            if cell.tag > 0 {} else {
+                                cell.configure2(self.replyDepth)
+                                cell.tag = self.replyDepth
+                            }
                         } else {
-                            // could be on same level as previous one, or level behind/previous to the left
-                            // check if saved inReplyToID is the same
-                            if self.allReplies[indexPath.row].inReplyToID == self.latestInRepID {
-                                // same level as previous
-                                
-                                cell.separatorInset.left = CGFloat(self.replyDepth)
-                                cell.configure2(self.replyDepth)
-                            } else {
-                                // one level behind/previous to the left
-                                
+                            // one level behind/previous to the left
+                            if cell.tag > 0 {} else {
                                 self.replyDepth = self.replyDepth - 30
-                                cell.separatorInset.left = CGFloat(self.replyDepth)
                                 cell.configure2(self.replyDepth)
+                                cell.tag = self.replyDepth
                             }
                         }
                     }
@@ -2132,6 +2129,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         
                         self.replyDepth = 0
                         cell.configure2(self.replyDepth)
+                        cell.tag = 0
                         
                     } else {
                         // check previous reply's state
@@ -2219,26 +2217,23 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         if self.allReplies[indexPath.row].inReplyToID == self.allReplies[indexPath.row - 1].id {
                             // shift the cell one depth in (it's a reply of the one above)
-                            // save latest inReplyToID
-                            self.latestInRepID = self.allReplies[indexPath.row].inReplyToID ?? ""
-                            
-                            self.replyDepth = self.replyDepth + 30
-                            cell.separatorInset.left = CGFloat(self.replyDepth)
-                            cell.configure2(self.replyDepth)
+                            if cell.tag > 0 {} else {
+                                self.replyDepth = self.replyDepth + 30
+                                cell.configure2(self.replyDepth)
+                                cell.tag = self.replyDepth
+                            }
+                        } else if self.allReplies[indexPath.row].inReplyToID == self.allReplies[indexPath.row - 1].inReplyToID ?? "" {
+                            // same level as previous
+                            if cell.tag > 0 {} else {
+                                cell.configure2(self.replyDepth)
+                                cell.tag = self.replyDepth
+                            }
                         } else {
-                            // could be on same level as previous one, or level behind/previous to the left
-                            // check if saved inReplyToID is the same
-                            if self.allReplies[indexPath.row].inReplyToID == self.latestInRepID {
-                                // same level as previous
-                                
-                                cell.separatorInset.left = CGFloat(self.replyDepth)
-                                cell.configure2(self.replyDepth)
-                            } else {
-                                // one level behind/previous to the left
-                                
+                            // one level behind/previous to the left
+                            if cell.tag > 0 {} else {
                                 self.replyDepth = self.replyDepth - 30
-                                cell.separatorInset.left = CGFloat(self.replyDepth)
                                 cell.configure2(self.replyDepth)
+                                cell.tag = self.replyDepth
                             }
                         }
                     }
