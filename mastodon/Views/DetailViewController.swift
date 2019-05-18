@@ -943,8 +943,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell8000", for: indexPath) as! RepliesCell
                     cell.delegate = self
-                    cell.configure(self.allPrevious[indexPath.row])
                     cell.configure2(0)
+                    cell.configure(self.allPrevious[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfileP), for: .touchUpInside)
                     cell.backgroundColor = Colours.white
@@ -1082,8 +1082,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell9000", for: indexPath) as! RepliesCellImage
                     cell.delegate = self
-                    cell.configure(self.allPrevious[indexPath.row])
                     cell.configure2(0)
+                    cell.configure(self.allPrevious[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfileP), for: .touchUpInside)
                     cell.mainImageView.addTarget(self, action: #selector(self.tappedImagePrev(_:)), for: .touchUpInside)
@@ -1980,7 +1980,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         if self.allReplies[indexPath.row].inReplyToID == self.allReplies[indexPath.row - 1].id {
                             // shift the cell one depth in (it's a reply of the one above)
                             if cell.tag > 0 {} else {
-                                self.replyDepth = self.replyDepth + 30
+                                self.replyDepth = self.replyDepth + 25
                                 cell.configure2(self.replyDepth)
                                 cell.tag = self.replyDepth
                             }
@@ -1993,7 +1993,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         } else {
                             // one level behind/previous to the left
                             if cell.tag > 0 {} else {
-                                self.replyDepth = self.replyDepth - 30
+                                self.replyDepth = self.replyDepth - 25
                                 cell.configure2(self.replyDepth)
                                 cell.tag = self.replyDepth
                             }
@@ -2228,7 +2228,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         if self.allReplies[indexPath.row].inReplyToID == self.allReplies[indexPath.row - 1].id {
                             // shift the cell one depth in (it's a reply of the one above)
                             if cell.tag > 0 {} else {
-                                self.replyDepth = self.replyDepth + 30
+                                self.replyDepth = self.replyDepth + 25
                                 cell.configure2(self.replyDepth)
                                 cell.tag = self.replyDepth
                             }
@@ -2241,7 +2241,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         } else {
                             // one level behind/previous to the left
                             if cell.tag > 0 {} else {
-                                self.replyDepth = self.replyDepth - 30
+                                self.replyDepth = self.replyDepth - 25
                                 cell.configure2(self.replyDepth)
                                 cell.tag = self.replyDepth
                             }
