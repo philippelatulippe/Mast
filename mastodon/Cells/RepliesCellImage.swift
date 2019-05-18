@@ -370,7 +370,6 @@ class RepliesCellImage: SwipeTableViewCell {
 //        DispatchQueue.global(qos: .userInitiated).async {
         self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
         self.mainImageView.pin_updateWithProgress = true
-        self.mainImageView.pin_setImage(from: URL(string: "\(status.mediaAttachments[0].url)"))
 //        }
         mainImageView.layer.masksToBounds = true
         mainImageView.layer.borderColor = UIColor.black.cgColor
@@ -414,17 +413,21 @@ class RepliesCellImage: SwipeTableViewCell {
             imageCountTag.setTitle("\u{25b6}", for: .normal)
             imageCountTag.backgroundColor = Colours.tabSelected
             imageCountTag.alpha = 1
+            self.mainImageView.pin_setImage(from: URL(string: "\(status.mediaAttachments[0].previewURL)"))
         } else if status.mediaAttachments[0].type == .gifv {
             imageCountTag.setTitle("GIF", for: .normal)
             imageCountTag.backgroundColor = Colours.tabSelected
             imageCountTag.alpha = 1
+            self.mainImageView.pin_setImage(from: URL(string: "\(status.mediaAttachments[0].previewURL)"))
         } else if status.mediaAttachments.count > 1 {
             imageCountTag.setTitle("\(status.mediaAttachments.count)", for: .normal)
             imageCountTag.backgroundColor = Colours.tabSelected
             imageCountTag.alpha = 1
+            self.mainImageView.pin_setImage(from: URL(string: "\(status.mediaAttachments[0].url)"))
         } else {
             imageCountTag.backgroundColor = Colours.clear
             imageCountTag.alpha = 0
+            self.mainImageView.pin_setImage(from: URL(string: "\(status.mediaAttachments[0].url)"))
         }
         
         if (UserDefaults.standard.object(forKey: "senseTog") == nil) || (UserDefaults.standard.object(forKey: "senseTog") as! Int == 0) {

@@ -2011,6 +2011,16 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     cell.userTag.tag = indexPath.row
                     cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
                     cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                    cell.mainImageView.addTarget(self, action: #selector(self.tappedImage(_:)), for: .touchUpInside)
+                    cell.smallImage1.addTarget(self, action: #selector(self.tappedImageS1(_:)), for: .touchUpInside)
+                    cell.smallImage2.addTarget(self, action: #selector(self.tappedImageS2(_:)), for: .touchUpInside)
+                    cell.smallImage3.addTarget(self, action: #selector(self.tappedImageS3(_:)), for: .touchUpInside)
+                    cell.smallImage4.addTarget(self, action: #selector(self.tappedImageS4(_:)), for: .touchUpInside)
+                    cell.mainImageView.tag = indexPath.row
+                    cell.smallImage1.tag = indexPath.row
+                    cell.smallImage2.tag = indexPath.row
+                    cell.smallImage3.tag = indexPath.row
+                    cell.smallImage4.tag = indexPath.row
                     cell.backgroundColor = Colours.white
                     cell.userName.textColor = Colours.black
                     cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
@@ -3729,7 +3739,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             if self.allPrevious[indexPath.row].inReplyToID == self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id {
                 
-                let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 sto[indexPath.row].mediaAttachments.map({
@@ -3770,7 +3780,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             } else {
                 
-                let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 sto[indexPath.row].mediaAttachments.map({
@@ -3836,7 +3846,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             if self.allReplies[indexPath.row].inReplyToID == self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id {
                 
-                let cell = tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 sto[indexPath.row].mediaAttachments.map({
@@ -3943,7 +3953,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = self.tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -4006,7 +4016,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = self.tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -4070,7 +4080,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = self.tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -4135,7 +4145,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = self.tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -4204,7 +4214,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = self.tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -4266,7 +4276,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = self.tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -4329,7 +4339,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = self.tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
@@ -4393,7 +4403,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 
                 //                let indexPath = IndexPath(row: sender.tag, section: 0)
-                let cell = self.tableView.cellForRow(at: indexPath) as! MainFeedCellImage
+                let cell = self.tableView.cellForRow(at: indexPath) as! RepliesCellImage
                 var images = [SKPhoto]()
                 var coun = 0
                 (sto[indexPath.row].reblog?.mediaAttachments ?? sto[indexPath.row].mediaAttachments).map({
