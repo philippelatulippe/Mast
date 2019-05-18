@@ -37,7 +37,7 @@ class RepliesCellImage: SwipeTableViewCell {
         warningB.backgroundColor = Colours.clear
         
         indi.backgroundColor = Colours.tabSelected
-        indi.layer.cornerRadius = 2
+        indi.layer.cornerRadius = 1
         
 //        userName.adjustsFontForContentSizeCategory = true
 //        userTag.titleLabel?.adjustsFontForContentSizeCategory = true
@@ -224,7 +224,7 @@ class RepliesCellImage: SwipeTableViewCell {
         ]
         
         let metrics = [
-            "first": 28 + replyDepth,
+            "first": 29 + replyDepth,
             "second": 10 + replyDepth,
             "third": 61 + replyDepth,
             "fourth": 63 + replyDepth,
@@ -232,19 +232,19 @@ class RepliesCellImage: SwipeTableViewCell {
             "sixth": 5 + replyDepth,
         ]
         
-        for x in contentView.constraints {
-            contentView.removeConstraint(x)
-        }
+        contentView.constraints.map({
+            contentView.removeConstraint($0)
+        })
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-first-[indi(4)]", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-second-[image(40)]-13-[name]-2-[artist]-(>=5)-[more(16)]-4-[date]-10-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-second-[image(40)]-13-[episodes]-10-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-fourth-[mainImage]-10-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-fifth-[mainImageBG]-20-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-sixth-[countTag(30)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-third-[warning]-7-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-first-[indi(2)]", options: [], metrics: metrics, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-second-[image(40)]-13-[name]-2-[artist]-(>=5)-[more(16)]-4-[date]-10-|", options: [], metrics: metrics, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-second-[image(40)]-13-[episodes]-10-|", options: [], metrics: metrics, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-fourth-[mainImage]-10-|", options: [], metrics: metrics, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-fifth-[mainImageBG]-20-|", options: [], metrics: metrics, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-sixth-[countTag(30)]-(>=10)-|", options: [], metrics: metrics, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-third-[warning]-7-|", options: [], metrics: metrics, views: viewsDict))
         
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-68-[indi(>=4)]-16-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-66-[indi(>=4)]-16-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[more(16)]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[date]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[artist]-(>=12)-|", options: [], metrics: nil, views: viewsDict))
@@ -254,7 +254,7 @@ class RepliesCellImage: SwipeTableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-5-[countTag(22)]-(>=10)-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-18-[name]-1-[warning]-16-|", options: [], metrics: nil, views: viewsDict))
         
-        contentView.layoutSubviews()
+//        contentView.layoutSubviews()
     }
     
     func configure(_ status: Status) {

@@ -1889,9 +1889,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if self.allReplies[indexPath.row].inReplyToID == self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id {
                         // top level reply
                         
-                        self.replyDepth = 0
-                        cell.configure2(self.replyDepth)
-                        cell.tag = 0
+                        if cell.tag == 1 {} else {
+                            self.replyDepth = 0
+                            cell.configure2(self.replyDepth)
+                            cell.tag = 1
+                        }
                         
                     } else {
                         // check previous reply's state
@@ -1979,20 +1981,20 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         if self.allReplies[indexPath.row].inReplyToID == self.allReplies[indexPath.row - 1].id {
                             // shift the cell one depth in (it's a reply of the one above)
-                            if cell.tag > 0 {} else {
+                            if cell.tag > 1 {} else {
                                 self.replyDepth = self.replyDepth + 25
                                 cell.configure2(self.replyDepth)
                                 cell.tag = self.replyDepth
                             }
                         } else if self.allReplies[indexPath.row].inReplyToID == self.allReplies[indexPath.row - 1].inReplyToID ?? "" {
                             // same level as previous
-                            if cell.tag > 0 {} else {
+                            if cell.tag > 1 {} else {
                                 cell.configure2(self.replyDepth)
                                 cell.tag = self.replyDepth
                             }
                         } else {
                             // one level behind/previous to the left
-                            if cell.tag > 0 {} else {
+                            if cell.tag > 1 {} else {
                                 self.replyDepth = self.replyDepth - 25
                                 cell.configure2(self.replyDepth)
                                 cell.tag = self.replyDepth
@@ -2137,9 +2139,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if self.allReplies[indexPath.row].inReplyToID == self.mainStatus[0].reblog?.id ?? self.mainStatus[0].id {
                         // top level reply
                         
-                        self.replyDepth = 0
-                        cell.configure2(self.replyDepth)
-                        cell.tag = 0
+                        if cell.tag == 1 {} else {
+                            self.replyDepth = 0
+                            cell.configure2(self.replyDepth)
+                            cell.tag = 1
+                        }
                         
                     } else {
                         // check previous reply's state
@@ -2227,20 +2231,20 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         if self.allReplies[indexPath.row].inReplyToID == self.allReplies[indexPath.row - 1].id {
                             // shift the cell one depth in (it's a reply of the one above)
-                            if cell.tag > 0 {} else {
+                            if cell.tag > 1 {} else {
                                 self.replyDepth = self.replyDepth + 25
                                 cell.configure2(self.replyDepth)
                                 cell.tag = self.replyDepth
                             }
                         } else if self.allReplies[indexPath.row].inReplyToID == self.allReplies[indexPath.row - 1].inReplyToID ?? "" {
                             // same level as previous
-                            if cell.tag > 0 {} else {
+                            if cell.tag > 1 {} else {
                                 cell.configure2(self.replyDepth)
                                 cell.tag = self.replyDepth
                             }
                         } else {
                             // one level behind/previous to the left
-                            if cell.tag > 0 {} else {
+                            if cell.tag > 1 {} else {
                                 self.replyDepth = self.replyDepth - 25
                                 cell.configure2(self.replyDepth)
                                 cell.tag = self.replyDepth
