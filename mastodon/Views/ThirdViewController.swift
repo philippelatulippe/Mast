@@ -2722,9 +2722,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                     }
                     
-                    
-                    
-                    
                 }
             }
             

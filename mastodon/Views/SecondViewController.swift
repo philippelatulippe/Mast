@@ -1264,7 +1264,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
     
     
     func streamDataNoti() {
-        
+        StoreStruct.tempNotificationsMentions = StoreStruct.notificationsMentions
+        StoreStruct.tempNotifications = StoreStruct.notifications
         if (UserDefaults.standard.object(forKey: "streamToggle") == nil) || (UserDefaults.standard.object(forKey: "streamToggle") as! Int == 0) {
             
             var sss = StoreStruct.client.baseURL.replacingOccurrences(of: "https", with: "wss")
@@ -1291,8 +1292,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             return
                         }
                         self.hMod.append(model)
-                        StoreStruct.notifications = self.hMod.reversed() + StoreStruct.notifications
-                        StoreStruct.notifications = StoreStruct.notifications.removeDuplicates()
+                        StoreStruct.tempNotifications = self.hMod.reversed() + StoreStruct.tempNotifications
+                        StoreStruct.tempNotifications = StoreStruct.tempNotifications.removeDuplicates()
                         DispatchQueue.main.async {
                             //self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
                             if self.currentIndex == 0 {
@@ -1310,6 +1311,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         self.countcount2 = self.hMod.count
                                         
                                         UIView.setAnimationsEnabled(false)
+                                        StoreStruct.notifications = StoreStruct.tempNotifications
                                         self.tableView2.reloadData()
                                         
                                         self.tableView2.scrollToRow(at: IndexPath(row: self.hMod.count, section: 1), at: .top, animated: false)
@@ -1317,6 +1319,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                         
                                     } else {
                                         
+                                        StoreStruct.notifications = StoreStruct.tempNotifications
                                         self.tableView2.reloadData()
                                         
                                     }
@@ -1332,8 +1335,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             DispatchQueue.main.async {
                                 if self.currentIndex == 1 {
                                     if self.tableView.contentOffset.y == 0 {
-                                        StoreStruct.notificationsMentions = self.fMod.reversed() + StoreStruct.notificationsMentions
-                                        StoreStruct.notificationsMentions = StoreStruct.notificationsMentions.removeDuplicates()
+                                        StoreStruct.tempNotificationsMentions = self.fMod.reversed() + StoreStruct.tempNotificationsMentions
+                                        StoreStruct.tempNotificationsMentions = StoreStruct.tempNotificationsMentions.removeDuplicates()
                                         
                                         if (UserDefaults.standard.object(forKey: "posset") == nil) || (UserDefaults.standard.object(forKey: "posset") as! Int == 0) {
                                             self.newUpdatesB1.setTitle("\(self.fMod.count)  ", for: .normal)
@@ -1347,6 +1350,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                             self.countcount1 = self.fMod.count
                                             
                                             UIView.setAnimationsEnabled(false)
+                                            StoreStruct.notificationsMentions = StoreStruct.tempNotificationsMentions
                                             self.tableView.reloadData()
                                             
                                             self.tableView.scrollToRow(at: IndexPath(row: self.fMod.count, section: 0), at: .top, animated: false)
@@ -1354,6 +1358,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                             
                                         } else {
                                             
+                                            StoreStruct.notificationsMentions = StoreStruct.tempNotificationsMentions
                                             self.tableView.reloadData()
                                             
                                         }
