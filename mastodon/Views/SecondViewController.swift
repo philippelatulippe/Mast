@@ -339,6 +339,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
             self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
+            self.tableView2.register(NotificationPollCell.self, forCellReuseIdentifier: "cellpoll")
             self.tableView2.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
@@ -390,6 +391,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
             self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
+            self.tableView2.register(NotificationPollCell.self, forCellReuseIdentifier: "cellpoll")
             self.tableView2.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
@@ -710,6 +712,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
             self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
+            self.tableView2.register(NotificationPollCell.self, forCellReuseIdentifier: "cellpoll")
             self.tableView2.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 65)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
@@ -762,6 +765,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
             self.tableView2.register(GraphCell.self, forCellReuseIdentifier: "cellG02")
             self.tableView2.register(NotificationCell.self, forCellReuseIdentifier: "cell302")
             self.tableView2.register(NotificationCellImage.self, forCellReuseIdentifier: "cell402")
+            self.tableView2.register(NotificationPollCell.self, forCellReuseIdentifier: "cellpoll")
             self.tableView2.frame = CGRect(x: 0, y: Int(offset + 5), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - 5 - tabHeight)
             self.tableView2.alpha = 0
             self.tableView2.delegate = self
@@ -1845,6 +1849,114 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     if let hasStatus = StoreStruct.notifications[indexPath.row].status {
                         
                         if hasStatus.mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
+                            
+                            if StoreStruct.notifications[indexPath.row].type == .poll {
+                                
+                                
+                                
+                                
+                                let cell = tableView2.dequeueReusableCell(withIdentifier: "cellpoll", for: indexPath) as! NotificationPollCell
+                                cell.delegate = self
+                                if let poll = StoreStruct.notifications[indexPath.row].status?.poll {
+                                    cell.configure(thePoll: poll, theOptions: poll.options, status: StoreStruct.notifications[indexPath.row])
+                                }
+                                cell.profileImageView.tag = indexPath.row
+                                cell.userTag.tag = indexPath.row
+                                cell.profileImageView.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                                cell.userTag.addTarget(self, action: #selector(self.didTouchProfile), for: .touchUpInside)
+                                cell.backgroundColor = Colours.white
+                                if (UserDefaults.standard.object(forKey: "subtleToggle") == nil) || (UserDefaults.standard.object(forKey: "subtleToggle") as! Int == 0) {
+                                    cell.toot.textColor = Colours.black
+                                    cell.userName.textColor = Colours.black
+                                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
+                                } else {
+                                    cell.toot.textColor = Colours.black.withAlphaComponent(0.3)
+                                    cell.userName.textColor = Colours.black.withAlphaComponent(0.3)
+                                    cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
+                                    cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
+                                }
+                                cell.typeImage.backgroundColor = Colours.white
+                                cell.toot.handleMentionTap { (string) in
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let selection = UISelectionFeedbackGenerator()
+                                        selection.selectionChanged()
+                                    }
+                                    
+                                    var newString = string
+                                    StoreStruct.notifications[indexPath.row].status!.mentions.map({
+                                        if $0.acct.contains(string) {
+                                            newString = $0.id
+                                        }
+                                    })
+                                    
+                                    
+                                    let controller = ThirdViewController()
+                                    if newString == StoreStruct.currentUser.username {} else {
+                                        controller.fromOtherUser = true
+                                    }
+                                    controller.userIDtoUse = newString
+                                    DispatchQueue.main.async {
+                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    }
+                                }
+                                cell.toot.handleURLTap { (url) in
+                                    // safari
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let selection = UISelectionFeedbackGenerator()
+                                        selection.selectionChanged()
+                                    }
+                                    if url.absoluteString.hasPrefix(".") {
+                                        let z = URL(string: String(url.absoluteString.dropFirst()))!
+                                        UIApplication.shared.open(z, options: [.universalLinksOnly: true]) { (success) in
+                                            if !success {
+                                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                                    self.safariVC = SFSafariViewController(url: z)
+                                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                                    self.present(self.safariVC!, animated: true, completion: nil)
+                                                } else {
+                                                    UIApplication.shared.openURL(z)
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { (success) in
+                                            if !success {
+                                                if (UserDefaults.standard.object(forKey: "linkdest") == nil) || (UserDefaults.standard.object(forKey: "linkdest") as! Int == 0) {
+                                                    self.safariVC = SFSafariViewController(url: url)
+                                                    self.safariVC?.preferredBarTintColor = Colours.white
+                                                    self.safariVC?.preferredControlTintColor = Colours.tabSelected
+                                                    self.present(self.safariVC!, animated: true, completion: nil)
+                                                } else {
+                                                    UIApplication.shared.openURL(url)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                cell.toot.handleHashtagTap { (string) in
+                                    // hash
+                                    if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                        let selection = UISelectionFeedbackGenerator()
+                                        selection.selectionChanged()
+                                    }
+                                    let controller = HashtagViewController()
+                                    controller.currentTagTitle = string
+                                    self.navigationController?.pushViewController(controller, animated: true)
+                                }
+                                let bgColorView = UIView()
+                                bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
+                                cell.selectedBackgroundView = bgColorView
+                                return cell
+                                
+                                
+                                
+                                
+                                
+                                
+                            } else {
+                            
                             let cell = tableView2.dequeueReusableCell(withIdentifier: "cell302", for: indexPath) as! NotificationCell
                             cell.delegate = self
                             
@@ -1960,6 +2072,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
                             cell.selectedBackgroundView = bgColorView
                             return cell
+                                
+                            }
                         } else {
                             let cell = tableView2.dequeueReusableCell(withIdentifier: "cell402", for: indexPath) as! NotificationCellImage
                             cell.delegate = self
@@ -4619,6 +4733,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         .show(on: self)
                     
                     if let cell = theTable.cellForRow(at: indexPath) as? NotificationCell {
+                        cell.hideSwipe(animated: true)
+                    } else if let cell = theTable.cellForRow(at: indexPath) as? NotificationPollCell {
                         cell.hideSwipe(animated: true)
                     } else {
                         let cell = theTable.cellForRow(at: indexPath) as! NotificationCellImage

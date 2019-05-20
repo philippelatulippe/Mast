@@ -984,6 +984,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             UserDefaults.standard.set(1, forKey: "sworder")
         }
         
+        if (UserDefaults.standard.object(forKey: "notifToggle") == nil) {
+            UserDefaults.standard.set(1, forKey: "notifToggle")
+        }
+        
         if (UserDefaults.standard.object(forKey: "instancesLocal") == nil) {
             
         } else {

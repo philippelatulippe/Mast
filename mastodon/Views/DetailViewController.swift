@@ -1766,7 +1766,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if self.allReplies[indexPath.row].mediaAttachments.isEmpty || (UserDefaults.standard.object(forKey: "sensitiveToggle") != nil) && (UserDefaults.standard.object(forKey: "sensitiveToggle") as? Int == 1) {
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell80", for: indexPath) as! RepliesCell
-                    cell.preservesSuperviewLayoutMargins = false
                     cell.delegate = self
                     cell.configure(self.allReplies[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
@@ -2006,7 +2005,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 } else {
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell90", for: indexPath) as! RepliesCellImage
-                    cell.preservesSuperviewLayoutMargins = false
                     cell.delegate = self
                     cell.configure(self.allReplies[indexPath.row])
                     cell.profileImageView.tag = indexPath.row
