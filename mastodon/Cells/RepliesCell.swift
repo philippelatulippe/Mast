@@ -155,9 +155,9 @@ class RepliesCell: SwipeTableViewCell {
             "third": 61 + replyDepth
         ]
         
-        contentView.constraints.map({
-            contentView.removeConstraint($0)
-        })
+//        contentView.constraints.map({
+//            contentView.removeConstraint($0)
+//        })
         
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-first-[indi(2)]", options: [], metrics: metrics, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-second-[image(40)]-13-[name]-2-[artist]-(>=5)-[more(16)]-4-[date]-10-|", options: [], metrics: metrics, views: viewsDict))
