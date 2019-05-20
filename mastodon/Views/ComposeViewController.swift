@@ -3501,6 +3501,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.bringBackDrawer()
         if self.picker.isDescendant(of: self.view) {
             self.picker.removeFromSuperview()
+            self.cameraCollectionView.alpha = 0
+            self.camPickButton.alpha = 0
+            self.galPickButton.alpha = 0
         }
     }
     

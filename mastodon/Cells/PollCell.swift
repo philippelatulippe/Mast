@@ -232,7 +232,7 @@ class NotificationPollCell: SwipeTableViewCell, CoreChartViewDataSource {
         
         StoreStruct.currentPollSelection = []
         
-        StoreStruct.pollHeight = (self.options.count*32) + (self.options.count*16) + 12
+        StoreStruct.pollHeight = (self.options.count*32) + (self.options.count*16) + 14
         
         let heightConstraint = NSLayoutConstraint(item: self.barChart, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: CGFloat(StoreStruct.pollHeight))
         self.barChart.addConstraint(heightConstraint)
