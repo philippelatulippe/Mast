@@ -149,10 +149,17 @@ class RepliesCell: SwipeTableViewCell {
             "indi" : indi,
         ]
         
+        var repdep = replyDepth
+        if (UserDefaults.standard.object(forKey: "indent1") == nil) || (UserDefaults.standard.object(forKey: "indent1") as! Int == 0) {
+            
+        } else {
+            repdep = 0
+        }
+        
         let metrics = [
-            "first": 29 + replyDepth,
-            "second": 10 + replyDepth,
-            "third": 61 + replyDepth
+            "first": 29 + repdep,
+            "second": 10 + repdep,
+            "third": 61 + repdep
         ]
         
 //        contentView.constraints.map({

@@ -2658,32 +2658,48 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     
                 }
-                .action(.default("Tell Me A Joke!".localized), image: UIImage(named: "emoti")) { (action, ind) in
-                    
-                    let urlStr = "https://official-joke-api.appspot.com/jokes/random"
-                    let url: URL = URL(string: urlStr)!
-                    var request = URLRequest(url: url)
-                    request.httpMethod = "GET"
-                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                    request.addValue("application/json", forHTTPHeaderField: "Accept")
-                    let sessionConfig = URLSessionConfiguration.default
-                    let session = URLSession(configuration: sessionConfig)
-                    let task = session.dataTask(with: request) { (data, response, err) in
-                        do {
-                            let json = try JSONDecoder().decode(Joke.self, from: data ?? Data())
-                            self.tellJoke(json)
-                        } catch {
-                            print("err")
+                .action(.default("Entertainment".localized), image: UIImage(named: "game")) { (action, ind) in
+                    let z1 = Alertift.actionSheet(title: nil, message: "Find some new jokes to laugh at or play a quick arcade game to relieve your boredom.")
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.default("Tell Me A Joke!".localized), image: nil) { (action, ind) in
+                            
+                            let urlStr = "https://official-joke-api.appspot.com/jokes/random"
+                            let url: URL = URL(string: urlStr)!
+                            var request = URLRequest(url: url)
+                            request.httpMethod = "GET"
+                            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                            request.addValue("application/json", forHTTPHeaderField: "Accept")
+                            let sessionConfig = URLSessionConfiguration.default
+                            let session = URLSession(configuration: sessionConfig)
+                            let task = session.dataTask(with: request) { (data, response, err) in
+                                do {
+                                    let json = try JSONDecoder().decode(Joke.self, from: data ?? Data())
+                                    self.tellJoke(json)
+                                } catch {
+                                    print("err")
+                                }
+                            }
+                            task.resume()
+                            
+                            
                         }
-                    }
-                    task.resume()
-                    
-                    
-                }
-                .action(.default("Save Yourself!".localized), image: UIImage(named: "game")) { (action, ind) in
-                     
-                    let vc = GameViewController()
-                    self.present(vc, animated: true, completion: nil)
+                        .action(.default("Save Yourself!".localized), image: nil) { (action, ind) in
+                            
+                            let vc = GameViewController()
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
+                    z1.popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.contentView ?? self.view)
+                    z1.show(on: self)
                 }
 //                .action(.default(" Log Out".localized), image: UIImage(named: "lout")) { (action, ind) in
 //                     
@@ -2745,7 +2761,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
                 .messageTextAlignment(.left)
                 .titleTextAlignment(.left)
-                .action(.default("Tell Me Another Joke!".localized), image: UIImage(named: "emoti")) { (action, ind) in
+                .action(.default("Tell Me Another Joke!".localized), image: nil) { (action, ind) in
                     
                     let urlStr = "https://official-joke-api.appspot.com/jokes/random"
                     let url: URL = URL(string: urlStr)!
@@ -4072,7 +4088,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.mainImageView.currentImage ?? nil)
                     photo.shouldCachePhotoURLImage = true
                     if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                        photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                        photo.caption = cell.toot.text ?? ""
                     } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                         photo.caption = $0.description ?? ""
                     } else {
@@ -4083,7 +4099,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                     photo.shouldCachePhotoURLImage = true
                     if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                        photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                        photo.caption = cell.toot.text ?? ""
                     } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                         photo.caption = $0.description ?? ""
                     } else {
@@ -4140,7 +4156,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage1.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -4151,7 +4167,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -4207,7 +4223,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage2.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -4218,7 +4234,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -4275,7 +4291,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage3.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -4286,7 +4302,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -4344,7 +4360,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage4.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -4355,7 +4371,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].reblog?.content.stripHTML() ?? sto[indexPath.row].content.stripHTML()
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {

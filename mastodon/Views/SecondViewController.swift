@@ -2788,7 +2788,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.mainImageView.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -2799,7 +2799,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -2829,7 +2829,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.mainImageView.currentImage ?? nil)
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                                photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                                photo.caption = cell.toot.text ?? ""
                             } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = $0.description ?? ""
                             } else {
@@ -2840,7 +2840,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                                photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                                photo.caption = cell.toot.text ?? ""
                             } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = $0.description ?? ""
                             } else {
@@ -2868,7 +2868,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.mainImageView.currentImage ?? nil)
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                                photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                                photo.caption = cell.toot.text ?? ""
                             } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = $0.description ?? ""
                             } else {
@@ -2879,7 +2879,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                             photo.shouldCachePhotoURLImage = true
                             if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                                photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                                photo.caption = cell.toot.text ?? ""
                             } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                                 photo.caption = $0.description ?? ""
                             } else {
@@ -2947,7 +2947,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage1.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -2958,7 +2958,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -3022,7 +3022,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage2.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -3033,7 +3033,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -3098,7 +3098,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage3.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -3109,7 +3109,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -3175,7 +3175,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: cell.smallImage4.currentImage ?? nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
@@ -3186,7 +3186,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         let photo = SKPhoto.photoWithImageURL($0.url, holder: nil)
                         photo.shouldCachePhotoURLImage = true
                         if (UserDefaults.standard.object(forKey: "captionset") == nil) || (UserDefaults.standard.object(forKey: "captionset") as! Int == 0) {
-                            photo.caption = sto[indexPath.row].status?.content.stripHTML() ?? ""
+                            photo.caption = cell.toot.text ?? ""
                         } else if UserDefaults.standard.object(forKey: "captionset") as! Int == 1 {
                             photo.caption = $0.description ?? ""
                         } else {
