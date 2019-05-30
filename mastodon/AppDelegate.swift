@@ -588,6 +588,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                StoreStruct.isSplit = false
 //            }
 //        }
+        
+        UserDefaults.standard.synchronize()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
