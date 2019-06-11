@@ -473,6 +473,38 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.crownScroll()
         }
         
+        
+        let deviceIdiom3 = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom3) {
+        case .phone:
+            print("nothing")
+        case .pad:
+            self.tableView.translatesAutoresizingMaskIntoConstraints = false
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+            
+            
+            if self.maybeDoOnce == false {
+                self.searchButton = MNGExpandedTouchAreaButton()
+                self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+                self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                self.searchButton.adjustsImageWhenHighlighted = false
+                self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
+                self.navigationController?.view.addSubview(self.searchButton)
+                self.maybeDoOnce = true
+                
+                self.searchButton.translatesAutoresizingMaskIntoConstraints = false
+                self.searchButton.widthAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
+                self.searchButton.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
+                self.searchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+                self.searchButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+            }
+        default:
+            print("nothing")
+        }
+        
     }
     
     func crownScroll() {
@@ -550,38 +582,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             newSize = offset + 65
         } else {
             newSize = offset + 15
-        }
-        
-        
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            print("nothing")
-        case .pad:
-                self.tableView.translatesAutoresizingMaskIntoConstraints = false
-                self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-                self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-                self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
-                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
-            
-            
-            if self.maybeDoOnce == false {
-                self.searchButton = MNGExpandedTouchAreaButton()
-                self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-                self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-                self.searchButton.adjustsImageWhenHighlighted = false
-                self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
-                self.navigationController?.view.addSubview(self.searchButton)
-                self.maybeDoOnce = true
-                
-                self.searchButton.translatesAutoresizingMaskIntoConstraints = false
-                self.searchButton.widthAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
-                self.searchButton.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
-                self.searchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
-                self.searchButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
-            }
-        default:
-            print("nothing")
         }
         
         
@@ -1684,19 +1684,19 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 //        self.tableView.deselectRow(at: indexPath, animated: true)
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone :
+//        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+//        switch (deviceIdiom) {
+//        case .phone :
             let controller = DMMessageViewController()
             controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
             self.navigationController?.pushViewController(controller, animated: true)
-        case .pad:
-            let controller = DMMessageViewController()
-            controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
-            self.navigationController?.pushViewController(controller, animated: true)
-        default:
-            print("nothing")
-        }
+//        case .pad:
+//            let controller = DMMessageViewController()
+//            controller.mainStatus.append(StoreStruct.notificationsDirect[indexPath.row].lastStatus!)
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        default:
+//            print("nothing")
+//        }
         
         let request2 = Timelines.markRead(id: StoreStruct.notificationsDirect[indexPath.row].id)
         StoreStruct.client.run(request2) { (statuses) in
