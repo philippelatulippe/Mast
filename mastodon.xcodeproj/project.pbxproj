@@ -723,6 +723,7 @@
 		53865FCB216CE5540041E686 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCA216CE5540041E686 /* Date.swift */; };
 		53865FCD216CF3540041E686 /* TootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCC216CF3540041E686 /* TootController.swift */; };
 		53865FCF216CFFA40041E686 /* LocalTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCE216CFFA40041E686 /* LocalTimelineController.swift */; };
+		5389F21E22B2C42100065DC6 /* PadLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389F21D22B2C42100065DC6 /* PadLoginViewController.swift */; };
 		538B2150222BE00A0034977E /* FlickType.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 538B214F222BE0090034977E /* FlickType.storyboard */; };
 		538B2152222BE01A0034977E /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 538B2151222BE0190034977E /* keyboard.png */; };
 		5392DBF92275EF8000D17F5F /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5392DBF82275EF8000D17F5F /* AccountSettingsViewController.swift */; };
@@ -1669,6 +1670,7 @@
 		53865FCA216CE5540041E686 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		53865FCC216CF3540041E686 /* TootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootController.swift; sourceTree = "<group>"; };
 		53865FCE216CFFA40041E686 /* LocalTimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTimelineController.swift; sourceTree = "<group>"; };
+		5389F21D22B2C42100065DC6 /* PadLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLoginViewController.swift; sourceTree = "<group>"; };
 		538B214F222BE0090034977E /* FlickType.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = FlickType.storyboard; path = "FlickTypeKit/App Resources/FlickType.storyboard"; sourceTree = "<group>"; };
 		538B2151222BE0190034977E /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keyboard.png; path = "FlickTypeKit/App Resources/keyboard.png"; sourceTree = "<group>"; };
 		5392DBF82275EF8000D17F5F /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
@@ -2974,6 +2976,7 @@
 				5335CCAC22AAE3DD00E8984A /* ColumnViewController.swift */,
 				530041DD22ADC48900783C3B /* VerticalTabBarController.swift */,
 				53CF184922B2494D000DC32B /* ScrollMainViewController.swift */,
+				5389F21D22B2C42100065DC6 /* PadLoginViewController.swift */,
 				5373C9E92151753800676F3D /* FirstViewController.swift */,
 				5373C9EF2151953C00676F3D /* SecondViewController.swift */,
 				531B420A224E0FFB00D1B132 /* DMViewController.swift */,
@@ -4174,6 +4177,7 @@
 				5373CA9D2152C68000676F3D /* ClientType.swift in Sources */,
 				5317C7B821DA334500746197 /* ScrollableGraphViewDrawingDelegate.swift in Sources */,
 				53E1AE0B221AB82200A6E1E6 /* UIView+PositionUtils.swift in Sources */,
+				5389F21E22B2C42100065DC6 /* PadLoginViewController.swift in Sources */,
 				53205823215D287700ED0C36 /* DKImagePickerController.swift in Sources */,
 				5373CB4C2156686300676F3D /* ActionButtonCell.swift in Sources */,
 				53DE98872275C8BF00077D18 /* MainSettingsViewController.swift in Sources */,

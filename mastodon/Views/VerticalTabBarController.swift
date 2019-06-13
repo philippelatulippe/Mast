@@ -49,6 +49,7 @@ class VerticalTabBarController: UIViewController {
     
     @objc func compose() {
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .pageSheet
         controller.inReply = []
         controller.inReplyText = ""
         self.present(controller, animated: true, completion: nil)

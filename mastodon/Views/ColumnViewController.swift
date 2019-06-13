@@ -172,16 +172,6 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         if UserDefaults.standard.object(forKey: "returnedText") == nil {} else {
             StoreStruct.currentInstance.returnedText = UserDefaults.standard.object(forKey: "returnedText") as! String
         }
-        if UserDefaults.standard.object(forKey: "accessToken") == nil {
-//            self.createLoginView()
-        } else {
-            
-            StoreStruct.currentInstance.accessToken = UserDefaults.standard.object(forKey: "accessToken") as! String
-            StoreStruct.client = Client(
-                baseURL: "https://\(StoreStruct.currentInstance.returnedText)",
-                accessToken: StoreStruct.currentInstance.accessToken
-            )
-        }
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
         longPress.minimumPressDuration = 0.5
@@ -686,6 +676,19 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        if UserDefaults.standard.object(forKey: "accessToken") == nil {
+            let con = PadLoginViewController()
+            con.modalPresentationStyle = .formSheet
+            self.show(con, sender: self)
+        } else {
+            
+            StoreStruct.currentInstance.accessToken = UserDefaults.standard.object(forKey: "accessToken") as! String
+            StoreStruct.client = Client(
+                baseURL: "https://\(StoreStruct.currentInstance.returnedText)",
+                accessToken: StoreStruct.currentInstance.accessToken
+            )
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
         do {
