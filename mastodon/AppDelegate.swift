@@ -606,22 +606,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //        UserDefaults.standard.synchronize()
         
-        
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
             let rootController = ColumnViewController()
             let nav0 = UINavigationController(rootViewController: VerticalTabBarController())
-            let nav1 = UINavigationController(rootViewController: FirstViewController())
-            let nav2 = UINavigationController(rootViewController: SecondViewController())
-            let nav3 = UINavigationController(rootViewController: ThirdViewController())
-            rootController.viewControllers = [nav0, nav1, nav2, nav3]
+            let nav1 = ScrollMainViewController()
+            
+            let nav01 = UINavigationController(rootViewController: FirstViewController())
+            let nav02 = UINavigationController(rootViewController: SecondViewController())
+            let nav03 = UINavigationController(rootViewController: DMViewController())
+            let nav04 = UINavigationController(rootViewController: ThirdViewController())
+            nav1.viewControllers = [nav01, nav02, nav03, nav04]
+            
+            rootController.viewControllers = [nav0, nav1]
             self.window?.rootViewController = rootController
             self.window!.makeKeyAndVisible()
         default:
             print("nil")
         }
-        
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

@@ -292,15 +292,21 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc func setLeft() {
-        //        var settingsButton = MNGExpandedTouchAreaButton()
-        //        settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 32, height: 32)))
-        //        settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-        //        settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        //        settingsButton.adjustsImageWhenHighlighted = false
-        //        settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
-        //
-        //        let done = UIBarButtonItem.init(customView: settingsButton)
-        //        self.navigationItem.setLeftBarButton(done, animated: false)
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone :
+                var settingsButton = MNGExpandedTouchAreaButton()
+                settingsButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 47, width: 32, height: 32)))
+                settingsButton.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+                settingsButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                settingsButton.adjustsImageWhenHighlighted = false
+                settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
+        
+                let done = UIBarButtonItem.init(customView: settingsButton)
+                self.navigationItem.setLeftBarButton(done, animated: false)
+        default:
+            print("nil")
+        }
         
     }
     
@@ -884,7 +890,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 0)
         case .pad:
 //            print("nothing")
-            self.tableView.frame = CGRect(x: 0, y: Int(offset + 0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 0)
+            self.tableView.frame = CGRect(x: 0, y: Int(offset + 60), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 60)
         default:
             self.tableView.frame = CGRect(x: 0, y: Int(offset + 0), width: Int(self.view.bounds.width), height: Int(self.view.bounds.height) - offset - tabHeight - 0)
         }
@@ -1167,8 +1173,8 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.tableView.translatesAutoresizingMaskIntoConstraints = false
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(self.navigationController?.navigationBar.frame.size.height ?? 0)).isActive = true
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
             
             if self.maybeDoOnce == false {
                 self.searchButton = MNGExpandedTouchAreaButton()

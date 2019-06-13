@@ -23,19 +23,15 @@ class ColumnViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         let firstViewWidth: CGFloat = 80
-        let width: CGFloat = (self.view.bounds.width - firstViewWidth)/3
-        var widthOffset: CGFloat = 0
         var count = 0
         for viewController in viewControllers {
             if count == 0 {
                 viewController.view.frame = CGRect(x: 0, y: 0, width: firstViewWidth, height: self.view.bounds.height)
                 count += 1
             } else {
-                viewController.view.frame = CGRect(x: firstViewWidth + widthOffset + 0.6, y: 0, width: width, height: self.view.bounds.height)
-                widthOffset += width + 0.6
-                count += 1
+                viewController.view.frame = CGRect(x: firstViewWidth + 0.6, y: 0, width: self.view.bounds.width - firstViewWidth, height: self.view.bounds.height)
             }
         }
     }

@@ -1018,26 +1018,26 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
                 self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
-                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
+                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
                 
                 self.tableView2.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
                 self.tableView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
-                self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
+                self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
                 
             } else {
                 self.tableView.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
                 self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
-                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
                 
                 self.tableView2.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
                 self.tableView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
-                self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
                 
             }
             
@@ -5332,13 +5332,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
                 self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
-                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
+                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
                 
                 self.tableView2.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
                 self.tableView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 60)).isActive = true
-                self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset + 60)).isActive = true
+                self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
             default:
                 print("nothing")
             }
@@ -5368,13 +5368,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
                 self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
-                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
                 
                 self.tableView2.translatesAutoresizingMaskIntoConstraints = false
                 self.tableView2.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
                 self.tableView2.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
                 self.tableView2.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset + 5)).isActive = true
-                self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+                self.tableView2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
             default:
                 print("nothing")
             }

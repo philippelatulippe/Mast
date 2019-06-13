@@ -483,7 +483,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
             self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
-            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(offset)).isActive = true
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
             
             
             if self.maybeDoOnce == false {
@@ -495,11 +495,11 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.navigationController?.view.addSubview(self.searchButton)
                 self.maybeDoOnce = true
                 
-                self.searchButton.translatesAutoresizingMaskIntoConstraints = false
-                self.searchButton.widthAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
-                self.searchButton.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
-                self.searchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
-                self.searchButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+//                self.searchButton.translatesAutoresizingMaskIntoConstraints = false
+//                self.searchButton.widthAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
+//                self.searchButton.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
+//                self.searchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+//                self.searchButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
             }
         default:
             print("nothing")
@@ -554,7 +554,14 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         settingsButton.adjustsImageWhenHighlighted = false
         settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
-        self.navigationController?.view.addSubview(settingsButton)
+        
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .phone :
+            self.navigationController?.view.addSubview(settingsButton)
+        default:
+            print("nil")
+        }
         
 //        self.refreshCont()
         
@@ -604,7 +611,14 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         settingsButton.adjustsImageWhenHighlighted = false
         settingsButton.addTarget(self, action: #selector(self.touchList), for: .touchUpInside)
-        self.navigationController?.view.addSubview(settingsButton)
+        
+        let deviceIdiom3 = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom3) {
+        case .phone :
+            self.navigationController?.view.addSubview(settingsButton)
+        default:
+            print("nil")
+        }
         
     }
     

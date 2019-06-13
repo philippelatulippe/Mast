@@ -15,7 +15,6 @@ class VerticalTabBarController: UIViewController {
     var button2 = UIButton()
     var button3 = UIButton()
     var button4 = UIButton()
-    var button5 = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +40,9 @@ class VerticalTabBarController: UIViewController {
         
         self.button4.frame = CGRect(x: 10, y: offset + 220, width: 60, height: 60)
         self.button4.backgroundColor = .clear
-        self.button4.setImage(UIImage(named: "direct")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+        self.button4.setImage(UIImage(named: "sett")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+        self.button4.addTarget(self, action: #selector(self.settings), for: .touchUpInside)
         self.view.addSubview(self.button4)
-        
-        self.button5.frame = CGRect(x: 10, y: offset + 290, width: 60, height: 60)
-        self.button5.backgroundColor = .clear
-        self.button5.setImage(UIImage(named: "sett")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-        self.button5.addTarget(self, action: #selector(self.settings), for: .touchUpInside)
-        self.view.addSubview(self.button5)
     }
     
     @objc func compose() {
