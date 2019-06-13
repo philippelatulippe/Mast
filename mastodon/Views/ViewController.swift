@@ -1072,21 +1072,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 baseURL: "https://\(StoreStruct.currentInstance.returnedText)",
                 accessToken: StoreStruct.currentInstance.accessToken
             )
-            
-//            do {
-//                let st1 = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)home.json", from: .documents, as: [Status].self)
-//                StoreStruct.statusesHome = st1
-//                let st2 = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)local.json", from: .documents, as: [Status].self)
-//                StoreStruct.statusesLocal = st2
-//                let st3 = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)fed.json", from: .documents, as: [Status].self)
-//                StoreStruct.statusesFederated = st3
-//                let st4 = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)noti.json", from: .documents, as: [Notificationt].self)
-//                StoreStruct.notifications = st4
-//                let st5 = try Disk.retrieve("\(StoreStruct.currentInstance.clientID)ment.json", from: .documents, as: [Notificationt].self)
-//                StoreStruct.notificationsMentions = st5
-//            } catch {
-//                print("Couldn't load")
-//            }
         }
         
         let request = Instances.customEmojis()

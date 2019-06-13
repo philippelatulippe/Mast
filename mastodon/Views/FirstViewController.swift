@@ -5714,6 +5714,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
             }
         }
         
+        self.navigationController?.navigationBar.backgroundColor = Colours.white
+        
         self.ai.alpha = 0
         self.ai.removeFromSuperview()
         

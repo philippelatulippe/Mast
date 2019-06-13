@@ -16,10 +16,21 @@ class ScrollMainViewController: UIViewController, UIGestureRecognizerDelegate {
         didSet {
             for viewController in viewControllers {
                 self.addChild(viewController)
-                self.scrollView.addSubview(viewController.view)
+                let vcv = viewController.view
+                vcv!.layer.cornerRadius = 20
+                vcv!.layer.masksToBounds = true
+                self.scrollView.addSubview(vcv!)
                 viewController.didMove(toParent: self)
             }
         }
+    }
+    
+    @objc func leftAr() {
+        self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+    
+    @objc func rightAr() {
+        self.scrollView.setContentOffset(CGPoint(x: self.scrollView.contentSize.width - self.scrollView.bounds.size.width, y: 0), animated: true)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -29,8 +40,12 @@ class ScrollMainViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.leftAr), name: NSNotification.Name(rawValue: "leftAr"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.rightAr), name: NSNotification.Name(rawValue: "rightAr"), object: nil)
+        
         self.scrollView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-        self.scrollView.panGestureRecognizer.minimumNumberOfTouches = 2
+        self.scrollView.panGestureRecognizer.minimumNumberOfTouches = 1
+        self.scrollView.isScrollEnabled = true
         self.scrollView.isUserInteractionEnabled = true
         self.scrollView.showsHorizontalScrollIndicator = false
         self.scrollView.showsVerticalScrollIndicator = false
@@ -42,13 +57,14 @@ class ScrollMainViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let width: CGFloat = 380
         
-        self.scrollView.contentSize = CGSize(width: CGFloat(width * CGFloat(CGFloat(viewControllers.count) + CGFloat(0.6))), height: CGFloat(self.view.bounds.height))
+        self.scrollView.contentSize = CGSize(width: (CGFloat(width * CGFloat(viewControllers.count))) + (CGFloat(25 * CGFloat(viewControllers.count + 1))), height: CGFloat(self.view.bounds.height))
         
         var idx: Int = 0
-        var widthOffset: CGFloat = 0
+        var widthOffset: CGFloat = 25
         for viewController in viewControllers {
-            viewController.view.frame = CGRect(x: widthOffset, y: 0, width: width + 0.6, height: self.view.bounds.height)
-            widthOffset += viewController.view.frame.size.width + 0.6
+            self.scrollView.touchesShouldCancel(in: viewController.view)
+            viewController.view.frame = CGRect(x: widthOffset, y: 25, width: width, height: self.view.bounds.height - 50)
+            widthOffset += viewController.view.frame.size.width + 25
             idx += 1
         }
     }

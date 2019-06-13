@@ -240,6 +240,9 @@ class MainSettingsViewController: UIViewController, UITableViewDelegate, UITable
                 // appearance
                 let controller = AppearanceSettingsViewController()
                 self.navigationController?.pushViewController(controller, animated: true)
+//                let controller = UINavigationController(rootViewController: AppearanceSettingsViewController())
+//                controller.modalPresentationStyle = .formSheet
+//                self.present(controller, animated: true, completion: nil)
             } else if indexPath.row == 2 {
                 // notifications
                 let controller = NotificationsSettingsViewController()
