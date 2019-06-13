@@ -315,6 +315,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window!.backgroundColor = Colours.white
         
+        if #available(iOS 11.0, *) {
+            UIImageView.appearance().accessibilityIgnoresInvertColors = true
+        }
+        
         let splitViewController =  UISplitViewController()
         let rootViewController = ViewController()
         let detailViewController = DetailViewController()
