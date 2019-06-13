@@ -194,6 +194,8 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         
         StoreStruct.tappedSignInCheck = false
         
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "padIsLogged"), object: nil)
+        
         var request = URLRequest(url: URL(string: "https://\(StoreStruct.currentInstance.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.currentInstance.authCode)&redirect_uri=\(StoreStruct.currentInstance.redirect)&client_id=\(StoreStruct.currentInstance.clientID)&client_secret=\(StoreStruct.currentInstance.clientSecret)&scope=read%20write%20follow%20push")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -673,13 +675,12 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         }
     }
     
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         if UserDefaults.standard.object(forKey: "accessToken") == nil {
             let con = PadLoginViewController()
-            con.modalPresentationStyle = .formSheet
+            con.modalPresentationStyle = .pageSheet
             self.show(con, sender: self)
         } else {
             

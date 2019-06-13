@@ -31,27 +31,18 @@ class PadLoginViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(self.loginLogo)
         
         self.loginLogo.translatesAutoresizingMaskIntoConstraints = false
-        //        self.loginLogo.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-        //        self.loginLogo.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-        self.loginLogo.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(100)).isActive = true
-        //        self.loginLogo.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
+        self.loginLogo.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(110)).isActive = true
         self.loginLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         self.loginLogo.width(80).isActive = true
         self.loginLogo.height(80).isActive = true
         
-        self.loginLabel.frame = CGRect(x: 50, y: self.view.bounds.height/2 - 57.5, width: self.view.bounds.width - 80, height: 35)
+        self.loginLabel.frame = CGRect(x: 50, y: Int(self.view.bounds.height) - self.keyHeight - 180, width: Int(self.view.bounds.width - 100), height: 35)
         self.loginLabel.text = "Instance name:".localized
         self.loginLabel.textColor = UIColor.white.withAlphaComponent(0.6)
         self.loginLabel.font = UIFont.systemFont(ofSize: 14)
         self.view.addSubview(self.loginLabel)
         
-        self.loginLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.loginLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-        self.loginLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 40).isActive = true
-        self.loginLabel.topAnchor.constraint(equalTo: self.loginLogo.bottomAnchor, constant: CGFloat(100)).isActive = true
-        //        self.loginLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
-        
-        self.textField.frame = CGRect(x: 40, y: self.view.bounds.height/2 - 22.5, width: self.view.bounds.width - 80, height: 45)
+        self.textField.frame = CGRect(x: 40, y: Int(self.view.bounds.height) - self.keyHeight - 140, width: Int(self.view.bounds.width - 80), height: 45)
         self.textField.backgroundColor = UIColor.black.withAlphaComponent(0.12)
         self.textField.borderStyle = .none
         self.textField.layer.cornerRadius = 10
@@ -65,28 +56,46 @@ class PadLoginViewController: UIViewController, UITextFieldDelegate {
                                                                   attributes: [NSAttributedString.Key.foregroundColor: Colours.tabSelected])
         self.view.addSubview(self.textField)
         
-        self.textField.translatesAutoresizingMaskIntoConstraints = false
-        self.textField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40).isActive = true
-        self.textField.trailingAnchor.constraint(equalTo: self.popoverPresentationController?.sourceView?.trailingAnchor ?? self.view.trailingAnchor, constant: 40).isActive = true
-        self.textField.topAnchor.constraint(equalTo: self.loginLabel.bottomAnchor, constant: CGFloat(20)).isActive = true
-        self.textField.height(45).isActive = true
-        
-        
         tagListView.alpha = 1
         tagListView.frame = CGRect(x: 0, y: Int(self.view.bounds.height) - self.keyHeight - 70, width: Int(self.view.bounds.width), height: 60)
         self.view.addSubview(tagListView)
-        
-        self.tagListView.translatesAutoresizingMaskIntoConstraints = false
-        self.tagListView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
-        self.tagListView.trailingAnchor.constraint(equalTo: self.popoverPresentationController?.sourceView?.trailingAnchor ?? self.view.trailingAnchor, constant: 20).isActive = true
-        self.tagListView.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: CGFloat(20)).isActive = true
-        self.tagListView.height(60).isActive = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        self.textField.becomeFirstResponder()
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.keyHeight = Int(keyboardHeight)
+            self.tagListView.frame = CGRect(x: 0, y: Int(self.view.bounds.height) - self.keyHeight - 70, width: Int(self.view.bounds.width), height: 60)
+            self.textField.frame = CGRect(x: 40, y: Int(self.view.bounds.height) - self.keyHeight - 140, width: Int(self.view.bounds.width - 80), height: 45)
+            self.loginLabel.frame = CGRect(x: 50, y: Int(self.view.bounds.height) - self.keyHeight - 180, width: Int(self.view.bounds.width - 100), height: 35)
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        self.keyHeight = Int(0)
+        self.tagListView.frame = CGRect(x: 0, y: Int(self.view.bounds.height) - self.keyHeight - 70, width: Int(self.view.bounds.width), height: 60)
+        self.textField.frame = CGRect(x: 40, y: Int(self.view.bounds.height) - self.keyHeight - 140, width: Int(self.view.bounds.width - 80), height: 45)
+        self.loginLabel.frame = CGRect(x: 50, y: Int(self.view.bounds.height) - self.keyHeight - 180, width: Int(self.view.bounds.width - 100), height: 35)
+    }
+    
+    @objc func padIsLogged() {
+        self.safariVC?.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = Colours.tabSelected
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.padIsLogged), name: NSNotification.Name(rawValue: "padIsLogged"), object: nil)
         
         if self.newInstance {
             var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
