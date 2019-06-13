@@ -8,10 +8,13 @@
 
 import Foundation
 import UIKit
+import UserNotifications
+import SAConfettiView
 
-class ColumnViewController: UIViewController, UIGestureRecognizerDelegate {
+class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUserNotificationCenterDelegate {
     
     let volumeBar = VolumeBar.shared
+    let reachability = Reachability()!
     
     var viewControllers: [UIViewController] = [] {
         didSet {
@@ -84,6 +87,19 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         
         self.view.backgroundColor = Colours.whitePad
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.siriLight00), name: NSNotification.Name(rawValue: "light00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.siriDark00), name: NSNotification.Name(rawValue: "dark00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.siriDark200), name: NSNotification.Name(rawValue: "darker00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.siriOled00), name: NSNotification.Name(rawValue: "black00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.siriBlue00), name: NSNotification.Name(rawValue: "blue00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.presentIntro), name: NSNotification.Name(rawValue: "presentIntro00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.gotoID), name: NSNotification.Name(rawValue: "gotoid00"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreate), name: NSNotification.Name(rawValue: "confettiCreate"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreateRe), name: NSNotification.Name(rawValue: "confettiCreateRe"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.confettiCreateLi), name: NSNotification.Name(rawValue: "confettiCreateLi"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.logged), name: NSNotification.Name(rawValue: "logged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newInstanceLogged), name: NSNotification.Name(rawValue: "newInstancelogged"), object: nil)
         
         if (UserDefaults.standard.object(forKey: "themeaccent") == nil) || (UserDefaults.standard.object(forKey: "themeaccent") as! Int == 0) {
             Colours.tabSelected = StoreStruct.colArray[0]
@@ -173,6 +189,289 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.addGestureRecognizer(longPress)
     }
     
+    @objc func gotoID() {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid"), object: self)
+    }
+    
+    @objc func presentIntro() {
+        DispatchQueue.main.async {
+            self.bulletinManager.prepare()
+            self.bulletinManager.presentBulletin(above: self, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func logged() {
+        
+        StoreStruct.tappedSignInCheck = false
+        
+        var request = URLRequest(url: URL(string: "https://\(StoreStruct.currentInstance.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.currentInstance.authCode)&redirect_uri=\(StoreStruct.currentInstance.redirect)&client_id=\(StoreStruct.currentInstance.clientID)&client_secret=\(StoreStruct.currentInstance.clientSecret)&scope=read%20write%20follow%20push")!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            guard error == nil else { print(error);return }
+            guard let data = data else { return }
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    
+                    DispatchQueue.main.async {
+                        var customStyle = VolumeBarStyle.likeInstagram
+                        customStyle.trackTintColor = Colours.cellQuote
+                        customStyle.progressTintColor = Colours.grayDark
+                        customStyle.backgroundColor = Colours.white
+                        self.volumeBar.style = customStyle
+                    }
+                    
+                    StoreStruct.currentInstance.accessToken = (json["access_token"] as? String ?? "")
+                    StoreStruct.client.accessToken = (json["access_token"] as? String ?? "")
+                    
+                    InstanceData.setCurrentInstance(instance: StoreStruct.currentInstance)
+                    
+                    let request2 = Accounts.currentUser()
+                    StoreStruct.client.run(request2) { (statuses) in
+                        if let stat = (statuses.value) {
+                            DispatchQueue.main.async {
+                                var instances = InstanceData.getAllInstances()
+                                instances.append(StoreStruct.currentInstance)
+                                UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey:"instances")
+                                StoreStruct.currentUser = stat
+                                Account.addAccountToList(account: stat)
+                                NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+                            }
+                        }
+                    }
+                    
+                    let request = Timelines.home()
+                    StoreStruct.client.run(request) { (statuses) in
+                        if let stat = (statuses.value) {
+                            StoreStruct.statusesHome = stat
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
+                        }
+                    }
+                    
+                    let request3 = Instances.customEmojis()
+                    StoreStruct.client.run(request3) { (statuses) in
+                        if let stat = (statuses.value) {
+                            DispatchQueue.main.async {
+                                StoreStruct.emotiFace = stat
+                            }
+                            stat.map({
+                                let attributedString = NSAttributedString(string: "    \($0.shortcode)")
+                                let textAttachment = NSTextAttachment()
+                                textAttachment.loadImageUsingCache(withUrl: $0.staticURL.absoluteString)
+                                textAttachment.bounds = CGRect(x:0, y: Int(-9), width: Int(30), height: Int(30))
+                                let attrStringWithImage = NSAttributedString(attachment: textAttachment)
+                                let result = NSMutableAttributedString()
+                                result.append(attrStringWithImage)
+                                result.append(attributedString)
+                                StoreStruct.mainResult.append(result)
+                                
+                                let textAttachment1 = NSTextAttachment()
+                                textAttachment1.loadImageUsingCache(withUrl: $0.staticURL.absoluteString)
+                                textAttachment1.bounds = CGRect(x:0, y: Int(-9), width: Int(30), height: Int(30))
+                                let attrStringWithImage1 = NSAttributedString(attachment: textAttachment1)
+                                let result1 = NSMutableAttributedString()
+                                result1.append(attrStringWithImage1)
+                                StoreStruct.mainResult1.append(result1)
+                                
+                                let attributedString2 = NSAttributedString(string: "\($0.shortcode)")
+                                let result2 = NSMutableAttributedString()
+                                result2.append(attributedString2)
+                                StoreStruct.mainResult2.append(result)
+                            })
+                        }
+                    }
+                    
+                    if (UserDefaults.standard.object(forKey: "onb") == nil) || (UserDefaults.standard.object(forKey: "onb") as! Int == 0) {
+                        DispatchQueue.main.async {
+                            self.bulletinManager.prepare()
+                            self.bulletinManager.presentBulletin(above: self, animated: true, completion: nil)
+                        }
+                    }
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        })
+        task.resume()
+        
+    }
+    
+    
+    @objc func newInstanceLogged() {
+        
+        var request = URLRequest(url: URL(string: "https://\(StoreStruct.newInstance!.returnedText)/oauth/token?grant_type=authorization_code&code=\(StoreStruct.newInstance!.authCode)&redirect_uri=\(StoreStruct.newInstance!.redirect)&client_id=\(StoreStruct.newInstance!.clientID)&client_secret=\(StoreStruct.newInstance!.clientSecret)&scope=read%20write%20follow%20push")!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            guard error == nil else { print(error);return }
+            guard let data = data else { return }
+            guard let newInstance = StoreStruct.newInstance else {
+                return
+            }
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    
+                    if let access1 = (json["access_token"] as? String) {
+                        
+                        StoreStruct.client = StoreStruct.newClient
+                        newInstance.accessToken = access1
+                        InstanceData.setCurrentInstance(instance: newInstance)
+                        
+                        let request2 = Accounts.currentUser()
+                        StoreStruct.client.run(request2) { (statuses) in
+                            if let stat = (statuses.value) {
+                                DispatchQueue.main.async {
+                                    var instances = InstanceData.getAllInstances()
+                                    instances.append(newInstance)
+                                    UserDefaults.standard.set(try? PropertyListEncoder().encode(instances), forKey: "instances")
+                                    StoreStruct.currentUser = stat
+                                    Account.addAccountToList(account: stat)
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+                                }
+                            }
+                        }
+                        
+                        let request = Timelines.home()
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                StoreStruct.statusesHome = stat
+                                NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
+                            }
+                        }
+                        
+                        if (UserDefaults.standard.object(forKey: "onb") == nil) || (UserDefaults.standard.object(forKey: "onb") as! Int == 0) {
+                            DispatchQueue.main.async {
+                                self.bulletinManager.prepare()
+                                self.bulletinManager.presentBulletin(above: self, animated: true, completion: nil)
+                            }
+                        }
+                        
+                        DispatchQueue.main.async {
+                            StoreStruct.tappedSignInCheck = false
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            appDelegate.reloadApplication()
+                        }
+                        
+                    }
+                    
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        })
+        task.resume()
+        
+    }
+    
+    lazy var bulletinManager: BulletinManager = {
+        
+        let page = PageBulletinItem(title: "Welcome to Mast")
+        page.image = UIImage(named: "iconb")
+        page.shouldCompactDescriptionText = true
+        page.descriptionText = "You're almost ready to go.\nLet's configure some things first."
+        page.actionButtonTitle = "Configure"
+        page.nextItem = makeNotPage()
+        
+        page.actionHandler = { item in
+            print("Action button tapped")
+            item.manager?.push(item: self.makeNotPage())
+        }
+        
+        let rootItem: BulletinItem = page
+        return BulletinManager(rootItem: rootItem)
+    }()
+    
+    func makeNotPage() -> PageBulletinItem {
+        
+        let page = PageBulletinItem(title: "Notifications")
+        page.image = UIImage(named: "notib")
+        page.shouldCompactDescriptionText = true
+        page.descriptionText = "Mast can send you push notifications for toots you're mentioned in, boosted and liked toots, as well as for new followers."
+        page.actionButtonTitle = "Subscribe"
+        page.alternativeButtonTitle = "No thanks"
+        page.nextItem = makeSiriPage()
+        
+        page.actionHandler = { item in
+            print("Action button tapped")
+            
+            UserDefaults.standard.set(true, forKey: "pnmentions")
+            UserDefaults.standard.set(true, forKey: "pnlikes")
+            UserDefaults.standard.set(true, forKey: "pnboosts")
+            UserDefaults.standard.set(true, forKey: "pnfollows")
+            
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+                // Enable or disable features based on authorization.
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+            
+            item.manager?.push(item: self.makeSiriPage())
+        }
+        
+        page.alternativeHandler = { item in
+            print("Action button tapped")
+            UserDefaults.standard.set(false, forKey: "pnmentions")
+            UserDefaults.standard.set(false, forKey: "pnlikes")
+            UserDefaults.standard.set(false, forKey: "pnboosts")
+            UserDefaults.standard.set(false, forKey: "pnfollows")
+            item.manager?.push(item: self.makeSiriPage())
+        }
+        
+        return page
+    }
+    
+    func makeSiriPage() -> PageBulletinItem {
+        
+        let page = PageBulletinItem(title: "Theme it Your Way")
+        page.image = UIImage(named: "themeb")
+        page.shouldCompactDescriptionText = true
+        page.descriptionText = "You can change the theme (and a variety of settings) via the app's settings section, or long-hold anywhere in the app to cycle through them.\n\nYou can also use Siri to do the same (Settings > Siri & Search > All Shortcuts)."
+        page.actionButtonTitle = "Got it!"
+        page.nextItem = makeDonePage()
+        
+        page.actionHandler = { item in
+            print("Action button tapped")
+            item.manager?.push(item: self.makeDonePage())
+        }
+        
+        return page
+    }
+    
+    func makeDonePage() -> PageBulletinItem {
+        
+        let page = PageBulletinItem(title: "Setup Complete")
+        page.image = UIImage(named: "doneb")
+        page.shouldCompactDescriptionText = true
+        page.descriptionText = "You're all ready to go.\nHappy tooting!"
+        page.actionButtonTitle = "Get Started"
+        //page.isDismissable = true
+        
+        page.actionHandler = { item in
+            print("Action button tapped")
+            
+            item.manager?.dismissBulletin(animated: true)
+            
+            UserDefaults.standard.set(1, forKey: "bulletindone")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                self.volumeBar.start()
+                self.volumeBar.showInitial()
+            })
+        }
+        
+        return page
+    }
+    
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: when, execute: closure)
+    }
+    
     func setupSiri() {
         let activity1 = NSUserActivity(activityType: "com.shi.Mast.light")
         activity1.title = "Switch to light mode".localized
@@ -187,7 +486,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.userActivity = activity1
         activity1.becomeCurrent()
         
-        delay(seconds: 1.5) {
+        delay(1.5) {
             let activity2 = NSUserActivity(activityType: "com.shi.Mast.dark")
             activity2.title = "Switch to dark mode".localized
             activity2.userInfo = ["state" : "dark"]
@@ -202,7 +501,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate {
             activity2.becomeCurrent()
         }
         
-        delay(seconds: 3) {
+        delay(3) {
             let activity21 = NSUserActivity(activityType: "com.shi.Mast.dark2")
             activity21.title = "Switch to extra dark mode".localized
             activity21.userInfo = ["state" : "dark2"]
@@ -217,7 +516,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate {
             activity21.becomeCurrent()
         }
         
-        delay(seconds: 4.5) {
+        delay(4.5) {
             let activity3 = NSUserActivity(activityType: "com.shi.Mast.oled")
             activity3.title = "Switch to true black dark mode".localized
             activity3.userInfo = ["state" : "oled"]
@@ -232,7 +531,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate {
             activity3.becomeCurrent()
         }
         
-        delay(seconds: 6) {
+        delay(6) {
             let activity3 = NSUserActivity(activityType: "com.shi.Mast.bluemid")
             activity3.title = "Switch to midnight blue mode".localized
             activity3.userInfo = ["state" : "blue"]
@@ -247,7 +546,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate {
             activity3.becomeCurrent()
         }
         
-        delay(seconds: 7.5) {
+        delay(7.5) {
             let activity3 = NSUserActivity(activityType: "com.shi.Mast.confetti")
             activity3.title = "Confetti time".localized
             activity3.userInfo = ["state" : "confetti"]
@@ -322,9 +621,78 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
     }
     
+    @objc func confettiCreate() {
+        let confettiView = SAConfettiView(frame: self.view.bounds)
+        confettiView.isUserInteractionEnabled = false
+        self.view.addSubview(confettiView)
+        confettiView.intensity = 1
+        confettiView.startConfetti()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            confettiView.stopConfetti()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                confettiView.removeFromSuperview()
+            }
+        }
+    }
+    
+    @objc func confettiCreateRe() {
+        let confettiView = SAConfettiView(frame: self.view.bounds)
+        confettiView.isUserInteractionEnabled = false
+        self.view.addSubview(confettiView)
+        confettiView.intensity = 1
+        confettiView.colors = [UIColor(red: 89/250, green: 207/250, blue: 99/250, alpha: 1.0), UIColor(red: 84/250, green: 202/250, blue: 94/250, alpha: 1.0), UIColor(red: 79/250, green: 97/250, blue: 89/250, alpha: 1.0)]
+        confettiView.startConfetti()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            confettiView.stopConfetti()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                confettiView.removeFromSuperview()
+            }
+        }
+    }
+    
+    @objc func confettiCreateLi() {
+        let confettiView = SAConfettiView(frame: self.view.bounds)
+        confettiView.isUserInteractionEnabled = false
+        self.view.addSubview(confettiView)
+        confettiView.intensity = 1
+        confettiView.colors = [UIColor(red: 255/250, green: 177/250, blue: 61/250, alpha: 1.0), UIColor(red: 250/250, green: 172/250, blue: 56/250, alpha: 1.0), UIColor(red: 245/250, green: 168/250, blue: 51/250, alpha: 1.0)]
+        confettiView.startConfetti()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            confettiView.stopConfetti()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                confettiView.removeFromSuperview()
+            }
+        }
+    }
+    
+    @objc func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+        switch reachability.connection {
+        case .wifi:
+            print("Reachable via WiFi")
+        case .cellular:
+            print("Reachable via Cellular")
+        case .none:
+            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                let warning = UINotificationFeedbackGenerator()
+                warning.notificationOccurred(.warning)
+            }
+            let label = ToppingLabel(text: "No Connection")
+            let biscuit = BiscuitViewController(title: "Oops!", toppings: [label], timeout: 2)
+            self.present(biscuit, animated: true, completion: nil)
+        }
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("couldn't start network checker")
+        }
         
         let request = Instances.customEmojis()
         StoreStruct.client.run(request) { (statuses) in
@@ -443,8 +811,8 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: self)
             
-            self.navigationController?.navigationBar.backgroundColor = Colours.white
-            self.navigationController?.navigationBar.tintColor = Colours.white
+            self.navigationController?.navigationBar.backgroundColor = Colours.whitePad
+            self.navigationController?.navigationBar.tintColor = Colours.whitePad
         }
     }
 }

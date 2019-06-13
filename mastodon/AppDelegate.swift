@@ -86,13 +86,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-//    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
-//        return true
-//    }
-//
-//    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
-//        return true
-//    }
+    //    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+    //        return true
+    //    }
+    //
+    //    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+    //        return true
+    //    }
     
     func resetApp() {
         if let window = UIApplication.shared.keyWindow {
@@ -125,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // change following when pushing to App Store or for local dev
         let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
-//        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
+        //        let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
         
         //create the url with URL
         let url = URL(string: "https://\(StoreStruct.currentInstance.returnedText)/api/v1/push/subscription")! //change the url
@@ -191,189 +191,184 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
-            if url.host == "light" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "light00"), object: nil)
-                return true
-            } else if url.host == "dark" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "dark00"), object: nil)
-                return true
-            } else if url.host == "darker" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "darker00"), object: nil)
-                return true
-            } else if url.host == "black" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "black00"), object: nil)
-                return true
-            } else if url.host == "blue" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "blue00"), object: nil)
-                return true
-            } else if url.host == "confetti" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
-                return true
-            } else if url.host == "onboard" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "presentIntro00"), object: self)
-                return true
-            } else if url.host == "settings" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings"), object: self)
-                return true
-            } else if url.absoluteString.contains("id=") {
-                let x = url.absoluteString
-                let y = x.split(separator: "=")
-                StoreStruct.curID = y[1].description
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid00"), object: self)
-                return true
-            } else if url.absoluteString.contains("toot=") {
-                let x = url.absoluteString
-                let y = x.split(separator: "=")
-                StoreStruct.composedTootText = y[1].description.replace("%20", with: " ")
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "switch44"), object: self)
-                return true
-            } else if url.absoluteString.contains("instance=") {
-                let x = url.absoluteString
-                let y = x.split(separator: "=")
-                self.tempGotoInstance(y[1].description)
-                return true
-            } else if url.host == "home" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "switch11"), object: self)
-                return true
-            } else if url.host == "mentions" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "switch22"), object: self)
-                return true
-            } else if url.host == "direct" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "switch222"), object: self)
-                return true
-            } else if url.host == "profile" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "switch33"), object: self)
-                return true
-            } else if url.host == "toot" {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "switch44"), object: self)
-                return true
-            } else if url.host == "addNewInstance" {
-                print("Response ==> \(url.absoluteString)")
-                let x = url.absoluteString
-                let y = x.split(separator: "=")
-                StoreStruct.newInstance!.authCode = y.last?.description ?? ""
-                if StoreStruct.tappedSignInCheck == false {
-                    StoreStruct.tappedSignInCheck = true
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "newInstancelogged"), object: nil)
-                }
-                return true
-            } else if url.host == "success" {
-                print("Response ==> \(url.absoluteString)")
-                let x = url.absoluteString
-                let y = x.split(separator: "=")
-                StoreStruct.currentInstance.authCode = y.last?.description ?? ""
-                if StoreStruct.tappedSignInCheck == false {
-                    StoreStruct.tappedSignInCheck = true
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
-                }
-                return true
-            } else {
-                return true
+        if url.host == "light" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "light00"), object: nil)
+            return true
+        } else if url.host == "dark" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "dark00"), object: nil)
+            return true
+        } else if url.host == "darker" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "darker00"), object: nil)
+            return true
+        } else if url.host == "black" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "black00"), object: nil)
+            return true
+        } else if url.host == "blue" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "blue00"), object: nil)
+            return true
+        } else if url.host == "confetti" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
+            return true
+        } else if url.host == "onboard" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "presentIntro00"), object: self)
+            return true
+        } else if url.host == "settings" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "goToSettings"), object: self)
+            return true
+        } else if url.absoluteString.contains("id=") {
+            let x = url.absoluteString
+            let y = x.split(separator: "=")
+            StoreStruct.curID = y[1].description
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "gotoid00"), object: self)
+            return true
+        } else if url.absoluteString.contains("toot=") {
+            let x = url.absoluteString
+            let y = x.split(separator: "=")
+            StoreStruct.composedTootText = y[1].description.replace("%20", with: " ")
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "switch44"), object: self)
+            return true
+        } else if url.absoluteString.contains("instance=") {
+            let x = url.absoluteString
+            let y = x.split(separator: "=")
+            self.tempGotoInstance(y[1].description)
+            return true
+        } else if url.host == "home" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "switch11"), object: self)
+            return true
+        } else if url.host == "mentions" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "switch22"), object: self)
+            return true
+        } else if url.host == "direct" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "switch222"), object: self)
+            return true
+        } else if url.host == "profile" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "switch33"), object: self)
+            return true
+        } else if url.host == "toot" {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "switch44"), object: self)
+            return true
+        } else if url.host == "addNewInstance" {
+            print("Response ==> \(url.absoluteString)")
+            let x = url.absoluteString
+            let y = x.split(separator: "=")
+            StoreStruct.newInstance!.authCode = y.last?.description ?? ""
+            if StoreStruct.tappedSignInCheck == false {
+                StoreStruct.tappedSignInCheck = true
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "newInstancelogged"), object: nil)
             }
+            return true
+        } else if url.host == "success" {
+            print("Response ==> \(url.absoluteString)")
+            let x = url.absoluteString
+            let y = x.split(separator: "=")
+            StoreStruct.currentInstance.authCode = y.last?.description ?? ""
+            if StoreStruct.tappedSignInCheck == false {
+                StoreStruct.tappedSignInCheck = true
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "logged"), object: nil)
+            }
+            return true
+        } else {
+            return true
+        }
     }
     
     func tempGotoInstance(_ text: String) {
-//        StoreStruct.client = Client(baseURL: "https://\(text)")
-//        let request = Clients.register(
-//            clientName: "Mast",
-//            redirectURI: "com.shi.mastodon://success",
-//            scopes: [.read, .write, .follow, .push],
-//            website: "https://twitter.com/jpeguin"
-//        )
-//        StoreStruct.client.run(request) { (application) in
-//
-//            if application.value == nil {} else {
+        //        StoreStruct.client = Client(baseURL: "https://\(text)")
+        //        let request = Clients.register(
+        //            clientName: "Mast",
+        //            redirectURI: "com.shi.mastodon://success",
+        //            scopes: [.read, .write, .follow, .push],
+        //            website: "https://twitter.com/jpeguin"
+        //        )
+        //        StoreStruct.client.run(request) { (application) in
+        //
+        //            if application.value == nil {} else {
         
-                DispatchQueue.main.async {
-                    // go to next view
-                    StoreStruct.currentInstance.instanceText = text
-                    
-                    if StoreStruct.instanceLocalToAdd.contains(StoreStruct.currentInstance.instanceText.lowercased()) {} else {
-                        StoreStruct.instanceLocalToAdd.append(StoreStruct.currentInstance.instanceText.lowercased())
-                        UserDefaults.standard.set(StoreStruct.instanceLocalToAdd, forKey: "instancesLocal")
-                    }
-                    
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadLists"), object: nil)
-                    if StoreStruct.currentPage == 0 {
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
-                    } else if StoreStruct.currentPage == 1 {
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
-                    } else if StoreStruct.currentPage == 101010 {
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
-                    } else {
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance4"), object: self)
-                    }
-                }
-                
-//            }
-//        }
+        DispatchQueue.main.async {
+            // go to next view
+            StoreStruct.currentInstance.instanceText = text
+            
+            if StoreStruct.instanceLocalToAdd.contains(StoreStruct.currentInstance.instanceText.lowercased()) {} else {
+                StoreStruct.instanceLocalToAdd.append(StoreStruct.currentInstance.instanceText.lowercased())
+                UserDefaults.standard.set(StoreStruct.instanceLocalToAdd, forKey: "instancesLocal")
+            }
+            
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadLists"), object: nil)
+            if StoreStruct.currentPage == 0 {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
+            } else if StoreStruct.currentPage == 1 {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
+            } else if StoreStruct.currentPage == 101010 {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
+            } else {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance4"), object: self)
+            }
+        }
+        
+        //            }
+        //        }
     }
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        if UIApplication.shared.isSplitOrSlideOver {
-//            self.window?.rootViewController = ViewController()
-//            self.window?.makeKeyAndVisible()
-//        } else {
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window!.backgroundColor = Colours.white
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window!.backgroundColor = Colours.white
+        
+        let splitViewController =  UISplitViewController()
+        let rootViewController = ViewController()
+        let detailViewController = DetailViewController()
+        splitViewController.viewControllers = [rootViewController, detailViewController]
+        splitViewController.preferredDisplayMode = .allVisible
+        let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
+        
+        if (UserDefaults.standard.object(forKey: "splitra") == nil) || (UserDefaults.standard.object(forKey: "splitra") as? Int == 0) {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.5
+            splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 1 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.25
+            splitViewController.minimumPrimaryColumnWidth = minimumWidth/4
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 2 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.3
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*3
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 3 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.35
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*7
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 4 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.4
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*2
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 5 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.45
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*9
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 6 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.55
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*11
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 7 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.6
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*4
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 8 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.65
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*13
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 9 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.7
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*7
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 10 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.75
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/4)*3
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        }
         
         
-            let splitViewController =  UISplitViewController()
-            let rootViewController = ViewController()
-            let detailViewController = DetailViewController()
-            splitViewController.viewControllers = [rootViewController, detailViewController]
-            splitViewController.preferredDisplayMode = .allVisible
-            let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
-            
-            if (UserDefaults.standard.object(forKey: "splitra") == nil) || (UserDefaults.standard.object(forKey: "splitra") as? Int == 0) {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.5
-                splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 1 {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.25
-                splitViewController.minimumPrimaryColumnWidth = minimumWidth/4
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 2 {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.3
-                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*3
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 3 {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.35
-                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*7
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 4 {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.4
-                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*2
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 5 {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.45
-                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*9
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 6 {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.55
-                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*11
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 7 {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.6
-                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*4
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 8 {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.65
-                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*13
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 9 {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.7
-                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*7
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 10 {
-                splitViewController.preferredPrimaryColumnWidthFraction = 0.75
-                splitViewController.minimumPrimaryColumnWidth = (minimumWidth/4)*3
-                splitViewController.maximumPrimaryColumnWidth = minimumWidth
-            }
- 
-                
         self.window?.rootViewController = splitViewController
         
         
@@ -381,20 +376,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         switch (deviceIdiom) {
         case .pad:
             let rootController = ColumnViewController()
-            rootViewController.viewControllers = [UINavigationController(), UITabBarController(), UIViewController()]
+            let nav0 = UINavigationController(rootViewController: VerticalTabBarController())
+            let nav1 = ScrollMainViewController()
+            
+            let nav01 = UINavigationController(rootViewController: FirstViewController())
+            let nav02 = UINavigationController(rootViewController: SecondViewController())
+            let nav03 = UINavigationController(rootViewController: DMViewController())
+            let nav04 = UINavigationController(rootViewController: ThirdViewController())
+            let nav05 = UINavigationController(rootViewController: MainSettingsViewController())
+            nav1.viewControllers = [nav01, nav02, nav03, nav04, nav05]
+            
+            rootController.viewControllers = [nav0, nav1]
             self.window?.rootViewController = rootController
             self.window!.makeKeyAndVisible()
         default:
             print("nil")
         }
         
-        
-        
-            UINavigationBar.appearance().backgroundColor = Colours.white
-            UINavigationBar.appearance().barTintColor = Colours.black
-            UINavigationBar.appearance().tintColor = Colours.black
-            UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
-//        }
+        UINavigationBar.appearance().backgroundColor = Colours.white
+        UINavigationBar.appearance().barTintColor = Colours.black
+        UINavigationBar.appearance().tintColor = Colours.black
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
         
         SwiftyGiphyAPI.shared.apiKey = SwiftyGiphyAPI.publicBetaKey
         
@@ -437,10 +439,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    
-    
-    
-    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -465,173 +463,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             UserDefaults.standard.set(StoreStruct.currentUser.username, forKey: "userN")
             DispatchQueue.global(qos: .userInitiated).async {
-            do {
-                try Disk.save(StoreStruct.currentUser, to: .documents, as: "\(StoreStruct.currentInstance.clientID)use.json")
-                
-                try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
-                try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
-                try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
-                
-                try Disk.save(StoreStruct.notifications, to: .documents, as: "\(StoreStruct.currentInstance.clientID)noti.json")
-                try Disk.save(StoreStruct.notificationsMentions, to: .documents, as: "\(StoreStruct.currentInstance.clientID)ment.json")
-                
-                try Disk.save(StoreStruct.gapLastHomeStat, to: .documents, as: "\(StoreStruct.currentInstance.clientID)homestat.json")
-                try Disk.save(StoreStruct.gapLastLocalStat, to: .documents, as: "\(StoreStruct.currentInstance.clientID)localstat.json")
-                try Disk.save(StoreStruct.gapLastFedStat, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fedstat.json")
-            } catch {
-                print("Couldn't save")
-            }
+                do {
+                    try Disk.save(StoreStruct.currentUser, to: .documents, as: "\(StoreStruct.currentInstance.clientID)use.json")
+                    
+                    try Disk.save(StoreStruct.statusesHome, to: .documents, as: "\(StoreStruct.currentInstance.clientID)home.json")
+                    try Disk.save(StoreStruct.statusesLocal, to: .documents, as: "\(StoreStruct.currentInstance.clientID)local.json")
+                    try Disk.save(StoreStruct.statusesFederated, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fed.json")
+                    
+                    try Disk.save(StoreStruct.notifications, to: .documents, as: "\(StoreStruct.currentInstance.clientID)noti.json")
+                    try Disk.save(StoreStruct.notificationsMentions, to: .documents, as: "\(StoreStruct.currentInstance.clientID)ment.json")
+                    
+                    try Disk.save(StoreStruct.gapLastHomeStat, to: .documents, as: "\(StoreStruct.currentInstance.clientID)homestat.json")
+                    try Disk.save(StoreStruct.gapLastLocalStat, to: .documents, as: "\(StoreStruct.currentInstance.clientID)localstat.json")
+                    try Disk.save(StoreStruct.gapLastFedStat, to: .documents, as: "\(StoreStruct.currentInstance.clientID)fedstat.json")
+                } catch {
+                    print("Couldn't save")
+                }
             }
         }
-        
-        
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-//        NotificationCenter.default.post(name: Notification.Name(rawValue: "startStream"), object: self)
-//
-//        UIApplication.shared.applicationIconBadgeNumber = 0
-//
-//        if (UserDefaults.standard.object(forKey: "composeSaved") == nil) || (UserDefaults.standard.object(forKey: "composeSaved") as? String == "") {
-//
-//        } else {
-//            if let x = UserDefaults.standard.object(forKey: "composeSaved") as? String {
-//                StoreStruct.savedComposeText = x
-//                if let y = UserDefaults.standard.object(forKey: "savedInReplyText") as? String {
-//                    StoreStruct.savedInReplyText = y
-//                    StoreStruct.savedComposeText = x
-//                    NotificationCenter.default.post(name: Notification.Name(rawValue: "savedComposePresent"), object: nil)
-//                }
-//            }
-//        }
-//
-//        SettingsBundleHelper.checkAndExecuteSettings()
-//        SettingsBundleHelper.setVersionAndBuildNumber()
-//
-//        if self.oneTime == false {
-//            if (UserDefaults.standard.object(forKey: "biometrics") == nil) || (UserDefaults.standard.object(forKey: "biometrics") as! Int == 0) {} else {
-//                self.biometricAuthenticationClicked(self)
-//                self.oneTime = true
-//            }
-//        }
-//
-//
-////        if UIApplication.shared.isSplitOrSlideOver {
-////            self.window?.rootViewController = ViewController()
-////            self.window?.makeKeyAndVisible()
-////            StoreStruct.isSplit = true
-////        } else {
-////            if StoreStruct.isSplit {
-//            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-//            switch (deviceIdiom) {
-//            case .phone:
-//                print("nothing")
-//            case .pad:
-//                self.window = UIWindow(frame: UIScreen.main.bounds)
-//                self.window!.backgroundColor = Colours.white
-//
-//                let splitViewController =  UISplitViewController()
-//                let rootViewController = ViewController()
-//                let detailViewController = DetailViewController()
-//                splitViewController.viewControllers = [rootViewController, detailViewController]
-//                splitViewController.preferredDisplayMode = .allVisible
-//                let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
-//
-//                if (UserDefaults.standard.object(forKey: "splitra") == nil) || (UserDefaults.standard.object(forKey: "splitra") as? Int == 0) {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.5
-//                    splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 1 {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.25
-//                    splitViewController.minimumPrimaryColumnWidth = minimumWidth/4
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 2 {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.3
-//                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*3
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 3 {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.35
-//                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*7
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 4 {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.4
-//                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*2
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 5 {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.45
-//                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*9
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 6 {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.55
-//                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*11
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 7 {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.6
-//                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*4
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 8 {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.65
-//                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*13
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 9 {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.7
-//                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*7
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 10 {
-//                    splitViewController.preferredPrimaryColumnWidthFraction = 0.75
-//                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/4)*3
-//                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-//                }
-//                self.window!.rootViewController = splitViewController
-//                self.window!.makeKeyAndVisible()
-//
-////                UINavigationBar.appearance().shadowImage = UIImage()
-////                UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-//                UINavigationBar.appearance().backgroundColor = Colours.white
-//                UINavigationBar.appearance().barTintColor = Colours.black
-//                UINavigationBar.appearance().tintColor = Colours.black
-//                UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
-//            default:
-//                print("nothing")
-//            }
-////                StoreStruct.isSplit = false
-////            }
-////        }
-//
-//        UserDefaults.standard.synchronize()
-        
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .pad:
-            let rootController = ColumnViewController()
-            let nav0 = UINavigationController(rootViewController: VerticalTabBarController())
-            let nav1 = ScrollMainViewController()
-            
-            let nav01 = UINavigationController(rootViewController: FirstViewController())
-            let nav02 = UINavigationController(rootViewController: SecondViewController())
-            let nav03 = UINavigationController(rootViewController: DMViewController())
-            let nav04 = UINavigationController(rootViewController: ThirdViewController())
-            let nav05 = UINavigationController(rootViewController: MainSettingsViewController())
-            nav1.viewControllers = [nav01, nav02, nav03, nav04, nav05]
-            
-            rootController.viewControllers = [nav0, nav1]
-            self.window?.rootViewController = rootController
-            self.window!.makeKeyAndVisible()
-        default:
-            print("nil")
-        }
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-  
+    
     func biometricAuthenticationClicked(_ sender: Any) {
         
         let win = window
@@ -687,8 +550,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if UIApplication.shared.isSplitOrSlideOver {
-//            self.window?.rootViewController = ViewController()
-//            self.window?.makeKeyAndVisible()
+            //            self.window?.rootViewController = ViewController()
+            //            self.window?.makeKeyAndVisible()
         } else {
             
             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
@@ -697,70 +560,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController = ViewController()
                 self.window?.makeKeyAndVisible()
             case .pad:
-                self.window = UIWindow(frame: UIScreen.main.bounds)
-                self.window!.backgroundColor = Colours.white
-
-                let splitViewController =  UISplitViewController()
-                let rootViewController = ViewController()
-                let detailViewController = DetailViewController()
-                splitViewController.viewControllers = [rootViewController, detailViewController]
-                splitViewController.preferredDisplayMode = .allVisible
-                let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
+                let rootController = ColumnViewController()
+                let nav0 = UINavigationController(rootViewController: VerticalTabBarController())
+                let nav1 = ScrollMainViewController()
                 
-                if (UserDefaults.standard.object(forKey: "splitra") == nil) || (UserDefaults.standard.object(forKey: "splitra") as? Int == 0) {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.5
-                    splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 1 {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.25
-                    splitViewController.minimumPrimaryColumnWidth = minimumWidth/4
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 2 {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.3
-                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*3
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 3 {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.35
-                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*7
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 4 {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.4
-                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*2
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 5 {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.45
-                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*9
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 6 {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.55
-                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*11
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 7 {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.6
-                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*4
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 8 {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.65
-                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*13
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 9 {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.7
-                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*7
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 10 {
-                    splitViewController.preferredPrimaryColumnWidthFraction = 0.75
-                    splitViewController.minimumPrimaryColumnWidth = (minimumWidth/4)*3
-                    splitViewController.maximumPrimaryColumnWidth = minimumWidth
-                }
-                self.window!.rootViewController = splitViewController
+                let nav01 = UINavigationController(rootViewController: FirstViewController())
+                let nav02 = UINavigationController(rootViewController: SecondViewController())
+                let nav03 = UINavigationController(rootViewController: DMViewController())
+                let nav04 = UINavigationController(rootViewController: ThirdViewController())
+                let nav05 = UINavigationController(rootViewController: MainSettingsViewController())
+                nav1.viewControllers = [nav01, nav02, nav03, nav04, nav05]
+                
+                rootController.viewControllers = [nav0, nav1]
+                self.window?.rootViewController = rootController
                 self.window!.makeKeyAndVisible()
-                
-                UINavigationBar.appearance().shadowImage = UIImage()
-                UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-                UINavigationBar.appearance().backgroundColor = Colours.white
-                UINavigationBar.appearance().barTintColor = Colours.black
-                UINavigationBar.appearance().tintColor = Colours.black
-                UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
             default:
                 self.window?.rootViewController = ViewController()
                 self.window?.makeKeyAndVisible()

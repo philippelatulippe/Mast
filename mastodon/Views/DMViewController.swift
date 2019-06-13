@@ -28,7 +28,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     var notifications: [Notificationt] = []
     var maybeDoOnce = false
-    var searchButton = MNGExpandedTouchAreaButton()
     var settingsButton = UIButton(type: .custom)
     var blurEffectViewMain = UIView()
     var blurEffect0 = UIBlurEffect()
@@ -102,14 +101,12 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
-    
     @objc func goLists() {
         DispatchQueue.main.async {
             let controller = ListViewController()
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
-    
     
     @objc func goInstance() {
         let request = Timelines.public(local: true, range: .max(id: StoreStruct.newInstanceTags.last?.id ?? "", limit: 5000))
@@ -127,7 +124,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         }
     }
-    
     
     @objc func goMembers() {
         let request = Lists.accounts(id: StoreStruct.allListRelID)
@@ -186,9 +182,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         }
     }
-    
-    
-    
     
     @objc func changeSeg() {
         var tabHeight = Int(UITabBarController().tabBar.frame.size.height) + Int(34)
@@ -484,23 +477,6 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
             self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(offset)).isActive = true
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
-            
-            
-            if self.maybeDoOnce == false {
-                self.searchButton = MNGExpandedTouchAreaButton()
-                self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-                self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-                self.searchButton.adjustsImageWhenHighlighted = false
-                self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
-                self.navigationController?.view.addSubview(self.searchButton)
-                self.maybeDoOnce = true
-                
-//                self.searchButton.translatesAutoresizingMaskIntoConstraints = false
-//                self.searchButton.widthAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
-//                self.searchButton.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
-//                self.searchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
-//                self.searchButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
-            }
         default:
             print("nothing")
         }

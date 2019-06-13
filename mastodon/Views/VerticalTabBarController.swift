@@ -23,7 +23,8 @@ class VerticalTabBarController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Colours.white
+        self.view.backgroundColor = Colours.whitePad
+        self.navigationController?.navigationBar.backgroundColor = Colours.whitePad
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         
@@ -31,18 +32,18 @@ class VerticalTabBarController: UIViewController {
         
         self.button1.frame = CGRect(x: 10, y: offset + 10, width: 60, height: 60)
         self.button1.backgroundColor = .clear
-        self.button1.setImage(UIImage(named: "toot")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+        self.button1.setImage(UIImage(named: "toot")?.maskWithColor(color: Colours.grayDark), for: .normal)
         self.button1.addTarget(self, action: #selector(self.compose), for: .touchUpInside)
         self.view.addSubview(self.button1)
         
         self.button2.frame = CGRect(x: 10, y: offset + 80, width: 60, height: 60)
         self.button2.backgroundColor = .clear
-        self.button2.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+        self.button2.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayDark), for: .normal)
         self.view.addSubview(self.button2)
         
         self.button3.frame = CGRect(x: 10, y: offset + 150, width: 60, height: 60)
         self.button3.backgroundColor = .clear
-        self.button3.setImage(UIImage(named: "search2")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+        self.button3.setImage(UIImage(named: "search2")?.maskWithColor(color: Colours.grayDark), for: .normal)
         self.view.addSubview(self.button3)
     }
     
@@ -55,6 +56,7 @@ class VerticalTabBarController: UIViewController {
     
     func loadLoadLoad() {
         if (UserDefaults.standard.object(forKey: "theme") == nil || UserDefaults.standard.object(forKey: "theme") as! Int == 0) {
+            Colours.whitePad = UIColor(red: 235/255.0, green: 235/255.0, blue: 235/255.0, alpha: 1.0)
             Colours.white = UIColor.white
             Colours.grayDark = UIColor(red: 40/250, green: 40/250, blue: 40/250, alpha: 1.0)
             Colours.grayDark2 = UIColor(red: 110/250, green: 113/250, blue: 121/250, alpha: 1.0)
@@ -69,6 +71,7 @@ class VerticalTabBarController: UIViewController {
             Colours.white3 = UIColor(red: 235/255.0, green: 235/255.0, blue: 235/255.0, alpha: 1.0)
             UIApplication.shared.statusBarStyle = .default
         } else if (UserDefaults.standard.object(forKey: "theme") != nil && UserDefaults.standard.object(forKey: "theme") as! Int == 1) {
+            Colours.whitePad = UIColor(red: 66/255.0, green: 66/255.0, blue: 72/255.0, alpha: 1.0)
             Colours.white = UIColor(red: 46/255.0, green: 46/255.0, blue: 52/255.0, alpha: 1.0)
             Colours.grayDark = UIColor(red: 250/250, green: 250/250, blue: 250/250, alpha: 1.0)
             Colours.grayDark2 = UIColor.white
@@ -83,6 +86,7 @@ class VerticalTabBarController: UIViewController {
             Colours.white3 = UIColor(red: 33/255.0, green: 33/255.0, blue: 44/255.0, alpha: 1.0)
             UIApplication.shared.statusBarStyle = .lightContent
         } else if (UserDefaults.standard.object(forKey: "theme") != nil && UserDefaults.standard.object(forKey: "theme") as! Int == 2) {
+            Colours.whitePad = UIColor(red: 56/255.0, green: 53/255.0, blue: 57/255.0, alpha: 1.0)
             Colours.white = UIColor(red: 36/255.0, green: 33/255.0, blue: 37/255.0, alpha: 1.0)
             Colours.grayDark = UIColor(red: 250/250, green: 250/250, blue: 250/250, alpha: 1.0)
             Colours.grayDark2 = UIColor.white
@@ -97,6 +101,7 @@ class VerticalTabBarController: UIViewController {
             Colours.white3 = UIColor(red: 16/255.0, green: 13/255.0, blue: 17/255.0, alpha: 1.0)
             UIApplication.shared.statusBarStyle = .lightContent
         } else if (UserDefaults.standard.object(forKey: "theme") != nil && UserDefaults.standard.object(forKey: "theme") as! Int == 4) {
+            Colours.whitePad = UIColor(red: 61/255.0, green: 70/255.0, blue: 98/255.0, alpha: 1.0)
             Colours.white = UIColor(red: 41/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
             Colours.grayDark = UIColor(red: 250/250, green: 250/250, blue: 250/250, alpha: 1.0)
             Colours.grayDark2 = UIColor.white
@@ -111,6 +116,7 @@ class VerticalTabBarController: UIViewController {
             Colours.white3 = UIColor(red: 0/255.0, green: 14/255.0, blue: 69/255.0, alpha: 1.0)
             UIApplication.shared.statusBarStyle = .lightContent
         } else {
+            Colours.whitePad = UIColor(red: 20/255.0, green: 20/255.0, blue: 20/255.0, alpha: 1.0)
             Colours.white = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
             Colours.grayDark = UIColor(red: 250/250, green: 250/250, blue: 250/250, alpha: 1.0)
             Colours.grayDark2 = UIColor.white
@@ -131,7 +137,7 @@ class VerticalTabBarController: UIViewController {
         topBorder.backgroundColor = Colours.tabUnselected.cgColor
         self.tabBarController?.tabBar.layer.addSublayer(topBorder)
         
-        self.view.backgroundColor = Colours.white
+        self.view.backgroundColor = Colours.whitePad
         
         if (UserDefaults.standard.object(forKey: "systemText") == nil) || (UserDefaults.standard.object(forKey: "systemText") as! Int == 0) {
             Colours.fontSize1 = CGFloat(UIFont.systemFontSize)
@@ -180,11 +186,11 @@ class VerticalTabBarController: UIViewController {
             }
         }
         
-        self.navigationController?.navigationBar.backgroundColor = Colours.white
+        self.navigationController?.navigationBar.backgroundColor = Colours.whitePad
         
-        self.button1.setImage(UIImage(named: "toot")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-        self.button2.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-        self.button3.setImage(UIImage(named: "search2")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+        self.button1.setImage(UIImage(named: "toot")?.maskWithColor(color: Colours.grayDark), for: .normal)
+        self.button2.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayDark), for: .normal)
+        self.button3.setImage(UIImage(named: "search2")?.maskWithColor(color: Colours.grayDark), for: .normal)
     }
     
 }
