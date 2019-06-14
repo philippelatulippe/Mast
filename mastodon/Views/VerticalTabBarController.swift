@@ -49,7 +49,20 @@ class VerticalTabBarController: UIViewController {
         self.button3.frame = CGRect(x: 15, y: offset + 85, width: 50, height: 50)
         self.button3.backgroundColor = .clear
         self.button3.setImage(UIImage(named: "search2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.6)), for: .normal)
+        self.button3.addTarget(self, action: #selector(self.search), for: .touchUpInside)
         self.view.addSubview(self.button3)
+    }
+    
+    @objc func search() {
+        let controller = UINavigationController(rootViewController: SearchViewController())
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            controller.modalPresentationStyle = .pageSheet
+        default:
+            print("nil")
+        }
+        self.present(controller, animated: true, completion: nil)
     }
     
     @objc func compose() {

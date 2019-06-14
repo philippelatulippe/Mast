@@ -31,11 +31,10 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         let newToot = UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(comp1), discoverabilityTitle: "New Toot")
         let listThing = UIKeyCommand(input: "l", modifierFlags: .control, action: #selector(list1), discoverabilityTitle: "Lists")
         let searchThing = UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(search1), discoverabilityTitle: "Search")
-        let settings = UIKeyCommand(input: ";", modifierFlags: .command, action: #selector(settings1), discoverabilityTitle: "Settings")
         let leftAr = UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: [], action: #selector(left1), discoverabilityTitle: "Scroll to Start")
         let rightAr = UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: [], action: #selector(right1), discoverabilityTitle: "Scroll to End")
         return [
-            newToot, listThing, searchThing, settings, leftAr, rightAr
+            newToot, listThing, searchThing, leftAr, rightAr
         ]
     }
     
@@ -58,12 +57,14 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
     }
     
     @objc func search1() {
-        
-    }
-    
-    @objc func settings1() {
-        let controller = UINavigationController(rootViewController: MainSettingsViewController())
-        controller.modalPresentationStyle = .formSheet
+        let controller = UINavigationController(rootViewController: SearchViewController())
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            controller.modalPresentationStyle = .pageSheet
+        default:
+            print("nil")
+        }
         self.present(controller, animated: true, completion: nil)
     }
     

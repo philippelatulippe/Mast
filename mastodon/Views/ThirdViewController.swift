@@ -1123,6 +1123,47 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         NotificationCenter.default.post(name: Notification.Name(rawValue: "searchthething"), object: self)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            self.ai.startAnimating()
+            
+            self.tableView.translatesAutoresizingMaskIntoConstraints = false
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(self.navigationController?.navigationBar.frame.size.height ?? 0)).isActive = true
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
+            
+            if self.maybeDoOnce == false {
+                self.searchButton = MNGExpandedTouchAreaButton()
+                self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
+                self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                self.searchButton.adjustsImageWhenHighlighted = false
+                self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
+                
+                let deviceIdiom2 = UIScreen.main.traitCollection.userInterfaceIdiom
+                switch (deviceIdiom2) {
+                case .phone:
+                    self.navigationController?.view.addSubview(self.searchButton)
+                    
+                    self.searchButton.translatesAutoresizingMaskIntoConstraints = false
+                    self.searchButton.widthAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
+                    self.searchButton.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
+                    self.searchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+                    self.searchButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
+                default:
+                    print("nil")
+                }
+                self.maybeDoOnce = true
+            }
+        default:
+            print("nothing")
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
@@ -1165,42 +1206,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //            }
 //        }
         
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .pad:
-            self.ai.startAnimating()
-            
-            self.tableView.translatesAutoresizingMaskIntoConstraints = false
-            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: CGFloat(self.navigationController?.navigationBar.frame.size.height ?? 0)).isActive = true
-            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: CGFloat(0)).isActive = true
-            
-            if self.maybeDoOnce == false {
-                self.searchButton = MNGExpandedTouchAreaButton()
-                self.searchButton.setImage(UIImage(named: "search")?.maskWithColor(color: Colours.grayLight2), for: .normal)
-                self.searchButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-                self.searchButton.adjustsImageWhenHighlighted = false
-                self.searchButton.addTarget(self, action: #selector(search9), for: .touchUpInside)
-                
-                let deviceIdiom2 = UIScreen.main.traitCollection.userInterfaceIdiom
-                switch (deviceIdiom2) {
-                case .phone:
-                    self.navigationController?.view.addSubview(self.searchButton)
-                    
-                    self.searchButton.translatesAutoresizingMaskIntoConstraints = false
-                    self.searchButton.widthAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
-                    self.searchButton.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
-                    self.searchButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
-                    self.searchButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIApplication.shared.statusBarFrame.height + 5).isActive = true
-                default:
-                    print("nil")
-                }
-                self.maybeDoOnce = true
-            }
-        default:
-            print("nothing")
-        }
         
         if self.fromOtherUser && (self.isPeeking == false) && (self.userIDtoUse != StoreStruct.currentUser.id) {
             let request00 = Accounts.allEndorsements()
