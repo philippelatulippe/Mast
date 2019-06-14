@@ -1629,6 +1629,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                  
                 
                 let controller = NewProfileViewController()
+                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                switch (deviceIdiom) {
+                case .pad:
+                    controller.modalPresentationStyle = .pageSheet
+                default:
+                    print("nil")
+                }
                 controller.editListName = self.chosenUser.displayName
                 self.present(controller, animated: true, completion: nil)
                 
@@ -1637,6 +1644,13 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                  
                 
                 let controller = NewProfileNoteViewController()
+                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                switch (deviceIdiom) {
+                case .pad:
+                    controller.modalPresentationStyle = .pageSheet
+                default:
+                    print("nil")
+                }
                 controller.editListName = self.chosenUser.note.stripHTML()
                 self.present(controller, animated: true, completion: nil)
                 
