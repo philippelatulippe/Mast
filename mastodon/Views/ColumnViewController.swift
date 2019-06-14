@@ -717,6 +717,13 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
             print("couldn't start network checker")
         }
         
+        let request8 = FilterToots.all()
+        StoreStruct.client.run(request8) { (statuses) in
+            if let stat = (statuses.value) {
+                StoreStruct.allCurrentFilters = stat
+            }
+        }
+        
         let request = Instances.customEmojis()
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {

@@ -408,19 +408,21 @@ class NewInstanceViewController: UIViewController, UITextFieldDelegate {
                             UserDefaults.standard.set(StoreStruct.instanceLocalToAdd, forKey: "instancesLocal")
                         }
                         self.textView.resignFirstResponder()
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: nil)
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "liload"), object: nil)
                         self.dismiss(animated: true, completion: nil)
                         
-                        if StoreStruct.currentPage == 0 {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
-                        } else if StoreStruct.currentPage == 1 {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
-                        } else if StoreStruct.currentPage == 101010 {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
-                        } else {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance4"), object: self)
-                        }
-                        
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadLists"), object: nil)
+//                        if StoreStruct.currentPage == 0 {
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
+//                        } else if StoreStruct.currentPage == 1 {
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
+//                        } else if StoreStruct.currentPage == 101010 {
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
+//                        } else {
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance4"), object: self)
+//                        }
+//
+//                        NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadLists"), object: nil)
                     }
                     
 //                }

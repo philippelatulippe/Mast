@@ -25,7 +25,7 @@ class VerticalTabBarController: UIViewController {
         
         self.button1.frame = CGRect(x: 10, y: self.view.bounds.height - 90, width: 60, height: 60)
         self.button1.backgroundColor = .clear
-        self.button1.setImage(UIImage(named: "addac1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.5)), for: .normal)
+        self.button1.setImage(UIImage(named: "newac2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         self.button1.adjustsImageWhenHighlighted = false
         self.button1.addTarget(self, action: #selector(self.compose), for: .touchUpInside)
         self.view.addSubview(self.button1)
@@ -208,7 +208,7 @@ class VerticalTabBarController: UIViewController {
         
         
         let offset = self.navigationController?.navigationBar.frame.size.height ?? 100
-        self.button1.setImage(UIImage(named: "addac1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.5)), for: .normal)
+        self.button1.setImage(UIImage(named: "newac2")?.maskWithColor(color: Colours.tabSelected), for: .normal)
         self.button2.setImage(UIImage(named: "search2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.5)), for: .normal)
     }
     

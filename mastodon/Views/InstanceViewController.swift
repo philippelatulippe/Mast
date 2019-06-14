@@ -186,6 +186,23 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        
+        switch (deviceIdiom) {
+        case .pad:
+            self.tableView.translatesAutoresizingMaskIntoConstraints = false
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+            self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        default:
+            print("nothing")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
