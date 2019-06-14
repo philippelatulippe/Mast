@@ -387,8 +387,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let nav02 = UINavigationController(rootViewController: SecondViewController())
             let nav03 = UINavigationController(rootViewController: DMViewController())
             let nav04 = UINavigationController(rootViewController: ThirdViewController())
-            let nav05 = UINavigationController(rootViewController: MainSettingsViewController())
-            nav1.viewControllers = [nav01, nav02, nav03, nav04, nav05]
+            let nav05 = UINavigationController(rootViewController: PadListsViewController())
+            let nav06 = UINavigationController(rootViewController: MainSettingsViewController())
+            nav1.viewControllers = [nav01, nav02, nav03, nav04, nav05, nav06]
             
             rootController.viewControllers = [nav0, nav1]
             self.window?.rootViewController = rootController
