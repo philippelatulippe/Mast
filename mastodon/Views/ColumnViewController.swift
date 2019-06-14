@@ -238,6 +238,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
                                 StoreStruct.currentUser = stat
                                 Account.addAccountToList(account: stat)
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+                                NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: nil)
                             }
                         }
                     }
@@ -331,6 +332,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
                                     StoreStruct.currentUser = stat
                                     Account.addAccountToList(account: stat)
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: nil)
                                 }
                             }
                         }

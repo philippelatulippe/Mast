@@ -141,6 +141,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         StoreStruct.client.run(request2) { (statuses) in
             if let stat = (statuses.value) {
                 StoreStruct.currentUser = stat
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: nil)
                 self.chosenUser = stat
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -410,6 +411,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 StoreStruct.client.run(request2) { (statuses) in
                     if let stat = (statuses.value) {
                         StoreStruct.currentUser = stat
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: nil)
                         
                         
                         self.userIDtoUse = StoreStruct.currentUser.id
@@ -1040,6 +1042,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     if let stat = (statuses.value) {
                         DispatchQueue.main.async {
                             StoreStruct.currentUser = stat
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: nil)
                             self.userIDtoUse = StoreStruct.currentUser.id
                             self.chosenUser = StoreStruct.currentUser
                             self.tableView.reloadData()
@@ -1248,6 +1251,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             StoreStruct.client.run(request2) { (statuses) in
                 if let stat = (statuses.value) {
                     StoreStruct.currentUser = stat
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: nil)
                     guard let chosen = self.chosenUser else { return }
                     let request02 = Accounts.relationships(ids: [StoreStruct.currentUser.id, chosen.id])
                     StoreStruct.client.run(request02) { (statuses) in
