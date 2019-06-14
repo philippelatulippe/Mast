@@ -3306,7 +3306,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     
                     
-                    Alertift.actionSheet()
+                    let zz = Alertift.actionSheet()
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
                         .messageTextColor(Colours.grayDark)
@@ -3349,8 +3349,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 return
                             }
                         }
-                        .popover(anchorView: self.moreButton ?? self.view)
-                        .show(on: self)
+                    if self.mainStatus[0].visibility == .direct {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! ActionButtonCell2
+                        zz.popover(anchorView: cell.moreButton ?? self.view)
+                    } else {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! ActionButtonCell
+                        zz.popover(anchorView: cell.moreButton ?? self.view)
+                    }
+                        zz.show(on: self)
                     
                     
                     
@@ -3662,7 +3668,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     
                     
-                    Alertift.actionSheet()
+                    let zz = Alertift.actionSheet()
                         .backgroundColor(Colours.white)
                         .titleTextColor(Colours.grayDark)
                         .messageTextColor(Colours.grayDark)
@@ -3705,8 +3711,14 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 return
                             }
                         }
-                        .popover(anchorView: self.moreButton ?? self.view)
-                        .show(on: self)
+                    if self.mainStatus[0].visibility == .direct {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! ActionButtonCell2
+                        zz.popover(anchorView: cell.moreButton ?? self.view)
+                    } else {
+                        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! ActionButtonCell
+                        zz.popover(anchorView: cell.moreButton ?? self.view)
+                    }
+                        zz.show(on: self)
                     
                     
                     
