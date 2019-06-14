@@ -427,7 +427,11 @@ class TipSettingsViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         
+        
         self.navigationController?.navigationBar.backgroundColor = Colours.white
+        self.navigationController?.navigationBar.tintColor = Colours.black
+        self.navigationController?.navigationBar.barTintColor = Colours.black
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
         
         self.tableView.backgroundColor = Colours.white
         self.tableView.separatorColor = Colours.grayDark.withAlphaComponent(0.21)

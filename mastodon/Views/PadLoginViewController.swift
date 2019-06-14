@@ -89,8 +89,8 @@ class PadLoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func padIsLogged() {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "refpush1"), object: nil)
         self.safariVC?.dismiss(animated: true, completion: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "refpush1"), object: nil)
         self.dismiss(animated: true, completion: nil)
     }
     

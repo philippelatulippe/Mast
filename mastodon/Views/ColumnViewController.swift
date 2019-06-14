@@ -239,6 +239,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
                                 Account.addAccountToList(account: stat)
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: nil)
+                                NotificationCenter.default.post(name: Notification.Name(rawValue: "refpush1"), object: nil)
                             }
                         }
                     }
@@ -248,6 +249,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
                         if let stat = (statuses.value) {
                             StoreStruct.statusesHome = stat
                             NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "refpush1"), object: nil)
                         }
                     }
                     
@@ -333,6 +335,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
                                     Account.addAccountToList(account: stat)
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "refProf"), object: nil)
                                     NotificationCenter.default.post(name: Notification.Name(rawValue: "load"), object: nil)
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refpush1"), object: nil)
                                 }
                             }
                         }
@@ -342,6 +345,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
                             if let stat = (statuses.value) {
                                 StoreStruct.statusesHome = stat
                                 NotificationCenter.default.post(name: Notification.Name(rawValue: "refresh"), object: nil)
+                                NotificationCenter.default.post(name: Notification.Name(rawValue: "refpush1"), object: nil)
                             }
                         }
                         
