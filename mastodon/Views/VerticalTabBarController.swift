@@ -21,6 +21,16 @@ class VerticalTabBarController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.button1.frame = CGRect(x: 10, y: self.view.bounds.height - 90, width: 60, height: 60)
+        self.button1.backgroundColor = .clear
+        self.button1.setImage(UIImage(named: "addac1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.6)), for: .normal)
+        self.button1.addTarget(self, action: #selector(self.compose), for: .touchUpInside)
+        self.view.addSubview(self.button1)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colours.whitePad
@@ -30,27 +40,27 @@ class VerticalTabBarController: UIViewController {
         
         let offset = self.navigationController?.navigationBar.frame.size.height ?? 100
         
-        self.button1.frame = CGRect(x: 10, y: offset + 10, width: 60, height: 60)
-        self.button1.backgroundColor = .clear
-        self.button1.setImage(UIImage(named: "addac1")?.maskWithColor(color: Colours.grayDark), for: .normal)
-        self.button1.addTarget(self, action: #selector(self.compose), for: .touchUpInside)
-        self.view.addSubview(self.button1)
-        
-        self.button2.frame = CGRect(x: 10, y: offset + 80, width: 60, height: 60)
+        self.button2.frame = CGRect(x: 10, y: offset + 10, width: 60, height: 60)
         self.button2.backgroundColor = .clear
-        self.button2.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayDark), for: .normal)
+        self.button2.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.6)), for: .normal)
         self.button2.imageEdgeInsets = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
         self.view.addSubview(self.button2)
         
-        self.button3.frame = CGRect(x: 13, y: offset + 153, width: 54, height: 54)
+        self.button3.frame = CGRect(x: 15, y: offset + 85, width: 50, height: 50)
         self.button3.backgroundColor = .clear
-        self.button3.setImage(UIImage(named: "search2")?.maskWithColor(color: Colours.grayDark), for: .normal)
+        self.button3.setImage(UIImage(named: "search2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.6)), for: .normal)
         self.view.addSubview(self.button3)
     }
     
     @objc func compose() {
         let controller = ComposeViewController()
-        controller.modalPresentationStyle = .pageSheet
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            controller.modalPresentationStyle = .pageSheet
+        default:
+            print("nil")
+        }
         controller.inReply = []
         controller.inReplyText = ""
         self.present(controller, animated: true, completion: nil)
@@ -190,9 +200,9 @@ class VerticalTabBarController: UIViewController {
         
         self.navigationController?.navigationBar.backgroundColor = Colours.whitePad
         
-        self.button1.setImage(UIImage(named: "addac1")?.maskWithColor(color: Colours.grayDark), for: .normal)
-        self.button2.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayDark), for: .normal)
-        self.button3.setImage(UIImage(named: "search2")?.maskWithColor(color: Colours.grayDark), for: .normal)
+        self.button1.setImage(UIImage(named: "addac1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.6)), for: .normal)
+        self.button2.setImage(UIImage(named: "list")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.6)), for: .normal)
+        self.button3.setImage(UIImage(named: "search2")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.6)), for: .normal)
     }
     
 }

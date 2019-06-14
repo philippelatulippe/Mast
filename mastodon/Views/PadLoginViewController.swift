@@ -84,6 +84,10 @@ class PadLoginViewController: UIViewController, UITextFieldDelegate {
         self.loginLabel.frame = CGRect(x: 50, y: Int(self.view.bounds.height) - self.keyHeight - 180, width: Int(self.view.bounds.width - 100), height: 35)
     }
     
+    @objc func tappedOnTag() {
+        self.textField.text = StoreStruct.tappedTag
+    }
+    
     @objc func padIsLogged() {
         self.safariVC?.dismiss(animated: true, completion: nil)
         self.dismiss(animated: true, completion: nil)
@@ -95,6 +99,7 @@ class PadLoginViewController: UIViewController, UITextFieldDelegate {
         self.view.backgroundColor = Colours.tabSelected
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.tappedOnTag), name: NSNotification.Name(rawValue: "tappedOnTag"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.padIsLogged), name: NSNotification.Name(rawValue: "padIsLogged"), object: nil)
         
         if self.newInstance {

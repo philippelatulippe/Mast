@@ -598,6 +598,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
 //                imp.impactOccurred()
 //            }
             let controller = ComposeViewController()
+            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+            switch (deviceIdiom) {
+            case .pad:
+                controller.modalPresentationStyle = .pageSheet
+            default:
+                print("nil")
+            }
             controller.inReply = []
             controller.inReplyText = ""
             self.present(controller, animated: true, completion: nil)
@@ -620,6 +627,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     @objc func switch44() {
         let controller = ComposeViewController()
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            controller.modalPresentationStyle = .pageSheet
+        default:
+            print("nil")
+        }
         controller.inReply = []
         controller.inReplyText = ""
         self.present(controller, animated: true, completion: nil)
@@ -1254,6 +1268,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         self.doOnce = true
                         self.doOncePinch = true
                         let controller = ComposeViewController()
+                        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                        switch (deviceIdiom) {
+                        case .pad:
+                            controller.modalPresentationStyle = .pageSheet
+                        default:
+                            print("nil")
+                        }
                         controller.inReply = []
                         controller.inReplyText = ""
                         controller.selectedImage1.image = self.screenshot
@@ -2035,6 +2056,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
 //                imp.impactOccurred()
 //            }
             let controller = ComposeViewController()
+                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                switch (deviceIdiom) {
+                case .pad:
+                    controller.modalPresentationStyle = .pageSheet
+                default:
+                    print("nil")
+                }
             controller.inReply = []
             controller.inReplyText = ""
             self.present(controller, animated: true, completion: nil)

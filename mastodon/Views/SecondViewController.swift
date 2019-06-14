@@ -3512,6 +3512,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         }
         
         let controller = ComposeViewController()
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            controller.modalPresentationStyle = .pageSheet
+        default:
+            print("nil")
+        }
         StoreStruct.spoilerText = sto[sender.tag].status?.spoilerText ?? ""
         controller.inReply = [sto[sender.tag].status!]
         controller.inReplyText = sto[sender.tag].account.username
@@ -3644,6 +3651,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
+                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                    switch (deviceIdiom) {
+                    case .pad:
+                        controller.modalPresentationStyle = .pageSheet
+                    default:
+                        print("nil")
+                    }
                     StoreStruct.spoilerText = sto[indexPath.row].status?.spoilerText ?? ""
                     controller.inReply = [sto[indexPath.row].status!]
                     controller.inReplyText = sto[indexPath.row].account.username
@@ -3983,6 +3997,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                             
                             let controller = ComposeViewController()
+                            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                            switch (deviceIdiom) {
+                            case .pad:
+                                controller.modalPresentationStyle = .pageSheet
+                            default:
+                                print("nil")
+                            }
                             controller.inReply = []
                             controller.inReplyText = ""
                             controller.filledTextFieldText = sto[indexPath.row].status?.content.stripHTML() ?? ""
@@ -4275,6 +4296,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
+                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                    switch (deviceIdiom) {
+                    case .pad:
+                        controller.modalPresentationStyle = .pageSheet
+                    default:
+                        print("nil")
+                    }
                     StoreStruct.spoilerText = sto[indexPath.row].status?.spoilerText ?? ""
                     controller.inReply = [sto[indexPath.row].status!]
                     controller.inReplyText = sto[indexPath.row].account.username
@@ -4635,6 +4663,13 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                             
                             let controller = ComposeViewController()
+                            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                            switch (deviceIdiom) {
+                            case .pad:
+                                controller.modalPresentationStyle = .pageSheet
+                            default:
+                                print("nil")
+                            }
                             controller.inReply = []
                             controller.inReplyText = ""
                             controller.filledTextFieldText = sto[indexPath.row].status?.content.stripHTML() ?? ""

@@ -1129,6 +1129,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         var sto = StoreStruct.notificationsDirect
         
         let controller = ComposeViewController()
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            controller.modalPresentationStyle = .pageSheet
+        default:
+            print("nil")
+        }
         StoreStruct.spoilerText = sto[sender.tag].lastStatus?.spoilerText ?? ""
         controller.inReply = [sto[sender.tag].lastStatus!]
         controller.inReplyText = sto[sender.tag].lastStatus!.account.username
@@ -1228,6 +1235,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
+                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                    switch (deviceIdiom) {
+                    case .pad:
+                        controller.modalPresentationStyle = .pageSheet
+                    default:
+                        print("nil")
+                    }
                     StoreStruct.spoilerText = sto[indexPath.row].lastStatus?.spoilerText ?? ""
                     controller.inReply = [sto[indexPath.row].lastStatus!]
                     controller.inReplyText = sto[indexPath.row].lastStatus!.account.username
@@ -1569,6 +1583,13 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                              
                             
                             let controller = ComposeViewController()
+                            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                            switch (deviceIdiom) {
+                            case .pad:
+                                controller.modalPresentationStyle = .pageSheet
+                            default:
+                                print("nil")
+                            }
                             controller.inReply = []
                             controller.inReplyText = ""
                             controller.filledTextFieldText = sto[indexPath.row].lastStatus?.content.stripHTML() ?? ""

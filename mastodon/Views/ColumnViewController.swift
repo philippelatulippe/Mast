@@ -41,6 +41,13 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
     
     @objc func comp1() {
         let controller = ComposeViewController()
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            controller.modalPresentationStyle = .pageSheet
+        default:
+            print("nil")
+        }
         controller.inReply = []
         controller.inReplyText = ""
         self.present(controller, animated: true, completion: nil)
@@ -748,6 +755,13 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 2) {
             if sender.state == .began {
                 let controller = ComposeViewController()
+                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                switch (deviceIdiom) {
+                case .pad:
+                    controller.modalPresentationStyle = .pageSheet
+                default:
+                    print("nil")
+                }
                 controller.inReply = []
                 controller.inReplyText = ""
                 self.present(controller, animated: true, completion: nil)

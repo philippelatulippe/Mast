@@ -705,6 +705,13 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         }
         
         let controller = ComposeViewController()
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            controller.modalPresentationStyle = .pageSheet
+        default:
+            print("nil")
+        }
         StoreStruct.spoilerText = self.mainStatus[0].reblog?.spoilerText ?? self.mainStatus[0].spoilerText
         controller.inReply = [self.mainStatus[0]]
         controller.inReplyText = self.mainStatus[0].account.acct
