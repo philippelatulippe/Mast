@@ -22,7 +22,7 @@ class PadListsViewController: UIViewController, UITableViewDelegate, UITableView
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.load), name: NSNotification.Name(rawValue: "load"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.liload), name: NSNotification.Name(rawValue: "liload"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.goInstance), name: NSNotification.Name(rawValue: "goInstance"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goInstance), name: NSNotification.Name(rawValue: "goInstance5"), object: nil)
         
         let wid = self.view.bounds.width
         self.tableViewLists.frame = CGRect(x: 0, y: 0, width: Int(wid), height: Int(0))
@@ -41,6 +41,27 @@ class PadListsViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableViewLists.register(ListCell.self, forCellReuseIdentifier: "cell002l")
         self.tableViewLists.register(ListCell2.self, forCellReuseIdentifier: "cell002l2")
         self.tableViewLists.register(ProCells.self, forCellReuseIdentifier: "colcell2")
+        
+        let request0 = Lists.all()
+        StoreStruct.client.run(request0) { (statuses) in
+            if let stat = (statuses.value) {
+                StoreStruct.allLists = stat
+                DispatchQueue.main.async {
+                    self.tableViewLists.reloadData()
+                }
+            }
+        }
+        
+        if (UserDefaults.standard.object(forKey: "instancesLocal") == nil) {
+            
+        } else {
+            StoreStruct.instanceLocalToAdd = UserDefaults.standard.object(forKey: "instancesLocal") as! [String]
+            DispatchQueue.main.async {
+                self.tableViewLists.reloadData()
+            }
+        }
+        
+        self.tableViewLists.reloadData()
     }
     
     @objc func goInstance() {
@@ -74,27 +95,6 @@ class PadListsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
-        let request0 = Lists.all()
-        StoreStruct.client.run(request0) { (statuses) in
-            if let stat = (statuses.value) {
-                StoreStruct.allLists = stat
-                DispatchQueue.main.async {
-                    self.tableViewLists.reloadData()
-                }
-            }
-        }
-        
-        if (UserDefaults.standard.object(forKey: "instancesLocal") == nil) {
-            
-        } else {
-            StoreStruct.instanceLocalToAdd = UserDefaults.standard.object(forKey: "instancesLocal") as! [String]
-            DispatchQueue.main.async {
-                self.tableViewLists.reloadData()
-            }
-        }
-        
-        self.tableViewLists.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -155,9 +155,9 @@ class PadListsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if StoreStruct.instanceLocalToAdd.count > 0 {
-            return 3
+            return 4
         } else {
-            return 2
+            return 3
         }
     }
     
@@ -303,15 +303,26 @@ class PadListsViewController: UIViewController, UITableViewDelegate, UITableView
                     .action(.default("View List Members".localized), image: UIImage(named: "profile")) { (action, ind) in
                         
                         StoreStruct.allListRelID = StoreStruct.allLists[indexPath.row].id
-                        if StoreStruct.currentPage == 0 {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers"), object: self)
-                        } else if StoreStruct.currentPage == 1 {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers2"), object: self)
-                        } else if StoreStruct.currentPage == 101010 {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers3"), object: self)
-                        } else {
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers3"), object: self)
+                        let request = Lists.accounts(id: StoreStruct.allListRelID)
+                        StoreStruct.client.run(request) { (statuses) in
+                            if let stat = (statuses.value) {
+                                DispatchQueue.main.async {
+                                    let controller = ListMembersViewController()
+                                    controller.currentTagTitle = "List Members".localized
+                                    controller.currentTags = stat
+                                    self.navigationController?.pushViewController(controller, animated: true)
+                                }
+                            }
                         }
+//                        if StoreStruct.currentPage == 0 {
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers"), object: self)
+//                        } else if StoreStruct.currentPage == 1 {
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers2"), object: self)
+//                        } else if StoreStruct.currentPage == 101010 {
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers3"), object: self)
+//                        } else {
+//                            NotificationCenter.default.post(name: Notification.Name(rawValue: "goMembers3"), object: self)
+//                        }
                     }
                     .action(.default("Delete List".localized), image: UIImage(named: "block")) { (action, ind) in
                         

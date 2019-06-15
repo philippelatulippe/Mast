@@ -1195,44 +1195,68 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 }
                 
                 
-                Alertift.actionSheet(title: nil, message: nil)
-                    .backgroundColor(Colours.white)
-                    .titleTextColor(Colours.grayDark)
-                    .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
-                    .messageTextAlignment(.left)
-                    .titleTextAlignment(.left)
-                    .action(.default("Cycle Through Themes".localized), image: filledSet1) { (action, ind) in
-                        
-                        UserDefaults.standard.set(0, forKey: "longToggle")
-                    }
-                    .action(.default("Invoke Share Sheet".localized), image: filledSet4) { (action, ind) in
-                        
-                        UserDefaults.standard.set(3, forKey: "longToggle")
-                    }
-                    .action(.default("Invoke Lists".localized), image: filledSet2) { (action, ind) in
-                        
-                        UserDefaults.standard.set(1, forKey: "longToggle")
-                    }
-                    .action(.default("Invoke Search".localized), image: filledSet5) { (action, ind) in
-                        
-                        UserDefaults.standard.set(4, forKey: "longToggle")
-                    }
-                    .action(.default("Invoke Toot Composer".localized), image: filledSet3) { (action, ind) in
-                        
-                        UserDefaults.standard.set(2, forKey: "longToggle")
-                    }
-                    .action(.default("Do Nothing".localized), image: filledSet6) { (action, ind) in
-                        
-                        UserDefaults.standard.set(6, forKey: "longToggle")
-                    }
-                    .action(.cancel("Dismiss"))
-                    .finally { action, index in
-                        if action.style == .cancel {
-                            return
+                
+                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                switch (deviceIdiom) {
+                case .pad:
+                    
+                    Alertift.actionSheet(title: "This is an iPhone-only setting", message: nil)
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
                         }
-                    }
-                    .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
-                    .show(on: self)
+                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 6))?.contentView ?? self.view)
+                        .show(on: self)
+                    
+                default:
+                    
+                    Alertift.actionSheet(title: nil, message: nil)
+                        .backgroundColor(Colours.white)
+                        .titleTextColor(Colours.grayDark)
+                        .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                        .messageTextAlignment(.left)
+                        .titleTextAlignment(.left)
+                        .action(.default("Cycle Through Themes".localized), image: filledSet1) { (action, ind) in
+                            
+                            UserDefaults.standard.set(0, forKey: "longToggle")
+                        }
+                        .action(.default("Invoke Share Sheet".localized), image: filledSet4) { (action, ind) in
+                            
+                            UserDefaults.standard.set(3, forKey: "longToggle")
+                        }
+                        .action(.default("Invoke Lists".localized), image: filledSet2) { (action, ind) in
+                            
+                            UserDefaults.standard.set(1, forKey: "longToggle")
+                        }
+                        .action(.default("Invoke Search".localized), image: filledSet5) { (action, ind) in
+                            
+                            UserDefaults.standard.set(4, forKey: "longToggle")
+                        }
+                        .action(.default("Invoke Toot Composer".localized), image: filledSet3) { (action, ind) in
+                            
+                            UserDefaults.standard.set(2, forKey: "longToggle")
+                        }
+                        .action(.default("Do Nothing".localized), image: filledSet6) { (action, ind) in
+                            
+                            UserDefaults.standard.set(6, forKey: "longToggle")
+                        }
+                        .action(.cancel("Dismiss"))
+                        .finally { action, index in
+                            if action.style == .cancel {
+                                return
+                            }
+                        }
+                        .popover(anchorView: self.tableView.cellForRow(at: IndexPath(row: indexPath.row, section: 4))?.contentView ?? self.view)
+                        .show(on: self)
+                    
+                }
             }
         }
         if indexPath.section == 6 {

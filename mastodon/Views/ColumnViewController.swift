@@ -30,10 +30,11 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         //shortkeys
         let newToot = UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(comp1), discoverabilityTitle: "New Toot")
         let searchThing = UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(search1), discoverabilityTitle: "Search")
+        let themeThing = UIKeyCommand(input: "d", modifierFlags: .command, action: #selector(theme1), discoverabilityTitle: "Toggle Theme")
         let leftAr = UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: [], action: #selector(left1), discoverabilityTitle: "Scroll to Start")
         let rightAr = UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: [], action: #selector(right1), discoverabilityTitle: "Scroll to End")
         return [
-            newToot, searchThing, leftAr, rightAr
+            newToot, searchThing, themeThing, leftAr, rightAr
         ]
     }
     
@@ -61,6 +62,10 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
             print("nil")
         }
         self.present(controller, animated: true, completion: nil)
+    }
+    
+    @objc func theme1() {
+        self.genericStuff()
     }
     
     @objc func left1() {
@@ -113,6 +118,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         NotificationCenter.default.addObserver(self, selector: #selector(self.logged), name: NSNotification.Name(rawValue: "logged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.newInstanceLogged), name: NSNotification.Name(rawValue: "newInstancelogged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.signOutNewInstance), name: NSNotification.Name(rawValue: "signOut2"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.genericTheme), name: NSNotification.Name(rawValue: "genericTheme"), object: nil)
         
         if (UserDefaults.standard.object(forKey: "themeaccent") == nil) || (UserDefaults.standard.object(forKey: "themeaccent") as! Int == 0) {
             Colours.tabSelected = StoreStruct.colArray[0]
@@ -186,10 +192,10 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
             StoreStruct.currentInstance.returnedText = UserDefaults.standard.object(forKey: "returnedText") as! String
         }
         
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
-        longPress.minimumPressDuration = 0.5
-        longPress.delegate = self
-        self.view.addGestureRecognizer(longPress)
+//        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longAction(sender:)))
+//        longPress.minimumPressDuration = 0.5
+//        longPress.delegate = self
+//        self.view.addGestureRecognizer(longPress)
     }
     
     @objc func gotoID() {
@@ -763,16 +769,16 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         
         if (UserDefaults.standard.object(forKey: "longToggle") == nil) || (UserDefaults.standard.object(forKey: "longToggle") as! Int == 0) {
             
-            if sender.state == .began {
+            if sender.state == .ended {
                 self.genericStuff()
             }
             
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 1) {
-            if sender.state == .began {
+            if sender.state == .ended {
 //                self.tList()
             }
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 2) {
-            if sender.state == .began {
+            if sender.state == .ended {
                 let controller = ComposeViewController()
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
@@ -790,10 +796,22 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 6) {
             print("do nothing")
         } else {
-            if sender.state == .began {
-//                self.tSearch()
+            if sender.state == .ended {
+                let controller = UINavigationController(rootViewController: SearchViewController())
+                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                switch (deviceIdiom) {
+                case .pad:
+                    controller.modalPresentationStyle = .pageSheet
+                default:
+                    print("nil")
+                }
+                self.present(controller, animated: true, completion: nil)
             }
         }
+    }
+    
+    @objc func genericTheme() {
+        self.genericStuff()
     }
     
     func genericStuff() {
