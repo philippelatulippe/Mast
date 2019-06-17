@@ -31,8 +31,8 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         let newToot = UIKeyCommand(input: "n", modifierFlags: .command, action: #selector(comp1), discoverabilityTitle: "New Toot")
         let searchThing = UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(search1), discoverabilityTitle: "Search")
         let themeThing = UIKeyCommand(input: "d", modifierFlags: .command, action: #selector(theme1), discoverabilityTitle: "Toggle Theme")
-        let leftAr = UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: [], action: #selector(left1), discoverabilityTitle: "Scroll to Start")
-        let rightAr = UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: [], action: #selector(right1), discoverabilityTitle: "Scroll to End")
+        let leftAr = UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: .control, action: #selector(left1), discoverabilityTitle: "Scroll to Start")
+        let rightAr = UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: .control, action: #selector(right1), discoverabilityTitle: "Scroll to End")
         return [
             newToot, searchThing, themeThing, leftAr, rightAr
         ]
@@ -448,7 +448,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         let page = PageBulletinItem(title: "Theme it Your Way")
         page.image = UIImage(named: "themeb")
         page.shouldCompactDescriptionText = true
-        page.descriptionText = "You can change the theme (and a variety of settings) via the app's settings section, or long-hold anywhere in the app to cycle through them.\n\nYou can also use Siri to do the same (Settings > Siri & Search > All Shortcuts)."
+        page.descriptionText = "You can change the theme (and a variety of settings) via the app's settings section.\n\nYou can also use Siri to do the same (Settings > Siri & Search > All Shortcuts)."
         page.actionButtonTitle = "Got it!"
         page.nextItem = makeDonePage()
         
