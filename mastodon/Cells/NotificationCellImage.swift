@@ -289,14 +289,15 @@ class NotificationCellImage: SwipeTableViewCell {
     }
     
     override func prepareForReuse() {
-        self.profileImageView.imageView?.image = nil
+        super.prepareForReuse()
+//        self.profileImageView.imageView?.image = nil
 //        self.mainImageView.imageView?.image = nil
 //        self.mainImageView.imageView?.image = UIImage()
 //        self.mainImageView.pin_clearImages()
-        self.smallImage1.imageView?.image = nil
-        self.smallImage2.imageView?.image = nil
-        self.smallImage3.imageView?.image = nil
-        self.smallImage4.imageView?.image = nil
+//        self.smallImage1.imageView?.image = nil
+//        self.smallImage2.imageView?.image = nil
+//        self.smallImage3.imageView?.image = nil
+//        self.smallImage4.imageView?.image = nil
     }
     
     func configure(_ status: Notificationt) {
@@ -309,6 +310,16 @@ class NotificationCellImage: SwipeTableViewCell {
         like1.backgroundColor = Colours.clear
         boost1.backgroundColor = Colours.clear
         more1.backgroundColor = Colours.clear
+        
+        if (UserDefaults.standard.object(forKey: "tootpl") == nil) || (UserDefaults.standard.object(forKey: "tootpl") as! Int == 0) {
+            self.rep1.alpha = 0
+            self.like1.alpha = 0
+            self.boost1.alpha = 0
+        } else {
+            self.rep1.alpha = 1
+            self.like1.alpha = 1
+            self.boost1.alpha = 1
+        }
         
         rep1.setImage(UIImage(named: "reply3")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
         more1.setImage(UIImage(named: "more")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)

@@ -908,8 +908,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 var filtersAr: [Bool] = []
                 let _ = StoreStruct.allCurrentFilters.map({
                     if $0.context.contains(Context2.thread) {
-                        if (self.allPrevious[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
-                            filtersAr.append(true)
+                        if (self.allPrevious[indexPath.row].content).lowercased().contains(((" \($0.phrase)").lowercased())) || (self.allPrevious[indexPath.row].content).lowercased().contains((("\($0.phrase) ").lowercased())) {
                         } else {
                             filtersAr.append(false)
                         }
@@ -1732,8 +1731,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 var filtersAr: [Bool] = []
                 let _ = StoreStruct.allCurrentFilters.map({
                     if $0.context.contains(Context2.thread) {
-                        if (self.allReplies[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
-                            filtersAr.append(true)
+                        if (self.allReplies[indexPath.row].content).lowercased().contains(((" \($0.phrase)").lowercased())) || (self.allReplies[indexPath.row].content).lowercased().contains((("\($0.phrase) ").lowercased())) {
                         } else {
                             filtersAr.append(false)
                         }

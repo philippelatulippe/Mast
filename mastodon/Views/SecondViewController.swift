@@ -1850,8 +1850,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     var filtersAr: [Bool] = []
                     let _ = StoreStruct.allCurrentFilters.map({
                         if $0.context.contains(Context2.notifications) {
-                            if (StoreStruct.notifications[indexPath.row].status?.content ?? "").lowercased().contains($0.phrase.lowercased()) {
-                                filtersAr.append(true)
+                            if (StoreStruct.notifications[indexPath.row].status?.content ?? "").lowercased().contains(((" \($0.phrase)").lowercased())) || (StoreStruct.notifications[indexPath.row].status?.content ?? "").lowercased().contains((("\($0.phrase) ").lowercased())) {
                             } else {
                                 filtersAr.append(false)
                             }
@@ -2390,8 +2389,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 var filtersAr: [Bool] = []
                 let _ = StoreStruct.allCurrentFilters.map({
                     if $0.context.contains(Context2.notifications) {
-                        if (StoreStruct.notifications[indexPath.row].status?.content ?? "").lowercased().contains($0.phrase.lowercased()) {
-                            filtersAr.append(true)
+                        if (StoreStruct.notifications[indexPath.row].status?.content ?? "").lowercased().contains(((" \($0.phrase)").lowercased())) || (StoreStruct.notifications[indexPath.row].status?.content ?? "").lowercased().contains((("\($0.phrase) ").lowercased())) {
                         } else {
                             filtersAr.append(false)
                         }

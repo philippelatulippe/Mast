@@ -2320,7 +2320,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 var filtersAr: [Bool] = []
                 let _ = StoreStruct.allCurrentFilters.map({
                     if $0.context.contains(Context2.home) {
-                        if (StoreStruct.statusesHome[indexPath.row].reblog?.content ?? StoreStruct.statusesHome[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
+                        if (StoreStruct.statusesHome[indexPath.row].reblog?.content ?? StoreStruct.statusesHome[indexPath.row].content).lowercased().contains(((" \($0.phrase)").lowercased())) || (StoreStruct.statusesHome[indexPath.row].reblog?.content ?? StoreStruct.statusesHome[indexPath.row].content).lowercased().contains((("\($0.phrase) ").lowercased())) {
                             filtersAr.append(true)
                         } else {
                             filtersAr.append(false)
@@ -2625,8 +2625,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 var filtersAr: [Bool] = []
                 let _ = StoreStruct.allCurrentFilters.map({
                     if $0.context.contains(Context2.public) {
-                        if (StoreStruct.statusesHome[indexPath.row].reblog?.content ?? StoreStruct.statusesHome[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
-                            filtersAr.append(true)
+                        if (StoreStruct.statusesLocal[indexPath.row].reblog?.content ?? StoreStruct.statusesLocal[indexPath.row].content).lowercased().contains(((" \($0.phrase)").lowercased())) || (StoreStruct.statusesLocal[indexPath.row].reblog?.content ?? StoreStruct.statusesLocal[indexPath.row].content).lowercased().contains((("\($0.phrase) ").lowercased())) {
                         } else {
                             filtersAr.append(false)
                         }
@@ -2924,8 +2923,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 var filtersAr: [Bool] = []
                 let _ = StoreStruct.allCurrentFilters.map({
                     if $0.context.contains(Context2.public) {
-                        if (StoreStruct.statusesHome[indexPath.row].reblog?.content ?? StoreStruct.statusesHome[indexPath.row].content).lowercased().contains($0.phrase.lowercased()) {
-                            filtersAr.append(true)
+                        if (StoreStruct.statusesFederated[indexPath.row].reblog?.content ?? StoreStruct.statusesFederated[indexPath.row].content).lowercased().contains(((" \($0.phrase)").lowercased())) || (StoreStruct.statusesFederated[indexPath.row].reblog?.content ?? StoreStruct.statusesFederated[indexPath.row].content).lowercased().contains((("\($0.phrase) ").lowercased())) {
                         } else {
                             filtersAr.append(false)
                         }

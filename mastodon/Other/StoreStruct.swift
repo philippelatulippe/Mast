@@ -177,6 +177,8 @@ class StoreStruct {
     
     static var avaFile = "avatar"
     static var heaFile = "header"
+    
+    static var nowPlayingText = ""
 }
 
 struct Drafts: Codable {
