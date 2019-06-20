@@ -470,14 +470,6 @@
 		535B33CE215C3641001A2A7F /* HashtagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535B33CD215C3641001A2A7F /* HashtagViewController.swift */; };
 		535B33D0215CE9A9001A2A7F /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535B33CF215CE9A9001A2A7F /* LikedViewController.swift */; };
 		535B33D2215CF0AD001A2A7F /* MutedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535B33D1215CF0AD001A2A7F /* MutedViewController.swift */; };
-		53631C33221364D0000D5B40 /* SAHistoryViewAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C2B221364D0000D5B40 /* SAHistoryViewAnimatedTransitioning.swift */; };
-		53631C34221364D0000D5B40 /* SAHistoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C2C221364D0000D5B40 /* SAHistoryExtension.swift */; };
-		53631C35221364D0000D5B40 /* UIView+Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C2D221364D0000D5B40 /* UIView+Screenshot.swift */; };
-		53631C36221364D0000D5B40 /* UIViewController+Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C2E221364D0000D5B40 /* UIViewController+Screenshot.swift */; };
-		53631C37221364D0000D5B40 /* SAThirdDimensionalTouchRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C2F221364D0000D5B40 /* SAThirdDimensionalTouchRecognizer.swift */; };
-		53631C38221364D0000D5B40 /* SAHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C30221364D0000D5B40 /* SAHistoryViewController.swift */; };
-		53631C39221364D0000D5B40 /* SAHistoryNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C31221364D0000D5B40 /* SAHistoryNavigationViewController.swift */; };
-		53631C3A221364D0000D5B40 /* SAHistoryNavigationTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C32221364D0000D5B40 /* SAHistoryNavigationTransitionController.swift */; };
 		53631C4322136A1D000D5B40 /* Array+MisterFusion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C3D22136A1D000D5B40 /* Array+MisterFusion.swift */; };
 		53631C4422136A1D000D5B40 /* MisterFusionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C3E22136A1D000D5B40 /* MisterFusionExtension.swift */; };
 		53631C4522136A1D000D5B40 /* MisterFusion.SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53631C3F22136A1D000D5B40 /* MisterFusion.SafeArea.swift */; };
@@ -742,7 +734,6 @@
 		53C037B0220A2A6F0047EBC4 /* NewQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */; };
 		53CF184A22B2494D000DC32B /* ScrollMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CF184922B2494D000DC32B /* ScrollMainViewController.swift */; };
 		53DE98872275C8BF00077D18 /* MainSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE98862275C8BF00077D18 /* MainSettingsViewController.swift */; };
-		53DE98892275DCC300077D18 /* TipSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE98882275DCC300077D18 /* TipSettingsViewController.swift */; };
 		53E095632270B4D4008C8762 /* AllMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095622270B4D4008C8762 /* AllMediaViewController.swift */; };
 		53E095652270B7C2008C8762 /* AllImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095642270B7C2008C8762 /* AllImagesCell.swift */; };
 		53E095672271AFB8008C8762 /* AllEmotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E095662271AFB8008C8762 /* AllEmotiCell.swift */; };
@@ -1387,14 +1378,6 @@
 		535B33CD215C3641001A2A7F /* HashtagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagViewController.swift; sourceTree = "<group>"; };
 		535B33CF215CE9A9001A2A7F /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
 		535B33D1215CF0AD001A2A7F /* MutedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutedViewController.swift; sourceTree = "<group>"; };
-		53631C2B221364D0000D5B40 /* SAHistoryViewAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryViewAnimatedTransitioning.swift; sourceTree = "<group>"; };
-		53631C2C221364D0000D5B40 /* SAHistoryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryExtension.swift; sourceTree = "<group>"; };
-		53631C2D221364D0000D5B40 /* UIView+Screenshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Screenshot.swift"; sourceTree = "<group>"; };
-		53631C2E221364D0000D5B40 /* UIViewController+Screenshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Screenshot.swift"; sourceTree = "<group>"; };
-		53631C2F221364D0000D5B40 /* SAThirdDimensionalTouchRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAThirdDimensionalTouchRecognizer.swift; sourceTree = "<group>"; };
-		53631C30221364D0000D5B40 /* SAHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryViewController.swift; sourceTree = "<group>"; };
-		53631C31221364D0000D5B40 /* SAHistoryNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationViewController.swift; sourceTree = "<group>"; };
-		53631C32221364D0000D5B40 /* SAHistoryNavigationTransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SAHistoryNavigationTransitionController.swift; sourceTree = "<group>"; };
 		53631C3C22136A1D000D5B40 /* MisterFusion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MisterFusion.h; sourceTree = "<group>"; };
 		53631C3D22136A1D000D5B40 /* Array+MisterFusion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+MisterFusion.swift"; sourceTree = "<group>"; };
 		53631C3E22136A1D000D5B40 /* MisterFusionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MisterFusionExtension.swift; sourceTree = "<group>"; };
@@ -1692,7 +1675,6 @@
 		53CF184922B2494D000DC32B /* ScrollMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollMainViewController.swift; sourceTree = "<group>"; };
 		53D14D9322183D330037C865 /* mastodon-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mastodon-Bridging-Header.h"; sourceTree = "<group>"; };
 		53DE98862275C8BF00077D18 /* MainSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsViewController.swift; sourceTree = "<group>"; };
-		53DE98882275DCC300077D18 /* TipSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipSettingsViewController.swift; sourceTree = "<group>"; };
 		53E095622270B4D4008C8762 /* AllMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMediaViewController.swift; sourceTree = "<group>"; };
 		53E095642270B7C2008C8762 /* AllImagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllImagesCell.swift; sourceTree = "<group>"; };
 		53E095662271AFB8008C8762 /* AllEmotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEmotiCell.swift; sourceTree = "<group>"; };
@@ -2602,21 +2584,6 @@
 			path = ActiveLabel;
 			sourceTree = "<group>";
 		};
-		53631C2A221364D0000D5B40 /* SAHistoryNavigationViewController */ = {
-			isa = PBXGroup;
-			children = (
-				53631C2B221364D0000D5B40 /* SAHistoryViewAnimatedTransitioning.swift */,
-				53631C2C221364D0000D5B40 /* SAHistoryExtension.swift */,
-				53631C2D221364D0000D5B40 /* UIView+Screenshot.swift */,
-				53631C2E221364D0000D5B40 /* UIViewController+Screenshot.swift */,
-				53631C2F221364D0000D5B40 /* SAThirdDimensionalTouchRecognizer.swift */,
-				53631C30221364D0000D5B40 /* SAHistoryViewController.swift */,
-				53631C31221364D0000D5B40 /* SAHistoryNavigationViewController.swift */,
-				53631C32221364D0000D5B40 /* SAHistoryNavigationTransitionController.swift */,
-			);
-			path = SAHistoryNavigationViewController;
-			sourceTree = "<group>";
-		};
 		53631C3B22136A1D000D5B40 /* MisterFusion */ = {
 			isa = PBXGroup;
 			children = (
@@ -2934,7 +2901,6 @@
 				53E1AE17221ADFE900A6E1E6 /* SLP */,
 				53E1ADE0221AB82100A6E1E6 /* Crown */,
 				53631C3B22136A1D000D5B40 /* MisterFusion */,
-				53631C2A221364D0000D5B40 /* SAHistoryNavigationViewController */,
 				531CCD5522073CC900A56145 /* ChromaColorPicker */,
 				530F5B3121E267CA00A910B3 /* DateTime */,
 				5317C79821DA334500746197 /* ScrollableGraph */,
@@ -3025,7 +2991,6 @@
 				5392DBFC2275FA3000D17F5F /* NotificationsSettingsViewController.swift */,
 				5392DBFA2275F5E500D17F5F /* LockSettingsViewController.swift */,
 				5392DBF82275EF8000D17F5F /* AccountSettingsViewController.swift */,
-				53DE98882275DCC300077D18 /* TipSettingsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4241,7 +4206,6 @@
 				5373CAB82152C68000676F3D /* NotificationType.swift in Sources */,
 				5316C893219D94A00003AB97 /* SwiftyGiphyGridLayout.swift in Sources */,
 				5373CB032152EDB800676F3D /* SwipeExpansionStyle.swift in Sources */,
-				53631C38221364D0000D5B40 /* SAHistoryViewController.swift in Sources */,
 				531CCD682207457400A56145 /* NewFilterViewController.swift in Sources */,
 				5317C7B521DA334500746197 /* LineDrawingLayer.swift in Sources */,
 				53E826E42236C32D00153721 /* ToppingButton.swift in Sources */,
@@ -4254,8 +4218,6 @@
 				5373CAD82152C89700676F3D /* StoreStruct.swift in Sources */,
 				5316C899219D94A00003AB97 /* GiphySingleGIFResponse.swift in Sources */,
 				531B61C7221960B300DD3845 /* SwiftGCM.swift in Sources */,
-				53631C39221364D0000D5B40 /* SAHistoryNavigationViewController.swift in Sources */,
-				53631C3A221364D0000D5B40 /* SAHistoryNavigationTransitionController.swift in Sources */,
 				53E1AE24221ADFEA00A6E1E6 /* Regex.swift in Sources */,
 				5351D75C21617FC40012960F /* VolumeBar.swift in Sources */,
 				5316C88F219D94A00003AB97 /* GiphyUser.swift in Sources */,
@@ -4298,7 +4260,6 @@
 				5373CA9B2152C68000676F3D /* Client.swift in Sources */,
 				536A4FB4216B73D600A3D483 /* BulletinBackgroundViewStyle.swift in Sources */,
 				531B61C8221960B300DD3845 /* DecryptNotification.swift in Sources */,
-				53631C35221364D0000D5B40 /* UIView+Screenshot.swift in Sources */,
 				5320582D215D287700ED0C36 /* DKAssetGroupDetailBaseCell.swift in Sources */,
 				535932BB222DB47600086545 /* Poll.swift in Sources */,
 				5354BACC216577FD0094C545 /* WCLLoadingView.swift in Sources */,
@@ -4421,7 +4382,6 @@
 				539385882172A9E4002444FC /* NewProfileNoteViewController.swift in Sources */,
 				5354BAD7216577FD0094C545 /* CRRefreshHeaderView.swift in Sources */,
 				5373CAC22152C68000676F3D /* Parameter.swift in Sources */,
-				53DE98892275DCC300077D18 /* TipSettingsViewController.swift in Sources */,
 				5373CAA82152C68000676F3D /* MediaAttachment.swift in Sources */,
 				539385862172A782002444FC /* NewProfileViewController.swift in Sources */,
 				5373CAFD2152EDB800676F3D /* SwipeCollectionViewCell+Accessibility.swift in Sources */,
@@ -4497,7 +4457,6 @@
 				5373CAD62152C68000676F3D /* Result.swift in Sources */,
 				5373CAD02152C68000676F3D /* Mutes.swift in Sources */,
 				535B33C8215C31E3001A2A7F /* RegexParser.swift in Sources */,
-				53631C33221364D0000D5B40 /* SAHistoryViewAnimatedTransitioning.swift in Sources */,
 				5354BAA721653C740094C545 /* PinnedViewController.swift in Sources */,
 				536A4FB3216B73D600A3D483 /* BulletinItem.swift in Sources */,
 				535B33B3215C0EC6001A2A7F /* XPlayerViewController+Action.swift in Sources */,
@@ -4512,7 +4471,6 @@
 				5373CB502156826000676F3D /* DetailCellImage.swift in Sources */,
 				530F5B3921E267CA00A910B3 /* DateCollectionViewCell.swift in Sources */,
 				5373CB002152EDB800676F3D /* SwipeCollectionViewCellDelegate.swift in Sources */,
-				53631C36221364D0000D5B40 /* UIViewController+Screenshot.swift in Sources */,
 				535B339B215C0198001A2A7F /* BoostersViewController.swift in Sources */,
 				53E1AE07221AB82200A6E1E6 /* StyleView.swift in Sources */,
 				531E0F96216E2BA2003E8890 /* NVActivityIndicatorAnimationBallScale.swift in Sources */,
@@ -4603,7 +4561,6 @@
 				5373CAAC2152C68000676F3D /* Attachment.swift in Sources */,
 				531B61CC221960B300DD3845 /* Decode85.swift in Sources */,
 				536A4FBD216B73D600A3D483 /* ContainerView.swift in Sources */,
-				53631C37221364D0000D5B40 /* SAThirdDimensionalTouchRecognizer.swift in Sources */,
 				5373CAB92152C68000676F3D /* Relationship.swift in Sources */,
 				53205828215D287700ED0C36 /* DKAssetGroupGridLayout.swift in Sources */,
 				5393859C217393A4002444FC /* DLTagView.swift in Sources */,
@@ -4612,7 +4569,6 @@
 				530F5B3821E267CA00A910B3 /* DateTimePicker.swift in Sources */,
 				531CCD642207406C00A56145 /* FiltersViewController.swift in Sources */,
 				53631C4422136A1D000D5B40 /* MisterFusionExtension.swift in Sources */,
-				53631C34221364D0000D5B40 /* SAHistoryExtension.swift in Sources */,
 				5373CAB72152C68000676F3D /* Notification.swift in Sources */,
 				530F5B3721E267CA00A910B3 /* FullDateCollectionViewCell.swift in Sources */,
 				535B33B4215C0EC6001A2A7F /* XPlayer.swift in Sources */,
