@@ -13,8 +13,9 @@ import StatusAlert
 import SAConfettiView
 import AVKit
 import AVFoundation
+import MobileCoreServices
 
-class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
+class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, UIViewControllerPreviewingDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UITableViewDragDelegate {
     
     var safariVC: SFSafariViewController?
     var tableView = UITableView()
@@ -31,6 +32,25 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let detailPrev = UIButton()
     var latestInRepID = ""
     var replyDepth = 0
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        var string = ""
+        
+        if indexPath.section == 0 {
+            string = self.allPrevious[indexPath.row].url?.absoluteString ?? self.allPrevious[indexPath.row].content.stripHTML()
+        } else if indexPath.section == 1 {
+            string = self.mainStatus[0].url?.absoluteString ?? self.mainStatus[0].content.stripHTML()
+        } else if indexPath.section == 5 {
+            string = self.allReplies[indexPath.row].url?.absoluteString ?? self.allReplies[indexPath.row].content.stripHTML()
+        } else {
+            
+        }
+        
+        guard let data = string.data(using: .utf8) else { return [] }
+        let itemProvider = NSItemProvider(item: data as NSData, typeIdentifier: kUTTypePlainText as String)
+        
+        return [UIDragItem(itemProvider: itemProvider)]
+    }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = self.tableView.indexPathForRow(at: location) else { return nil }
@@ -498,6 +518,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.rowHeight = UITableView.automaticDimension
         self.view.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
+        
+        self.tableView.dragDelegate = self
         
         self.detailPrev.frame = CGRect(x: Int(self.view.bounds.width) - 50, y: Int(offset + 15), width: 30, height: 30)
         self.detailPrev.setImage(UIImage(named: "detailprev-1")?.maskWithColor(color: Colours.grayDark.withAlphaComponent(0.21)), for: .normal)
