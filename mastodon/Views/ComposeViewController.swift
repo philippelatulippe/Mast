@@ -82,6 +82,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var collectionView: UICollectionView!
     var inArea = 0
     var cropViewController = CropViewController(image: UIImage())
+    var keyboardConnected = false
     
     func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem) {
         print(item.fixedHeightStillImage)
@@ -3577,6 +3578,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     
     @objc func keyboardWillShow(notification: Notification) {
+        self.keyboardConnected = false
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
@@ -3630,6 +3632,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.cameraCollectionView.alpha = 0
             self.camPickButton.alpha = 0
             self.galPickButton.alpha = 0
+        }
+        if self.keyHeight == 0 {
+            self.keyboardConnected = true
         }
     }
     

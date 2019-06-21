@@ -179,6 +179,7 @@ class StoreStruct {
     static var heaFile = "header"
     
     static var nowPlayingText = ""
+    static var defaultKeyboardHeight = 300
 }
 
 struct Drafts: Codable {

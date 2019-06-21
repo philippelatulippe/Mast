@@ -296,14 +296,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadLists"), object: nil)
-            if StoreStruct.currentPage == 0 {
+            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+            switch (deviceIdiom) {
+            case .pad:
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
-            } else if StoreStruct.currentPage == 1 {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
-            } else if StoreStruct.currentPage == 101010 {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
-            } else {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance4"), object: self)
+            default:
+                if StoreStruct.currentPage == 0 {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance"), object: self)
+                } else if StoreStruct.currentPage == 1 {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance2"), object: self)
+                } else if StoreStruct.currentPage == 101010 {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance3"), object: self)
+                } else {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "goInstance4"), object: self)
+                }
             }
         }
         

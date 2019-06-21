@@ -119,6 +119,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         NotificationCenter.default.addObserver(self, selector: #selector(self.newInstanceLogged), name: NSNotification.Name(rawValue: "newInstancelogged"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.signOutNewInstance), name: NSNotification.Name(rawValue: "signOut2"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.genericTheme), name: NSNotification.Name(rawValue: "genericTheme"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.switch44), name: NSNotification.Name(rawValue: "switch44"), object: nil)
         
         if (UserDefaults.standard.object(forKey: "themeaccent") == nil) || (UserDefaults.standard.object(forKey: "themeaccent") as! Int == 0) {
             Colours.tabSelected = StoreStruct.colArray[0]
@@ -196,6 +197,14 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
 //        longPress.minimumPressDuration = 0.5
 //        longPress.delegate = self
 //        self.view.addGestureRecognizer(longPress)
+    }
+    
+    @objc func switch44() {
+        let controller = ComposeViewController()
+        controller.modalPresentationStyle = .pageSheet
+        controller.inReply = []
+        controller.inReplyText = ""
+        self.present(controller, animated: true, completion: nil)
     }
     
     @objc func gotoID() {

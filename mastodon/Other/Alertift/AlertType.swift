@@ -110,7 +110,7 @@ extension AlertType {
     /// - Parameter color: UIColor
     /// - Returns: Myself
     public func titleTextColor(_ color: UIColor?) -> Self {
-        _inner._alertController.titleTextColor = color
+        _inner._alertController.titleTextColor = Colours.grayDark
         return self
     }
     
@@ -119,7 +119,7 @@ extension AlertType {
     /// - Parameter color: UIColor
     /// - Returns: Myself
     public func messageTextColor(_ color: UIColor?) -> Self {
-        _inner._alertController.messageTextColor = color
+        _inner._alertController.messageTextColor = Colours.grayDark.withAlphaComponent(0.8)
         return self
     }
     
