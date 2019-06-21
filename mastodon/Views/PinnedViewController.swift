@@ -638,7 +638,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let con = ARVideoViewController()
                 StoreStruct.tempPlayer = self.player
                 con.modalPresentationStyle = .fullScreen
-                self.show(con, sender: self)
+                self.playerViewController.show(con, sender: self)
             }
             z.action(.cancel("Dismiss"))
             z.finally { action, index in

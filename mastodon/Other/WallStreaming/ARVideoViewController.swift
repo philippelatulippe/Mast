@@ -30,9 +30,9 @@ class ARVideoViewController: UIViewController {
         let scene = SCNScene()
         sceneView.scene = scene
         
-        self.closeButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 30, y: 30, width: 32, height: 32)))
+        self.closeButton = MNGExpandedTouchAreaButton(frame:(CGRect(x: 15, y: 35, width: 32, height: 32)))
         self.closeButton.setImage(UIImage(named: "block")?.maskWithColor(color: UIColor.white), for: .normal)
-        self.closeButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        self.closeButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         self.closeButton.adjustsImageWhenHighlighted = false
         self.closeButton.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         self.closeButton.layer.cornerRadius = 16

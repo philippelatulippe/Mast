@@ -28,8 +28,9 @@ class VideoPlayer: NSObject {
 
     init(_ temp: String) {
         player = StoreStruct.tempPlayer
+        player.play()
         videoNode = SKVideoNode(avPlayer: player)
-        let size = CGSize(width: 1600, height: 900)
+        let size = CGSize(width: player.currentItem?.presentationSize.width ?? 1600, height: player.currentItem?.presentationSize.height ?? 900)
         videoNode.size = size
         videoNode.position = CGPoint(x: 0.5 * size.width, y: 0.5 * size.height)
 

@@ -212,6 +212,8 @@ class PadLoginViewController: UIViewController, UITextFieldDelegate {
                 DispatchQueue.main.async {
                     self.textField.resignFirstResponder()
                     
+                    if returnedText.contains("gab.com") || returnedText.contains("gab.ai") { return }
+                    
                     if self.newInstance {
                         
                         StoreStruct.newInstance = InstanceData()

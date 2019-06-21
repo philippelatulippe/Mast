@@ -209,78 +209,88 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             activity1.becomeCurrent()
         
         delay(1.5) {
-            let activity2 = NSUserActivity(activityType: "com.shi.Mast.dark")
-            activity2.title = "Switch to dark mode".localized
-            activity2.userInfo = ["state" : "dark"]
-            activity2.isEligibleForSearch = true
-            if #available(iOS 12.0, *) {
-                activity2.isEligibleForPrediction = true
-                activity2.persistentIdentifier = "com.shi.Mast.dark"
-            } else {
-                // Fallback on earlier versions
+            DispatchQueue.main.async {
+                let activity2 = NSUserActivity(activityType: "com.shi.Mast.dark")
+                activity2.title = "Switch to dark mode".localized
+                activity2.userInfo = ["state" : "dark"]
+                activity2.isEligibleForSearch = true
+                if #available(iOS 12.0, *) {
+                    activity2.isEligibleForPrediction = true
+                    activity2.persistentIdentifier = "com.shi.Mast.dark"
+                } else {
+                    // Fallback on earlier versions
+                }
+                self.view.userActivity = activity2
+                activity2.becomeCurrent()
             }
-            self.view.userActivity = activity2
-            activity2.becomeCurrent()
         }
         
         delay(3) {
-            let activity21 = NSUserActivity(activityType: "com.shi.Mast.dark2")
-            activity21.title = "Switch to extra dark mode".localized
-            activity21.userInfo = ["state" : "dark2"]
-            activity21.isEligibleForSearch = true
-            if #available(iOS 12.0, *) {
-                activity21.isEligibleForPrediction = true
-                activity21.persistentIdentifier = "com.shi.Mast.dark2"
-            } else {
-                // Fallback on earlier versions
+            DispatchQueue.main.async {
+                let activity21 = NSUserActivity(activityType: "com.shi.Mast.dark2")
+                activity21.title = "Switch to extra dark mode".localized
+                activity21.userInfo = ["state" : "dark2"]
+                activity21.isEligibleForSearch = true
+                if #available(iOS 12.0, *) {
+                    activity21.isEligibleForPrediction = true
+                    activity21.persistentIdentifier = "com.shi.Mast.dark2"
+                } else {
+                    // Fallback on earlier versions
+                }
+                self.view.userActivity = activity21
+                activity21.becomeCurrent()
             }
-            self.view.userActivity = activity21
-            activity21.becomeCurrent()
         }
         
         delay(4.5) {
-            let activity3 = NSUserActivity(activityType: "com.shi.Mast.oled")
-            activity3.title = "Switch to true black dark mode".localized
-            activity3.userInfo = ["state" : "oled"]
-            activity3.isEligibleForSearch = true
-            if #available(iOS 12.0, *) {
-                activity3.isEligibleForPrediction = true
-                activity3.persistentIdentifier = "com.shi.Mast.oled"
-            } else {
-                // Fallback on earlier versions
+            DispatchQueue.main.async {
+                let activity3 = NSUserActivity(activityType: "com.shi.Mast.oled")
+                activity3.title = "Switch to true black dark mode".localized
+                activity3.userInfo = ["state" : "oled"]
+                activity3.isEligibleForSearch = true
+                if #available(iOS 12.0, *) {
+                    activity3.isEligibleForPrediction = true
+                    activity3.persistentIdentifier = "com.shi.Mast.oled"
+                } else {
+                    // Fallback on earlier versions
+                }
+                self.view.userActivity = activity3
+                activity3.becomeCurrent()
             }
-            self.view.userActivity = activity3
-            activity3.becomeCurrent()
         }
         
         delay(6) {
-            let activity3 = NSUserActivity(activityType: "com.shi.Mast.bluemid")
-            activity3.title = "Switch to midnight blue mode".localized
-            activity3.userInfo = ["state" : "blue"]
-            activity3.isEligibleForSearch = true
-            if #available(iOS 12.0, *) {
-                activity3.isEligibleForPrediction = true
-                activity3.persistentIdentifier = "com.shi.Mast.bluemid"
-            } else {
-                // Fallback on earlier versions
+            DispatchQueue.main.async {
+                let activity3 = NSUserActivity(activityType: "com.shi.Mast.bluemid")
+                activity3.title = "Switch to midnight blue mode".localized
+                activity3.userInfo = ["state" : "blue"]
+                activity3.isEligibleForSearch = true
+                if #available(iOS 12.0, *) {
+                    activity3.isEligibleForPrediction = true
+                    activity3.persistentIdentifier = "com.shi.Mast.bluemid"
+                } else {
+                    // Fallback on earlier versions
+                }
+                self.view.userActivity = activity3
+                activity3.becomeCurrent()
             }
-            self.view.userActivity = activity3
-            activity3.becomeCurrent()
         }
         
         delay(7.5) {
-            let activity3 = NSUserActivity(activityType: "com.shi.Mast.confetti")
-            activity3.title = "Confetti time".localized
-            activity3.userInfo = ["state" : "confetti"]
-            activity3.isEligibleForSearch = true
-            if #available(iOS 12.0, *) {
-                activity3.isEligibleForPrediction = true
-                activity3.persistentIdentifier = "com.shi.Mast.confetti"
-            } else {
-                // Fallback on earlier versions
+            DispatchQueue.main.async {
+                let activity3 = NSUserActivity(activityType: "com.shi.Mast.confetti")
+                activity3.title = "Confetti time".localized
+                activity3.userInfo = ["state" : "confetti"]
+                activity3.isEligibleForSearch = true
+                if #available(iOS 12.0, *) {
+                    activity3.isEligibleForPrediction = true
+                    activity3.persistentIdentifier = "com.shi.Mast.confetti"
+                } else {
+                    // Fallback on earlier versions
+                }
+                self.view.userActivity = activity3
+                activity3.becomeCurrent()
             }
-            self.view.userActivity = activity3
-            activity3.becomeCurrent()
         }
     }
     
@@ -2697,6 +2707,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             DispatchQueue.main.async {
                 self.textField.resignFirstResponder()
             
+                if returnedText.contains("gab.com") || returnedText.contains("gab.ai") { return }
             
             // Send off returnedText to client
             if self.newInstance {

@@ -145,7 +145,7 @@ class NewDomainBlockViewController: UIViewController, UITextViewDelegate {
         context1Text.textAlignment = .left
         context1Text.font = UIFont.systemFont(ofSize: 16)
         context1.addSubview(context1Text)
-        self.view.addSubview(context1)
+//        self.view.addSubview(context1)
         
         context2.frame = CGRect(x: 15, y: offset + 155, width: 50, height: 50)
         context2.setImage(UIImage(named: "filledset")?.maskWithColor(color: Colours.tabSelected), for: .normal)
@@ -158,7 +158,7 @@ class NewDomainBlockViewController: UIViewController, UITextViewDelegate {
         context2Text.textAlignment = .left
         context2Text.font = UIFont.systemFont(ofSize: 16)
         context2.addSubview(context2Text)
-        self.view.addSubview(context2)
+//        self.view.addSubview(context2)
         
         context3.frame = CGRect(x: 15, y: offset + 210, width: 50, height: 50)
         context3.setImage(UIImage(named: "filledset")?.maskWithColor(color: Colours.tabSelected), for: .normal)
@@ -171,7 +171,7 @@ class NewDomainBlockViewController: UIViewController, UITextViewDelegate {
         context3Text.textAlignment = .left
         context3Text.font = UIFont.systemFont(ofSize: 16)
         context3.addSubview(context3Text)
-        self.view.addSubview(context3)
+//        self.view.addSubview(context3)
         
         context4.frame = CGRect(x: 15, y: offset + 265, width: 50, height: 50)
         context4.setImage(UIImage(named: "filledset")?.maskWithColor(color: Colours.tabSelected), for: .normal)
@@ -184,7 +184,7 @@ class NewDomainBlockViewController: UIViewController, UITextViewDelegate {
         context4Text.textAlignment = .left
         context4Text.font = UIFont.systemFont(ofSize: 16)
         context4.addSubview(context4Text)
-        self.view.addSubview(context4)
+//        self.view.addSubview(context4)
     }
     
     @objc func context1Tapped() {

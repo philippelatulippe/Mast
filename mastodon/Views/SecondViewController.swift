@@ -2832,7 +2832,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                 let con = ARVideoViewController()
                 StoreStruct.tempPlayer = self.player
                 con.modalPresentationStyle = .fullScreen
-                self.show(con, sender: self)
+                self.playerViewController.show(con, sender: self)
             }
             z.action(.cancel("Dismiss"))
             z.finally { action, index in
@@ -5134,17 +5134,17 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             self.tableView2.reloadData()
                         }
                         
-                        if self.currentIndex == 1 {
-                            if stat.count == 0 {
-                                
-                            } else {
-                                if StoreStruct.notifications.count == 0 || stat.count == 0 || StoreStruct.notifications.count == stat.count {
-                                    
-                                } else {
-                                    self.tableView2.scrollToRow(at: IndexPath(row: stat.count, section: 1), at: .top, animated: true)
-                                }
-                            }
-                        }
+//                        if self.currentIndex == 1 {
+//                            if stat.count == 0 {
+//
+//                            } else {
+//                                if StoreStruct.notifications.count == 0 || stat.count == 0 || StoreStruct.notifications.count == stat.count {
+//
+//                                } else {
+//                                    self.tableView2.scrollToRow(at: IndexPath(row: stat.count, section: 1), at: .top, animated: true)
+//                                }
+//                            }
+//                        }
                         
                     } else {
                         if stat.count > 0 {
@@ -5194,17 +5194,17 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             self.tableView.reloadData()
                         }
                         
-                        if self.currentIndex == 1 {
-                            if stat.count == 0 {
-                                
-                            } else {
-                                if StoreStruct.notificationsMentions.count == 0 || stat.count == 0 || StoreStruct.notificationsMentions.count == stat.count {
-                                    
-                                } else {
-                                    self.tableView.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
-                                }
-                            }
-                        }
+//                        if self.currentIndex == 1 {
+//                            if stat.count == 0 {
+//
+//                            } else {
+//                                if StoreStruct.notificationsMentions.count == 0 || stat.count == 0 || StoreStruct.notificationsMentions.count == stat.count {
+//
+//                                } else {
+//                                    self.tableView.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
+//                                }
+//                            }
+//                        }
                         
                     } else {
                         if stat.count > 0 {
