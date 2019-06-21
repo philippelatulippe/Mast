@@ -3427,7 +3427,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             // Create Tab one
             self.tabOne = UINavigationController(rootViewController: self.firstView)
             let tabOneBarItem = UITabBarItem(title: "", image: UIImage(named: "feed")?.maskWithColor(color: Colours.gray), selectedImage: UIImage(named: "feed")?.maskWithColor(color: Colours.gray))
-            tabOneBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            if #available(iOS 13.0, *) {} else {
+                tabOneBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            }
             self.tabOne.tabBarItem = tabOneBarItem
             self.tabOne.navigationBar.backgroundColor = Colours.white
             self.tabOne.navigationBar.barTintColor = Colours.white
@@ -3437,7 +3439,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             // Create Tab two
             self.tabTwo = UINavigationController(rootViewController: self.secondView)
             let tabTwoBarItem2 = UITabBarItem(title: "", image: UIImage(named: "notifications")?.maskWithColor(color: Colours.gray), selectedImage: UIImage(named: "notifications")?.maskWithColor(color: Colours.gray))
-            tabTwoBarItem2.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            if #available(iOS 13.0, *) {} else {
+                tabTwoBarItem2.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            }
             self.tabTwo.tabBarItem = tabTwoBarItem2
             self.tabTwo.navigationBar.backgroundColor = Colours.white
             self.tabTwo.navigationBar.barTintColor = Colours.white
@@ -3447,7 +3451,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             // Create Tab DM
             self.tabDM = UINavigationController(rootViewController: self.dmView)
             let tabDMBarItem2 = UITabBarItem(title: "", image: UIImage(named: "direct")?.maskWithColor(color: Colours.gray), selectedImage: UIImage(named: "direct")?.maskWithColor(color: Colours.gray))
-            tabDMBarItem2.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            if #available(iOS 13.0, *) {} else {
+                tabDMBarItem2.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            }
             self.tabDM.tabBarItem = tabDMBarItem2
             self.tabDM.navigationBar.backgroundColor = Colours.white
             self.tabDM.navigationBar.barTintColor = Colours.white
@@ -3457,7 +3463,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             // Create Tab three
             self.tabThree = UINavigationController(rootViewController: self.thirdView)
             let tabThreeBarItem = UITabBarItem(title: "", image: UIImage(named: "profile")?.maskWithColor(color: Colours.gray), selectedImage: UIImage(named: "profile")?.maskWithColor(color: Colours.gray))
-            tabThreeBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            if #available(iOS 13.0, *) {} else {
+                tabThreeBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            }
             self.tabThree.tabBarItem = tabThreeBarItem
             self.tabThree.navigationBar.backgroundColor = Colours.white
             self.tabThree.navigationBar.barTintColor = Colours.white
@@ -3467,7 +3475,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             // Create Tab four
             self.tabFour = UINavigationController(rootViewController: self.fourthView)
             let tabFourBarItem = UITabBarItem(title: "", image: UIImage(named: "toot")?.maskWithColor(color: Colours.gray), selectedImage: UIImage(named: "toot")?.maskWithColor(color: Colours.gray))
-            tabFourBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            if #available(iOS 13.0, *) {} else {
+                tabFourBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            }
             self.tabFour.tabBarItem = tabFourBarItem
             self.tabFour.navigationBar.backgroundColor = Colours.white
             self.tabFour.navigationBar.barTintColor = Colours.white

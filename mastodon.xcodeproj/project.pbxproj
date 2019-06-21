@@ -728,6 +728,9 @@
 		5393859C217393A4002444FC /* DLTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53938599217393A3002444FC /* DLTagView.swift */; };
 		5393859D217393A4002444FC /* DLTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393859A217393A3002444FC /* DLTagButton.swift */; };
 		5393859E217393A4002444FC /* DLTagInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393859B217393A3002444FC /* DLTagInfo.swift */; };
+		539FAA5E22BD029F00E3DA83 /* BlockedDomainsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FAA5D22BD029F00E3DA83 /* BlockedDomainsViewController.swift */; };
+		539FAA6022BD032900E3DA83 /* DomainsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FAA5F22BD032900E3DA83 /* DomainsCell.swift */; };
+		539FAA6222BD03E100E3DA83 /* NewDomainBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FAA6122BD03E100E3DA83 /* NewDomainBlockViewController.swift */; };
 		53ADB308217E4F6C00A7C431 /* NewCaptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADB307217E4F6C00A7C431 /* NewCaptionViewController.swift */; };
 		53BC45BC215AC8EE0092223F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45BB215AC8EE0092223F /* SettingsCell.swift */; };
 		53BC45C2215AE4F10092223F /* SettingsCellToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */; };
@@ -1668,6 +1671,9 @@
 		53938599217393A3002444FC /* DLTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLTagView.swift; sourceTree = "<group>"; };
 		5393859A217393A3002444FC /* DLTagButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLTagButton.swift; sourceTree = "<group>"; };
 		5393859B217393A3002444FC /* DLTagInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLTagInfo.swift; sourceTree = "<group>"; };
+		539FAA5D22BD029F00E3DA83 /* BlockedDomainsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedDomainsViewController.swift; sourceTree = "<group>"; };
+		539FAA5F22BD032900E3DA83 /* DomainsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsCell.swift; sourceTree = "<group>"; };
+		539FAA6122BD03E100E3DA83 /* NewDomainBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDomainBlockViewController.swift; sourceTree = "<group>"; };
 		53ADB307217E4F6C00A7C431 /* NewCaptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCaptionViewController.swift; sourceTree = "<group>"; };
 		53BC45BB215AC8EE0092223F /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellToggle.swift; sourceTree = "<group>"; };
@@ -2966,6 +2972,7 @@
 				53E5039A2207153100FD5CF2 /* NewHexViewController.swift */,
 				531CCD5322073C3C00A56145 /* NewHuePickerViewController.swift */,
 				531CCD672207457400A56145 /* NewFilterViewController.swift */,
+				539FAA6122BD03E100E3DA83 /* NewDomainBlockViewController.swift */,
 				53659423222ED4CA00BFF3CD /* NewPollViewController.swift */,
 				53C037AF220A2A6F0047EBC4 /* NewQRViewController.swift */,
 				5329F3852174B31400C4A23C /* InstanceViewController.swift */,
@@ -2977,6 +2984,7 @@
 				535B33D1215CF0AD001A2A7F /* MutedViewController.swift */,
 				532057D7215CF4D500ED0C36 /* BlockedViewController.swift */,
 				531CCD632207406C00A56145 /* FiltersViewController.swift */,
+				539FAA5D22BD029F00E3DA83 /* BlockedDomainsViewController.swift */,
 				531BD5FC2178D68400C1509D /* FollowRequestsViewController.swift */,
 				5373CB612159553500676F3D /* FollowersViewController.swift */,
 				5315ECDF21FDE0AE00A3F1A9 /* FollowSuggestionsViewController.swift */,
@@ -3019,6 +3027,7 @@
 				536592EF222E997800BFF3CD /* PollCell.swift */,
 				5373CB592157F7C400676F3D /* ListCell.swift */,
 				531CCD652207413C00A56145 /* FiltersCell.swift */,
+				539FAA5F22BD032900E3DA83 /* DomainsCell.swift */,
 				53659425222EDA6000BFF3CD /* PollOptionCell.swift */,
 				535932BC222EFB5A00086545 /* PollOptionCellToggle.swift */,
 				5373CB632159564400676F3D /* FollowersCell.swift */,
@@ -4236,6 +4245,7 @@
 				531B420D224E1AA100D1B132 /* DMFeedCell.swift in Sources */,
 				5315ECE421FE13CB00A3F1A9 /* ScheduledStatus.swift in Sources */,
 				5317C7BD21DA334500746197 /* GraphPointAnimation.swift in Sources */,
+				539FAA6222BD03E100E3DA83 /* NewDomainBlockViewController.swift in Sources */,
 				536A4FB9216B73D600A3D483 /* UIView+SafeAnchors.swift in Sources */,
 				5373CA9C2152C68000676F3D /* ClientError.swift in Sources */,
 				5373CB3A21541A0300676F3D /* SKZoomingScrollView.swift in Sources */,
@@ -4367,6 +4377,7 @@
 				5373CAC92152C68000676F3D /* DomainBlocks.swift in Sources */,
 				5373CAF72152EDB700676F3D /* SwipeAccessibilityCustomAction.swift in Sources */,
 				5354BAD4216577FD0094C545 /* NormalFooterAnimator.swift in Sources */,
+				539FAA6022BD032900E3DA83 /* DomainsCell.swift in Sources */,
 				5393859D217393A4002444FC /* DLTagButton.swift in Sources */,
 				5373C9F621519EF800676F3D /* MainFeedCell.swift in Sources */,
 				53205831215D317900ED0C36 /* CameraViewController.swift in Sources */,
@@ -4422,6 +4433,7 @@
 				5316C89C219D94A00003AB97 /* ParsingTransforms.swift in Sources */,
 				53E1AE16221AD44D00A6E1E6 /* DetailCellLink.swift in Sources */,
 				5373CAB32152C68000676F3D /* Instance.swift in Sources */,
+				539FAA5E22BD029F00E3DA83 /* BlockedDomainsViewController.swift in Sources */,
 				5351B98E2167ADF400002069 /* NewListViewController.swift in Sources */,
 				531CCD5F22073CCA00A56145 /* ChromaColorPicker.swift in Sources */,
 				531E0F93216E2BA2003E8890 /* NVActivityIndicatorAnimationLineScalePulseOut.swift in Sources */,

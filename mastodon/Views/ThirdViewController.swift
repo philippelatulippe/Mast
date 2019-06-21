@@ -2599,6 +2599,21 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         }
                     }
                 }
+                .action(.default("Domain Blocks".localized), image: UIImage(named: "block2")) { (action, ind) in
+                    
+                    
+                    let request = DomainBlocks.all()
+                    StoreStruct.client.run(request) { (statuses) in
+                        if let stat = (statuses.value) {
+                            DispatchQueue.main.async {
+                                let controller = BlockedDomainsViewController()
+                                controller.currentTagTitle = "Domain Blocks"
+                                controller.currentTags = stat
+                                self.navigationController?.pushViewController(controller, animated: true)
+                            }
+                        }
+                    }
+                }
                 .action(.default("Scheduled Toots"), image: UIImage(named: "scheduled")) { (action, ind) in
                      
                     
