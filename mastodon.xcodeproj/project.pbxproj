@@ -731,6 +731,10 @@
 		539FAA5E22BD029F00E3DA83 /* BlockedDomainsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FAA5D22BD029F00E3DA83 /* BlockedDomainsViewController.swift */; };
 		539FAA6022BD032900E3DA83 /* DomainsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FAA5F22BD032900E3DA83 /* DomainsCell.swift */; };
 		539FAA6222BD03E100E3DA83 /* NewDomainBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FAA6122BD03E100E3DA83 /* NewDomainBlockViewController.swift */; };
+		539FAA6B22BD268800E3DA83 /* AVPlayer+Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FAA6622BD268800E3DA83 /* AVPlayer+Debugging.swift */; };
+		539FAA6C22BD268800E3DA83 /* VirtualWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FAA6722BD268800E3DA83 /* VirtualWall.swift */; };
+		539FAA6D22BD268800E3DA83 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FAA6822BD268800E3DA83 /* VideoPlayer.swift */; };
+		539FAA6F22BD268800E3DA83 /* ARVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FAA6A22BD268800E3DA83 /* ARVideoViewController.swift */; };
 		53ADB308217E4F6C00A7C431 /* NewCaptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ADB307217E4F6C00A7C431 /* NewCaptionViewController.swift */; };
 		53BC45BC215AC8EE0092223F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45BB215AC8EE0092223F /* SettingsCell.swift */; };
 		53BC45C2215AE4F10092223F /* SettingsCellToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */; };
@@ -1674,6 +1678,10 @@
 		539FAA5D22BD029F00E3DA83 /* BlockedDomainsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedDomainsViewController.swift; sourceTree = "<group>"; };
 		539FAA5F22BD032900E3DA83 /* DomainsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsCell.swift; sourceTree = "<group>"; };
 		539FAA6122BD03E100E3DA83 /* NewDomainBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDomainBlockViewController.swift; sourceTree = "<group>"; };
+		539FAA6622BD268800E3DA83 /* AVPlayer+Debugging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVPlayer+Debugging.swift"; sourceTree = "<group>"; };
+		539FAA6722BD268800E3DA83 /* VirtualWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualWall.swift; sourceTree = "<group>"; };
+		539FAA6822BD268800E3DA83 /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		539FAA6A22BD268800E3DA83 /* ARVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARVideoViewController.swift; sourceTree = "<group>"; };
 		53ADB307217E4F6C00A7C431 /* NewCaptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCaptionViewController.swift; sourceTree = "<group>"; };
 		53BC45BB215AC8EE0092223F /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		53BC45C1215AE4F10092223F /* SettingsCellToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellToggle.swift; sourceTree = "<group>"; };
@@ -2925,6 +2933,7 @@
 				5373CB0B2152FCF300676F3D /* Alertift */,
 				5316C87D219D949F0003AB97 /* Gif */,
 				5373CADD2152EDB700676F3D /* Swipe */,
+				539FAA6522BD268800E3DA83 /* WallStreaming */,
 				5373C9EB2151757300676F3D /* Colours.swift */,
 				5373CAD72152C89700676F3D /* StoreStruct.swift */,
 				5373CA592152B76500676F3D /* Spring.swift */,
@@ -3230,6 +3239,17 @@
 				5393859B217393A3002444FC /* DLTagInfo.swift */,
 			);
 			path = DLTagView;
+			sourceTree = "<group>";
+		};
+		539FAA6522BD268800E3DA83 /* WallStreaming */ = {
+			isa = PBXGroup;
+			children = (
+				539FAA6622BD268800E3DA83 /* AVPlayer+Debugging.swift */,
+				539FAA6722BD268800E3DA83 /* VirtualWall.swift */,
+				539FAA6822BD268800E3DA83 /* VideoPlayer.swift */,
+				539FAA6A22BD268800E3DA83 /* ARVideoViewController.swift */,
+			);
+			path = WallStreaming;
 			sourceTree = "<group>";
 		};
 		53E1ADE0221AB82100A6E1E6 /* Crown */ = {
@@ -4243,6 +4263,7 @@
 				A9D80EED21B8F27A00020ECE /* InstanceData.swift in Sources */,
 				53E095632270B4D4008C8762 /* AllMediaViewController.swift in Sources */,
 				531B420D224E1AA100D1B132 /* DMFeedCell.swift in Sources */,
+				539FAA6C22BD268800E3DA83 /* VirtualWall.swift in Sources */,
 				5315ECE421FE13CB00A3F1A9 /* ScheduledStatus.swift in Sources */,
 				5317C7BD21DA334500746197 /* GraphPointAnimation.swift in Sources */,
 				539FAA6222BD03E100E3DA83 /* NewDomainBlockViewController.swift in Sources */,
@@ -4390,6 +4411,7 @@
 				531E0F8D216E2BA2003E8890 /* NVActivityIndicatorView.swift in Sources */,
 				5373CB152152FCF300676F3D /* ActionHandlerBuilder.swift in Sources */,
 				5354BAD6216577FD0094C545 /* CRRefreshBundle.swift in Sources */,
+				539FAA6D22BD268800E3DA83 /* VideoPlayer.swift in Sources */,
 				539385882172A9E4002444FC /* NewProfileNoteViewController.swift in Sources */,
 				5354BAD7216577FD0094C545 /* CRRefreshHeaderView.swift in Sources */,
 				5373CAC22152C68000676F3D /* Parameter.swift in Sources */,
@@ -4494,6 +4516,7 @@
 				5373C9F42151957200676F3D /* FourthViewController.swift in Sources */,
 				53E826E9223AA84000153721 /* CardType.swift in Sources */,
 				53E826D82236C32D00153721 /* State.swift in Sources */,
+				539FAA6B22BD268800E3DA83 /* AVPlayer+Debugging.swift in Sources */,
 				535B33CE215C3641001A2A7F /* HashtagViewController.swift in Sources */,
 				5373CA5A2152B76500676F3D /* Spring.swift in Sources */,
 				5352D0C2215E68C900901B60 /* AppIconsCells.swift in Sources */,
@@ -4533,6 +4556,7 @@
 				535B33B2215C0EC6001A2A7F /* Utils.swift in Sources */,
 				531E0F8B216E2BA2003E8890 /* NVActivityIndicatorViewable.swift in Sources */,
 				5354BACE216577FD0094C545 /* FastLayer.swift in Sources */,
+				539FAA6F22BD268800E3DA83 /* ARVideoViewController.swift in Sources */,
 				5329F3922174DBDF00C4A23C /* SSLClientCertificate.swift in Sources */,
 				5373CB622159553600676F3D /* FollowersViewController.swift in Sources */,
 				53EBE6BD222E7C4D000D007E /* Polls.swift in Sources */,

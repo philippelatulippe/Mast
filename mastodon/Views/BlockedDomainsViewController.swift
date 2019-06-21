@@ -263,7 +263,6 @@ class BlockedDomainsViewController: UIViewController, UITableViewDelegate, UITab
             cell.configure(self.currentTags[indexPath.row])
             cell.backgroundColor = Colours.white
             cell.userName.textColor = Colours.black
-            cell.toot.textColor = Colours.grayDark.withAlphaComponent(0.38)
             let bgColorView = UIView()
             bgColorView.backgroundColor = Colours.grayDark.withAlphaComponent(0.1)
             cell.selectedBackgroundView = bgColorView

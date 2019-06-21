@@ -2822,16 +2822,22 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     self.playerRate = 0.5
                     self.player.rate = 0.5
                 }
-                .action(.cancel("Dismiss"))
-                .finally { action, index in
-                    if action.style == .cancel {
-                        return
-                    }
-            }
             if self.player.rate != 1 {
                 z.action(.default("Regular Speed".localized), image: nil) { (action, ind) in
                     self.playerRate = 1
                     self.player.rate = 1
+                }
+            }
+            z.action(.default("Show in AR".localized), image: nil) { (action, ind) in
+                let con = ARVideoViewController()
+                StoreStruct.tempPlayer = self.player
+                con.modalPresentationStyle = .fullScreen
+                self.show(con, sender: self)
+            }
+            z.action(.cancel("Dismiss"))
+            z.finally { action, index in
+                if action.style == .cancel {
+                    return
                 }
             }
             z.show(on: self.playerViewController)
@@ -5125,19 +5131,23 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                         
                         if stat.count > 0 {
-//                            self.tableView2.cr.endHeaderRefresh()
                             self.tableView2.reloadData()
                         }
                         
                         if self.currentIndex == 1 {
-                            if newestC <= 0 {} else {
-//                                self.tableView2.scrollToRow(at: IndexPath(row: newestC, section: 0), at: .top, animated: false)
+                            if stat.count == 0 {
+                                
+                            } else {
+                                if StoreStruct.notifications.count == 0 || stat.count == 0 || StoreStruct.notifications.count == stat.count {
+                                    
+                                } else {
+                                    self.tableView2.scrollToRow(at: IndexPath(row: stat.count, section: 1), at: .top, animated: true)
+                                }
                             }
                         }
                         
                     } else {
                         if stat.count > 0 {
-//                            self.tableView2.cr.endHeaderRefresh()
                             self.tableView2.reloadData()
                         }
                         
@@ -5181,19 +5191,23 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         }
                         
                         if stat.count > 0 {
-//                            self.tableView.cr.endHeaderRefresh()
                             self.tableView.reloadData()
                         }
                         
                         if self.currentIndex == 1 {
-                            if newestC2 <= 0 {} else {
-//                                self.tableView.scrollToRow(at: IndexPath(row: newestC2, section: 0), at: .top, animated: false)
+                            if stat.count == 0 {
+                                
+                            } else {
+                                if StoreStruct.notificationsMentions.count == 0 || stat.count == 0 || StoreStruct.notificationsMentions.count == stat.count {
+                                    
+                                } else {
+                                    self.tableView.scrollToRow(at: IndexPath(row: stat.count, section: 0), at: .top, animated: false)
+                                }
                             }
                         }
                         
                     } else {
                         if stat.count > 0 {
-//                            self.tableView.cr.endHeaderRefresh()
                             self.tableView.reloadData()
                         }
                         

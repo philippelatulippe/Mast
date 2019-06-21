@@ -3288,16 +3288,22 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                     self.playerRate = 0.5
                     self.player.rate = 0.5
                 }
-                .action(.cancel("Dismiss"))
-                .finally { action, index in
-                    if action.style == .cancel {
-                        return
-                    }
-            }
             if self.player.rate != 1 {
                 z.action(.default("Regular Speed".localized), image: nil) { (action, ind) in
                     self.playerRate = 1
                     self.player.rate = 1
+                }
+            }
+            z.action(.default("Show in AR".localized), image: nil) { (action, ind) in
+                let con = ARVideoViewController()
+                StoreStruct.tempPlayer = self.player
+                con.modalPresentationStyle = .fullScreen
+                self.show(con, sender: self)
+            }
+            z.action(.cancel("Dismiss"))
+            z.finally { action, index in
+                if action.style == .cancel {
+                    return
                 }
             }
             z.show(on: self.playerViewController)
@@ -5450,10 +5456,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             self.countcount1 = stat.count
                             
                             if stat.count > 0 {
-//                                self.tableView.cr.endHeaderRefresh()
                                 self.tableView.reloadData()
                             }
-                            //                                self.refreshControl.endRefreshing()
                             if stat.count == 0 {
                                 
                             } else {
@@ -5465,10 +5469,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             }
                         } else {
                             if stat.count > 0 {
-//                                self.tableView.cr.endHeaderRefresh()
                                 self.tableView.reloadData()
                             }
-                            //                                self.refreshControl.endRefreshing()
                         }
                         
                     }

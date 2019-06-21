@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class StoreStruct {
     
@@ -181,6 +182,7 @@ class StoreStruct {
     
     static var nowPlayingText = ""
     static var defaultKeyboardHeight = 300
+    static var tempPlayer = AVPlayer()
 }
 
 struct Drafts: Codable {

@@ -229,16 +229,22 @@ class AllMediaViewController: UIViewController, UICollectionViewDelegate, UIColl
                     self.playerRate = 0.5
                     self.player.rate = 0.5
                 }
-                .action(.cancel("Dismiss"))
-                .finally { action, index in
-                    if action.style == .cancel {
-                        return
-                    }
-            }
             if self.player.rate != 1 {
                 z.action(.default("Regular Speed".localized), image: nil) { (action, ind) in
                     self.playerRate = 1
                     self.player.rate = 1
+                }
+            }
+            z.action(.default("Show in AR".localized), image: nil) { (action, ind) in
+                let con = ARVideoViewController()
+                StoreStruct.tempPlayer = self.player
+                con.modalPresentationStyle = .fullScreen
+                self.show(con, sender: self)
+            }
+            z.action(.cancel("Dismiss"))
+            z.finally { action, index in
+                if action.style == .cancel {
+                    return
                 }
             }
             z.show(on: self.playerViewController)
