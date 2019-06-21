@@ -577,38 +577,115 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         return true
     }
     
+    func guidedAc() {
+        Alertift.actionSheet(title: "You can't access this whilst guided access is enabled", message: nil)
+            .backgroundColor(Colours.white)
+            .titleTextColor(Colours.grayDark)
+            .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+            .messageTextAlignment(.left)
+            .titleTextAlignment(.left)
+            .action(.cancel("Dismiss"))
+            .finally { action, index in
+                if action.style == .cancel {
+                    return
+                }
+            }
+            .show(on: self)
+    }
+    
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
         if item.tag == 1 && StoreStruct.currentPage == 0 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTop1"), object: nil)
         }
         if item.tag == 2 && StoreStruct.currentPage == 1 {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTop2"), object: nil)
+            
+            // restrict things when guided access is enabled
+            NotificationCenter.default.addObserver(
+                forName: UIAccessibility.guidedAccessStatusDidChangeNotification,
+                object: nil,
+                queue: .main
+            ) { (notification) in
+                if UIAccessibility.isGuidedAccessEnabled {
+                    self.guidedAc()
+                } else {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTop2"), object: nil)
+                }
+                return
+            }
+            
+            if UIAccessibility.isGuidedAccessEnabled {
+                self.guidedAc()
+            } else {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTop2"), object: nil)
+            }
         }
         if item.tag == 3 && StoreStruct.currentPage == 101010 {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTopDM"), object: nil)
+            
+            // restrict things when guided access is enabled
+            NotificationCenter.default.addObserver(
+                forName: UIAccessibility.guidedAccessStatusDidChangeNotification,
+                object: nil,
+                queue: .main
+            ) { (notification) in
+                if UIAccessibility.isGuidedAccessEnabled {
+                    self.guidedAc()
+                } else {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTopDM"), object: nil)
+                }
+                return
+            }
+            
+            if UIAccessibility.isGuidedAccessEnabled {
+                self.guidedAc()
+            } else {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTopDM"), object: nil)
+            }
         }
         if item.tag == 4 && StoreStruct.currentPage == 2 {
             NotificationCenter.default.post(name: Notification.Name(rawValue: "scrollTop3"), object: nil)
         }
         if item.tag == 5 {
             
-//            if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
-//                let imp = UIImpactFeedbackGenerator(style: .light)
-//                imp.impactOccurred()
-//            }
-            let controller = ComposeViewController()
-            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-            switch (deviceIdiom) {
-            case .pad:
-                controller.modalPresentationStyle = .pageSheet
-            default:
-                print("nil")
+            // restrict things when guided access is enabled
+            NotificationCenter.default.addObserver(
+                forName: UIAccessibility.guidedAccessStatusDidChangeNotification,
+                object: nil,
+                queue: .main
+            ) { (notification) in
+                if UIAccessibility.isGuidedAccessEnabled {
+                    self.guidedAc()
+                } else {
+                    let controller = ComposeViewController()
+                    let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                    switch (deviceIdiom) {
+                    case .pad:
+                        controller.modalPresentationStyle = .pageSheet
+                    default:
+                        print("nil")
+                    }
+                    controller.inReply = []
+                    controller.inReplyText = ""
+                    self.present(controller, animated: true, completion: nil)
+                }
+                return
             }
-            controller.inReply = []
-            controller.inReplyText = ""
-            self.present(controller, animated: true, completion: nil)
             
+            if UIAccessibility.isGuidedAccessEnabled {
+                self.guidedAc()
+            } else {
+                let controller = ComposeViewController()
+                let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+                switch (deviceIdiom) {
+                case .pad:
+                    controller.modalPresentationStyle = .pageSheet
+                default:
+                    print("nil")
+                }
+                controller.inReply = []
+                controller.inReplyText = ""
+                self.present(controller, animated: true, completion: nil)
+            }
         }
     }
     
@@ -1088,6 +1165,19 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             )
         }
         
+        let request4 = DomainBlocks.block(domain: "gab.com")
+        StoreStruct.client.run(request4) { (statuses) in
+            if let stat = (statuses.value) {
+                print("blocked")
+            }
+        }
+        let request5 = DomainBlocks.block(domain: "gab.ai")
+        StoreStruct.client.run(request5) { (statuses) in
+            if let stat = (statuses.value) {
+                print("blocked")
+            }
+        }
+        
         let request = Instances.customEmojis()
         StoreStruct.client.run(request) { (statuses) in
             if let stat = (statuses.value) {
@@ -1121,7 +1211,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 })
             }
         }
-        
     }
     
     

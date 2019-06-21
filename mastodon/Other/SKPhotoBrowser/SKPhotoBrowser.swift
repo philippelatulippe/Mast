@@ -755,6 +755,7 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
                             return
                         }
                     }
+                    .popover(sourceView: self.view, sourceRect: CGRect(origin: recognizer.location(in: self.view), size: CGSize(width: 1.0, height: 1.0)))
                     .show(on: self)
                 
             } else {
@@ -807,6 +808,7 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
                         return
                     }
                 }
+                .popover(sourceView: self.view, sourceRect: CGRect(origin: recognizer.location(in: self.view), size: CGSize(width: 1.0, height: 1.0)))
                 .show(on: self)
             
             }

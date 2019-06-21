@@ -982,7 +982,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         })
         
 //        if StoreStruct.historyBool {
-            self.changeSeg()
+//            self.changeSeg()
 //        }
         
         StoreStruct.historyBool = false

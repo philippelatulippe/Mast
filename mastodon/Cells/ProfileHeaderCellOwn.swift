@@ -197,17 +197,6 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
     
     func configure(_ status: Account) {
         
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            print("nothing")
-        case .pad:
-            self.settings.alpha = 0
-        default:
-            print("nothing")
-        }
-        
-        
         profileImageView.layer.zPosition = 999
         settings2.layer.zPosition = 1000
         bgDark.isUserInteractionEnabled = false
