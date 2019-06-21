@@ -739,6 +739,13 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
             }
         }
         
+        let request9 = DomainBlocks.all()
+        StoreStruct.client.run(request9) { (statuses) in
+            if let stat = (statuses.value) {
+                StoreStruct.allCurrentDomainBlocks = stat
+            }
+        }
+        
         let request4 = DomainBlocks.block(domain: "gab.com")
         StoreStruct.client.run(request4) { (statuses) in
             if let stat = (statuses.value) {

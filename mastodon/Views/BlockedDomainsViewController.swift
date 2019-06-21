@@ -299,7 +299,7 @@ class BlockedDomainsViewController: UIViewController, UITableViewDelegate, UITab
                 
                 DispatchQueue.main.async {
                     self.currentTags.remove(at: indexPath.row)
-                    StoreStruct.allCurrentFilters.remove(at: indexPath.row)
+                    StoreStruct.allCurrentDomainBlocks.remove(at: indexPath.row)
                     self.tableView.reloadData()
                 }
                 

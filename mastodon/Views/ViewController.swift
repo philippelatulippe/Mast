@@ -2943,6 +2943,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             }
         }
         
+        let request9 = DomainBlocks.all()
+        StoreStruct.client.run(request9) { (statuses) in
+            if let stat = (statuses.value) {
+                StoreStruct.allCurrentDomainBlocks = stat
+            }
+        }
+        
         if (UserDefaults.standard.object(forKey: "theme") == nil || UserDefaults.standard.object(forKey: "theme") as! Int == 0) {
             UIApplication.shared.statusBarStyle = .default
         } else if (UserDefaults.standard.object(forKey: "theme") != nil && UserDefaults.standard.object(forKey: "theme") as! Int == 1) {

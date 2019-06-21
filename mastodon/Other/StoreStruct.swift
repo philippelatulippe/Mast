@@ -169,6 +169,7 @@ class StoreStruct {
     static var profileStatusesHasImage0: [Status] = []
     
     static var allCurrentFilters: [Filters] = []
+    static var allCurrentDomainBlocks: [String] = []
     
     static var medType = 0
     static var switchedNow = false
