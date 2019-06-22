@@ -15,6 +15,8 @@ public enum MediaAttachment {
     case gif(Data?)
     /// PNG (Portable Network Graphics) image
     case png(Data?)
+    /// MP3
+    case mp3(Data?)
     /// Other media file
     case other(Data?, fileExtension: String, mimeType: String)
 }
@@ -25,6 +27,7 @@ extension MediaAttachment {
         case .jpeg(let data): return data
         case .gif(let data): return data
         case .png(let data): return data
+        case .mp3(let data): return data
         case .other(let data, _, _): return data
         }
     }
@@ -35,6 +38,7 @@ extension MediaAttachment {
             case .jpeg: return "file.jpeg"
             case .gif: return "file.gif"
             case .png: return "file.png"
+            case .mp3: return "file.png"
             case .other(_, let fileExtension, _): return "file.\(fileExtension)"
             }
         } else if StoreStruct.medType == 1 {
@@ -59,6 +63,7 @@ extension MediaAttachment {
         case .jpeg: return "image/jpg"
         case .gif: return "image/gif"
         case .png: return "image/png"
+        case .mp3: return "audio/mpeg"
         case .other(_, _, let mimeType): return mimeType
         }
     }

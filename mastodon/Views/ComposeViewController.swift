@@ -83,6 +83,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var inArea = 0
     var cropViewController = CropViewController(image: UIImage())
     var keyboardConnected = false
+    var isAudio = false
     
     func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem) {
         print(item.fixedHeightStillImage)
@@ -2524,6 +2525,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.present(controller, animated: true, completion: nil)
                 }
             }
+            .action(.default("  Record Audio"), image: UIImage(named: "music")) { (action, ind) in
+                
+                // TODO: add record button in the drawer
+                
+            }
             .action(.default("  Add Now Playing"), image: UIImage(named: "music")) { (action, ind) in
                  
                 
@@ -2917,10 +2923,94 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         
         
+        if self.isAudio {
         
         
+            
+            let audioData = Data()
+            let request = Media.upload(media: .mp3(audioData))
+            StoreStruct.client.run(request) { (statuses) in
+                if let stat = (statuses.value) {
+                    mediaIDs.append(stat.id)
+                    
+                    let request0 = Statuses.create(status: theText, replyToID: inRep, mediaIDs: mediaIDs, sensitive: self.isSensitive, spoilerText: StoreStruct.spoilerText, scheduledAt: self.scheduleTime, visibility: self.visibility)
+                    StoreStruct.client.run(request0) { (statuses) in
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: Notification.Name(rawValue: "stopindi"), object: self)
+                        }
+                        if statuses.isError && self.scheduleTime != nil {
+                            
+                            
+                            DispatchQueue.main.async {
+                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                    let notification = UINotificationFeedbackGenerator()
+                                    notification.notificationOccurred(.success)
+                                }
+                                StoreStruct.savedComposeText = ""
+                                let statusAlert = StatusAlert()
+                                statusAlert.image = UIImage(named: "notificationslarge")?.maskWithColor(color: Colours.grayDark)
+                                statusAlert.title = "Toot Toot!".localized
+                                statusAlert.contentColor = Colours.grayDark
+                                statusAlert.message = "Successfully \(successMessage)"
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
+                                    statusAlert.show()
+                                }
+                                
+                                StoreStruct.caption1 = ""
+                                StoreStruct.caption2 = ""
+                                StoreStruct.caption3 = ""
+                                StoreStruct.caption4 = ""
+                            }
+                        } else if statuses.isError {
+                            DispatchQueue.main.async {
+                                let statusAlert = StatusAlert()
+                                statusAlert.image = UIImage(named: "reportlarge")?.maskWithColor(color: Colours.grayDark)
+                                statusAlert.title = "Could not Toot".localized
+                                statusAlert.contentColor = Colours.grayDark
+                                statusAlert.message = "Saved to drafts"
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
+                                    statusAlert.show()
+                                }
+                            }
+                        } else {
+                            
+                            DispatchQueue.main.async {
+                                if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+                                    let notification = UINotificationFeedbackGenerator()
+                                    notification.notificationOccurred(.success)
+                                }
+                                StoreStruct.savedComposeText = ""
+                                let statusAlert = StatusAlert()
+                                statusAlert.image = UIImage(named: "notificationslarge")?.maskWithColor(color: Colours.grayDark)
+                                statusAlert.title = "Toot Toot!".localized
+                                statusAlert.contentColor = Colours.grayDark
+                                statusAlert.message = "Successfully \(successMessage)"
+                                if (UserDefaults.standard.object(forKey: "popupset") == nil) || (UserDefaults.standard.object(forKey: "popupset") as! Int == 0) {
+                                    statusAlert.show()
+                                }
+                                
+                                StoreStruct.caption1 = ""
+                                StoreStruct.caption2 = ""
+                                StoreStruct.caption3 = ""
+                                StoreStruct.caption4 = ""
+                                
+                                if (UserDefaults.standard.object(forKey: "juto") == nil) || (UserDefaults.standard.object(forKey: "juto") as! Int == 0) {
+                                    
+                                } else {
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "fetchAllNewest"), object: nil)
+                                }
+                                if (UserDefaults.standard.object(forKey: "notifToggle") == nil) || (UserDefaults.standard.object(forKey: "notifToggle") as! Int == 0) {
+                                    NotificationCenter.default.post(name: Notification.Name(rawValue: "confettiCreate"), object: nil)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
         
-        
+        } else {
         
         if self.gifVidData != nil || self.isGifVid {
             let request = Media.upload(media: .gif(self.gifVidData))
@@ -3553,6 +3643,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
             self.textView.resignFirstResponder()
             self.dismiss(animated: true, completion: nil)
+        }
+            
         }
     }
     
