@@ -77,7 +77,9 @@ class ListMembersViewController: UIViewController, UITableViewDelegate, UITableV
         if let items = self.tabBarController?.tabBar.items {
             for item in items {
                 item.title = ""
-                item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0);
+                if #available(iOS 13.0, *) {} else {
+                    item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0);
+                }
             }
         }
     }
