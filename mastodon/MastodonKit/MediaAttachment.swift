@@ -46,6 +46,7 @@ extension MediaAttachment {
             case .jpeg: return "\(StoreStruct.avaFile).jpeg"
             case .gif: return "\(StoreStruct.avaFile).gif"
             case .png: return "\(StoreStruct.avaFile).png"
+            case .mp3: return "\(StoreStruct.avaFile).mp3"
             case .other(_, let fileExtension, _): return "\(StoreStruct.avaFile).\(fileExtension)"
             }
         } else {
@@ -53,6 +54,7 @@ extension MediaAttachment {
             case .jpeg: return "\(StoreStruct.heaFile).jpeg"
             case .gif: return "\(StoreStruct.heaFile).gif"
             case .png: return "\(StoreStruct.heaFile).png"
+            case .mp3: return "\(StoreStruct.avaFile).mp3"
             case .other(_, let fileExtension, _): return "\(StoreStruct.heaFile).\(fileExtension)"
             }
         }

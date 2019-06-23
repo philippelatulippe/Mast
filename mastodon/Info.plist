@@ -257,6 +257,19 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
+            <key>AppIcon-Neon</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>iconNeon</string>
+                </array>
+                <key>CFBundleIcons~ipad</key>
+                <array>
+                    <string>iconNeon~ipad</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
 		</dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
@@ -523,6 +536,19 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
+            <key>AppIcon-Neon</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>iconNeon</string>
+                </array>
+                <key>CFBundleIcons~ipad</key>
+                <array>
+                    <string>iconNeon~ipad</string>
+                </array>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+            </dict>
 		</dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>

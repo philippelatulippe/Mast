@@ -84,6 +84,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var cropViewController = CropViewController(image: UIImage())
     var keyboardConnected = false
     var isAudio = false
+    var recordAudio = UIButton()
+    var currentlyRecording = false
     
     func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem) {
         print(item.fixedHeightStillImage)
@@ -1414,6 +1416,16 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableViewASCII.reloadData()
         self.bgView.addSubview(self.tableViewASCII)
         
+        self.recordAudio.frame = CGRect(x: Int(self.bgView.bounds.width/2 - 90), y: Int(self.bgView.bounds.height/2 - 25), width: Int(180), height: Int(50))
+        self.recordAudio.setTitle("Start Recording".localized, for: .normal)
+        self.recordAudio.setTitleColor(UIColor.white, for: .normal)
+        self.recordAudio.backgroundColor = UIColor.black.withAlphaComponent(0.15)
+        self.recordAudio.layer.cornerRadius = 25
+        self.recordAudio.adjustsImageWhenHighlighted = false
+        self.recordAudio.addTarget(self, action: #selector(tappedRecord), for: .touchUpInside)
+        self.recordAudio.alpha = 0
+        self.bgView.addSubview(self.recordAudio)
+        
         let layout0 = ColumnFlowLayout(
             cellsPerRow: 8,
             minimumInteritemSpacing: 5,
@@ -2525,10 +2537,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.present(controller, animated: true, completion: nil)
                 }
             }
-            .action(.default("  Record Audio"), image: UIImage(named: "music")) { (action, ind) in
+            .action(.default("  Record Audio"), image: UIImage(named: "record")) { (action, ind) in
                 
-                // TODO: add record button in the drawer
+                if self.picker.isDescendant(of: self.view) {
+                    self.picker.removeFromSuperview()
+                }
                 
+                springWithDelay(duration: 0.6, delay: 0, animations: {
+                    self.recordAudio.alpha = 1
+                })
             }
             .action(.default("  Add Now Playing"), image: UIImage(named: "music")) { (action, ind) in
                  
@@ -2669,8 +2686,32 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     
     let picker = DateTimePicker.create(minimumDate: Date().addingTimeInterval(5 * 60), maximumDate: Date().addingTimeInterval(900000 * 60 * 24 * 4))
     
-    
-    
+    @objc func tappedRecord() {
+        if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
+            let selection = UISelectionFeedbackGenerator()
+            selection.selectionChanged()
+        }
+        
+        if self.currentlyRecording {
+            self.recordAudio.setTitle("Stop Recording".localized, for: .normal)
+            self.currentlyRecording = false
+            
+            springWithDelay(duration: 0.5, delay: 0, animations: {
+                self.recordAudio.backgroundColor = Colours.red
+                self.recordAudio.frame = CGRect(x: Int(self.bgView.bounds.width/2 - 110), y: Int(self.bgView.bounds.height/2 - 35), width: Int(220), height: Int(70))
+                self.recordAudio.layer.cornerRadius = 35
+            })
+        } else {
+            self.recordAudio.setTitle("Start Recording".localized, for: .normal)
+            self.currentlyRecording = true
+            
+            springWithDelay(duration: 0.5, delay: 0, animations: {
+                self.recordAudio.backgroundColor = UIColor.black.withAlphaComponent(0.15)
+                self.recordAudio.frame = CGRect(x: Int(self.bgView.bounds.width/2 - 90), y: Int(self.bgView.bounds.height/2 - 25), width: Int(180), height: Int(50))
+                self.recordAudio.layer.cornerRadius = 25
+            })
+        }
+    }
     
     private var sentiment: SentimentType = .Neutral
     
@@ -3719,6 +3760,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         self.tableViewASCII.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 60))
         
         self.collectionView.frame = CGRect(x: 0, y: 60, width: Int(self.view.bounds.width), height: Int(self.bgView.bounds.height - 90))
+        
+        self.recordAudio.frame = CGRect(x: Int(self.bgView.bounds.width/2 - 90), y: Int(self.bgView.bounds.height/2 - 25), width: Int(180), height: Int(50))
     }
     
     

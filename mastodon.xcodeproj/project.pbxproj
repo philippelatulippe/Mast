@@ -253,6 +253,9 @@
 		5329F3952174DBDF00C4A23C /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5329F3912174DBDF00C4A23C /* WebSocket.swift */; };
 		5335CCAD22AAE3DD00E8984A /* ColumnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335CCAC22AAE3DD00E8984A /* ColumnViewController.swift */; };
 		5346A0BC22B4192200639360 /* PadListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5346A0BB22B4192200639360 /* PadListsViewController.swift */; };
+		5346EBD722BF81C4007FD975 /* iconNeon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5346EBD422BF81C3007FD975 /* iconNeon.png */; };
+		5346EBD822BF81C4007FD975 /* iconNeon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5346EBD522BF81C3007FD975 /* iconNeon@2x.png */; };
+		5346EBD922BF81C4007FD975 /* iconNeon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5346EBD622BF81C4007FD975 /* iconNeon@3x.png */; };
 		5351B98E2167ADF400002069 /* NewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5351B98D2167ADF400002069 /* NewListViewController.swift */; };
 		5351D75721617FC40012960F /* VolumeBarAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5351D74E21617FC40012960F /* VolumeBarAnimation.swift */; };
 		5351D75821617FC40012960F /* VolumeBarStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5351D75021617FC40012960F /* VolumeBarStackView.swift */; };
@@ -1162,6 +1165,9 @@
 		5329F3912174DBDF00C4A23C /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		5335CCAC22AAE3DD00E8984A /* ColumnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnViewController.swift; sourceTree = "<group>"; };
 		5346A0BB22B4192200639360 /* PadListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadListsViewController.swift; sourceTree = "<group>"; };
+		5346EBD422BF81C3007FD975 /* iconNeon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconNeon.png; sourceTree = "<group>"; };
+		5346EBD522BF81C3007FD975 /* iconNeon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconNeon@2x.png"; sourceTree = "<group>"; };
+		5346EBD622BF81C4007FD975 /* iconNeon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconNeon@3x.png"; sourceTree = "<group>"; };
 		5351B98D2167ADF400002069 /* NewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListViewController.swift; sourceTree = "<group>"; };
 		5351D74E21617FC40012960F /* VolumeBarAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeBarAnimation.swift; sourceTree = "<group>"; };
 		5351D75021617FC40012960F /* VolumeBarStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeBarStackView.swift; sourceTree = "<group>"; };
@@ -2900,6 +2906,9 @@
 				530976A62179D8D900640D84 /* icon20.png */,
 				530976952179D8D500640D84 /* icon20@2x.png */,
 				530976962179D8D500640D84 /* icon20@3x.png */,
+				5346EBD422BF81C3007FD975 /* iconNeon.png */,
+				5346EBD522BF81C3007FD975 /* iconNeon@2x.png */,
+				5346EBD622BF81C4007FD975 /* iconNeon@3x.png */,
 				53D14D9322183D330037C865 /* mastodon-Bridging-Header.h */,
 			);
 			path = mastodon;
@@ -3769,11 +3778,13 @@
 				53E826E22236C32D00153721 /* battery_charging.pdf in Resources */,
 				5352D0A6215E679300901B60 /* icon3.png in Resources */,
 				530976C02179D8D900640D84 /* icon18@2x.png in Resources */,
+				5346EBD722BF81C4007FD975 /* iconNeon.png in Resources */,
 				5373C9DF215173F000676F3D /* Assets.xcassets in Resources */,
 				53205825215D287700ED0C36 /* DKImagePickerController.bundle in Resources */,
 				53205815215D287700ED0C36 /* LICENSE in Resources */,
 				5354BAD2216577FD0094C545 /* NormalHeader.bundle in Resources */,
 				530976BF2179D8D900640D84 /* icon14@2x.png in Resources */,
+				5346EBD922BF81C4007FD975 /* iconNeon@3x.png in Resources */,
 				5352D0BA215E679400901B60 /* icon8.png in Resources */,
 				53E826DB2236C32D00153721 /* battery.png in Resources */,
 				530976C12179D8D900640D84 /* icon18@3x.png in Resources */,
@@ -3807,6 +3818,7 @@
 				530976C72179D8D900640D84 /* icon20.png in Resources */,
 				5352D0A7215E679300901B60 /* icon6@3x.png in Resources */,
 				530976B22179D8D900640D84 /* icon11.png in Resources */,
+				5346EBD822BF81C4007FD975 /* iconNeon@2x.png in Resources */,
 				5352D0B7215E679400901B60 /* icon2.png in Resources */,
 				530976A92179D8D900640D84 /* icon16@3x.png in Resources */,
 				5352D0C8215E74B400901B60 /* icon9@3x.png in Resources */,

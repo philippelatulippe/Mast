@@ -37,6 +37,7 @@ class ColourCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDa
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(CollectionColourCell.self, forCellWithReuseIdentifier: "CollectionColourCell")
+        collectionView.register(CollectionColourCell.self, forCellWithReuseIdentifier: "CollectionColourCell2")
         
         contentView.addSubview(collectionView)
     }
@@ -58,11 +59,11 @@ class ColourCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionColourCell", for: indexPath) as! CollectionColourCell
         
-        cell.configure()
         if indexPath.row == 0 {
             // manual hex code
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionColourCell", for: indexPath) as! CollectionColourCell
+            cell.configure()
             cell.image.backgroundColor = UIColor.clear
             cell.image.image = UIImage(named: "hex")
             
@@ -79,6 +80,8 @@ class ColourCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDa
             
         } else {
             
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionColourCell2", for: indexPath) as! CollectionColourCell
+            cell.configure()
             cell.image.backgroundColor = StoreStruct.colArray[indexPath.row - 1]
             
             cell.image.frame = CGRect(x: 0, y: 0, width: 55, height: 55)
