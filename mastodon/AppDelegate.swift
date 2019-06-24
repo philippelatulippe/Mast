@@ -15,13 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
     var blurEffectViewMain = UIView()
-    
     var blurEffect0 = UIBlurEffect()
     var blurEffectView0 = UIVisualEffectView()
-    
     var oneTime = false
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if StoreStruct.allowRotation == true {
+            return .all
+        }
         if let tabBarController = window?.rootViewController as? UITabBarController {
             if let tabBarViewControllers = tabBarController.viewControllers {
                 if let projectsNavigationController = tabBarViewControllers[1] as? UINavigationController {

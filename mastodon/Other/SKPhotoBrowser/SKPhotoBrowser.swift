@@ -236,6 +236,7 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
     }
     
     deinit {
+        StoreStruct.allowRotation = false
         pagingScrollView = nil
         NotificationCenter.default.removeObserver(self)
     }
@@ -290,6 +291,8 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
     // MARK: - override
     open override func viewDidLoad() {
         super.viewDidLoad()
+        
+        StoreStruct.allowRotation = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadIm), name: NSNotification.Name(rawValue: "loadIm"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadImD), name: NSNotification.Name(rawValue: "loadImD"), object: nil)
@@ -1062,15 +1065,7 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
         pagingScrollView.alpha = 0.0
         backgroundView.alpha = 0
         
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            UIApplication.shared.setStatusBarHidden(true, with: .fade)
-        case .pad:
-            print("nothing")
-        default:
-            UIApplication.shared.setStatusBarHidden(true, with: .fade)
-        }
+        UIApplication.shared.setStatusBarHidden(true, with: .fade)
         
         let alpha: CGFloat = 1.0
         var captionViews = Set<SKCaptionView>()
@@ -1202,17 +1197,7 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
         backgroundView.isHidden = false
         backgroundView.alpha = 1
         
-        
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            UIApplication.shared.setStatusBarHidden(false, with: .fade)
-        case .pad:
-            print("nothing")
-        default:
-            UIApplication.shared.setStatusBarHidden(false, with: .fade)
-        }
-        
+        UIApplication.shared.setStatusBarHidden(false, with: .fade)
         
         statusBarStyle = isStatusBarOriginallyHidden ? nil : originalStatusBarStyle
         setNeedsStatusBarAppearanceUpdate()
@@ -1257,17 +1242,7 @@ open class SKPhotoBrowser: UIViewController, UIScrollViewDelegate {
     }
     
     open func dismissPhotoBrowser() {
-        
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            UIApplication.shared.setStatusBarHidden(false, with: .fade)
-        case .pad:
-            print("nothing")
-        default:
-            UIApplication.shared.setStatusBarHidden(false, with: .fade)
-        }
-        
+        UIApplication.shared.setStatusBarHidden(false, with: .fade)
         
         modalTransitionStyle = .crossDissolve
         senderViewForAnimation?.isHidden = false

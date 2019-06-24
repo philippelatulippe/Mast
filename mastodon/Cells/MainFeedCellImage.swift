@@ -269,15 +269,31 @@ class MainFeedCellImage: SwipeTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        self.profileImageView.imageView?.image = nil
-//        self.profileImageView2.imageView?.image = nil
-//        self.mainImageView.imageView?.image = nil
-//        self.mainImageView.imageView?.image = UIImage()
-//        self.mainImageView.pin_clearImages()
-//        self.smallImage1.imageView?.image = nil
-//        self.smallImage2.imageView?.image = nil
-//        self.smallImage3.imageView?.image = nil
-//        self.smallImage4.imageView?.image = nil
+        self.profileImageView.imageView?.image = nil
+        self.profileImageView2.imageView?.image = nil
+        self.profileImageView.setImage(nil, for: .normal)
+        self.profileImageView2.setImage(nil, for: .normal)
+        
+        self.mainImageView.imageView?.image = nil
+        self.mainImageView.pin_cancelImageDownload()
+        self.smallImage1.imageView?.image = nil
+        self.smallImage1.pin_cancelImageDownload()
+        self.smallImage2.imageView?.image = nil
+        self.smallImage2.pin_cancelImageDownload()
+        self.smallImage3.imageView?.image = nil
+        self.smallImage3.pin_cancelImageDownload()
+        self.smallImage4.imageView?.image = nil
+        self.smallImage4.pin_cancelImageDownload()
+        
+        self.mainImageView.setImage(nil, for: .normal)
+        self.smallImage1.setImage(nil, for: .normal)
+        self.smallImage2.setImage(nil, for: .normal)
+        self.smallImage3.setImage(nil, for: .normal)
+        self.smallImage4.setImage(nil, for: .normal)
+        
+        self.userName.text = ""
+        self.userTag.setTitle("", for: .normal)
+        self.toot.text = ""
     }
     
     func configure(_ status: Status) {

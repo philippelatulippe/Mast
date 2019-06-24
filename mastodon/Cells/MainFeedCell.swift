@@ -186,8 +186,13 @@ class MainFeedCell: SwipeTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        self.profileImageView.imageView?.image = nil
-//        self.profileImageView2.imageView?.image = nil
+        self.profileImageView.imageView?.image = nil
+        self.profileImageView2.imageView?.image = nil
+        self.profileImageView.setImage(nil, for: .normal)
+        self.profileImageView2.setImage(nil, for: .normal)
+        self.userName.text = ""
+        self.userTag.setTitle("", for: .normal)
+        self.toot.text = ""
     }
     
     func configure(_ status: Status) {

@@ -183,6 +183,8 @@ class StoreStruct {
     static var nowPlayingText = ""
     static var defaultKeyboardHeight = 300
     static var tempPlayer = AVPlayer()
+    
+    static var allowRotation = false
 }
 
 struct Drafts: Codable {

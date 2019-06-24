@@ -100,6 +100,16 @@ class RepliesCell: SwipeTableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.profileImageView.imageView?.image = nil
+        self.profileImageView.setImage(nil, for: .normal)
+        
+        self.userName.text = ""
+        self.userTag.setTitle("", for: .normal)
+        self.toot.text = ""
+    }
+    
     func configure2(_ replyDepth: Int) {
 //        let contentViewFrame = self.contentView.frame
 //        let insetContentViewFrame = contentViewFrame.inset(by: UIEdgeInsets(top: 0, left: -CGFloat(replyDepth), bottom: 0, right: 0))
