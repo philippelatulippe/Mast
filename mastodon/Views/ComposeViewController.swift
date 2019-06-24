@@ -88,6 +88,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     var currentlyRecording = false
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
+    var isAudioAdded = false
     
     func giphyControllerDidSelectGif(controller: SwiftyGiphyViewController, item: GiphyItem) {
         print(item.fixedHeightStillImage)
@@ -285,6 +286,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 }
                 .popover(anchorView: self.selectedImage1)
                 .show(on: self)
+            
+        } else if self.isAudioAdded {
+            
+            
             
         } else {
             
@@ -700,7 +705,72 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 })
             }
             
+        } else if self.isAudioAdded {
+            
+            
+            if pan.state == .began {
+                buttonCenter = self.selectedImage1.center
+                self.view.bringSubviewToFront(self.selectedImage1)
+                self.textView.resignFirstResponder()
+                springWithDelay(duration: 0.6, delay: 0, animations: {
+                    self.bgView.backgroundColor = Colours.red
+                    self.removeLabel.alpha = 1
+                    self.cameraButton.alpha = 0
+                    self.visibilityButton.alpha = 0
+                    self.warningButton.alpha = 0
+                    self.emotiButton.alpha = 0
+                    self.cameraCollectionView.alpha = 0
+                    self.galPickButton.alpha = 0
+                    self.camPickButton.alpha = 0
+                })
+            } else if pan.state == .ended || pan.state == .failed || pan.state == .cancelled {
+                
+                self.selectedImage1.image = nil
+                self.selectedImage2.image = nil
+                self.selectedImage3.image = nil
+                self.selectedImage4.image = nil
+                StoreStruct.currentOptions = []
+                StoreStruct.expiresIn = 86400
+                StoreStruct.allowsMultiple = false
+                StoreStruct.totalsHidden = false
+                self.isAudioAdded = false
+                
+                let location = pan.location(in: view)
+                if location.y > CGFloat(self.view.bounds.height) - CGFloat(40) - CGFloat(self.keyHeight) {
+                    self.selectedImage1.image = nil
+                    UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: [], animations: {
+                        self.selectedImage1.center = self.buttonCenter
+                    }, completion: { finished in
+                        self.selectedImage1.image = self.selectedImage2.image
+                        self.selectedImage2.image = self.selectedImage3.image
+                        self.selectedImage3.image = self.selectedImage4.image
+                        self.selectedImage4.image = nil
+                    })
+                } else {
+                    springWithDelay(duration: 0.6, delay: 0, animations: {
+                        self.selectedImage1.center = self.buttonCenter
+                    })
+                }
+                self.textView.becomeFirstResponder()
+                springWithDelay(duration: 0.6, delay: 0, animations: {
+                    if (UserDefaults.standard.object(forKey: "barhue1") == nil) || (UserDefaults.standard.object(forKey: "barhue1") as! Int == 0) {
+                        self.bgView.backgroundColor = Colours.tabSelected
+                    } else {
+                        self.bgView.backgroundColor = Colours.white3
+                    }
+                    self.removeLabel.alpha = 0
+                })
+            } else {
+                let location = pan.location(in: view)
+                print(location)
+                springWithDelay(duration: 0.6, delay: 0, animations: {
+                    self.selectedImage1.center = location
+                })
+            }
+            
         } else {
+            
+            
         if pan.state == .began {
             buttonCenter = self.selectedImage1.center
             self.view.bringSubviewToFront(self.selectedImage1)
@@ -1004,18 +1074,18 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         // images
         
-        if self.isPollAdded {} else {
-        self.selectedImage1.frame = CGRect(x:15, y:Int(self.view.bounds.height) - 50 - Int(self.keyHeight) - 55, width: 40, height: 40)
-        self.selectedImage1.backgroundColor = Colours.clear
-        self.selectedImage1.layer.cornerRadius = 8
-        self.selectedImage1.layer.masksToBounds = true
-        self.selectedImage1.contentMode = .scaleAspectFill
-        self.selectedImage1.alpha = 1
-                let recognizer1 = UITapGestureRecognizer(target: self, action: #selector(self.tappedImageView1(_:)))
-                self.selectedImage1.addGestureRecognizer(recognizer1)
-                let pan1 = UIPanGestureRecognizer(target: self, action: #selector(self.panButton1(pan:)))
-                self.selectedImage1.addGestureRecognizer(pan1)
-        self.view.addSubview(self.selectedImage1)
+        if self.isPollAdded || self.isAudioAdded {} else {
+            self.selectedImage1.frame = CGRect(x:15, y:Int(self.view.bounds.height) - 50 - Int(self.keyHeight) - 55, width: 40, height: 40)
+            self.selectedImage1.backgroundColor = Colours.clear
+            self.selectedImage1.layer.cornerRadius = 8
+            self.selectedImage1.layer.masksToBounds = true
+            self.selectedImage1.contentMode = .scaleAspectFill
+            self.selectedImage1.alpha = 1
+                    let recognizer1 = UITapGestureRecognizer(target: self, action: #selector(self.tappedImageView1(_:)))
+                    self.selectedImage1.addGestureRecognizer(recognizer1)
+                    let pan1 = UIPanGestureRecognizer(target: self, action: #selector(self.panButton1(pan:)))
+                    self.selectedImage1.addGestureRecognizer(pan1)
+            self.view.addSubview(self.selectedImage1)
         }
         
         self.selectedImage2.frame = CGRect(x:70, y:Int(self.view.bounds.height) - 50 - Int(self.keyHeight) - 55, width: 40, height: 40)
@@ -2718,6 +2788,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         }
         
         if self.currentlyRecording {
+            self.recordAudio.setTitle("Start Recording".localized, for: .normal)
+            springWithDelay(duration: 0.5, delay: 0, animations: {
+                self.recordAudio.backgroundColor = UIColor.black.withAlphaComponent(0.15)
+                self.recordAudio.frame = CGRect(x: Int(self.bgView.bounds.width/2 - 90), y: Int(self.bgView.bounds.height/2 - 25), width: Int(180), height: Int(50))
+                self.recordAudio.layer.cornerRadius = 25
+            })
+            self.currentlyRecording = false
+            
+        } else {
             if self.audioRecorder == nil {
                 self.startRecording()
             } else {
@@ -2725,22 +2804,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
             
             self.recordAudio.setTitle("Stop Recording".localized, for: .normal)
-            self.currentlyRecording = false
-            
             springWithDelay(duration: 0.5, delay: 0, animations: {
                 self.recordAudio.backgroundColor = Colours.red
                 self.recordAudio.frame = CGRect(x: Int(self.bgView.bounds.width/2 - 110), y: Int(self.bgView.bounds.height/2 - 35), width: Int(220), height: Int(70))
                 self.recordAudio.layer.cornerRadius = 35
             })
-        } else {
-            self.recordAudio.setTitle("Start Recording".localized, for: .normal)
             self.currentlyRecording = true
-            
-            springWithDelay(duration: 0.5, delay: 0, animations: {
-                self.recordAudio.backgroundColor = UIColor.black.withAlphaComponent(0.15)
-                self.recordAudio.frame = CGRect(x: Int(self.bgView.bounds.width/2 - 90), y: Int(self.bgView.bounds.height/2 - 25), width: Int(180), height: Int(50))
-                self.recordAudio.layer.cornerRadius = 25
-            })
         }
     }
     
@@ -2770,7 +2839,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         audioRecorder = nil
         
         if success {
-            // add audio file to image view 1
+            self.isAudioAdded = true
+            self.selectedImage1.isUserInteractionEnabled = true
+            self.selectedImage1.contentMode = .scaleAspectFit
+            self.selectedImage1.layer.masksToBounds = true
+            self.selectedImage1.image = UIImage(named: "record")?.maskWithColor(color: Colours.grayDark)
+            self.selectedImage2.image = nil
+            self.selectedImage3.image = nil
+            self.selectedImage4.image = nil
             self.recordAudio.setTitle("Start Recording".localized, for: .normal)
         } else {
             self.recordAudio.setTitle("Start Recording".localized, for: .normal)
@@ -2926,6 +3002,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         var seIm: Data? = nil
         if self.isPollAdded == false {
+            seIm = self.selectedImage1.image?.pngData()
+        }
+        if self.isAudioAdded == false {
             seIm = self.selectedImage1.image?.pngData()
         }
         let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
@@ -4010,6 +4089,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 
                 var seIm: Data? = nil
                 if self.isPollAdded == false {
+                    seIm = self.selectedImage1.image?.pngData()
+                }
+                if self.isAudioAdded == false {
                     seIm = self.selectedImage1.image?.pngData()
                 }
                 let newDraft = Drafts(text: self.textView.text!, image1: seIm, image2: self.selectedImage2.image?.pngData(), image3: self.selectedImage3.image?.pngData(), image4: self.selectedImage4.image?.pngData(), isGifVid: self.isGifVid, textVideoURL: self.textVideoURL.absoluteString, gifVidData: self.gifVidData)
