@@ -290,6 +290,37 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         } else if self.isAudioAdded {
             
             
+            Alertift.actionSheet(title: nil, message: nil)
+                .backgroundColor(Colours.white)
+                .titleTextColor(Colours.grayDark)
+                .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
+                .messageTextAlignment(.left)
+                .titleTextAlignment(.left)
+                .action(.default(" Listen to Audio Clip"), image: UIImage(named: "record")) { (action, ind) in
+                    
+                    // TODO
+                    
+                }
+                .action(.default("Remove Audio".localized), image: UIImage(named: "block")) { (action, ind) in
+                    
+                    
+                    self.selectedImage1.image = nil
+                    self.selectedImage2.image = nil
+                    self.selectedImage3.image = nil
+                    self.selectedImage4.image = nil
+                    StoreStruct.currentOptions = []
+                    self.isAudioAdded = false
+                }
+                .action(.cancel("Dismiss"))
+                .finally { action, index in
+                    if action.style == .cancel {
+                        self.bringBackDrawer()
+                        return
+                    }
+                }
+                .popover(anchorView: self.selectedImage1)
+                .show(on: self)
+            
             
         } else {
             
@@ -722,6 +753,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.cameraCollectionView.alpha = 0
                     self.galPickButton.alpha = 0
                     self.camPickButton.alpha = 0
+                    self.recordAudio.alpha = 0
                 })
             } else if pan.state == .ended || pan.state == .failed || pan.state == .cancelled {
                 
@@ -730,9 +762,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.selectedImage3.image = nil
                 self.selectedImage4.image = nil
                 StoreStruct.currentOptions = []
-                StoreStruct.expiresIn = 86400
-                StoreStruct.allowsMultiple = false
-                StoreStruct.totalsHidden = false
                 self.isAudioAdded = false
                 
                 let location = pan.location(in: view)
@@ -2813,10 +2842,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     }
     
     func startRecording() {
-        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.flac")
         
         let settings = [
-            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVFormatIDKey: Int(kAudioFormatFLAC),
             AVSampleRateKey: 12000,
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
@@ -2914,7 +2943,17 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.tableViewDrafts.alpha = 0
             self.tableViewASCII.alpha = 0
             self.collectionView.alpha = 0
-            self.recordAudio.alpha = 0
+            if self.currentlyRecording {
+                self.recordAudio.alpha = 0
+                self.finishRecording(success: false)
+                self.currentlyRecording = false
+                self.recordAudio.setTitle("Start Recording".localized, for: .normal)
+                springWithDelay(duration: 0.5, delay: 0, animations: {
+                    self.recordAudio.backgroundColor = UIColor.black.withAlphaComponent(0.15)
+                    self.recordAudio.frame = CGRect(x: Int(self.bgView.bounds.width/2 - 90), y: Int(self.bgView.bounds.height/2 - 25), width: Int(180), height: Int(50))
+                    self.recordAudio.layer.cornerRadius = 25
+                })
+            }
         })
     }
     
