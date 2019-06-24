@@ -47,6 +47,7 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
         default:
             print("nil")
         }
+        controller.modalPresentationStyle = .fullScreen
         controller.inReply = []
         controller.inReplyText = ""
         self.present(controller, animated: true, completion: nil)

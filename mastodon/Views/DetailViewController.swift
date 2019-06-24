@@ -2293,6 +2293,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var sto = self.allPrevious
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -2336,6 +2337,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var sto = self.allReplies
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -2858,6 +2860,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             impact.impactOccurred()
         }
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -3093,6 +3096,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 
                 let controller = NewQRViewController()
+                controller.modalPresentationStyle = .fullScreen
                 controller.ur = self.mainStatus[0].url?.absoluteString ?? "https://www.thebluebird.app"
                 self.present(controller, animated: true, completion: nil)
                 
@@ -3224,6 +3228,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                      
                     
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -3317,6 +3322,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                      
                     
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -3367,6 +3373,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                              
                             
                             let controller = NewQRViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             controller.ur = self.mainStatus[0].url?.absoluteString ?? "https://www.thebluebird.app"
                             self.present(controller, animated: true, completion: nil)
                             
@@ -3679,6 +3686,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                      
                     
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -3729,6 +3737,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                              
                             
                             let controller = NewQRViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             controller.ur = self.mainStatus[0].url?.absoluteString ?? "https://www.thebluebird.app"
                             self.present(controller, animated: true, completion: nil)
                             
@@ -5026,6 +5035,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
                 
                 let controller = ComposeViewController()
+                controller.modalPresentationStyle = .fullScreen
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .pad:
@@ -5178,6 +5188,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -5221,6 +5232,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -5271,6 +5283,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                      
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     
@@ -5572,6 +5585,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -5623,6 +5637,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                      
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     

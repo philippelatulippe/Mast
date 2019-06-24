@@ -1164,6 +1164,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var sto = self.currentTags
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -1378,6 +1379,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     impact.impactOccurred()
                 }
                 let controller = ComposeViewController()
+                controller.modalPresentationStyle = .fullScreen
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .pad:
@@ -1543,6 +1545,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -1639,6 +1642,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -1705,6 +1709,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                      
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     
@@ -2007,6 +2012,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -2073,6 +2079,7 @@ class PinnedViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                      
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     

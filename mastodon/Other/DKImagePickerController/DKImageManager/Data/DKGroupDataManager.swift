@@ -7,6 +7,8 @@
 //
 
 import Photos
+import UIKit
+import Foundation
 
 @objc
 protocol DKGroupDataManagerObserver {

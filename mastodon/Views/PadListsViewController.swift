@@ -296,6 +296,7 @@ class PadListsViewController: UIViewController, UITableViewDelegate, UITableView
                     .action(.default("Edit List Name".localized), image: UIImage(named: "list")) { (action, ind) in
                         
                         let controller = NewListViewController()
+                        controller.modalPresentationStyle = .fullScreen
                         controller.listID = StoreStruct.allLists[indexPath.row].id
                         controller.editListName = StoreStruct.allLists[indexPath.row].title
                         self.present(controller, animated: true, completion: nil)
@@ -517,6 +518,7 @@ class PadListsViewController: UIViewController, UITableViewDelegate, UITableView
             } else {
                 // create new list
                 let controller = NewListViewController()
+                controller.modalPresentationStyle = .fullScreen
                 controller.modalPresentationStyle = .pageSheet
                 self.present(controller, animated: true, completion: nil)
             }

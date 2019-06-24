@@ -720,7 +720,6 @@
 		53865FCD216CF3540041E686 /* TootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCC216CF3540041E686 /* TootController.swift */; };
 		53865FCF216CFFA40041E686 /* LocalTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53865FCE216CFFA40041E686 /* LocalTimelineController.swift */; };
 		5389F21E22B2C42100065DC6 /* PadLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5389F21D22B2C42100065DC6 /* PadLoginViewController.swift */; };
-		538B2150222BE00A0034977E /* FlickType.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 538B214F222BE0090034977E /* FlickType.storyboard */; };
 		538B2152222BE01A0034977E /* keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 538B2151222BE0190034977E /* keyboard.png */; };
 		5392DBF92275EF8000D17F5F /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5392DBF82275EF8000D17F5F /* AccountSettingsViewController.swift */; };
 		5392DBFB2275F5E500D17F5F /* LockSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5392DBFA2275F5E500D17F5F /* LockSettingsViewController.swift */; };
@@ -780,8 +779,6 @@
 		53E1AE25221ADFEA00A6E1E6 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE1D221ADFE900A6E1E6 /* Cache.swift */; };
 		53E1AE26221ADFEA00A6E1E6 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE1E221ADFE900A6E1E6 /* StringExtension.swift */; };
 		53E1AE27221ADFEA00A6E1E6 /* PreviewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1AE1F221ADFE900A6E1E6 /* PreviewError.swift */; };
-		53E3CE2F224A52B7000324D9 /* FlickTypeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E3CE2E224A52B6000324D9 /* FlickTypeKit.framework */; };
-		53E3CE30224A52B7000324D9 /* FlickTypeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53E3CE2E224A52B6000324D9 /* FlickTypeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53E5039B2207153100FD5CF2 /* NewHexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E5039A2207153100FD5CF2 /* NewHexViewController.swift */; };
 		53E6F2B1216CCA9400912B83 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */; };
 		53E6F2B2216CCA9400912B83 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */; };
@@ -909,7 +906,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				53E3CE30224A52B7000324D9 /* FlickTypeKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1669,7 +1665,6 @@
 		53865FCC216CF3540041E686 /* TootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TootController.swift; sourceTree = "<group>"; };
 		53865FCE216CFFA40041E686 /* LocalTimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTimelineController.swift; sourceTree = "<group>"; };
 		5389F21D22B2C42100065DC6 /* PadLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLoginViewController.swift; sourceTree = "<group>"; };
-		538B214F222BE0090034977E /* FlickType.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = FlickType.storyboard; path = "FlickTypeKit/App Resources/FlickType.storyboard"; sourceTree = "<group>"; };
 		538B2151222BE0190034977E /* keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keyboard.png; path = "FlickTypeKit/App Resources/keyboard.png"; sourceTree = "<group>"; };
 		5392DBF82275EF8000D17F5F /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 		5392DBFA2275F5E500D17F5F /* LockSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockSettingsViewController.swift; sourceTree = "<group>"; };
@@ -1731,7 +1726,6 @@
 		53E1AE1D221ADFE900A6E1E6 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		53E1AE1E221ADFE900A6E1E6 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		53E1AE1F221ADFE900A6E1E6 /* PreviewError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewError.swift; sourceTree = "<group>"; };
-		53E3CE2E224A52B6000324D9 /* FlickTypeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlickTypeKit.framework; path = FlickTypeKit/FlickTypeKit.framework; sourceTree = "<group>"; };
 		53E5039A2207153100FD5CF2 /* NewHexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHexViewController.swift; sourceTree = "<group>"; };
 		53E6F2B0216CCA9400912B83 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		53E6F2B3216CDDF800912B83 /* StoreStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreStruct.swift; sourceTree = "<group>"; };
@@ -1800,7 +1794,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53E3CE2F224A52B7000324D9 /* FlickTypeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2800,9 +2793,7 @@
 		5373C9CB215173EE00676F3D = {
 			isa = PBXGroup;
 			children = (
-				53E3CE2E224A52B6000324D9 /* FlickTypeKit.framework */,
 				538B2151222BE0190034977E /* keyboard.png */,
-				538B214F222BE0090034977E /* FlickType.storyboard */,
 				5373CA112151AC8D00676F3D /* Localizable.strings */,
 				5373C9D6215173EE00676F3D /* mastodon */,
 				5354BA1A2163F89E0094C545 /* MastShare */,
@@ -3690,7 +3681,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				538B2152222BE01A0034977E /* keyboard.png in Resources */,
-				538B2150222BE00A0034977E /* FlickType.storyboard in Resources */,
 				536A4FC7216B843A00A3D483 /* Assets.xcassets in Resources */,
 				536A4FC5216B843700A3D483 /* Interface.storyboard in Resources */,
 			);

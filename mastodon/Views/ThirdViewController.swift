@@ -1647,6 +1647,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                  
                 
                 let controller = NewProfileViewController()
+                controller.modalPresentationStyle = .fullScreen
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .pad:
@@ -1662,6 +1663,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                  
                 
                 let controller = NewProfileNoteViewController()
+                controller.modalPresentationStyle = .fullScreen
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .pad:
@@ -2066,6 +2068,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                      
                     
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -2080,6 +2083,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                      
                     
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -2335,6 +2339,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     if self.zzz.count == 0 {
                         z1.action(.default("Create New List"), image: nil) { (action, ind) in
                             let controller = NewListViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             self.present(controller, animated: true, completion: nil)
                         }
                     }
@@ -2464,6 +2469,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                              
                             
                             let controller = NewQRViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             controller.ur = self.chosenUser.url
                             self.present(controller, animated: true, completion: nil)
                             
@@ -2745,6 +2751,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                              
                             
                             let controller = NewQRViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             controller.ur = self.chosenUser.url
                             self.present(controller, animated: true, completion: nil)
                             
@@ -4748,6 +4755,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -4958,6 +4966,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -5123,6 +5132,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                  
                                 
                                 let controller = ComposeViewController()
+                                controller.modalPresentationStyle = .fullScreen
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .pad:
@@ -5223,6 +5233,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                  
                                 
                                 let controller = ComposeViewController()
+                                controller.modalPresentationStyle = .fullScreen
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .pad:
@@ -5293,6 +5304,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                          
                                         
                                         let controller = NewQRViewController()
+                                        controller.modalPresentationStyle = .fullScreen
                                         controller.ur = sto[indexPath.row].reblog?.url?.absoluteString ?? sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                         self.present(controller, animated: true, completion: nil)
                                         
@@ -5595,6 +5607,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                  
                                 
                                 let controller = ComposeViewController()
+                                controller.modalPresentationStyle = .fullScreen
                                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                                 switch (deviceIdiom) {
                                 case .pad:
@@ -5662,6 +5675,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                          
                                         
                                         let controller = NewQRViewController()
+                                        controller.modalPresentationStyle = .fullScreen
                                         controller.ur = sto[indexPath.row].reblog?.url?.absoluteString ?? sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                         self.present(controller, animated: true, completion: nil)
                                         

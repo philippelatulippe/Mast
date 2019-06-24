@@ -536,6 +536,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
                         
                         
                         let controller = ComposeViewController()
+                        controller.modalPresentationStyle = .fullScreen
                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                         switch (deviceIdiom) {
                         case .pad:
@@ -550,6 +551,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
                         
                         
                         let controller = ComposeViewController()
+                        controller.modalPresentationStyle = .fullScreen
                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                         switch (deviceIdiom) {
                         case .pad:
@@ -731,6 +733,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
                                     if zzz.count == 0 {
                                         z1.action(.default("Create New List"), image: nil) { (action, ind) in
                                             let controller = NewListViewController()
+                                            controller.modalPresentationStyle = .fullScreen
                                             self.present(controller, animated: true, completion: nil)
                                         }
                                     }
@@ -873,6 +876,7 @@ class BoostersViewController: UIViewController, SJFluidSegmentedControlDataSourc
                                 
                                 
                                 let controller = NewQRViewController()
+                                controller.modalPresentationStyle = .fullScreen
                                 controller.ur = sto[indexPath.row].displayName
                                 self.present(controller, animated: true, completion: nil)
                                 

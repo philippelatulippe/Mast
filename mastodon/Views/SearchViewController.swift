@@ -556,6 +556,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
         var sto = StoreStruct.statusSearch
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -1454,6 +1455,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                     impact.impactOccurred()
                 }
                 let controller = ComposeViewController()
+                controller.modalPresentationStyle = .fullScreen
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .pad:
@@ -1640,6 +1642,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -1736,6 +1739,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -1802,6 +1806,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                                      
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     
@@ -2105,6 +2110,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -2171,6 +2177,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, SJFluidSegmen
                                      
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     

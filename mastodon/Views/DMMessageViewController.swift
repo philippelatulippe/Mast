@@ -713,6 +713,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         }
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:

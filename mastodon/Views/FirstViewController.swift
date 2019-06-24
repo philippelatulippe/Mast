@@ -717,6 +717,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 .titleTextAlignment(.left)
                 .action(.default("Resume Composing Toot".localized), image: nil) { (action, ind) in
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -762,6 +763,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
     @available(iOS 12.1, *)
     func pencilInteractionDidTap(_ interaction: UIPencilInteraction) {
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -4002,6 +4004,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         }
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -4236,6 +4239,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                 }
                 
                 let controller = ComposeViewController()
+                controller.modalPresentationStyle = .fullScreen
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .pad:
@@ -4420,6 +4424,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -4521,6 +4526,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -4571,6 +4577,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].reblog?.url?.absoluteString ?? sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     
@@ -4867,6 +4874,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                             
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -4917,6 +4925,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                     
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].reblog?.url?.absoluteString ?? sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     

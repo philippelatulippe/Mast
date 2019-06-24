@@ -667,6 +667,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                     self.guidedAc()
                 } else {
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -685,6 +686,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 self.guidedAc()
             } else {
                 let controller = ComposeViewController()
+                controller.modalPresentationStyle = .fullScreen
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .pad:
@@ -714,6 +716,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     }
     @objc func switch44() {
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -1367,6 +1370,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                         self.doOnce = true
                         self.doOncePinch = true
                         let controller = ComposeViewController()
+                        controller.modalPresentationStyle = .fullScreen
                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                         switch (deviceIdiom) {
                         case .pad:
@@ -1738,6 +1742,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 .action(.default("Edit List Name".localized), image: UIImage(named: "list")) { (action, ind) in
                      
                     let controller = NewListViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     controller.listID = StoreStruct.allLists[indexPath.row].id
                     controller.editListName = StoreStruct.allLists[indexPath.row].title
                     self.present(controller, animated: true, completion: nil)
@@ -1973,11 +1978,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 if indexPath.row == 0 {
                     // other instance
                     let controller = NewInstanceViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     controller.editListName = ""
                     self.present(controller, animated: true, completion: nil)
                 } else if indexPath.row == 1 {
                     // create new list
                     let controller = NewListViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     self.present(controller, animated: true, completion: nil)
                 } else {
                     // go to settings
@@ -2155,6 +2162,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
 //                imp.impactOccurred()
 //            }
             let controller = ComposeViewController()
+                controller.modalPresentationStyle = .fullScreen
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .pad:
@@ -2162,9 +2170,9 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 default:
                     print("nil")
                 }
-            controller.inReply = []
-            controller.inReplyText = ""
-            self.present(controller, animated: true, completion: nil)
+                controller.inReply = []
+                controller.inReplyText = ""
+                self.present(controller, animated: true, completion: nil)
             }
             
         } else if (UserDefaults.standard.object(forKey: "longToggle") as! Int == 3) {

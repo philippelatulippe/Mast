@@ -412,6 +412,7 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
                 .action(.default("Delete and Redraft".localized), image: UIImage(named: "block")) { (action, ind) in
                     
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:

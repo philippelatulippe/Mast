@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import AssetsLibrary
+import Foundation
 
 @objc
 public protocol DKImagePickerControllerCameraProtocol {

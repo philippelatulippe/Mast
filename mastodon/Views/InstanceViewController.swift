@@ -1221,6 +1221,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
         var sto = StoreStruct.newInstanceTags
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -1266,6 +1267,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                     impact.impactOccurred()
                 }
                 let controller = ComposeViewController()
+                controller.modalPresentationStyle = .fullScreen
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .pad:
@@ -1428,6 +1430,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -1524,6 +1527,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -1590,6 +1594,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                                      
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     
@@ -1893,6 +1898,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -1959,6 +1965,7 @@ class InstanceViewController: UIViewController, UITableViewDelegate, UITableView
                                      
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     

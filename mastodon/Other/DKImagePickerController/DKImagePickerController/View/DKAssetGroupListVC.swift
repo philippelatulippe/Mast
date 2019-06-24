@@ -7,6 +7,8 @@
 //
 
 import Photos
+import UIKit
+import Foundation
 
 let DKImageGroupCellIdentifier = "DKImageGroupCellIdentifier"
 

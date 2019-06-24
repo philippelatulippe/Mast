@@ -1129,6 +1129,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         var sto = StoreStruct.notificationsDirect
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -1235,6 +1236,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -1583,6 +1585,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -1634,6 +1637,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                      
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].lastStatus?.url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     

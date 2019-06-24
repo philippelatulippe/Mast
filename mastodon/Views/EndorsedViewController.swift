@@ -234,6 +234,7 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
                         
                         
                         let controller = ComposeViewController()
+                        controller.modalPresentationStyle = .fullScreen
                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                         switch (deviceIdiom) {
                         case .pad:
@@ -248,6 +249,7 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
                         
                         
                         let controller = ComposeViewController()
+                        controller.modalPresentationStyle = .fullScreen
                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                         switch (deviceIdiom) {
                         case .pad:
@@ -429,6 +431,7 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
                                     if zzz.count == 0 {
                                         z1.action(.default("Create New List"), image: nil) { (action, ind) in
                                             let controller = NewListViewController()
+                                            controller.modalPresentationStyle = .fullScreen
                                             self.present(controller, animated: true, completion: nil)
                                         }
                                     }
@@ -571,6 +574,7 @@ class EndorsedViewController: UIViewController, UITableViewDelegate, UITableView
                                 
                                 
                                 let controller = NewQRViewController()
+                                controller.modalPresentationStyle = .fullScreen
                                 controller.ur = sto[indexPath.row].displayName
                                 self.present(controller, animated: true, completion: nil)
                                 

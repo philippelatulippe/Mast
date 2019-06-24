@@ -1306,6 +1306,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -1548,6 +1549,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 impact.impactOccurred()
                 }
                 let controller = ComposeViewController()
+                controller.modalPresentationStyle = .fullScreen
                 let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                 switch (deviceIdiom) {
                 case .pad:
@@ -1733,6 +1735,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -1830,6 +1833,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                              
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -1896,6 +1900,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                                      
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     
@@ -2195,6 +2200,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                          
                         
                         let controller = ComposeViewController()
+                        controller.modalPresentationStyle = .fullScreen
                         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                         switch (deviceIdiom) {
                         case .pad:
@@ -2261,6 +2267,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                                  
                                 
                                 let controller = NewQRViewController()
+                                controller.modalPresentationStyle = .fullScreen
                                 controller.ur = sto[indexPath.row].reblog?.url?.absoluteString ?? sto[indexPath.row].url?.absoluteString ?? "https://www.thebluebird.app"
                                 self.present(controller, animated: true, completion: nil)
                                 

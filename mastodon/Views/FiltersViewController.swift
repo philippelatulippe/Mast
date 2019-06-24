@@ -232,6 +232,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         let controller = NewFilterViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:

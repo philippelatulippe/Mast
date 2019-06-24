@@ -48,10 +48,12 @@ class AppearanceSettingsViewController: UIViewController, UITableViewDelegate, U
             .titleTextAlignment(.left)
             .action(.default("Hue Picker Wheel".localized), image: nil) { (action, ind) in
                 let controller = NewHuePickerViewController()
+                controller.modalPresentationStyle = .fullScreen
                 self.present(controller, animated: true, completion: nil)
             }
             .action(.default("Enter Hex Value Manually".localized), image: nil) { (action, ind) in
                 let controller = NewHexViewController()
+                controller.modalPresentationStyle = .fullScreen
                 self.present(controller, animated: true, completion: nil)
             }
             .action(.cancel("Dismiss"))

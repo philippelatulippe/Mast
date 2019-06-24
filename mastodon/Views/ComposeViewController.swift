@@ -261,6 +261,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 .action(.default("Edit Poll"), image: UIImage(named: "pollbubble")) { (action, ind) in
                      
                     let controller = NewPollViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     self.present(controller, animated: true, completion: nil)
                 }
                 .action(.default("Remove Poll".localized), image: UIImage(named: "block")) { (action, ind) in
@@ -354,6 +355,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                         
                         let controller = NewCaptionViewController()
+                        controller.modalPresentationStyle = .fullScreen
                         controller.editListName = StoreStruct.caption1
                         controller.fromWhich = 0
                         self.present(controller, animated: true, completion: nil)
@@ -431,6 +433,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                 
                 let controller = NewCaptionViewController()
+                controller.modalPresentationStyle = .fullScreen
                 controller.editListName = StoreStruct.caption1
                 controller.fromWhich = 0
                 self.present(controller, animated: true, completion: nil)
@@ -505,6 +508,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                 
                 let controller = NewCaptionViewController()
+                controller.modalPresentationStyle = .fullScreen
                 controller.editListName = StoreStruct.caption2
                 controller.fromWhich = 1
                 self.present(controller, animated: true, completion: nil)
@@ -574,6 +578,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                 
                 let controller = NewCaptionViewController()
+                controller.modalPresentationStyle = .fullScreen
                 controller.editListName = StoreStruct.caption3
                 controller.fromWhich = 2
                 self.present(controller, animated: true, completion: nil)
@@ -641,6 +646,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             .action(.default("Edit Caption".localized), image: nil) { (action, ind) in
                 
                 let controller = NewCaptionViewController()
+                controller.modalPresentationStyle = .fullScreen
                 controller.editListName = StoreStruct.caption4
                 controller.fromWhich = 3
                 self.present(controller, animated: true, completion: nil)
@@ -2635,6 +2641,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.present(controller, animated: true, completion: nil)
                 default:
                     let controller = NewPollViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     self.present(controller, animated: true, completion: nil)
                 }
             }

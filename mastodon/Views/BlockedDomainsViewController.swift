@@ -232,6 +232,7 @@ class BlockedDomainsViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         let controller = NewDomainBlockViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:

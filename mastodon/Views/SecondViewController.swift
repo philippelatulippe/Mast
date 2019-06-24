@@ -3535,6 +3535,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         }
         
         let controller = ComposeViewController()
+        controller.modalPresentationStyle = .fullScreen
         let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
         switch (deviceIdiom) {
         case .pad:
@@ -3674,6 +3675,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -4020,6 +4022,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -4101,6 +4104,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].status?.url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     
@@ -4319,6 +4323,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         impact.impactOccurred()
                     }
                     let controller = ComposeViewController()
+                    controller.modalPresentationStyle = .fullScreen
                     let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                     switch (deviceIdiom) {
                     case .pad:
@@ -4686,6 +4691,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                             
                             
                             let controller = ComposeViewController()
+                            controller.modalPresentationStyle = .fullScreen
                             let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
                             switch (deviceIdiom) {
                             case .pad:
@@ -4767,6 +4773,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     
                                     
                                     let controller = NewQRViewController()
+                                    controller.modalPresentationStyle = .fullScreen
                                     controller.ur = sto[indexPath.row].status?.url?.absoluteString ?? "https://www.thebluebird.app"
                                     self.present(controller, animated: true, completion: nil)
                                     

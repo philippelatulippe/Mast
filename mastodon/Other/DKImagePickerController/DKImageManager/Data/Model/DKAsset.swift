@@ -7,6 +7,8 @@
 //
 
 import Photos
+import UIKit
+import Foundation
 
 public extension CGSize {
     
