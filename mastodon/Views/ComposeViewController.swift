@@ -2788,6 +2788,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         }
         
         if self.currentlyRecording {
+            
             self.recordAudio.setTitle("Start Recording".localized, for: .normal)
             springWithDelay(duration: 0.5, delay: 0, animations: {
                 self.recordAudio.backgroundColor = UIColor.black.withAlphaComponent(0.15)
@@ -2795,13 +2796,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.recordAudio.layer.cornerRadius = 25
             })
             self.currentlyRecording = false
+            self.finishRecording(success: true)
             
         } else {
-            if self.audioRecorder == nil {
-                self.startRecording()
-            } else {
-                self.finishRecording(success: true)
-            }
             
             self.recordAudio.setTitle("Stop Recording".localized, for: .normal)
             springWithDelay(duration: 0.5, delay: 0, animations: {
@@ -2810,11 +2807,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.recordAudio.layer.cornerRadius = 35
             })
             self.currentlyRecording = true
+            self.startRecording()
+            
         }
     }
     
     func startRecording() {
-        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.mp3")
+        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -2827,15 +2826,17 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.delegate = self
             audioRecorder.record()
-            
-            self.recordAudio.setTitle("Stop Recording".localized, for: .normal)
         } catch {
+            audioRecorder = nil
             finishRecording(success: false)
         }
     }
     
     func finishRecording(success: Bool) {
-        audioRecorder.stop()
+        
+        if success {
+            self.audioRecorder.stop()
+        }
         audioRecorder = nil
         
         if success {
@@ -2847,9 +2848,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.selectedImage2.image = nil
             self.selectedImage3.image = nil
             self.selectedImage4.image = nil
-            self.recordAudio.setTitle("Start Recording".localized, for: .normal)
-        } else {
-            self.recordAudio.setTitle("Start Recording".localized, for: .normal)
         }
     }
     
@@ -2916,6 +2914,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.tableViewDrafts.alpha = 0
             self.tableViewASCII.alpha = 0
             self.collectionView.alpha = 0
+            self.recordAudio.alpha = 0
         })
     }
     
