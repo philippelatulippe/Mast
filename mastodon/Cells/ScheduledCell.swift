@@ -266,7 +266,7 @@ class ScheduledCellImage: SwipeTableViewCell {
         }
         
         imageCountTag.isUserInteractionEnabled = false
-        if status.mediaAttachments[0].type == .video {
+        if status.mediaAttachments[0].type == .video || status.mediaAttachments[0].type == .audio {
             imageCountTag.setTitle("\u{25b6}", for: .normal)
             imageCountTag.backgroundColor = Colours.tabSelected
             imageCountTag.alpha = 1

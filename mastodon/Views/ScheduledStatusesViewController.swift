@@ -285,7 +285,7 @@ class ScheduledStatusesViewController: UIViewController, UITableViewDelegate, UI
         
         if sto.count < 1 {} else {
             
-            if sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].mediaAttachments[0].type == .gifv {
+            if sto[sender.tag].mediaAttachments[0].type == .video || sto[sender.tag].mediaAttachments[0].type == .gifv || sto[sender.tag].mediaAttachments[0].type == .audio {
                 
                 let videoURL = URL(string: sto[sender.tag].mediaAttachments[0].url)!
                 if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {

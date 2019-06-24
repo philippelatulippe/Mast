@@ -304,7 +304,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         StoreStruct.currentImageURL = self.allPosts[indexPath?.section ?? 0].reblog?.url ?? self.allPosts[indexPath?.section ?? 0].url
         
         
-        if self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].type ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].type == .video || self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].type ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].type == .gifv {
+        if self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].type ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].type == .video || self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].type ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].type == .gifv || self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].type ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].type == .audio {
             
             let videoURL = URL(string: self.allPosts[indexPath?.section ?? 0].reblog?.mediaAttachments[0].url ?? self.allPosts[indexPath?.section ?? 0].mediaAttachments[0].url)!
             if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {

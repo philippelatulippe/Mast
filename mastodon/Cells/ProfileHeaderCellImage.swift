@@ -126,7 +126,7 @@ class ProfileHeaderCellImage: UITableViewCell, UICollectionViewDelegate, UIColle
                     cell.bgImage.layer.shadowOffset = CGSize(width: 0, height: 8)
 //                }
                 
-                if self.profileStatusesHasImage[indexPath.item].reblog?.mediaAttachments[0].type ?? self.profileStatusesHasImage[indexPath.item].mediaAttachments[0].type == .video {
+                if self.profileStatusesHasImage[indexPath.item].reblog?.mediaAttachments[0].type ?? self.profileStatusesHasImage[indexPath.item].mediaAttachments[0].type == .video || self.profileStatusesHasImage[indexPath.item].reblog?.mediaAttachments[0].type ?? self.profileStatusesHasImage[indexPath.item].mediaAttachments[0].type == .audio {
                     cell.imageCountTag.setTitle("\u{25b6}", for: .normal)
                     cell.imageCountTag.backgroundColor = Colours.tabSelected
                     cell.imageCountTag.alpha = 1
@@ -160,7 +160,7 @@ class ProfileHeaderCellImage: UITableViewCell, UICollectionViewDelegate, UIColle
         StoreStruct.newIDtoGoTo = sto[indexPath.item].id
         
         
-        if sto[indexPath.item].mediaAttachments[0].type == .video || sto[indexPath.item].mediaAttachments[0].type == .gifv {
+        if sto[indexPath.item].mediaAttachments[0].type == .video || sto[indexPath.item].mediaAttachments[0].type == .gifv || sto[indexPath.item].mediaAttachments[0].type == .audio {
             
             let videoURL = URL(string: sto[indexPath.item].mediaAttachments[0].url)!
             XPlayer.play(videoURL)

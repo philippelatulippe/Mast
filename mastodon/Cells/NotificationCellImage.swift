@@ -571,7 +571,7 @@ class NotificationCellImage: SwipeTableViewCell {
         self.smallImage4.alpha = 0
         imageCountTag.isUserInteractionEnabled = false
         if status.status?.reblog?.mediaAttachments.isEmpty ?? status.status?.mediaAttachments.isEmpty ?? false { return }
-        if status.status?.reblog?.mediaAttachments[0].type ?? status.status?.mediaAttachments[0].type == .video {
+        if status.status?.reblog?.mediaAttachments[0].type ?? status.status?.mediaAttachments[0].type == .video || status.status?.reblog?.mediaAttachments[0].type ?? status.status?.mediaAttachments[0].type == .audio {
 //            self.mainImageView.setImage(UIImage(), for: .normal)
             self.mainImageView.contentMode = .scaleAspectFit
             self.mainImageView.imageView?.contentMode = .scaleAspectFit

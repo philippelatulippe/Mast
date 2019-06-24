@@ -2868,7 +2868,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         StoreStruct.currentImageURL = sto[sender.tag].status!.reblog?.url ?? sto[sender.tag].status!.url
         
-        if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
+        if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv || sto[sender.tag].status?.mediaAttachments[0].type == .audio {
             
             if let videoURL = URL(string: sto[sender.tag].status!.mediaAttachments[0].url) {
             if (UserDefaults.standard.object(forKey: "vidgif") == nil) || (UserDefaults.standard.object(forKey: "vidgif") as! Int == 0) {
@@ -3049,7 +3049,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         if sto.count < 1 {} else {
             
-            if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
+            if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv || sto[sender.tag].status?.mediaAttachments[0].type == .audio {
                 
             } else {
                 
@@ -3124,7 +3124,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         if sto.count < 1 {} else {
             
-            if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
+            if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv || sto[sender.tag].status?.mediaAttachments[0].type == .audio {
                 
             } else {
                 
@@ -3200,7 +3200,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         if sto.count < 1 {} else {
             
-            if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
+            if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv || sto[sender.tag].status?.mediaAttachments[0].type == .audio {
                 
             } else {
                 
@@ -3277,7 +3277,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
         
         if sto.count < 1 {} else {
             
-            if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv {
+            if sto[sender.tag].status?.mediaAttachments[0].type == .video || sto[sender.tag].status?.mediaAttachments[0].type == .gifv || sto[sender.tag].status?.mediaAttachments[0].type == .audio {
                 
             } else {
                 

@@ -359,7 +359,7 @@ class DetailCellImage: UITableViewCell {
         self.smallImage3.alpha = 0
         self.smallImage4.alpha = 0
         imageCountTag.isUserInteractionEnabled = false
-        if status.reblog?.mediaAttachments[0].type ?? status.mediaAttachments[0].type == .video {
+        if status.reblog?.mediaAttachments[0].type ?? status.mediaAttachments[0].type == .video || status.reblog?.mediaAttachments[0].type ?? status.mediaAttachments[0].type == .audio { 
 //            self.mainImageView.setImage(UIImage(), for: .normal)
             self.mainImageView.contentMode = .scaleAspectFit
             self.mainImageView.imageView?.contentMode = .scaleAspectFit
