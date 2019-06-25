@@ -14,6 +14,7 @@ import StatusAlert
 import SAConfettiView
 import UserNotifications
 import Disk
+import SDWebImage
 
 class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SKPhotoBrowserDelegate, UIGestureRecognizerDelegate, UNUserNotificationCenterDelegate {
     
@@ -1525,6 +1526,8 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
             print("couldn't clear disk")
         }
         imageCache.removeAllObjects()
+        SDImageCache.shared().clearMemory()
+        SDImageCache.shared().clearDisk()
         UserDefaults.standard.set(0, forKey: "savedRowHome1")
         UserDefaults.standard.set(0, forKey: "savedRowLocal1")
         UserDefaults.standard.set(0, forKey: "savedRowFed1")
@@ -1545,6 +1548,9 @@ class GeneralSettingsViewController: UIViewController, UITableViewDelegate, UITa
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         UserDefaults.standard.set(nil, forKey: "onb")
         UserDefaults.standard.synchronize()
+        imageCache.removeAllObjects()
+        SDImageCache.shared().clearMemory()
+        SDImageCache.shared().clearDisk()
         
         StoreStruct.client = Client(baseURL: "")
         StoreStruct.newClient = Client(baseURL: "")

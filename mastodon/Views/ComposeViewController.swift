@@ -20,10 +20,11 @@ import Speech
 import Disk
 import CropViewController
 import Vision
-import VisionKit
 import SDWebImage
+//import VisionKit
 
-class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate, SFSpeechRecognizerDelegate, SwipeTableViewCellDelegate, CropViewControllerDelegate, UIGestureRecognizerDelegate, AVAudioRecorderDelegate, VNDocumentCameraViewControllerDelegate {
+class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate, SFSpeechRecognizerDelegate, SwipeTableViewCellDelegate, CropViewControllerDelegate, UIGestureRecognizerDelegate, AVAudioRecorderDelegate {
+    // VNDocumentCameraViewControllerDelegate
     
     let gifCont = SwiftyGiphyViewController()
     var isGifVid = false
@@ -443,9 +444,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
             
                 if #available(iOS 13.0, *) {
-            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
-                self.textFromImage(self.selectedImage1.image!)
-            }
+//            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+//                self.textFromImage(self.selectedImage1.image!)
+//            }
                 }
             z.action(.default("Remove Image".localized), image: nil) { (action, ind) in
                 self.selectedImage1.image = self.selectedImage2.image
@@ -515,9 +516,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
         
         if #available(iOS 13.0, *) {
-            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
-                self.textFromImage(self.selectedImage2.image!)
-            }
+//            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+//                self.textFromImage(self.selectedImage2.image!)
+//            }
         }
             z.action(.default("Remove Image".localized), image: nil) { (action, ind) in
                 self.selectedImage2.image = self.selectedImage3.image
@@ -582,9 +583,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
         
         if #available(iOS 13.0, *) {
-            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
-                self.textFromImage(self.selectedImage3.image!)
-            }
+//            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+//                self.textFromImage(self.selectedImage3.image!)
+//            }
         }
             z.action(.default("Remove Image".localized), image: nil) { (action, ind) in
                 self.selectedImage3.image = self.selectedImage4.image
@@ -647,9 +648,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             }
         
         if #available(iOS 13.0, *) {
-            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
-                self.textFromImage(self.selectedImage4.image!)
-            }
+//            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+//                self.textFromImage(self.selectedImage4.image!)
+//            }
         }
             z.action(.cancel("Dismiss"))
             z.action(.default("Remove Image".localized), image: nil) { (action, ind) in
@@ -993,6 +994,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
@@ -2108,6 +2113,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         }
     }
     
+    //TODO: - Uncomment when pushing from Xcode 11
+    /*
     var vc: Any? = {
         let iosVersion = NSString(string: UIDevice.current.systemVersion).doubleValue
         if #available(iOS 13.0, *) {
@@ -2176,13 +2183,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             try? handler.perform(requests)
         }
     }
+ */
     
     func cameraText() {
         if #available(iOS 13.0, *) {
-            let vc = self.vc as! VNDocumentCameraViewController
-            vc.delegate = self
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+//            let vc = self.vc as! VNDocumentCameraViewController
+//            vc.delegate = self
+//            vc.modalPresentationStyle = .fullScreen
+//            self.present(vc, animated: true)
         }
     }
     
@@ -2816,10 +2824,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         
         if #available(iOS 13.0, *) {
-            z.action(.default("Compose Toot from Camera"), image: UIImage(named: "camcomp")) { (action, ind) in
-                 
-                self.cameraText()
-            }
+//            z.action(.default("Compose Toot from Camera"), image: UIImage(named: "camcomp")) { (action, ind) in
+//
+//                self.cameraText()
+//            }
         }
         
             z.action(.default("Drafts"), image: UIImage(named: "list")) { (action, ind) in
@@ -3011,9 +3019,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     @objc func didTouchUpInsideCloseButton(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
             let impact = UIImpactFeedbackGenerator(style: .light)
-        impact.impactOccurred()
+            impact.impactOccurred()
         }
-        
         
         if self.textView.text! == "" || self.textView.text! == self.startRepText {
             self.textView.resignFirstResponder()

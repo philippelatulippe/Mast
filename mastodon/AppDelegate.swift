@@ -124,11 +124,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         state = PushNotificationState(receiver: receiver, subscription: subscription, deviceToken: deviceToken)
         PushNotificationReceiver.setState(state: state)
         
-        #if DEBUG
-            let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
-        #else
+//        #if DEBUG
+//            let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1-dev.your.org/relay-to/development/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
+//        #else
             let requestParams = PushNotificationSubscriptionRequest(endpoint: "https://pushrelay-mast1.your.org/relay-to/production/\(token)", receiver: receiver, alerts: PushNotificationAlerts.init(favourite: UserDefaults.standard.object(forKey: "pnlikes") as? Bool ?? true, follow: UserDefaults.standard.object(forKey: "pnfollows") as? Bool ?? true, mention: UserDefaults.standard.object(forKey: "pnmentions") as? Bool ?? true, reblog: UserDefaults.standard.object(forKey: "pnboosts") as? Bool ?? true))
-        #endif
+//        #endif
         
         //create the url with URL
         let url = URL(string: "https://\(StoreStruct.currentInstance.returnedText)/api/v1/push/subscription")! //change the url
@@ -589,36 +589,106 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Couldn't load")
         }
         
-        if UIApplication.shared.isSplitOrSlideOver {
-            //            self.window?.rootViewController = ViewController()
-            //            self.window?.makeKeyAndVisible()
-        } else {
-            
-            let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-            switch (deviceIdiom) {
-            case .phone:
-                self.window?.rootViewController = ViewController()
-                self.window?.makeKeyAndVisible()
-            case .pad:
-                let rootController = ColumnViewController()
-                let nav0 = UINavigationController(rootViewController: VerticalTabBarController())
-                let nav1 = ScrollMainViewController()
-                
-                let nav01 = UINavigationController(rootViewController: FirstViewController())
-                let nav02 = UINavigationController(rootViewController: SecondViewController())
-                let nav03 = UINavigationController(rootViewController: DMViewController())
-                let nav04 = UINavigationController(rootViewController: ThirdViewController())
-                let nav05 = UINavigationController(rootViewController: MainSettingsViewController())
-                nav1.viewControllers = [nav01, nav02, nav03, nav04, nav05]
-                
-                rootController.viewControllers = [nav0, nav1]
-                self.window?.rootViewController = rootController
-                self.window!.makeKeyAndVisible()
-            default:
-                self.window?.rootViewController = ViewController()
-                self.window?.makeKeyAndVisible()
-            }
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window!.backgroundColor = Colours.white
+        
+        if #available(iOS 11.0, *) {
+            UIImageView.appearance().accessibilityIgnoresInvertColors = true
         }
+        
+        let splitViewController =  UISplitViewController()
+        let rootViewController = ViewController()
+        let detailViewController = DetailViewController()
+        splitViewController.viewControllers = [rootViewController, detailViewController]
+        splitViewController.preferredDisplayMode = .allVisible
+        let minimumWidth = min(splitViewController.view.bounds.width, splitViewController.view.bounds.height)
+        
+        if (UserDefaults.standard.object(forKey: "splitra") == nil) || (UserDefaults.standard.object(forKey: "splitra") as? Int == 0) {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.5
+            splitViewController.minimumPrimaryColumnWidth = minimumWidth/2
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 1 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.25
+            splitViewController.minimumPrimaryColumnWidth = minimumWidth/4
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 2 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.3
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*3
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 3 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.35
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*7
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 4 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.4
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*2
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 5 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.45
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*9
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 6 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.55
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*11
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 7 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.6
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/5)*4
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 8 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.65
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/20)*13
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 9 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.7
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/10)*7
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        } else if UserDefaults.standard.object(forKey: "splitra") as? Int == 10 {
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.75
+            splitViewController.minimumPrimaryColumnWidth = (minimumWidth/4)*3
+            splitViewController.maximumPrimaryColumnWidth = minimumWidth
+        }
+        
+        
+        self.window?.rootViewController = splitViewController
+        
+        
+        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
+        switch (deviceIdiom) {
+        case .pad:
+            let rootController = ColumnViewController()
+            let nav0 = UINavigationController(rootViewController: VerticalTabBarController())
+            let nav1 = ScrollMainViewController()
+            
+            let nav01 = UINavigationController(rootViewController: FirstViewController())
+            let nav02 = UINavigationController(rootViewController: SecondViewController())
+            let nav03 = UINavigationController(rootViewController: DMViewController())
+            let nav04 = UINavigationController(rootViewController: ThirdViewController())
+            let nav05 = UINavigationController(rootViewController: PadListsViewController())
+            let nav06 = UINavigationController(rootViewController: MainSettingsViewController())
+            nav1.viewControllers = [nav01, nav02, nav03, nav04, nav05, nav06]
+            
+            rootController.viewControllers = [nav0, nav1]
+            self.window?.rootViewController = rootController
+            self.window!.makeKeyAndVisible()
+        default:
+            print("nil")
+        }
+        
+        UINavigationBar.appearance().backgroundColor = Colours.white
+        UINavigationBar.appearance().barTintColor = Colours.black
+        UINavigationBar.appearance().tintColor = Colours.black
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colours.black]
+        
+        let BarButtonItemAppearance = UIBarButtonItem.appearance()
+        BarButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: Colours.grayLight2], for: .normal)
+        BarButtonItemAppearance.tintColor = Colours.grayLight2
+        
+        window?.tintColor = Colours.tabSelected
+        
+        
+        
     }
 }
 

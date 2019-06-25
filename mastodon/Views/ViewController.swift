@@ -910,12 +910,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("couldn't start network checker")
-        }
     }
     
     func composedToot() {
@@ -2999,6 +2993,13 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
 //                print("err")
 //            }
 //        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("couldn't start network checker")
+        }
     }
     
     
