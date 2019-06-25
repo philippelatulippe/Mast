@@ -703,6 +703,7 @@ class DMMessageViewController: MessagesViewController, MessagesDataSource, Messa
         pickerController.allowMultipleTypes = false
         pickerController.allowSwipeToSelect = false
         pickerController.assetType = .allAssets
+        pickerController.modalPresentationStyle = .fullScreen
         self.present(pickerController, animated: true) {}
     }
     

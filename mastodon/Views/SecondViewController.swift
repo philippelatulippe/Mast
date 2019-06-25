@@ -1933,7 +1933,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                                     cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                                 }
-                                cell.typeImage.backgroundColor = Colours.white
+                                cell.typeImage.backgroundColor = Colours.clear
                                 cell.toot.handleMentionTap { (string) in
                                     if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                         let selection = UISelectionFeedbackGenerator()
@@ -2048,7 +2048,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                                 }
                             }
-                            cell.typeImage.backgroundColor = Colours.white
+                            cell.typeImage.backgroundColor = Colours.clear
                             cell.toot.handleMentionTap { (string) in
                                 if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                     let selection = UISelectionFeedbackGenerator()
@@ -2176,7 +2176,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                     cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                                 }
                             }
-                            cell.typeImage.backgroundColor = Colours.white
+                            cell.typeImage.backgroundColor = Colours.clear
                             cell.mainImageView.backgroundColor = Colours.white
                             cell.mainImageViewBG.backgroundColor = Colours.white
                             cell.toot.handleMentionTap { (string) in
@@ -2295,7 +2295,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                 cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                             }
                         }
-                        cell.typeImage.backgroundColor = Colours.white
+                        cell.typeImage.backgroundColor = Colours.clear
                         cell.toot.handleMentionTap { (string) in
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let selection = UISelectionFeedbackGenerator()
@@ -2464,7 +2464,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                         cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                         cell.toot.textColor = Colours.black
-                        cell.typeImage.backgroundColor = Colours.white
+                        cell.typeImage.backgroundColor = Colours.clear
                         cell.toot.handleMentionTap { (string) in
                             if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                                 let selection = UISelectionFeedbackGenerator()
@@ -2576,7 +2576,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                         cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                         cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                         cell.toot.textColor = Colours.black
-                        cell.typeImage.backgroundColor = Colours.white
+                        cell.typeImage.backgroundColor = Colours.clear
                         cell.mainImageView.backgroundColor = Colours.white
                         cell.mainImageViewBG.backgroundColor = Colours.white
                         cell.toot.handleMentionTap { (string) in
@@ -2679,7 +2679,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                     cell.userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
                     cell.date.textColor = Colours.grayDark.withAlphaComponent(0.38)
                     cell.toot.textColor = Colours.black
-                    cell.typeImage.backgroundColor = Colours.white
+                    cell.typeImage.backgroundColor = Colours.clear
                     cell.toot.handleMentionTap { (string) in
                         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
                             let selection = UISelectionFeedbackGenerator()
@@ -3996,6 +3996,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                             translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
                                         }
                                         
+                                        DispatchQueue.main.async {
                                         Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
                                             .backgroundColor(Colours.white)
                                             .titleTextColor(Colours.grayDark)
@@ -4010,6 +4011,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                             }
                                             .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                             .show(on: self)
+                                        }
+                                        
                                     } catch let error as NSError {
                                         print(error)
                                     }
@@ -4665,6 +4668,7 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                             translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
                                         }
                                         
+                                        DispatchQueue.main.async {
                                         Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
                                             .backgroundColor(Colours.white)
                                             .titleTextColor(Colours.grayDark)
@@ -4679,6 +4683,8 @@ class SecondViewController: UIViewController, SJFluidSegmentedControlDataSource,
                                             }
                                             .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                             .show(on: self)
+                                        }
+                                        
                                     } catch let error as NSError {
                                         print(error)
                                     }

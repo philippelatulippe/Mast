@@ -1559,6 +1559,7 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                             translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
                                         }
                                         
+                                        DispatchQueue.main.async {
                                         Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
                                             .backgroundColor(Colours.white)
                                             .titleTextColor(Colours.grayDark)
@@ -1573,6 +1574,8 @@ class DMViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                                             }
                                             .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))?.contentView ?? self.view)
                                             .show(on: self)
+                                        }
+                                        
                                     } catch let error as NSError {
                                         print(error)
                                     }

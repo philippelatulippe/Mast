@@ -4500,20 +4500,24 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                             translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
                                         }
                                         
-                                        Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
-                                            .backgroundColor(Colours.white)
-                                            .titleTextColor(Colours.grayDark)
-                                            .messageTextColor(Colours.grayDark)
-                                            .messageTextAlignment(.left)
-                                            .titleTextAlignment(.left)
-                                            .action(.cancel("Dismiss"))
-                                            .finally { action, index in
-                                                if action.style == .cancel {
-                                                    return
+                                        DispatchQueue.main.async {
+                                            Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
+                                                .backgroundColor(Colours.white)
+                                                .titleTextColor(Colours.grayDark)
+                                                .messageTextColor(Colours.grayDark)
+                                                .messageTextAlignment(.left)
+                                                .titleTextAlignment(.left)
+                                                .action(.cancel("Dismiss"))
+                                                .finally { action, index in
+                                                    if action.style == .cancel {
+                                                        return
+                                                    }
                                                 }
-                                            }
-                                            .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
-                                            .show(on: self)
+                                                .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
+                                                .show(on: self)
+                                        }
+                                        
+                                        
                                     } catch let error as NSError {
                                         print(error)
                                     }
@@ -4848,6 +4852,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                             translatedText = translatedText + ((i as! [Any])[0] as? String ?? "")
                                         }
                                         
+                                        DispatchQueue.main.async {
                                         Alertift.actionSheet(title: nil, message: translatedText as? String ?? "Could not translate tweet")
                                             .backgroundColor(Colours.white)
                                             .titleTextColor(Colours.grayDark)
@@ -4862,6 +4867,8 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
                                             }
                                             .popover(anchorView: theTable.cellForRow(at: IndexPath(row: indexPath.row, section: 0))?.contentView ?? self.view)
                                             .show(on: self)
+                                        }
+                                        
                                     } catch let error as NSError {
                                         print(error)
                                     }
