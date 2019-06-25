@@ -150,8 +150,8 @@ class InnerAlertController: UIAlertController {
     var finallyHandler: FinallyHandler?
 
     var alertBackgroundColor: UIColor?
-    var titleTextColor: UIColor? = .black
-    var messageTextColor: UIColor? = .black
+    var titleTextColor: UIColor? = Colours.grayDark
+    var messageTextColor: UIColor? = Colours.grayDark.withAlphaComponent(0.8)
     var titleTextAlignment: NSTextAlignment = .center
     var messageTextAlignment: NSTextAlignment = .center
     
@@ -256,7 +256,7 @@ class InnerAlertController: UIAlertController {
     
     private func searchLabel(from text: String) -> UILabel? {
         return view.recursiveSubviews
-            .flatMap { $0 as? UILabel}
+            .compactMap { $0 as? UILabel}
             .first { $0.text == text }
     }
     

@@ -72,7 +72,7 @@ class MainFeedCell: SwipeTableViewCell {
         userName.textColor = Colours.black
         userTag.setTitleColor(Colours.grayDark.withAlphaComponent(0.38), for: .normal)
         date.textColor = Colours.grayDark.withAlphaComponent(0.38)
-        toot.textColor = Colours.black
+//        toot.textColor = Colours.black
         
         userName.font = UIFont.systemFont(ofSize: Colours.fontSize1, weight: .heavy)
         userTag.titleLabel?.font = UIFont.systemFont(ofSize: Colours.fontSize3)
