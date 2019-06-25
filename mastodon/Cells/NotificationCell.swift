@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class NotificationCell: SwipeTableViewCell {
     
@@ -200,9 +200,9 @@ class NotificationCell: SwipeTableViewCell {
         self.profileImageView.imageView?.image = nil
         self.profileImageView.setImage(nil, for: .normal)
         
-        self.userName.text = ""
-        self.userTag.setTitle("", for: .normal)
-        self.toot.text = ""
+//        self.userName.text = ""
+//        self.userTag.setTitle("", for: .normal)
+//        self.toot.text = ""
     }
     
     func configure(_ status: Notificationt) {
@@ -424,11 +424,8 @@ class NotificationCell: SwipeTableViewCell {
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         
-        DispatchQueue.global(qos: .userInitiated).async {
-        self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-        self.profileImageView.pin_updateWithProgress = true
-        self.profileImageView.pin_setImage(from: URL(string: "\(status.account.avatar)"))
-        }
+        self.profileImageView.sd_setImage(with: URL(string: "\(status.account.avatar)"), for: .normal)
+        
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 0.2

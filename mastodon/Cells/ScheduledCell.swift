@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class ScheduledCell: SwipeTableViewCell {
     
@@ -251,11 +251,7 @@ class ScheduledCellImage: SwipeTableViewCell {
         mainImageView.contentMode = .scaleAspectFill
         mainImageView.imageView?.contentMode = .scaleAspectFill
         mainImageView.clipsToBounds = true
-        DispatchQueue.global(qos: .userInitiated).async {
-        self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-        self.mainImageView.pin_updateWithProgress = true
-        self.mainImageView.pin_setImage(from: URL(string: "\(status.mediaAttachments[0].url)"))
-        }
+        self.mainImageView.sd_setImage(with: URL(string: "\(status.mediaAttachments[0].url)"), for: .normal)
         mainImageView.layer.masksToBounds = true
         mainImageView.layer.borderColor = UIColor.black.cgColor
         if (UserDefaults.standard.object(forKey: "imCorner") == nil || UserDefaults.standard.object(forKey: "imCorner") as! Int == 0) {

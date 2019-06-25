@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class DMFeedCell: SwipeTableViewCell {
     
@@ -190,9 +190,6 @@ class DMFeedCell: SwipeTableViewCell {
             userTag.setTitle("@\(status.reblog?.account.username ?? status.account.username)", for: .normal)
         }
         
-        self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-        self.profileImageView.pin_updateWithProgress = true
-        
         userName.text = status.reblog?.account.displayName ?? status.account.displayName
         if userName.text == StoreStruct.currentUser.displayName {
             let request = Accounts.account(id: status.inReplyToAccountID ?? "")
@@ -205,13 +202,13 @@ class DMFeedCell: SwipeTableViewCell {
                         } else {
                             self.userTag.setTitle("@\(stat.username)", for: .normal)
                         }
-                        self.profileImageView.pin_setImage(from: URL(string: "\(stat.avatar)"))
+                        self.profileImageView.sd_setImage(with: URL(string: "\(stat.avatar)"), for: .normal)
                         self.reloadInputViews()
                     }
                 }
             }
         } else {
-            self.profileImageView.pin_setImage(from: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"))
+            self.profileImageView.sd_setImage(with: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"), for: .normal)
         }
         
         
@@ -299,10 +296,7 @@ class DMFeedCell: SwipeTableViewCell {
             
             
             
-            
-            profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo"))
-            profileImageView2.pin_updateWithProgress = true
-            profileImageView2.pin_setImage(from: URL(string: "\(status.account.avatar)"))
+            self.profileImageView2.sd_setImage(with: URL(string: "\(status.account.avatar)"), for: .normal)
             profileImageView2.layer.masksToBounds = true
             profileImageView2.layer.borderColor = Colours.white.cgColor
             profileImageView2.layer.borderWidth = 2
@@ -358,7 +352,6 @@ class DMFeedCell: SwipeTableViewCell {
             }
             
             
-            profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo2345"))
             profileImageView2.layer.masksToBounds = true
             profileImageView2.layer.borderColor = UIColor.black.cgColor
             profileImageView2.layer.borderWidth = 1

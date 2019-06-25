@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class SearchFeedCell: SwipeTableViewCell {
     
@@ -232,10 +232,7 @@ class SearchFeedCell: SwipeTableViewCell {
             
             
             
-            
-            profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo"))
-            profileImageView2.pin_updateWithProgress = true
-            profileImageView2.pin_setImage(from: URL(string: "\(status.account.avatar)"))
+            self.profileImageView2.sd_setImage(with: URL(string: "\(status.account.avatar)"), for: .normal)
             profileImageView2.layer.masksToBounds = true
             profileImageView2.layer.borderColor = UIColor.black.cgColor
             profileImageView2.layer.borderWidth = 0.2
@@ -320,7 +317,6 @@ class SearchFeedCell: SwipeTableViewCell {
             
             
             
-            profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo2345"))
             profileImageView2.layer.masksToBounds = true
             profileImageView2.layer.borderColor = UIColor.black.cgColor
             profileImageView2.layer.borderWidth = 0
@@ -342,11 +338,7 @@ class SearchFeedCell: SwipeTableViewCell {
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         
-        DispatchQueue.global(qos: .userInitiated).async {
-        self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-        self.profileImageView.pin_updateWithProgress = true
-        self.profileImageView.pin_setImage(from: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"))
-        }
+        self.profileImageView.sd_setImage(with: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"), for: .normal)
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 0.2

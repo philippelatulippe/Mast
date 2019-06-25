@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class FollowersCell: SwipeTableViewCell {
     
@@ -111,11 +111,7 @@ class FollowersCell: SwipeTableViewCell {
             self.reloadInputViews()
         }
         
-        DispatchQueue.global(qos: .userInitiated).async {
-        self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-        self.profileImageView.pin_updateWithProgress = true
-        self.profileImageView.pin_setImage(from: URL(string: "\(status.avatar)"))
-        }
+        self.profileImageView.sd_setImage(with: URL(string: "\(status.avatar)"), for: .normal)
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 0.2

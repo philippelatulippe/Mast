@@ -19,6 +19,7 @@ import Disk
 import AVKit
 import AVFoundation
 import MobileCoreServices
+import SDWebImage
 
 class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, SJFluidSegmentedControlDelegate, UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate, SKPhotoBrowserDelegate, URLSessionDataDelegate, UIViewControllerPreviewingDelegate, CrownControlDelegate, UIPencilInteractionDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate, UITableViewDragDelegate {
     
@@ -1297,7 +1298,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         } else {
             settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 36, height: 36)
             if StoreStruct.currentUser != nil {
-                settingsButton.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatarStatic)"))
+                settingsButton.sd_setImage(with: URL(string: "\(StoreStruct.currentUser.avatarStatic)"), for: .normal)
             }
             settingsButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             settingsButton.imageView?.layer.cornerRadius = 18
@@ -1436,7 +1437,7 @@ class FirstViewController: UIViewController, SJFluidSegmentedControlDataSource, 
         } else {
             settingsButton.frame = CGRect(x: 15, y: UIApplication.shared.statusBarFrame.height + 5, width: 36, height: 36)
             if StoreStruct.currentUser != nil {
-                settingsButton.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatar)"))
+                settingsButton.sd_setImage(with: URL(string: "\(StoreStruct.currentUser.avatarStatic)"), for: .normal)
             }
             settingsButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             settingsButton.imageView?.layer.cornerRadius = 18

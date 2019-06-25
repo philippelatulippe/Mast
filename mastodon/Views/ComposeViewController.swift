@@ -21,6 +21,7 @@ import Disk
 import CropViewController
 import Vision
 import VisionKit
+import SDWebImage
 
 class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate, SFSpeechRecognizerDelegate, SwipeTableViewCellDelegate, CropViewControllerDelegate, UIGestureRecognizerDelegate, AVAudioRecorderDelegate, VNDocumentCameraViewControllerDelegate {
     
@@ -102,7 +103,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         } catch {
             print("err")
         }
-        self.selectedImage1.pin_setImage(from: item.originalStillImage?.url)
+        self.selectedImage1.sd_setImage(with: item.originalStillImage?.url)
         self.selectedImage1.isUserInteractionEnabled = true
         self.selectedImage1.contentMode = .scaleAspectFill
         self.selectedImage1.layer.masksToBounds = true
@@ -1701,7 +1702,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         
         
         if StoreStruct.currentUser != nil {
-            self.avatarButton.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatar)"))
+            self.avatarButton.sd_setImage(with: URL(string: "\(StoreStruct.currentUser.avatar)"), for: .normal)
         }
         self.avatarButton.layer.cornerRadius = 16
         self.avatarButton.layer.masksToBounds = true
@@ -1820,7 +1821,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         cell.imageCountTag.setTitle(self.isVidText[indexPath.row], for: .normal)
         cell.imageCountTag.backgroundColor = self.isVidBG[indexPath.row]
         cell.image.contentMode = .scaleAspectFill
-        cell.image.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
         cell.image.backgroundColor = Colours.white
         cell.image.layer.cornerRadius = 10
         cell.image.layer.masksToBounds = true

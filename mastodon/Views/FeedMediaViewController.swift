@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 import AVKit
 import AVFoundation
 
@@ -167,10 +167,9 @@ class FeedMediaViewController: UIViewController, UICollectionViewDelegate, UICol
         if self.statusesLocal.isEmpty {} else {
             cell.configure()
             cell.image.image = nil
-            cell.image.pin_updateWithProgress = true
             let z = self.statusesLocal[indexPath.item].mediaAttachments[0].previewURL
             let secureImageUrl = URL(string: z)!
-            cell.image.pin_setImage(from: secureImageUrl)
+            cell.image.sd_setImage(with: secureImageUrl)
             cell.image.contentMode = .scaleAspectFill
             cell.layer.cornerRadius = 10
             cell.image.layer.cornerRadius = 10

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SKPhotoBrowserDelegate {
     
@@ -88,7 +88,7 @@ class ProCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
                 cell.image.layer.borderColor = Colours.tabSelected.cgColor
                 
                 let account = Account.getAccounts()[indexPath.item]
-                cell.image.pin_setImage(from: URL(string: account.avatar))
+                cell.image.sd_setImage(with: URL(string: account.avatar))
                 cell.name.text = account.username
                 
                 cell.image.backgroundColor = Colours.clear

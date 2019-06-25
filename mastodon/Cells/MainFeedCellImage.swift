@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class MainFeedCellImage: SwipeTableViewCell {
     
@@ -275,15 +275,15 @@ class MainFeedCellImage: SwipeTableViewCell {
         self.profileImageView2.setImage(nil, for: .normal)
         
         self.mainImageView.imageView?.image = nil
-        self.mainImageView.pin_cancelImageDownload()
+        self.mainImageView.sd_cancelImageLoad(for: .normal)
         self.smallImage1.imageView?.image = nil
-        self.smallImage1.pin_cancelImageDownload()
+        self.smallImage1.sd_cancelImageLoad(for: .normal)
         self.smallImage2.imageView?.image = nil
-        self.smallImage2.pin_cancelImageDownload()
+        self.smallImage2.sd_cancelImageLoad(for: .normal)
         self.smallImage3.imageView?.image = nil
-        self.smallImage3.pin_cancelImageDownload()
+        self.smallImage3.sd_cancelImageLoad(for: .normal)
         self.smallImage4.imageView?.image = nil
-        self.smallImage4.pin_cancelImageDownload()
+        self.smallImage4.sd_cancelImageLoad(for: .normal)
         
         self.mainImageView.setImage(nil, for: .normal)
         self.smallImage1.setImage(nil, for: .normal)
@@ -291,9 +291,9 @@ class MainFeedCellImage: SwipeTableViewCell {
         self.smallImage3.setImage(nil, for: .normal)
         self.smallImage4.setImage(nil, for: .normal)
         
-        self.userName.text = ""
-        self.userTag.setTitle("", for: .normal)
-        self.toot.text = ""
+//        self.userName.text = ""
+//        self.userTag.setTitle("", for: .normal)
+//        self.toot.text = ""
     }
     
     func configure(_ status: Status) {
@@ -491,10 +491,7 @@ class MainFeedCellImage: SwipeTableViewCell {
             }
             
             
-            
-            profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo"))
-            profileImageView2.pin_updateWithProgress = true
-            profileImageView2.pin_setImage(from: URL(string: "\(status.account.avatar)"))
+            self.profileImageView2.sd_setImage(with: URL(string: "\(status.account.avatar)"), for: .normal)
             profileImageView2.layer.masksToBounds = true
             profileImageView2.layer.borderColor = Colours.white.cgColor
             profileImageView2.layer.borderWidth = 2
@@ -556,7 +553,6 @@ class MainFeedCellImage: SwipeTableViewCell {
             }
             
             
-            profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo2345"))
             profileImageView2.layer.masksToBounds = true
             profileImageView2.layer.borderColor = UIColor.black.cgColor
             profileImageView2.layer.borderWidth = 1
@@ -578,11 +574,7 @@ class MainFeedCellImage: SwipeTableViewCell {
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         
-        DispatchQueue.global(qos: .userInitiated).async {
-        self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-        self.profileImageView.pin_updateWithProgress = true
-        self.profileImageView.pin_setImage(from: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"))
-        }
+        self.profileImageView.sd_setImage(with: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"), for: .normal)
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 0.2
@@ -690,9 +682,7 @@ class MainFeedCellImage: SwipeTableViewCell {
             self.mainImageView.contentMode = .scaleAspectFit
             self.mainImageView.imageView?.contentMode = .scaleAspectFit
 //            DispatchQueue.global(qos: .userInitiated).async {
-                self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.mainImageView.pin_updateWithProgress = true
-                self.mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
+            self.mainImageView.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"), for: .normal)
 //            }
             imageCountTag.setTitle("\u{25b6}", for: .normal)
             imageCountTag.backgroundColor = Colours.tabSelected
@@ -702,9 +692,7 @@ class MainFeedCellImage: SwipeTableViewCell {
             self.mainImageView.contentMode = .scaleAspectFit
             self.mainImageView.imageView?.contentMode = .scaleAspectFit
 //            DispatchQueue.global(qos: .userInitiated).async {
-                self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.mainImageView.pin_updateWithProgress = true
-                self.mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
+            self.mainImageView.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"), for: .normal)
                 
 //                DispatchQueue.main.async {
 //                    self.animatedImageView.frame = self.mainImageView.frame
@@ -726,10 +714,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.smallImage1.imageView?.contentMode = .scaleAspectFill
                 self.smallImage1.clipsToBounds = true
 //                DispatchQueue.global(qos: .userInitiated).async {
-                self.smallImage1.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.smallImage1.pin_updateWithProgress = true
-                self.smallImage1.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
-//                }
+                self.smallImage1.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"), for: .normal)
                 self.smallImage1.layer.masksToBounds = true
                 self.smallImage1.layer.borderColor = UIColor.black.cgColor
                 self.smallImage1.alpha = 1
@@ -740,9 +725,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.smallImage2.imageView?.contentMode = .scaleAspectFill
                 self.smallImage2.clipsToBounds = true
 //                    DispatchQueue.global(qos: .userInitiated).async {
-                self.smallImage2.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.smallImage2.pin_updateWithProgress = true
-                self.smallImage2.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[1].previewURL ?? status.mediaAttachments[1].previewURL)"))
+                self.smallImage2.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[1].previewURL ?? status.mediaAttachments[1].previewURL)"), for: .normal)
 //                    }
                 self.smallImage2.layer.masksToBounds = true
                 self.smallImage2.layer.borderColor = UIColor.black.cgColor
@@ -754,9 +737,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.smallImage1.imageView?.contentMode = .scaleAspectFill
                 self.smallImage1.clipsToBounds = true
 //                    DispatchQueue.global(qos: .userInitiated).async {
-                self.smallImage1.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.smallImage1.pin_updateWithProgress = true
-                self.smallImage1.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
+                self.smallImage1.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"), for: .normal)
 //                    }
                 self.smallImage1.layer.masksToBounds = true
                 self.smallImage1.layer.borderColor = UIColor.black.cgColor
@@ -768,9 +749,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.smallImage2.imageView?.contentMode = .scaleAspectFill
                 self.smallImage2.clipsToBounds = true
 //                    DispatchQueue.global(qos: .userInitiated).async {
-                self.smallImage2.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.smallImage2.pin_updateWithProgress = true
-                self.smallImage2.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[1].previewURL ?? status.mediaAttachments[1].previewURL)"))
+                self.smallImage2.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[1].previewURL ?? status.mediaAttachments[1].previewURL)"), for: .normal)
 //                    }
                 self.smallImage2.layer.masksToBounds = true
                 self.smallImage2.layer.borderColor = UIColor.black.cgColor
@@ -782,9 +761,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.smallImage3.imageView?.contentMode = .scaleAspectFill
                 self.smallImage3.clipsToBounds = true
 //                    DispatchQueue.global(qos: .userInitiated).async {
-                self.smallImage3.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.smallImage3.pin_updateWithProgress = true
-                self.smallImage3.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[2].previewURL ?? status.mediaAttachments[2].previewURL)"))
+                self.smallImage3.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[2].previewURL ?? status.mediaAttachments[2].previewURL)"), for: .normal)
 //                    }
                 self.smallImage3.layer.masksToBounds = true
                 self.smallImage3.layer.borderColor = UIColor.black.cgColor
@@ -796,9 +773,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.smallImage1.imageView?.contentMode = .scaleAspectFill
                 self.smallImage1.clipsToBounds = true
 //                    DispatchQueue.global(qos: .userInitiated).async {
-                self.smallImage1.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.smallImage1.pin_updateWithProgress = true
-                self.smallImage1.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"))
+                self.smallImage1.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"), for: .normal)
 //                    }
                 self.smallImage1.layer.masksToBounds = true
                 self.smallImage1.layer.borderColor = UIColor.black.cgColor
@@ -810,9 +785,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.smallImage2.imageView?.contentMode = .scaleAspectFill
                 self.smallImage2.clipsToBounds = true
 //                    DispatchQueue.global(qos: .userInitiated).async {
-                self.smallImage2.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.smallImage2.pin_updateWithProgress = true
-                self.smallImage2.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[1].previewURL ?? status.mediaAttachments[1].previewURL)"))
+                self.smallImage2.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[1].previewURL ?? status.mediaAttachments[1].previewURL)"), for: .normal)
 //                    }
                 self.smallImage2.layer.masksToBounds = true
                 self.smallImage2.layer.borderColor = UIColor.black.cgColor
@@ -824,9 +797,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.smallImage3.imageView?.contentMode = .scaleAspectFill
                 self.smallImage3.clipsToBounds = true
 //                    DispatchQueue.global(qos: .userInitiated).async {
-                self.smallImage3.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.smallImage3.pin_updateWithProgress = true
-                self.smallImage3.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[2].previewURL ?? status.mediaAttachments[2].previewURL)"))
+                self.smallImage3.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[2].previewURL ?? status.mediaAttachments[2].previewURL)"), for: .normal)
 //                    }
                 self.smallImage3.layer.masksToBounds = true
                 self.smallImage3.layer.borderColor = UIColor.black.cgColor
@@ -838,9 +809,7 @@ class MainFeedCellImage: SwipeTableViewCell {
                 self.smallImage4.imageView?.contentMode = .scaleAspectFill
                 self.smallImage4.clipsToBounds = true
 //                    DispatchQueue.global(qos: .userInitiated).async {
-                self.smallImage4.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-                self.smallImage4.pin_updateWithProgress = true
-                self.smallImage4.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[3].previewURL ?? status.mediaAttachments[3].previewURL)"))
+                self.smallImage4.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[3].previewURL ?? status.mediaAttachments[3].previewURL)"), for: .normal)
 //                    }
                 self.smallImage4.layer.masksToBounds = true
                 self.smallImage4.layer.borderColor = UIColor.black.cgColor
@@ -861,9 +830,7 @@ class MainFeedCellImage: SwipeTableViewCell {
             imageCountTag.backgroundColor = Colours.clear
             imageCountTag.alpha = 0
 //            DispatchQueue.global(qos: .userInitiated).async {
-            self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-            self.mainImageView.pin_updateWithProgress = true
-            self.mainImageView.pin_setImage(from: URL(string: "\(status.reblog?.mediaAttachments[0].url ?? status.mediaAttachments[0].url)"))
+            self.mainImageView.sd_setImage(with: URL(string: "\(status.reblog?.mediaAttachments[0].previewURL ?? status.mediaAttachments[0].previewURL)"), for: .normal)
 //            }
         }
     }

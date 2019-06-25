@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
 
 class ColourCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SKPhotoBrowserDelegate {
     

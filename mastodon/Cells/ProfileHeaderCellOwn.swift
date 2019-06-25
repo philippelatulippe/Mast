@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class ProfileHeaderCellOwn: SwipeTableViewCell {
     
@@ -278,9 +278,7 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         
         
         profileImageView.imageView?.contentMode = .scaleAspectFill
-        profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-        profileImageView.pin_updateWithProgress = true
-        profileImageView.pin_setImage(from: URL(string: "\(status.avatar)"))
+        self.profileImageView.sd_setImage(with: URL(string: "\(status.avatar)"), for: .normal)
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = Colours.white.cgColor
         if (UserDefaults.standard.object(forKey: "bord") == nil) || (UserDefaults.standard.object(forKey: "bord") as! Int == 0) {
@@ -302,8 +300,7 @@ class ProfileHeaderCellOwn: SwipeTableViewCell {
         }
         
         headerImageView.imageView?.contentMode = .scaleAspectFill
-        headerImageView.pin_updateWithProgress = true
-        headerImageView.pin_setImage(from: URL(string: "\(status.header)"))
+        self.headerImageView.sd_setImage(with: URL(string: "\(status.header)"), for: .normal)
         headerImageView.layer.masksToBounds = true
         
         userName.text = status.displayName
@@ -589,9 +586,7 @@ class ProfileHeaderCellOwn2: SwipeTableViewCell {
         
         
         profileImageView.imageView?.contentMode = .scaleAspectFill
-        profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-        profileImageView.pin_updateWithProgress = true
-        profileImageView.pin_setImage(from: URL(string: "\(status.avatar)"))
+        self.profileImageView.sd_setImage(with: URL(string: "\(status.avatar)"), for: .normal)
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = Colours.white.cgColor
         if (UserDefaults.standard.object(forKey: "bord") == nil) || (UserDefaults.standard.object(forKey: "bord") as! Int == 0) {
@@ -613,8 +608,7 @@ class ProfileHeaderCellOwn2: SwipeTableViewCell {
         }
         
         headerImageView.imageView?.contentMode = .scaleAspectFill
-        headerImageView.pin_updateWithProgress = true
-        headerImageView.pin_setImage(from: URL(string: "\(status.header)"))
+        self.headerImageView.sd_setImage(with: URL(string: "\(status.header)"), for: .normal)
         headerImageView.layer.masksToBounds = true
         
         userName.text = status.displayName

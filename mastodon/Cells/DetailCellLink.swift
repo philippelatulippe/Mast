@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 import SafariServices
 import AVKit
 import AVFoundation
@@ -103,11 +103,9 @@ class DetailCellLink: UITableViewCell {
         if self.name.text == "" {
             self.name.text = "URL"
             self.name2.text = self.currentURL
-            self.image1.pin_setPlaceholder(with: UIImage(named: "logo"))
-            self.image1.pin_updateWithProgress = true
         }
         
-        self.image1.pin_setImage(from: card.image ?? nil)
+        self.image1.sd_setImage(with: card.image)
         self.containerView.addTarget(self, action: #selector(self.didTouchLink), for: .touchUpInside)
     }
     

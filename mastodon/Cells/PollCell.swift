@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class PollCell: UITableViewCell, CoreChartViewDataSource {
     
@@ -307,11 +308,7 @@ class NotificationPollCell: SwipeTableViewCell, CoreChartViewDataSource {
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-            self.profileImageView.pin_updateWithProgress = true
-            self.profileImageView.pin_setImage(from: URL(string: "\(status.account.avatar)"))
-        }
+        self.profileImageView.sd_setImage(with: URL(string: "\(status.account.avatar)"), for: .normal)
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 0.2

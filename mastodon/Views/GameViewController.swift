@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class GameViewController: UIViewController {
     
@@ -185,7 +186,7 @@ fileprivate extension GameViewController {
         playerView.bounds.size = CGSize(width: radius * 2, height: radius * 2)
         playerView.layer.cornerRadius = radius
         playerView.backgroundColor = Colours.tabSelected
-        playerView.pin_setImage(from: URL(string: "\(StoreStruct.currentUser.avatarStatic)"))
+        playerView.sd_setImage(with: URL(string: "\(StoreStruct.currentUser.avatarStatic)"))
         playerView.layer.masksToBounds = true
         
         view.addSubview(playerView)

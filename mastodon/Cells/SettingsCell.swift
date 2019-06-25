@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class SettingsCell: SwipeTableViewCell {
     
@@ -74,7 +74,7 @@ class SettingsCell: SwipeTableViewCell {
         }
         
         if imageURL != nil {
-            profileImageView.pin_setImage(from: URL(string:imageURL!))
+            self.profileImageView.sd_setImage(with: URL(string: imageURL!))
         }
         
         userName.font = UIFont.systemFont(ofSize: Colours.fontSize1, weight: .heavy)
@@ -164,7 +164,7 @@ class SettingsCell2: SwipeTableViewCell {
         }
         
         if imageURL != nil {
-            profileImageView.pin_setImage(from: URL(string:imageURL!))
+            self.profileImageView.sd_setImage(with: URL(string: imageURL!))
         }
         
         userName.font = UIFont.systemFont(ofSize: Colours.fontSize1, weight: .heavy)

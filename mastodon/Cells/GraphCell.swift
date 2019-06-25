@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
 
 class GraphCell: UITableViewCell, ScrollableGraphViewDataSource {
     

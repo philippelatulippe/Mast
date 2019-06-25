@@ -8,7 +8,7 @@ target 'mastodon' do
   # Pods for mastodon
 
 pod 'SJFluidSegmentedControl'
-pod 'PINRemoteImage'
+pod 'SDWebImage'
 pod 'Regift’
 pod 'ReactiveSSE'
 pod 'ReactiveSwift'

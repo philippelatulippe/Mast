@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
 import SafariServices
 import StatusAlert
 import SAConfettiView

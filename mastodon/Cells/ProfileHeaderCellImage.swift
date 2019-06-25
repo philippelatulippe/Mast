@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class ProfileHeaderCellImage: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SKPhotoBrowserDelegate {
     
@@ -63,11 +63,7 @@ class ProfileHeaderCellImage: UITableViewCell, UICollectionViewDelegate, UIColle
             let z = self.profileStatusesHasImage[indexPath.item].mediaAttachments[0].previewURL
             let secureImageUrl = URL(string: z)!
             cell.image.contentMode = .scaleAspectFill
-                DispatchQueue.global(qos: .userInitiated).async {
-            cell.image.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-            cell.image.pin_updateWithProgress = true
-            cell.image.pin_setImage(from: secureImageUrl)
-                }
+                    cell.image.sd_setImage(with: secureImageUrl)
             //cell.layer.cornerRadius = 10
             cell.image.backgroundColor = Colours.white
             

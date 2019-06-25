@@ -185,6 +185,7 @@ class StoreStruct {
     static var tempPlayer = AVPlayer()
     
     static var allowRotation = false
+    static var placeholderImage = UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0))
 }
 
 struct Drafts: Codable {

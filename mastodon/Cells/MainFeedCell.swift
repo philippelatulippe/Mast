@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class MainFeedCell: SwipeTableViewCell {
     
@@ -190,9 +190,9 @@ class MainFeedCell: SwipeTableViewCell {
         self.profileImageView2.imageView?.image = nil
         self.profileImageView.setImage(nil, for: .normal)
         self.profileImageView2.setImage(nil, for: .normal)
-        self.userName.text = ""
-        self.userTag.setTitle("", for: .normal)
-        self.toot.text = ""
+//        self.userName.text = ""
+//        self.userTag.setTitle("", for: .normal)
+//        self.toot.text = ""
     }
     
     func configure(_ status: Status) {
@@ -390,9 +390,7 @@ class MainFeedCell: SwipeTableViewCell {
             
             
             
-            profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo"))
-            profileImageView2.pin_updateWithProgress = true
-            profileImageView2.pin_setImage(from: URL(string: "\(status.account.avatar)"))
+            profileImageView2.sd_setImage(with: URL(string: "\(status.account.avatarStatic)"), for: .normal)
             profileImageView2.layer.masksToBounds = true
             profileImageView2.layer.borderColor = Colours.white.cgColor
             profileImageView2.layer.borderWidth = 2
@@ -453,7 +451,6 @@ class MainFeedCell: SwipeTableViewCell {
             }
             
             
-            profileImageView2.pin_setPlaceholder(with: UIImage(named: "logo2345"))
             profileImageView2.layer.masksToBounds = true
             profileImageView2.layer.borderColor = UIColor.black.cgColor
             profileImageView2.layer.borderWidth = 1
@@ -475,11 +472,7 @@ class MainFeedCell: SwipeTableViewCell {
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         
-        DispatchQueue.global(qos: .userInitiated).async {
-        self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-        self.profileImageView.pin_updateWithProgress = true
-        self.profileImageView.pin_setImage(from: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"))
-        }
+        self.profileImageView.sd_setImage(with: URL(string: "\(status.reblog?.account.avatar ?? status.account.avatar)"), for: .normal)
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 0.2

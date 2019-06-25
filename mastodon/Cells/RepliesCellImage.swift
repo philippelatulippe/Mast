@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import PINRemoteImage
+import SDWebImage
 
 class RepliesCellImage: SwipeTableViewCell {
     
@@ -177,15 +177,15 @@ class RepliesCellImage: SwipeTableViewCell {
         self.profileImageView.setImage(nil, for: .normal)
         
         self.mainImageView.imageView?.image = nil
-        self.mainImageView.pin_cancelImageDownload()
+        self.mainImageView.sd_cancelImageLoad(for: .normal)
         self.smallImage1.imageView?.image = nil
-        self.smallImage1.pin_cancelImageDownload()
+        self.smallImage1.sd_cancelImageLoad(for: .normal)
         self.smallImage2.imageView?.image = nil
-        self.smallImage2.pin_cancelImageDownload()
+        self.smallImage2.sd_cancelImageLoad(for: .normal)
         self.smallImage3.imageView?.image = nil
-        self.smallImage3.pin_cancelImageDownload()
+        self.smallImage3.sd_cancelImageLoad(for: .normal)
         self.smallImage4.imageView?.image = nil
-        self.smallImage4.pin_cancelImageDownload()
+        self.smallImage4.sd_cancelImageLoad(for: .normal)
         
         self.mainImageView.setImage(nil, for: .normal)
         self.smallImage1.setImage(nil, for: .normal)
@@ -193,9 +193,9 @@ class RepliesCellImage: SwipeTableViewCell {
         self.smallImage3.setImage(nil, for: .normal)
         self.smallImage4.setImage(nil, for: .normal)
         
-        self.userName.text = ""
-        self.userTag.setTitle("", for: .normal)
-        self.toot.text = ""
+//        self.userName.text = ""
+//        self.userTag.setTitle("", for: .normal)
+//        self.toot.text = ""
     }
     
     func configure2(_ replyDepth: Int) {
@@ -365,11 +365,7 @@ class RepliesCellImage: SwipeTableViewCell {
         date.font = UIFont.systemFont(ofSize: Colours.fontSize3)
         toot.font = UIFont.systemFont(ofSize: Colours.fontSize1)
         
-        DispatchQueue.global(qos: .userInitiated).async {
-        self.profileImageView.pin_setPlaceholder(with: UIImage(named: "logo"))
-        self.profileImageView.pin_updateWithProgress = true
-        self.profileImageView.pin_setImage(from: URL(string: "\(status.account.avatar)"))
-        }
+        self.profileImageView.sd_setImage(with: URL(string: "\(status.account.avatar)"), for: .normal)
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.borderWidth = 0.2
@@ -386,8 +382,6 @@ class RepliesCellImage: SwipeTableViewCell {
         mainImageView.contentMode = .scaleAspectFill
         mainImageView.imageView?.contentMode = .scaleAspectFill
 //        DispatchQueue.global(qos: .userInitiated).async {
-        self.mainImageView.pin_setPlaceholder(with: UIImage(named: "imagebg")?.maskWithColor(color: UIColor(red: 30/250, green: 30/250, blue: 30/250, alpha: 1.0)))
-        self.mainImageView.pin_updateWithProgress = true
 //        }
         mainImageView.layer.masksToBounds = true
         mainImageView.layer.borderColor = UIColor.black.cgColor
@@ -431,21 +425,21 @@ class RepliesCellImage: SwipeTableViewCell {
             imageCountTag.setTitle("\u{25b6}", for: .normal)
             imageCountTag.backgroundColor = Colours.tabSelected
             imageCountTag.alpha = 1
-            self.mainImageView.pin_setImage(from: URL(string: "\(status.mediaAttachments[0].previewURL)"))
+            self.mainImageView.sd_setImage(with: URL(string: "\(status.mediaAttachments[0].previewURL)"), for: .normal)
         } else if status.mediaAttachments[0].type == .gifv {
             imageCountTag.setTitle("GIF", for: .normal)
             imageCountTag.backgroundColor = Colours.tabSelected
             imageCountTag.alpha = 1
-            self.mainImageView.pin_setImage(from: URL(string: "\(status.mediaAttachments[0].previewURL)"))
+            self.mainImageView.sd_setImage(with: URL(string: "\(status.mediaAttachments[0].previewURL)"), for: .normal)
         } else if status.mediaAttachments.count > 1 {
             imageCountTag.setTitle("\(status.mediaAttachments.count)", for: .normal)
             imageCountTag.backgroundColor = Colours.tabSelected
             imageCountTag.alpha = 1
-            self.mainImageView.pin_setImage(from: URL(string: "\(status.mediaAttachments[0].url)"))
+            self.mainImageView.sd_setImage(with: URL(string: "\(status.mediaAttachments[0].previewURL)"), for: .normal)
         } else {
             imageCountTag.backgroundColor = Colours.clear
             imageCountTag.alpha = 0
-            self.mainImageView.pin_setImage(from: URL(string: "\(status.mediaAttachments[0].url)"))
+            self.mainImageView.sd_setImage(with: URL(string: "\(status.mediaAttachments[0].previewURL)"), for: .normal)
         }
         
         if (UserDefaults.standard.object(forKey: "senseTog") == nil) || (UserDefaults.standard.object(forKey: "senseTog") as! Int == 0) {
