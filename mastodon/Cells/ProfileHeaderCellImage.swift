@@ -205,19 +205,16 @@ class ProfileHeaderCellImage: UITableViewCell, UICollectionViewDelegate, UIColle
                 
         let originImage = cell.image.image
         if originImage != nil {
-            let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.image)
-            browser.displayToolbar = true
-            browser.displayAction = true
-            browser.delegate = self
-            browser.initializePageIndex(0)
-            
-            let win = UIWindow(frame: UIScreen.main.bounds)
-            let vc = UIViewController()
-            vc.view.backgroundColor = .clear
-            win.rootViewController = vc
-            win.windowLevel = UIWindow.Level.alert + 1
-            win.makeKeyAndVisible()
-            vc.present(browser, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                let browser = SKPhotoBrowser(originImage: originImage ?? UIImage(), photos: images, animatedFromView: cell.image)
+                browser.displayToolbar = true
+                browser.displayAction = true
+                browser.delegate = self
+                browser.initializePageIndex(0)
+                
+                let win = UIApplication.shared.keyWindow?.rootViewController
+                win?.present(browser, animated: true, completion: nil)
+            }
         }
         
         }

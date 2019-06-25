@@ -16,12 +16,13 @@ import SwiftyJSON
 import AVKit
 import AVFoundation
 import Sharaku
-import TesseractOCR
 import Speech
 import Disk
 import CropViewController
+import Vision
+import VisionKit
 
-class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate, SFSpeechRecognizerDelegate, SwipeTableViewCellDelegate, CropViewControllerDelegate, UIGestureRecognizerDelegate, AVAudioRecorderDelegate {
+class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate, SFSpeechRecognizerDelegate, SwipeTableViewCellDelegate, CropViewControllerDelegate, UIGestureRecognizerDelegate, AVAudioRecorderDelegate, VNDocumentCameraViewControllerDelegate {
     
     let gifCont = SwiftyGiphyViewController()
     var isGifVid = false
@@ -399,7 +400,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 
             } else {
         
-        Alertift.actionSheet(title: nil, message: nil)
+        let z = Alertift.actionSheet(title: nil, message: nil)
             .backgroundColor(Colours.white)
             .titleTextColor(Colours.grayDark)
             .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -439,29 +440,26 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.present(controller, animated: true, completion: nil)
                 
             }
-            .action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
-                if let tesseract = G8Tesseract(language: "eng+fra") {
-                    tesseract.engineMode = .tesseractCubeCombined
-                    tesseract.pageSegmentationMode = .auto
-                    tesseract.image = self.selectedImage1.image!.g8_blackAndWhite()
-                    tesseract.recognize()
-                    self.textView.text = tesseract.recognizedText
-                }
+            
+                if #available(iOS 13.0, *) {
+            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+                self.textFromImage(self.selectedImage1.image!)
             }
-            .action(.default("Remove Image".localized), image: nil) { (action, ind) in
+                }
+            z.action(.default("Remove Image".localized), image: nil) { (action, ind) in
                 self.selectedImage1.image = self.selectedImage2.image
                 self.selectedImage2.image = self.selectedImage3.image
                 self.selectedImage3.image = self.selectedImage4.image
                 self.selectedImage4.image = nil
             }
-            .action(.cancel("Dismiss"))
-            .finally { action, index in
+            z.action(.cancel("Dismiss"))
+            z.finally { action, index in
                 if action.style == .cancel {
                     return
                 }
             }
-            .popover(anchorView: self.selectedImage1)
-            .show(on: self)
+            z.popover(anchorView: self.selectedImage1)
+            z.show(on: self)
                 
             }
         
@@ -473,7 +471,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             selection.selectionChanged()
         }
         
-        Alertift.actionSheet(title: nil, message: nil)
+        let z = Alertift.actionSheet(title: nil, message: nil)
             .backgroundColor(Colours.white)
             .titleTextColor(Colours.grayDark)
             .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -514,28 +512,25 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.present(controller, animated: true, completion: nil)
                 
             }
-            .action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
-                if let tesseract = G8Tesseract(language: "eng+fra") {
-                    tesseract.engineMode = .tesseractCubeCombined
-                    tesseract.pageSegmentationMode = .auto
-                    tesseract.image = self.selectedImage2.image!.g8_blackAndWhite()
-                    tesseract.recognize()
-                    self.textView.text = tesseract.recognizedText
-                }
+        
+        if #available(iOS 13.0, *) {
+            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+                self.textFromImage(self.selectedImage2.image!)
             }
-            .action(.default("Remove Image".localized), image: nil) { (action, ind) in
+        }
+            z.action(.default("Remove Image".localized), image: nil) { (action, ind) in
                 self.selectedImage2.image = self.selectedImage3.image
                 self.selectedImage3.image = self.selectedImage4.image
                 self.selectedImage4.image = nil
             }
-            .action(.cancel("Dismiss"))
-            .finally { action, index in
+            z.action(.cancel("Dismiss"))
+            z.finally { action, index in
                 if action.style == .cancel {
                     return
                 }
             }
-            .popover(anchorView: self.selectedImage2)
-            .show(on: self)
+            z.popover(anchorView: self.selectedImage2)
+            z.show(on: self)
         
     }
     @objc func tappedImageView3(_ sender: AnyObject) {
@@ -544,7 +539,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             selection.selectionChanged()
         }
         
-        Alertift.actionSheet(title: nil, message: nil)
+        let z = Alertift.actionSheet(title: nil, message: nil)
             .backgroundColor(Colours.white)
             .titleTextColor(Colours.grayDark)
             .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -584,27 +579,24 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.present(controller, animated: true, completion: nil)
                 
             }
-            .action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
-                if let tesseract = G8Tesseract(language: "eng+fra") {
-                    tesseract.engineMode = .tesseractCubeCombined
-                    tesseract.pageSegmentationMode = .auto
-                    tesseract.image = self.selectedImage3.image!.g8_blackAndWhite()
-                    tesseract.recognize()
-                    self.textView.text = tesseract.recognizedText
-                }
+        
+        if #available(iOS 13.0, *) {
+            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+                self.textFromImage(self.selectedImage3.image!)
             }
-            .action(.default("Remove Image".localized), image: nil) { (action, ind) in
+        }
+            z.action(.default("Remove Image".localized), image: nil) { (action, ind) in
                 self.selectedImage3.image = self.selectedImage4.image
                 self.selectedImage4.image = nil
             }
-            .action(.cancel("Dismiss"))
-            .finally { action, index in
+            z.action(.cancel("Dismiss"))
+            z.finally { action, index in
                 if action.style == .cancel {
                     return
                 }
             }
-            .popover(anchorView: self.selectedImage3)
-            .show(on: self)
+            z.popover(anchorView: self.selectedImage3)
+            z.show(on: self)
     }
     @objc func tappedImageView4(_ sender: AnyObject) {
         if (UserDefaults.standard.object(forKey: "hapticToggle") == nil) || (UserDefaults.standard.object(forKey: "hapticToggle") as! Int == 0) {
@@ -612,7 +604,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             selection.selectionChanged()
         }
         
-        Alertift.actionSheet(title: nil, message: nil)
+        let z = Alertift.actionSheet(title: nil, message: nil)
             .backgroundColor(Colours.white)
             .titleTextColor(Colours.grayDark)
             .messageTextColor(Colours.grayDark.withAlphaComponent(0.8))
@@ -652,26 +644,23 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                 self.present(controller, animated: true, completion: nil)
                 
             }
-            .action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
-                if let tesseract = G8Tesseract(language: "eng+fra") {
-                    tesseract.engineMode = .tesseractCubeCombined
-                    tesseract.pageSegmentationMode = .auto
-                    tesseract.image = self.selectedImage4.image!.g8_blackAndWhite()
-                    tesseract.recognize()
-                    self.textView.text = tesseract.recognizedText
-                }
+        
+        if #available(iOS 13.0, *) {
+            z.action(.default("Compose Toot from Image Text".localized), image: nil) { (action, ind) in
+                self.textFromImage(self.selectedImage4.image!)
             }
-            .action(.cancel("Dismiss"))
-            .action(.default("Remove Image".localized), image: nil) { (action, ind) in
+        }
+            z.action(.cancel("Dismiss"))
+            z.action(.default("Remove Image".localized), image: nil) { (action, ind) in
                 self.selectedImage4.image = nil
             }
-            .finally { action, index in
+            z.finally { action, index in
                 if action.style == .cancel {
                     return
                 }
             }
-            .popover(anchorView: self.selectedImage4)
-            .show(on: self)
+            z.popover(anchorView: self.selectedImage4)
+            z.show(on: self)
     }
     
     
@@ -2062,15 +2051,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     
                     if self.textFromIm {
                     
-                    if let tesseract = G8Tesseract(language: "eng+fra") {
-                        tesseract.engineMode = .tesseractCubeCombined
-                        tesseract.pageSegmentationMode = .auto
-                        tesseract.image = StoreStruct.photoNew.g8_blackAndWhite()
-                        tesseract.recognize()
-                        self.textView.text = tesseract.recognizedText
-                    }
-                        
-                        self.textFromIm = false
                     
                     } else {
             
@@ -2128,22 +2108,81 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
         }
     }
     
-    func cameraText() {
-        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
-            if response {
-                
-                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-                    self.textFromIm = true
-                    self.imag.delegate = self
-                    self.imag.sourceType = UIImagePickerController.SourceType.camera
-                    self.imag.mediaTypes = [kUTTypeImage as String]
-                    self.imag.allowsEditing = false
-                    self.present(self.imag, animated: true, completion: nil)
+    var vc: Any? = {
+        let iosVersion = NSString(string: UIDevice.current.systemVersion).doubleValue
+        if #available(iOS 13.0, *) {
+            return (iosVersion >= 13 ? VNDocumentCameraViewController() : nil)
+        } else {
+            return nil
+        }
+    }()
+    
+    @available(iOS 13.0, *)
+    func textFromImage(_ image1: UIImage) {
+        
+        let request = VNRecognizeTextRequest { request, error in
+            guard let observations = request.results as? [VNRecognizedTextObservation] else {
+                return
+            }
+            
+            for observation in observations {
+                guard let bestCandidate = observation.topCandidates(1).first else {
+                    continue
                 }
                 
-            } else {
-                
+                self.textView.text = "\(self.textView.text ?? "") \(bestCandidate.string ?? "")"
             }
+        }
+        
+        request.recognitionLevel = .accurate
+        let requests = [request]
+        
+        guard let img = image1.cgImage else {
+            return
+        }
+        let handler = VNImageRequestHandler(cgImage: img, options: [:])
+        try? handler.perform(requests)
+    }
+    
+    @available(iOS 13.0, *)
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        
+        let vc = self.vc as! VNDocumentCameraViewController
+        vc.dismiss(animated: true, completion: nil)
+        
+        let request = VNRecognizeTextRequest { request, error in
+            guard let observations = request.results as? [VNRecognizedTextObservation] else {
+                return
+            }
+            
+            for observation in observations {
+                guard let bestCandidate = observation.topCandidates(1).first else {
+                    continue
+                }
+                
+                self.textView.text = "\(self.textView.text ?? "") \(bestCandidate.string ?? "")"
+            }
+        }
+        
+        request.recognitionLevel = .accurate
+        let requests = [request]
+        
+        for i in 0 ..< scan.pageCount {
+            let image1 = scan.imageOfPage(at: i)
+            guard let img = image1.cgImage else {
+                return
+            }
+            let handler = VNImageRequestHandler(cgImage: img, options: [:])
+            try? handler.perform(requests)
+        }
+    }
+    
+    func cameraText() {
+        if #available(iOS 13.0, *) {
+            let vc = self.vc as! VNDocumentCameraViewController
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
         }
     }
     
@@ -2473,7 +2512,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
             self.collectionView.alpha = 0
         })
         
-        Alertift.actionSheet(title: nil, message: self.prevTextReply)
+        let z = Alertift.actionSheet(title: nil, message: self.prevTextReply)
             .backgroundColor(Colours.white)
             .titleTextColor(Colours.grayDark)
             .messageTextColor(Colours.grayDark)
@@ -2774,11 +2813,16 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.isScheduled = true
                 }
             }
-            .action(.default("Compose Toot from Camera"), image: UIImage(named: "camcomp")) { (action, ind) in
+        
+        
+        if #available(iOS 13.0, *) {
+            z.action(.default("Compose Toot from Camera"), image: UIImage(named: "camcomp")) { (action, ind) in
                  
                 self.cameraText()
             }
-            .action(.default("Drafts"), image: UIImage(named: "list")) { (action, ind) in
+        }
+        
+            z.action(.default("Drafts"), image: UIImage(named: "list")) { (action, ind) in
                  
                 
                 if self.picker.isDescendant(of: self.view) {
@@ -2789,22 +2833,22 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
                     self.tableViewDrafts.alpha = 1
                 })
             }
-            .action(.default("Clear All"), image: UIImage(named: "block")) { (action, ind) in
+            z.action(.default("Clear All"), image: UIImage(named: "block")) { (action, ind) in
                  
                 
                 self.textView.text = ""
                 self.bringBackDrawer()
                 
             }
-            .action(.cancel("Dismiss"))
-            .finally { action, index in
+            z.action(.cancel("Dismiss"))
+            z.finally { action, index in
                 if action.style == .cancel {
                     self.bringBackDrawer()
                     return
                 }
             }
-            .popover(anchorView: self.emotiButton)
-            .show(on: self)
+            z.popover(anchorView: self.emotiButton)
+            z.show(on: self)
         
         
     }
