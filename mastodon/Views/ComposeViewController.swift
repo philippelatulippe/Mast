@@ -1002,7 +1002,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         
-        StoreStruct.spoilerText = self.textField.text ?? ""
+//        StoreStruct.spoilerText = self.textField.text ?? ""
+        StoreStruct.spoilerText = ""
     }
     
     override func viewDidLayoutSubviews() {
@@ -1412,7 +1413,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        StoreStruct.spoilerText = ""
         StoreStruct.holdOnTempText = ""
         StoreStruct.currentOptions = []
         StoreStruct.expiresIn = 86400
