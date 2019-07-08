@@ -32,11 +32,11 @@ class ColumnFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else { return }
         let itemWidth = ((collectionView.bounds.size.width) / CGFloat(cellsPerRow)).rounded(.down)
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            itemSize = CGSize(width: 290, height: 250)
-        } else {
-            itemSize = CGSize(width: 190, height: 150)
-        }
+//        if UIDevice.current.userInterfaceIdiom == .pad {
+//            itemSize = CGSize(width: 290, height: 250)
+//        } else {
+            itemSize = CGSize(width: itemWidth, height: 150)
+//        }
     }
     
     override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {

@@ -26,11 +26,7 @@ class ColourCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDa
         )
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 55, height: 55)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            collectionView = UICollectionView(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(540), height: CGFloat(105)), collectionViewLayout: layout)
-        } else {
-            collectionView = UICollectionView(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(UIScreen.main.bounds.width), height: CGFloat(105)), collectionViewLayout: layout)
-        }
+        collectionView = UICollectionView(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(self.frame.width + 60), height: CGFloat(105)), collectionViewLayout: layout)
         collectionView.backgroundColor = Colours.clear
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -86,6 +82,7 @@ class ColourCells: UITableViewCell, UICollectionViewDelegate, UICollectionViewDa
             cell.image.frame = CGRect(x: 0, y: 0, width: 55, height: 55)
             cell.bgImage.frame = CGRect(x: 0, y: 0, width: 55, height: 55)
             
+            cell.image.image = nil
             
             cell.bgImage.layer.masksToBounds = false
             cell.bgImage.layer.shadowColor = UIColor.black.cgColor

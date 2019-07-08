@@ -759,6 +759,12 @@ class ColumnViewController: UIViewController, UIGestureRecognizerDelegate, UNUse
                 print("blocked")
             }
         }
+        let request6 = DomainBlocks.block(domain: "exited.eu")
+        StoreStruct.client.run(request6) { (statuses) in
+            if let stat = (statuses.value) {
+                print("blocked")
+            }
+        }
         
         let request = Instances.customEmojis()
         StoreStruct.client.run(request) { (statuses) in

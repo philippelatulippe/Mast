@@ -1184,6 +1184,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
                 print("blocked")
             }
         }
+        let request6 = DomainBlocks.block(domain: "exited.eu")
+        StoreStruct.client.run(request6) { (statuses) in
+            if let stat = (statuses.value) {
+                print("blocked")
+            }
+        }
         
         let request = Instances.customEmojis()
         StoreStruct.client.run(request) { (statuses) in
@@ -2576,6 +2582,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
         self.textField.returnKeyType = .done
         self.textField.autocorrectionType = .no
         self.textField.autocapitalizationType = .none
+        self.textField.keyboardType = .URL
         self.textField.delegate = self
         self.textField.attributedPlaceholder = NSAttributedString(string: "mastodon.social",
                                                                   attributes: [NSAttributedString.Key.foregroundColor: Colours.tabSelected])
@@ -2709,7 +2716,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate, UITextFiel
             DispatchQueue.main.async {
                 self.textField.resignFirstResponder()
             
-                if returnedText.contains("gab.com") || returnedText.contains("gab.ai") { return }
+                if returnedText.contains("gab.com") || returnedText.contains("gab.ai") || returnedText.contains("exited.eu") { return }
             
             // Send off returnedText to client
             if self.newInstance {

@@ -26,28 +26,13 @@ class AppIconsCells: UITableViewCell, UICollectionViewDelegate, UICollectionView
         )
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 80, height: 80)
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            collectionView = UICollectionView(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(540), height: CGFloat(130)), collectionViewLayout: layout)
-        } else {
-            collectionView = UICollectionView(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(UIScreen.main.bounds.width), height: CGFloat(130)), collectionViewLayout: layout)
-        }
+        collectionView = UICollectionView(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(self.frame.width + 60), height: CGFloat(130)), collectionViewLayout: layout)
         collectionView.backgroundColor = Colours.clear
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(CollectionAppCell.self, forCellWithReuseIdentifier: "CollectionAppCell")
-        
-        
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            contentView.addSubview(collectionView)
-        case .pad:
-            print("nothing")
-            contentView.addSubview(collectionView)
-        default:
-            contentView.addSubview(collectionView)
-        }
+        contentView.addSubview(collectionView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -75,16 +60,7 @@ class AppIconsCells: UITableViewCell, UICollectionViewDelegate, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionAppCell", for: indexPath) as! CollectionAppCell
         
         cell.image.contentMode = .scaleAspectFill
-        
-        let deviceIdiom = UIScreen.main.traitCollection.userInterfaceIdiom
-        switch (deviceIdiom) {
-        case .phone:
-            cell.image.image = UIImage(named: self.appArrayIcons[indexPath.row])
-        case .pad:
-            cell.image.image = UIImage(named: self.appArrayIcons[indexPath.row])
-        default:
-            cell.image.image = UIImage(named: self.appArrayIcons[indexPath.row])
-        }
+        cell.image.image = UIImage(named: self.appArrayIcons[indexPath.row])
         cell.image.backgroundColor = Colours.white
         
         cell.image.layer.cornerRadius = 15

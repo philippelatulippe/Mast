@@ -212,7 +212,7 @@ class PadLoginViewController: UIViewController, UITextFieldDelegate {
                 DispatchQueue.main.async {
                     self.textField.resignFirstResponder()
                     
-                    if returnedText.contains("gab.com") || returnedText.contains("gab.ai") { return }
+                    if returnedText.contains("gab.com") || returnedText.contains("gab.ai") || returnedText.contains("exited.eu") { return }
                     
                     if self.newInstance {
                         
