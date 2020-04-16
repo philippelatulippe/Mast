@@ -22,6 +22,7 @@ import CropViewController
 import Vision
 import SDWebImage
 #if canImport(VisionKit)
+import VisionKit
 #endif
 
 class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SwiftyGiphyViewControllerDelegate, DateTimePickerDelegate, SHViewControllerDelegate, SFSpeechRecognizerDelegate, SwipeTableViewCellDelegate, CropViewControllerDelegate, UIGestureRecognizerDelegate, AVAudioRecorderDelegate {
@@ -4483,9 +4484,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate, UICollectionV
 }
 
 #if compiler(>=5.1)
+@available(iOS 13.0, *)
 extension ComposeViewController: VNDocumentCameraViewControllerDelegate {
-    
-    var vc = VNDocumentCameraViewController()
     
     @available(iOS 13.0, *)
     func textFromImage(_ image1: UIImage) {
@@ -4515,8 +4515,7 @@ extension ComposeViewController: VNDocumentCameraViewControllerDelegate {
     
     @available(iOS 13.0, *)
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
-        let vc = self.vc as! VNDocumentCameraViewController
-        vc.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
         
         let request = VNRecognizeTextRequest { request, error in
             guard let observations = request.results as? [VNRecognizedTextObservation] else {
@@ -4546,12 +4545,10 @@ extension ComposeViewController: VNDocumentCameraViewControllerDelegate {
     }
     
     func cameraText() {
-        if #available(iOS 13.0, *) {
-            let vc = self.vc as! VNDocumentCameraViewController
+            let vc = VNDocumentCameraViewController()
             vc.delegate = self
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)
-        }
     }
 }
 #endif
